@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:layout_gravity="center">
+
+
+    <com.flikster.RoundedImageView
+        android:id="@+id/profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@mipmap/ic_launcher"
+        app:civ_border_color="#e4e3e3"
+        app:civ_border_width="2dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/profile_image"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_tag_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mahanubhavudu"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_tag_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Comment"
+            android:textSize="14sp" />
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/corner_rounded"
+        android:gravity="center"
+        android:text="follow"
+        android:textSize="18sp" />
+
+</RelativeLayout>
