@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
     {
         if(viewId==R.id.feed_button)
         {
-            beginTransact();
+            beginTransact(new FeedFragment());
         }
 
     }
