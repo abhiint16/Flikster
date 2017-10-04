@@ -7,5 +7,5 @@ import android.support.v4.app.Fragment;
  */
 
 public interface FragmentChangeInterface {
-    void beginTransaction1(Fragment fragment);
+    void beginTransact(Fragment fragment);
 }
