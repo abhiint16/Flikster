@@ -128,31 +128,53 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return  type.get(position);
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder {
+    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1;
         public ViewHolder1(View itemView) {
             super(itemView);
             card_gallary1_img1=(ImageView)itemView.findViewById(R.id.card_gallary1_img1);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            fragmentManager.beginTransaction()
+                    .add(R.id.main_container,new GallaryCardClick())
+                    .addToBackStack("")
+                    .commit();
+
         }
     }
-    public class ViewHolder2 extends RecyclerView.ViewHolder {
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary2_img1,card_gallary2_img2;
         public ViewHolder2(View itemView) {
             super(itemView);
             card_gallary2_img1=(ImageView)itemView.findViewById(R.id.card_gallary2_img1);
             card_gallary2_img2=(ImageView)itemView.findViewById(R.id.card_gallary2_img2);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
-    public class ViewHolder3 extends RecyclerView.ViewHolder {
+    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary3_img1,card_gallary3_img2,card_gallary3_img3;
         public ViewHolder3(View itemView) {
             super(itemView);
             card_gallary3_img1=(ImageView)itemView.findViewById(R.id.card_gallary3_img1);
             card_gallary3_img2=(ImageView)itemView.findViewById(R.id.card_gallary3_img2);
             card_gallary3_img3=(ImageView)itemView.findViewById(R.id.card_gallary3_img3);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
-    public class ViewHolder4 extends RecyclerView.ViewHolder {
+    public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary4_img1,card_gallary4_img2,card_gallary4_img3,card_gallary4_img4;
         public ViewHolder4(View itemView) {
             super(itemView);
@@ -160,9 +182,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_gallary4_img2=(ImageView)itemView.findViewById(R.id.card_gallary4_img2);
             card_gallary4_img3=(ImageView)itemView.findViewById(R.id.card_gallary4_img3);
             card_gallary4_img4=(ImageView)itemView.findViewById(R.id.card_gallary4_img4);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
-    public class ViewHolder5 extends RecyclerView.ViewHolder {
+    public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary5_img1,card_gallary5_img2,card_gallary5_img3,card_gallary5_img4;
         TextView card_gallary5_text;
         public ViewHolder5(View itemView) {
@@ -172,6 +200,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_gallary5_img3=(ImageView)itemView.findViewById(R.id.card_gallary5_img3);
             card_gallary5_img4=(ImageView)itemView.findViewById(R.id.card_gallary5_img4);
             card_gallary5_text=(TextView)itemView.findViewById(R.id.card_gallary5_text);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 }
