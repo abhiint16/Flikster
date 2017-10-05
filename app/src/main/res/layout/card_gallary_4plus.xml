@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/card_header"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorImageBackgroundGrey"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="2"
+                android:id="@+id/card_gallary5_img1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bahubai" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:id="@+id/card_gallary5_img2"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bahubai" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:id="@+id/card_gallary5_img3"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bahubai" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:id="@+id/card_gallary5_img4"
+                android:layout_weight="2"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bahubai" />
+        </LinearLayout>
+    </LinearLayout>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="#8b000000"
+            android:id="@+id/card_gallary5_text"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <include layout="@layout/card_footer"></include>
+
+    <include layout="@layout/card_description"></include>
+
+    <include layout="@layout/card_comment_text"></include>
+</LinearLayout>
