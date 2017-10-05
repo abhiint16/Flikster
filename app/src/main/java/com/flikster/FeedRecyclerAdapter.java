@@ -20,23 +20,12 @@ import java.util.List;
  */
 
 public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
-    List<Integer> type=new ArrayList<>();
-    List<String> imag=new ArrayList<>();
+    GlobalData globalData=new GlobalData();
     Context context;
     FragmentManager fragmentManager;
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager) {
         this.context=context;
         this.fragmentManager=fragmentManager;
-        type.add(4);
-        type.add(3);type.add(4);type.add(2);type.add(4);type.add(1);type.add(2);type.add(2);type.add(1);type.add(3);type.add(4);
-        type.add(3);type.add(4);type.add(7);type.add(4);type.add(9);type.add(3);type.add(4);type.add(1);type.add(2);type.add(4);
-        type.add(4);type.add(8);type.add(5);
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");imag.add("http://img.youtube.com/vi/FXAngnH3s0c/0.jpg");
-        imag.add("http://img.youtube.com/vi/rJwPCq61qfo/0.jpg");imag.add("http://img.youtube.com/vi/9gwNKVnmVIg/0.jpg");
     }
 
     @Override
@@ -73,59 +62,59 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder.getItemViewType()==1)
         {
-                Glide.with(((ViewHolder1)holder).itemView.getContext()).load(imag.get(0))
+                Glide.with(((ViewHolder1)holder).itemView.getContext()).load(globalData.imag.get(0))
                 .into(((ViewHolder1)holder).card_gallary1_img1);
 
         }
         else if(holder.getItemViewType()==2)
         {
-            Glide.with(((ViewHolder2)holder).itemView.getContext()).load(imag.get(0))
+            Glide.with(((ViewHolder2)holder).itemView.getContext()).load(globalData.imag.get(0))
                     .into(((ViewHolder2)holder).card_gallary2_img1);
-            Glide.with(context).load(imag.get(1))
+            Glide.with(context).load(globalData.imag.get(1))
                     .into(((ViewHolder2)holder).card_gallary2_img2);
         }
         else if(holder.getItemViewType()==3)
         {
-            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(imag.get(2))
+            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(globalData.imag.get(2))
                     .into(((ViewHolder3)holder).card_gallary3_img1);
-            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(imag.get(3))
+            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(globalData.imag.get(3))
                     .into(((ViewHolder3)holder).card_gallary3_img2);
-            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(imag.get(4))
+            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(globalData.imag.get(4))
                     .into(((ViewHolder3)holder).card_gallary3_img3);
         }
         else if(holder.getItemViewType()==4)
         {
-            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(imag.get(4))
+            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(4))
                     .into(((ViewHolder4)holder).card_gallary4_img1);
-            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(imag.get(5))
+            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(5))
                     .into(((ViewHolder4)holder).card_gallary4_img2);
-            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(imag.get(6))
+            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(6))
                     .into(((ViewHolder4)holder).card_gallary4_img3);
-            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(imag.get(7))
+            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(7))
                     .into(((ViewHolder4)holder).card_gallary4_img4);
         }
         else
         {
-            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(imag.get(5))
+            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(globalData.imag.get(5))
                     .into(((ViewHolder5)holder).card_gallary5_img1);
-            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(imag.get(2))
+            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(globalData.imag.get(2))
                     .into(((ViewHolder5)holder).card_gallary5_img2);
-            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(imag.get(8))
+            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(globalData.imag.get(8))
                     .into(((ViewHolder5)holder).card_gallary5_img3);
-            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(imag.get(4))
+            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(globalData.imag.get(4))
                     .into(((ViewHolder5)holder).card_gallary5_img4);
-            ((ViewHolder5)holder).card_gallary5_text.setText("+"+(type.get(position)-4)+"More");
+            ((ViewHolder5)holder).card_gallary5_text.setText("+"+(globalData.type.get(position)-4)+"More");
         }
     }
 
     @Override
     public int getItemCount() {
-        return type.size();
+        return globalData.type.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return  type.get(position);
+        return  globalData.type.get(position);
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -142,7 +131,6 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     .add(R.id.main_container,new GallaryCardClick())
                     .addToBackStack("")
                     .commit();
-
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -156,6 +144,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
+
 
         }
     }
