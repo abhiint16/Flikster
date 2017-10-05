@@ -17,6 +17,8 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="#696969"
+            android:id="@+id/card_gallary2_img1"
             android:scaleType="centerCrop"
             android:src="@drawable/bahubai" />
 
@@ -24,6 +26,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
+            android:background="#484848"
+            android:id="@+id/card_gallary2_img2"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/bahubai" />

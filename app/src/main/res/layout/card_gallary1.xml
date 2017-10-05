@@ -11,6 +11,7 @@
         android:layout_height="300dp"
         android:background="@color/colorImageBackgroundGrey"
         android:padding="5dp"
+        android:id="@+id/card_gallary1_img1"
         android:scaleType="centerCrop"
         android:src="@drawable/bahubai" />
 
