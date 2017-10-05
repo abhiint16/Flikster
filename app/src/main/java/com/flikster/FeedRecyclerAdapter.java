@@ -144,8 +144,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-
-
+            fragmentManager.beginTransaction()
+                    .add(R.id.main_container,new GallaryCardClick())
+                    .addToBackStack("")
+                    .commit();
         }
     }
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -160,7 +162,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-
+            fragmentManager.beginTransaction()
+                    .add(R.id.main_container,new GallaryCardClick())
+                    .addToBackStack("")
+                    .commit();
         }
     }
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -176,7 +181,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-
+            fragmentManager.beginTransaction()
+                    .add(R.id.main_container,new GallaryCardClick())
+                    .addToBackStack("")
+                    .commit();
         }
     }
     public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -194,7 +202,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-
+            fragmentManager.beginTransaction()
+                    .add(R.id.main_container,new GallaryCardClick())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }
