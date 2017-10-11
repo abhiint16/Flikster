@@ -25,6 +25,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     Context context;
     FragmentManager fragmentManager;
     RecyclerView.LayoutManager stealStyleLayoutManager;
+    StealStyleViewHolder stealStyleViewHolder;
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager) {
         this.context=context;
         this.fragmentManager=fragmentManager;
@@ -72,6 +73,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         {
             stealStyleLayoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2)holder).card_steal_style_recycler.setLayoutManager(stealStyleLayoutManager);
+            stealStyleViewHolder=new StealStyleViewHolder();
+            ((ViewHolder2)holder).card_steal_style_recycler.setAdapter(stealStyleViewHolder);
         }
         else if(holder.getItemViewType()==3)
         {
