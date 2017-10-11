@@ -127,6 +127,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
+            globalData.a=1;
             fragmentManager.beginTransaction()
                     .add(R.id.main_container,new GallaryCardClick())
                     .addToBackStack("")
@@ -144,6 +145,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
+            globalData.a=2;
             fragmentManager.beginTransaction()
                     .add(R.id.main_container,new GallaryCardClick())
                     .addToBackStack("")
@@ -162,6 +164,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
+            globalData.a=3;
             fragmentManager.beginTransaction()
                     .add(R.id.main_container,new GallaryCardClick())
                     .addToBackStack("")
@@ -181,6 +184,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
+            globalData.a=4;
             fragmentManager.beginTransaction()
                     .add(R.id.main_container,new GallaryCardClick())
                     .addToBackStack("")
@@ -202,6 +206,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
+            globalData.a=globalData.type.get(getAdapterPosition());
             fragmentManager.beginTransaction()
                     .add(R.id.main_container,new GallaryCardClick())
                     .addToBackStack("")

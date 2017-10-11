@@ -9,12 +9,13 @@ import java.util.List;
 
 public class GlobalData {
 
+    int a=9;
     List<Integer> type=new ArrayList<>();
     List<String> imag=new ArrayList<>();
 
     public GlobalData() {
-        type.add(4);
-        type.add(3);type.add(4);type.add(2);type.add(4);type.add(1);type.add(2);type.add(2);type.add(1);type.add(3);type.add(4);
+        type.add(1);
+        type.add(2);type.add(3);type.add(4);type.add(5);type.add(6);type.add(7);type.add(8);type.add(9);type.add(3);type.add(4);
         type.add(3);type.add(4);type.add(7);type.add(4);type.add(9);type.add(3);type.add(4);type.add(1);type.add(2);type.add(4);
         type.add(4);type.add(8);type.add(5);
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
