@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Steal Your Style"
+        android:textColor="@color/black"
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:textSize="18sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="You won't believe these"
+        android:textColor="#616161"
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:textSize="14sp"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:id="@+id/card_steal_style_recycler"
+        android:padding="5dp">
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
