@@ -73,7 +73,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         {
             stealStyleLayoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2)holder).card_steal_style_recycler.setLayoutManager(stealStyleLayoutManager);
-            stealStyleViewHolder=new StealStyleViewHolder();
+            stealStyleViewHolder=new StealStyleViewHolder(((ViewHolder2)holder).itemView.getContext());
             ((ViewHolder2)holder).card_steal_style_recycler.setAdapter(stealStyleViewHolder);
         }
         else if(holder.getItemViewType()==3)
