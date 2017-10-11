@@ -3,6 +3,7 @@ package com.flikster;
 import android.content.Context;
 import android.media.Image;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     GlobalData globalData=new GlobalData();
     Context context;
     FragmentManager fragmentManager;
+    RecyclerView.LayoutManager stealStyleLayoutManager;
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager) {
         this.context=context;
         this.fragmentManager=fragmentManager;
@@ -37,7 +39,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         else if(viewType==2)
         {
-            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary2,parent,false);
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_steal_style_carousel,parent,false);
             return  new ViewHolder2(view);
         }
         else if(viewType==3)
@@ -68,10 +70,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         else if(holder.getItemViewType()==2)
         {
-            Glide.with(((ViewHolder2)holder).itemView.getContext()).load(globalData.imag.get(0))
-                    .into(((ViewHolder2)holder).card_gallary2_img1);
-            Glide.with(context).load(globalData.imag.get(1))
-                    .into(((ViewHolder2)holder).card_gallary2_img2);
+            stealStyleLayoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            ((ViewHolder2)holder).card_steal_style_recycler.setLayoutManager(stealStyleLayoutManager);
         }
         else if(holder.getItemViewType()==3)
         {
@@ -135,11 +135,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_gallary2_img1,card_gallary2_img2;
+        RecyclerView card_steal_style_recycler;
         public ViewHolder2(View itemView) {
             super(itemView);
-            card_gallary2_img1=(ImageView)itemView.findViewById(R.id.card_gallary2_img1);
-            card_gallary2_img2=(ImageView)itemView.findViewById(R.id.card_gallary2_img2);
+            card_steal_style_recycler=(RecyclerView)itemView.findViewById(R.id.card_steal_style_recycler);
             itemView.setOnClickListener(this);
         }
 
