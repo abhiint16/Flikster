@@ -1,52 +1,41 @@
 package com.flikster;
 
-import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import java.util.ArrayList;
-import java.util.List;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
- * Created by abhishek on 20-09-2017.
+ * Created by abhishek on 12-10-2017.
  */
 
-public class CelebrityFeedAdapter extends FragmentStatePagerAdapter {
-    List<String> list=new ArrayList<>();
-    public CelebrityFeedAdapter(FragmentManager fm) {
-        super(fm);
-        list.add("Feed");
-        list.add("Biography");
-        list.add("Store");
+public class CelebrityFeedAdapter extends RecyclerView.Adapter<CelebrityFeedAdapter.ViewHolder> {
+    Context context;
+    FragmentManager fragmentManager;
+    public CelebrityFeedAdapter(Context context, FragmentManager fragmentManager) {
+        this.context=context;
+        this.fragmentManager=fragmentManager;
     }
 
     @Override
-    public Fragment getItem(int position) {
-        if(position==0)
-        {
-            return  new CelebrityFragmentFeed();
-        }
-        else if(position==1)
-        {
-            return  new CelebrityFragmentBio();
-        }
-        else if(position==2)
-        {
-            return new CelebrityFragmentStore();
-        }
-        else
-        {
-            return null;
-        }
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
     }
 
     @Override
-    public int getCount() {
-        return 3;
+    public int getItemCount() {
+        return 0;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return list.get(position);
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 }

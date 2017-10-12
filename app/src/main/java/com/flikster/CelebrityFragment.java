@@ -20,7 +20,7 @@ public class CelebrityFragment extends Fragment {
     View view;
     ViewPager viewPager;
     TabLayout tabLayout;
-    CelebrityFeedAdapter celebrityFeedAdapter;
+    CelebrityAdapter celebrityAdapter;
     FragmentManager fragmentManager;
     @Nullable
     @Override
@@ -32,8 +32,8 @@ public class CelebrityFragment extends Fragment {
     }
 
     private void initializeRest() {
-        celebrityFeedAdapter = new CelebrityFeedAdapter(getChildFragmentManager());
-        viewPager.setAdapter(celebrityFeedAdapter);
+        celebrityAdapter = new CelebrityAdapter(getChildFragmentManager());
+        viewPager.setAdapter(celebrityAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
