@@ -89,6 +89,7 @@
         android:layout_gravity="right"
         android:background="@drawable/corner_rounded"
         android:gravity="center"
+        android:layout_marginRight="10dp"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -153,13 +154,14 @@
                 android:layout_weight="1"
                 android:text="POOJA HEGDE"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="#ACTOR" />
+                android:text="#ACTOR"
+                android:textSize="10sp"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
