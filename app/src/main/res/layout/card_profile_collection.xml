@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tv"
@@ -118,9 +120,9 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rc"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:id="@+id/rc"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/quote">
 
@@ -129,15 +131,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_above="@+id/rc"
         android:layout_toLeftOf="@+id/quote"
         android:background="@color/white"
-        android:layout_above="@+id/rc"
         android:orientation="horizontal">
 
         <com.flikster.RoundedImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/pooja"/>
+            android:src="@drawable/pooja" />
 
         <LinearLayout
             android:layout_width="match_parent"

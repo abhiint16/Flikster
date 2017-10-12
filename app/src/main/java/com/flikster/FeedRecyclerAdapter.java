@@ -24,8 +24,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     GlobalData globalData=new GlobalData();
     Context context;
     FragmentManager fragmentManager;
-    RecyclerView.LayoutManager stealStyleLayoutManager;
+    RecyclerView.LayoutManager stealStyleLayoutManager,profileCollectionRecyclerLayoutManager;
     StealStyleViewHolder stealStyleViewHolder;
+    ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager) {
         this.context=context;
         this.fragmentManager=fragmentManager;
@@ -47,6 +48,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary3_1,parent,false);
             return  new ViewHolder3(view);
+        }
+        else if(viewType==6)
+        {
+            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_profile_collection,parent,false);
+            return new ViewHolder6(view);
         }
         else if(viewType==4)
         {
@@ -95,6 +101,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     .into(((ViewHolder4)holder).card_gallary4_img3);
             Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(7))
                     .into(((ViewHolder4)holder).card_gallary4_img4);
+        }
+        else if(holder.getItemViewType()==6)
+        {
+            profileCollectionRecyclerLayoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            ((ViewHolder6)holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
+            profileCollectionRecyclerItemAdapter=new ProfileCollectionRecyclerItemAdapter(((ViewHolder6)holder).itemView.getContext());
+            ((ViewHolder6)holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
         }
         else
         {
@@ -204,6 +217,24 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_gallary5_img4=(ImageView)itemView.findViewById(R.id.card_gallary5_img4);
             card_gallary5_text=(TextView)itemView.findViewById(R.id.card_gallary5_text);
             itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            globalData.a=globalData.type.get(getAdapterPosition());
+            fragmentManager.beginTransaction()
+                    .add(R.id.main_container,new GallaryCardClick())
+                    .addToBackStack("")
+                    .commit();
+        }
+    }
+    public class ViewHolder6 extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        RecyclerView recyclerView;
+        public ViewHolder6(View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+            recyclerView=(RecyclerView)itemView.findViewById(R.id.rc);
         }
 
         @Override
