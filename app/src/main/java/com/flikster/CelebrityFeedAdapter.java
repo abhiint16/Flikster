@@ -23,7 +23,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.context=context;
         this.fragmentManager=fragmentManager;
         type.add(1);
-        type.add(2);type.add(3);type.add(4);type.add(5);type.add(6);type.add(7);type.add(8);type.add(9);type.add(3);type.add(4);
+        type.add(3);type.add(1);type.add(4);type.add(5);type.add(6);type.add(7);type.add(8);type.add(9);type.add(3);type.add(4);
         type.add(3);type.add(4);type.add(7);
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
@@ -40,22 +40,22 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
         else if(viewType==2)
         {
-            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1,parent,false);
+            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary2,parent,false);
             return new ViewHolder2(view);
         }
         else if(viewType==3)
         {
-            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1,parent,false);
+            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary3_1,parent,false);
             return new ViewHolder3(view);
         }
         else if(viewType==4)
         {
-            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1,parent,false);
+            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_dialogue,parent,false);
             return new ViewHolder4(view);
         }
         else if(viewType==5)
         {
-            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1,parent,false);
+            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary4_1,parent,false);
             return new ViewHolder5(view);
         }
         else
