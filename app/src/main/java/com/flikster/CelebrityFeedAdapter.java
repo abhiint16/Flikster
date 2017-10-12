@@ -23,15 +23,15 @@ public class CelebrityFeedAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if(position==0)
         {
-            return  null;
+            return  new CelebrityFragmentFeed();
         }
         else if(position==1)
         {
-            return  null;
+            return  new CelebrityFragmentBio();
         }
         else if(position==2)
         {
-            return null;
+            return new CelebrityFragmentStore();
         }
         else
         {
