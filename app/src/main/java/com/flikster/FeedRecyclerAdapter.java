@@ -145,7 +145,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View view) {
             globalData.a=1;
             fragmentManager.beginTransaction()
-                    .add(R.id.main_container,new GallaryCardClick())
+                    .add(R.id.main_container,new CelebrityFragment())
                     .addToBackStack("")
                     .commit();
         }

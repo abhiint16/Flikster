@@ -19,7 +19,7 @@ public class ProfileCollectionRecyclerItemAdapter extends RecyclerView.Adapter<P
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_peofile_collection_recycler_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_profile_collection_recycler_item,parent,false);
         return new ViewHolder(view);
     }
 
