@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="180dp"
     android:layout_height="120dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bahubai"
+        android:src="@drawable/pooja4"
         android:scaleType="fitXY"/>
     <ImageButton
         android:layout_width="wrap_content"

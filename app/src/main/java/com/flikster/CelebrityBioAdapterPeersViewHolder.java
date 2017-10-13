@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +13,10 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class CelebrityBioAdapterHorViewHolder extends RecyclerView.Adapter<CelebrityBioAdapterHorViewHolder.ViewHolder> {
+public class CelebrityBioAdapterPeersViewHolder extends RecyclerView.Adapter<CelebrityBioAdapterPeersViewHolder.ViewHolder> {
     List<String> imag=new ArrayList<>();
 
-    public CelebrityBioAdapterHorViewHolder() {
+    public CelebrityBioAdapterPeersViewHolder() {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
@@ -27,7 +25,7 @@ public class CelebrityBioAdapterHorViewHolder extends RecyclerView.Adapter<Celeb
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_videos_carousel_recycler_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_peers_recycler_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -45,7 +43,7 @@ public class CelebrityBioAdapterHorViewHolder extends RecyclerView.Adapter<Celeb
         ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView=(ImageView)itemView.findViewById(R.id.celebrity_bio_hor_recycler_image);
+            //imageView=(ImageView)itemView.findViewById(R.id.card_celebrity_bio_peers_recycler);
         }
     }
 }
