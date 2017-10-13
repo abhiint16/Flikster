@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white">
 
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/bahubai" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt"
+        android:padding="10dp"
+        android:text="Videos"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/card_celebrity_bio_video_carousel_recycler">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
