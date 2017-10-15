@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:text="Off Shoulder High Slit Floral Maxi Dress and Lipstick"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Rs 3,600/-"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/colorImageBackgroundGrey"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="2"
+                android:background="#696969"
+                android:id="@+id/card_gallary4_img1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bahubai" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:id="@+id/card_gallary4_img2"
+                android:layout_weight="1"
+                android:background="#484848"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bahubai" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="#323232"
+                android:id="@+id/card_gallary4_img3"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bahubai" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:layout_weight="2"
+                android:background="#808080"
+                android:id="@+id/card_gallary4_img4"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bahubai" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/card_footer"></include>
+
+    <include layout="@layout/card_description"></include>
+
+    <include layout="@layout/card_comment_text"></include>
+</LinearLayout>
