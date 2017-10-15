@@ -74,7 +74,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         {
             layoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3)holder).recyclerView.setLayoutManager(layoutManager);
-            profileCollectionRecyclerItemAdapter =new ProfileCollectionRecyclerItemAdapter(context);
+            profileCollectionRecyclerItemAdapter =new ProfileCollectionRecyclerItemAdapter(context,2);
             ((ViewHolder3)holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
         }
         else if(holder.getItemViewType()==4)

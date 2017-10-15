@@ -21,6 +21,7 @@ import java.util.List;
  */
 
 public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    Boolean news=true,profile1=true,profile4=true,collection=true;
     GlobalData globalData=new GlobalData();
     Context context;
     FragmentManager fragmentManager;
@@ -46,7 +47,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         else if(viewType==3)
         {
-            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary3_1,parent,false);
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_news,parent,false);
             return  new ViewHolder3(view);
         }
         else if(viewType==6)
@@ -71,8 +72,28 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder.getItemViewType()==1)
         {
-                Glide.with(((ViewHolder1)holder).itemView.getContext()).load(globalData.imag.get(0))
-                .into(((ViewHolder1)holder).card_gallary1_img1);
+            if(profile1==true)
+            {
+                ((ViewHolder1)holder).profile_image.setImageResource(R.drawable.ranveer1);
+                ((ViewHolder1)holder).card_gallary1_img1.setImageResource(R.drawable.ranveer2);
+                ((ViewHolder1)holder).tv_tag_desc.setText("#Actor");
+                ((ViewHolder1)holder).tv_tag_name.setText("Ranveer Singh");
+                ((ViewHolder1)holder).tv_name.setText("Ranveer Singh at the set of Padmavati");
+                ((ViewHolder1)holder).tv_description.setText("Ranveer Singh at the set of Padmavati. He was caught red handed by" +
+                        "our camera crew while he was kissing his girlfriend Deepika.");
+                profile1=false;
+            }
+            else if(profile1==false)
+            {
+                ((ViewHolder1)holder).profile_image.setImageResource(R.drawable.pooja2);
+                ((ViewHolder1)holder).card_gallary1_img1.setImageResource(R.drawable.pooja3);
+                ((ViewHolder1)holder).tv_tag_desc.setText("#Actress");
+                ((ViewHolder1)holder).tv_tag_name.setText("Pooja Hegde");
+                ((ViewHolder1)holder).tv_name.setText("Pooja Hegde at doing nightout");
+                ((ViewHolder1)holder).tv_description.setText("Pooja Hegde was caught red handed by our camera crew while she" +
+                        "was full drunk with her friends");
+                profile1=true;
+            }
 
         }
         else if(holder.getItemViewType()==2)
@@ -84,42 +105,92 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         else if(holder.getItemViewType()==3)
         {
-            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(globalData.imag.get(2))
-                    .into(((ViewHolder3)holder).card_gallary3_img1);
-            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(globalData.imag.get(3))
-                    .into(((ViewHolder3)holder).card_gallary3_img2);
-            Glide.with(((ViewHolder3)holder).itemView.getContext()).load(globalData.imag.get(4))
-                    .into(((ViewHolder3)holder).card_gallary3_img3);
+            if(news==true)
+            {
+                ((ViewHolder3)holder).profile_image.setImageResource(globalData.movie.get(0));
+                ((ViewHolder3)holder).news_img.setImageResource(globalData.movie.get(0));
+                ((ViewHolder3)holder).tv_tag_name.setText("3 Idiots");
+                ((ViewHolder3)holder).tv_tag_desc.setText("#Drama #Comedy");
+                ((ViewHolder3)holder).tv_name.setText("Shooting of 3 Idiots is almost complete");
+                ((ViewHolder3)holder).tv_description.setText("Shooting of 3 Idiots is almost complete and it is " +
+                        "going to launch next year");
+                news=false;
+            }
+            else if(news==false)
+            {
+                ((ViewHolder3)holder).profile_image.setImageResource(globalData.movie.get(1));
+                ((ViewHolder3)holder).news_img.setImageResource(globalData.movie.get(1));
+                ((ViewHolder3)holder).tv_tag_name.setText("Zindagi Na Milegi Dobara");
+                ((ViewHolder3)holder).tv_tag_desc.setText("#Drama #Comedy #Life");
+                ((ViewHolder3)holder).tv_name.setText("Shooting of ZNMD is complete");
+                ((ViewHolder3)holder).tv_description.setText("ZNMD is a movie of 4 friends and it revolves around the plot of " +
+                        "a trip");
+                news=true;
+            }
         }
         else if(holder.getItemViewType()==4)
         {
-            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(4))
-                    .into(((ViewHolder4)holder).card_gallary4_img1);
-            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(5))
-                    .into(((ViewHolder4)holder).card_gallary4_img2);
-            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(6))
-                    .into(((ViewHolder4)holder).card_gallary4_img3);
-            Glide.with(((ViewHolder4)holder).itemView.getContext()).load(globalData.imag.get(7))
-                    .into(((ViewHolder4)holder).card_gallary4_img4);
+            if(profile4==true)
+            {
+                ((ViewHolder4)holder).profile_image.setImageResource(globalData.pooja.get(2));
+                ((ViewHolder4)holder).card_gallary4_img1.setImageResource(globalData.pooja.get(0));
+                ((ViewHolder4)holder).card_gallary4_img2.setImageResource(globalData.pooja.get(1));
+                ((ViewHolder4)holder).card_gallary4_img3.setImageResource(globalData.pooja.get(2));
+                ((ViewHolder4)holder).card_gallary4_img4.setImageResource(globalData.pooja.get(3));
+                ((ViewHolder4)holder).tv_tag_name.setText("Pooja Hegde");
+                ((ViewHolder4)holder).tv_tag_desc.setText("Actress");
+                ((ViewHolder4)holder).tv_name.setText("Pooja Hegde at doing nightout");
+                ((ViewHolder4)holder).tv_description.setText("Pooja Hegde was caught red handed by our camera crew while she" +
+                        "was full drunk with her friends");
+                profile4=false;
+            }
+            else if(profile4=false)
+            {
+                ((ViewHolder4)holder).profile_image.setImageResource(globalData.ranveer.get(2));
+                ((ViewHolder4)holder).card_gallary4_img1.setImageResource(globalData.ranveer.get(0));
+                ((ViewHolder4)holder).card_gallary4_img2.setImageResource(globalData.ranveer.get(1));
+                ((ViewHolder4)holder).card_gallary4_img3.setImageResource(globalData.ranveer.get(2));
+                ((ViewHolder4)holder).card_gallary4_img4.setImageResource(globalData.ranveer.get(1));
+                ((ViewHolder4)holder).tv_tag_name.setText("Ranveer Singh");
+                ((ViewHolder4)holder).tv_tag_desc.setText("Actor");
+                ((ViewHolder4)holder).tv_name.setText("Ranveer Singh at the set of Padmavati");
+                ((ViewHolder4)holder).tv_description.setText("Ranveer Singh at the set of Padmavati. He was caught red handed by" +
+                        "our camera crew while he was kissing his girlfriend Deepika.");
+                profile4=true;
+            }
+
         }
         else if(holder.getItemViewType()==6)
         {
-            profileCollectionRecyclerLayoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder6)holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
-            profileCollectionRecyclerItemAdapter=new ProfileCollectionRecyclerItemAdapter(((ViewHolder6)holder).itemView.getContext());
-            ((ViewHolder6)holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
+            if(collection==true)
+            {
+                ((ViewHolder6)holder).dp_name.setText("Pooja Hegde");
+                ((ViewHolder6)holder).imageView2.setImageResource(globalData.pooja.get(2));
+                ((ViewHolder6)holder).profile_collection_dp.setImageResource(globalData.pooja.get(3));
+                ((ViewHolder6)holder).tv.setText("Pooja Hegde Collection");
+                profileCollectionRecyclerLayoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                ((ViewHolder6)holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
+                profileCollectionRecyclerItemAdapter=new ProfileCollectionRecyclerItemAdapter(((ViewHolder6)holder).itemView.getContext(),1);
+                ((ViewHolder6)holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
+                collection=false;
+            }
+            else if(collection==false)
+            {
+                ((ViewHolder6)holder).dp_name.setText("Ranveer Singh");
+                ((ViewHolder6)holder).imageView2.setImageResource(globalData.ranveer.get(0));
+                ((ViewHolder6)holder).profile_collection_dp.setImageResource(globalData.ranveer.get(1));
+                ((ViewHolder6)holder).tv.setText("Ranveer Singh Collection");
+                profileCollectionRecyclerLayoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                ((ViewHolder6)holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
+                profileCollectionRecyclerItemAdapter=new ProfileCollectionRecyclerItemAdapter(((ViewHolder6)holder).itemView.getContext(),2);
+                ((ViewHolder6)holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
+                collection=true;
+            }
+
         }
         else
         {
-            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(globalData.imag.get(5))
-                    .into(((ViewHolder5)holder).card_gallary5_img1);
-            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(globalData.imag.get(2))
-                    .into(((ViewHolder5)holder).card_gallary5_img2);
-            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(globalData.imag.get(8))
-                    .into(((ViewHolder5)holder).card_gallary5_img3);
-            Glide.with(((ViewHolder5)holder).itemView.getContext()).load(globalData.imag.get(4))
-                    .into(((ViewHolder5)holder).card_gallary5_img4);
-            ((ViewHolder5)holder).card_gallary5_text.setText("+"+(globalData.type.get(position)-4)+"More");
+
         }
     }
 
@@ -134,10 +205,16 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_gallary1_img1;
+        ImageView card_gallary1_img1,profile_image;
+        TextView tv_tag_name,tv_tag_desc,tv_name,tv_description;
         public ViewHolder1(View itemView) {
             super(itemView);
             card_gallary1_img1=(ImageView)itemView.findViewById(R.id.card_gallary1_img1);
+            tv_tag_desc=(TextView)itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name=(TextView)itemView.findViewById(R.id.tv_tag_name);
+            tv_name=(TextView)itemView.findViewById(R.id.tv_name);
+            tv_description=(TextView)itemView.findViewById(R.id.tv_description);
+            profile_image=(ImageView)itemView.findViewById(R.id.profile_image);
             itemView.setOnClickListener(this);
         }
 
@@ -168,12 +245,16 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_gallary3_img1,card_gallary3_img2,card_gallary3_img3;
+        ImageView news_img,profile_image;
+        TextView tv_tag_name,tv_tag_desc,tv_name,tv_description;
         public ViewHolder3(View itemView) {
             super(itemView);
-            card_gallary3_img1=(ImageView)itemView.findViewById(R.id.card_gallary3_img1);
-            card_gallary3_img2=(ImageView)itemView.findViewById(R.id.card_gallary3_img2);
-            card_gallary3_img3=(ImageView)itemView.findViewById(R.id.card_gallary3_img3);
+            news_img=(ImageView)itemView.findViewById(R.id.news_img);
+            tv_tag_desc=(TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name=(TextView) itemView.findViewById(R.id.tv_tag_name);
+            profile_image=(ImageView) itemView.findViewById(R.id.profile_image);
+            tv_name=(TextView)itemView.findViewById(R.id.tv_name);
+            tv_description=(TextView)itemView.findViewById(R.id.tv_description);
             itemView.setOnClickListener(this);
         }
 
@@ -187,13 +268,19 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_gallary4_img1,card_gallary4_img2,card_gallary4_img3,card_gallary4_img4;
+        ImageView card_gallary4_img1,card_gallary4_img2,card_gallary4_img3,card_gallary4_img4,profile_image;
+        TextView tv_tag_name,tv_tag_desc,tv_name,tv_description;
         public ViewHolder4(View itemView) {
             super(itemView);
+            profile_image=(ImageView)itemView.findViewById(R.id.profile_image);
             card_gallary4_img1=(ImageView)itemView.findViewById(R.id.card_gallary4_img1);
             card_gallary4_img2=(ImageView)itemView.findViewById(R.id.card_gallary4_img2);
             card_gallary4_img3=(ImageView)itemView.findViewById(R.id.card_gallary4_img3);
             card_gallary4_img4=(ImageView)itemView.findViewById(R.id.card_gallary4_img4);
+            tv_name=(TextView)itemView.findViewById(R.id.tv_name);
+            tv_description=(TextView)itemView.findViewById(R.id.tv_description);
+            tv_tag_desc=(TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name=(TextView) itemView.findViewById(R.id.tv_tag_name);
             itemView.setOnClickListener(this);
         }
 
@@ -230,11 +317,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
     public class ViewHolder6 extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        ImageView imageView2,profile_collection_dp;
+        TextView tv,dp_name;
         RecyclerView recyclerView;
         public ViewHolder6(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             recyclerView=(RecyclerView)itemView.findViewById(R.id.rc);
+            imageView2=(ImageView)itemView.findViewById(R.id.imageView2);
+            profile_collection_dp=(ImageView)itemView.findViewById(R.id.profile_collection_dp);
+            tv=(TextView)itemView.findViewById(R.id.tv);
+            dp_name=(TextView)itemView.findViewById(R.id.dp_name);
         }
 
         @Override

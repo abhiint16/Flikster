@@ -140,7 +140,8 @@
         <com.flikster.RoundedImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/pooja" />
+            android:src="@drawable/pooja"
+            android:id="@+id/profile_collection_dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,6 +152,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:id="@+id/dp_name"
                 android:layout_weight="1"
                 android:text="POOJA HEGDE"
                 android:textColor="@color/black"

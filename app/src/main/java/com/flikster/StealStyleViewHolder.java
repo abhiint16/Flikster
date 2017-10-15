@@ -30,12 +30,12 @@ public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHol
     public void onBindViewHolder(ViewHolder holder, int position) {
         /*Glide.with(context).load("http://img.youtube.com/vi/MeH346YHUIE/0.jpg")
                 .into(holder.card_steal_style_recycler_item_imageview);*/
-        holder.card_steal_style_recycler_item_imageview.setImageResource(R.drawable.bahubai);
+        holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.style.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 9;
+        return globalData.style.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

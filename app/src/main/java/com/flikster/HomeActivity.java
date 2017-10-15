@@ -17,6 +17,14 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         setContentView(R.layout.activity_home);
         initializeViews();
         initializeRest();
+        firstTimeLaunch(new FeedFragment());
+    }
+
+    private void firstTimeLaunch(Fragment fragment) {
+        fragmentManager.beginTransaction()
+                .add(R.id.main_container, fragment)
+                .addToBackStack("")
+                .commit();
     }
 
     private void initializeRest() {

@@ -13,8 +13,10 @@ import android.widget.ImageView;
 
 public class ProfileCollectionRecyclerItemAdapter extends RecyclerView.Adapter<ProfileCollectionRecyclerItemAdapter.ViewHolder> {
     Context context;
-    public ProfileCollectionRecyclerItemAdapter(Context context) {
+    int a;
+    public ProfileCollectionRecyclerItemAdapter(Context context,int a) {
         this.context=context;
+        this.a=a;
     }
 
     @Override
@@ -25,7 +27,15 @@ public class ProfileCollectionRecyclerItemAdapter extends RecyclerView.Adapter<P
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.imageView.setImageResource(R.drawable.pooja2);
+        if(a==1)
+        {
+            holder.imageView.setImageResource(R.drawable.pooja2);
+        }
+        else if(a==2)
+        {
+            holder.imageView.setImageResource(R.drawable.ranveer2);
+        }
+
     }
 
     @Override
