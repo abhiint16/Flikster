@@ -33,13 +33,10 @@
             android:id="@+id/simpleSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/ib_volume"
-            android:layout_toRightOf="@+id/ib_play"
-            android:max="150" />
+            android:max="100" />
 
 
     </LinearLayout>
