@@ -78,7 +78,7 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         {
             case R.id.menu_profile :
             {
-                beginTransact(new ProfileFragment());
+                //beginTransact(new ProfileFragment());
             }
         }
         return true;
