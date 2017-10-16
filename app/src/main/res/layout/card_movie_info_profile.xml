@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:id="@+id/ll">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:background="#4e4e4e"></ImageView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></View>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/idiots2"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="258 Followers"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_toLeftOf="@+id/img"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="55dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_toRightOf="@+id/img"
+        android:layout_marginLeft="55dp"
+        android:background="@drawable/white_round_border"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="FOLLOW"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3 Idiots"
+        android:layout_below="@+id/img"
+        android:id="@+id/profile_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="23rd Aug | 2h 30m | Hindi"
+        android:layout_below="@+id/profile_name"
+        android:id="@+id/age"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:textColor="#454545"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Romance | Comedy | Drama"
+        android:layout_below="@+id/age"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:textColor="#454545"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/capture"
+        android:scaleType="fitXY"
+        android:layout_below="@+id/ll"
+        android:padding="5dp"
+        android:id="@+id/ss"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ss"
+        android:layout_marginTop="10dp"
+        android:text="In college, Farhan and Raju form a great bond with Rancho due to his refreshing outlook. Years later, a bet gives them a chance to look for their long-lost friend whose existence seems rather elusive."
+        android:gravity="center_vertical"
+        android:padding="10dp"/>
+</RelativeLayout>
