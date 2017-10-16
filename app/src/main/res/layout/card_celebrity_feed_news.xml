@@ -14,6 +14,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/card_celebrity_feed_news_image"
         android:src="@drawable/pooja6"
         android:scaleType="fitXY"/>
     <include layout="@layout/card_footer"></include>
