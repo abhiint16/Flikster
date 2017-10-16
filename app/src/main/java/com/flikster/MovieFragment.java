@@ -18,7 +18,7 @@ public class MovieFragment extends Fragment {
     View view;
     ViewPager viewPager;
     TabLayout tabLayout;
-    CelebrityAdapter celebrityAdapter;
+    MovieAdapter movieAdapter;
     FragmentManager fragmentManager;
     @Nullable
     @Override
@@ -38,8 +38,8 @@ public class MovieFragment extends Fragment {
     }
 
     private void initializeRest() {
-        celebrityAdapter = new CelebrityAdapter(getChildFragmentManager());
-        viewPager.setAdapter(celebrityAdapter);
+        movieAdapter = new MovieAdapter(getChildFragmentManager());
+        viewPager.setAdapter(movieAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 }

@@ -24,7 +24,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/img"
+        android:id="@+id/card_celebrity_feed_profile_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@+id/img"
+        android:layout_toRightOf="@+id/card_celebrity_feed_profile_image"
         android:background="@drawable/white_round_border"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
@@ -61,8 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pooja Hegde"
-        android:layout_below="@+id/img"
-        android:id="@+id/profile_name"
+        android:layout_below="@+id/card_celebrity_feed_profile_image"
+        android:id="@+id/card_celebrity_feed_profile_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"/>
@@ -70,7 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Actress"
-        android:layout_below="@+id/profile_name"
+        android:id="@+id/card_celebrity_feed_profile_desc"
+        android:layout_below="@+id/card_celebrity_feed_profile_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:textColor="@color/black"/>
