@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Created by abhishek on 05-10-2017.
@@ -21,6 +23,8 @@ public class GallaryCardClick extends Fragment {
     RecyclerView.LayoutManager gallaryLayoutManager;
     GallaryCardClickAdapter gallaryCardClickAdapter;
     FragmentManager fragmentManager;
+    TextView tv_tag_name,tv_tag_desc;
+    ImageView profile_image;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,6 +37,9 @@ public class GallaryCardClick extends Fragment {
 
     private void initializeRest() {
         Log.e("rest","REST");
+        profile_image.setImageResource(R.drawable.pooja2);
+        tv_tag_name.setText("Pooja Hegde");
+        tv_tag_desc.setText("#Actress");
         gallaryLayoutManager=new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         gallary_recyclerview.setLayoutManager(gallaryLayoutManager);
         gallaryCardClickAdapter=new GallaryCardClickAdapter(getActivity(),fragmentManager);
@@ -42,5 +49,9 @@ public class GallaryCardClick extends Fragment {
     private void initializeViews() {
         Log.e("views","views");
         gallary_recyclerview=(RecyclerView)view.findViewById(R.id.gallary_recyclerview);
-        fragmentManager=getActivity().getSupportFragmentManager();    }
+        profile_image=(ImageView)view.findViewById(R.id.profile_image);
+        tv_tag_name=(TextView)view.findViewById(R.id.tv_tag_name);
+        tv_tag_desc=(TextView)view.findViewById(R.id.tv_tag_desc);
+        fragmentManager=getActivity().getSupportFragmentManager();
+    }
 }

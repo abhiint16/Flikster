@@ -14,6 +14,7 @@ import android.widget.ImageView;
 public class ProfileCollectionRecyclerItemAdapter extends RecyclerView.Adapter<ProfileCollectionRecyclerItemAdapter.ViewHolder> {
     Context context;
     int a;
+    Boolean b=true;
     public ProfileCollectionRecyclerItemAdapter(Context context,int a) {
         this.context=context;
         this.a=a;
@@ -34,6 +35,19 @@ public class ProfileCollectionRecyclerItemAdapter extends RecyclerView.Adapter<P
         else if(a==2)
         {
             holder.imageView.setImageResource(R.drawable.ranveer2);
+        }
+        else if(a==3)
+        {
+            if(b==true)
+            {
+                holder.imageView.setImageResource(R.drawable.legging1);
+                b=false;
+            }
+            else if(b==false)
+            {
+                holder.imageView.setImageResource(R.drawable.legging2);
+                b=true;
+            }
         }
 
     }

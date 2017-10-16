@@ -42,15 +42,16 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<GallaryCardCli
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.e("onbindviewholder","onbindviewholder");
-        holder.gallary_recycler_item_img.setContentDescription("aaaaaaaaaaaa");
-        Glide.with(holder.itemView.getContext()).load(globalData.imag.get(position)).into(holder.gallary_recycler_item_img);
+        //holder.gallary_recycler_item_img.setContentDescription("aaaaaaaaaaaa");
+        //Glide.with(holder.itemView.getContext()).load(globalData.imag.get(position)).into(holder.gallary_recycler_item_img);
+        holder.gallary_recycler_item_img.setImageResource(globalData.pooja.get(position));
 
     }
 
     @Override
     public int getItemCount() {
         Log.e(" "+globalData.a," "+globalData.a);
-        return globalData.a;
+        return globalData.pooja.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -16,6 +16,7 @@ public class GlobalData {
     List<Integer> movie=new ArrayList<>();
     List<Integer> ranveer=new ArrayList<>();
     List<Integer> pooja=new ArrayList<>();
+    List<Integer> product=new ArrayList<>();
 
     public GlobalData() {
         type.add(1);
@@ -31,5 +32,7 @@ public class GlobalData {
         movie.add(R.drawable.movie);movie.add(R.drawable.movie2);
         ranveer.add(R.drawable.ranveer1);ranveer.add(R.drawable.ranveer2);ranveer.add(R.drawable.ranveer3);
         pooja.add(R.drawable.pooja);pooja.add(R.drawable.pooja2);pooja.add(R.drawable.pooja3);pooja.add(R.drawable.pooja4);
+        product.add(R.drawable.legging1);product.add(R.drawable.legging2);product.add(R.drawable.maxi1);
+        product.add(R.drawable.maxi2);product.add(R.drawable.maxi3);product.add(R.drawable.jhumka);
     }
 }

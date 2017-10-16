@@ -15,12 +15,17 @@ import java.util.List;
 
 public class CelebrityBioAdapterVideoViewHolder extends RecyclerView.Adapter<CelebrityBioAdapterVideoViewHolder.ViewHolder> {
     List<String> imag=new ArrayList<>();
+    int a;
 
     public CelebrityBioAdapterVideoViewHolder() {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+    }
+    public CelebrityBioAdapterVideoViewHolder(int a)
+    {
+        this.a=a;
     }
 
     @Override
@@ -43,7 +48,7 @@ public class CelebrityBioAdapterVideoViewHolder extends RecyclerView.Adapter<Cel
         ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
-            //imageView=(ImageView)itemView.findViewById(R.id.celebrity_bio_hor_recycler_image);
+            imageView=(ImageView)itemView.findViewById(R.id.celebrity_bio_hor_recycler_image);
         }
     }
 }

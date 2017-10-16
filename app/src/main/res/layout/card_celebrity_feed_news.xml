@@ -6,30 +6,17 @@
     android:layout_marginBottom="10dp"
     android:background="@color/white">
 
-    <include layout="@layout/card_header"></include>
-
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/card_celebrity_feed_news_title"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/movie2"
-        android:id="@+id/news_img"
+        android:src="@drawable/pooja6"
         android:scaleType="fitXY"/>
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/video_btn"
-            android:src="@drawable/video_play"
-            android:scaleType="fitXY"
-            android:layout_centerInParent="true"
-            android:background="#00000000"/>
-    </RelativeLayout>
     <include layout="@layout/card_footer"></include>
-
     <include layout="@layout/card_description"></include>
-
     <include layout="@layout/card_comment_text"></include>
-
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     RecyclerView.LayoutManager layoutManager;
     ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
     CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
+    StealStyleViewHolder stealStyleViewHolder;
+    RecyclerView.LayoutManager layoutManager2;
     public CelebrityStoreAdapter(Context context, FragmentManager fragmentManager) {
         this.context=context;
         this.fragmentManager=fragmentManager;
@@ -57,10 +60,15 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_videos_carousel,parent,false);
             return new CelebrityStoreAdapter.ViewHolder4(view);
         }
+        else if(viewType==5)
+        {
+            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_store_gallary4_1,parent,false);
+            return new CelebrityStoreAdapter.ViewHolder5(view);
+        }
         else
         {
-            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_upcoming,parent,false);
-            return new CelebrityStoreAdapter.ViewHolder4(view);
+            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.card_steal_style_carousel,parent,false);
+            return new CelebrityStoreAdapter.ViewHolder6(view);
         }
     }
 
@@ -74,7 +82,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         {
             layoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3)holder).recyclerView.setLayoutManager(layoutManager);
-            profileCollectionRecyclerItemAdapter =new ProfileCollectionRecyclerItemAdapter(context,2);
+            profileCollectionRecyclerItemAdapter =new ProfileCollectionRecyclerItemAdapter(context,3);
             ((ViewHolder3)holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
         }
         else if(holder.getItemViewType()==4)
@@ -82,19 +90,33 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ((ViewHolder4)holder).textView.setText("Shop By videos");
             layoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4)holder).recyclerView.setLayoutManager(layoutManager);
-            celebrityBioAdapterVideoViewHolder =new CelebrityBioAdapterVideoViewHolder();
+            celebrityBioAdapterVideoViewHolder =new CelebrityBioAdapterVideoViewHolder(3);
             ((ViewHolder4)holder).recyclerView.setAdapter(celebrityBioAdapterVideoViewHolder);
         }
 
-        else if(holder.getItemViewType()==7)
+        else if(holder.getItemViewType()==5)
         {
-
+            ((ViewHolder5)holder).card_store_gallary4_img1.setImageResource(R.drawable.top1);
+            ((ViewHolder5)holder).card_store_gallary4_img2.setImageResource(R.drawable.top2);
+            ((ViewHolder5)holder).card_store_gallary4_img3.setImageResource(R.drawable.jhumka);
+            ((ViewHolder5)holder).card_store_gallary4_img4.setImageResource(R.drawable.sandal);
+            ((ViewHolder5)holder).card_store_product_gallary_title.setText("Latest trend");
+            ((ViewHolder5)holder).card_store_product_gallary_cost.setText("7500/-");
+        }
+        else if(holder.getItemViewType()==6)
+        {
+            ((ViewHolder6)holder).card_steal_style_carousel_title.setText("Recommended Products");
+            ((ViewHolder6)holder).card_steal_style_carousel_desc.setVisibility(View.GONE);
+            layoutManager2=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            ((ViewHolder6)holder).card_steal_style_recycler.setLayoutManager(layoutManager2);
+            stealStyleViewHolder=new StealStyleViewHolder(3);
+            ((ViewHolder6)holder).card_steal_style_recycler.setAdapter(stealStyleViewHolder);
         }
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -132,6 +154,29 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             super(itemView);
             textView=(TextView)itemView.findViewById(R.id.txt);
             recyclerView=(RecyclerView)itemView.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
+        }
+    }
+    public class ViewHolder5 extends RecyclerView.ViewHolder {
+        TextView card_store_product_gallary_title,card_store_product_gallary_cost;
+        ImageView card_store_gallary4_img1,card_store_gallary4_img2,card_store_gallary4_img3,card_store_gallary4_img4;
+        public ViewHolder5(View itemView) {
+            super(itemView);
+            card_store_product_gallary_title=(TextView)itemView.findViewById(R.id.card_store_product_gallary_title);
+            card_store_product_gallary_cost=(TextView)itemView.findViewById(R.id.card_store_product_gallary_cost);
+            card_store_gallary4_img1=(ImageView)itemView.findViewById(R.id.card_store_gallary4_img1);
+            card_store_gallary4_img2=(ImageView)itemView.findViewById(R.id.card_store_gallary4_img2);
+            card_store_gallary4_img3=(ImageView)itemView.findViewById(R.id.card_store_gallary4_img3);
+            card_store_gallary4_img4=(ImageView)itemView.findViewById(R.id.card_store_gallary4_img4);
+        }
+    }
+    public class ViewHolder6 extends RecyclerView.ViewHolder {
+        TextView card_steal_style_carousel_title,card_steal_style_carousel_desc;
+        RecyclerView card_steal_style_recycler;
+        public ViewHolder6(View itemView) {
+            super(itemView);
+            card_steal_style_carousel_title=(TextView)itemView.findViewById(R.id.card_steal_style_carousel_title);
+            card_steal_style_carousel_desc=(TextView)itemView.findViewById(R.id.card_steal_style_carousel_desc);
+            card_steal_style_recycler=(RecyclerView)itemView.findViewById(R.id.card_steal_style_recycler);
         }
     }
 

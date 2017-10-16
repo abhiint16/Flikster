@@ -16,8 +16,13 @@ import com.bumptech.glide.Glide;
 public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHolder.ViewHolder> {
     Context context;
     GlobalData globalData=new GlobalData();
+    int a;
     public StealStyleViewHolder(Context context) {
         this.context=context;
+    }
+    public StealStyleViewHolder(int a)
+    {
+        this.a=a;
     }
 
     @Override
@@ -30,11 +35,19 @@ public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHol
     public void onBindViewHolder(ViewHolder holder, int position) {
         /*Glide.with(context).load("http://img.youtube.com/vi/MeH346YHUIE/0.jpg")
                 .into(holder.card_steal_style_recycler_item_imageview);*/
+        if(a==3)
+        {
+            holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.product.get(position));
+        }
+        else
         holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.style.get(position));
     }
 
     @Override
     public int getItemCount() {
+        if (a==3)
+            return globalData.product.size();
+        else
         return globalData.style.size();
     }
 

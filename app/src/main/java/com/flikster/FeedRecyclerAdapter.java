@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -207,6 +209,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1,profile_image;
         TextView tv_tag_name,tv_tag_desc,tv_name,tv_description;
+        LinearLayout linearLayout;
         public ViewHolder1(View itemView) {
             super(itemView);
             card_gallary1_img1=(ImageView)itemView.findViewById(R.id.card_gallary1_img1);
@@ -215,7 +218,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_name=(TextView)itemView.findViewById(R.id.tv_name);
             tv_description=(TextView)itemView.findViewById(R.id.tv_description);
             profile_image=(ImageView)itemView.findViewById(R.id.profile_image);
-            itemView.setOnClickListener(this);
+            linearLayout=(LinearLayout)itemView.findViewById(R.id.header_linear);
+            linearLayout.setOnClickListener(this);
         }
 
         @Override
@@ -247,6 +251,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView news_img,profile_image;
         TextView tv_tag_name,tv_tag_desc,tv_name,tv_description;
+        ImageButton video_btn;
         public ViewHolder3(View itemView) {
             super(itemView);
             news_img=(ImageView)itemView.findViewById(R.id.news_img);
@@ -255,6 +260,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image=(ImageView) itemView.findViewById(R.id.profile_image);
             tv_name=(TextView)itemView.findViewById(R.id.tv_name);
             tv_description=(TextView)itemView.findViewById(R.id.tv_description);
+            video_btn=(ImageButton)itemView.findViewById(R.id.video_btn);
             itemView.setOnClickListener(this);
         }
 
@@ -320,14 +326,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView imageView2,profile_collection_dp;
         TextView tv,dp_name;
         RecyclerView recyclerView;
+        LinearLayout linearLayout;
         public ViewHolder6(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
             recyclerView=(RecyclerView)itemView.findViewById(R.id.rc);
             imageView2=(ImageView)itemView.findViewById(R.id.imageView2);
             profile_collection_dp=(ImageView)itemView.findViewById(R.id.profile_collection_dp);
             tv=(TextView)itemView.findViewById(R.id.tv);
             dp_name=(TextView)itemView.findViewById(R.id.dp_name);
+            linearLayout=(LinearLayout)itemView.findViewById(R.id.profile_collection_linear);
+            linearLayout.setOnClickListener(this);
+
         }
 
         @Override

@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cancel"
         android:scaleType="fitXY"
-        android:src="@drawable/bahubai" />
+        android:src="@drawable/pooja2" />
 
 </RelativeLayout>
