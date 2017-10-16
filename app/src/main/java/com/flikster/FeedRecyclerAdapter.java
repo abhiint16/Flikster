@@ -252,6 +252,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView news_img,profile_image;
         TextView tv_tag_name,tv_tag_desc,tv_name,tv_description;
         ImageButton video_btn;
+        LinearLayout header_linear;
         public ViewHolder3(View itemView) {
             super(itemView);
             news_img=(ImageView)itemView.findViewById(R.id.news_img);
@@ -261,14 +262,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_name=(TextView)itemView.findViewById(R.id.tv_name);
             tv_description=(TextView)itemView.findViewById(R.id.tv_description);
             video_btn=(ImageButton)itemView.findViewById(R.id.video_btn);
-            itemView.setOnClickListener(this);
+            header_linear=(LinearLayout)itemView.findViewById(R.id.header_linear);
+            header_linear.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             globalData.a=3;
             fragmentManager.beginTransaction()
-                    .add(R.id.main_container,new GallaryCardClick())
+                    .add(R.id.main_container,new MovieFragment())
                     .addToBackStack("")
                     .commit();
         }

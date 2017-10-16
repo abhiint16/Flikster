@@ -109,7 +109,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ((ViewHolder6)holder).card_steal_style_carousel_desc.setVisibility(View.GONE);
             layoutManager2=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6)holder).card_steal_style_recycler.setLayoutManager(layoutManager2);
-            stealStyleViewHolder=new StealStyleViewHolder(3);
+            stealStyleViewHolder=new StealStyleViewHolder("celebrity_store");
             ((ViewHolder6)holder).card_steal_style_recycler.setAdapter(stealStyleViewHolder);
         }
     }

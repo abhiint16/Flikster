@@ -25,7 +25,7 @@ public class MovieAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if(position==0)
         {
-            return  new CelebrityFragmentFeed();
+            return  new MovieFragmentFeed();
         }
         else if(position==1)
         {

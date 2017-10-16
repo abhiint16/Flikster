@@ -11,7 +11,7 @@
         android:layout_weight="7"
         android:id="@+id/card_steal_style_recycler_item_imageview"
         android:src="@drawable/bahubai"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitXY"/>
 
     <TextView
         android:layout_width="match_parent"
