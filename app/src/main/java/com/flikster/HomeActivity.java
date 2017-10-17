@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 public class HomeActivity extends AppCompatActivity implements  FragmentChangeInterface, View.OnClickListener {
@@ -19,6 +20,7 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_home);
         initializeViews();
         initializeRest();
