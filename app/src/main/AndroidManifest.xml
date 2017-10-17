@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Authentication.AuthenticationActivity" />
-        <activity android:name=".Authentication.LoginMobileActivity"></activity>
+        <activity android:name=".Authentication.LoginMobileActivity" />
+        <activity android:name=".Authentication.LoginEmailActivity"></activity>
     </application>
 
 </manifest>
