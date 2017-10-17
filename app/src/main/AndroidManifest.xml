@@ -12,18 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".HomeActivity">
+
+        </activity>
+        <activity android:name=".Authentication.AuthenticationActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Authentication.AuthenticationActivity" />
+            </activity>
         <activity android:name=".Authentication.LoginMobileActivity" />
         <activity android:name=".Authentication.LoginEmailActivity" />
         <activity android:name=".Authentication.LoginMobileOtpActivity" />
         <activity android:name=".Authentication.LoginEmailOtpActivity" />
-        <activity android:name=".Authentication.LoginScreenActivity" />
         <activity android:name=".Authentication.LoginCreateAccountActivity"></activity>
     </application>
 
