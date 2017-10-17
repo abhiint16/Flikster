@@ -36,4 +36,13 @@
     <string name="login_verify_mobile_resend_code">GET A NEW ONE</string>
     <string name="login_verify_mobile_verify">VERIFY</string>
 
+    <string name="login_screen_title">Flikster</string>
+    <string name="login_screen_description">\"Join our execlusive community of movie, celebrity &amp; fashion Enthusiasts\"</string>
+    <string name="login_screen_phone">PHONE</string>
+    <string name="login_screen_mail">EMAIL</string>
+    <string name="login_screen_facebook">FACEBOOK</string>
+    <string name="login_screen_google">GOOGLE</string>
+    <string name="login_screen_condition">By creating an account, you are agree to our </string>
+    <string name="login_screen_terms">Terms &amp; Conditions</string>
+
 </resources>
