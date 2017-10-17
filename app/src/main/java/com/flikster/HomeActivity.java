@@ -2,8 +2,10 @@ package com.flikster;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,16 +40,19 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
     private void initializeRest() {
         feed.setOnClickListener(this);
         fashion.setOnClickListener(this);
+        store.setOnClickListener(this);
+        rating.setOnClickListener(this);
         fragmentManager = getSupportFragmentManager();
         toolbar.setWillNotCacheDrawing(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         menu_notification.setOnClickListener(this);
-
     }
 
     private void initializeViews() {
         feed=(LinearLayout)findViewById(R.id.feed_button);
         fashion=(LinearLayout)findViewById(R.id.fashion_button);
+        rating=(LinearLayout)findViewById(R.id.rating_button);
+        store=(LinearLayout)findViewById(R.id.store_button);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         menu_notification=(ImageButton)toolbar.findViewById(R.id.toolbar_notification_icon);
@@ -80,13 +85,27 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         {
             beginTransact(new NotificationFragment());
         }
-
+        else if(viewId==R.id.menu_search)
+        {
+            beginTransact(new SearchFragment());
+        }
+        else if(viewId==R.id.store_button)
+        {
+            beginTransact(new StoreFragment());
+        }
+        else if(viewId==R.id.rating_button)
+        {
+            beginTransact(new RatingFragment());
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater=getMenuInflater();
         menuInflater.inflate(R.menu.menu_main,menu);
+        MenuItem menuItem=menu.findItem(R.id.menu_search);
+        SearchView searchView=(SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnClickListener(this);
         return true;
     }
 
@@ -95,11 +114,6 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         switch (item.getItemId())
         {
             case R.id.menu_profile :
-            {
-                beginTransact(new ProfileFragment());
-                break;
-            }
-            case R.id.menu_search :
             {
                 beginTransact(new ProfileFragment());
                 break;
