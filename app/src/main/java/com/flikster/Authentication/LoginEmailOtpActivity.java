@@ -1,11 +1,13 @@
 package com.flikster.Authentication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity;
 import com.flikster.R;
 
 public class LoginEmailOtpActivity extends AppCompatActivity implements View.OnClickListener {
@@ -28,6 +30,13 @@ public class LoginEmailOtpActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
+        if (view.getId() == R.id.tv_send_new_otp)
+            gotoHomeActivity();
 
+    }
+
+    private void gotoHomeActivity() {
+        startActivity(new Intent(LoginEmailOtpActivity.this, HomeActivity.class));
+        finish();
     }
 }
