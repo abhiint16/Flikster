@@ -99,6 +99,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         else if(holder.getItemViewType()==3)
         {
+
             ((ViewHolder3)holder).textView.setText("Images");
             layoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3)holder).recyclerView.setLayoutManager(layoutManager);
