@@ -3,6 +3,7 @@ package com.flikster.Authentication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,7 +41,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_login_phone)
+        {
+            Log.e("inside onclick","insidde onclikc");
             gotoPhoneLogin();
+        }
+
         else if (view.getId() == R.id.btn_login_mail)
             gotoEmailLogin();
         else if (view.getId() == R.id.btn_login_google)
@@ -52,6 +57,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void gotoPhoneLogin() {
+        Log.e("inside gotophonelogin","insidegotologing");
         startActivity(new Intent(AuthenticationActivity.this, LoginMobileActivity.class));
     }
 

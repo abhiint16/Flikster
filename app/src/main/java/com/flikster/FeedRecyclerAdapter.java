@@ -209,7 +209,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1,profile_image;
         TextView tv_tag_name,tv_tag_desc,tv_name,tv_description;
-        LinearLayout linearLayout;
+        LinearLayout linearLayout,card_description_linear;
         public ViewHolder1(View itemView) {
             super(itemView);
             card_gallary1_img1=(ImageView)itemView.findViewById(R.id.card_gallary1_img1);
@@ -219,16 +219,29 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_description=(TextView)itemView.findViewById(R.id.tv_description);
             profile_image=(ImageView)itemView.findViewById(R.id.profile_image);
             linearLayout=(LinearLayout)itemView.findViewById(R.id.header_linear);
+            card_description_linear=(LinearLayout)itemView.findViewById(R.id.card_description_linear);
+            card_description_linear.setOnClickListener(this);
             linearLayout.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             globalData.a=1;
-            fragmentManager.beginTransaction()
-                    .add(R.id.main_container,new CelebrityFragment())
-                    .addToBackStack("")
-                    .commit();
+            if(view.getId()==R.id.header_linear)
+            {
+                fragmentManager.beginTransaction()
+                        .add(R.id.main_container,new CelebrityFragment())
+                        .addToBackStack("")
+                        .commit();
+            }
+            else if(view.getId()==R.id.card_description_linear)
+            {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container,new NewsOnClickFragment())
+                        .addToBackStack("")
+                        .commit();
+            }
+
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -243,7 +256,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View view) {
             globalData.a=2;
             fragmentManager.beginTransaction()
-                    .add(R.id.main_container,new GallaryCardClick())
+                    .replace(R.id.main_container,new ProductOnClick())
                     .addToBackStack("")
                     .commit();
         }

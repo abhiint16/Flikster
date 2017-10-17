@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 public class HomeActivity extends AppCompatActivity implements  FragmentChangeInterface, View.OnClickListener {
@@ -19,6 +20,7 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_home);
         initializeViews();
         initializeRest();
@@ -28,17 +30,21 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
     private void firstTimeLaunch(Fragment fragment) {
         fragmentManager.beginTransaction()
                 .add(R.id.main_container, fragment)
-                .addToBackStack("")
                 .commit();
     }
 
     private void initializeRest() {
         feed.setOnClickListener(this);
+        fashion.setOnClickListener(this);
         fragmentManager = getSupportFragmentManager();
+        toolbar.setWillNotCacheDrawing(true);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAccent));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void initializeViews() {
         feed=(LinearLayout)findViewById(R.id.feed_button);
+        fashion=(LinearLayout)findViewById(R.id.fashion_button);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -46,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
     @Override
     public void beginTransact(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .add(R.id.main_container, fragment)
+                .replace(R.id.main_container, fragment)
                 .addToBackStack("")
                 .commit();
     }
@@ -61,6 +67,10 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         if(viewId==R.id.feed_button)
         {
             beginTransact(new FeedFragment());
+        }
+        else if(viewId==R.id.fashion_button)
+        {
+            beginTransact(new FashionFragment());
         }
 
     }

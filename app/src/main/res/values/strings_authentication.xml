@@ -16,9 +16,9 @@
     <string name="login_mobile_terms">Your number will be kept private</string>
     <string name="login_mobile_send">SEND OTP</string>
     <array name="login_country_codes">
-        <item>+91</item>
-        <item>+33</item>
-        <item>+49</item>
+        <item>"+91"</item>
+        <item>"+33"</item>
+        <item>"+49"</item>
     </array>
 
     <string name="login_main_title">Flikster</string>
