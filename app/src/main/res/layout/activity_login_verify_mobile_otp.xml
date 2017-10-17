@@ -107,6 +107,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login_verify_mobile_code_receive"/>
         <TextView
+            android:id="@+id/tv_new_otp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoLink="none"
