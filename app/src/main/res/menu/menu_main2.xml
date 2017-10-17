@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_my_account"
+        android:title="My Account"></item>
+
+    <item
+        android:id="@+id/menu_orders"
+        android:title="Orders"></item>
+    <item
+        android:id="@+id/menu_wish_list"
+        android:title="Wish List"></item>
+    <item
+        android:id="@+id/menu_saved_posts"
+        android:title="Saved Posts"></item>
+    <item
+        android:id="@+id/menu_refer"
+        android:title="Refer a Friend"></item>
+    <item
+        android:id="@+id/menu_credits"
+        android:title="Flikster Credits"></item>
+    <item
+        android:id="@+id/menu_rewards"
+        android:title="Rewards"></item>
+    <item
+        android:id="@+id/menu_setting"
+        android:title="Settings"></item>
+    <item
+        android:id="@+id/menu_logout"
+        android:title="Logout"></item>
+</menu>
