@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login_verify_mobile_code_receive"/>
         <TextView
+            android:id="@+id/tv_send_new_otp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoLink="none"
@@ -96,7 +97,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_mob_verify"
+        android:id="@+id/btn_email_verify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login_verify_mobile_verify"
