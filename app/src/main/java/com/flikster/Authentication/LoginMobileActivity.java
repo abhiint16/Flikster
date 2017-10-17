@@ -1,5 +1,6 @@
 package com.flikster.Authentication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,6 @@ public class LoginMobileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void gotoMobileOtp() {
-        
+        startActivity(new Intent(LoginMobileActivity.this, LoginMobileOtpActivity.class));
     }
 }
