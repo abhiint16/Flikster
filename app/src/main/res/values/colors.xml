@@ -9,4 +9,9 @@
     <color name="black">#000</color>
 
     <color name="colorImageBackgroundGrey">#cecece</color>
+    <color name="colorRectangleBorderGrey">#767676</color>
+    <color name="colorCreateAccountSelected">#20d2bb</color>
+    <color name="horizontal_line">#f98da5</color>
+
+
 </resources>
