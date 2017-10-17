@@ -22,7 +22,9 @@
         <activity android:name=".Authentication.LoginMobileActivity" />
         <activity android:name=".Authentication.LoginEmailActivity" />
         <activity android:name=".Authentication.LoginMobileOtpActivity" />
-        <activity android:name=".Authentication.LoginEmailOtpActivity"></activity>
+        <activity android:name=".Authentication.LoginEmailOtpActivity" />
+        <activity android:name=".Authentication.LoginScreenActivity" />
+        <activity android:name=".Authentication.LoginCreateAccountActivity"></activity>
     </application>
 
 </manifest>
