@@ -1,5 +1,6 @@
 package com.flikster.Authentication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,19 +52,19 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void gotoPhoneLogin() {
-
+        startActivity(new Intent(AuthenticationActivity.this, LoginMobileActivity.class));
     }
 
     private void gotoEmailLogin() {
-
+        startActivity(new Intent(AuthenticationActivity.this, LoginEmailActivity.class));
     }
 
     private void gotoGoogleLogin() {
-
+        Toast.makeText(AuthenticationActivity.this, "Google login authentication", Toast.LENGTH_LONG).show();
     }
 
     private void gotoFacebookLogin() {
-
+        Toast.makeText(AuthenticationActivity.this, "Facebook login authentication", Toast.LENGTH_LONG).show();
     }
 
     private void showTermsConditions() {
