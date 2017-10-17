@@ -142,17 +142,31 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_my_account:
-
+                beginTransact(new MyAccountFragment());
                 break;
-            case R.id.menu_feedback:
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.setData(Uri.parse("mailto:"));
-                String[] s = {"abhishekint16@gmail.com"};
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, s);
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Suggestion | Flikster");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "");
-                emailIntent.setType("message/rfc822");//message/rfc822   text/plain
-                startActivity(Intent.createChooser(emailIntent, "Send EMAIL using...."));
+            case R.id.menu_orders:
+                beginTransact(new OrdersFragment());
+                break;
+            case R.id.menu_credits:
+                beginTransact(new FliksterCreditFragment());
+                break;
+            case R.id.menu_logout:
+                beginTransact(new LogoutFragment());
+                break;
+            case R.id.menu_refer:
+                beginTransact(new ReferFragment());
+                break;
+            case R.id.menu_saved_posts:
+                beginTransact(new SavedPostsFragment());
+                break;
+            case R.id.menu_setting:
+                beginTransact(new SettingsFragment());
+                break;
+            case R.id.menu_wish_list:
+                beginTransact(new WishListFragment());
+                break;
+            case R.id.menu_rewards:
+                beginTransact(new RewardsFragment());
                 break;
         }
         return false;
