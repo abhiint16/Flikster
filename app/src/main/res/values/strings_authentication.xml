@@ -7,4 +7,33 @@
     <string name="login_createaccount_female">Female</string>
     <string name="login_createaccount_signup">SIGNUP</string>
 
+    <string name="login_email_title">Login</string>
+    <string name="login_email_hint">Enter Email ID</string>
+    <string name="login_email_terms">Your email ID will be kept private</string>
+    <string name="login_email_send">SEND OTP</string>
+
+    <string name="login_mobile_title">Login</string>
+    <string name="login_mobile_terms">Your number will be kept private</string>
+    <string name="login_mobile_send">SEND OTP</string>
+    <array name="login_country_codes">
+        <item>+91</item>
+        <item>+33</item>
+        <item>+49</item>
+    </array>
+
+    <string name="login_main_title">Flikster</string>
+    <string name="login_main_description">\"Join our execlusive community of movie, celebrity &amp; fashion Enthusiasts\"</string>
+    <string name="login_main_phone">PHONE</string>
+    <string name="login_main_email">EMAIL</string>
+    <string name="login_main_facebook">FACEBOOK</string>
+    <string name="login_main_google">GOOGLE</string>
+    <string name="login_main_condition">By creating an account, you are agree to our </string>
+    <string name="login_terms">Terms &amp; Conditions</string>
+
+    <string name="login_verify_mobile_info">Enter the 4 digit OTP we have sent you on</string>
+    <string name="login_verify_mobileno_edit">Edit Number</string>
+    <string name="login_verify_mobile_code_receive">"Didn't receive a code?"</string>
+    <string name="login_verify_mobile_resend_code">GET A NEW ONE</string>
+    <string name="login_verify_mobile_verify">VERIFY</string>
+
 </resources>
