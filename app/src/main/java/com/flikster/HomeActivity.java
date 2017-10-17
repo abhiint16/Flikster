@@ -10,12 +10,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 public class HomeActivity extends AppCompatActivity implements  FragmentChangeInterface, View.OnClickListener {
 
     LinearLayout feed,rating,plus,fashion,store;
     FragmentManager fragmentManager;
+    ImageButton menu_notification;
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,9 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         fashion.setOnClickListener(this);
         fragmentManager = getSupportFragmentManager();
         toolbar.setWillNotCacheDrawing(true);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAccent));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        menu_notification.setOnClickListener(this);
+
     }
 
     private void initializeViews() {
@@ -47,6 +50,7 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         fashion=(LinearLayout)findViewById(R.id.fashion_button);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        menu_notification=(ImageButton)toolbar.findViewById(R.id.toolbar_notification_icon);
     }
 
     @Override
@@ -72,6 +76,10 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         {
             beginTransact(new FashionFragment());
         }
+        else if(viewId==R.id.toolbar_notification_icon)
+        {
+            beginTransact(new NotificationFragment());
+        }
 
     }
 
@@ -88,7 +96,13 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         {
             case R.id.menu_profile :
             {
-                //beginTransact(new ProfileFragment());
+                beginTransact(new ProfileFragment());
+                break;
+            }
+            case R.id.menu_search :
+            {
+                beginTransact(new ProfileFragment());
+                break;
             }
         }
         return true;
