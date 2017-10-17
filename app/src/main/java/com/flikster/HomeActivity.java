@@ -1,5 +1,7 @@
 package com.flikster;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -138,6 +140,21 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_my_account:
+
+                break;
+            case R.id.menu_feedback:
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                String[] s = {"abhishekint16@gmail.com"};
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, s);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Suggestion | Flikster");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+                emailIntent.setType("message/rfc822");//message/rfc822   text/plain
+                startActivity(Intent.createChooser(emailIntent, "Send EMAIL using...."));
+                break;
+        }
         return false;
     }
 }
