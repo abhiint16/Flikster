@@ -40,8 +40,8 @@ public class CelebrityFragment extends Fragment {
     private void initializeViews() {
         viewPager=(ViewPager)view.findViewById(R.id.celebrity_pager);
         tabLayout=(TabLayout)view.findViewById(R.id.celebrity_tablayout);
-        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        tabLayout.setTabTextColors(getResources().getColor(R.color.colorImageBackgroundGrey), getResources().getColor(R.color.white));
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
+        tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
+        tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.black));
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
     }
 }
