@@ -11,16 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".Authentication.AuthenticationActivity">
-
-        </activity>
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".Authentication.AuthenticationActivity"></activity>
         <activity android:name=".Authentication.LoginMobileActivity" />
         <activity android:name=".Authentication.LoginEmailActivity" />
         <activity android:name=".Authentication.LoginMobileOtpActivity" />
         <activity android:name=".Authentication.LoginEmailOtpActivity" />
         <activity android:name=".Authentication.LoginCreateAccountActivity" />
         <activity android:name=".Preferences.PreferencesView">
+        </activity>
+        <activity android:name=".SplashScreen.Splash_Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
