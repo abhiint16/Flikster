@@ -12,6 +12,6 @@
     <color name="colorRectangleBorderGrey">#767676</color>
     <color name="colorCreateAccountSelected">#20d2bb</color>
     <color name="horizontal_line">#f98da5</color>
-
+    <color name="colorAuthenticationHeader">#0C4483</color>
 
 </resources>
