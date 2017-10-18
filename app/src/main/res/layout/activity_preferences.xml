@@ -3,43 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:layout_margin="@dimen/activity_authentication_login_margin">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/preference_head1"
+        android:text="@string/preference_header"
         android:layout_weight="1"
-        style="@style/headers"
+        style="@style/preferences_header_style"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/preference_head2"
-        style="@style/preference_head2"
+        android:text="@string/preference_subheader"
         />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/nextbtn_textbg"
+        android:background="@color/colorAccent"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/industry_type"
-        style="@style/headers"/>
+        android:text="@string/preference_industry_type"
+        style="@style/preferences_header_style"/>
 
-    <RadioGroup
-        android:id="@+id/industry_group"
-        android:layout_width="match_parent"
-        android:layout_weight="2.5"
-        android:layout_height="0dp"
-        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,18 +42,17 @@
                 android:id="@+id/ind_bollywood"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:text="@string/industry1"
+                android:text="@string/preference_industry_bollywood"
                 android:layout_height="wrap_content"
-                style="@style/radio_group"/>
+                />
 
             <RadioButton
                 android:id="@+id/ind_tollywood"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:text="@string/industry2"
+                android:text="@string/preference_industry_tollywood"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                style="@style/radio_group"
                 />
         </LinearLayout>
 
@@ -73,39 +65,37 @@
                 android:id="@+id/ind_tamil"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:text="@string/industry3"
+                android:text="@string/preference_industry_tamil"
                 android:layout_height="wrap_content"
-                style="@style/radio_group"/>
+                />
             <RadioButton
                 android:id="@+id/ind_kannada"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:text="@string/industry4"
+                android:text="@string/preference_industry_kannada"
                 android:layout_height="wrap_content"
-                style="@style/radio_group"
                 />
         </LinearLayout>
 
         <RadioButton
             android:id="@+id/ind_malayalam"
             android:layout_width="match_parent"
-            android:text="@string/industry5"
+            android:text="@string/preference_industry_malayalam"
             android:layout_height="wrap_content"
-            style="@style/radio_group"/>
-    </RadioGroup>
+            />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/nextbtn_textbg">
+        android:background="@color/colorAccent">
 
     </View>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/fashion_selection"
+        android:text="@string/preference_fashion_selection"
         android:layout_weight="1"
-        style="@style/headers"
+        style="@style/preferences_header_style"
         />
 
     <LinearLayout
@@ -120,10 +110,9 @@
             android:layout_width="0dp"
             android:layout_weight="0.4"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/man"
             android:layout_marginRight="5dp"
-            android:text="@string/fashion1"
-            android:background="@drawable/rectange_shape"
+            android:text="@string/preference_men_fashion"
+            android:background="@drawable/gray_rectange_border"
             android:gravity="center"
             android:padding="10dp"/>
 
@@ -132,10 +121,9 @@
             android:layout_width="0dp"
             android:layout_weight="0.4"
             android:layout_marginLeft="5dp"
-            android:drawableLeft="@drawable/woman"
             android:layout_height="wrap_content"
-            android:text="@string/fashion2"
-            android:background="@drawable/rectange_shape"
+            android:text="@string/preference_female_fashion"
+            android:background="@drawable/gray_rectange_border"
             android:gravity="center"
             android:padding="10dp"/>
 
@@ -147,21 +135,21 @@
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
-        <TextView
+        <Button
             android:id="@+id/goto_home"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/nexts"
-            style="@style/next_btn"
+            android:text="@string/preferences_next"
+            style="@style/preferences_next_button"
             />
-        <TextView
+        <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:id="@+id/goto_signup"
-            style="@style/next_btn"
-            android:text="Sign Up"/>
+            android:text="Sign Up"
+            style="@style/preferences_next_button"/>
     </LinearLayout>
 </LinearLayout>

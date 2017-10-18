@@ -45,4 +45,19 @@
     <string name="login_screen_condition">By creating an account, you are agree to our </string>
     <string name="login_screen_terms">Terms &amp; Conditions</string>
 
+    <!-- preferences -->
+    <string name="preference_header">Let us know your preference</string>
+    <string name="preference_subheader">We\'\ll tailor your feed. You see only what you love !</string>
+    <string name="preference_industry_type">Select Industry</string>
+    <string name="preference_fashion_selection">Select Fashion Preference</string>
+    <string name="preference_men_fashion">Men\'\s Fashion</string>
+    <string name="preference_female_fashion">Women\'\s Fashion</string>
+    <string name="preference_industry_bollywood">Bollywood</string>
+    <string name="preference_industry_tollywood">Tollywood</string>
+    <string name="preference_industry_tamil">Tamil</string>
+    <string name="preference_industry_kannada">Kannada</string>
+    <string name="preference_industry_malayalam">Malayalam</string>
+
+    <string name="preferences_next"> >> Next >> </string>
+
 </resources>
