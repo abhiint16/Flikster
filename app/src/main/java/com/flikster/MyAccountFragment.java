@@ -47,4 +47,10 @@ public class MyAccountFragment extends Fragment {
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
 
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
 }
