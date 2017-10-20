@@ -58,9 +58,9 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         menu_notification.setOnClickListener(this);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+        /*actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         actionBarDrawerToggle.syncState();
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);*/
     }
 
     private void initializeViews() {
