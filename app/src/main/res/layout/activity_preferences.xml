@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_authentication_login_margin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/preference_header"
+        android:layout_weight="1"
+        style="@style/preferences_header_style"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/preference_subheader"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/preference_industry_type"
+        style="@style/preferences_header_style"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+            <RadioButton
+                android:id="@+id/ind_bollywood"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="@string/preference_industry_bollywood"
+                android:layout_height="wrap_content"
+                />
+
+            <RadioButton
+                android:id="@+id/ind_tollywood"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="@string/preference_industry_tollywood"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+            <RadioButton
+                android:id="@+id/ind_tamil"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="@string/preference_industry_tamil"
+                android:layout_height="wrap_content"
+                />
+            <RadioButton
+                android:id="@+id/ind_kannada"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="@string/preference_industry_kannada"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/ind_malayalam"
+            android:layout_width="match_parent"
+            android:text="@string/preference_industry_malayalam"
+            android:layout_height="wrap_content"
+            />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent">
+
+    </View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/preference_fashion_selection"
+        android:layout_weight="1"
+        style="@style/preferences_header_style"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/tv_menFashion"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:text="@string/preference_men_fashion"
+            android:background="@drawable/gray_rectange_border"
+            android:gravity="center"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_womenFashion"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:text="@string/preference_female_fashion"
+            android:background="@drawable/gray_rectange_border"
+            android:gravity="center"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.6"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/goto_home"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/preferences_next"
+            style="@style/preferences_next_button"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/goto_signup"
+            android:text="Sign Up"
+            style="@style/preferences_next_button"/>
+    </LinearLayout>
+</LinearLayout>
