@@ -90,7 +90,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ((ViewHolder4)holder).textView.setText("Shop By videos");
             layoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4)holder).recyclerView.setLayoutManager(layoutManager);
-            celebrityBioAdapterVideoViewHolder =new CelebrityBioAdapterVideoViewHolder(3);
+            celebrityBioAdapterVideoViewHolder =new CelebrityBioAdapterVideoViewHolder();
             ((ViewHolder4)holder).recyclerView.setAdapter(celebrityBioAdapterVideoViewHolder);
         }
 
