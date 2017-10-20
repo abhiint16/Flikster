@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="Horizontal"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:id="@+id/notification_item_img"
+        android:background="@drawable/black_round_border"
+        android:layout_gravity="center"
+        android:src="@drawable/shoes"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Product Delivered"
+            android:layout_weight="1"
+            android:id="@+id/notification_item_title"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Black shoes that you ordered has been delivered. Thanks for shopping"
+            android:layout_weight="3"
+            android:id="@+id/notification_item_desc"
+            android:gravity="center_vertical"
+            android:textSize="12sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="5 days"
+            android:layout_weight="1"
+            android:id="@+id/notification_item_time"
+            android:gravity="center_vertical|end"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+</LinearLayout>
