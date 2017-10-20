@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -131,8 +132,14 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         {
             case R.id.menu_profile :
             {
-                beginTransact(new ProfileFragment());
-                break;
+                if(drawerLayout.isDrawerOpen(Gravity.RIGHT))
+                {
+                    drawerLayout.closeDrawer(Gravity.RIGHT);
+                }
+                else if(!drawerLayout.isDrawerOpen(Gravity.RIGHT))
+                {
+                    drawerLayout.openDrawer(Gravity.RIGHT);
+                }
             }
         }
         return true;
