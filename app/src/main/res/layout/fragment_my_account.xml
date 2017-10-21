@@ -46,7 +46,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@+id/fragment_my_account_banner"
-                    android:background="@color/white"></View>
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/white_solid_round_border"></View>
 
                 <ImageView
                     android:id="@+id/fragment_my_account_dp"
