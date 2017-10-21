@@ -27,7 +27,7 @@ public class MyAccountFragment extends Fragment {
     View view;
     TextView textView;
     TabLayout tabLayout;
-    CelebrityAdapter celebrityAdapter;
+    MyAccountAdapter myAccountAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,8 +39,8 @@ public class MyAccountFragment extends Fragment {
     }
 
     private void initializeRest() {
-        celebrityAdapter = new CelebrityAdapter(getChildFragmentManager());
-        viewPager.setAdapter(celebrityAdapter);
+        myAccountAdapter = new MyAccountAdapter(getChildFragmentManager());
+        viewPager.setAdapter(myAccountAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
