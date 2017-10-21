@@ -114,20 +114,50 @@
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <ImageButton
+                    android:id="@+id/toolbar_overflow_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="@color/transparent"
+                    android:src="@android:drawable/arrow_down_float"
+                    android:layout_marginRight="5dp"/>
+
+                <ImageButton
+                    android:id="@+id/toolbar_cart_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="@color/transparent"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:layout_marginRight="5dp"/>
+
+                <ImageButton
                     android:id="@+id/toolbar_notification_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@android:drawable/ic_menu_search" />
+                    android:src="@drawable/notification_white"
+                    android:layout_marginRight="5dp"/>
 
                 <ImageButton
-                    android:id="@+id/toolbar_notification_ico"
+                    android:id="@+id/toolbar_search_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@drawable/notification_white" />
+                    android:src="@android:drawable/ic_menu_search"
+                    android:layout_marginRight="5dp"/>
+
+                <ImageButton
+                    android:id="@+id/toolbar_navigation_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@color/transparent"
+                    android:src="@drawable/arraow_back"
+                    android:layout_marginLeft="5dp"/>
+
             </android.support.v7.widget.Toolbar>
 
 
@@ -139,7 +169,7 @@
             android:orientation="horizontal"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp">
         <android.support.design.widget.TabLayout
             android:id="@+id/fragment_my_account_tablayout"
@@ -150,6 +180,10 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:text="Follow"
                 android:background="@drawable/solid_border"
