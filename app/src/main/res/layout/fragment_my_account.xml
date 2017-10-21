@@ -104,6 +104,20 @@
                 android:titleTextColor="@color/black"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/toolbar_notification_icon"
+                    android:src="@android:drawable/ic_menu_search"
+                    android:background="@color/transparent"
+                    android:layout_gravity="end|center_vertical"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/toolbar_notification_ico"
+                    android:src="@drawable/notification_white"
+                    android:background="@color/transparent"
+                    android:layout_gravity="end|center_vertical"/>
             </android.support.v7.widget.Toolbar>
 
 
