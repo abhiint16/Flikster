@@ -49,7 +49,7 @@ public class MyAccountFragment extends Fragment {
         tabLayout=(TabLayout)view.findViewById(R.id.fragment_my_account_tablayout);
         toolbar=(Toolbar)view.findViewById(R.id.fragment_my_account_toolbar);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
-        tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.black));
+        tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.colorAccent));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
 
     }
