@@ -55,12 +55,11 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.colorAccent));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
-
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 

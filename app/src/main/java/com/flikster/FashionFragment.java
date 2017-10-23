@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 /**
  * Created by abhishek on 17-10-2017.
@@ -21,6 +22,7 @@ public class FashionFragment extends Fragment {
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     FashionFragmentAdapter fashionFragmentAdapter;
     Toolbar toolbar;
+    ImageButton toolbar_navigation_icon;
 
     @Nullable
     @Override
@@ -37,16 +39,23 @@ public class FashionFragment extends Fragment {
         recyclerViewFashionFragment.setLayoutManager(layoutManagerFashionFragment);
         fashionFragmentAdapter = new FashionFragmentAdapter(getActivity());
         recyclerViewFashionFragment.setAdapter(fashionFragmentAdapter);
+        toolbar_navigation_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().popBackStackImmediate();
+            }
+        });
     }
 
     private void initializeViews() {
         recyclerViewFashionFragment = (RecyclerView) view.findViewById(R.id.fashion_recyclerview);
         toolbar = (Toolbar) view.findViewById(R.id.fragment_fashion_toolbar);
+        toolbar_navigation_icon=(ImageButton)view.findViewById(R.id.toolbar_navigation_icon);
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 }
