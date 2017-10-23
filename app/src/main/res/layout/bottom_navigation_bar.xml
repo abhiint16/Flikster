@@ -72,11 +72,11 @@
 
         <ImageButton
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_height="match_parent"
             android:duplicateParentState="true"
             android:background="@drawable/black_round_border"
-            android:src="@drawable/add_icon" />
+            android:src="@drawable/add_icon"
+            android:clickable="false" />
     </LinearLayout>
 
     <LinearLayout

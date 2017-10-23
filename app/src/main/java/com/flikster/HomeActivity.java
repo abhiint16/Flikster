@@ -52,6 +52,7 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         fashion.setOnClickListener(this);
         store.setOnClickListener(this);
         rating.setOnClickListener(this);
+        plus.setOnClickListener(this);
         fragmentManager = getSupportFragmentManager();
         toolbar.setWillNotCacheDrawing(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -68,6 +69,7 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         fashion=(LinearLayout)findViewById(R.id.fashion_button);
         rating=(LinearLayout)findViewById(R.id.rating_button);
         store=(LinearLayout)findViewById(R.id.store_button);
+        plus=(LinearLayout)findViewById(R.id.plus_button);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         menu_notification=(ImageButton)toolbar.findViewById(R.id.toolbar_notification_icon);
@@ -113,6 +115,10 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         else if(viewId==R.id.rating_button)
         {
             beginTransact(new RatingFragment());
+        }
+        else if(viewId==R.id.plus_button)
+        {
+            
         }
     }
 
