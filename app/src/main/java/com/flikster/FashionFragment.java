@@ -35,7 +35,7 @@ public class FashionFragment extends Fragment {
     private void initializeRest() {
         layoutManagerFashionFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerViewFashionFragment.setLayoutManager(layoutManagerFashionFragment);
-        fashionFragmentAdapter = new FashionFragmentAdapter();
+        fashionFragmentAdapter = new FashionFragmentAdapter(getActivity());
         recyclerViewFashionFragment.setAdapter(fashionFragmentAdapter);
     }
 
