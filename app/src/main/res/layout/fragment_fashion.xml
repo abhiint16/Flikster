@@ -68,6 +68,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/fragment_fashion_toolbar"
         android:id="@+id/fashion_recyclerview"
-        android:background="@color/colorImageBackgroundGrey"></android.support.v7.widget.RecyclerView>
+        android:background="@color/white"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

@@ -15,14 +15,16 @@
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginRight="10dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/card_fashion_option_men_relative">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/black_round_border"
             android:scaleType="fitXY"
-            android:src="@drawable/style6" />
+            android:src="@drawable/style6"
+            android:id="@+id/card_fashion_option_menimg"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,21 +32,24 @@
             android:layout_centerInParent="true"
             android:text="Men Fashion"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:id="@+id/card_fashion_option_men_txt"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/card_fashion_option_women_relative">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/black_round_border"
             android:scaleType="fitXY"
-            android:src="@drawable/style2" />
+            android:src="@drawable/style2"
+            android:id="@+id/card_fashion_option_womenimg"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,6 +57,7 @@
             android:layout_centerInParent="true"
             android:text="Women Fashion"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:id="@+id/card_fashion_option_women_txt"/>
     </RelativeLayout>
 </LinearLayout>

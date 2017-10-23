@@ -4,8 +4,10 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -76,8 +78,47 @@ public class FashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
+        RelativeLayout card_fashion_option_women_relative,card_fashion_option_men_relative;
         public ViewHolder1(View itemView) {
             super(itemView);
+            card_fashion_option_women_relative=(RelativeLayout)itemView.findViewById(R.id.card_fashion_option_women_relative);
+            card_fashion_option_men_relative=(RelativeLayout)itemView.findViewById(R.id.card_fashion_option_men_relative);
+            card_fashion_option_women_relative.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    switch (motionEvent.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            view.setFitsSystemWindows(true);
+                            view.setAlpha((float) 0.5);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            view.setAlpha((float) 1.0);
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            view.setAlpha((float) 0.5);
+                            break;
+                    }
+                    return true;
+                }
+            });
+            card_fashion_option_men_relative.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    switch (motionEvent.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            view.setFitsSystemWindows(true);
+                            view.setAlpha((float) 0.5);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            view.setAlpha((float) 1.0);
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            view.setAlpha((float) 0.5);
+                            break;
+                    }
+                    return true;
+                }
+            });
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder {
