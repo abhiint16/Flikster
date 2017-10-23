@@ -18,7 +18,7 @@ public class RewardsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_fashion,container,false);
+        view=inflater.inflate(R.layout.fragment_common,container,false);
         textView=(TextView)view.findViewById(R.id.tvf);
         textView.setText("Rewards is working fine");
         return view;
