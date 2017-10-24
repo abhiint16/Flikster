@@ -68,7 +68,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
         {
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.main_container,new NotificationFragment())
+                    .replace(R.id.main_container,new NotificationFragment())
                     .addToBackStack("")
                     .commit();
         }
@@ -76,7 +76,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
         {
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.main_container,new MyBagFragment())
+                    .replace(R.id.main_container,new MyBagFragment())
                     .addToBackStack("")
                     .commit();
         }
