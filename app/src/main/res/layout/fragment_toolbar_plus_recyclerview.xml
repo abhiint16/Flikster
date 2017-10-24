@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/dark_grey"
+        android:id="@+id/fragment_toolbar_plus_recyclerview_toolbar"
+        android:layout_alignParentTop="true">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arraow_back"
+            android:background="@color/transparent"
+            android:id="@+id/fragment_toolbar_plus_recyclerview_back_navigation"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Bag"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:id="@+id/fragment_toolbar_plus_recyclerview_title"
+            android:layout_marginLeft="30dp"/>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_toolbar_plus_recyclerview_recycler_view"
+        android:layout_below="@id/fragment_toolbar_plus_recyclerview_toolbar"
+        android:layout_above="@+id/fragment_toolbar_plus_recyclerview_continue_button">
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        android:text="Continue"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:id="@+id/fragment_toolbar_plus_recyclerview_continue_button"/>
+</RelativeLayout>
