@@ -16,13 +16,13 @@ import android.widget.ImageButton;
  * Created by abhishek on 17-10-2017.
  */
 
-public class FashionFragment extends Fragment {
+public class FashionFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView recyclerViewFashionFragment;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     FashionFragmentAdapter fashionFragmentAdapter;
     Toolbar toolbar;
-    ImageButton toolbar_navigation_icon;
+    ImageButton toolbar_navigation_icon,toolbar_notification_icon;
 
     @Nullable
     @Override
@@ -39,23 +39,36 @@ public class FashionFragment extends Fragment {
         recyclerViewFashionFragment.setLayoutManager(layoutManagerFashionFragment);
         fashionFragmentAdapter = new FashionFragmentAdapter(getActivity());
         recyclerViewFashionFragment.setAdapter(fashionFragmentAdapter);
-        toolbar_navigation_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().popBackStackImmediate();
-            }
-        });
+        toolbar_navigation_icon.setOnClickListener(this);
+        toolbar_notification_icon.setOnClickListener(this);
     }
 
     private void initializeViews() {
         recyclerViewFashionFragment = (RecyclerView) view.findViewById(R.id.fashion_recyclerview);
         toolbar = (Toolbar) view.findViewById(R.id.fragment_fashion_toolbar);
         toolbar_navigation_icon=(ImageButton)view.findViewById(R.id.toolbar_navigation_icon);
+        toolbar_notification_icon=(ImageButton)view.findViewById(R.id.toolbar_notification_icon);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.toolbar_navigation_icon)
+        {
+            getFragmentManager().popBackStackImmediate();
+        }
+        else if(view.getId()==R.id.toolbar_notification_icon)
+        {
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.main_container,new NotificationFragment())
+                    .addToBackStack("")
+                    .commit();
+        }
     }
 }

@@ -29,7 +29,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     TextView textView;
     TabLayout tabLayout;
     MyAccountAdapter myAccountAdapter;
-    ImageButton toolbar_navigation_icon;
+    ImageButton toolbar_navigation_icon,toolbar_notification_icon;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         viewPager.setAdapter(myAccountAdapter);
         tabLayout.setupWithViewPager(viewPager);
         toolbar_navigation_icon.setOnClickListener(this);
+        toolbar_notification_icon.setOnClickListener(this);
     }
 
     private void initializeViews() {
@@ -52,6 +53,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         tabLayout=(TabLayout)view.findViewById(R.id.fragment_my_account_tablayout);
         toolbar=(Toolbar)view.findViewById(R.id.fragment_my_account_toolbar);
         toolbar_navigation_icon=(ImageButton)view.findViewById(R.id.toolbar_navigation_icon);
+        toolbar_notification_icon=(ImageButton)view.findViewById(R.id.toolbar_notification_icon);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.colorAccent));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
@@ -68,6 +70,14 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         if(view.getId()==R.id.toolbar_navigation_icon)
         {
             getFragmentManager().popBackStackImmediate();
+        }
+        else if(view.getId()==R.id.toolbar_notification_icon)
+        {
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.main_container,new NotificationFragment())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }
