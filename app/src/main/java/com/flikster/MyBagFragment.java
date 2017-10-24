@@ -9,16 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 /**
  * Created by abhishek on 24-10-2017.
  */
 
-public class MyBagFragment extends Fragment {
+public class MyBagFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     MyBagAdapter myBagAdapter;
+    ImageButton fragment_toolbar_plus_recyclerview_back_navigation;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,15 +36,26 @@ public class MyBagFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         myBagAdapter=new MyBagAdapter();
         recyclerView.setAdapter(myBagAdapter);
+        fragment_toolbar_plus_recyclerview_back_navigation.setOnClickListener(this);
     }
 
     private void initializeViews() {
         recyclerView=(RecyclerView)view.findViewById(R.id.fragment_toolbar_plus_recyclerview_recycler_view);
+        fragment_toolbar_plus_recyclerview_back_navigation=(ImageButton)view.findViewById(R.id.fragment_toolbar_plus_recyclerview_back_navigation);
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.fragment_toolbar_plus_recyclerview_back_navigation)
+        {
+            getFragmentManager().popBackStackImmediate();
+        }
     }
 }
