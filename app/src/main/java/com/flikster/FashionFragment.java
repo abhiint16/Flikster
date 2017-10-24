@@ -22,7 +22,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     FashionFragmentAdapter fashionFragmentAdapter;
     Toolbar toolbar;
-    ImageButton toolbar_navigation_icon,toolbar_notification_icon;
+    ImageButton toolbar_navigation_icon,toolbar_notification_icon,toolbar_cart_icon;
 
     @Nullable
     @Override
@@ -41,6 +41,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
         recyclerViewFashionFragment.setAdapter(fashionFragmentAdapter);
         toolbar_navigation_icon.setOnClickListener(this);
         toolbar_notification_icon.setOnClickListener(this);
+        toolbar_cart_icon.setOnClickListener(this);
     }
 
     private void initializeViews() {
@@ -48,6 +49,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
         toolbar = (Toolbar) view.findViewById(R.id.fragment_fashion_toolbar);
         toolbar_navigation_icon=(ImageButton)view.findViewById(R.id.toolbar_navigation_icon);
         toolbar_notification_icon=(ImageButton)view.findViewById(R.id.toolbar_notification_icon);
+        toolbar_cart_icon=(ImageButton)view.findViewById(R.id.toolbar_cart_icon);
     }
 
     @Override
@@ -67,6 +69,14 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
             getFragmentManager()
                     .beginTransaction()
                     .add(R.id.main_container,new NotificationFragment())
+                    .addToBackStack("")
+                    .commit();
+        }
+        else if(view.getId()==R.id.toolbar_cart_icon)
+        {
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.main_container,new MyBagFragment())
                     .addToBackStack("")
                     .commit();
         }
