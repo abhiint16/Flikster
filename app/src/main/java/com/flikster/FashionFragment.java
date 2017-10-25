@@ -1,5 +1,6 @@
 package com.flikster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -74,11 +75,8 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
         }
         else if(view.getId()==R.id.toolbar_cart_icon)
         {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_container,new MyBagFragment())
-                    .addToBackStack("")
-                    .commit();
+            Intent intent=new Intent(getActivity(),MyBagActivity.class);
+            startActivity(intent);
         }
     }
 }
