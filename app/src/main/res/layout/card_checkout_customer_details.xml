@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_marginTop="10dp"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rakesh Kumar"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Shibi infolab TSS Tower Hyderabad - 550033"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="+91-9999999999"/>
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/solid_border"
+        android:text="Change/Edit"
+        android:textColor="@color/white"
+        android:layout_gravity="end"
+        android:id="@+id/card_checkout_customer_details_button"/>
+</LinearLayout>
