@@ -61,6 +61,9 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
         }
         else if(view.getId()==R.id.activity_mybag_continue_onclick_tabs_payment_linear)
         {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
+                    .commit();
         }
     }
 
