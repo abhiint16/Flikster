@@ -11,12 +11,12 @@ import android.view.ViewGroup;
  * Created by abhishek on 24-10-2017.
  */
 
-public class PaymentAddressFragment extends Fragment {
+public class AddressFragment extends Fragment {
     View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_payment_address,container,false);
+        view=inflater.inflate(R.layout.fragment_address,container,false);
         return view;
     }
 }
