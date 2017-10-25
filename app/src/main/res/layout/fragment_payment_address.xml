@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:drawableLeft="@drawable/gps"
+            android:paddingLeft="50dp"
+            android:text="Use My Current Location"
+            android:background="@color/white"
+            android:elevation="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="name"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Mobile No"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Address"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="City"
+                android:layout_margin="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Pin Code"
+                    android:layout_margin="5dp"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:hint="State"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Landmark (Optional)"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="Addition Mobile No (Optional)"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorAccent"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+</ScrollView>
