@@ -4,21 +4,21 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/fragment_mybag_continue_onclick_toolbar"
+        android:id="@+id/activity_mybag_continue_onclick_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
         android:background="@color/dark_grey">
 
         <ImageButton
-            android:id="@+id/fragment_mybag_continue_onclick_toolbar_back_navigation"
+            android:id="@+id/activity_mybag_continue_onclick_toolbar_back_navigation_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:src="@drawable/arraow_back" />
 
         <TextView
-            android:id="@+id/fragment_mybag_continue_onclick_toolbar_title"
+            android:id="@+id/activity_mybag_continue_onclick_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -31,67 +31,76 @@
         android:layout_height="?attr/actionBarSize"
         android:orientation="horizontal"
         android:background="@color/white"
-        android:id="@+id/fragment_mybag_continue_onclick_tab"
-        android:layout_below="@+id/fragment_mybag_continue_onclick_toolbar">
+        android:id="@+id/activity_mybag_continue_onclick_tabs"
+        android:layout_below="@+id/activity_mybag_continue_onclick_toolbar">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear">
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/address"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear_imgbtn"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Address"/>
+                android:text="Address"
+                android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear_name"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear">
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/address"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Address"/>
+                android:text="Address"
+                android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_name"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear">
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/address"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_imgbtn"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Address"/>
+                android:text="Address"
+                android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_name"/>
         </LinearLayout>
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/payment_container"
-        android:layout_below="@+id/fragment_mybag_continue_onclick_tab">
+        android:id="@+id/activity_mybag_continue_onclick_container"
+        android:layout_below="@+id/activity_mybag_continue_onclick_tabs">
     </FrameLayout>
 </RelativeLayout>

@@ -13,47 +13,33 @@ import android.widget.ImageButton;
  * Created by abhishek on 24-10-2017.
  */
 
-public class MyBagContinueOnClickFragment extends Fragment implements View.OnClickListener {
-    View view;
-    ImageButton fragment_mybag_continue_onclick_toolbar_back_navigation;
-    @Nullable
+public class MyBagContinueOnClickActivity extends AppCompatActivity implements View.OnClickListener {
+    ImageButton activity_mybag_continue_onclick_toolbar_back_navigation_btn;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.activity_mybag_continue_onclick,container,false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mybag_continue_onclick);
         addressFragmentLaunch();
         initializeView();
         initializeRest();
-        return view;
     }
 
     private void initializeRest() {
-        fragment_mybag_continue_onclick_toolbar_back_navigation.setOnClickListener(this);
+        activity_mybag_continue_onclick_toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
     private void initializeView() {
-        fragment_mybag_continue_onclick_toolbar_back_navigation=(ImageButton)view.findViewById(R.id.fragment_mybag_continue_onclick_toolbar_back_navigation);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        activity_mybag_continue_onclick_toolbar_back_navigation_btn = (ImageButton) findViewById(R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn);
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.fragment_mybag_continue_onclick_toolbar_back_navigation)
-        {
+        if (view.getId() == R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn) {
             getFragmentManager().popBackStackImmediate();
         }
     }
 
-    private void addressFragmentLaunch()
-    {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.payment_container,new PaymentAddressFragment())
-                .addToBackStack("")
-                .commit();
+    private void addressFragmentLaunch() {
     }
 }

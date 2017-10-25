@@ -1,5 +1,6 @@
 package com.flikster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -55,7 +56,8 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
         }
         else if(view.getId()==R.id.activity_my_bag_bottom_continue_btn)
         {
-
+            Intent intent=new Intent(this,MyBagContinueOnClickActivity.class);
+            startActivity(intent);
         }
     }
 }
