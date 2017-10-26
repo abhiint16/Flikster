@@ -14,7 +14,15 @@
         android:title="Fashion"
         android:titleTextColor="@color/black"
         app:layout_collapseMode="pin"
-        app:layout_scrollFlags="scroll|enterAlways">
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
 
         <ImageButton
             android:id="@+id/toolbar_overflow_icon"
@@ -54,7 +62,7 @@
 
         <ImageButton
             android:id="@+id/toolbar_navigation_icon"
-            android:layout_width="40dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
             android:background="@color/transparent"

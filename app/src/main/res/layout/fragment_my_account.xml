@@ -113,53 +113,62 @@
                 android:title="Megha"
                 android:titleTextColor="@color/black"
                 app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|enterAlways">
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:contentInsetLeft="0dp"
+                android:contentInsetStart="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetEnd="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp">
 
                 <ImageButton
                     android:id="@+id/toolbar_overflow_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@android:drawable/arrow_down_float"
-                    android:layout_marginRight="5dp"/>
+                    android:src="@android:drawable/arrow_down_float" />
 
                 <ImageButton
                     android:id="@+id/toolbar_cart_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:layout_marginRight="5dp"/>
+                    android:src="@android:drawable/ic_menu_gallery" />
 
                 <ImageButton
                     android:id="@+id/toolbar_notification_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@drawable/notification_white"
-                    android:layout_marginRight="5dp"/>
+                    android:src="@drawable/notification_white" />
 
                 <ImageButton
                     android:id="@+id/toolbar_search_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@android:drawable/ic_menu_search"
-                    android:layout_marginRight="5dp"/>
+                    android:src="@android:drawable/ic_menu_search" />
 
                 <ImageButton
                     android:id="@+id/toolbar_navigation_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@drawable/arraow_back"
-                    android:layout_marginLeft="5dp"/>
+                    android:src="@drawable/arraow_back"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Neha Aggarwal"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"/>
             </android.support.v7.widget.Toolbar>
 
 
