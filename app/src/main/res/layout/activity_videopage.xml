@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/headerrllayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/closebtn"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/ten"
+            android:background="@drawable/closeicon" />
+
+        <ImageButton
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ten"
+            android:background="@drawable/moredotdicon" />
+    </RelativeLayout>
+
+    <VideoView
+        android:id="@+id/playVideo"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical|center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/bottom_navigation_bar"
+            layout="@layout/share_option_card_video_footer"
+
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_comment"
+            android:layout_marginLeft="@dimen/ten"
+            android:layout_marginRight="@dimen/ten"
+            android:background="@null"
+            android:elevation="2dp"
+            android:hint="Write a comment"
+            android:imeOptions="actionDone"
+            android:padding="@dimen/ten"
+            android:textColor="@color/white"
+            android:textColorHint="@color/dark_grey"
+            android:textSize="12sp" />
+    </LinearLayout>
+</RelativeLayout>

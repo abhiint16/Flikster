@@ -6,21 +6,21 @@
     android:orientation="horizontal">
 
     <LinearLayout
+        android:id="@+id/feed_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:id="@+id/feed_button"
-        android:orientation="vertical"
         android:clickable="true"
+        android:orientation="vertical"
         android:padding="2dp">
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
+            android:background="@color/white"
             android:clickable="false"
             android:duplicateParentState="true"
-            android:background="@color/white"
             android:src="@drawable/feed_icon" />
 
         <TextView
@@ -34,10 +34,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/rating_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:id="@+id/rating_button"
         android:clickable="true"
         android:orientation="vertical"
         android:padding="2dp">
@@ -46,9 +46,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
+            android:background="@color/white"
             android:clickable="false"
             android:duplicateParentState="true"
-            android:background="@color/white"
             android:src="@drawable/rating_icon" />
 
         <TextView
@@ -56,74 +56,74 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clickable="false"
-            android:gravity="center"
             android:duplicateParentState="true"
+            android:gravity="center"
             android:text="Rating" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/plus_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:clickable="true"
-        android:id="@+id/plus_button"
+        android:orientation="vertical"
         android:padding="5dp">
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:duplicateParentState="true"
             android:background="@drawable/black_round_border"
-            android:src="@drawable/add_icon"
-            android:clickable="false" />
+            android:clickable="false"
+            android:duplicateParentState="true"
+            android:src="@drawable/add_icon" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/fashion_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:clickable="true"
-        android:id="@+id/fashion_button"
+        android:orientation="vertical"
         android:padding="2dp">
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
-            android:duplicateParentState="true"
-            android:src="@drawable/feed_icon"
+            android:background="@color/white"
             android:clickable="false"
-            android:background="@color/white" />
+            android:duplicateParentState="true"
+            android:src="@drawable/feed_icon" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:duplicateParentState="true"
             android:clickable="false"
+            android:duplicateParentState="true"
             android:gravity="center"
             android:text="Fashion" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/store_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:clickable="true"
-        android:id="@+id/store_button"
+        android:orientation="vertical"
         android:padding="2dp">
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
-            android:duplicateParentState="true"
+            android:background="@color/white"
             android:clickable="false"
-            android:src="@drawable/rating_icon"
-            android:background="@color/white" />
+            android:duplicateParentState="true"
+            android:src="@drawable/rating_icon" />
 
         <TextView
             android:layout_width="match_parent"

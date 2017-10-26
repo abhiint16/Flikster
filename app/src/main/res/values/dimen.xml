@@ -13,4 +13,7 @@
     <dimen name="desc_padding">40dp</dimen>
     <dimen name="activity_authentication_margin">16dp</dimen>
     <dimen name="activity_authentication_login_margin">30dp</dimen>
+
+    <dimen name="five">5dp</dimen>
+    <dimen name="ten">10dp</dimen>
 </resources>

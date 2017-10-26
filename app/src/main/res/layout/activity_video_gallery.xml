@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_my_bag_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/activity_my_bag_toolbar_back_navigation_btn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/backicon" />
+
+            <TextView
+                android:id="@+id/activity_my_bag_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Videos"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/ten"
+                android:background="@color/transparent"
+                android:src="@drawable/more_icon" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/card_header"></include>
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/ten"
+                android:text="Animation trailer "
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <VideoView
+                android:id="@+id/playVideo"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|center" />
+
+            <include layout="@layout/card_footer"></include>
+
+            <include layout="@layout/card_description"></include>
+
+            <include layout="@layout/card_comment_text"></include>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/ten"
+                android:text="Recommeded Videos"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/gallery_videos_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
+                android:layout_below="@id/activity_my_bag_toolbar"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

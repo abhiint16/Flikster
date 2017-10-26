@@ -20,9 +20,9 @@
         <activity android:name=".Authentication.LoginMobileOtpActivity" />
         <activity android:name=".Authentication.LoginEmailOtpActivity" />
         <activity android:name=".Authentication.LoginCreateAccountActivity" />
-        <activity android:name=".Preferences.PreferencesView">
-        </activity>
+        <activity android:name=".Preferences.PreferencesView"></activity>
         <activity android:name=".SplashScreen.Splash_Screen">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +31,9 @@
         </activity>
         <activity android:name=".MyBagActivity"></activity>
         <activity android:name=".MyBagContinueOnClickActivity"></activity>
+        <activity android:name=".VideoPlayerActivity" />
+        <activity android:name=".VideoGalleryActivity" />
+
     </application>
 
 </manifest>
