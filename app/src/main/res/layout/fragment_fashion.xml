@@ -18,8 +18,8 @@
 
         <ImageButton
             android:id="@+id/toolbar_overflow_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:layout_gravity="end|center_vertical"
             android:layout_marginRight="5dp"
             android:background="@color/transparent"
@@ -27,8 +27,8 @@
 
         <ImageButton
             android:id="@+id/toolbar_cart_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:layout_gravity="end|center_vertical"
             android:layout_marginRight="5dp"
             android:background="@color/transparent"
@@ -36,8 +36,8 @@
 
         <ImageButton
             android:id="@+id/toolbar_notification_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:layout_gravity="end|center_vertical"
             android:layout_marginRight="5dp"
             android:background="@color/transparent"
@@ -45,8 +45,8 @@
 
         <ImageButton
             android:id="@+id/toolbar_search_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:layout_gravity="end|center_vertical"
             android:layout_marginRight="5dp"
             android:background="@color/transparent"
@@ -54,12 +54,17 @@
 
         <ImageButton
             android:id="@+id/toolbar_navigation_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
-            android:layout_marginLeft="5dp"
             android:background="@color/transparent"
             android:src="@drawable/arraow_back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fashion"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
 
     </android.support.v7.widget.Toolbar>
 

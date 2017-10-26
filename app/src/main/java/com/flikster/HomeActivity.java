@@ -36,6 +36,10 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
         setContentView(R.layout.activity_home);
         initializeViews();
         initializeRest();
+        checkForLaunch();
+    }
+
+    private void checkForLaunch() {
         if("MyBag".equals(getIntent().getStringExtra("MyBag")))
         {
             fragmentManager.beginTransaction()
@@ -43,7 +47,8 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
                     .commit();
         }
         else
-        firstTimeLaunch(new FeedFragment());
+            firstTimeLaunch(new FeedFragment());
+
     }
 
     private void firstTimeLaunch(Fragment fragment) {
