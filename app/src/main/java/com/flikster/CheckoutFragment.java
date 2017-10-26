@@ -23,8 +23,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     RecyclerView.LayoutManager layoutManager;
     CheckoutAdapter checkoutAdapter;
     Toolbar toolbar;
-    ImageButton imageButton;
-    TextView titleToolbar;
+    ImageButton backButton,addressTabIcon,checkoutTabIcon,paymentTabIcon;
+    TextView titleToolbar,addressTabText,checkoutTabText,paymentTabText;
     Button fragment_checkout_bottom_btn;
     @Nullable
     @Override
@@ -40,7 +40,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutManager);
         checkoutAdapter=new  CheckoutAdapter();
         recyclerView.setAdapter(checkoutAdapter);
-        imageButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
         fragment_checkout_bottom_btn.setOnClickListener(this);
         titleToolbar.setText("Order Details");
     }
@@ -48,9 +48,26 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     private void initializeViews() {
         recyclerView=(RecyclerView)view.findViewById(R.id.fragment_checkout_recyclerview);
         toolbar=(Toolbar)getActivity().findViewById(R.id.activity_mybag_continue_onclick_toolbar);
-        imageButton=(ImageButton)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn);
+        backButton=(ImageButton)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn);
         titleToolbar=(TextView)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_title);
         fragment_checkout_bottom_btn=(Button)view.findViewById(R.id.fragment_checkout_bottom_btn);
+        addressTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_imgbtn);
+        checkoutTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn);
+        paymentTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_imgbtn);
+        addressTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_name);
+        checkoutTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_name);
+        paymentTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_name);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        addressTabIcon.setImageResource(R.drawable.address);
+        addressTabText.setTextColor(getActivity().getResources().getColor(R.color.black));
+        checkoutTabIcon.setImageResource(R.drawable.checkout_pink);
+        checkoutTabText.setTextColor(getActivity().getResources().getColor(R.color.colorAccent));
+        paymentTabIcon.setImageResource(R.drawable.payment);
+        paymentTabText.setTextColor(getActivity().getResources().getColor(R.color.black));
     }
 
     @Override
