@@ -32,7 +32,7 @@
         android:orientation="horizontal"
         android:background="@color/white"
         android:id="@+id/activity_mybag_continue_onclick_tabs"
-        android:layout_below="@+id/activity_mybag_continue_onclick_toolbar">
+        android:layout_below="@id/activity_mybag_continue_onclick_toolbar">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"

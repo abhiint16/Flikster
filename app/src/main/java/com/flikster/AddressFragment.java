@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 /**
  * Created by abhishek on 24-10-2017.
@@ -20,6 +21,7 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
     Button fragment_address_bottom_btn;
     Toolbar toolbar;
     ImageButton imageButton;
+    TextView titleToolbar;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,12 +34,14 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
     private void initializeRest() {
         fragment_address_bottom_btn.setOnClickListener(this);
         imageButton.setOnClickListener(this);
+        titleToolbar.setText("Enter Address");
     }
 
     private void initializeView() {
         fragment_address_bottom_btn=(Button)view.findViewById(R.id.fragment_address_bottom_btn);
         toolbar=(Toolbar)getActivity().findViewById(R.id.activity_mybag_continue_onclick_toolbar);
         imageButton=(ImageButton)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn);
+        titleToolbar=(TextView)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_title);
     }
 
     @Override

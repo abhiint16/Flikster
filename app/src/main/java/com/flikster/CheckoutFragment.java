@@ -24,7 +24,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     CheckoutAdapter checkoutAdapter;
     Toolbar toolbar;
     ImageButton imageButton;
-    TextView toolbarTitle;
+    TextView titleToolbar;
     Button fragment_checkout_bottom_btn;
     @Nullable
     @Override
@@ -42,14 +42,14 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         recyclerView.setAdapter(checkoutAdapter);
         imageButton.setOnClickListener(this);
         fragment_checkout_bottom_btn.setOnClickListener(this);
-//        toolbarTitle.setText("Order Details");
+        titleToolbar.setText("Order Details");
     }
 
     private void initializeViews() {
         recyclerView=(RecyclerView)view.findViewById(R.id.fragment_checkout_recyclerview);
         toolbar=(Toolbar)getActivity().findViewById(R.id.activity_mybag_continue_onclick_toolbar);
         imageButton=(ImageButton)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn);
-        toolbarTitle=(TextView)toolbar.findViewById(R.id.activity_my_bag_toolbar_title);
+        titleToolbar=(TextView)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_title);
         fragment_checkout_bottom_btn=(Button)view.findViewById(R.id.fragment_checkout_bottom_btn);
     }
 

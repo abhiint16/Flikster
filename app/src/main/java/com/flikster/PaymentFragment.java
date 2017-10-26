@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 /**
  * Created by abhishek on 25-10-2017.
@@ -30,6 +31,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     Button button;
     ImageButton imageButton;
     Toolbar toolbar;
+    TextView titleToolbar;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         recyclerView.setAdapter(paymentAdapter);
         button.setOnClickListener(this);
         imageButton.setOnClickListener(this);
+        titleToolbar.setText("Payment Mode");
     }
 
     private void initializeViews() {
@@ -52,6 +55,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         button=(Button)view.findViewById(R.id.fragment_checkout_bottom_btn);
         toolbar=(Toolbar)getActivity().findViewById(R.id.activity_mybag_continue_onclick_toolbar);
         imageButton=(ImageButton)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn);
+        titleToolbar=(TextView)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_title);
     }
 
     @Override
