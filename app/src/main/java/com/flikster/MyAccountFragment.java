@@ -60,6 +60,12 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
@@ -75,7 +81,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         {
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.main_container,new NotificationFragment())
+                    .replace(R.id.main_container,new NotificationFragment())
                     .addToBackStack("")
                     .commit();
         }
