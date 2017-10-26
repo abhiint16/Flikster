@@ -1,6 +1,7 @@
 package com.flikster;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -52,9 +53,18 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.card_order_succesfully_placed);
         final Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        //window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button btn=(Button)dialog.findViewById(R.id.card_order_successfully_placed_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        //window.set
+        window.setBackgroundDrawable(new ColorDrawable(getActivity().getResources().getColor(R.color.translucent)));
         dialog.show();
     }
 }

@@ -86,7 +86,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 card_payment_mode_deditcard_tv.setTextColor(context.getResources().getColor(R.color.black));
                 card_payment_mode_netbanking_tv.setTextColor(context.getResources().getColor(R.color.black));
                 card_payment_mode_cash_tv.setTextColor(context.getResources().getColor(R.color.black));
-                card_payment_mode_other_rb.setTextColor(context.getResources().getColor(R.color.black));
+                card_payment_mode_other_tv.setTextColor(context.getResources().getColor(R.color.black));
 
             }
             else if(view.getId()==R.id.card_payment_mode_deditcard_rb)
@@ -100,7 +100,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 card_payment_mode_deditcard_tv.setTextColor(context.getResources().getColor(R.color.colorAccent));
                 card_payment_mode_netbanking_tv.setTextColor(context.getResources().getColor(R.color.black));
                 card_payment_mode_cash_tv.setTextColor(context.getResources().getColor(R.color.black));
-                card_payment_mode_other_rb.setTextColor(context.getResources().getColor(R.color.black));
+                card_payment_mode_other_tv.setTextColor(context.getResources().getColor(R.color.black));
             }
             else if(view.getId()==R.id.card_payment_mode_netbanking_rb)
             {
@@ -113,7 +113,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 card_payment_mode_deditcard_tv.setTextColor(context.getResources().getColor(R.color.black));
                 card_payment_mode_netbanking_tv.setTextColor(context.getResources().getColor(R.color.colorAccent));
                 card_payment_mode_cash_tv.setTextColor(context.getResources().getColor(R.color.black));
-                card_payment_mode_other_rb.setTextColor(context.getResources().getColor(R.color.black));
+                card_payment_mode_other_tv.setTextColor(context.getResources().getColor(R.color.black));
             }
             else if(view.getId()==R.id.card_payment_mode_cash_rb)
             {
@@ -126,7 +126,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 card_payment_mode_deditcard_tv.setTextColor(context.getResources().getColor(R.color.black));
                 card_payment_mode_netbanking_tv.setTextColor(context.getResources().getColor(R.color.black));
                 card_payment_mode_cash_tv.setTextColor(context.getResources().getColor(R.color.colorAccent));
-                card_payment_mode_other_rb.setTextColor(context.getResources().getColor(R.color.black));
+                card_payment_mode_other_tv.setTextColor(context.getResources().getColor(R.color.black));
             }
             else if(view.getId()==R.id.card_payment_mode_other_rb)
             {
@@ -139,7 +139,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 card_payment_mode_deditcard_tv.setTextColor(context.getResources().getColor(R.color.black));
                 card_payment_mode_netbanking_tv.setTextColor(context.getResources().getColor(R.color.black));
                 card_payment_mode_cash_tv.setTextColor(context.getResources().getColor(R.color.black));
-                card_payment_mode_other_rb.setTextColor(context.getResources().getColor(R.color.colorAccent));
+                card_payment_mode_other_tv.setTextColor(context.getResources().getColor(R.color.colorAccent));
             }
         }
     }

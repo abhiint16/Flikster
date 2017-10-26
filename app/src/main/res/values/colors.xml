@@ -15,5 +15,6 @@
     <color name="horizontal_line">#f98da5</color>
     <color name="colorAuthenticationHeader">#0C4483</color>
     <color name="transparent">#00000000</color>
+    <color name="translucent">#94000000</color>
 
 </resources>
