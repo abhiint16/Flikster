@@ -30,8 +30,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/activity_my_bag_recycler_view"
-        android:layout_below="@id/activity_my_bag_toolbar"
-        android:layout_above="@+id/activity_my_bag_bottom_continue_btn">
+        android:layout_below="@+id/activity_my_bag_toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
     </android.support.v7.widget.RecyclerView>
 
     <Button
