@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -17,7 +18,6 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
     FragmentManager fragmentManager;
     LinearLayout activity_mybag_continue_onclick_tabs_address_linear,activity_mybag_continue_onclick_tabs_checkout_linear
             ,activity_mybag_continue_onclick_tabs_payment_linear;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +44,7 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn) {
+        /*if (view.getId() == R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn) {
             getFragmentManager().popBackStackImmediate();
         }
         else if(view.getId()==R.id.activity_mybag_continue_onclick_tabs_address_linear)
@@ -64,7 +64,7 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
             fragmentManager.beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
                     .commit();
-        }
+        }*/
     }
 
     private void addressFragmentLaunch() {

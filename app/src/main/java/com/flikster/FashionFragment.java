@@ -63,7 +63,11 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId()==R.id.toolbar_navigation_icon)
         {
-            getFragmentManager().popBackStackImmediate();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container,new FeedFragment())
+                    .addToBackStack("")
+                    .commit();
         }
         else if(view.getId()==R.id.toolbar_notification_icon)
         {

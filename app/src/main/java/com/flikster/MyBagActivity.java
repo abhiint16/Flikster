@@ -52,7 +52,9 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         if(view.getId()==R.id.activity_my_bag_toolbar_back_navigation_btn)
         {
-            getFragmentManager().popBackStackImmediate();
+            Intent intent=new Intent(this,HomeActivity.class);
+            intent.putExtra("MyBag","MyBag");
+            startActivity(intent);
         }
         else if(view.getId()==R.id.activity_my_bag_bottom_continue_btn)
         {
