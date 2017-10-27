@@ -231,6 +231,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         ImageButton video_btn;
         LinearLayout header_linear;
+        LinearLayout card_description_linear;
 
         public ViewHolder3(View itemView) {
             super(itemView);
@@ -242,35 +243,33 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
             video_btn.setOnClickListener(this);
+            card_description_linear.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             globalData.a = 3;
             if (view.getId() == R.id.video_btn) {
-                /*final Dialog dialog = new Dialog(context);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.activity_videopage);
-                final Window window = dialog.getWindow();
-                window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                window.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-                dialog.show();*/
-                Intent intent=new Intent(context,VideoPlayerActivity.class);
+                Intent intent = new Intent(context, VideoPlayerActivity.class);
                 context.startActivity(intent);
-
-            } else if((view.getId()==R.id.profile_image)||(view.getId()==R.id.header_linear)){
+            } else if ((view.getId() == R.id.profile_image) || (view.getId() == R.id.header_linear)) {
                 fragmentManager.beginTransaction()
                         .add(R.id.main_container, new MovieFragment())
                         .addToBackStack("")
                         .commit();
+            } else if (view.getId() == R.id.card_description_linear) {
+                fragmentManager.beginTransaction()
+                        .add(R.id.main_container, new VideoGalleryFragment())
+                        .addToBackStack("")
+                        .commit();
             }
         }
-    }
 
+    }
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary4_img1, card_gallary4_img2, card_gallary4_img3, card_gallary4_img4, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;

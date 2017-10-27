@@ -14,29 +14,31 @@ import android.view.ViewGroup;
  * Created by abhishek on 12-10-2017.
  */
 
-public class CelebrityFragmentInfo extends Fragment{
+public class CelebrityFragmentInfo extends Fragment {
     View view;
     RecyclerView movieFragmentInfoRecycler;
     RecyclerView.LayoutManager movieFragmentInfoLayoutManager;
     MovieInfoAdapter movieInfoAdapter;
     FragmentManager fragmentManager;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_celebrity_bio,container,false);
+        view = inflater.inflate(R.layout.fragment_celebrity_bio, container, false);
         initializeViews();
         initializeRest();
-        return  view;
+        return view;
     }
+
     private void initializeRest() {
         movieFragmentInfoLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         movieFragmentInfoRecycler.setLayoutManager(movieFragmentInfoLayoutManager);
-        movieInfoAdapter = new MovieInfoAdapter(getActivity(),fragmentManager);
+        movieInfoAdapter = new MovieInfoAdapter(getActivity(), fragmentManager);
         movieFragmentInfoRecycler.setAdapter(movieInfoAdapter);
     }
 
     private void initializeViews() {
-        movieFragmentInfoRecycler=(RecyclerView)view.findViewById(R.id.fragment_celebrity_bio_recycler);
-        fragmentManager=getActivity().getSupportFragmentManager();
+        movieFragmentInfoRecycler = (RecyclerView) view.findViewById(R.id.fragment_celebrity_bio_recycler);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 }

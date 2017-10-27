@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_celebrity_bio_recycler"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_celebrity_bio_recycler"
-    android:background="@color/colorImageBackgroundGrey">
-</android.support.v7.widget.RecyclerView>
+    android:background="#f2f2f2"></android.support.v7.widget.RecyclerView>

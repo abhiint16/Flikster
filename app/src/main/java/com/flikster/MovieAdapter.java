@@ -29,7 +29,7 @@ public class MovieAdapter extends FragmentStatePagerAdapter {
         }
         else if(position==1)
         {
-            return  new CelebrityFragmentBio();
+            return  new CelebrityFragmentInfo();
         }
         else if(position==2)
         {
