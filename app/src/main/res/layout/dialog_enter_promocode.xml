@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/solid_round_border"
+    android:layout_gravity="center"
+    android:padding="20dp">
+
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:src="@drawable/add_icon"
+        android:rotation="45"
+        android:background="@color/white"
+        android:id="@+id/dialog_enter_promocode_cancel_btn"/>
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="If you have a promotion code, please enter it here"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="PROMO CODE"
+        android:background="@drawable/black_round_border"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"/>
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:background="@drawable/solid_border"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Done"
+        android:textColor="@color/white"
+        android:id="@+id/dialog_enter_promocode_done_btn"/>
+</LinearLayout>

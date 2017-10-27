@@ -38,7 +38,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     private void initializeRest() {
         layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        checkoutAdapter=new  CheckoutAdapter(getFragmentManager());
+        checkoutAdapter=new  CheckoutAdapter(getFragmentManager(),getActivity());
         recyclerView.setAdapter(checkoutAdapter);
         backButton.setOnClickListener(this);
         fragment_checkout_bottom_btn.setOnClickListener(this);

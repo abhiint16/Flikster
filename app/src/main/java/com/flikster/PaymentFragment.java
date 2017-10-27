@@ -2,7 +2,6 @@ package com.flikster;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -81,7 +80,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
         {
             final Dialog dialog = new Dialog(getContext());
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.card_order_succesfully_placed);
+            dialog.setContentView(R.layout.dialog_order_succesfully_placed);
             final Window window = dialog.getWindow();
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
             window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);

@@ -1,10 +1,17 @@
 package com.flikster;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -14,8 +21,10 @@ import android.widget.ImageButton;
 
 public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     FragmentManager fragmentManager;
-    public CheckoutAdapter(FragmentManager fragmentManager) {
+    Context context;
+    public CheckoutAdapter(FragmentManager fragmentManager,Context context) {
         this.fragmentManager=fragmentManager;
+        this.context=context;
     }
 
     @Override
@@ -83,9 +92,38 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             notification_item_cancel_btn=(ImageButton)itemView.findViewById(R.id.notification_item_cancel_btn);
         }
     }
-    public class ViewHolder3 extends RecyclerView.ViewHolder {
+    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        Button button;
         public ViewHolder3(View itemView) {
             super(itemView);
+            button=(Button)itemView.findViewById(R.id.card_checkout_promo_btn);
+            button.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_enter_promocode);
+            final Window window = dialog.getWindow();
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            Button dialog_enter_promocode_done_btn=(Button)dialog.findViewById(R.id.dialog_enter_promocode_done_btn);
+            ImageButton dialog_enter_promocode_cancel_btn=(ImageButton)dialog.findViewById(R.id.dialog_enter_promocode_cancel_btn);
+            dialog_enter_promocode_done_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+            dialog_enter_promocode_cancel_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+            window.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.translucent)));
+            dialog.show();
         }
     }
     public class ViewHolder4 extends RecyclerView.ViewHolder {
