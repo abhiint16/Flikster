@@ -26,7 +26,6 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<GallaryCardCli
     Context context;
     FragmentManager fragmentManager;
     public GallaryCardClickAdapter(Context context, FragmentManager fragmentManager) {
-        Log.e("adapter cons","adapter cons");
         this.context=context;
         globalData=new GlobalData();
         this.fragmentManager=fragmentManager;
@@ -34,14 +33,12 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<GallaryCardCli
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.e("oncraeteviewholder","oncraeteviewholder");
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary_item_onclick_recycler_item,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.e("onbindviewholder","onbindviewholder");
         //holder.gallary_recycler_item_img.setContentDescription("aaaaaaaaaaaa");
         //Glide.with(holder.itemView.getContext()).load(globalData.imag.get(position)).into(holder.gallary_recycler_item_img);
         holder.gallary_recycler_item_img.setImageResource(globalData.pooja.get(position));
@@ -58,7 +55,6 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<GallaryCardCli
         ImageView gallary_recycler_item_img;
         public ViewHolder(View itemView) {
             super(itemView);
-            Log.e("Viewholde","viewholder");
             gallary_recycler_item_img=(ImageView)itemView.findViewById(R.id.gallary_recycler_item_img);
             itemView.setOnClickListener(this);
         }

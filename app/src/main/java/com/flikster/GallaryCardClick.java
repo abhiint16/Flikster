@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,12 +32,21 @@ public class GallaryCardClick extends Fragment {
         view=inflater.inflate(R.layout.card_gallary_item_onclick,container,false);
         initializeViews();
         initializeRest();
-        Log.e("leavng onCreatview","leavng onCreatview");
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
+
     private void initializeRest() {
-        Log.e("rest","REST");
         profile_image.setImageResource(R.drawable.pooja2);
         tv_tag_name.setText("Pooja Hegde");
         tv_tag_desc.setText("#Actress");
@@ -47,7 +57,6 @@ public class GallaryCardClick extends Fragment {
     }
 
     private void initializeViews() {
-        Log.e("views","views");
         gallary_recyclerview=(RecyclerView)view.findViewById(R.id.gallary_recyclerview);
         profile_image=(ImageView)view.findViewById(R.id.profile_image);
         tv_tag_name=(TextView)view.findViewById(R.id.tv_tag_name);
