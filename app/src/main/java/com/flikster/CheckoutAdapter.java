@@ -1,9 +1,11 @@
 package com.flikster;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 /**
@@ -11,6 +13,11 @@ import android.widget.ImageButton;
  */
 
 public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    FragmentManager fragmentManager;
+    public CheckoutAdapter(FragmentManager fragmentManager) {
+        this.fragmentManager=fragmentManager;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType==0)
@@ -53,9 +60,20 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return position;
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder {
+    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        Button card_checkout_customer_details_button;
         public ViewHolder1(View itemView) {
             super(itemView);
+            card_checkout_customer_details_button=(Button)itemView.findViewById(R.id.card_checkout_customer_details_button);
+            card_checkout_customer_details_button.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.activity_mybag_continue_onclick_container,new AddressFragment())
+                    .addToBackStack("")
+                    .commit();
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder {
