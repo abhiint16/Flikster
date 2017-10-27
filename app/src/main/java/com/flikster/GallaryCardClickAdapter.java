@@ -90,16 +90,8 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         @Override
         public void onClick(View view) {
-            /*Intent intent=new Intent(context,GallaryFullScreen.class);
-            context.startActivity(intent);*/
-            final Dialog dialog = new Dialog(context);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.card_gallary_fullscreen);
-            final Window window = dialog.getWindow();
-            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.show();
+            Intent intent=new Intent(context,GallaryFullScreen.class);
+            context.startActivity(intent);
         }
     }
 
@@ -110,7 +102,7 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
         public ViewHolder2(View itemView)
         {
             super(itemView);
-            recyclerView=(RecyclerView)itemView.findViewById(R.id.rc);
+            textView=(TextView)itemView.findViewById(R.id.txt);
             recyclerView=(RecyclerView) itemView.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
         }
     }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.MediaController;
+import android.widget.ScrollView;
 import android.widget.VideoView;
 
 /**
@@ -22,7 +23,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     View view;
     VideoView playVideo;
     Button closebtn;
-
+    ScrollView scrollView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,9 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private void initializeViews() {
         playVideo = (VideoView) findViewById(R.id.playVideo);
         closebtn = (Button) findViewById(R.id.closebtn);
+        scrollView=(ScrollView)findViewById(R.id.gallary_fullscreen_scrollimg);
+        playVideo.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
     }
 
     @Override

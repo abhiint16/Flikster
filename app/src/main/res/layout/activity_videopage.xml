@@ -36,16 +36,30 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical|center" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headerrllayout"
+        android:layout_above="@+id/bottom_layout"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:id="@+id/gallary_fullscreen_scrollimg">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gallary_fullscreen_img"/>
+    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/bottom_layout">
 
         <include
             android:id="@+id/bottom_navigation_bar"
             layout="@layout/share_option_card_video_footer"
-
             android:layout_width="match_parent"
             android:layout_height="60dp" />
 
