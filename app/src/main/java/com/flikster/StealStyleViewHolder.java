@@ -1,6 +1,7 @@
 package com.flikster;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,11 @@ import com.bumptech.glide.Glide;
 public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHolder.ViewHolder> {
     Context context;
     GlobalData globalData=new GlobalData();
+    FragmentManager fragmentManager;
     String a;
-    public StealStyleViewHolder(Context context) {
+    public StealStyleViewHolder(Context context,FragmentManager fragmentManager) {
         this.context=context;
+        this.fragmentManager=fragmentManager;
     }
     public StealStyleViewHolder(String a)
     {
@@ -59,11 +62,20 @@ public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHol
         return globalData.style.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_steal_style_recycler_item_imageview;
         public ViewHolder(View itemView) {
             super(itemView);
             card_steal_style_recycler_item_imageview=(ImageView)itemView.findViewById(R.id.card_steal_style_recycler_item_imageview);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, new ProductOnClick())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }

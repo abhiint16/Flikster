@@ -92,7 +92,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (holder.getItemViewType() == 2) {
             stealStyleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).card_steal_style_recycler.setLayoutManager(stealStyleLayoutManager);
-            stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext());
+            stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext(),fragmentManager);
             ((ViewHolder2) holder).card_steal_style_recycler.setAdapter(stealStyleViewHolder);
         } else if (holder.getItemViewType() == 3) {
             if (news == true) {
@@ -182,7 +182,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
-        LinearLayout linearLayout, card_description_linear;
+        LinearLayout header_linear, card_description_linear;
 
         public ViewHolder1(View itemView) {
             super(itemView);
@@ -192,16 +192,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             card_description_linear.setOnClickListener(this);
-            linearLayout.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
+            header_linear.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             globalData.a = 1;
-            if (view.getId() == R.id.header_linear) {
+            if ((view.getId() == R.id.header_linear)||(view.getId()==R.id.profile_name)) {
                 fragmentManager.beginTransaction()
                         .add(R.id.main_container, new CelebrityFragment())
                         .addToBackStack("")
@@ -216,22 +217,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder2 extends RecyclerView.ViewHolder{
         RecyclerView card_steal_style_recycler;
 
         public ViewHolder2(View itemView) {
             super(itemView);
             card_steal_style_recycler = (RecyclerView) itemView.findViewById(R.id.card_steal_style_recycler);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            globalData.a = 2;
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new ProductOnClick())
-                    .addToBackStack("")
-                    .commit();
         }
     }
 
@@ -252,6 +243,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             header_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
             video_btn.setOnClickListener(this);
         }
 
@@ -270,7 +262,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Intent intent=new Intent(context,VideoPlayerActivity.class);
                 context.startActivity(intent);
 
-            } else {
+            } else if((view.getId()==R.id.profile_image)||(view.getId()==R.id.header_linear)){
                 fragmentManager.beginTransaction()
                         .add(R.id.main_container, new MovieFragment())
                         .addToBackStack("")
@@ -282,7 +274,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary4_img1, card_gallary4_img2, card_gallary4_img3, card_gallary4_img4, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
-
+        LinearLayout header_linear,card_gallary4_img_container;
         public ViewHolder4(View itemView) {
             super(itemView);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
@@ -290,20 +282,35 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_gallary4_img2 = (ImageView) itemView.findViewById(R.id.card_gallary4_img2);
             card_gallary4_img3 = (ImageView) itemView.findViewById(R.id.card_gallary4_img3);
             card_gallary4_img4 = (ImageView) itemView.findViewById(R.id.card_gallary4_img4);
+            header_linear=(LinearLayout)itemView.findViewById(R.id.header_linear);
+            card_gallary4_img_container=(LinearLayout)itemView.findViewById(R.id.card_gallary4_img_container);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
-            itemView.setOnClickListener(this);
+            card_gallary4_img_container.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
+            header_linear.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             globalData.a = 4;
-            fragmentManager.beginTransaction()
-                    .add(R.id.main_container, new GallaryCardClick())
-                    .addToBackStack("")
-                    .commit();
+            if(view.getId()==R.id.card_gallary4_img_container)
+            {
+                fragmentManager.beginTransaction()
+                        .add(R.id.main_container, new GallaryCardClick())
+                        .addToBackStack("")
+                        .commit();
+            }
+            else if((view.getId()==R.id.header_linear)||(view.getId()==R.id.profile_image))
+            {
+                fragmentManager.beginTransaction()
+                        .add(R.id.main_container, new CelebrityFragment())
+                        .addToBackStack("")
+                        .commit();
+            }
+
         }
     }
 
@@ -354,7 +361,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View view) {
             globalData.a = globalData.type.get(getAdapterPosition());
             fragmentManager.beginTransaction()
-                    .add(R.id.main_container, new GallaryCardClick())
+                    .add(R.id.main_container, new CelebrityFragment())
                     .addToBackStack("")
                     .commit();
         }
