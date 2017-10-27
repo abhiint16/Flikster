@@ -32,6 +32,19 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
         initializeView();
+        initializeRest();
+    }
+
+    private void initializeRest() {
+        radioBollywood.setOnClickListener(this);
+        radioTollywood.setOnClickListener(this);
+        radioTamil.setOnClickListener(this);
+        radioKannada.setOnClickListener(this);
+        radioMalayalam.setOnClickListener(this);
+        btnSignup.setOnClickListener(this);
+        btnPreferencesNext.setOnClickListener(this);
+        tvMenFashon.setOnClickListener(this);
+        tvWomenFashon.setOnClickListener(this);
     }
 
     private void initializeView() {
@@ -42,15 +55,8 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
         radioKannada=(RadioButton)findViewById(R.id.ind_kannada);
         radioMalayalam=(RadioButton)findViewById(R.id.ind_malayalam);
         radioTamil=(RadioButton)findViewById(R.id.ind_tamil);
-
-        radioBollywood.setOnClickListener(this);
-        radioTollywood.setOnClickListener(this);
-        radioTamil.setOnClickListener(this);
-        radioKannada.setOnClickListener(this);
-        radioMalayalam.setOnClickListener(this);
-        btnSignup.setOnClickListener(this);
-        btnPreferencesNext.setOnClickListener(this);
-
+        tvMenFashon=(TextView)findViewById(R.id.tv_menFashion);
+        tvWomenFashon=(TextView)findViewById(R.id.tv_womenFashion);
     }
 
     @Override
@@ -88,6 +94,16 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
             radioKannada.setChecked(false);
             radioBollywood.setChecked(false);
             radioTamil.setChecked(false);
+        }
+        else if(view.getId()==R.id.tv_menFashion)
+        {
+            tvMenFashon.setAlpha((float) 0.5);
+            tvWomenFashon.setAlpha((float) 1.0);
+        }
+        else if(view.getId()==R.id.tv_womenFashion)
+        {
+            tvMenFashon.setAlpha((float) 1.0);
+            tvWomenFashon.setAlpha((float) 0.5);
         }
 
     }
