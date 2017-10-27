@@ -3,21 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
+    android:layout_marginLeft="@dimen/ten"
+    android:layout_marginRight="@dimen/ten"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="@dimen/ten">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="Crictic Reviews" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Users Reviews"
+            android:textColor="@color/colorImageBackgroundGrey" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:padding="5dp"
+            android:text="Show more"
+            android:textColor="@color/colorImageBackgroundGrey" />
+    </RelativeLayout>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="The Times Of India"
+        android:drawableLeft="@drawable/usericon"
+        android:drawablePadding="@dimen/ten"
+        android:gravity="center_vertical"
+        android:padding="@dimen/ten"
+
+        android:text="User Name"
         android:textColor="@color/black"
         android:textSize="14sp" />
 

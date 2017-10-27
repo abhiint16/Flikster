@@ -18,7 +18,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/activity_my_bag_toolbar_back_navigation_btn"
+                android:id="@+id/toolbar_back_navigation_btn"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@drawable/backicon" />
@@ -56,13 +56,13 @@
             <include layout="@layout/card_header"></include>
 
             <TextView
-                android:id="@+id/tv_description"
+                android:id="@+id/titlehedertxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/ten"
                 android:text="Animation trailer "
                 android:textColor="@android:color/secondary_text_light"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="normal" />
 
             <VideoView
@@ -73,6 +73,17 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|center" />
 
+            <ImageView
+                android:id="@+id/newsimg"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_centerHorizontal="true"
+
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical|center"
+                android:background="@drawable/bahubai"
+                android:visibility="gone" />
+
             <include layout="@layout/card_footer"></include>
 
             <include layout="@layout/card_description"></include>
@@ -80,6 +91,7 @@
             <include layout="@layout/card_comment_text"></include>
 
             <TextView
+                android:id="@+id/recomdedtxtlabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/ten"
