@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +18,10 @@ import android.widget.VideoView;
  * Created by Logins on 26-10-2017.
  */
 
-public class VideoGalleryActivity extends AppCompatActivity implements View.OnClickListener {
+public class VideoGalleryActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener {
     View view;
     VideoView playVideo;
-    Button activity_my_bag_toolbar_back_navigation_btn;
+    Button toolbar_back_navigation_btn;
     Context mContext;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -34,7 +35,7 @@ public class VideoGalleryActivity extends AppCompatActivity implements View.OnCl
         initializeViews();
         playLocalVideo();
         initializeRest();
-        activity_my_bag_toolbar_back_navigation_btn.setOnClickListener(this);
+        toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
     private void playLocalVideo() {
@@ -51,11 +52,6 @@ public class VideoGalleryActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    private void initializeViews() {
-        playVideo = (VideoView) findViewById(R.id.playVideo);
-        recyclerView = (RecyclerView) findViewById(R.id.gallery_videos_recycler_view);
-        activity_my_bag_toolbar_back_navigation_btn = (Button) findViewById(R.id.activity_my_bag_toolbar_back_navigation_btn);
-    }
 
     @Override
     public void onClick(View view) {
@@ -64,11 +60,22 @@ public class VideoGalleryActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+
+    private void initializeViews() {
+        playVideo = (VideoView) findViewById(R.id.playVideo);
+        recyclerView = (RecyclerView) findViewById(R.id.gallery_videos_recycler_view);
+        toolbar_back_navigation_btn = (Button) findViewById(R.id.toolbar_back_navigation_btn);
+    }
+
     private void initializeRest() {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         myCeleAdapter = new CelebrityBioAdapterImagesViewHolder();
         recyclerView.setAdapter(myCeleAdapter);
-        activity_my_bag_toolbar_back_navigation_btn.setOnClickListener(this);
+    }
+
+    @Override
+    public void beginTransact(Fragment fragment) {
+
     }
 }

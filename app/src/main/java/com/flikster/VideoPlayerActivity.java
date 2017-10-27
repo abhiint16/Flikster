@@ -1,10 +1,14 @@
 package com.flikster;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,11 +26,14 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     View view;
     VideoView playVideo;
     Button closebtn;
+    FragmentManager fragmentManager;
+    Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videopage);
+        mContext = VideoPlayerActivity.this;
         initializeViews();
         playLocalVideo();
         closebtn.setOnClickListener(this);
@@ -48,14 +55,19 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private void initializeViews() {
         playVideo = (VideoView) findViewById(R.id.playVideo);
         closebtn = (Button) findViewById(R.id.closebtn);
+        fragmentManager = getSupportFragmentManager();
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.closebtn) {
-//            getFragmentManager().popBackStackImmediate();
-            Intent in = new Intent(VideoPlayerActivity.this, VideoGalleryActivity.class);
-            startActivity(in);
+            /*Intent in = new Intent(VideoPlayerActivity.this, VideoGalleryActivity.class);
+            startActivity(in);*/
+            fragmentManager.beginTransaction()
+                    .add(R.id.main_container, new VideoGalleryFragment())
+                    .addToBackStack("")
+                    .commit();
+
         }
     }
 }
