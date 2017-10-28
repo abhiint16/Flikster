@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+
+            android:text="Casual Formal Shirt"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Rs 9,750/-"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:layout_margin="@dimen/ten"
+            android:background="@color/dark_grey" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/five">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/five"
+                android:padding="5dp"
+                android:text="Select Size:"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/five"
+                android:padding="@dimen/five"
+                android:text="Size Chart"
+                android:textColor="#ff8080"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="@dimen/five"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/black_square_border"
+                android:paddingBottom="@dimen/five"
+                android:paddingLeft="@dimen/ten"
+                android:paddingRight="@dimen/ten"
+                android:paddingTop="@dimen/five"
+                android:text="S"
+                android:textColor="#474747"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_marginRight="@dimen/ten"
+                android:background="@drawable/black_square_border"
+                android:paddingBottom="@dimen/five"
+                android:paddingLeft="@dimen/ten"
+                android:paddingRight="@dimen/ten"
+                android:paddingTop="@dimen/five"
+                android:text="M"
+                android:textColor="#474747"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/black_square_border"
+                android:paddingBottom="@dimen/five"
+                android:paddingLeft="@dimen/ten"
+                android:paddingRight="@dimen/ten"
+                android:paddingTop="@dimen/five"
+                android:text="L"
+                android:textColor="#474747"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ten"
+                android:layout_marginRight="@dimen/ten"
+                android:background="@drawable/black_square_border"
+                android:paddingBottom="@dimen/five"
+                android:paddingLeft="@dimen/ten"
+                android:paddingRight="@dimen/ten"
+
+                android:paddingTop="@dimen/five"
+                android:text="XL"
+                android:textColor="#474747"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/black_square_border"
+                android:paddingBottom="@dimen/five"
+                android:paddingLeft="@dimen/ten"
+                android:paddingRight="@dimen/ten"
+                android:paddingTop="@dimen/five"
+                android:text="XLL"
+                android:textColor="#474747"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/add_to_cart_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#e0e0d2"
+            android:text="Add to Cart"
+            android:textAllCaps="false"
+            android:textColor="#8c8c8c"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/buy_now_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ff6666"
+            android:text="Buy Now"
+            android:textAllCaps="false"
+            android:textColor="#FFF"
+            android:textSize="17sp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="Dispatch with in 10days"
+        android:textColor="#474747"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="Policy and Authentication"
+        android:textColor="#474747"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="Information : Being Fab Men's Solid Formal Blue Shirt,Regular Fit, Full Sleeve"
+        android:textColor="#474747"
+        android:textSize="13sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="Description :
+If you are looking to be a trend setter when you go out to the fanciest of parties on a weekend, Being Fab has just the range of apparel that ensures you'd never miss that admirable glance or compliment. You can tuck the shirt inside for a formal look and also put it outside for casual look."
+        android:textColor="#474747"
+        android:textSize="13sp" />
+</LinearLayout>
