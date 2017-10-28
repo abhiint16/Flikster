@@ -204,7 +204,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             globalData.a = 1;
             if ((view.getId() == R.id.header_linear)||(view.getId()==R.id.profile_name)) {
                 fragmentManager.beginTransaction()
-                        .add(R.id.main_container, new CelebrityFragment())
+                        .replace(R.id.main_container, new CelebrityFragment())
                         .addToBackStack("")
                         .commit();
             } else if (view.getId() == R.id.card_description_linear) {
@@ -258,12 +258,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 context.startActivity(intent);
             } else if ((view.getId() == R.id.profile_image) || (view.getId() == R.id.header_linear)) {
                 fragmentManager.beginTransaction()
-                        .add(R.id.main_container, new MovieFragment())
+                        .replace(R.id.main_container, new MovieFragment())
                         .addToBackStack("")
                         .commit();
             } else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
-                        .add(R.id.main_container, new VideoGalleryFragment())
+                        .replace(R.id.main_container, new VideoGalleryFragment())
                         .addToBackStack("")
                         .commit();
             }
@@ -298,14 +298,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if(view.getId()==R.id.card_gallary4_img_container)
             {
                 fragmentManager.beginTransaction()
-                        .add(R.id.main_container, new GallaryCardClick())
+                        .replace(R.id.main_container, new GallaryCardClick())
                         .addToBackStack("")
                         .commit();
             }
             else if((view.getId()==R.id.header_linear)||(view.getId()==R.id.profile_image))
             {
                 fragmentManager.beginTransaction()
-                        .add(R.id.main_container, new CelebrityFragment())
+                        .replace(R.id.main_container, new CelebrityFragment())
                         .addToBackStack("")
                         .commit();
             }
@@ -331,7 +331,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View view) {
             globalData.a = globalData.type.get(getAdapterPosition());
             fragmentManager.beginTransaction()
-                    .add(R.id.main_container, new GallaryCardClick())
+                    .replace(R.id.main_container, new GallaryCardClick())
                     .addToBackStack("")
                     .commit();
         }
@@ -360,7 +360,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View view) {
             globalData.a = globalData.type.get(getAdapterPosition());
             fragmentManager.beginTransaction()
-                    .add(R.id.main_container, new CelebrityFragment())
+                    .replace(R.id.main_container, new CelebrityFragment())
                     .addToBackStack("")
                     .commit();
         }

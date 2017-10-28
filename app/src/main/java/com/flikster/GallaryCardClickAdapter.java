@@ -29,7 +29,7 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     FragmentManager fragmentManager;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder=new CelebrityBioAdapterImagesViewHolder();
+    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder=new CelebrityBioAdapterImagesViewHolder(context);
     public GallaryCardClickAdapter(Context context, FragmentManager fragmentManager) {
         this.context=context;
         globalData=new GlobalData();

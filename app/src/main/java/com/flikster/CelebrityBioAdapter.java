@@ -97,7 +97,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder3) holder).textView.setText("Images");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).recyclerView.setLayoutManager(layoutManager);
-            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder();
+            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
             ((ViewHolder3) holder).recyclerView.setAdapter(celebrityBioAdapterImagesViewHolder);
         } else if (holder.getItemViewType() == 5) {
             //((ViewHolder5)holder).textView.setText("videos");

@@ -76,7 +76,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder();
+        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
         recyclerView.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
     }

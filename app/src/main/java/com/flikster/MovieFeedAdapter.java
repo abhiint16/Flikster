@@ -144,7 +144,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_celebrity_feed_profile_image=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_profile_image);
         }
     }
-    public class ViewHolder2 extends RecyclerView.ViewHolder {
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView card_celebrity_feed_gallary_title;
         ImageView card_celebrity_feed_gallary_img1,card_celebrity_feed_gallary_img2,card_celebrity_feed_gallary_img3;
         public ViewHolder2(View itemView) {
@@ -153,9 +153,18 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_celebrity_feed_gallary_img1=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_gallary_img1);
             card_celebrity_feed_gallary_img2=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_gallary_img2);
             card_celebrity_feed_gallary_img3=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_gallary_img3);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new GallaryCardClick())
+                    .addToBackStack("")
+                    .commit();
         }
     }
-    public class ViewHolder3 extends RecyclerView.ViewHolder {
+    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView card_celebrity_feed_news_title,desc,name;
         ImageView card_celebrity_feed_news_image;
         public ViewHolder3(View itemView) {
@@ -164,6 +173,15 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             desc=(TextView)itemView.findViewById(R.id.tv_description);
             name=(TextView)itemView.findViewById(R.id.tv_name);
             card_celebrity_feed_news_image=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_news_image);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new NewsOnClickFragment())
+                    .addToBackStack("")
+                    .commit();
         }
     }
     public class ViewHolder4 extends RecyclerView.ViewHolder {
@@ -177,13 +195,22 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ib_play=(ImageButton)itemView.findViewById(R.id.ib_play);
         }
     }
-    public class ViewHolder5 extends RecyclerView.ViewHolder {
+    public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView card_celebrity_feed_video_title;
         ImageView card_celebrity_feed_video_image;
         public ViewHolder5(View itemView) {
             super(itemView);
             card_celebrity_feed_video_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_video_title);
             card_celebrity_feed_video_image=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_video_image);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new VideoGalleryFragment())
+                    .addToBackStack("")
+                    .commit();
         }
     }
     public class ViewHolder6 extends RecyclerView.ViewHolder {

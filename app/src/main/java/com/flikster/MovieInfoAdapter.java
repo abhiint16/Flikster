@@ -120,7 +120,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //            ((ViewHolder3) holder).textView.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).recyclerView.setLayoutManager(layoutManager);
-            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder();
+            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
             ((ViewHolder3) holder).recyclerView.setAdapter(celebrityBioAdapterImagesViewHolder);
         } else if (holder.getItemViewType() == 4) {
             //((ViewHolder5)holder).textView.setText("videos");
@@ -138,7 +138,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //            ((ViewHolder3) holder).textView.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder9) holder).recyclerView.setLayoutManager(layoutManager);
-            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder();
+            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
             ((ViewHolder9) holder).recyclerView.setAdapter(celebrityBioAdapterImagesViewHolder);
         }
     }
