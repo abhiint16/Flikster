@@ -1,6 +1,7 @@
 package com.flikster;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,13 @@ import android.widget.ImageView;
 
 public class ProfileCollectionRecyclerItemAdapter extends RecyclerView.Adapter<ProfileCollectionRecyclerItemAdapter.ViewHolder> {
     Context context;
+    FragmentManager fragmentManager;
     int a;
     Boolean b=true;
-    public ProfileCollectionRecyclerItemAdapter(Context context,int a) {
+    public ProfileCollectionRecyclerItemAdapter(Context context,int a,FragmentManager fragmentManager) {
         this.context=context;
         this.a=a;
+        this.fragmentManager=fragmentManager;
     }
 
     @Override
@@ -57,11 +60,20 @@ public class ProfileCollectionRecyclerItemAdapter extends RecyclerView.Adapter<P
         return 5;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
             imageView=(ImageView)itemView.findViewById(R.id.imageView3);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new ProductOnClick())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }
