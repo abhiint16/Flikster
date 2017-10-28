@@ -75,8 +75,8 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         LinearLayoutManager layoutManagers = new LinearLayoutManager(getActivity());
         layoutManagers.setOrientation(LinearLayoutManager.HORIZONTAL);
         card_celebrity_bio_video_carousel_recycler.setLayoutManager(layoutManagers);
-        myPrductImgAdapter = new ProductImagesAdapter((AppCompatActivity) getContext(), fragmentManager);
-        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder();
+//        myPrductImgAdapter = new ProductImagesAdapter((AppCompatActivity) getContext(), fragmentManager);
+        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder((AppCompatActivity) getContext());
         card_celebrity_bio_video_carousel_recycler.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
         add.setOnClickListener(this);
@@ -96,9 +96,14 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         fragmentManager = getActivity().getSupportFragmentManager();
     }
 
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
 }
