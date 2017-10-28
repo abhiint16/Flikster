@@ -46,6 +46,12 @@ public class HomeActivity extends AppCompatActivity implements  FragmentChangeIn
                     .replace(R.id.main_container,new FashionFragment())
                     .commit();
         }
+        else if("VideoPlayer".equals(getIntent().getStringExtra("VideoPlayer")))
+        {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new VideoGalleryFragment())
+                    .commit();
+        }
         else if("GallaryFullscreen".equals(getIntent().getStringExtra("GallaryFullscreen")))
         {
             fragmentManager.beginTransaction()

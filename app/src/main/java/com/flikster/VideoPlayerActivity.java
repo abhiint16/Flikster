@@ -66,13 +66,9 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.closebtn) {
-            /*Intent in = new Intent(VideoPlayerActivity.this, VideoGalleryActivity.class);
-            startActivity(in);*/
-            fragmentManager.beginTransaction()
-                    .add(R.id.main_container, new VideoGalleryFragment())
-                    .addToBackStack("")
-                    .commit();
-
+            Intent in = new Intent(VideoPlayerActivity.this, HomeActivity.class);
+            in.putExtra("VideoPlayer","VideoPlayer");
+            startActivity(in);
         }
     }
 }
