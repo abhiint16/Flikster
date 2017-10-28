@@ -75,4 +75,14 @@ public class ProductGallaryFragment extends Fragment implements View.OnClickList
                     .commit();
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
 }

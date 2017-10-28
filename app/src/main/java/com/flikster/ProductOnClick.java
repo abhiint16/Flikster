@@ -97,9 +97,14 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         fragmentManager = getActivity().getSupportFragmentManager();
     }
 
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
 }
