@@ -76,7 +76,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         layoutManagers.setOrientation(LinearLayoutManager.HORIZONTAL);
         card_celebrity_bio_video_carousel_recycler.setLayoutManager(layoutManagers);
         myPrductImgAdapter = new ProductImagesAdapter((AppCompatActivity) getContext(), fragmentManager);
-        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder();
+        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
         card_celebrity_bio_video_carousel_recycler.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
         add.setOnClickListener(this);

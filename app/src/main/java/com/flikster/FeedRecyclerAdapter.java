@@ -123,7 +123,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder4) holder).card_gallary4_img4.setImageResource(globalData.pooja.get(3));
                 ((ViewHolder4) holder).tv_tag_name.setText("Pooja Hegde");
                 ((ViewHolder4) holder).tv_tag_desc.setText("Actress");
-                ((ViewHolder4) holder).tv_name.setText("Pooja Hegde at doing nightout");
+                ((ViewHolder4) holder).tv_name.setText("Pooja Hegde was caught doing nightout");
                 ((ViewHolder4) holder).tv_description.setText("Pooja Hegde was caught red handed by our camera crew while she" +
                         "was full drunk with her friends");
                 profile4 = false;
