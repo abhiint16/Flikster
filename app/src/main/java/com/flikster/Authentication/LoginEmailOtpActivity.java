@@ -45,5 +45,6 @@ public class LoginEmailOtpActivity extends AppCompatActivity implements View.OnC
 
     private void gotoHomeActivity() {
         startActivity(new Intent(LoginEmailOtpActivity.this, HomeActivity.class));
+        finish();
     }
 }
