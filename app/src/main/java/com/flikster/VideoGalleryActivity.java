@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -21,7 +22,7 @@ import android.widget.VideoView;
 public class VideoGalleryActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener {
     View view;
     VideoView playVideo;
-    Button toolbar_back_navigation_btn;
+    ImageButton toolbar_back_navigation_btn;
     Context mContext;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -64,7 +65,7 @@ public class VideoGalleryActivity extends AppCompatActivity implements FragmentC
     private void initializeViews() {
         playVideo = (VideoView) findViewById(R.id.playVideo);
         recyclerView = (RecyclerView) findViewById(R.id.gallery_videos_recycler_view);
-        toolbar_back_navigation_btn = (Button) findViewById(R.id.toolbar_back_navigation_btn);
+        toolbar_back_navigation_btn = (ImageButton) findViewById(R.id.toolbar_back_navigation_btn);
     }
 
     private void initializeRest() {

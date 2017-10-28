@@ -25,8 +25,8 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     View view;
     VideoView playVideo;
     ImageView newsimg;
-    Button toolbar_back_navigation_btn;
-    TextView activity_my_bag_toolbar_title, titlehedertxt, recomdedtxtlabel, tv_name, tv_description;
+    ImageButton toolbar_back_navigation_btn;
+    TextView toolbar_frag_title, titlehedertxt, recomdedtxtlabel, tv_name, tv_description;
     Context mContext;
     RecyclerView recyclerView;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
@@ -51,12 +51,12 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     }
 
     private void headerTitlesChange() {
-        activity_my_bag_toolbar_title.setText("News");
+        toolbar_frag_title.setText("News");
         recomdedtxtlabel.setText("Recommended News");
     }
 
     private void initializeViews() {
-        activity_my_bag_toolbar_title = (TextView) view.findViewById(R.id.activity_my_bag_toolbar_title);
+        toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         playVideo = (VideoView) view.findViewById(R.id.playVideo);
         newsimg = (ImageView) view.findViewById(R.id.newsimg);
         titlehedertxt = (TextView) view.findViewById(R.id.titlehedertxt);
@@ -64,7 +64,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
         recyclerView = (RecyclerView) view.findViewById(R.id.gallery_videos_recycler_view);
-        toolbar_back_navigation_btn = (Button) view.findViewById(R.id.toolbar_back_navigation_btn);
+        toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
 
         newsimg.setVisibility(View.VISIBLE);
         playVideo.setVisibility(View.GONE);
