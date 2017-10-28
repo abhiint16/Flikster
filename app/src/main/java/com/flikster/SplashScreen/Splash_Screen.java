@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.flikster.IntroSlider.IntroSlider;
 import com.flikster.Preferences.PreferencesView;
 import com.flikster.R;
 
@@ -21,7 +22,8 @@ public class Splash_Screen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(Splash_Screen.this, PreferencesView.class));
+                startActivity(new Intent(Splash_Screen.this, IntroSlider.class));
+                finish();
             }
         }, SPLASH_TIME_OUT);
     }

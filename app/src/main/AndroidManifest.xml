@@ -46,6 +46,7 @@
         <activity android:name=".VideoGalleryActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".GallaryFullScreen"></activity>
+        <activity android:name=".IntroSlider.IntroSlider"></activity>
 
     </application>
 

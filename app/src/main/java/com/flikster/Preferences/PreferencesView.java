@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.flikster.Authentication.AuthenticationActivity;
 import com.flikster.HomeActivity;
 import com.flikster.R;
+import com.flikster.SharedPref.SharedPref;
 
 /**
  * author Bheema 18-10-2017
@@ -25,14 +26,22 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
     private Button btnPreferencesNext, btnSignup;
     private TextView tvMenFashon, tvWomenFashon;
     RadioButton radioTollywood, radioBollywood, radioTamil, radioKannada, radioMalayalam;
+    private SharedPref sharedPref;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initSharedPred();
+        if(!sharedPref.isFirstTimeLaunch2())
+            launchHomeScreen();
         setContentView(R.layout.activity_preferences);
         initializeView();
         initializeRest();
+    }
+
+    private void initSharedPred() {
+        sharedPref = new SharedPref(this);
     }
 
     private void initializeRest() {
@@ -109,11 +118,15 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
     }
 
     private void goToSignUp() {
+        sharedPref.setFirstTimeLaunch2(false);
         startActivity(new Intent(PreferencesView.this, AuthenticationActivity.class));
+        finish();
     }
 
     private void launchHomeScreen() {
+        sharedPref.setFirstTimeLaunch2(false);
         startActivity(new Intent(PreferencesView.this, HomeActivity.class));
+        finish();
     }
 
     /*@Override

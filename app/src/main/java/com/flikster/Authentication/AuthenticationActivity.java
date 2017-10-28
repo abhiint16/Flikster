@@ -57,7 +57,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void gotoPhoneLogin() {
-        Log.e("inside gotophonelogin","insidegotologing");
         startActivity(new Intent(AuthenticationActivity.this, LoginMobileActivity.class));
     }
 
