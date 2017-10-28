@@ -2,47 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="10dp"
     android:background="@color/white"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/activity_my_bag_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="@color/white">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/toolbar_back_navigation_btn"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/backicon" />
-
-            <TextView
-                android:id="@+id/activity_my_bag_toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:text="Videos"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/ten"
-                android:background="@color/transparent"
-                android:src="@drawable/more_icon" />
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    <include layout="@layout/toolbar_frag"></include>
 
     <ScrollView
         android:layout_width="match_parent"
