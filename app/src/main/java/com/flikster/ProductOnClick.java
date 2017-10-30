@@ -1,5 +1,6 @@
 package com.flikster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -47,11 +48,11 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buy_now_btn) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new Checkout())
-                    .addToBackStack("")
-                    .commit();
+            Intent intent=new Intent(getActivity(),MyBagContinueOnClickActivity.class);
+            startActivity(intent);
         } else if (view.getId() == R.id.add_to_cart_btn) {
+            Intent intent=new Intent(getActivity(),MyBagActivity.class);
+            startActivity(intent);
 
         } else if (view.getId() == R.id.toolbar_back_navigation_btn) {
             getFragmentManager()
@@ -75,8 +76,8 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         LinearLayoutManager layoutManagers = new LinearLayoutManager(getActivity());
         layoutManagers.setOrientation(LinearLayoutManager.HORIZONTAL);
         card_celebrity_bio_video_carousel_recycler.setLayoutManager(layoutManagers);
-//        myPrductImgAdapter = new ProductImagesAdapter((AppCompatActivity) getContext(), fragmentManager);
-        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder((AppCompatActivity) getContext());
+        myPrductImgAdapter = new ProductImagesAdapter((AppCompatActivity) getContext(), fragmentManager);
+        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
         card_celebrity_bio_video_carousel_recycler.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
         add.setOnClickListener(this);

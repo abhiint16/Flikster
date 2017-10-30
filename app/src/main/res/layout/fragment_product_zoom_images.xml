@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginRight="@dimen/ten"
-    android:layout_marginTop="@dimen/ten"
     android:orientation="vertical">
 
     <include layout="@layout/common_header" />
@@ -42,7 +41,7 @@
                 android:background="#ff6666"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
-                android:text="Buy Now"
+                android:text="Use In board"
                 android:textAllCaps="false"
                 android:textColor="#FFF"
                 android:textSize="17sp" />
@@ -56,25 +55,28 @@
                 android:layout_marginTop="@dimen/ten">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/ten"
+                    android:layout_marginBottom="@dimen/ten"
                     android:background="@drawable/formalshirt" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:layout_gravity="center_vertical|center_horizontal"
-
-
                     android:layout_marginBottom="@dimen/ten"
-
                     android:background="@drawable/formalshirtsmall" />
 
-
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_marginBottom="@dimen/ten"
+                    android:background="@drawable/formalshirtsmall" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

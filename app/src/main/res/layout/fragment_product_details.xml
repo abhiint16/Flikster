@@ -23,8 +23,6 @@
                 android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
                 android:layout_below="@id/activity_my_bag_toolbar"
                 android:layout_gravity="center"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="60dp"
                 android:layout_marginTop="@dimen/ten" />
 
             <include layout="@layout/card_footer" />

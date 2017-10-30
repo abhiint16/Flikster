@@ -123,7 +123,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder4) holder).card_gallary4_img4.setImageResource(globalData.pooja.get(3));
                 ((ViewHolder4) holder).tv_tag_name.setText("Pooja Hegde");
                 ((ViewHolder4) holder).tv_tag_desc.setText("Actress");
-                ((ViewHolder4) holder).tv_name.setText("Pooja Hegde at doing nightout");
+                ((ViewHolder4) holder).tv_name.setText("Pooja Hegde was caught doing nightout");
                 ((ViewHolder4) holder).tv_description.setText("Pooja Hegde was caught red handed by our camera crew while she" +
                         "was full drunk with her friends");
                 profile4 = false;
@@ -149,7 +149,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder6) holder).tv.setText("Pooja Hegde Collection");
                 profileCollectionRecyclerLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 ((ViewHolder6) holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
-                profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 1);
+                profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 1,fragmentManager);
                 ((ViewHolder6) holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
                 collection = false;
             } else if (collection == false) {
@@ -159,7 +159,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder6) holder).tv.setText("Ranveer Singh Collection");
                 profileCollectionRecyclerLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 ((ViewHolder6) holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
-                profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 2);
+                profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 2,fragmentManager);
                 ((ViewHolder6) holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
                 collection = true;
             }
