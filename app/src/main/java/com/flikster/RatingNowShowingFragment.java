@@ -32,7 +32,7 @@ public class RatingNowShowingFragment extends Fragment{
     private void initializeRest() {
         ratingNowShowingLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         ratingNowShowingRecycler.setLayoutManager(ratingNowShowingLayoutManager);
-        ratingNowshowingAdapter = new RatingNowShowingAdapter(getActivity(),fragmentManager);
+        ratingNowShowingAdapter = new RatingNowShowingAdapter(getActivity(),fragmentManager);
         ratingNowShowingRecycler.setAdapter(ratingNowShowingAdapter);
     }
 
