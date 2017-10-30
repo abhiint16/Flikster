@@ -180,20 +180,24 @@
             android:background="@drawable/black_round_border"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:clickable="true"
+            android:id="@+id/rating_now_showing_frag_recycler_item_rate_movie">
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@color/transparent"
-                android:src="@drawable/star_gray" />
+                android:src="@drawable/star_gray"
+                android:clickable="false"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:clickable="false"
                 android:text="Rate The Movie" />
         </LinearLayout>
     </LinearLayout>
