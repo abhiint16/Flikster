@@ -18,7 +18,13 @@
             layout="@layout/bottom_navigation_bar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_alignParentBottom="true"></include>
+            android:layout_alignParentBottom="true"/>
+        <include
+            android:id="@+id/bottom_navigation_bar"
+            layout="@layout/bottom_navigation_customized_bar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"/>
 
         <FrameLayout
             android:id="@+id/main_container"

@@ -4,4 +4,9 @@
     <string name="bio">Prabhas is an Indian film actor best known for his work in telugu cinema.Prabhas made his debut with the 2002 drama film eshwar.</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <string name="feed">Feed</string>
+    <string name="rating">Rating</string>
+    <string name="fashion">Fashion</string>
+    <string name="store">Store</string>
 </resources>

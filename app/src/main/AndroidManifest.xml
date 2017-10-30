@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,23 +14,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".Authentication.AuthenticationActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Authentication.LoginMobileActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Authentication.LoginEmailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Authentication.LoginMobileOtpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Authentication.LoginEmailOtpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Authentication.LoginCreateAccountActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Preferences.PreferencesView"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".SplashScreen.Splash_Screen"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Authentication.AuthenticationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Authentication.LoginMobileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Authentication.LoginEmailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Authentication.LoginMobileOtpActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Authentication.LoginEmailOtpActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Authentication.LoginCreateAccountActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Preferences.PreferencesView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScreen.Splash_Screen"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,16 +56,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyBagActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".MyBagContinueOnClickActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".VideoPlayerActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".VideoGalleryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GallaryFullScreen"></activity>
-        <activity android:name=".IntroSlider.IntroSlider"></activity>
+        <activity
+            android:name=".MyBagActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".MyBagContinueOnClickActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".VideoPlayerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".GallaryFullScreen"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".IntroSlider.IntroSlider"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
 
     </application>
 
