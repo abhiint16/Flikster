@@ -14,13 +14,10 @@ import android.widget.TextView;
 
 public class RatingFragment extends Fragment {
     View view;
-    TextView textView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_common,container,false);
-        textView=(TextView)view.findViewById(R.id.tvf);
-        textView.setText("Rating is working properly");
+        view=inflater.inflate(R.layout.fragment_celebrity,container,false);
         return view;
     }
 }
