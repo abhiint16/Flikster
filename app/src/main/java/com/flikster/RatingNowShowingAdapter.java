@@ -3,6 +3,7 @@ package com.flikster;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,7 +21,8 @@ public class RatingNowShowingAdapter extends RecyclerView.Adapter<RatingNowShowi
 
     @Override
     public RatingNowShowingAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.rating_now_showing_frag_recycler_item,parent,false);
+        return  new ViewHolder(view);
     }
 
     @Override
@@ -30,7 +32,7 @@ public class RatingNowShowingAdapter extends RecyclerView.Adapter<RatingNowShowi
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 20;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
