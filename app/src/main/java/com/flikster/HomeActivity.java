@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -52,6 +53,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
     Context mContext;
+    FloatingActionButton camera_fab;
 
     ///Image Capture
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -155,7 +157,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 } else if (position == 1) {
                     beginTransact(new RatingFragment());
                 } else if (position == 2) {
-                    cameraAccessPermission();
+                    //cameraAccessPermission();
                 } else if (position == 3) {
                     beginTransact(new FashionFragment());
                 } else if (position == 4) {
@@ -206,6 +208,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store.setOnClickListener(this);
         rating.setOnClickListener(this);
         plus.setOnClickListener(this);
+        camera_fab.setOnClickListener(this);
         fragmentManager = getSupportFragmentManager();
         toolbar.setWillNotCacheDrawing(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -224,6 +227,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        camera_fab=(FloatingActionButton)findViewById(R.id.camera_fab);
         setSupportActionBar(toolbar);
         menu_notification = (ImageButton) toolbar.findViewById(R.id.toolbar_notification_icon);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -258,6 +262,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             beginTransact(new RatingFragment());
         } else if (viewId == R.id.plus_button) {
 //            cameraAccessPermission();
+        }
+        else if(viewId==R.id.camera_fab)
+        {
+            cameraAccessPermission();
         }
     }
 
