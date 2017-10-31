@@ -61,5 +61,6 @@
     <string name="preferences_next"> >> Next >> </string>
 
 
-
+    <string name="place_bid"> Place Bid</string>
+    <string name="enter_bid"> Enter Your Bid</string>
 </resources>

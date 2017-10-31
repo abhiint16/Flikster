@@ -50,15 +50,25 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
 
         notifcationimg.setBackgroundDrawable(getResources().getDrawable(R.drawable.store_bag));
 
-        String cartmptystr = "<font color=\"#030a0a\"><bold>"
-                        + "Your bag is empty ! \n"
-                        + "</bold></font>" + "<br/>" + "<br/>" + "Add items to it now";
-        nodataavailtxt.setText(Html.fromHtml(cartmptystr));
-        backhomebtn.setText("Shop Now");
+
+        setAvailableText();
 
         activity_my_bag_toolbar_back_navigation_btn.setOnClickListener(this);
         activity_my_bag_bottom_continue_btn.setOnClickListener(this);
         backhomebtn.setOnClickListener(this);
+    }
+
+    private void setAvailableText() {
+        try {
+            String cartmptystr = "<font color=\"#030a0a\"><bold>"
+                    + "Your bag is empty ! \n"
+                    + "</bold></font>" + "<br/>" + "<br/>" + "Add items to it now";
+            nodataavailtxt.setText(Html.fromHtml(cartmptystr));
+        } catch (Exception e) {
+            nodataavailtxt.setText("Your bag is empty !" + "\n" + "Add items to it now");
+        }
+
+        backhomebtn.setText("Shop Now");
     }
 
     private void initializeViews() {
