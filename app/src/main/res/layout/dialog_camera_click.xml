@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/solid_round_border">
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="Select Photo"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:padding="20dp"
+        android:gravity="center_vertical">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:background="@drawable/black_round_border"
+        android:gravity="center"
+        android:clickable="true"
+        android:id="@+id/dialog_camera_click_click_photo">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/camera_black"
+            android:background="@color/transparent"
+            android:clickable="false"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click a Photo"
+            android:gravity="center"
+            android:clickable="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:background="@drawable/black_round_border"
+        android:gravity="center"
+        android:clickable="true"
+        android:id="@+id/dialog_camera_click_select_gallery">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/gallery_icon"
+            android:background="@color/transparent"
+            android:clickable="false"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select from Gallery"
+            android:gravity="center"
+            android:clickable="false"/>
+    </LinearLayout>
+</LinearLayout>

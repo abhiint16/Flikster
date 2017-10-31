@@ -1,12 +1,14 @@
 package com.flikster;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -27,7 +29,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -265,8 +269,38 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         }
         else if(viewId==R.id.camera_fab)
         {
-            cameraAccessPermission();
+            openCameraClickDialog();
         }
+    }
+
+    private void openCameraClickDialog()
+    {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_camera_click);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        LinearLayout dialog_camera_click_click_photo=(LinearLayout) dialog.findViewById(R.id.dialog_camera_click_click_photo);
+        LinearLayout dialog_camera_click_select_gallery=(LinearLayout)dialog.findViewById(R.id.dialog_camera_click_select_gallery);
+        dialog_camera_click_select_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivity(intent);
+            }
+        });
+        dialog_camera_click_click_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cameraAccessPermission();
+                dialog.dismiss();
+            }
+        });
+        window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.translucent)));
+        dialog.show();
     }
 
 
