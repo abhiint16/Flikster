@@ -1,7 +1,7 @@
 package com.flikster;
 
 import android.content.Context;
-import android.media.Image;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +15,15 @@ import android.widget.ImageView;
 public class ShopByVideoFragmentAdapter extends RecyclerView.Adapter<ShopByVideoFragmentAdapter.ViewHolder> {
     Context context;
     GlobalData globalData=new GlobalData();
-    public ShopByVideoFragmentAdapter(Context context) {
+    FragmentManager fragmentManager;
+    public ShopByVideoFragmentAdapter(Context context,FragmentManager fragmentManager) {
         this.context=context;
+        this.fragmentManager=fragmentManager;
     }
 
     @Override
     public ShopByVideoFragmentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_shopby_cideo_recycler_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_shopby_video_recycler_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -45,7 +47,10 @@ public class ShopByVideoFragmentAdapter extends RecyclerView.Adapter<ShopByVideo
 
         @Override
         public void onClick(View view) {
-
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new ShopByVideoFragmentItemClick())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }

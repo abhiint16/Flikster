@@ -48,9 +48,10 @@ public class ShopByVideoFragment extends Fragment implements View.OnClickListene
     }
 
     private void initializeRest() {
+        fragmentManager=getActivity().getSupportFragmentManager();
         layoutManagerShopByVideoFragment = new GridLayoutManager(getActivity(),2);
         recyclerViewShopByVideoFragment.setLayoutManager(layoutManagerShopByVideoFragment);
-        shopByVideoFragmentAdapter = new ShopByVideoFragmentAdapter(getActivity());
+        shopByVideoFragmentAdapter = new ShopByVideoFragmentAdapter(getActivity(),fragmentManager);
         recyclerViewShopByVideoFragment.setAdapter(shopByVideoFragmentAdapter);
         toolbar_navigation_icon.setOnClickListener(this);
         toolbar_notification_icon.setVisibility(View.GONE);
@@ -69,7 +70,7 @@ public class ShopByVideoFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         if(view.getId()==R.id.toolbar_notification_icon)
         {
-            getFragmentManager().popBackStackImmediate();
+            fragmentManager.popBackStackImmediate();
         }
     }
 }
