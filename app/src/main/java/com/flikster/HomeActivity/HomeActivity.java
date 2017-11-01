@@ -1,16 +1,13 @@
-package com.flikster;
+package com.flikster.HomeActivity;
 
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -31,7 +28,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -44,6 +40,25 @@ import android.support.v4.content.ContextCompat;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.flikster.FashionFragment;
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.FliksterCreditFragment;
+import com.flikster.FragmentChangeInterface;
+import com.flikster.GallaryCardClick;
+import com.flikster.LogoutFragment;
+import com.flikster.MyAccountFragment;
+import com.flikster.NotificationFragment;
+import com.flikster.OrdersFragment;
+import com.flikster.R;
+import com.flikster.RatingFragment;
+import com.flikster.ReferFragment;
+import com.flikster.RewardsFragment;
+import com.flikster.SavedPostsFragment;
+import com.flikster.SearchFragment;
+import com.flikster.SettingsFragment;
+import com.flikster.StoreFragment;
+import com.flikster.VideoGalleryFragment;
+import com.flikster.WishListFragment;
 
 import java.util.ArrayList;
 

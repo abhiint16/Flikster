@@ -1,23 +1,19 @@
 package com.flikster;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.VideoView;
+
+import com.flikster.HomeActivity.HomeActivity;
 
 /**
  * Created by Logins on 26-10-2017.

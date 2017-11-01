@@ -1,9 +1,9 @@
 package com.flikster;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,17 +11,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 
 /**
  * Created by abhishek on 16-10-2017.
  */
 
-public class NewsOnClickFragment extends Fragment implements View.OnClickListener {
+public class VideoGalleryFragment extends Fragment implements View.OnClickListener {
     View view;
     VideoView playVideo;
     ImageView newsimg;
@@ -39,20 +41,15 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         initializeViews();
         headerTitlesChange();
         initializeRest();
+        playLocalVideo();
         titlehedertxt.setText("Two Years Of Bahubali: Lessons Its Success Taught The Industry");
-        tv_description.setText("Ranbir said: \"I have really liked Prabhas. He is amazing in Baahubali.\"\n" +
-                "\n" +
-                "Meanwhile, the Bollywood actor is awaiting the release of Jagga Jasoos, which will hit the screens on July 14.\n" +
-                "\n" +
-                "Ranbir has also co-produced Jagga Jasoos, helmed by Anurag Basu.\n" +
-                "\n" +
-                "Talking about his experience as a producer, he earlier said: \"I am a bad producer. I can't get things done, can't do man management. I was lucky that a lot of the work was taken care of by Anurag Basu. I can be happy that I can just collect awards for the film.\"");
+        tv_description.setText("Ranbir said: \"I have really liked Prabhas. He is amazing in Baahubali");
         return view;
     }
 
     private void headerTitlesChange() {
-        toolbar_frag_title.setText("News");
-        recomdedtxtlabel.setText("Recommended News");
+        toolbar_frag_title.setText("Videos");
+        recomdedtxtlabel.setText("Recommended Videos");
     }
 
     private void initializeViews() {
@@ -66,8 +63,8 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         recyclerView = (RecyclerView) view.findViewById(R.id.gallery_videos_recycler_view);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
 
-        newsimg.setVisibility(View.VISIBLE);
-        playVideo.setVisibility(View.GONE);
+        newsimg.setVisibility(View.GONE);
+        playVideo.setVisibility(View.VISIBLE);
         tv_name.setVisibility(View.GONE);
     }
 
@@ -93,8 +90,26 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
+
+    private void playLocalVideo() {
+        //Creating MediaController
+        MediaController mediaController = new MediaController(getContext());
+        mediaController.setAnchorView(playVideo);
+        //specify the location of media file
+        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.demovideo);
+        //Setting MediaController and URI, then starting the videoView
+        playVideo.setMediaController(mediaController);
+        playVideo.setVideoURI(uri);
+        playVideo.requestFocus();
+        playVideo.start();
     }
 }

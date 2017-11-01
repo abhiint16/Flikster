@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flikster.HomeActivity;
+import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 
 public class LoginEmailOtpActivity extends AppCompatActivity implements View.OnClickListener {

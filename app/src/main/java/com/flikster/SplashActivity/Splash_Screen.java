@@ -1,4 +1,4 @@
-package com.flikster.SplashScreen;
+package com.flikster.SplashActivity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.flikster.IntroSlider.IntroSlider;
-import com.flikster.Preferences.PreferencesView;
 import com.flikster.R;
 
 public class Splash_Screen extends AppCompatActivity {

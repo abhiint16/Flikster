@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.flikster.Preferences.PreferencesView;
+import com.flikster.PreferenceActivity.PreferencesView;
 import com.flikster.R;
 import com.flikster.SharedPref.SharedPref;
 

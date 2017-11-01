@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.FeedFragment;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -21,6 +21,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.AuctionDetailFragment;
+import com.flikster.CelebrityFragment;
+import com.flikster.GallaryCardClick;
+import com.flikster.GlobalData;
+import com.flikster.MovieFragment;
+import com.flikster.NewsOnClickFragment;
+import com.flikster.ProfileCollectionRecyclerItemAdapter;
+import com.flikster.R;
+import com.flikster.StealStyleViewHolder;
+import com.flikster.VideoGalleryFragment;
+import com.flikster.VideoPlayerActivity;
 
 import java.util.ArrayList;
 import java.util.List;

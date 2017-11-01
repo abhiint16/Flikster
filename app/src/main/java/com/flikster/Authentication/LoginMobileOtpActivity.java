@@ -9,10 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flikster.HomeActivity;
+import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
-
-import org.w3c.dom.Text;
 
 public class LoginMobileOtpActivity extends AppCompatActivity implements View.OnClickListener{
 

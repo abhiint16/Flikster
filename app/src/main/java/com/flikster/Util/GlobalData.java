@@ -9,14 +9,14 @@ import java.util.List;
 
 public class GlobalData {
 
-    int a=9;
-    List<Integer> type=new ArrayList<>();
-    List<String> imag=new ArrayList<>();
-    List<Integer> style=new ArrayList<>();
-    List<Integer> movie=new ArrayList<>();
-    List<Integer> ranveer=new ArrayList<>();
-    List<Integer> pooja=new ArrayList<>();
-    List<Integer> product=new ArrayList<>();
+    public  int a=9;
+    public  List<Integer> type=new ArrayList<>();
+    public  List<String> imag=new ArrayList<>();
+    public  List<Integer> style=new ArrayList<>();
+    public  List<Integer> movie=new ArrayList<>();
+    public  List<Integer> ranveer=new ArrayList<>();
+    public  List<Integer> pooja=new ArrayList<>();
+    public  List<Integer> product=new ArrayList<>();
 
     public GlobalData() {
         type.add(1);
