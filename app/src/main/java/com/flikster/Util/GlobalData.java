@@ -1,4 +1,6 @@
-package com.flikster;
+package com.flikster.Util;
+
+import com.flikster.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,12 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.flikster.Util.GlobalData;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 01-11-2017.

@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.NotificationFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.flikster.R;
 
 /**
  * Created by abhishek on 17-10-2017.

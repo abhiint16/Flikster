@@ -1,14 +1,16 @@
-package com.flikster;
+package com.flikster.CheckoutActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 24-10-2017.

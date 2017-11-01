@@ -1,10 +1,8 @@
-package com.flikster;
+package com.flikster.CheckoutActivity.CheckoutFragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +12,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 25-10-2017.

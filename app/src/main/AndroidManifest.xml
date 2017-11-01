@@ -57,20 +57,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MyBagActivity"
+            android:name=".MyBagActivity.MyBagActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MyBagContinueOnClickActivity"
+            android:name=".CheckoutActivity.MyBagContinueOnClickActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".VideoPlayerActivity"
+            android:name=".VideoFullScreenActivity.VideoPlayerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".GallaryFullScreen"
+            android:name=".HomeActivity.CommonFragments.GalleryFragment.GallaryFullScreen"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

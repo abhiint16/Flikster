@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.FashionFragment;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.flikster.R;
 
 /**
  * Created by abhishek on 23-10-2017.

@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.CheckoutActivity.CheckoutFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.flikster.CheckoutActivity.PaymentFragment.PaymentFragment;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 25-10-2017.

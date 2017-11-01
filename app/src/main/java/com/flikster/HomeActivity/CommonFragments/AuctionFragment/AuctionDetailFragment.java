@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.AuctionFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +17,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.flikster.Adapter.ProductImagesAdapter;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductImagesAdapter;
 import com.flikster.CheckoutActivity.MyBagContinueOnClickActivity;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 16-10-2017.

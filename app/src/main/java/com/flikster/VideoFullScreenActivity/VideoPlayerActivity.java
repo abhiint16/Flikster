@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.VideoFullScreenActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.VideoView;
 
 import com.flikster.HomeActivity.HomeActivity;
+import com.flikster.R;
 
 /**
  * Created by Logins on 26-10-2017.

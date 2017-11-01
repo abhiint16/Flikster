@@ -1,8 +1,11 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentInfo;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentStore;
 
 import java.util.ArrayList;
 import java.util.List;

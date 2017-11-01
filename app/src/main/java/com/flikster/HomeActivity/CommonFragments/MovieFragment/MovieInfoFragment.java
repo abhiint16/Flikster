@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapter;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 12-10-2017.

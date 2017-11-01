@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
+import com.flikster.R;
+import com.flikster.Util.GlobalData;
 
 /**
  * Created by abhishek on 11-10-2017.

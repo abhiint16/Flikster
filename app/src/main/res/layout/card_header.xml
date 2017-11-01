@@ -7,7 +7,7 @@
     android:padding="12dp">
 
 
-    <com.flikster.RoundedImageView
+    <com.flikster.Util.RoundedImageView
         android:id="@+id/profile_image"
         android:layout_width="50dp"
         android:layout_height="50dp"

@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.MyBagActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.flikster.HomeActivity.HomeActivity;
+import com.flikster.CheckoutActivity.MyBagContinueOnClickActivity;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 24-10-2017.

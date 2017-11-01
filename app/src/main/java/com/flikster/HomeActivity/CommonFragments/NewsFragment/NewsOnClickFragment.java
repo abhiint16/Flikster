@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.NewsFragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 16-10-2017.

@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.MyAccountFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

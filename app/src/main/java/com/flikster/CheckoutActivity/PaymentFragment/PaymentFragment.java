@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.CheckoutActivity.PaymentFragment;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.flikster.HomeActivity.HomeActivity;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 25-10-2017.

@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.GalleryFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import android.widget.VideoView;
 
 import com.flikster.HomeActivity.HomeActivity;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 05-10-2017.

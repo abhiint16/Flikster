@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.RatingFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

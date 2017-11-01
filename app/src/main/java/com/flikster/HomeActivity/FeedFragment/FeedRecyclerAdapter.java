@@ -1,40 +1,30 @@
 package com.flikster.HomeActivity.FeedFragment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.flikster.AuctionDetailFragment;
-import com.flikster.CelebrityFragment;
-import com.flikster.GallaryCardClick;
-import com.flikster.GlobalData;
-import com.flikster.MovieFragment;
-import com.flikster.NewsOnClickFragment;
-import com.flikster.ProfileCollectionRecyclerItemAdapter;
+import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionDetailFragment;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
+import com.flikster.Util.GlobalData;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
+import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
-import com.flikster.StealStyleViewHolder;
-import com.flikster.VideoGalleryFragment;
-import com.flikster.VideoPlayerActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.flikster.HomeActivity.StealStyleViewHolder;
+import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
+import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
 /**
  * Created by abhishek on 04-10-2017.

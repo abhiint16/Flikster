@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.FashionFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.MyBagActivity.MyBagActivity;
+import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 17-10-2017.

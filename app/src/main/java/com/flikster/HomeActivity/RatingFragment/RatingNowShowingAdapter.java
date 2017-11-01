@@ -1,8 +1,7 @@
-package com.flikster;
+package com.flikster.HomeActivity.RatingFragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.flikster.R;
 
 /**
  * Created by abhishek on 30-10-2017.

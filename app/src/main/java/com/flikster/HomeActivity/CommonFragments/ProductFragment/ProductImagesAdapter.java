@@ -1,4 +1,4 @@
-package com.flikster.Adapter;
+package com.flikster.HomeActivity.CommonFragments.ProductFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.flikster.Checkout;
-import com.flikster.ProductGallaryFragment;
-import com.flikster.ProductOnClick;
 import com.flikster.R;
 
 import java.util.ArrayList;

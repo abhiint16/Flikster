@@ -1,9 +1,9 @@
-package com.flikster.Adapter;
+package com.flikster.HomeActivity.CommonFragments.VideoFragment;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.flikster.CelebrityBioAdapterImagesViewHolder;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 
 /**
  * Created by Logins on 26-10-2017.

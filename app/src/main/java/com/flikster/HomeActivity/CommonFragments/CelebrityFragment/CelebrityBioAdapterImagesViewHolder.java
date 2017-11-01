@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryFullScreen;
+import com.flikster.R;
 
 import java.util.ArrayList;
 import java.util.List;

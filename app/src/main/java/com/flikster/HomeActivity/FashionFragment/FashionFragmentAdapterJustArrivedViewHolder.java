@@ -1,9 +1,11 @@
-package com.flikster;
+package com.flikster.HomeActivity.FashionFragment;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.flikster.R;
 
 /**
  * Created by abhishek on 23-10-2017.

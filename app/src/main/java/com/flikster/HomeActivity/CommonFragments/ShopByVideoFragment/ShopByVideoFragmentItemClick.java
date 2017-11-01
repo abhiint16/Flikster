@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.VideoView;
+
+import com.flikster.R;
 
 /**
  * Created by abhishek on 01-11-2017.

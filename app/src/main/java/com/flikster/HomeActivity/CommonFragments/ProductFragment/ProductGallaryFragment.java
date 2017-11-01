@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.ProductFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.MenuFragments.Checkout;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 17-10-2017.

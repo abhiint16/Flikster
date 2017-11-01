@@ -1,8 +1,13 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentBio;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentFeed;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentStore;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,6 @@
-package com.flikster;
+package com.flikster.CheckoutActivity.AddressFragment;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.flikster.CheckoutActivity.CheckoutFragment.CheckoutFragment;
+import com.flikster.MyBagActivity.MyBagActivity;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 24-10-2017.

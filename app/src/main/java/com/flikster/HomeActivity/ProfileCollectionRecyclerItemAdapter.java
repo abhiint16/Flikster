@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
+import com.flikster.R;
 
 /**
  * Created by abhishek on 11-10-2017.

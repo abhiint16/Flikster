@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
+import com.flikster.R;
+import com.flikster.HomeActivity.StealStyleViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

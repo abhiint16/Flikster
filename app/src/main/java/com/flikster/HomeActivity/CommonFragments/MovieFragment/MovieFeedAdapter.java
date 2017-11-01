@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
+import com.flikster.R;
+import com.flikster.HomeActivity.StealStyleViewHolder;
+import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 
 import java.util.ArrayList;
 import java.util.List;

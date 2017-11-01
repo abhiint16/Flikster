@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.MenuFragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.flikster.R;
 
 /**
  * Created by abhishek on 16-10-2017.

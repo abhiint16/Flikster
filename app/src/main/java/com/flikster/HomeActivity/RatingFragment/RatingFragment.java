@@ -1,4 +1,4 @@
-package com.flikster;
+package com.flikster.HomeActivity.RatingFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.flikster.R;
 
 /**
  * Created by abhishek on 17-10-2017.
