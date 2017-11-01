@@ -114,7 +114,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //            ((ViewHolder2) holder).textView.setText("Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).recyclerView.setLayoutManager(layoutManager);
-            celebrityBioAdapterVideoViewHolder = new CelebrityBioAdapterVideoViewHolder();
+            celebrityBioAdapterVideoViewHolder = new CelebrityBioAdapterVideoViewHolder(fragmentManager);
             ((ViewHolder2) holder).recyclerView.setAdapter(celebrityBioAdapterVideoViewHolder);
         } else if (holder.getItemViewType() == 3) {
 //            ((ViewHolder3) holder).textView.setText("Cast");

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_frag"></include>
+
+    <VideoView
+        android:id="@+id/card_shopby_video_recycler_item_onclick_playVideo"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical|center"/>
+    
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:id="@+id/card_shopby_video_recycler_item_onclick_recycler"></android.support.v7.widget.RecyclerView>
+</LinearLayout>

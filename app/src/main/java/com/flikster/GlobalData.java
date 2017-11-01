@@ -29,6 +29,10 @@ public class GlobalData {
         imag.add("http://img.youtube.com/vi/rJwPCq61qfo/0.jpg");imag.add("http://img.youtube.com/vi/9gwNKVnmVIg/0.jpg");
         style.add(R.drawable.style1);style.add(R.drawable.style2);style.add(R.drawable.style3);style.add(R.drawable.style4);
         style.add(R.drawable.style5);style.add(R.drawable.style6);style.add(R.drawable.style7);
+        style.add(R.drawable.style1);style.add(R.drawable.style2);style.add(R.drawable.style3);style.add(R.drawable.style4);
+        style.add(R.drawable.style5);style.add(R.drawable.style6);style.add(R.drawable.style7);
+        style.add(R.drawable.style1);style.add(R.drawable.style2);style.add(R.drawable.style3);style.add(R.drawable.style4);
+        style.add(R.drawable.style5);style.add(R.drawable.style6);style.add(R.drawable.style7);
         movie.add(R.drawable.movie);movie.add(R.drawable.movie2);movie.add(R.drawable.movie3);
         ranveer.add(R.drawable.ranveer1);ranveer.add(R.drawable.ranveer2);ranveer.add(R.drawable.ranveer3);
         pooja.add(R.drawable.pooja);pooja.add(R.drawable.pooja2);pooja.add(R.drawable.pooja3);pooja.add(R.drawable.pooja4);
