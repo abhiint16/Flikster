@@ -3,6 +3,8 @@ package com.flikster;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +25,7 @@ public class ShopByVideoFragment extends Fragment implements View.OnClickListene
     ShopByVideoFragmentAdapter shopByVideoFragmentAdapter;
     Toolbar toolbar;
     ImageButton toolbar_navigation_icon,toolbar_notification_icon,toolbar_cart_icon;
+    FragmentManager fragmentManager;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,14 +35,26 @@ public class ShopByVideoFragment extends Fragment implements View.OnClickListene
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+    }
+
     private void initializeRest() {
         layoutManagerShopByVideoFragment = new GridLayoutManager(getActivity(),2);
         recyclerViewShopByVideoFragment.setLayoutManager(layoutManagerShopByVideoFragment);
         shopByVideoFragmentAdapter = new ShopByVideoFragmentAdapter(getActivity());
         recyclerViewShopByVideoFragment.setAdapter(shopByVideoFragmentAdapter);
         toolbar_navigation_icon.setOnClickListener(this);
-        toolbar_notification_icon.setOnClickListener(this);
-        toolbar_cart_icon.setOnClickListener(this);
+        toolbar_notification_icon.setVisibility(View.GONE);
+        toolbar_cart_icon.setVisibility(View.GONE);
     }
 
     private void initializeViews() {
@@ -52,5 +67,9 @@ public class ShopByVideoFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
+        if(view.getId()==R.id.toolbar_notification_icon)
+        {
+            getFragmentManager().popBackStackImmediate();
+        }
     }
 }
