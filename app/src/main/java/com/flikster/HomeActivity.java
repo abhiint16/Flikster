@@ -290,6 +290,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivity(intent);
+                dialog.dismiss();
             }
         });
         dialog_camera_click_click_photo.setOnClickListener(new View.OnClickListener() {
