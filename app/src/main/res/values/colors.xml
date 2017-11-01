@@ -24,6 +24,16 @@
     <color name="color_tab_5">#F63D2B</color>
 
 
-    <color name="red">#e60000</color>
+
+    <color name="grey_txt_label">#8a8a8a</color>
+
+    <color name="red">#fc5b68</color>
+
+    <color name="background_layout">#fafafa</color>
+
+
+    <color name="header_background">#696969</color>
+
+
 
 </resources>

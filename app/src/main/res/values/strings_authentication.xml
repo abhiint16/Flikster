@@ -61,5 +61,12 @@
     <string name="preferences_next"> >> Next >> </string>
 
 
+    <string name="place_bid"> Place Bid</string>
+    <string name="enter_bid"> Enter Your Bid</string>
+
+    <string name="startbid">Starting Bid Rs 3,600</string>
+    <string name="auction_header_title_desc">Rakul  Preeth Singh Red Printed Saree</string>
+    <string name="timeleft">Time Left : 22h 45m 52s </string>
+    <string name="datestr">(6 May 2017)</string>
 
 </resources>

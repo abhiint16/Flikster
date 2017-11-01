@@ -15,5 +15,9 @@
     <dimen name="activity_authentication_login_margin">30dp</dimen>
 
     <dimen name="five">5dp</dimen>
+    <dimen name="seven">7dp</dimen>
     <dimen name="ten">10dp</dimen>
+    <dimen name="fifteen">15dp</dimen>
+    <dimen name="thirty">30dp</dimen>
+    <dimen name="twenty">20dp</dimen>
 </resources>

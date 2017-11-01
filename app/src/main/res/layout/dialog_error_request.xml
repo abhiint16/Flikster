@@ -55,13 +55,10 @@
             android:textSize="18sp" />
 
         <Button
-
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/ten"
-
             android:layout_marginTop="10dp"
             android:background="@drawable/solid_border"
             android:backgroundTint="@color/red"

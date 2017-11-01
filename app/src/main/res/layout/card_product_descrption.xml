@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/five"
+        android:drawableLeft="@drawable/downsmal_arrow"
+        android:drawablePadding="@dimen/seven"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:layout_marginTop="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="Dispatch with in 10days"
+        android:textColor="#474747"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/five"
+        android:drawableLeft="@drawable/downsmal_arrow"
+        android:drawablePadding="@dimen/seven"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="Policy and Authentication"
+        android:textColor="#474747"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/infotxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="Information : Being Fab Men's Solid Formal Blue Shirt,Regular Fit, Full Sleeve"
+        android:textColor="#474747"
+        android:textSize="13sp" />
+
+
+    <TextView
+        android:id="@+id/descrtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/five"
+        android:paddingLeft="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:paddingTop="@dimen/five"
+        android:text="Description :
+If you are looking to be a trend setter when you go out to the fanciest of parties on a weekend, Being Fab has just the range of apparel that ensures you'd never miss that admirable glance or compliment. You can tuck the shirt inside for a formal look and also put it outside for casual look."
+        android:textColor="#474747"
+        android:textSize="13sp" />
+</LinearLayout>

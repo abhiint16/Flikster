@@ -16,21 +16,22 @@ import com.bumptech.glide.Glide;
 
 public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHolder.ViewHolder> {
     Context context;
-    GlobalData globalData=new GlobalData();
+    GlobalData globalData = new GlobalData();
     FragmentManager fragmentManager;
     String a;
-    public StealStyleViewHolder(Context context,FragmentManager fragmentManager) {
-        this.context=context;
-        this.fragmentManager=fragmentManager;
+
+    public StealStyleViewHolder(Context context, FragmentManager fragmentManager) {
+        this.context = context;
+        this.fragmentManager = fragmentManager;
     }
-    public StealStyleViewHolder(String a)
-    {
-        this.a=a;
+
+    public StealStyleViewHolder(String a) {
+        this.a = a;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_steal_style_carousel_recycler_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_steal_style_carousel_recycler_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -38,35 +39,30 @@ public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHol
     public void onBindViewHolder(ViewHolder holder, int position) {
         /*Glide.with(context).load("http://img.youtube.com/vi/MeH346YHUIE/0.jpg")
                 .into(holder.card_steal_style_recycler_item_imageview);*/
-        if("celebrity_store".equals(a))
-        {
+        if ("celebrity_store".equals(a)) {
             holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.product.get(position));
-        }
-        else if("movie_feed".equals(a))
-        {
+        } else if ("movie_feed".equals(a)) {
             holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.movie.get(position));
-        }
-        else
-        holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.style.get(position));
+        } else
+            holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.style.get(position));
     }
 
     @Override
     public int getItemCount() {
         if ("celebrity_store".equals(a))
             return globalData.product.size();
-        else if("movie_feed".equals(a))
-        {
+        else if ("movie_feed".equals(a)) {
             return globalData.movie.size();
-        }
-        else
-        return globalData.style.size();
+        } else
+            return globalData.style.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_steal_style_recycler_item_imageview;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            card_steal_style_recycler_item_imageview=(ImageView)itemView.findViewById(R.id.card_steal_style_recycler_item_imageview);
+            card_steal_style_recycler_item_imageview = (ImageView) itemView.findViewById(R.id.card_steal_style_recycler_item_imageview);
             itemView.setOnClickListener(this);
         }
 
@@ -74,6 +70,7 @@ public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHol
         public void onClick(View view) {
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, new ProductOnClick())
+//                    .replace(R.id.main_container, new AuctionDetailFragment())
                     .addToBackStack("")
                     .commit();
         }
