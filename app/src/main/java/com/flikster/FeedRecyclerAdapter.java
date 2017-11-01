@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,6 +60,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (viewType == 4) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary4_1, parent, false);
             return new ViewHolder4(view);
+        } else if (viewType == 7) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_auction, parent, false);
+            return new ViewHolder7(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary_4plus, parent, false);
             return new ViewHolder5(view);
@@ -92,7 +96,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (holder.getItemViewType() == 2) {
             stealStyleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).card_steal_style_recycler.setLayoutManager(stealStyleLayoutManager);
-            stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext(),fragmentManager);
+            stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext(), fragmentManager);
             ((ViewHolder2) holder).card_steal_style_recycler.setAdapter(stealStyleViewHolder);
         } else if (holder.getItemViewType() == 3) {
             if (news == true) {
@@ -149,7 +153,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder6) holder).tv.setText("Pooja Hegde Collection");
                 profileCollectionRecyclerLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 ((ViewHolder6) holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
-                profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 1,fragmentManager);
+                profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 1, fragmentManager);
                 ((ViewHolder6) holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
                 collection = false;
             } else if (collection == false) {
@@ -159,10 +163,20 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder6) holder).tv.setText("Ranveer Singh Collection");
                 profileCollectionRecyclerLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 ((ViewHolder6) holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
-                profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 2,fragmentManager);
+                profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 2, fragmentManager);
                 ((ViewHolder6) holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
                 collection = true;
             }
+
+        } else if (holder.getItemViewType() == 7) {
+            ((ViewHolder7) holder).profile_image.setImageResource(R.drawable.rakulprofileicon);
+//            ((ViewHolder7) holder).card_gallary1_img1.setImageResource(R.drawable.ranveer2);
+            ((ViewHolder7) holder).tv_tag_desc.setText("#Actor");
+            ((ViewHolder7) holder).tv_tag_name.setText("Rakul Preet");
+            /*((ViewHolder1) holder).tv_name.setText("Ranveer Singh at the set of Padmavati");
+            ((ViewHolder1) holder).tv_description.setText("Ranveer Singh at the set of Padmavati. He was caught red handed by" +
+                    "our camera crew while he was kissing his girlfriend Deepika.");*/
+//            profile1 = false;
 
         } else {
 
@@ -202,7 +216,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             globalData.a = 1;
-            if ((view.getId() == R.id.header_linear)||(view.getId()==R.id.profile_name)) {
+            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_name)) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new CelebrityFragment())
                         .addToBackStack("")
@@ -217,7 +231,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public class ViewHolder2 extends RecyclerView.ViewHolder{
+    public class ViewHolder2 extends RecyclerView.ViewHolder {
         RecyclerView card_steal_style_recycler;
 
         public ViewHolder2(View itemView) {
@@ -270,10 +284,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
     }
+
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary4_img1, card_gallary4_img2, card_gallary4_img3, card_gallary4_img4, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
-        LinearLayout header_linear,card_gallary4_img_container;
+        LinearLayout header_linear, card_gallary4_img_container;
+
         public ViewHolder4(View itemView) {
             super(itemView);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
@@ -281,8 +297,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_gallary4_img2 = (ImageView) itemView.findViewById(R.id.card_gallary4_img2);
             card_gallary4_img3 = (ImageView) itemView.findViewById(R.id.card_gallary4_img3);
             card_gallary4_img4 = (ImageView) itemView.findViewById(R.id.card_gallary4_img4);
-            header_linear=(LinearLayout)itemView.findViewById(R.id.header_linear);
-            card_gallary4_img_container=(LinearLayout)itemView.findViewById(R.id.card_gallary4_img_container);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            card_gallary4_img_container = (LinearLayout) itemView.findViewById(R.id.card_gallary4_img_container);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
@@ -295,15 +311,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             globalData.a = 4;
-            if(view.getId()==R.id.card_gallary4_img_container)
-            {
+            if (view.getId() == R.id.card_gallary4_img_container) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new GallaryCardClick())
                         .addToBackStack("")
                         .commit();
-            }
-            else if((view.getId()==R.id.header_linear)||(view.getId()==R.id.profile_image))
-            {
+            } else if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new CelebrityFragment())
                         .addToBackStack("")
@@ -363,6 +376,48 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     .replace(R.id.main_container, new CelebrityFragment())
                     .addToBackStack("")
                     .commit();
+        }
+    }
+
+
+    public class ViewHolder7 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView card_gallary1_img1, profile_image;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
+        LinearLayout header_linear, card_description_linear;
+        Button followbtn;
+
+        public ViewHolder7(View itemView) {
+            super(itemView);
+            card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setText("BID");
+            card_description_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
+            header_linear.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            globalData.a = 1;
+            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_name)) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container, new CelebrityFragment())
+                        .addToBackStack("")
+                        .commit();
+            } else if (view.getId() == R.id.card_description_linear) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container, new AuctionDetailFragment())
+                        .addToBackStack("")
+                        .commit();
+            }
+
         }
     }
 }

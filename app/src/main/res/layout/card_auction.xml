@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/card_header"></include>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/card_gallary1_img1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/colorImageBackgroundGrey"
+            android:scaleType="centerCrop"
+            android:src="@drawable/rakulpreetred" />
+
+        <EditText
+            android:id="@+id/imageView1"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|end|bottom"
+            android:layout_marginBottom="60dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="55dp"
+
+            android:background="@drawable/black_box"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="@string/enter_bid"
+            android:textColorHint="@color/white" />
+    </FrameLayout>
+
+    <include layout="@layout/card_footer"></include>
+
+    <include layout="@layout/card_price_time_stamp"></include>
+
+    <include layout="@layout/card_comment_text"></include>
+</LinearLayout>
