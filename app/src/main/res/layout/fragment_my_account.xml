@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <android.support.v4.view.ViewPager
-        android:layout_width="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_height="match_parent"
         android:id="@+id/fragment_my_account_pager"
-        android:fitsSystemWindows="true">
-    </android.support.v4.view.ViewPager>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v4.view.ViewPager>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -46,8 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@+id/fragment_my_account_banner"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/white_solid_round_border"></View>
 
                 <ImageView
@@ -106,25 +106,25 @@
 
             <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/fragment_my_account_toolbar"
+                android:id="@+id/myprofile_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="#00000000"
+                android:contentInsetEnd="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetStart="0dp"
                 android:title="Megha"
                 android:titleTextColor="@color/black"
-                app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|enterAlways"
-                android:contentInsetLeft="0dp"
-                android:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                android:contentInsetRight="0dp"
-                android:contentInsetEnd="0dp"
                 app:contentInsetRight="0dp"
-                app:contentInsetEnd="0dp">
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways">
 
                 <ImageButton
-                    android:id="@+id/toolbar_overflow_icon"
+                    android:id="@+id/myprofile_toolbar_overflow_icon"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
@@ -132,7 +132,7 @@
                     android:src="@android:drawable/arrow_down_float" />
 
                 <ImageButton
-                    android:id="@+id/toolbar_cart_icon"
+                    android:id="@+id/myprofile_toolbar_cart_icon"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
@@ -140,7 +140,7 @@
                     android:src="@android:drawable/ic_menu_gallery" />
 
                 <ImageButton
-                    android:id="@+id/toolbar_notification_icon"
+                    android:id="@+id/myprofile_toolbar_notification_icon"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
@@ -148,7 +148,7 @@
                     android:src="@drawable/notification_white" />
 
                 <ImageButton
-                    android:id="@+id/toolbar_search_icon"
+                    android:id="@+id/myprofile_toolbar_search_icon"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
@@ -156,19 +156,20 @@
                     android:src="@android:drawable/ic_menu_search" />
 
                 <ImageButton
-                    android:id="@+id/toolbar_navigation_icon"
+                    android:id="@+id/myprofile_toolbar_navigation_icon"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@drawable/arraow_back"/>
+                    android:src="@drawable/arraow_back" />
 
                 <TextView
+                    android:id="@+id/myprofile_toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Neha Aggarwal"
                     android:textColor="@color/white"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
             </android.support.v7.widget.Toolbar>
 
 
@@ -177,29 +178,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp">
-        <android.support.design.widget.TabLayout
-            android:id="@+id/fragment_my_account_tablayout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            app:tabMode="fixed"></android.support.design.widget.TabLayout>
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/fragment_my_account_tablayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                app:tabMode="fixed"></android.support.design.widget.TabLayout>
+
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="Follow"
                 android:background="@drawable/solid_border"
-                android:textColor="@color/white"
-                />
+                android:text="Follow"
+                android:textColor="@color/white" />
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
 

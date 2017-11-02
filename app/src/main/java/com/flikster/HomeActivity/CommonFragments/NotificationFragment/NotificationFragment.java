@@ -28,9 +28,9 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
     RecyclerView.LayoutManager layoutManager;
     NotificationAdapter notificationAdapter;
     Button button, backhomebtn;
-    Toolbar toolbar;
-    ImageButton backButton;
-    TextView titleToolbar, nodataavailtxt;
+    Toolbar toolbar_frag_multiicons_toolbar;
+    ImageButton toolbar_frag_multiicons_back_navigation;
+    TextView toolbar_frag_multiicons_title, nodataavailtxt;
     LinearLayout nodatalayout;
     ImageView notifcationimg;
 
@@ -52,17 +52,17 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
         recyclerView.setLayoutManager(layoutManager);
         notificationAdapter = new NotificationAdapter();
         recyclerView.setAdapter(notificationAdapter);
-        backButton.setOnClickListener(this);
+        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         backhomebtn.setOnClickListener(this);
-        titleToolbar.setText("Notifications");
+        toolbar_frag_multiicons_title.setText("Notifications");
     }
 
     private void initializeViews() {
         recyclerView = (RecyclerView) view.findViewById(R.id.activity_my_bag_recycler_view);
         button = (Button) view.findViewById(R.id.activity_my_bag_bottom_continue_btn);
-        toolbar = (Toolbar) view.findViewById(R.id.activity_my_bag_toolbar);
-        backButton = (ImageButton) view.findViewById(R.id.activity_my_bag_toolbar_back_navigation_btn);
-        titleToolbar = (TextView) view.findViewById(R.id.activity_my_bag_toolbar_title);
+        toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
+        toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
+        toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
 
         nodatalayout = (LinearLayout) view.findViewById(R.id.nodatalayout);
         notifcationimg = (ImageView) view.findViewById(R.id.notifcationimg);
@@ -72,7 +72,7 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.activity_my_bag_toolbar_back_navigation_btn) {
+        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             getFragmentManager().popBackStackImmediate();
         } else if (view.getId() == R.id.backhomebtn) {
             getFragmentManager().popBackStackImmediate();

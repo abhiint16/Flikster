@@ -27,8 +27,8 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
     RecyclerView recyclerViewFashionFragment;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     FashionFragmentAdapter fashionFragmentAdapter;
-    Toolbar toolbar;
-    ImageButton toolbar_navigation_icon,toolbar_notification_icon,toolbar_cart_icon;
+    Toolbar toolbar_frag_multiicons_toolbar;
+    ImageButton toolbar_frag_multiicons_back_navigation,toolbar_frag_multiicons_notification,toolbar_frag_multiicons_cart;
 
     @Nullable
     @Override
@@ -45,17 +45,17 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
         recyclerViewFashionFragment.setLayoutManager(layoutManagerFashionFragment);
         fashionFragmentAdapter = new FashionFragmentAdapter(getActivity());
         recyclerViewFashionFragment.setAdapter(fashionFragmentAdapter);
-        toolbar_navigation_icon.setOnClickListener(this);
-        toolbar_notification_icon.setOnClickListener(this);
-        toolbar_cart_icon.setOnClickListener(this);
+        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
+        toolbar_frag_multiicons_notification.setOnClickListener(this);
+        toolbar_frag_multiicons_cart.setOnClickListener(this);
     }
 
     private void initializeViews() {
         recyclerViewFashionFragment = (RecyclerView) view.findViewById(R.id.fashion_recyclerview);
-        toolbar = (Toolbar) view.findViewById(R.id.fragment_fashion_toolbar);
-        toolbar_navigation_icon=(ImageButton)view.findViewById(R.id.toolbar_navigation_icon);
-        toolbar_notification_icon=(ImageButton)view.findViewById(R.id.toolbar_notification_icon);
-        toolbar_cart_icon=(ImageButton)view.findViewById(R.id.toolbar_cart_icon);
+        toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
+        toolbar_frag_multiicons_back_navigation=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
+        toolbar_frag_multiicons_notification=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        toolbar_frag_multiicons_cart=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_cart);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.toolbar_navigation_icon)
+        if(view.getId()==R.id.toolbar_frag_multiicons_back_navigation)
         {
             getFragmentManager()
                     .beginTransaction()
@@ -74,7 +74,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
                     .addToBackStack("")
                     .commit();
         }
-        else if(view.getId()==R.id.toolbar_notification_icon)
+        else if(view.getId()==R.id.toolbar_frag_multiicons_notification)
         {
             getFragmentManager()
                     .beginTransaction()
@@ -82,7 +82,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
                     .addToBackStack("")
                     .commit();
         }
-        else if(view.getId()==R.id.toolbar_cart_icon)
+        else if(view.getId()==R.id.toolbar_frag_multiicons_cart)
         {
             Intent intent=new Intent(getActivity(),MyBagActivity.class);
             startActivity(intent);

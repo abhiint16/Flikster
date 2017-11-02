@@ -25,9 +25,9 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     CheckoutAdapter checkoutAdapter;
-    Toolbar toolbar;
-    ImageButton backButton,addressTabIcon,checkoutTabIcon,paymentTabIcon;
-    TextView titleToolbar,addressTabText,checkoutTabText,paymentTabText;
+    Toolbar toolbar_frag_multiicons_toolbar;
+    ImageButton toolbar_frag_multiicons_back_navigation,addressTabIcon,checkoutTabIcon,paymentTabIcon;
+    TextView toolbar_frag_multiicons_title,addressTabText,checkoutTabText,paymentTabText;
     Button fragment_checkout_bottom_btn;
     @Nullable
     @Override
@@ -43,16 +43,16 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutManager);
         checkoutAdapter=new  CheckoutAdapter(getFragmentManager(),getActivity());
         recyclerView.setAdapter(checkoutAdapter);
-        backButton.setOnClickListener(this);
+        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         fragment_checkout_bottom_btn.setOnClickListener(this);
-        titleToolbar.setText("Order Details");
+        toolbar_frag_multiicons_title.setText("Order Details");
     }
 
     private void initializeViews() {
         recyclerView=(RecyclerView)view.findViewById(R.id.fragment_checkout_recyclerview);
-        toolbar=(Toolbar)getActivity().findViewById(R.id.activity_mybag_continue_onclick_toolbar);
-        backButton=(ImageButton)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn);
-        titleToolbar=(TextView)toolbar.findViewById(R.id.activity_mybag_continue_onclick_toolbar_title);
+        toolbar_frag_multiicons_toolbar=(Toolbar)getActivity().findViewById(R.id.toolbar_frag_multiicons_toolbar);
+        toolbar_frag_multiicons_back_navigation=(ImageButton)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
+        toolbar_frag_multiicons_title=(TextView)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_title);
         fragment_checkout_bottom_btn=(Button)view.findViewById(R.id.fragment_checkout_bottom_btn);
         addressTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_imgbtn);
         checkoutTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn);
@@ -75,7 +75,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn)
+        if(view.getId()==R.id.toolbar_frag_multiicons_back_navigation)
         {
             getFragmentManager().popBackStackImmediate();
         }

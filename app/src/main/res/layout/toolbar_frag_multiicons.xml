@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_frag_multiicons_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentTop="true"
+    android:background="@color/dark_grey"
+    android:title="Fashion"
+    android:titleTextColor="@color/black"
+    app:layout_collapseMode="pin"
+    app:layout_scrollFlags="scroll|enterAlways"
+    android:contentInsetLeft="0dp"
+    android:contentInsetStart="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    android:contentInsetRight="0dp"
+    android:contentInsetEnd="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetEnd="0dp">
+
+    <ImageButton
+        android:id="@+id/toolbar_frag_multiicons_overflow"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginRight="5dp"
+        android:background="@color/transparent"
+        android:src="@android:drawable/arrow_down_float" />
+
+    <ImageButton
+        android:id="@+id/toolbar_frag_multiicons_cart"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginRight="5dp"
+        android:background="@color/transparent"
+        android:src="@android:drawable/ic_menu_gallery" />
+
+    <ImageButton
+        android:id="@+id/toolbar_frag_multiicons_notification"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginRight="5dp"
+        android:background="@color/transparent"
+        android:src="@drawable/notification_white" />
+
+    <ImageButton
+        android:id="@+id/toolbar_frag_multiicons_search"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginRight="5dp"
+        android:background="@color/transparent"
+        android:src="@android:drawable/ic_menu_search" />
+
+    <ImageButton
+        android:id="@+id/toolbar_frag_multiicons_back_navigation"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start|center_vertical"
+        android:background="@color/transparent"
+        android:src="@drawable/arraow_back" />
+    <TextView
+        android:id="@+id/toolbar_frag_multiicons_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fashion"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
+</android.support.v7.widget.Toolbar>

@@ -29,9 +29,9 @@ import com.flikster.R;
 
 public class AuctionDetailFragment extends Fragment implements View.OnClickListener {
     View view;
-    Button toolbar_back_navigation_btn, placebidbtn, add;
-    ImageButton moreimg;
-    TextView activity_my_bag_toolbar_title;
+    Button placebidbtn, add;
+    ImageButton toolbar_back_navigation_btn,toolbar_more_icon;
+    TextView toolbar_frag_title;
     FragmentManager fragmentManager;
     TextView txt, infotxt, descrtxt;
     RecyclerView card_celebrity_bio_video_carousel_recycler;
@@ -65,9 +65,9 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
     }
 
     private void initializeRest() {
-        activity_my_bag_toolbar_title.setText("Auction");
+        toolbar_frag_title.setText("Auction");
         txt.setText("Recommended Product");
-        moreimg.setVisibility(View.GONE);
+        toolbar_more_icon.setVisibility(View.VISIBLE);
         cartlayout.setVisibility(View.GONE);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -104,15 +104,15 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
     }
 
     private void initializeViews() {
-        toolbar_back_navigation_btn = (Button) view.findViewById(R.id.toolbar_back_navigation_btn);
-        activity_my_bag_toolbar_title = (TextView) view.findViewById(R.id.activity_my_bag_toolbar_title);
+        toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
+        toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         txt = (TextView) view.findViewById(R.id.txt);
         infotxt = (TextView) view.findViewById(R.id.infotxt);
         descrtxt = (TextView) view.findViewById(R.id.descrtxt);
         product_imgs_recycler_view = (RecyclerView) view.findViewById(R.id.product_imgs_recycler_view);
         card_celebrity_bio_video_carousel_recycler = (RecyclerView) view.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
         placebidbtn = (Button) view.findViewById(R.id.placebidbtn);
-        moreimg = (ImageButton) view.findViewById(R.id.moreimg);
+        toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
         cartlayout = (LinearLayout) view.findViewById(R.id.cartlayout);
         fragmentManager = getActivity().getSupportFragmentManager();
     }

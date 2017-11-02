@@ -5,49 +5,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/activity_my_bag_toolbar"
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/activity_my_bag_toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@color/header_background"-->
+    <!--android:contentInsetEnd="0dp"-->
+    <!--android:contentInsetLeft="0dp"-->
+    <!--android:contentInsetRight="0dp"-->
+    <!--android:contentInsetStart="0dp"-->
+    <!--app:contentInsetEnd="0dp"-->
+    <!--app:contentInsetLeft="0dp"-->
+    <!--app:contentInsetRight="0dp"-->
+    <!--app:contentInsetStart="0dp">-->
+
+    <!--<ImageButton-->
+    <!--android:id="@+id/activity_my_bag_toolbar_back_navigation_btn"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/transparent"-->
+    <!--android:src="@drawable/arraow_back" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/activity_my_bag_toolbar_title"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="My Bag"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="18sp" />-->
+    <!--</android.support.v7.widget.Toolbar>-->
+    <include layout="@layout/toolbar_frag_multiicons" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_my_bag_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="@color/header_background"
-        android:contentInsetEnd="0dp"
-        android:contentInsetLeft="0dp"
-        android:contentInsetRight="0dp"
-        android:contentInsetStart="0dp"
-        app:contentInsetEnd="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetStart="0dp">
-
-        <ImageButton
-            android:id="@+id/activity_my_bag_toolbar_back_navigation_btn"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"
-            android:src="@drawable/arraow_back" />
-
-        <TextView
-            android:id="@+id/activity_my_bag_toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Bag"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-    </android.support.v7.widget.Toolbar>
-
-     <android.support.v7.widget.RecyclerView
-         android:id="@+id/activity_my_bag_recycler_view"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
-         android:layout_below="@+id/activity_my_bag_toolbar"
-         />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
+        android:layout_below="@+id/toolbar_frag_multiicons_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/activity_my_bag_toolbar"
+        android:layout_below="@+id/toolbar_frag_multiicons_toolbar"
         android:orientation="vertical">
 
         <include layout="@layout/card_no_data_available" />

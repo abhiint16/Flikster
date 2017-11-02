@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
+package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +17,7 @@ import com.flikster.R;
  * Created by abhishek on 12-10-2017.
  */
 
-public class CelebrityFragmentInfo extends Fragment {
+public class MovieFragmentInfo extends Fragment {
     View view;
     RecyclerView movieFragmentInfoRecycler;
     RecyclerView.LayoutManager movieFragmentInfoLayoutManager;

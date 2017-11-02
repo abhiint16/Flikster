@@ -21,13 +21,13 @@ import com.flikster.R;
  */
 
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
-    Toolbar toolbar;
+    Toolbar myprofile_toolbar;
     ViewPager viewPager;
     View view;
-    TextView textView;
+    TextView textView,myprofile_toolbar_title;
     TabLayout tabLayout;
     MyAccountAdapter myAccountAdapter;
-    ImageButton toolbar_navigation_icon,toolbar_notification_icon;
+    ImageButton myprofile_toolbar_navigation_icon,myprofile_toolbar_notification_icon;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,16 +42,18 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         myAccountAdapter = new MyAccountAdapter(getChildFragmentManager());
         viewPager.setAdapter(myAccountAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        toolbar_navigation_icon.setOnClickListener(this);
-        toolbar_notification_icon.setOnClickListener(this);
+        myprofile_toolbar_title.setText("Profile");
+        myprofile_toolbar_navigation_icon.setOnClickListener(this);
+        myprofile_toolbar_notification_icon.setOnClickListener(this);
     }
 
     private void initializeViews() {
         viewPager=(ViewPager)view.findViewById(R.id.fragment_my_account_pager);
         tabLayout=(TabLayout)view.findViewById(R.id.fragment_my_account_tablayout);
-        toolbar=(Toolbar)view.findViewById(R.id.fragment_my_account_toolbar);
-        toolbar_navigation_icon=(ImageButton)view.findViewById(R.id.toolbar_navigation_icon);
-        toolbar_notification_icon=(ImageButton)view.findViewById(R.id.toolbar_notification_icon);
+        myprofile_toolbar=(Toolbar)view.findViewById(R.id.myprofile_toolbar);
+        myprofile_toolbar_navigation_icon=(ImageButton)view.findViewById(R.id.myprofile_toolbar_navigation_icon);
+        myprofile_toolbar_notification_icon=(ImageButton)view.findViewById(R.id.myprofile_toolbar_notification_icon);
+        myprofile_toolbar_title =(TextView)view.findViewById(R.id.myprofile_toolbar_title);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.colorAccent));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
@@ -71,11 +73,11 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.toolbar_navigation_icon)
+        if(view.getId()==R.id.toolbar_frag_multiicons_back_navigation)
         {
             getFragmentManager().popBackStackImmediate();
         }
-        else if(view.getId()==R.id.toolbar_notification_icon)
+        else if(view.getId()==R.id.toolbar_frag_multiicons_notification)
         {
             getFragmentManager()
                     .beginTransaction()

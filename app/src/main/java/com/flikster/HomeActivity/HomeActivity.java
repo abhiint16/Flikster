@@ -65,8 +65,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
-    ImageButton menu_notification;
-    Toolbar toolbar;
+    ImageButton toolbar_main_notification;
+    Toolbar toolbar_main;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
@@ -100,8 +100,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed, R.drawable.home, R.color.color_tab_1);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.rating, R.drawable.rating, R.color.color_tab_1);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.addsquare, R.color.color_tab_1);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.usericon, R.color.color_tab_1);
-        AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.store, R.drawable.feed_icon, R.color.color_tab_1);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionicon, R.color.color_tab_1);
+        AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.store, R.drawable.storeicon, R.color.color_tab_1);
 
 // Add items
         bottomNavigation.addItem(item1);
@@ -228,9 +228,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         plus.setOnClickListener(this);
         camera_fab.setOnClickListener(this);
         fragmentManager = getSupportFragmentManager();
-        toolbar.setWillNotCacheDrawing(true);
+        toolbar_main.setWillNotCacheDrawing(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        menu_notification.setOnClickListener(this);
+        toolbar_main_notification.setOnClickListener(this);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         /*actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
@@ -244,10 +244,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         rating = (LinearLayout) findViewById(R.id.rating_button);
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
         camera_fab=(FloatingActionButton)findViewById(R.id.camera_fab);
-        setSupportActionBar(toolbar);
-        menu_notification = (ImageButton) toolbar.findViewById(R.id.toolbar_notification_icon);
+        setSupportActionBar(toolbar_main);
+        toolbar_main_notification = (ImageButton) toolbar_main.findViewById(R.id.toolbar_main_notification);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         navigationView = (NavigationView) findViewById(R.id.drawer_navview);
     }
@@ -270,7 +270,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             beginTransact(new FeedFragment());
         } else if (viewId == R.id.fashion_button) {
             beginTransact(new FashionFragment());
-        } else if (viewId == R.id.toolbar_notification_icon) {
+        } else if (viewId == R.id.toolbar_main_notification) {
             beginTransact(new NotificationFragment());
         } else if (viewId == R.id.menu_search) {
             beginTransact(new SearchFragment());

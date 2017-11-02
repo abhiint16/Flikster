@@ -28,9 +28,9 @@ import com.flikster.R;
 
 public class ProductOnClick extends Fragment implements View.OnClickListener {
     View view;
-    Button toolbar_back_navigation_btn, buy, add;
-    ImageButton moreimg;
-    TextView activity_my_bag_toolbar_title;
+    Button buy, add;
+    ImageButton toolbar_more_icon,toolbar_back_navigation_btn;
+    TextView toolbar_frag_title;
     FragmentManager fragmentManager;
     TextView txt;
     RecyclerView card_celebrity_bio_video_carousel_recycler;
@@ -67,9 +67,9 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     }
 
     private void initializeRest() {
-        activity_my_bag_toolbar_title.setText("Product");
+        toolbar_frag_title.setText("Product");
         txt.setText("Recommended Product");
-        moreimg.setVisibility(View.GONE);
+        toolbar_more_icon.setVisibility(View.VISIBLE);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         product_imgs_recycler_view.setLayoutManager(layoutManager);
@@ -89,14 +89,14 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     }
 
     private void initializeViews() {
-        toolbar_back_navigation_btn = (Button) view.findViewById(R.id.toolbar_back_navigation_btn);
-        activity_my_bag_toolbar_title = (TextView) view.findViewById(R.id.activity_my_bag_toolbar_title);
+        toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
+        toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         txt = (TextView) view.findViewById(R.id.txt);
         product_imgs_recycler_view = (RecyclerView) view.findViewById(R.id.product_imgs_recycler_view);
         card_celebrity_bio_video_carousel_recycler = (RecyclerView) view.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
         add = (Button) view.findViewById(R.id.add_to_cart_btn);
         buy = (Button) view.findViewById(R.id.buy_now_btn);
-        moreimg = (ImageButton) view.findViewById(R.id.moreimg);
+        toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
         fragmentManager = getActivity().getSupportFragmentManager();
     }
 

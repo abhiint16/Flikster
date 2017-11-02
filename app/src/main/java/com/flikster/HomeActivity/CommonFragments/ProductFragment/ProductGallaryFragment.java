@@ -24,10 +24,10 @@ public class ProductGallaryFragment extends Fragment implements View.OnClickList
     View view;
     TextView textView;
 
-    Button toolbar_back_navigation_btn, buynowbtn, closebtn;
-    TextView activity_my_bag_toolbar_title;
+    Button buynowbtn, closebtn;
+    TextView toolbar_frag_title;
     FragmentManager fragmentManager;
-    ImageButton moreimg;
+    ImageButton toolbar_back_navigation_btn,toolbar_more_icon;
     TextView txt;
 
     @Nullable
@@ -42,16 +42,16 @@ public class ProductGallaryFragment extends Fragment implements View.OnClickList
 
 
     private void initializeViews() {
-        toolbar_back_navigation_btn = (Button) view.findViewById(R.id.toolbar_back_navigation_btn);
-        activity_my_bag_toolbar_title = (TextView) view.findViewById(R.id.activity_my_bag_toolbar_title);
+        toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
+        toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         buynowbtn = (Button) view.findViewById(R.id.buynowbtn);
         closebtn = (Button) view.findViewById(R.id.closebtn);
-        moreimg = (ImageButton) view.findViewById(R.id.moreimg);
+        toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
     }
 
     private void initializeRest() {
-        activity_my_bag_toolbar_title.setText("Product");
-        moreimg.setVisibility(View.GONE);
+        toolbar_frag_title.setText("Product");
+        toolbar_more_icon.setVisibility(View.GONE);
         toolbar_back_navigation_btn.setOnClickListener(this);
         buynowbtn.setOnClickListener(this);
         closebtn.setOnClickListener(this);

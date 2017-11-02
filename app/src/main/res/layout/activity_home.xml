@@ -18,22 +18,24 @@
             layout="@layout/bottom_navigation_bar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true" />
+
         <include
-            android:id="@+id/bottom_navigation_bar"
+            android:id="@+id/include_bottom_navigation_bar"
             layout="@layout/bottom_navigation_customized_bar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true" />
 
         <FrameLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottom_navigation_bar"
-            android:layout_below="@+id/toolbar"></FrameLayout>
+            android:layout_above="@+id/include_bottom_navigation_bar"
+            android:layout_below="@+id/toolbar_main"></FrameLayout>
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/camera_fab"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
@@ -41,8 +43,7 @@
             android:layout_marginBottom="15dp"
             android:elevation="10dp"
             android:src="@drawable/camera"
-            app:fabSize="normal"
-            android:id="@+id/camera_fab"/>
+            app:fabSize="normal" />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

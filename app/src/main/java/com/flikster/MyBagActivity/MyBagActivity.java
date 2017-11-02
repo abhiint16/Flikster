@@ -27,11 +27,12 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     MyBagAdapter myBagAdapter;
-    ImageButton activity_my_bag_toolbar_back_navigation_btn;
+    ImageButton toolbar_frag_multiicons_back_navigation;
     Button activity_my_bag_bottom_continue_btn, backhomebtn;
     LinearLayout nodatalayout;
     ImageView notifcationimg;
     TextView nodataavailtxt;
+    TextView toolbar_frag_multiicons_title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
         recyclerView.setVisibility(View.VISIBLE);
         activity_my_bag_bottom_continue_btn.setVisibility(View.VISIBLE);
         nodatalayout.setVisibility(View.GONE);
+        toolbar_frag_multiicons_title.setText("My Bag");
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         myBagAdapter = new MyBagAdapter();
@@ -55,7 +57,7 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
 
         setAvailableText();
 
-        activity_my_bag_toolbar_back_navigation_btn.setOnClickListener(this);
+        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         activity_my_bag_bottom_continue_btn.setOnClickListener(this);
         backhomebtn.setOnClickListener(this);
     }
@@ -76,18 +78,19 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     private void initializeViews() {
         recyclerView = (RecyclerView) findViewById(R.id.activity_my_bag_recycler_view);
         activity_my_bag_bottom_continue_btn = (Button) findViewById(R.id.activity_my_bag_bottom_continue_btn);
-        activity_my_bag_toolbar_back_navigation_btn = (ImageButton) findViewById(R.id.activity_my_bag_toolbar_back_navigation_btn);
+        toolbar_frag_multiicons_back_navigation = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_back_navigation);
 
         nodatalayout = (LinearLayout) findViewById(R.id.nodatalayout);
         notifcationimg = (ImageView) findViewById(R.id.notifcationimg);
         nodataavailtxt = (TextView) findViewById(R.id.nodataavailtxt);
+        toolbar_frag_multiicons_title = (TextView) findViewById(R.id.toolbar_frag_multiicons_title);
         backhomebtn = (Button) findViewById(R.id.backhomebtn);
 
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.activity_my_bag_toolbar_back_navigation_btn) {
+        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             backtoHome();
         } else if (view.getId() == R.id.backhomebtn) {
             backtoHome();

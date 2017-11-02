@@ -30,8 +30,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp">
     <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:src="@drawable/star_gray_bigger"
         android:padding="10dp"
         android:background="@color/white"/>

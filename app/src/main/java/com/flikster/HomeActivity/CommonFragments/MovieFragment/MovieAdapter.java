@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentInfo;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentStore;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class MovieAdapter extends FragmentStatePagerAdapter {
         }
         else if(position==1)
         {
-            return  new CelebrityFragmentInfo();
+            return  new MovieFragmentInfo();
         }
         else if(position==2)
         {

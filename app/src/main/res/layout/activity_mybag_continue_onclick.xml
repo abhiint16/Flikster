@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
+    <!--<android.support.v7.widget.Toolbar
         android:id="@+id/activity_mybag_continue_onclick_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -33,94 +33,106 @@
             android:text="Enter Address"
             android:textColor="@color/white"
             android:textSize="18sp" />
-    </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>-->
+    <include
+        layout="@layout/toolbar_frag_multiicons" />
+
     <LinearLayout
+        android:id="@+id/activity_mybag_continue_onclick_tabs"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:orientation="horizontal"
+        android:layout_below="@+id/toolbar_frag_multiicons_toolbar"
         android:background="@color/white"
-        android:id="@+id/activity_mybag_continue_onclick_tabs"
-        android:layout_below="@id/activity_mybag_continue_onclick_toolbar">
+        android:orientation="horizontal">
+
         <LinearLayout
+            android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
             android:orientation="vertical"
-            android:padding="5dp"
-            android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear">
+            android:padding="5dp">
+
             <ImageButton
+                android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear_imgbtn"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/address"
                 android:background="@color/white"
                 android:clickable="false"
-                android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear_imgbtn"/>
+                android:src="@drawable/address" />
+
             <TextView
+                android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Address"
-                android:gravity="center"
                 android:clickable="false"
-                android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear_name"/>
+                android:gravity="center"
+                android:text="Address" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
             android:orientation="vertical"
-            android:padding="5dp"
-            android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear">
+            android:padding="5dp">
+
             <ImageButton
+                android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/checkout"
                 android:background="@color/white"
                 android:clickable="false"
-                android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn"/>
+                android:src="@drawable/checkout" />
+
             <TextView
+                android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Checkout"
                 android:clickable="false"
                 android:gravity="center"
-                android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_name"/>
+                android:text="Checkout" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
             android:orientation="vertical"
-            android:padding="5dp"
-            android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear">
+            android:padding="5dp">
+
             <ImageButton
+                android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_imgbtn"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/payment"
-                android:clickable="false"
                 android:background="@color/white"
-                android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_imgbtn"/>
+                android:clickable="false"
+                android:src="@drawable/payment" />
+
             <TextView
+                android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Payment"
-                android:gravity="center"
                 android:clickable="false"
-                android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_name"/>
+                android:gravity="center"
+                android:text="Payment" />
         </LinearLayout>
     </LinearLayout>
+
     <FrameLayout
+        android:id="@+id/activity_mybag_continue_onclick_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/activity_mybag_continue_onclick_container"
-        android:layout_below="@+id/activity_mybag_continue_onclick_tabs">
-    </FrameLayout>
+        android:layout_below="@+id/activity_mybag_continue_onclick_tabs"></FrameLayout>
 </RelativeLayout>

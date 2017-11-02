@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
 import com.flikster.R;
@@ -17,7 +18,7 @@ import com.flikster.R;
  */
 
 public class MyBagContinueOnClickActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageButton activity_mybag_continue_onclick_toolbar_back_navigation_btn;
+    ImageButton toolbar_frag_multiicons_back_navigation;
     FragmentManager fragmentManager;
     LinearLayout activity_mybag_continue_onclick_tabs_address_linear,activity_mybag_continue_onclick_tabs_checkout_linear
             ,activity_mybag_continue_onclick_tabs_payment_linear;
@@ -32,7 +33,7 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
     }
 
     private void initializeRest() {
-        activity_mybag_continue_onclick_toolbar_back_navigation_btn.setOnClickListener(this);
+        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         fragmentManager=getSupportFragmentManager();
         activity_mybag_continue_onclick_tabs_address_linear.setOnClickListener(this);
         activity_mybag_continue_onclick_tabs_checkout_linear.setOnClickListener(this);
@@ -41,7 +42,7 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
 
     private void initializeView() {
         activity_mybag_continue_onclick_tabs_address_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear);
-        activity_mybag_continue_onclick_toolbar_back_navigation_btn = (ImageButton) findViewById(R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn);
+        toolbar_frag_multiicons_back_navigation = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         activity_mybag_continue_onclick_tabs_checkout_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear);
         activity_mybag_continue_onclick_tabs_payment_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear);
     }
