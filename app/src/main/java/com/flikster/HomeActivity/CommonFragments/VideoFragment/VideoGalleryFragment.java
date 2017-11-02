@@ -28,7 +28,6 @@ import com.flikster.R;
 public class VideoGalleryFragment extends Fragment implements View.OnClickListener {
     View view;
     VideoView playVideo;
-    ImageView newsimg;
     ImageButton toolbar_back_navigation_btn;
     TextView toolbar_frag_title, titlehedertxt, recomdedtxtlabel, tv_name, tv_description;
     Context mContext;
@@ -38,7 +37,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.news_onclick, container, false);
+        view = inflater.inflate(R.layout.fragment_video_gallery, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         initializeViews();
         headerTitlesChange();
@@ -57,7 +56,6 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     private void initializeViews() {
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         playVideo = (VideoView) view.findViewById(R.id.playVideo);
-        newsimg = (ImageView) view.findViewById(R.id.newsimg);
         titlehedertxt = (TextView) view.findViewById(R.id.titlehedertxt);
         recomdedtxtlabel = (TextView) view.findViewById(R.id.recomdedtxtlabel);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
@@ -65,7 +63,6 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         recyclerView = (RecyclerView) view.findViewById(R.id.gallery_videos_recycler_view);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
 
-        newsimg.setVisibility(View.GONE);
         playVideo.setVisibility(View.VISIBLE);
         tv_name.setVisibility(View.GONE);
     }

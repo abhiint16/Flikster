@@ -76,7 +76,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_peers, parent, false);
             return new CelebrityBioAdapter.ViewHolder6(view);
         } else if (viewType == 7) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_family, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview, parent, false);
             return new CelebrityBioAdapter.ViewHolder7(view);
         } else if (viewType == 8) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_awards, parent, false);
@@ -114,7 +114,8 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder();
             ((ViewHolder6) holder).recyclerView.setAdapter(celebrityBioAdapterPeersViewHolder);
         } else if (holder.getItemViewType() == 7) {
-            //((ViewHolder7)holder).textView.setText("videos");
+            ((ViewHolder7) holder).textView.setVisibility(View.VISIBLE);
+            ((ViewHolder7) holder).textView.setText("Family");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder7) holder).recyclerView.setLayoutManager(layoutManager);
             celebrityBioAdapterFamilyViewHolder = new CelebrityBioAdapterFamilyViewHolder();
@@ -194,8 +195,8 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder7(View itemView) {
             super(itemView);
-            //textView=(TextView)itemView.findViewById(R.id.txt);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.card_celebrity_bio_family_recycler);
+            textView = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_title);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
         }
     }
 

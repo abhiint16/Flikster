@@ -33,6 +33,7 @@ public class CelebrityBioAdapterFamilyViewHolder extends RecyclerView.Adapter<Ce
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         //holder.imageView.setImageResource(R.drawable.pooja);
     }
 

@@ -25,7 +25,6 @@ import com.flikster.R;
 
 public class NewsOnClickFragment extends Fragment implements View.OnClickListener {
     View view;
-    VideoView playVideo;
     ImageView newsimg;
     ImageButton toolbar_back_navigation_btn;
     TextView toolbar_frag_title, titlehedertxt, recomdedtxtlabel, tv_name, tv_description;
@@ -59,17 +58,15 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
 
     private void initializeViews() {
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
-        playVideo = (VideoView) view.findViewById(R.id.playVideo);
         newsimg = (ImageView) view.findViewById(R.id.newsimg);
         titlehedertxt = (TextView) view.findViewById(R.id.titlehedertxt);
         recomdedtxtlabel = (TextView) view.findViewById(R.id.recomdedtxtlabel);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
-        recyclerView = (RecyclerView) view.findViewById(R.id.gallery_videos_recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.news_recycler_view);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
 
         newsimg.setVisibility(View.VISIBLE);
-        playVideo.setVisibility(View.GONE);
         tv_name.setVisibility(View.GONE);
     }
 

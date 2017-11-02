@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.ProductFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.flikster.MenuFragments.Checkout;
+import com.flikster.CheckoutActivity.MyBagContinueOnClickActivity;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
 
@@ -60,10 +61,8 @@ public class ProductGallaryFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buynowbtn) {
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.main_container, new Checkout())
-                    .addToBackStack("")
-                    .commit();
+            Intent i = new Intent(getActivity(),MyBagContinueOnClickActivity.class);
+            startActivity(i);
         }
         if (view.getId() == R.id.closebtn) {
             getFragmentManager().beginTransaction()

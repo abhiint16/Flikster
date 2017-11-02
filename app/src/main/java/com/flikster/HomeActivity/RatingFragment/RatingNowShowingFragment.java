@@ -25,7 +25,7 @@ public class RatingNowShowingFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_celebrity_feed,container,false);
+        view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
         initializeViews();
         initializeRest();
         return  view;
@@ -39,7 +39,7 @@ public class RatingNowShowingFragment extends Fragment{
     }
 
     private void initializeViews() {
-        ratingNowShowingRecycler=(RecyclerView)view.findViewById(R.id.fragment_celebrity_feed_recycler);
+        ratingNowShowingRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager=getActivity().getSupportFragmentManager();
     }
 }

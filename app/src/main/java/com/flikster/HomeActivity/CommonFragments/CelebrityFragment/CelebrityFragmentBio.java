@@ -25,7 +25,7 @@ public class CelebrityFragmentBio extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_celebrity_bio,container,false);
+        view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
         initializeViews();
         initializeRest();
         return  view;
@@ -38,7 +38,7 @@ public class CelebrityFragmentBio extends Fragment{
     }
 
     private void initializeViews() {
-        celebrityFragmentBioRecycler=(RecyclerView)view.findViewById(R.id.fragment_celebrity_bio_recycler);
+        celebrityFragmentBioRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager=getActivity().getSupportFragmentManager();
     }
 }
