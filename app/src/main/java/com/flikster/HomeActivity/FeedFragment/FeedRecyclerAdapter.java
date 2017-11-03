@@ -38,6 +38,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     RecyclerView.LayoutManager stealStyleLayoutManager, profileCollectionRecyclerLayoutManager;
     StealStyleViewHolder stealStyleViewHolder;
     ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
+    FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
 
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
@@ -47,7 +48,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview, parent, false);
             return new ViewHolder1(view);
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_steal_style_carousel, parent, false);
@@ -74,25 +75,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            if (profile1 == true) {
-                ((ViewHolder1) holder).profile_image.setImageResource(R.drawable.ranveer1);
-                ((ViewHolder1) holder).card_gallary1_img1.setImageResource(R.drawable.ranveer2);
-                ((ViewHolder1) holder).tv_tag_desc.setText("#Actor");
-                ((ViewHolder1) holder).tv_tag_name.setText("Ranveer Singh");
-                ((ViewHolder1) holder).tv_name.setText("Ranveer Singh at the set of Padmavati");
-                ((ViewHolder1) holder).tv_description.setText("Ranveer Singh at the set of Padmavati. He was caught red handed by" +
-                        "our camera crew while he was kissing his girlfriend Deepika.");
-                profile1 = false;
-            } else if (profile1 == false) {
-                ((ViewHolder1) holder).profile_image.setImageResource(R.drawable.pooja2);
-                ((ViewHolder1) holder).card_gallary1_img1.setImageResource(R.drawable.pooja3);
-                ((ViewHolder1) holder).tv_tag_desc.setText("#Actress");
-                ((ViewHolder1) holder).tv_tag_name.setText("Pooja Hegde");
-                ((ViewHolder1) holder).tv_name.setText("Pooja Hegde at doing nightout");
-                ((ViewHolder1) holder).tv_description.setText("Pooja Hegde was caught red handed by our camera crew while she" +
-                        "was full drunk with her friends");
-                profile1 = true;
-            }
+            profileCollectionRecyclerLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            ((ViewHolder1) holder).fragment_common_recyclerview_recycler.setLayoutManager(profileCollectionRecyclerLayoutManager);
+            feedCelebrityRecyclerItemAdapter = new FeedCelebrityRecyclerItemAdapter();
+            ((ViewHolder1) holder).fragment_common_recyclerview_recycler.setAdapter(feedCelebrityRecyclerItemAdapter);
+            profile1 = false;
 
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("You won't believe these");
@@ -195,12 +182,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return globalData.type.get(position);
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder1 extends RecyclerView.ViewHolder {
+        RecyclerView fragment_common_recyclerview_recycler;
+
+        public ViewHolder1(View itemView) {
+            super(itemView);
+            fragment_common_recyclerview_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
+        }
+    }
+
+    public class ViewHolder11 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         LinearLayout header_linear, card_description_linear;
 
-        public ViewHolder1(View itemView) {
+        public ViewHolder11(View itemView) {
             super(itemView);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
