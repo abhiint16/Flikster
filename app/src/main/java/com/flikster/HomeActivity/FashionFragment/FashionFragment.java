@@ -24,7 +24,7 @@ import com.flikster.R;
 
 public class FashionFragment extends Fragment implements View.OnClickListener {
     View view;
-    RecyclerView recyclerViewFashionFragment;
+    RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     FashionFragmentAdapter fashionFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
@@ -42,16 +42,16 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
 
     private void initializeRest() {
         layoutManagerFashionFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerViewFashionFragment.setLayoutManager(layoutManagerFashionFragment);
+        fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerFashionFragment);
         fashionFragmentAdapter = new FashionFragmentAdapter(getActivity());
-        recyclerViewFashionFragment.setAdapter(fashionFragmentAdapter);
+        fragment_common_recyclerview_recycler.setAdapter(fashionFragmentAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_notification.setOnClickListener(this);
         toolbar_frag_multiicons_cart.setOnClickListener(this);
     }
 
     private void initializeViews() {
-        recyclerViewFashionFragment = (RecyclerView) view.findViewById(R.id.fashion_recyclerview);
+        fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_back_navigation=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         toolbar_frag_multiicons_notification=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_notification);

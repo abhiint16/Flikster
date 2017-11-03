@@ -3,20 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+
+
+    <include layout="@layout/fragment_common_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/fragment_checkout_bottom_btn"
-        android:id="@+id/fragment_checkout_recyclerview">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_above="@+id/fragment_checkout_bottom_btn"/>
 
     <Button
+        android:id="@+id/fragment_checkout_bottom_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorAccent"
         android:text="Continue"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:id="@+id/fragment_checkout_bottom_btn"
-        android:layout_alignParentBottom="true"/>
+        android:textSize="18sp" />
 </RelativeLayout>

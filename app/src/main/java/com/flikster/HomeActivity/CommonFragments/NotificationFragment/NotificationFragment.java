@@ -24,7 +24,7 @@ import com.flikster.R;
 
 public class NotificationFragment extends Fragment implements View.OnClickListener {
     View view;
-    RecyclerView recyclerView;
+    RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManager;
     NotificationAdapter notificationAdapter;
     Button button, backhomebtn;
@@ -46,19 +46,19 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
     private void initializeRest() {
         button.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
+        fragment_common_recyclerview_recycler.setVisibility(View.VISIBLE);
         nodatalayout.setVisibility(View.GONE);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         notificationAdapter = new NotificationAdapter();
-        recyclerView.setAdapter(notificationAdapter);
+        fragment_common_recyclerview_recycler.setAdapter(notificationAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         backhomebtn.setOnClickListener(this);
         toolbar_frag_multiicons_title.setText("Notifications");
     }
 
     private void initializeViews() {
-        recyclerView = (RecyclerView) view.findViewById(R.id.activity_my_bag_recycler_view);
+        fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         button = (Button) view.findViewById(R.id.activity_my_bag_bottom_continue_btn);
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);

@@ -29,9 +29,9 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     View view;
     VideoView playVideo;
     ImageButton toolbar_back_navigation_btn;
-    TextView toolbar_frag_title, titlehedertxt, recomdedtxtlabel, tv_name, tv_description;
+    TextView toolbar_frag_title, titlehedertxt, fragment_common_recyclerview_with_tv_title, tv_name, tv_description;
     Context mContext;
-    RecyclerView recyclerView;
+    RecyclerView fragment_common_recyclerview_with_tv_recycler;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
 
     @Nullable
@@ -50,17 +50,17 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
     private void headerTitlesChange() {
         toolbar_frag_title.setText("Videos");
-        recomdedtxtlabel.setText("Recommended Videos");
+        fragment_common_recyclerview_with_tv_title.setText("Recommended Videos");
     }
 
     private void initializeViews() {
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         playVideo = (VideoView) view.findViewById(R.id.playVideo);
         titlehedertxt = (TextView) view.findViewById(R.id.titlehedertxt);
-        recomdedtxtlabel = (TextView) view.findViewById(R.id.recomdedtxtlabel);
+        fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
-        recyclerView = (RecyclerView) view.findViewById(R.id.gallery_videos_recycler_view);
+        fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
 
         playVideo.setVisibility(View.VISIBLE);
@@ -71,9 +71,9 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     private void initializeRest() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
+        fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
         myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
-        recyclerView.setAdapter(myCeleAdapter);
+        fragment_common_recyclerview_with_tv_recycler.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
 

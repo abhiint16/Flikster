@@ -95,10 +95,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
         } else if (holder.getItemViewType() == 2) {
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("You won't believe these");
             stealStyleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder2) holder).card_steal_style_recycler.setLayoutManager(stealStyleLayoutManager);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(stealStyleLayoutManager);
             stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext(), fragmentManager);
-            ((ViewHolder2) holder).card_steal_style_recycler.setAdapter(stealStyleViewHolder);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(stealStyleViewHolder);
         } else if (holder.getItemViewType() == 3) {
             if (news == true) {
                 ((ViewHolder3) holder).profile_image.setImageResource(globalData.movie.get(0));
@@ -153,9 +154,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder6) holder).profile_collection_dp.setImageResource(globalData.pooja.get(3));
                 ((ViewHolder6) holder).tv.setText("Pooja Hegde Collection");
                 profileCollectionRecyclerLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                ((ViewHolder6) holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
+                ((ViewHolder6) holder).fragment_common_recyclerview_recycler.setLayoutManager(profileCollectionRecyclerLayoutManager);
                 profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 1, fragmentManager);
-                ((ViewHolder6) holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
+                ((ViewHolder6) holder).fragment_common_recyclerview_recycler.setAdapter(profileCollectionRecyclerItemAdapter);
                 collection = false;
             } else if (collection == false) {
                 ((ViewHolder6) holder).dp_name.setText("Ranveer Singh");
@@ -163,9 +164,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder6) holder).profile_collection_dp.setImageResource(globalData.ranveer.get(1));
                 ((ViewHolder6) holder).tv.setText("Ranveer Singh Collection");
                 profileCollectionRecyclerLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                ((ViewHolder6) holder).recyclerView.setLayoutManager(profileCollectionRecyclerLayoutManager);
+                ((ViewHolder6) holder).fragment_common_recyclerview_recycler.setLayoutManager(profileCollectionRecyclerLayoutManager);
                 profileCollectionRecyclerItemAdapter = new ProfileCollectionRecyclerItemAdapter(((ViewHolder6) holder).itemView.getContext(), 2, fragmentManager);
-                ((ViewHolder6) holder).recyclerView.setAdapter(profileCollectionRecyclerItemAdapter);
+                ((ViewHolder6) holder).fragment_common_recyclerview_recycler.setAdapter(profileCollectionRecyclerItemAdapter);
                 collection = true;
             }
 
@@ -233,11 +234,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder {
-        RecyclerView card_steal_style_recycler;
+        TextView fragment_common_recyclerview_with_tv_title;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder2(View itemView) {
             super(itemView);
-            card_steal_style_recycler = (RecyclerView) itemView.findViewById(R.id.card_steal_style_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
 
@@ -355,12 +358,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         ImageView imageView2, profile_collection_dp;
         TextView tv, dp_name;
-        RecyclerView recyclerView;
+        RecyclerView fragment_common_recyclerview_recycler;
         LinearLayout linearLayout;
 
         public ViewHolder6(View itemView) {
             super(itemView);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.rc);
+            fragment_common_recyclerview_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
             imageView2 = (ImageView) itemView.findViewById(R.id.imageView2);
             profile_collection_dp = (ImageView) itemView.findViewById(R.id.profile_collection_dp);
             tv = (TextView) itemView.findViewById(R.id.tv);

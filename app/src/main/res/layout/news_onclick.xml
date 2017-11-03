@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="10dp"
     android:background="@color/white"
     android:orientation="vertical">
@@ -31,7 +31,6 @@
                 android:textStyle="normal" />
 
 
-
             <ImageView
                 android:id="@+id/newsimg"
                 android:layout_width="match_parent"
@@ -39,8 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|center"
-                android:background="@drawable/bahubai"
-              />
+                android:background="@drawable/bahubai" />
 
             <include layout="@layout/card_footer"></include>
 
@@ -48,22 +46,13 @@
 
             <include layout="@layout/card_comment_text"></include>
 
-            <TextView
-                android:id="@+id/recomdedtxtlabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/ten"
-                android:text="Recommeded News"
-                android:textColor="@android:color/secondary_text_light"
-                android:textSize="12sp"
-                android:textStyle="normal" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/news_recycler_view"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
-                ></android.support.v7.widget.RecyclerView>
+                android:layout_above="@+id/activity_my_bag_bottom_continue_btn">
+
+                <include layout="@layout/fragment_common_recyclerview_with_tv" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

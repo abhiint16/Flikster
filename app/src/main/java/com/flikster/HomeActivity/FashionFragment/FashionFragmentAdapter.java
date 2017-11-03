@@ -35,12 +35,12 @@ public class FashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
         else if(viewType==1)
         {
-            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_videos_carousel,parent,false);
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv,parent,false);
             return new ViewHolder2(view);
         }
         else
         {
-            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_videos_carousel,parent,false);
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv,parent,false);
             return new ViewHolder3(view);
         }
     }
@@ -53,19 +53,19 @@ public class FashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
         else if(holder.getItemViewType()==1)
         {
-            ((ViewHolder2)holder).textView.setText("Just Arrived");
+            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_title.setText("Just Arrived");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
-            ((ViewHolder2)holder).recyclerView.setLayoutManager(layoutManager);
+            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             fashionFragmentAdapterJustArrivedViewHolder=new FashionFragmentAdapterJustArrivedViewHolder();
-            ((ViewHolder2)holder).recyclerView.setAdapter(fashionFragmentAdapterJustArrivedViewHolder);
+            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(fashionFragmentAdapterJustArrivedViewHolder);
         }
         else
         {
-            ((ViewHolder3)holder).textView.setText("Recommended Products");
+            ((ViewHolder3)holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Products");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
-            ((ViewHolder3)holder).recyclerView.setLayoutManager(layoutManager);
+            ((ViewHolder3)holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             fashionFragmentAdapterRecommenedViewHolder=new FashionFragmentAdapterRecommenedViewHolder();
-            ((ViewHolder3)holder).recyclerView.setAdapter(fashionFragmentAdapterRecommenedViewHolder);
+            ((ViewHolder3)holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(fashionFragmentAdapterRecommenedViewHolder);
         }
     }
 
@@ -124,21 +124,21 @@ public class FashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder {
-        RecyclerView recyclerView;
-        TextView textView;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
+        TextView fragment_common_recyclerview_with_tv_title;
         public ViewHolder2(View itemView) {
             super(itemView);
-            recyclerView=(RecyclerView)itemView.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
-            textView=(TextView)itemView.findViewById(R.id.txt);
+            fragment_common_recyclerview_with_tv_recycler=(RecyclerView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title=(TextView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         }
     }
     public class ViewHolder3 extends RecyclerView.ViewHolder {
-        RecyclerView recyclerView;
-        TextView textView;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
+        TextView fragment_common_recyclerview_with_tv_title;
         public ViewHolder3(View itemView) {
             super(itemView);
-            recyclerView=(RecyclerView)itemView.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
-            textView=(TextView)itemView.findViewById(R.id.txt);
+            fragment_common_recyclerview_with_tv_recycler=(RecyclerView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title=(TextView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         }
     }
 }

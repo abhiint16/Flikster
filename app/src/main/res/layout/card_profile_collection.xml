@@ -120,19 +120,17 @@
             android:textSize="10sp" />
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc"
+    <include layout="@layout/fragment_common_recyclerview"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/quote">
+        android:layout_below="@+id/quote"></include>
 
-    </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_above="@+id/rc"
+        android:layout_above="@+id/fragment_common_recyclerview_recycler"
         android:layout_toLeftOf="@+id/quote"
         android:background="@color/white"
         android:orientation="horizontal"

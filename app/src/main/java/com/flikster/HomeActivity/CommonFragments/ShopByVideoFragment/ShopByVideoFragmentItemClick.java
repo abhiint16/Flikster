@@ -22,7 +22,7 @@ import com.flikster.R;
 
 public class ShopByVideoFragmentItemClick extends Fragment implements View.OnClickListener {
     View view;
-    RecyclerView recyclerView;
+    RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManager;
     ShopByVideoFragmentItemClickAdapter shopByVideoFragmentItemClickAdapter;
     VideoView card_shopby_video_recycler_item_onclick_playVideo;
@@ -41,14 +41,14 @@ public class ShopByVideoFragmentItemClick extends Fragment implements View.OnCli
     private void initializeRest() {
         fragmentManager=getActivity().getSupportFragmentManager();
         layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
-        recyclerView.setLayoutManager(layoutManager);
+        fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         shopByVideoFragmentItemClickAdapter=new ShopByVideoFragmentItemClickAdapter();
-        recyclerView.setAdapter(shopByVideoFragmentItemClickAdapter);
+        fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentItemClickAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
     private void initializeViews() {
-        recyclerView=(RecyclerView)view.findViewById(R.id.card_shopby_video_recycler_item_onclick_recycler);
+        fragment_common_recyclerview_recycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
         toolbar_back_navigation_btn=(ImageButton)view.findViewById(R.id.toolbar_back_navigation_btn);
         card_shopby_video_recycler_item_onclick_playVideo=(VideoView)view.findViewById(R.id.card_shopby_video_recycler_item_onclick_playVideo);
     }

@@ -22,7 +22,7 @@ import com.flikster.R;
 
 public class CheckoutFragment extends Fragment implements View.OnClickListener {
     View view;
-    RecyclerView recyclerView;
+    RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManager;
     CheckoutAdapter checkoutAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
@@ -40,16 +40,16 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
     private void initializeRest() {
         layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(layoutManager);
+        fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         checkoutAdapter=new  CheckoutAdapter(getFragmentManager(),getActivity());
-        recyclerView.setAdapter(checkoutAdapter);
+        fragment_common_recyclerview_recycler.setAdapter(checkoutAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         fragment_checkout_bottom_btn.setOnClickListener(this);
         toolbar_frag_multiicons_title.setText("Order Details");
     }
 
     private void initializeViews() {
-        recyclerView=(RecyclerView)view.findViewById(R.id.fragment_checkout_recyclerview);
+        fragment_common_recyclerview_recycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
         toolbar_frag_multiicons_toolbar=(Toolbar)getActivity().findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_back_navigation=(ImageButton)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         toolbar_frag_multiicons_title=(TextView)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_title);

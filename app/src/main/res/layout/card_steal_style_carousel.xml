@@ -17,22 +17,7 @@
         android:textColor="@color/black"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/card_steal_style_carousel_desc"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:paddingLeft="5dp"
-        android:text="You won't believe these"
-        android:textColor="#616161"
-        android:textSize="14sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/card_steal_style_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        android:padding="5dp"></android.support.v7.widget.RecyclerView>
+    <include layout="@layout/fragment_common_recyclerview_with_tv"/>
 
 </LinearLayout>

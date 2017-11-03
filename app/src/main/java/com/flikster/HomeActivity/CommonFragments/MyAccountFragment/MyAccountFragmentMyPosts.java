@@ -15,28 +15,30 @@ import com.flikster.R;
  * Created by abhishek on 21-10-2017.
  */
 
-public class MyAccountFragmentMyPosts extends Fragment{
+public class MyAccountFragmentMyPosts extends Fragment {
     View view;
-    RecyclerView recyclerViewMyPost;
+    RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerMyPost;
     MyAccountFragmentMyPostsAdapter myAccountFragmentMyPostsAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_feed,container,false);
+        view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         initializeViews();
         initializeRest();
         return view;
     }
 
     private void initializeRest() {
-        layoutManagerMyPost=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
-        recyclerViewMyPost.setLayoutManager(layoutManagerMyPost);
-        myAccountFragmentMyPostsAdapter=new MyAccountFragmentMyPostsAdapter();
-        recyclerViewMyPost.setAdapter(myAccountFragmentMyPostsAdapter);
+        layoutManagerMyPost = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerMyPost);
+        myAccountFragmentMyPostsAdapter = new MyAccountFragmentMyPostsAdapter();
+        fragment_common_recyclerview_recycler.setAdapter(myAccountFragmentMyPostsAdapter);
+        fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.colorImageBackgroundGrey));
     }
 
     private void initializeViews() {
-        recyclerViewMyPost=(RecyclerView)view.findViewById(R.id.recyclerview);
+        fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
     }
 }

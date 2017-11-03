@@ -27,7 +27,7 @@ import com.flikster.R;
 
 public class PaymentFragment extends Fragment implements View.OnClickListener {
     View view;
-    RecyclerView recyclerView;
+    RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManager;
     PaymentAdapter paymentAdapter;
     Button button;
@@ -44,16 +44,16 @@ public class PaymentFragment extends Fragment implements View.OnClickListener {
     }
     private void initializeRest() {
         layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(layoutManager);
+        fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         paymentAdapter=new  PaymentAdapter(getActivity());
-        recyclerView.setAdapter(paymentAdapter);
+        fragment_common_recyclerview_recycler.setAdapter(paymentAdapter);
         button.setOnClickListener(this);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_title.setText("Payment Mode");
     }
 
     private void initializeViews() {
-        recyclerView=(RecyclerView)view.findViewById(R.id.fragment_checkout_recyclerview);
+        fragment_common_recyclerview_recycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
         button=(Button)view.findViewById(R.id.fragment_checkout_bottom_btn);
         toolbar_frag_multiicons_toolbar=(Toolbar)getActivity().findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_back_navigation=(ImageButton)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_back_navigation);

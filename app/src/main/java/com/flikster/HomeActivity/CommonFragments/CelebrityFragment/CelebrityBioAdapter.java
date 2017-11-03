@@ -61,22 +61,22 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_profile, parent, false);
             return new CelebrityBioAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_videos_carousel, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
             return new CelebrityBioAdapter.ViewHolder2(view);
         } else if (viewType == 3) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_videos_carousel, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
             return new CelebrityBioAdapter.ViewHolder3(view);
         } else if (viewType == 4) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_news, parent, false);
             return new CelebrityBioAdapter.ViewHolder4(view);
         } else if (viewType == 5) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_filmography, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
             return new CelebrityBioAdapter.ViewHolder5(view);
         } else if (viewType == 6) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_peers, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
             return new CelebrityBioAdapter.ViewHolder6(view);
         } else if (viewType == 7) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
             return new CelebrityBioAdapter.ViewHolder7(view);
         } else if (viewType == 8) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_awards, parent, false);
@@ -90,36 +90,36 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 2) {
-            ((ViewHolder2) holder).textView.setText("videos");
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder2) holder).recyclerView.setLayoutManager(layoutManager);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterVideoViewHolder = new CelebrityBioAdapterVideoViewHolder(fragmentManager);
-            ((ViewHolder2) holder).recyclerView.setAdapter(celebrityBioAdapterVideoViewHolder);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterVideoViewHolder);
         } else if (holder.getItemViewType() == 3) {
-            ((ViewHolder3) holder).textView.setText("Images");
+            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Images");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder3) holder).recyclerView.setLayoutManager(layoutManager);
+            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
-            ((ViewHolder3) holder).recyclerView.setAdapter(celebrityBioAdapterImagesViewHolder);
+            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
         } else if (holder.getItemViewType() == 5) {
-            //((ViewHolder5)holder).textView.setText("videos");
+            ((ViewHolder5)holder).fragment_common_recyclerview_with_tv_title.setText("Filmography");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder5) holder).recyclerView.setLayoutManager(layoutManager);
+            ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder();
-            ((ViewHolder5) holder).recyclerView.setAdapter(celebrityBioAdapterFilmographyViewHolder);
+            ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFilmographyViewHolder);
         } else if (holder.getItemViewType() == 6) {
-            //((ViewHolder6)holder).textView.setText("videos");
+            ((ViewHolder6)holder).fragment_common_recyclerview_with_tv_title.setText("Peers");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder6) holder).recyclerView.setLayoutManager(layoutManager);
+            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder();
-            ((ViewHolder6) holder).recyclerView.setAdapter(celebrityBioAdapterPeersViewHolder);
+            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterPeersViewHolder);
         } else if (holder.getItemViewType() == 7) {
-            ((ViewHolder7) holder).textView.setVisibility(View.VISIBLE);
-            ((ViewHolder7) holder).textView.setText("Family");
+            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.VISIBLE);
+            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Family");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder7) holder).recyclerView.setLayoutManager(layoutManager);
+            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterFamilyViewHolder = new CelebrityBioAdapterFamilyViewHolder();
-            ((ViewHolder7) holder).recyclerView.setAdapter(celebrityBioAdapterFamilyViewHolder);
+            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFamilyViewHolder);
         }
     }
 
@@ -140,24 +140,24 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder {
-        TextView textView;
-        RecyclerView recyclerView;
+        TextView fragment_common_recyclerview_with_tv_title;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder2(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.txt);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
 
     public class ViewHolder3 extends RecyclerView.ViewHolder {
-        TextView textView;
-        RecyclerView recyclerView;
+        TextView fragment_common_recyclerview_with_tv_title;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder3(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.txt);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
 
@@ -168,35 +168,35 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder5 extends RecyclerView.ViewHolder {
-        TextView textView;
-        RecyclerView recyclerView;
+        TextView fragment_common_recyclerview_with_tv_title;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder5(View itemView) {
             super(itemView);
-            //textView=(TextView)itemView.findViewById(R.id.txt);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.card_celebrity_bio_filmography_recycler);
+            fragment_common_recyclerview_with_tv_title=(TextView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
 
     public class ViewHolder6 extends RecyclerView.ViewHolder {
-        TextView textView;
-        RecyclerView recyclerView;
+        TextView fragment_common_recyclerview_with_tv_title;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder6(View itemView) {
             super(itemView);
-            //textView=(TextView)itemView.findViewById(R.id.txt);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.card_celebrity_bio_peers_recycler);
+            fragment_common_recyclerview_with_tv_title =(TextView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
 
     public class ViewHolder7 extends RecyclerView.ViewHolder {
-        TextView textView;
-        RecyclerView recyclerView;
+        TextView fragment_common_recyclerview_with_tv_title;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder7(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_title);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
 

@@ -41,7 +41,7 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
         else
         {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_videos_carousel, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
             return new ViewHolder2(view);
         }
     }
@@ -56,10 +56,10 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
         else
         {
-            ((ViewHolder2)holder).textView.setText("Recommended Gallary");
+            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
-            ((ViewHolder2)holder).recyclerView.setLayoutManager(layoutManager);
-            ((ViewHolder2)holder).recyclerView.setAdapter(celebrityBioAdapterImagesViewHolder);
+            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
         }
     }
 
@@ -93,13 +93,13 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public  class ViewHolder2 extends RecyclerView.ViewHolder
     {
-        TextView textView;
-        RecyclerView recyclerView;
+        TextView fragment_common_recyclerview_with_tv_title;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;
         public ViewHolder2(View itemView)
         {
             super(itemView);
-            textView=(TextView)itemView.findViewById(R.id.txt);
-            recyclerView=(RecyclerView) itemView.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
+            fragment_common_recyclerview_with_tv_title=(TextView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler=(RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
 }

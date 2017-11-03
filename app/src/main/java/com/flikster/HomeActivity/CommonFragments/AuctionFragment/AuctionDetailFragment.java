@@ -33,11 +33,11 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
     ImageButton toolbar_back_navigation_btn,toolbar_more_icon;
     TextView toolbar_frag_title;
     FragmentManager fragmentManager;
-    TextView txt, infotxt, descrtxt;
-    RecyclerView card_celebrity_bio_video_carousel_recycler;
+    TextView fragment_common_recyclerview_with_tv_title, infotxt, descrtxt;
+    RecyclerView fragment_common_recyclerview_with_tv_recycler;
     ProductImagesAdapter myPrductImgAdapter;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
-    RecyclerView product_imgs_recycler_view;
+    RecyclerView fragment_common_recyclerview_recycler;
     LinearLayout cartlayout;
 
     @Nullable
@@ -66,21 +66,21 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
 
     private void initializeRest() {
         toolbar_frag_title.setText("Auction");
-        txt.setText("Recommended Product");
+        fragment_common_recyclerview_with_tv_title.setText("Recommended Product");
         toolbar_more_icon.setVisibility(View.VISIBLE);
         cartlayout.setVisibility(View.GONE);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        product_imgs_recycler_view.setLayoutManager(layoutManager);
+        fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         myPrductImgAdapter = new ProductImagesAdapter((AppCompatActivity) getContext(), fragmentManager);
-        product_imgs_recycler_view.setAdapter(myPrductImgAdapter);
+        fragment_common_recyclerview_recycler.setAdapter(myPrductImgAdapter);
 
         LinearLayoutManager layoutManagers = new LinearLayoutManager(getActivity());
         layoutManagers.setOrientation(LinearLayoutManager.HORIZONTAL);
-        card_celebrity_bio_video_carousel_recycler.setLayoutManager(layoutManagers);
+        fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManagers);
         myPrductImgAdapter = new ProductImagesAdapter((AppCompatActivity) getContext(), fragmentManager);
         myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
-        card_celebrity_bio_video_carousel_recycler.setAdapter(myCeleAdapter);
+        fragment_common_recyclerview_with_tv_recycler.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
         placebidbtn.setOnClickListener(this);
 
@@ -106,11 +106,11 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
     private void initializeViews() {
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
-        txt = (TextView) view.findViewById(R.id.txt);
+        fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         infotxt = (TextView) view.findViewById(R.id.infotxt);
         descrtxt = (TextView) view.findViewById(R.id.descrtxt);
-        product_imgs_recycler_view = (RecyclerView) view.findViewById(R.id.product_imgs_recycler_view);
-        card_celebrity_bio_video_carousel_recycler = (RecyclerView) view.findViewById(R.id.card_celebrity_bio_video_carousel_recycler);
+        fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         placebidbtn = (Button) view.findViewById(R.id.placebidbtn);
         toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
         cartlayout = (LinearLayout) view.findViewById(R.id.cartlayout);

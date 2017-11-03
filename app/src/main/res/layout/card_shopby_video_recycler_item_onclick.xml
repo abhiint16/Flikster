@@ -12,12 +12,13 @@
         android:layout_height="280dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_gravity="center_vertical|center"/>
-    
-    <android.support.v7.widget.RecyclerView
+        android:layout_gravity="center_vertical|center" />
+
+
+    <include
+        layout="@layout/fragment_common_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="20dp"
-        android:background="@color/white"
-        android:id="@+id/card_shopby_video_recycler_item_onclick_recycler"></android.support.v7.widget.RecyclerView>
+        android:background="@color/white" />
 </LinearLayout>

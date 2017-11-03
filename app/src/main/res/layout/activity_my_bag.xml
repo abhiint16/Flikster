@@ -37,12 +37,17 @@
     <!--</android.support.v7.widget.Toolbar>-->
     <include layout="@layout/toolbar_frag_multiicons" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_my_bag_recycler_view"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
-        android:layout_below="@+id/toolbar_frag_multiicons_toolbar" />
+        android:layout_below="@+id/toolbar_frag_multiicons_toolbar"
+        android:orientation="vertical">
+        <include
+            layout="@layout/fragment_common_recyclerview"
+         />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -21,16 +21,17 @@ import com.flikster.R;
 
 public class GallaryCardClick extends Fragment {
     View view;
-    RecyclerView gallary_recyclerview;
+    RecyclerView fragment_common_recyclerview_with_tv_recycler;
     RecyclerView.LayoutManager gallaryLayoutManager;
     GallaryCardClickAdapter gallaryCardClickAdapter;
     FragmentManager fragmentManager;
-    TextView tv_tag_name,tv_tag_desc;
+    TextView fragment_common_recyclerview_with_tv_title, tv_tag_name, tv_tag_desc;
     ImageView profile_image;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.card_gallary_item_onclick,container,false);
+        view = inflater.inflate(R.layout.card_gallary_item_onclick, container, false);
         initializeViews();
         initializeRest();
         return view;
@@ -39,29 +40,33 @@ public class GallaryCardClick extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
     private void initializeRest() {
         profile_image.setImageResource(R.drawable.pooja2);
+        fragment_common_recyclerview_with_tv_title.setText("Pooja's latest Photo Shoot");
+        fragment_common_recyclerview_with_tv_title.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
         tv_tag_name.setText("Pooja Hegde");
         tv_tag_desc.setText("#Actress");
-        gallaryLayoutManager=new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        gallary_recyclerview.setLayoutManager(gallaryLayoutManager);
-        gallaryCardClickAdapter=new GallaryCardClickAdapter(getActivity(),fragmentManager);
-        gallary_recyclerview.setAdapter(gallaryCardClickAdapter);
+        gallaryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        fragment_common_recyclerview_with_tv_recycler.setLayoutManager(gallaryLayoutManager);
+        gallaryCardClickAdapter = new GallaryCardClickAdapter(getActivity(), fragmentManager);
+        fragment_common_recyclerview_with_tv_recycler.setAdapter(gallaryCardClickAdapter);
     }
 
     private void initializeViews() {
-        gallary_recyclerview=(RecyclerView)view.findViewById(R.id.gallary_recyclerview);
-        profile_image=(ImageView)view.findViewById(R.id.profile_image);
-        tv_tag_name=(TextView)view.findViewById(R.id.tv_tag_name);
-        tv_tag_desc=(TextView)view.findViewById(R.id.tv_tag_desc);
-        fragmentManager=getActivity().getSupportFragmentManager();
+        fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+        fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+        profile_image = (ImageView) view.findViewById(R.id.profile_image);
+        tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
+        tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 }

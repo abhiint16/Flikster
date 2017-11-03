@@ -24,7 +24,7 @@ import com.flikster.R;
 
 public class MyBagActivity extends AppCompatActivity implements View.OnClickListener {
     View view;
-    RecyclerView recyclerView;
+    RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManager;
     MyBagAdapter myBagAdapter;
     ImageButton toolbar_frag_multiicons_back_navigation;
@@ -43,14 +43,14 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initializeRest() {
-        recyclerView.setVisibility(View.VISIBLE);
+        fragment_common_recyclerview_recycler.setVisibility(View.VISIBLE);
         activity_my_bag_bottom_continue_btn.setVisibility(View.VISIBLE);
         nodatalayout.setVisibility(View.GONE);
         toolbar_frag_multiicons_title.setText("My Bag");
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         myBagAdapter = new MyBagAdapter();
-        recyclerView.setAdapter(myBagAdapter);
+        fragment_common_recyclerview_recycler.setAdapter(myBagAdapter);
 
         notifcationimg.setBackgroundDrawable(getResources().getDrawable(R.drawable.store_bag));
 
@@ -76,7 +76,7 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initializeViews() {
-        recyclerView = (RecyclerView) findViewById(R.id.activity_my_bag_recycler_view);
+        fragment_common_recyclerview_recycler = (RecyclerView) findViewById(R.id.fragment_common_recyclerview_recycler);
         activity_my_bag_bottom_continue_btn = (Button) findViewById(R.id.activity_my_bag_bottom_continue_btn);
         toolbar_frag_multiicons_back_navigation = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_back_navigation);
 
