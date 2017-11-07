@@ -59,7 +59,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_news, parent, false);
             return new ViewHolder1(view);
         } else if (viewType == 2) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_steal_style_carousel, parent, false);
+            //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_steal_style_carousel, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_quote, parent, false);
             return new ViewHolder2(view);
         } else if (viewType == 3) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1, parent, false);
@@ -91,46 +92,52 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder1) holder).tv_name.setText(items.get(0).getTitle());
             ((ViewHolder1) holder).tv_description.setText(items.get(0).getTitle());
         } else if (holder.getItemViewType() == 2) {
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("You won't believe these");
+            /*((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("You won't believe these");
             stealStyleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(stealStyleLayoutManager);
             stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext(), fragmentManager);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(stealStyleViewHolder);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(stealStyleViewHolder);*/
+            ((ViewHolder2) holder).card_quote_tv.setText(items.get(1).getTitle());
+            Glide.with(context).load(items.get(1).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
+            ((ViewHolder2) holder).tv_tag_desc.setText(items.get(1).getTitle());
+            ((ViewHolder2) holder).tv_tag_name.setText(items.get(1).getTitle());
+            ((ViewHolder2) holder).tv_name.setText(items.get(1).getTitle());
+            ((ViewHolder2) holder).tv_description.setText(items.get(1).getTitle());
         } else if (holder.getItemViewType() == 3) {
             Glide.with(context).load(items.get(1).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
             Glide.with(context).load(items.get(1).getProfilePic()).into(((ViewHolder3) holder).card_gallary1_img1);
-            ((ViewHolder3) holder).tv_tag_name.setText(items.get(1).getTitle());
-            ((ViewHolder3) holder).tv_tag_desc.setText(items.get(1).getTitle());
-            ((ViewHolder3) holder).tv_name.setText(items.get(1).getTitle());
-            ((ViewHolder3) holder).tv_description.setText(items.get(1).getTitle());
+            ((ViewHolder3) holder).tv_tag_name.setText(items.get(2).getTitle());
+            ((ViewHolder3) holder).tv_tag_desc.setText(items.get(2).getTitle());
+            ((ViewHolder3) holder).tv_name.setText(items.get(2).getTitle());
+            ((ViewHolder3) holder).tv_description.setText(items.get(2).getTitle());
         } else if (holder.getItemViewType() == 4) {
             Glide.with(context).load(items.get(2).getProfilePic()).into(((ViewHolder4) holder).news_img);
             Glide.with(context).load(items.get(2).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
-            ((ViewHolder4) holder).tv_tag_desc.setText(items.get(2).getTitle());
-            ((ViewHolder4) holder).tv_tag_name.setText(items.get(2).getTitle());
-            ((ViewHolder4) holder).tv_name.setText(items.get(2).getTitle());
-            ((ViewHolder4) holder).tv_description.setText(items.get(2).getTitle());
+            ((ViewHolder4) holder).tv_tag_desc.setText(items.get(3).getTitle());
+            ((ViewHolder4) holder).tv_tag_name.setText(items.get(3).getTitle());
+            ((ViewHolder4) holder).tv_name.setText(items.get(3).getTitle());
+            ((ViewHolder4) holder).tv_description.setText(items.get(3).getTitle());
         } else if (holder.getItemViewType() == 5) {
             Glide.with(context).load(items.get(3).getProfilePic()).asBitmap().into((((ViewHolder5) holder).profile_image));
             Glide.with(context).load(items.get(3).getProfilePic()).into(((ViewHolder5) holder).card_gallary1_img1);
-            ((ViewHolder5) holder).tv_tag_name.setText(items.get(3).getTitle());
-            ((ViewHolder5) holder).tv_tag_desc.setText(items.get(3).getTitle());
-            ((ViewHolder5) holder).tv_name.setText(items.get(3).getTitle());
-            ((ViewHolder5) holder).tv_description.setText(items.get(3).getTitle());
+            ((ViewHolder5) holder).tv_tag_name.setText(items.get(4).getTitle());
+            ((ViewHolder5) holder).tv_tag_desc.setText(items.get(4).getTitle());
+            ((ViewHolder5) holder).tv_name.setText(items.get(4).getTitle());
+            ((ViewHolder5) holder).tv_description.setText(items.get(4).getTitle());
         } else if (holder.getItemViewType() == 6) {
             Glide.with(context).load(items.get(4).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
             Glide.with(context).load(items.get(4).getProfilePic()).into(((ViewHolder6) holder).card_gallary1_img1);
-            ((ViewHolder6) holder).tv_tag_name.setText(items.get(4).getTitle());
-            ((ViewHolder6) holder).tv_tag_desc.setText(items.get(4).getTitle());
-            ((ViewHolder6) holder).tv_name.setText(items.get(4).getTitle());
-            ((ViewHolder6) holder).tv_description.setText(items.get(4).getTitle());
+            ((ViewHolder6) holder).tv_tag_name.setText(items.get(5).getTitle());
+            ((ViewHolder6) holder).tv_tag_desc.setText(items.get(5).getTitle());
+            ((ViewHolder6) holder).tv_name.setText(items.get(5).getTitle());
+            ((ViewHolder6) holder).tv_description.setText(items.get(5).getTitle());
         } else if(holder.getItemViewType() == 7){
             Glide.with(context).load(items.get(5).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
             Glide.with(context).load(items.get(5).getProfilePic()).into(((ViewHolder7) holder).card_gallary1_img1);
-            ((ViewHolder7) holder).tv_tag_name.setText(items.get(5).getTitle());
-            ((ViewHolder7) holder).tv_tag_desc.setText(items.get(5).getTitle());
-            ((ViewHolder7) holder).tv_name.setText(items.get(5).getTitle());
-            ((ViewHolder7) holder).tv_description.setText(items.get(5).getTitle());
+            ((ViewHolder7) holder).tv_tag_name.setText(items.get(6).getTitle());
+            ((ViewHolder7) holder).tv_tag_desc.setText(items.get(6).getTitle());
+            ((ViewHolder7) holder).tv_name.setText(items.get(6).getTitle());
+            ((ViewHolder7) holder).tv_description.setText(items.get(6).getTitle());
         }
     }
 
@@ -178,13 +185,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder {
-        TextView fragment_common_recyclerview_with_tv_title;
-        RecyclerView fragment_common_recyclerview_with_tv_recycler;
+        /*TextView fragment_common_recyclerview_with_tv_title;
+        RecyclerView fragment_common_recyclerview_with_tv_recycler;*/
+        ImageView profile_image;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_quote_tv;
 
         public ViewHolder2(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            /*fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);*/
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_quote_tv=(TextView)itemView.findViewById(R.id.card_quote_tv);
         }
     }
 
@@ -380,4 +395,46 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         }
     }
+
+    /*public class ViewHolder8 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView profile_image, ib_bookmark;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, tv_quote;
+        LinearLayout header_linear, card_description_linear;
+        Button followbtn;
+
+        public ViewHolder8(View itemView) {
+            super(itemView);
+            tv_quote = (TextView) itemView.findViewById(R.id.tv_quote);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            ib_bookmark = (ImageView) itemView.findViewById(R.id.ib_bookmark);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setText("Follow");
+            card_description_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
+            header_linear.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            globalData.a = 1;
+            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_name)) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container, new MovieFragment())
+                        .addToBackStack("")
+                        .commit();
+            } else if (view.getId() == R.id.card_description_linear) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container, new MovieFragmentInfo())
+                        .addToBackStack("")
+                        .commit();
+            }
+
+        }
+    }*/
 }

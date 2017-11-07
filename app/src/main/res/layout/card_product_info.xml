@@ -6,22 +6,11 @@
 
     <include layout="@layout/toolbar_frag_multiicons" />
 
-    <VideoView
-        android:id="@+id/card_shopby_video_recycler_item_onclick_playVideo"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_vertical|center" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
+
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -100,7 +89,5 @@
                         android:src="@drawable/shirtimg" />
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>
