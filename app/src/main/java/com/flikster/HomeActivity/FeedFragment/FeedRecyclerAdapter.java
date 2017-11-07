@@ -44,8 +44,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
     List<FeedInnerData> items;
     Integer Count;
+    FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
 
-    //FeedInnerData a;
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, List<FeedInnerData> items, Integer Count) {
         this.context = context;
         this.fragmentManager = fragmentManager;
@@ -160,41 +160,20 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return super.getItemViewType(position);
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder1 extends RecyclerView.ViewHolder{
         ImageView news_img, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         LinearLayout header_linear, card_description_linear;
-
-        public ViewHolder1(View itemView) {
+       public ViewHolder1(View itemView) {
             super(itemView);
-            news_img = (ImageView) itemView.findViewById(R.id.news_img);
-            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
-            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
-            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
-            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
-            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
-            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
-            card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
-            card_description_linear.setOnClickListener(this);
-            profile_image.setOnClickListener(this);
-            header_linear.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            globalData.a = 1;
-            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_name)) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.main_container, new CelebrityFragment())
-                        .addToBackStack("")
-                        .commit();
-            } else if (view.getId() == R.id.card_description_linear) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.main_container, new NewsOnClickFragment())
-                        .addToBackStack("")
-                        .commit();
-            }
-
+           news_img = (ImageView) itemView.findViewById(R.id.news_img);
+           tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+           tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+           tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+           tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+           profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+           header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+           card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
         }
     }
 

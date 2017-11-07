@@ -42,6 +42,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.MenuFragments.FliksterCreditFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
 import com.flikster.MenuFragments.LogoutFragment;
@@ -98,7 +99,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
 // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed, R.drawable.home, R.color.color_tab_1);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.rating, R.drawable.rating, R.color.color_tab_1);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watch, R.color.color_tab_1);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.addsquare, R.color.color_tab_1);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionicon, R.color.color_tab_1);
         AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.store, R.drawable.storeicon, R.color.color_tab_1);
@@ -173,8 +174,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 if (position == 0) {
                     beginTransact(new FeedFragment());
                 } else if (position == 1) {
-                    beginTransact(new RatingFragment());
+//                    beginTransact(new RatingFragment());
+                    beginTransact(new WatchFragment());
+                    //
                 } else if (position == 2) {
+
                     //cameraAccessPermission();
                 } else if (position == 3) {
                     beginTransact(new FashionFragment());
@@ -245,7 +249,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
-        camera_fab=(FloatingActionButton)findViewById(R.id.camera_fab);
+        camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
         setSupportActionBar(toolbar_main);
         toolbar_main_notification = (ImageButton) toolbar_main.findViewById(R.id.toolbar_main_notification);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -280,27 +284,24 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             beginTransact(new RatingFragment());
         } else if (viewId == R.id.plus_button) {
 //            cameraAccessPermission();
-        }
-        else if(viewId==R.id.camera_fab)
-        {
+        } else if (viewId == R.id.camera_fab) {
             openCameraClickDialog();
         }
     }
 
-    private void openCameraClickDialog()
-    {
+    private void openCameraClickDialog() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_camera_click);
         final Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        LinearLayout dialog_camera_click_click_photo=(LinearLayout) dialog.findViewById(R.id.dialog_camera_click_click_photo);
-        LinearLayout dialog_camera_click_select_gallery=(LinearLayout)dialog.findViewById(R.id.dialog_camera_click_select_gallery);
+        LinearLayout dialog_camera_click_click_photo = (LinearLayout) dialog.findViewById(R.id.dialog_camera_click_click_photo);
+        LinearLayout dialog_camera_click_select_gallery = (LinearLayout) dialog.findViewById(R.id.dialog_camera_click_select_gallery);
         dialog_camera_click_select_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivity(intent);

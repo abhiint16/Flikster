@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/movieimg"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/saholook" />
+
+    <TextView
+        android:id="@+id/imageView1"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|end|bottom"
+        android:layout_marginBottom="10dp"
+        android:textSize="15sp"
+        android:hint="@string/enter_bid"
+        android:layout_marginLeft="@dimen/ten"
+        android:text="@string/song_title"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold" />
+
+</FrameLayout>

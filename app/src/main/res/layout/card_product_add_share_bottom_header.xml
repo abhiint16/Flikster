@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="@dimen/ten"
+    android:background="@color/red"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/activity_mybag_continue_onclick_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="@dimen/ten"
+
+        android:layout_below="@+id/toolbar_frag_multiicons_toolbar"
+        android:background="@color/red"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+
+            android:background="@color/red"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageButton
+                android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear_imgbtn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:clickable="false"
+                android:src="@drawable/share" />
+
+            <TextView
+                android:id="@+id/activity_mybag_continue_onclick_tabs_address_linear_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="Share"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageButton
+                android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:clickable="false"
+                android:src="@drawable/shoppingcart" />
+
+            <TextView
+                android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="Buy"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageButton
+                android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_imgbtn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:clickable="false"
+                android:src="@drawable/boardpicture" />
+
+            <TextView
+                android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="Use in Board"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
