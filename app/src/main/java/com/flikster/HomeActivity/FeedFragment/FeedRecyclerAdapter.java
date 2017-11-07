@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionDetailFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragmentInfo;
 import com.flikster.Util.GlobalData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
@@ -65,6 +66,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (viewType == 7) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_auction, parent, false);
             return new ViewHolder7(view);
+        } else if (viewType == 8) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_quote, parent, false);
+            return new ViewHolder8(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary_4plus, parent, false);
             return new ViewHolder5(view);
@@ -159,16 +163,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).profile_image.setImageResource(R.drawable.rakulprofileicon);
-//            ((ViewHolder7) holder).card_gallary1_img1.setImageResource(R.drawable.ranveer2);
             ((ViewHolder7) holder).tv_tag_desc.setText("#Actor");
             ((ViewHolder7) holder).tv_tag_name.setText("Rakul Preet");
-            /*((ViewHolder1) holder).tv_name.setText("Ranveer Singh at the set of Padmavati");
-            ((ViewHolder1) holder).tv_description.setText("Ranveer Singh at the set of Padmavati. He was caught red handed by" +
-                    "our camera crew while he was kissing his girlfriend Deepika.");*/
-//            profile1 = false;
-
+        } else if (holder.getItemViewType() == 8) {
+            ((ViewHolder8) holder).ib_bookmark.setVisibility(View.GONE);
         } else {
-
         }
     }
 
@@ -414,6 +413,48 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new AuctionDetailFragment())
+                        .addToBackStack("")
+                        .commit();
+            }
+
+        }
+    }
+
+    public class ViewHolder8 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView profile_image, ib_bookmark;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, tv_quote;
+        LinearLayout header_linear, card_description_linear;
+        Button followbtn;
+
+        public ViewHolder8(View itemView) {
+            super(itemView);
+            tv_quote = (TextView) itemView.findViewById(R.id.tv_quote);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            ib_bookmark = (ImageView) itemView.findViewById(R.id.ib_bookmark);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setText("Follow");
+            card_description_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
+            header_linear.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            globalData.a = 1;
+            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_name)) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container, new MovieFragment())
+                        .addToBackStack("")
+                        .commit();
+            } else if (view.getId() == R.id.card_description_linear) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container, new MovieFragmentInfo())
                         .addToBackStack("")
                         .commit();
             }
