@@ -2,15 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <VideoView
-        android:id="@+id/card_shopby_video_recycler_item_onclick_playVideo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_vertical|center" />
+    <include layout="@layout/toolbar_frag_multiicons" />
+
+    <FrameLayout
+        android:id="@+id/video_frame"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:background="#000">
+
+        <VideoView
+            android:id="@+id/card_shopby_video_recycler_item_onclick_playVideo"
+            android:layout_width="fill_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_height="fill_parent" />
+    </FrameLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
