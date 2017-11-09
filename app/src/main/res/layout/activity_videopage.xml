@@ -28,14 +28,19 @@
             android:background="@drawable/moredotdicon" />
     </RelativeLayout>
 
-    <VideoView
-        android:id="@+id/playVideo"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/video_frame"
+        android:layout_width="fill_parent"
         android:layout_height="280dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:background="#000">
+    <VideoView
+        android:id="@+id/playVideo"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
         android:layout_gravity="center_vertical|center" />
-
+</FrameLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

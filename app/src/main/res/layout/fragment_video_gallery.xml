@@ -30,21 +30,28 @@
                 android:textSize="14sp"
                 android:textStyle="normal" />
 
-            <VideoView
-                android:id="@+id/playVideo"
-                android:layout_width="match_parent"
+            <FrameLayout
+                android:id="@+id/video_frame"
+                android:layout_width="fill_parent"
                 android:layout_height="280dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical|center" />
+                android:background="#000">
 
+                <VideoView
+                    android:id="@+id/playVideo"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical|center" />
+            </FrameLayout>
 
             <include layout="@layout/card_footer"></include>
 
             <include layout="@layout/card_description"></include>
 
             <include layout="@layout/card_comment_text"></include>
-
 
 
             <include layout="@layout/fragment_common_recyclerview_with_tv" />
