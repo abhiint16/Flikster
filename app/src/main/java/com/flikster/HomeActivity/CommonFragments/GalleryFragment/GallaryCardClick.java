@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class GallaryCardClick extends Fragment {
 
     private void initializeRest() {
         profile_image.setImageResource(R.drawable.pooja2);
-        fragment_common_recyclerview_with_tv_title.setText("Pooja's latest Photo Shoot");
+        fragment_common_recyclerview_with_tv_title.setText("Photoshoot");
         fragment_common_recyclerview_with_tv_title.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
         tv_tag_name.setText("Pooja Hegde");
         tv_tag_desc.setText("#Actress");

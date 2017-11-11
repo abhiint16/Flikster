@@ -1,14 +1,23 @@
 package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.media.Image;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
@@ -27,37 +36,24 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     Context context;
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
-    List<String> imag = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
     CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
     CelebrityBioAdapterFamilyViewHolder celebrityBioAdapterFamilyViewHolder;
-    CelebrityBioAdapterFilmographyViewHolder celebrityBioAdapterFilmographyViewHolder;
+    MovieInfoAdapterCrewViewHolder movieInfoAdapterCrewViewHolder;
     CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
-    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
+    MovieInfoAdapterCastViewHolder movieInfoAdapterCastViewHolder;
+    List<MovieData.MovieInnerData> items;
+    Boolean storyLineBoolean=true;
 
-    public MovieInfoAdapter(Context context, FragmentManager fragmentManager) {
+    public MovieInfoAdapter(Context context, FragmentManager fragmentManager,List<MovieData.MovieInnerData> items) {
         this.context = context;
         this.fragmentManager = fragmentManager;
-        type.add(1);
-        type.add(2);
-        type.add(3);
-        type.add(4);
-        type.add(5);
-        type.add(6);
-        type.add(7);
-        type.add(8);
-        type.add(9);
-        type.add(3);
-        type.add(4);
-        type.add(3);
-        type.add(4);
-        type.add(7);
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
-        imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
-        imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+        this.items=items;
+        type.add(1);type.add(2);type.add(3);
+        type.add(4);type.add(5);type.add(6);
+        type.add(7);type.add(8);type.add(9);
+        type.add(3);type.add(4);type.add(3);
+        type.add(4);type.add(7);
     }
 
     @Override
@@ -115,26 +111,93 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     }
 
+    public  String formatDate(String dateOfRelease)
+    {
+        String subString=dateOfRelease.substring(3,dateOfRelease.indexOf("GMT")-9);
+        return subString;
+    }
+    public String formatGenre()
+    {
+        String genre="";
+        for(int i=0;i<items.get(0).genre.size();i++)
+        {
+            if(i<items.get(0).genre.size()-1)
+                genre=genre+items.get(0).getGenre().get(i)+" | ";
+            else
+                genre=genre+items.get(0).getGenre().get(i);
+        }
+        return genre;
+    }
+
+    public Spannable formatStoryLine()
+    {
+        String storyLine=items.get(0).getStoryLine();
+        Spannable spannable = null;
+        if(storyLine.length()>200)
+        {
+            storyLine=storyLine.substring(0,190)+" ...Click To Expand";
+            spannable = new SpannableString(storyLine);
+            spannable.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorAccent)), 190
+                    , storyLine.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        }
+        return spannable;
+    }
+    public void storyLineOnClick(ViewHolder1 holder)
+    {
+        String storyLine=items.get(0).getStoryLine();
+        if(storyLine.length()>200&&storyLineBoolean==true)
+        {
+            holder.card_movie_info_profile_storyline.setText(items.get(0).getStoryLine());
+            storyLineBoolean=false;
+        }
+        else if(storyLine.length()>200&&storyLineBoolean==false)
+        {
+            holder.card_movie_info_profile_storyline.setText(formatStoryLine());
+            storyLineBoolean=true;
+        }
+    }
+
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == 2) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        if(holder.getItemViewType()==1)
+        {
+            ((ViewHolder1)holder).card_movie_info_profile_critic_rating.setText(items.get(0).getCriticRating());
+            ((ViewHolder1)holder).card_movie_info_profile_duration.setText(items.get(0).getDuration());
+            ((ViewHolder1)holder).card_movie_info_profile_releasedate.setText(formatDate(items.get(0).getDateOfRelease()));
+            ((ViewHolder1)holder).card_movie_info_profile_genre.setText(formatGenre());
+            if(items.get(0).getStoryLine().length()<=200)
+                ((ViewHolder1)holder).card_movie_info_profile_storyline.setText(items.get(0).getStoryLine());
+            else if(items.get(0).getStoryLine().length()>200)
+            ((ViewHolder1)holder).card_movie_info_profile_storyline.setText(formatStoryLine(),TextView.BufferType.SPANNABLE);
+            ((ViewHolder1)holder).card_movie_info_profile_storyline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    storyLineOnClick(((ViewHolder1)holder));
+                }
+            });
+            ((ViewHolder1)holder).card_movie_info_profile_title.setText(items.get(0).getTitle());
+            Glide.with(context).load(items.get(0).getCoverPic()).asBitmap().into(((ViewHolder1)holder).card_movie_info_profile_coverpic);
+            Glide.with(context).load(items.get(0).getProfilePic()).asBitmap().into(((ViewHolder1)holder).card_movie_info_profile_profilepic);
+        }
+        else if (holder.getItemViewType() == 2) {
 //            ((ViewHolder2) holder).textView.setText("Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterVideoViewHolder = new CelebrityBioAdapterVideoViewHolder(fragmentManager);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterVideoViewHolder);
         } else if (holder.getItemViewType() == 3) {
-//            ((ViewHolder3) holder).textView.setText("Cast");
+            ((ViewHolder3)holder).fragment_common_recyclerview_with_tv_title.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
-            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
+            movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context,items.get(0).getCast().size(),items);
+            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCastViewHolder);
         } else if (holder.getItemViewType() == 4) {
-            //((ViewHolder5)holder).textView.setText("videos");
+            ((ViewHolder4)holder).fragment_common_recyclerview_with_tv_title.setText("Crew");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder();
-            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFilmographyViewHolder);
+            movieInfoAdapterCrewViewHolder = new MovieInfoAdapterCrewViewHolder(context,items.get(0).getCrew().size(),items);
+            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCrewViewHolder);
         } else if (holder.getItemViewType() == 6) {
             //((ViewHolder6)holder).textView.setText("videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -145,8 +208,8 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //            ((ViewHolder3) holder).textView.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
-            ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
+            movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context,items.get(0).getCast().size(),items);
+            ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCastViewHolder);
         }
     }
 
@@ -161,8 +224,21 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
+        ImageView card_movie_info_profile_coverpic,card_movie_info_profile_profilepic;
+        TextView card_movie_info_profile_critic_rating,card_movie_info_profile_duration,card_movie_info_profile_genre
+                ,card_movie_info_profile_lang,card_movie_info_profile_releasedate,card_movie_info_profile_title
+                ,card_movie_info_profile_storyline;
         public ViewHolder1(View itemView) {
             super(itemView);
+            card_movie_info_profile_coverpic=(ImageView)itemView.findViewById(R.id.card_movie_info_profile_coverpic);
+            card_movie_info_profile_profilepic=(ImageView)itemView.findViewById(R.id.card_movie_info_profile_profilepic);
+            card_movie_info_profile_critic_rating=(TextView)itemView.findViewById(R.id.card_movie_info_profile_critic_rating);
+            card_movie_info_profile_duration=(TextView)itemView.findViewById(R.id.card_movie_info_profile_duration);
+            card_movie_info_profile_genre=(TextView)itemView.findViewById(R.id.card_movie_info_profile_genre);
+            card_movie_info_profile_lang=(TextView)itemView.findViewById(R.id.card_movie_info_profile_lang);
+            card_movie_info_profile_releasedate=(TextView)itemView.findViewById(R.id.card_movie_info_profile_releasedate);
+            card_movie_info_profile_title=(TextView)itemView.findViewById(R.id.card_movie_info_profile_title);
+            card_movie_info_profile_storyline=(TextView)itemView.findViewById(R.id.card_movie_info_profile_storyline);
         }
     }
 
@@ -186,7 +262,6 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
-            fragment_common_recyclerview_with_tv_title.setText("Cast");
         }
     }
 
@@ -198,7 +273,6 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
-            fragment_common_recyclerview_with_tv_title.setText("Crew");
         }
     }
 

@@ -6,16 +6,17 @@
     android:background="@color/white">
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:orientation="vertical"
-        android:id="@+id/ll">
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/card_celebrity_bio_profile_coverpic"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
+            android:scaleType="fitXY"
             android:background="#4e4e4e"></ImageView>
 
         <View
@@ -26,69 +27,122 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/img"
+        android:id="@+id/card_celebrity_bio_profile_profilepic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:src="@drawable/pooja2" />
+        android:src="@drawable/pooja2"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="55dp"
+        android:layout_marginTop="80dp"
+        android:layout_toLeftOf="@+id/card_celebrity_bio_profile_profilepic"
         android:text="258 Followers"
         android:textColor="@color/white"
-        android:textSize="12sp"
-        android:layout_toLeftOf="@+id/img"
-        android:layout_marginTop="80dp"
-        android:layout_marginRight="55dp" />
+        android:textSize="12sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_toRightOf="@+id/img"
         android:layout_marginLeft="55dp"
+        android:layout_marginTop="80dp"
+        android:layout_toRightOf="@+id/card_celebrity_bio_profile_profilepic"
         android:background="@drawable/white_round_border"
+        android:paddingBottom="5dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         android:text="FOLLOW"
         android:textColor="@color/white"
         android:textSize="12sp" />
+
     <TextView
+        android:id="@+id/card_celebrity_bio_profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pooja Hegde"
-        android:layout_below="@+id/img"
-        android:id="@+id/profile_name"
+        android:layout_below="@+id/card_celebrity_bio_profile_profilepic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textColor="@color/black"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Actress | 23 Movies"
-        android:layout_below="@+id/profile_name"
+        android:text="Pooja Hegde"
+        android:textColor="@color/black" />
+
+    <LinearLayout
         android:id="@+id/age"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
-        android:textColor="#454545"/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20 Oct 1989, Chennai, Tamilnadu, India"
+        android:layout_below="@+id/card_celebrity_bio_profile_name"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Actress"
+            android:id="@+id/card_celebrity_bio_profile_role"
+            android:textColor="#454545" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="|"
+            android:textStyle="bold"
+            android:textColor="#454545"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text=" 23 Movies"
+            android:id="@+id/card_celebrity_bio_profile_nomovie"
+            android:textColor="#454545" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/age"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
-        android:textColor="#454545"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="20 Oct 1989"
+            android:id="@+id/card_celebrity_bio_profile_dob"
+            android:textColor="#454545" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="|"
+            android:textStyle="bold"
+            android:textColor="#454545"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text=" Chennai, Tamilnadu, India"
+            android:id="@+id/card_celebrity_bio_profile_pob"
+            android:textColor="#454545" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll"
         android:layout_marginTop="10dp"
-        android:text="@string/bio"
         android:gravity="center_vertical"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:id="@+id/card_celebrity_bio_profile_biography"
+        android:text="@string/bio" />
 </RelativeLayout>
