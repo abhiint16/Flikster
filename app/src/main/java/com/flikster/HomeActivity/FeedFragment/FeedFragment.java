@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.FeedFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,6 +37,7 @@ public class FeedFragment extends Fragment {
     FragmentManager fragmentManager;
     List<FeedInnerData> items;
     Integer Count;
+    Testing testing;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,20 +49,15 @@ public class FeedFragment extends Fragment {
     }
 
     private void retrofitInit() {
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Log.e("mmmmmmm","mmmmmmm");
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getTopRatedMovies();
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
-                Log.e("nnnnnnnnn","nnnnnnnnn");
                 items = response.body().getItems();
                 Count=response.body().getCount();
-                feedAdapter = new FeedRecyclerAdapter(getActivity(),fragmentManager,items,Count);
+                feedAdapter = new FeedRecyclerAdapter(getActivity(),fragmentManager,items,Count,testing);
                 fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
-                Log.e("xxxxxxxxx","xxx"+items.size());
-                Log.e("xxxxxxxxx","yyyy"+items);
-                Log.e("ppppppppp","pppp"+response.body().getCount());
             }
 
             @Override
@@ -79,5 +76,16 @@ public class FeedFragment extends Fragment {
     private void initializeViews() {
         fragment_common_recyclerview_recycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager=getActivity().getSupportFragmentManager();
+    }
+
+    public interface Testing
+    {
+         void test(String name,Fragment fragment,int getClass);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        testing= (Testing) activity;
     }
 }
