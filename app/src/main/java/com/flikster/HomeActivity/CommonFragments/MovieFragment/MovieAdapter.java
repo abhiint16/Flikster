@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,11 +17,13 @@ import java.util.List;
 public class MovieAdapter extends FragmentStatePagerAdapter {
 
     List<String> list=new ArrayList<>();
-    public MovieAdapter(FragmentManager fm) {
+    Bundle data;
+    public MovieAdapter(FragmentManager fm, Bundle data) {
         super(fm);
         list.add("Feed");
         list.add("Info");
         list.add("Store");
+        this.data=data;
     }
 
     @Override
@@ -31,7 +34,9 @@ public class MovieAdapter extends FragmentStatePagerAdapter {
         }
         else if(position==1)
         {
-            return  new MovieFragmentInfo();
+            MovieFragmentInfo movieFragmentInfo=new MovieFragmentInfo();
+            movieFragmentInfo.setArguments(data);
+            return movieFragmentInfo;
         }
         else if(position==2)
         {

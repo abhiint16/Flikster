@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -17,11 +18,13 @@ import java.util.List;
 
 public class CelebrityAdapter extends FragmentStatePagerAdapter {
     List<String> list=new ArrayList<>();
-    public CelebrityAdapter(FragmentManager fm) {
+    Bundle data;
+    public CelebrityAdapter(FragmentManager fm,Bundle data) {
         super(fm);
         list.add("Feed");
         list.add("Biography");
         list.add("Store");
+        this.data=data;
     }
 
     @Override
@@ -32,7 +35,10 @@ public class CelebrityAdapter extends FragmentStatePagerAdapter {
         }
         else if(position==1)
         {
-            return  new CelebrityFragmentBio();
+            CelebrityFragmentBio celebrityFragmentBio=new CelebrityFragmentBio();
+            celebrityFragmentBio.setArguments(data);
+            return celebrityFragmentBio;
+
         }
         else if(position==2)
         {
