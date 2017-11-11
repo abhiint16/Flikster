@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieAdapter;
 import com.flikster.R;
 
 /**
@@ -27,6 +28,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     FragmentManager fragmentManager;
     TextView toolbar_frag_title;
     ImageButton toolbar_back_navigation_btn;
+    String slug;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,7 +51,9 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeRest() {
-        celebrityAdapter = new CelebrityAdapter(getChildFragmentManager());
+        Bundle arguments=new Bundle();
+        arguments.putString("slug",slug);
+        celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(),arguments);
         viewPager.setAdapter(celebrityAdapter);
         tabLayout.setupWithViewPager(viewPager);
         toolbar_frag_title.setText("Celebrity");
@@ -72,5 +76,10 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
         {
             getFragmentManager().popBackStackImmediate();
         }
+    }
+
+    public  void updateInfo(String slug)
+    {
+        this.slug=slug;
     }
 }

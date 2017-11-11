@@ -27,6 +27,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     FragmentManager fragmentManager;
     TextView toolbar_frag_title;
     ImageButton toolbar_back_navigation_btn;
+    String slug;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,12 +60,20 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initializeRest() {
-        movieAdapter = new MovieAdapter(getChildFragmentManager());
+        Bundle arguments=new Bundle();
+        arguments.putString("slug",slug);
+        movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
         viewPager.setAdapter(movieAdapter);
         tabLayout.setupWithViewPager(viewPager);
         toolbar_frag_title.setText("Movies");
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
+
+    public  void updateInfo(String slug)
+    {
+        this.slug=slug;
+    }
+
 
     @Override
     public void onClick(View view) {
