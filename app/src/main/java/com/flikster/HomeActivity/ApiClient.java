@@ -15,11 +15,10 @@ public class ApiClient {
     private static Retrofit retrofit = null;
 
 
-    public static Retrofit getClient() {
-        Log.e("dddddd","ddddddddddd");
+    public static Retrofit getClient(String baseURL) {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(baseURL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
