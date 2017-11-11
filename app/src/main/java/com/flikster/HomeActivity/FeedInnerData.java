@@ -80,6 +80,16 @@ public class FeedInnerData {
         public String type;
         @SerializedName("profilePic")
         public String profilePic;
+        @SerializedName("slug")
+        public String slug;
+
+        public String getSlug() {
+            return slug;
+        }
+
+        public void setSlug(String slug) {
+            this.slug = slug;
+        }
 
         public String getName() {
             return name;
@@ -115,7 +125,16 @@ public class FeedInnerData {
         public String type;
         @SerializedName("profilePic")
         public String profilePic;
+        @SerializedName("slug")
+        public String slug;
 
+        public String getSlug() {
+            return slug;
+        }
+
+        public void setSlug(String slug) {
+            this.slug = slug;
+        }
         public String getName() {
             return name;
         }
