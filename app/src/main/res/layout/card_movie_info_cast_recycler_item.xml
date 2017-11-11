@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="180dp"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:src="@drawable/pooja2"
+        android:scaleType="fitXY"
+        android:id="@+id/card_movie_info_cast_recycler_item_image"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:id="@+id/card_movie_info_cast_recycler_item_name"/>
+</LinearLayout>
