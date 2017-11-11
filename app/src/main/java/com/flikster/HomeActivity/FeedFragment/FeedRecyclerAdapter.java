@@ -46,12 +46,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     List<FeedInnerData> items;
     Integer Count;
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
+    FeedFragment.Testing testing;
 
-    public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, List<FeedInnerData> items, Integer Count) {
+    public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, List<FeedInnerData> items, Integer Count, FeedFragment.Testing testing) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.items = items;
         this.Count = Count;
+        this.testing=testing;
     }
 
     @Override
@@ -245,7 +247,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return super.getItemViewType(position);
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder {
+    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView news_img, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         LinearLayout header_linear, card_description_linear;
@@ -260,6 +262,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            header_linear.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if ((view.getId() == R.id.profile_image) || (view.getId() == R.id.header_linear)) {
+                if(items.get(getAdapterPosition()).getCeleb() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(),new MovieFragment(),1);
+                }
+                else if(items.get(getAdapterPosition()).getMovie() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(),new CelebrityFragment(),2);
+                }
+            }
         }
     }
 
@@ -304,15 +321,18 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-            globalData.a = 3;
             if (view.getId() == R.id.video_btn) {
                 Intent intent = new Intent(context, VideoPlayerActivity.class);
                 context.startActivity(intent);
             } else if ((view.getId() == R.id.profile_image) || (view.getId() == R.id.header_linear)) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.main_container, new MovieFragment())
-                        .addToBackStack("")
-                        .commit();
+                if(items.get(getAdapterPosition()).getCeleb() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(),new MovieFragment(),1);
+                }
+                else if(items.get(getAdapterPosition()).getMovie() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(),new CelebrityFragment(),2);
+                }
             } else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new VideoGalleryFragment())
@@ -351,10 +371,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         .addToBackStack("")
                         .commit();
             } else if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.main_container, new CelebrityFragment())
-                        .addToBackStack("")
-                        .commit();
+                if(items.get(getAdapterPosition()).getCeleb() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(),new MovieFragment(),1);
+                }
+                else if(items.get(getAdapterPosition()).getMovie() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(),new CelebrityFragment(),2);
+                }
             }
 
         }
@@ -386,11 +410,16 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-            globalData.a = globalData.type.get(getAdapterPosition());
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new GallaryCardClick())
-                    .addToBackStack("")
-                    .commit();
+            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
+                if(items.get(getAdapterPosition()).getCeleb() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(),new MovieFragment(),1);
+                }
+                else if(items.get(getAdapterPosition()).getMovie() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(),new CelebrityFragment(),2);
+                }
+            }
         }
     }
 
@@ -420,13 +449,18 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-            globalData.a = globalData.type.get(getAdapterPosition());
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new CelebrityFragment())
-                    .addToBackStack("")
-                    .commit();
+            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
+                if(items.get(getAdapterPosition()).getCeleb() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(),new MovieFragment(),1);
+                }
+                else if(items.get(getAdapterPosition()).getMovie() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(),new CelebrityFragment(),2);
+                }
+            }
         }
-    }
+        }
 
 
     public class ViewHolder7 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -456,11 +490,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             globalData.a = 1;
-            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_name)) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.main_container, new CelebrityFragment())
-                        .addToBackStack("")
-                        .commit();
+            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
+                if(items.get(getAdapterPosition()).getCeleb() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(),new MovieFragment(),1);
+                }
+                else if(items.get(getAdapterPosition()).getMovie() == null)
+                {
+                    testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(),new CelebrityFragment(),2);
+                }
             } else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new AuctionDetailFragment())

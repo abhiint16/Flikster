@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,6 +41,8 @@ import android.support.v4.content.ContextCompat;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
@@ -62,7 +65,7 @@ import com.flikster.MenuFragments.WishListFragment;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,FeedFragment.Testing {
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -517,5 +520,19 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         startActivity(intent);
     }
 
-
+    @Override
+    public void test(String name, Fragment fragment,int getClass) {
+        if(getClass==1)
+        {
+            MovieFragment movieFragment= (MovieFragment) fragment;
+            movieFragment.updateInfo(name);
+            firstTimeLaunch(fragment);
+        }
+        else if(getClass==2)
+        {
+            CelebrityFragment celebrityFragment=(CelebrityFragment)fragment;
+            celebrityFragment.updateInfo(name);
+            firstTimeLaunch(fragment);
+        }
+    }
 }
