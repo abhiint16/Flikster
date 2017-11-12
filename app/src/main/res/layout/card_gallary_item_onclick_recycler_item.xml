@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:elevation="5dp">
 
     <ImageView
         android:id="@+id/gallary_recycler_item_img"

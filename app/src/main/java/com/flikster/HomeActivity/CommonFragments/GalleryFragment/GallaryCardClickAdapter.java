@@ -11,9 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.Util.GlobalData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.R;
+
+import java.util.List;
 
 /**
  * Created by abhishek on 05-10-2017.
@@ -25,11 +28,13 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     FragmentManager fragmentManager;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    List<String> galleryImgLinks;
     CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder=new CelebrityBioAdapterImagesViewHolder(context);
-    public GallaryCardClickAdapter(Context context, FragmentManager fragmentManager) {
+    public GallaryCardClickAdapter(Context context, FragmentManager fragmentManager,List<String> galleryImgLinks) {
         this.context=context;
         globalData=new GlobalData();
         this.fragmentManager=fragmentManager;
+        this.galleryImgLinks=galleryImgLinks;
     }
 
     @Override
@@ -52,7 +57,8 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
         //Glide.with(holder.itemView.getContext()).load(globalData.imag.get(position)).into(holder.gallary_recycler_item_img);
         if(holder.getItemViewType()==0)
         {
-            ((ViewHolder1)holder).gallary_recycler_item_img.setImageResource(globalData.pooja.get(position));
+            //((ViewHolder1)holder).gallary_recycler_item_img.setImageResource(galleryImgLinks.get(position));
+            Glide.with(context).load(galleryImgLinks.get(position)).asBitmap().into(((ViewHolder1) holder).gallary_recycler_item_img);
         }
         else
         {
@@ -65,12 +71,12 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        return globalData.pooja.size()+1;
+        return galleryImgLinks.size()+1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if((position)==globalData.pooja.size())
+        if((position)==galleryImgLinks.size())
             return 1;
         else
             return 0;

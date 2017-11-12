@@ -14,7 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.R;
+
+import java.util.List;
 
 /**
  * Created by abhishek on 05-10-2017.
@@ -28,6 +31,8 @@ public class GallaryCardClick extends Fragment {
     FragmentManager fragmentManager;
     TextView fragment_common_recyclerview_with_tv_title, tv_tag_name, tv_tag_desc;
     ImageView profile_image;
+    List<String> galleryImgLinks;
+    String name,profilepic,type,title;
 
     @Nullable
     @Override
@@ -51,14 +56,14 @@ public class GallaryCardClick extends Fragment {
     }
 
     private void initializeRest() {
-        profile_image.setImageResource(R.drawable.pooja2);
-        fragment_common_recyclerview_with_tv_title.setText("Photoshoot");
+        Glide.with(getActivity()).load(profilepic).asBitmap().into(profile_image);
+        fragment_common_recyclerview_with_tv_title.setText(title);
         fragment_common_recyclerview_with_tv_title.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
-        tv_tag_name.setText("Pooja Hegde");
-        tv_tag_desc.setText("#Actress");
+        tv_tag_name.setText(name);
+        tv_tag_desc.setText(type);
         gallaryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(gallaryLayoutManager);
-        gallaryCardClickAdapter = new GallaryCardClickAdapter(getActivity(), fragmentManager);
+        gallaryCardClickAdapter = new GallaryCardClickAdapter(getActivity(), fragmentManager,galleryImgLinks);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(gallaryCardClickAdapter);
     }
 
@@ -70,4 +75,14 @@ public class GallaryCardClick extends Fragment {
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
         fragmentManager = getActivity().getSupportFragmentManager();
     }
+
+    public void updateImage(List<String> galleryImgLinks,String name,String profilePic,String type,String title)
+    {
+        this.galleryImgLinks=galleryImgLinks;
+        this.name=name;
+        this.profilepic=profilePic;
+        this.type=type;
+        this.title=title;
+    }
+
 }

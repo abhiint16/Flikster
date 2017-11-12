@@ -2,9 +2,13 @@ package com.flikster.HomeActivity;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by abhishek on 06-11-2017.
@@ -24,6 +28,16 @@ public class FeedInnerData {
     public List<FeedMovieInnerMoreData> movie;
     @SerializedName("celeb")
     public List<FeedCelebInnerMoreData> celeb;
+    @SerializedName("media")
+    public  FeedMediaInnerData media;
+
+    public FeedMediaInnerData getMedia() {
+        return media;
+    }
+
+    public void setMedia(FeedMediaInnerData media) {
+        this.media = media;
+    }
 
     public String getText() {
         return text;
@@ -116,8 +130,6 @@ public class FeedInnerData {
         }
     }
 
-
-
     public class FeedCelebInnerMoreData{
         @SerializedName("name")
         public String name;
@@ -158,5 +170,40 @@ public class FeedInnerData {
         public void setProfilePic(String profilePic) {
             this.profilePic = profilePic;
         }
+    }
+
+    public class FeedMediaInnerData {
+        @SerializedName("gallery")
+        List<String> gallery;
+
+        /*@SerializedName("audio")
+        String audio;
+        @SerializedName("video")
+        String video;
+*/
+        public List<String> getGallery() {
+            return gallery;
+        }
+
+        public void setGallery(List<String> gallery) {
+            this.gallery = gallery;
+        }
+
+        /*public String getAudio() {
+            return audio;
+        }
+
+        public void setAudio(String audio) {
+            this.audio = audio;
+        }
+
+        public String getVideo() {
+            return video;
+        }
+
+        public void setVideo(String video) {
+            this.video = video;
+        }
+    }*/
     }
 }

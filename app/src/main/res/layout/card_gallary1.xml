@@ -10,10 +10,9 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorImageBackgroundGrey"
         android:id="@+id/card_gallary1_img1"
-        android:scaleType="centerCrop"
         android:src="@drawable/bahubai" />
 
     <include layout="@layout/card_footer"></include>
