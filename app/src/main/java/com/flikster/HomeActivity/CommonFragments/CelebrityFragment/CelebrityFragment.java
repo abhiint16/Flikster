@@ -7,14 +7,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.GlobalDataStorage;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieAdapter;
 import com.flikster.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 04-10-2017.
@@ -27,15 +38,41 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     CelebrityAdapter celebrityAdapter;
     FragmentManager fragmentManager;
     TextView toolbar_frag_title;
+    ApiInterface apiInterface;
     ImageButton toolbar_back_navigation_btn;
     String slug;
+    List<CelebrityData.CelebrityInnerData> items;
+    Bundle arguments=new Bundle();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_celebrity,container,false);
         initializeViews();
+        tempMethod();
         initializeRest();
         return view;
+    }
+
+    private void tempMethod() {
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/celeb-ms/getCelebBySlug/").create(ApiInterface.class);
+        Call<CelebrityData> call = apiInterface.getCelebrityData("http://apiv3.flikster.com/v3/celeb-ms/getCelebBySlug/"+slug);
+        call.enqueue(new Callback<CelebrityData>() {
+            @Override
+            public void onResponse(Call<CelebrityData> call, Response<CelebrityData> response) {
+                items = response.body().getItems();
+                arguments.putString("profilepic",items.get(0).getProfilePic());
+                arguments.putString("coverpic",items.get(0).getCoverPic());
+                arguments.putString("name",items.get(0).getName());
+                arguments.putStringArrayList("role", (ArrayList<String>) items.get(0).getRole());
+                celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(),arguments);
+                viewPager.setAdapter(celebrityAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<CelebrityData> call, Throwable t) {
+                Log.e("vvvvvvvvvv","vv"+call+t);
+            }
+        });
     }
 
     @Override
@@ -51,10 +88,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeRest() {
-        Bundle arguments=new Bundle();
         arguments.putString("slug",slug);
-        celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(),arguments);
-        viewPager.setAdapter(celebrityAdapter);
         tabLayout.setupWithViewPager(viewPager);
         toolbar_frag_title.setText("Celebrity");
         toolbar_back_navigation_btn.setOnClickListener(this);

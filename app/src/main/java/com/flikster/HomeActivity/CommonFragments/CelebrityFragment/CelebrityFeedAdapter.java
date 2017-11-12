@@ -3,12 +3,15 @@ package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.flikster.GlobalDataStorage;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.R;
@@ -25,16 +28,20 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     Context context;
     FragmentManager fragmentManager;
     List<Integer> type=new ArrayList<>();
-    List<String> imag=new ArrayList<>();
-    public CelebrityFeedAdapter(Context context, FragmentManager fragmentManager) {
+    String profilepic;
+    String coverpic;
+    String name;
+    ArrayList<String> role=new ArrayList<>();
+    public CelebrityFeedAdapter(Context context, FragmentManager fragmentManager,String profilepic,String coverpic,
+                                String name,ArrayList<String> role) {
         this.context=context;
         this.fragmentManager=fragmentManager;
         type.add(1);
         type.add(2);type.add(3);type.add(4);type.add(5);
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+        this.profilepic=profilepic;
+        this.coverpic=coverpic;
+        this.name=name;
+        this.role=role;
     }
 
     @Override
@@ -75,7 +82,14 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder.getItemViewType()==1)
         {
-
+            Log.e("check4global"," "+new GlobalDataStorage().getCelebrityProfilePic());
+            Log.e("check4global1"," "+profilepic);
+            ((ViewHolder1)holder).card_celebrity_feed_profile_name.setText(name);
+            ((ViewHolder1)holder).card_celebrity_feed_profile_role.setText(role.get(0));
+            Glide.with(context).load(profilepic).asBitmap()
+                    .into(((ViewHolder1)holder).card_celebrity_feed_profile_image);
+            Glide.with(context).load(coverpic).asBitmap()
+                    .into(((ViewHolder1)holder).card_celebrity_feed_profile_coverpic);
         }
         else if(holder.getItemViewType()==2)
         {
@@ -112,8 +126,14 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
+        ImageView card_celebrity_feed_profile_image,card_celebrity_feed_profile_coverpic;
+        TextView card_celebrity_feed_profile_name,card_celebrity_feed_profile_role;
         public ViewHolder1(View itemView) {
             super(itemView);
+            card_celebrity_feed_profile_image=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_profile_image);
+            card_celebrity_feed_profile_coverpic=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_profile_coverpic);
+            card_celebrity_feed_profile_name=(TextView)itemView.findViewById(R.id.card_celebrity_feed_profile_name);
+            card_celebrity_feed_profile_role=(TextView)itemView.findViewById(R.id.card_celebrity_feed_profile_role);
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -31,7 +31,9 @@ public class CelebrityAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if(position==0)
         {
-            return  new CelebrityFragmentFeed();
+            CelebrityFragmentFeed celebrityFragmentFeed=new CelebrityFragmentFeed();
+            celebrityFragmentFeed.setArguments(data);
+            return  celebrityFragmentFeed;
         }
         else if(position==1)
         {
@@ -42,7 +44,9 @@ public class CelebrityAdapter extends FragmentStatePagerAdapter {
         }
         else if(position==2)
         {
-            return new CelebrityFragmentStore();
+            CelebrityFragmentStore celebrityFragmentStore=new CelebrityFragmentStore();
+            celebrityFragmentStore.setArguments(data);
+            return  celebrityFragmentStore;
         }
         else
         {
