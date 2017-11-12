@@ -146,7 +146,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public ViewHolder1(View itemView) {
             super(itemView);
             card_celebrity_feed_profile_name=(TextView)itemView.findViewById(R.id.card_celebrity_feed_profile_name);
-            card_celebrity_feed_profile_desc=(TextView)itemView.findViewById(R.id.card_celebrity_feed_profile_desc);
+            card_celebrity_feed_profile_desc=(TextView)itemView.findViewById(R.id.card_celebrity_feed_profile_role);
             card_celebrity_feed_profile_image=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_profile_image);
         }
     }

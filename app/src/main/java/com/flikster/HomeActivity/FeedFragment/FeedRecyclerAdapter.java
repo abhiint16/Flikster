@@ -197,6 +197,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Glide.with(context).load(items.get(position).getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
                 ((ViewHolder7) holder).tv_tag_desc.setText(items.get(position).getCeleb().get(0).getType());
                 ((ViewHolder7) holder).tv_tag_name.setText(items.get(position).getCeleb().get(0).getName());
+                Log.e("check",""+items.get(position).getMedia().getGallery());
             }
             if (items.get(position).getText() == null)
                 ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
@@ -478,13 +479,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
-            //video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
-            //video_btn.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
+            card_gallary1_img1.setOnClickListener(this);
         }
 
         @Override
@@ -505,49 +505,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         .addToBackStack("")
                         .commit();
             }
-
-        }
-    }
-
-    /*public class ViewHolder8 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView profile_image, ib_bookmark;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, tv_quote;
-        LinearLayout header_linear, card_description_linear;
-        Button followbtn;
-
-        public ViewHolder8(View itemView) {
-            super(itemView);
-            tv_quote = (TextView) itemView.findViewById(R.id.tv_quote);
-            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
-            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
-            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
-            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
-            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
-            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
-            card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
-            ib_bookmark = (ImageView) itemView.findViewById(R.id.ib_bookmark);
-            followbtn = (Button) itemView.findViewById(R.id.followbtn);
-            followbtn.setText("Follow");
-            card_description_linear.setOnClickListener(this);
-            profile_image.setOnClickListener(this);
-            header_linear.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            globalData.a = 1;
-            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_name)) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.main_container, new MovieFragment())
-                        .addToBackStack("")
-                        .commit();
-            } else if (view.getId() == R.id.card_description_linear) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.main_container, new MovieFragmentInfo())
-                        .addToBackStack("")
-                        .commit();
+            else if(view.getId()==R.id.card_gallary1_img1)
+            {
+                testing.galleryCardOnClick(items.get(getAdapterPosition()).getMedia().getGallery(),
+                        items.get(getAdapterPosition()).getCeleb().get(0).getName(),
+                        items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(),items.get(getAdapterPosition()).getCeleb().get(0).getType(),
+                        items.get(getAdapterPosition()).getTitle(),new GallaryCardClick());
             }
 
         }
-    }*/
+    }
 }

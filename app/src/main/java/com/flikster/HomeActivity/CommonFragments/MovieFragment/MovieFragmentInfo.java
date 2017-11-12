@@ -52,7 +52,6 @@ public class MovieFragmentInfo extends Fragment {
 
     private void retrofitInit() {
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/").create(ApiInterface.class);
-        Log.e("mmmmmmm","mmmmmmm");
         Call<MovieData> call = apiInterface.getMovieData("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/"+slug);
         call.enqueue(new Callback<MovieData>() {
             @Override
@@ -60,8 +59,6 @@ public class MovieFragmentInfo extends Fragment {
                 items = response.body().getItems();
                 movieInfoAdapter = new MovieInfoAdapter(getActivity(), fragmentManager,items);
                 movieFragmentInfoRecycler.setAdapter(movieInfoAdapter);
-                Log.e("xxxxxxxxx","xxx"+items.size());
-                Log.e("xxxxxxxxx","yyyy"+items);
             }
 
             @Override

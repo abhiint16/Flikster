@@ -33,7 +33,8 @@ public class CelebrityFragmentStore extends Fragment{
     private void initializeRest() {
         celebrityFragmentStoreLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentStoreRecycler.setLayoutManager(celebrityFragmentStoreLayoutManager);
-        celebrityStoreAdapter = new CelebrityStoreAdapter(getActivity(),fragmentManager);
+        celebrityStoreAdapter = new CelebrityStoreAdapter(getActivity(),fragmentManager,getArguments().getString("profilepic"),
+                getArguments().getString("coverpic"),getArguments().getString("name"),getArguments().getStringArrayList("role"));
         celebrityFragmentStoreRecycler.setAdapter(celebrityStoreAdapter);
     }
 

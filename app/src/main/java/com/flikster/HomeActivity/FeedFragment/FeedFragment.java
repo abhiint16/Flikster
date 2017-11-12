@@ -80,7 +80,8 @@ public class FeedFragment extends Fragment {
 
     public interface Testing
     {
-         void test(String name,Fragment fragment,int getClass);
+        void test(String name,Fragment fragment,int getClass);
+        void galleryCardOnClick(List<String> galleryImgLinks,String name,String profilePic,String type,String title,Fragment fragment);
     }
 
     @Override

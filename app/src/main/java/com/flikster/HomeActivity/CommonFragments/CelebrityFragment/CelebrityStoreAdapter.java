@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
 import com.flikster.HomeActivity.StealStyleViewHolder;
@@ -25,22 +26,26 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     Context context;
     FragmentManager fragmentManager;
     List<Integer> type=new ArrayList<>();
-    List<String> imag=new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
     ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
     CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
     StealStyleViewHolder stealStyleViewHolder;
     RecyclerView.LayoutManager layoutManager2;
-    public CelebrityStoreAdapter(Context context, FragmentManager fragmentManager) {
+    String profilepic;
+    String coverpic;
+    String name;
+    ArrayList<String> role=new ArrayList<>();
+    public CelebrityStoreAdapter(Context context, FragmentManager fragmentManager,String profilepic,String coverpic,
+                                 String name,ArrayList<String> role) {
         this.context=context;
         this.fragmentManager=fragmentManager;
         type.add(1);
         type.add(2);type.add(3);type.add(4);type.add(5);type.add(6);type.add(7);type.add(8);type.add(9);type.add(3);type.add(4);
         type.add(3);type.add(4);type.add(7);
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+        this.profilepic=profilepic;
+        this.coverpic=coverpic;
+        this.name=name;
+        this.role=role;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -78,7 +83,16 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder.getItemViewType()==2)
+        if(holder.getItemViewType()==1)
+        {
+            ((CelebrityStoreAdapter.ViewHolder1)holder).card_celebrity_feed_profile_name.setText(name);
+            ((CelebrityStoreAdapter.ViewHolder1)holder).card_celebrity_feed_profile_role.setText(role.get(0));
+            Glide.with(context).load(profilepic).asBitmap()
+                    .into(((CelebrityStoreAdapter.ViewHolder1)holder).card_celebrity_feed_profile_image);
+            Glide.with(context).load(coverpic).asBitmap()
+                    .into(((CelebrityStoreAdapter.ViewHolder1)holder).card_celebrity_feed_profile_coverpic);
+        }
+        else if(holder.getItemViewType()==2)
         {
 
         }
@@ -129,8 +143,14 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
+        ImageView card_celebrity_feed_profile_image,card_celebrity_feed_profile_coverpic;
+        TextView card_celebrity_feed_profile_name,card_celebrity_feed_profile_role;
         public ViewHolder1(View itemView) {
             super(itemView);
+            card_celebrity_feed_profile_image=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_profile_image);
+            card_celebrity_feed_profile_coverpic=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_profile_coverpic);
+            card_celebrity_feed_profile_name=(TextView)itemView.findViewById(R.id.card_celebrity_feed_profile_name);
+            card_celebrity_feed_profile_role=(TextView)itemView.findViewById(R.id.card_celebrity_feed_profile_role);
         }
     }
     public class ViewHolder2 extends RecyclerView.ViewHolder {
