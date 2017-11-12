@@ -1,7 +1,10 @@
 package com.flikster.HomeActivity.WatchFragment;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,11 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.MediaController;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment.ShopByVideoFragmentItemClickAdapter;
 import com.flikster.R;
+
+import java.io.IOException;
 
 /**
  * Created by abhishek on 01-11-2017.
@@ -29,10 +35,13 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManager;
     SongByMovieFragmentItemPlayClickAdapter shopByVideoFragmentItemClickAdapter;
-    VideoView card_shopby_video_recycler_item_onclick_playVideo;
     FragmentManager fragmentManager;
     ImageButton ib_bookmark, toolbar_back_navigation_btn, toolbar_frag_multiicons_search, toolbar_frag_multiicons_overflow, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
     TextView fragment_common_recyclerview_with_tv_title, toolbar_frag_multiicons_title;
+    MediaPlayer musicplay;
+    SeekBar seekBar;
+    ImageButton playibtn, pauseibtn;
+    Handler han = new Handler();
 
     @Nullable
     @Override
@@ -40,7 +49,36 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         view = inflater.inflate(R.layout.fragment_song_with_products, container, false);
         initializeViews();
         initializeRest();
-        playLocalVideo();
+//        playLocalVideo();
+
+        musicplay = MediaPlayer.create(getContext(), R.raw.ringtone);
+        seekBar.setMax(musicplay.getDuration());
+        SeekUpdation();
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                if (playibtn.getVisibility() == View.GONE) {
+                    if (musicplay != null) {
+                        musicplay.pause();
+                    }
+                }
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if (playibtn.getVisibility() == View.GONE) {
+                    if (musicplay != null) {
+                        musicplay.seekTo(seekBar.getProgress());
+                        musicplay.start();
+                    }
+                }
+            }
+        });
         return view;
     }
 
@@ -61,6 +99,9 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         toolbar_frag_multiicons_notification.setVisibility(View.GONE);
         toolbar_frag_multiicons_cart.setVisibility(View.GONE);
         ib_bookmark.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.playlist));
+
+        playibtn.setOnClickListener(this);
+        pauseibtn.setOnClickListener(this);
     }
 
     private void initializeViews() {
@@ -72,32 +113,62 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
-
-        card_shopby_video_recycler_item_onclick_playVideo = (VideoView) view.findViewById(R.id.card_shopby_video_recycler_item_onclick_playVideo);
         ib_bookmark = (ImageButton) view.findViewById(R.id.ib_bookmark);
-    }
-
-    private void playLocalVideo() {
-        //Creating MediaController
-        MediaController mediaController = new MediaController(getContext());
-        mediaController.setAnchorView(card_shopby_video_recycler_item_onclick_playVideo);
-        //specify the location of media file
-        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.demovideo);
-        //Setting MediaController and URI, then starting the videoView
-        card_shopby_video_recycler_item_onclick_playVideo.setMediaController(mediaController);
-        card_shopby_video_recycler_item_onclick_playVideo.setVideoURI(uri);
-        card_shopby_video_recycler_item_onclick_playVideo.requestFocus();
-        card_shopby_video_recycler_item_onclick_playVideo.start();
+        playibtn = (ImageButton) view.findViewById(R.id.playibtn);
+        pauseibtn = (ImageButton) view.findViewById(R.id.pauseibtn);
+        seekBar = (SeekBar) view.findViewById(R.id.seekBar);
     }
 
     @Override
     public void onClick(View view) {
-        fragmentManager.popBackStackImmediate();
+        if (view.getId() == R.id.playibtn) {
+            playibtn.setVisibility(View.GONE);
+            pauseibtn.setVisibility(View.VISIBLE);
+            playAudioSong();
+        } else if (view.getId() == R.id.pauseibtn) {
+            playibtn.setVisibility(View.VISIBLE);
+            pauseibtn.setVisibility(View.GONE);
+            pauseAudioSong();
+        } else {
+            fragmentManager.popBackStackImmediate();
+        }
+
+    }
+
+    private void pauseAudioSong() {
+        if (musicplay != null) {
+            musicplay.pause();
+
+            seekBar.setProgress(musicplay.getCurrentPosition());
+        }
+    }
+
+    private void playAudioSong() {
+      /*  if (musicplay == null)
+            musicplay = MediaPlayer.create(getContext(), R.raw.ringtone);
+        musicplay.start();
+        seekBar.setMax(musicplay.getDuration());
+        seekBar.setProgress(musicplay.getCurrentPosition());*/
+        Uri myUri = Uri.parse("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3");
+        try {
+            musicplay = new MediaPlayer();
+            musicplay.setDataSource(getContext(), myUri);
+            musicplay.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            musicplay.prepare(); //don't use prepareAsync for mp3 playback
+            musicplay.start();
+            seekBar.setMax(musicplay.getDuration());
+            seekBar.setProgress(musicplay.getCurrentPosition());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (musicplay!=null){
+            musicplay.stop();
+        }
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
@@ -107,6 +178,23 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
+    public void SeekUpdation() {
+        if (musicplay != null) {
+//            int mpos = musicplay.getCurrentPosition();
+//            int mdur = musicplay.getDuration();
+            seekBar.setProgress(musicplay.getCurrentPosition());
+            han.postDelayed(run, 1000);
+//            tv1.setText(String.valueOf((float)mpos/100) + " s ");
+//            tv2.setText(String.valueOf((float)mdur/100)+ "m");
+        }
+    }
+
+    Runnable run = new Runnable() {
+        @Override
+        public void run() {
+            SeekUpdation();
+        }
+    };
 
 
 }

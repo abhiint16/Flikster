@@ -43,7 +43,11 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(playVideo);
         //specify the location of media file
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.demovideo);
+//        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.demovideo);
+
+        Uri uri = Uri.parse("https://www.youtube.com/watch?v=JXIiQFSj8Yg");
+//
+
         //Setting MediaController and URI, then starting the videoView
         playVideo.setMediaController(mediaController);
         playVideo.setVideoURI(uri);
@@ -54,7 +58,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     private void initializeViews() {
         playVideo = (VideoView) findViewById(R.id.playVideo);
         closebtn = (Button) findViewById(R.id.closebtn);
-        scrollView=(ScrollView)findViewById(R.id.gallary_fullscreen_scrollimg);
+        scrollView = (ScrollView) findViewById(R.id.gallary_fullscreen_scrollimg);
         playVideo.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
         fragmentManager = getSupportFragmentManager();
@@ -64,7 +68,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         if (view.getId() == R.id.closebtn) {
             Intent in = new Intent(VideoPlayerActivity.this, HomeActivity.class);
-            in.putExtra("VideoPlayer","VideoPlayer");
+            in.putExtra("VideoPlayer", "VideoPlayer");
             startActivity(in);
         }
     }

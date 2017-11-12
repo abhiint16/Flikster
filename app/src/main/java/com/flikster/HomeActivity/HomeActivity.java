@@ -46,6 +46,7 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
+import com.flikster.HomeActivity.WatchFragment.WatchTrailerFragment;
 import com.flikster.MenuFragments.FliksterCreditFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
 import com.flikster.MenuFragments.LogoutFragment;
@@ -62,6 +63,7 @@ import com.flikster.MenuFragments.SettingsFragment;
 import com.flikster.HomeActivity.StoreFragment.StoreFragment;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.MenuFragments.WishListFragment;
+import com.flikster.Util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +98,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         initializeRest();
         checkForLaunch();
         bottomnavigationBar();
+
+        Log.e("Currentdate", DateUtil.currentDate());
+        Log.e("MinutesToHr", String.format("%.2f", DateUtil.mintsTohoursCovert("165")));
+        Log.e("Movietime", DateUtil.mintsToCoverthoursMin("125"));
     }
 
     private void bottomnavigationBar() {
@@ -182,7 +188,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                     beginTransact(new WatchFragment());
                     //
                 } else if (position == 2) {
-
                     //cameraAccessPermission();
                 } else if (position == 3) {
                     beginTransact(new FashionFragment());
@@ -323,7 +328,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         dialog.show();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -378,6 +382,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             case R.id.menu_rewards:
                 beginTransact(new RewardsFragment());
                 break;
+            case R.id.menu_rating:
+                beginTransact(new RatingFragment());
+                break;
+
         }
         return false;
     }

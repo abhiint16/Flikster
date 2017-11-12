@@ -6,11 +6,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="3 Idiots JukeBox" />
+    <include layout="@layout/card_header" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -18,11 +14,21 @@
         android:scaleType="fitXY"
         android:src="@drawable/movie" />
 
-    <include layout="@layout/card_footer"></include>
+    <include layout="@layout/card_footer" />
 
     <include layout="@layout/card_audio_clip" />
 
     <include layout="@layout/card_audio_clip" />
 
-    <include layout="@layout/card_comment_text"></include>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/blue"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginBottom="@dimen/five"
+        android:layout_marginRight="@dimen/ten"
+        android:text="More" />
+    <include layout="@layout/card_comment_text" />
+
 </LinearLayout>

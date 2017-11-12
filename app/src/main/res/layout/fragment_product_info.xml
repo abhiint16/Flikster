@@ -7,18 +7,51 @@
 
     <include layout="@layout/toolbar_frag_multiicons" />
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/video_frame"
         android:layout_width="fill_parent"
         android:layout_height="180dp"
-        android:background="#000">
+        android:layout_gravity="bottom"
+        android:background="@drawable/sahoomusic"
+        android:gravity="bottom">
 
-        <VideoView
-            android:id="@+id/card_shopby_video_recycler_item_onclick_playVideo"
-            android:layout_width="fill_parent"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_height="fill_parent" />
-    </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ten"
+            android:layout_marginRight="@dimen/ten"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageButton
+                android:id="@+id/playibtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@color/transparent"
+                android:src="@drawable/playicon" />
+
+            <ImageButton
+                android:id="@+id/pauseibtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@color/transparent"
+                android:src="@drawable/pausebtn"
+                android:visibility="gone" />
+
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2.5"
+                android:max="100" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
