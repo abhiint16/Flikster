@@ -64,6 +64,7 @@ import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragm
 import com.flikster.MenuFragments.WishListFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,FeedFragment.Testing {
 
@@ -534,5 +535,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             celebrityFragment.updateInfo(name);
             firstTimeLaunch(fragment);
         }
+    }
+
+    @Override
+    public void galleryCardOnClick(List<String> galleryImgLinks,String name,String profilePic,String type,
+                                   String title,Fragment fragment) {
+        GallaryCardClick gallaryCardClick=(GallaryCardClick)fragment;
+        gallaryCardClick.updateImage(galleryImgLinks,name,profilePic,type,title);
+        firstTimeLaunch(fragment);
     }
 }
