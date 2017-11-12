@@ -1,13 +1,16 @@
 package com.flikster.HomeActivity.WatchFragment;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
@@ -17,6 +20,10 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioA
 import com.flikster.HomeActivity.FeedFragment.FeedCelebrityRecyclerItemAdapter;
 import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
 import com.flikster.R;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
+import com.synnapps.carouselview.ImageListener;
+import com.synnapps.carouselview.ViewListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +46,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
     CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
 
+    int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
+
     public WatchAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
@@ -60,7 +69,9 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+//            return new WatchAdapter.ViewHolder1(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.carouselview, parent, false);
             return new WatchAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
@@ -89,11 +100,31 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            watchTrailerViewHolder = new WatchTrailerViewHolder();
-            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(watchTrailerViewHolder);
+
+            final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
+//            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+//            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+//            watchTrailerViewHolder = new WatchTrailerViewHolder();
+//            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(watchTrailerViewHolder);
+            ImageListener imageListeners;
+            imageListeners = new ImageListener() {
+                @Override
+                public void setImageForPosition(int position, ImageView imageView) {
+                    imageView.setImageResource(sampleImages[position]);
+                }
+            };
+            //
+            ((ViewHolder1) holder).carouselView.setImageListener(imageListeners);
+//            ViewListener viewListener = new ViewListener() {
+//                @Override
+//                public View setViewForPosition(int position) {
+//                    View imgview = inflater.inflate(R.layout.card_image_item, null);
+//                    return imgview;
+//                }
+//            };
+
+
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Music");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -118,8 +149,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder();
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFilmographyViewHolder);
-        }
-        else if (holder.getItemViewType() == 6) {
+        } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
@@ -148,11 +178,18 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
+        CarouselView carouselView;
+        View imgview;
+
 
         public ViewHolder1(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+//            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+//            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+
+            carouselView = (CarouselView) itemView.findViewById(R.id.carouselView);
+            carouselView.setPageCount(sampleImages.length);
+
         }
     }
 
@@ -222,6 +259,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
             fragment_common_recyclerview_with_tv_title.setText("Comedy");
         }
+
+
     }
 
 

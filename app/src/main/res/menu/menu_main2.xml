@@ -27,6 +27,9 @@
         android:id="@+id/menu_setting"
         android:title="Settings"></item>
     <item
+        android:id="@+id/menu_rating"
+        android:title="Rating"></item>
+    <item
         android:id="@+id/menu_logout"
         android:title="Logout"></item>
 </menu>

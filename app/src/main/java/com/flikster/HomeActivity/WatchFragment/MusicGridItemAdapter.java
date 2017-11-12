@@ -57,6 +57,8 @@ public class MusicGridItemAdapter extends RecyclerView.Adapter<MusicGridItemAdap
                     .replace(R.id.main_container, new SongByMovieFragment())
                     .addToBackStack("")
                     .commit();
+
+
         }
     }
 }

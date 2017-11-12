@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_alignParentTop="true"
-    android:background="@color/dark_grey"
+    android:background="@color/header_background"
     android:title="Fashion"
     android:titleTextColor="@color/black"
     app:layout_collapseMode="pin"

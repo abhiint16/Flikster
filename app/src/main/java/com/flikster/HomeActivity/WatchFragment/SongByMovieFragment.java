@@ -80,7 +80,7 @@ public class SongByMovieFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
+        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             fragmentManager.popBackStackImmediate();
         }
     }

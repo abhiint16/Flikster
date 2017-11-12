@@ -77,8 +77,8 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
-            fragmentManager.popBackStackImmediate();
-        }
+//        if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
+        fragmentManager.popBackStackImmediate();
+//        }
     }
 }
