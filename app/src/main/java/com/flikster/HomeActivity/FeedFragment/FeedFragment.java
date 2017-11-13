@@ -38,10 +38,11 @@ public class FeedFragment extends Fragment {
     List<FeedInnerData> items;
     Integer Count;
     Testing testing;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
+        view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         retrofitInit();
         initializeViews();
         initializeRest();
@@ -55,14 +56,14 @@ public class FeedFragment extends Fragment {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 items = response.body().getItems();
-                Count=response.body().getCount();
-                feedAdapter = new FeedRecyclerAdapter(getActivity(),fragmentManager,items,Count,testing);
+                Count = response.body().getCount();
+                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, items, Count, testing);
                 fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
             }
 
             @Override
             public void onFailure(Call<FeedData> call, Throwable t) {
-                Log.e("vvvvvvvvvv","vv"+call+t);
+                Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
     }
@@ -74,19 +75,21 @@ public class FeedFragment extends Fragment {
     }
 
     private void initializeViews() {
-        fragment_common_recyclerview_recycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
-        fragmentManager=getActivity().getSupportFragmentManager();
+        fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 
-    public interface Testing
-    {
-        void test(String name,Fragment fragment,int getClass);
-        void galleryCardOnClick(List<String> galleryImgLinks,String name,String profilePic,String type,String title,Fragment fragment);
+    public interface Testing {
+        void test(String name, Fragment fragment, int getClass);
+
+        void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment);
+
+        void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        testing= (Testing) activity;
+        testing = (Testing) activity;
     }
 }

@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
 import com.flikster.R;
+import com.flikster.Util.RoundedImageView;
+
+import java.util.List;
 
 /**
  * Created by abhishek on 16-10-2017.
@@ -29,8 +36,11 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     ImageButton toolbar_back_navigation_btn;
     TextView toolbar_frag_title, titlehedertxt, fragment_common_recyclerview_with_tv_title, tv_name, tv_description;
     Context mContext;
+    TextView tv_tag_name, tv_tag_desc;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
+    String profilePic, title, type, bannerImg, headertitle, description;
+    RoundedImageView profile_image;
 
     @Nullable
     @Override
@@ -40,14 +50,13 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         initializeViews();
         headerTitlesChange();
         initializeRest();
-        titlehedertxt.setText("Two Years Of Bahubali: Lessons Its Success Taught The Industry");
-        tv_description.setText("Ranbir said: \"I have really liked Prabhas. He is amazing in Baahubali.\"\n" +
-                "\n" +
-                "Meanwhile, the Bollywood actor is awaiting the release of Jagga Jasoos, which will hit the screens on July 14.\n" +
-                "\n" +
-                "Ranbir has also co-produced Jagga Jasoos, helmed by Anurag Basu.\n" +
-                "\n" +
-                "Talking about his experience as a producer, he earlier said: \"I am a bad producer. I can't get things done, can't do man management. I was lucky that a lot of the work was taken care of by Anurag Basu. I can be happy that I can just collect awards for the film.\"");
+        if (!headertitle.isEmpty()){
+            titlehedertxt.setText(Html.fromHtml(headertitle) + "");
+        }
+        if (!description.isEmpty()){
+            tv_description.setText(Html.fromHtml(description)+ "");
+        }
+        Log.e("Picimag2", profilePic + "");
         return view;
     }
 
@@ -63,6 +72,11 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
+
+        profile_image = (RoundedImageView) view.findViewById(R.id.profile_image);
+        tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
+        tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
+
         fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
 
@@ -78,6 +92,23 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
         fragment_common_recyclerview_with_tv_recycler.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
+
+        if (!type.isEmpty()){
+            tv_tag_desc.setText(type  + "");
+        }
+        if (!title.isEmpty()){
+            tv_tag_name.setText(title+ "");
+        }
+
+
+        if (!profilePic.isEmpty()){
+            Glide.with(getContext()).load(profilePic).asBitmap().into(profile_image);
+        }
+        if (!bannerImg.isEmpty()){
+            Glide.with(getContext()).load(bannerImg).asBitmap().into(newsimg);
+        }
+
+
     }
 
     @Override
@@ -95,5 +126,15 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     public void onDestroyView() {
         super.onDestroyView();
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+    }
+
+    public void updateImage(String profilePic, String title, String type, String bannerImg, String headertitle, String description) {
+
+        this.profilePic = profilePic;
+        this.title = title;
+        this.type = type;
+        this.bannerImg = bannerImg;
+        this.headertitle = headertitle;
+        this.description = description;
     }
 }

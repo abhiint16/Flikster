@@ -1,13 +1,21 @@
 package com.flikster.Util;
 
+import android.content.Context;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
+
+import com.flikster.R;
+
+import java.util.List;
 
 /**
  * Created by Logins on 10-11-2017.
@@ -88,6 +96,19 @@ public class Common {
         }
         return ssb;
 
+    }
+
+
+
+
+    public static String formatString(String name)
+    {
+        String s=name;
+        if(s.length()>=120)
+        {
+            s=s.substring(0,115)+" ...";
+        }
+        return s;
     }
 
 }

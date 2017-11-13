@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:layout_width="match_parent"
+    android:clickable="true"
     android:layout_height="wrap_content"
     android:id="@+id/card_description_linear"
     android:padding="12dp">
@@ -12,12 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
+        android:clickable="false"
         android:text="dfcdsfgdgfhfghng"
         android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="match_parent"
+        android:clickable="false"
         android:layout_height="wrap_content"
         android:text="dsgfdhgtfhjmnhmnhnjhnjhynmjhmnjhnm"
         android:textStyle="normal"

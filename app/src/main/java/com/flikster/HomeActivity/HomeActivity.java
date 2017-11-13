@@ -43,6 +43,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
@@ -550,6 +551,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                                    String title,Fragment fragment) {
         GallaryCardClick gallaryCardClick=(GallaryCardClick)fragment;
         gallaryCardClick.updateImage(galleryImgLinks,name,profilePic,type,title);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment) {
+        NewsOnClickFragment gallaryCardClick=(NewsOnClickFragment)fragment;
+        gallaryCardClick.updateImage(profilePic,title,type,bannerImg,headertitle,description);
         firstTimeLaunch(fragment);
     }
 }
