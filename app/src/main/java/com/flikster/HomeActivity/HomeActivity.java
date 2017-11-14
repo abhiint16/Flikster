@@ -536,12 +536,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         {
             MovieFragment movieFragment= (MovieFragment) fragment;
             movieFragment.updateInfo(name);
+            Log.e("inside home movie","indies home movie"+name);
             firstTimeLaunch(fragment);
         }
         else if(getClass==2)
         {
             CelebrityFragment celebrityFragment=(CelebrityFragment)fragment;
             celebrityFragment.updateInfo(name);
+            Log.e("inside home celeb","indie home celbe");
             firstTimeLaunch(fragment);
         }
     }

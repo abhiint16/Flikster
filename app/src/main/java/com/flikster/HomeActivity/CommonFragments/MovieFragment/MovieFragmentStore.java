@@ -10,17 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityStoreAdapter;
 import com.flikster.R;
 
 /**
  * Created by abhishek on 12-10-2017.
  */
 
-public class MovieFragmentFeed extends Fragment{
+public class MovieFragmentStore extends Fragment{
     View view;
-    RecyclerView movieFragmentFeedRecycler;
-    RecyclerView.LayoutManager movieFragmentFeedLayoutManager;
-    MovieFeedAdapter movieFeedAdapter;
+    RecyclerView celebrityFragmentStoreRecycler;
+    RecyclerView.LayoutManager celebrityFragmentStoreLayoutManager;
+    MovieStoreAdapter movieStoreAdapter;
     FragmentManager fragmentManager;
     @Nullable
     @Override
@@ -30,17 +31,16 @@ public class MovieFragmentFeed extends Fragment{
         initializeRest();
         return  view;
     }
-
     private void initializeRest() {
-        movieFragmentFeedLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        movieFragmentFeedRecycler.setLayoutManager(movieFragmentFeedLayoutManager);
-        movieFeedAdapter = new MovieFeedAdapter(getActivity(),fragmentManager,getArguments().getString("profilepic"),
+        celebrityFragmentStoreLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        celebrityFragmentStoreRecycler.setLayoutManager(celebrityFragmentStoreLayoutManager);
+        movieStoreAdapter = new MovieStoreAdapter(getActivity(),fragmentManager,getArguments().getString("profilepic"),
                 getArguments().getString("coverpic"),getArguments().getString("name"),getArguments().getStringArrayList("role"));
-        movieFragmentFeedRecycler.setAdapter(movieFeedAdapter);
+        celebrityFragmentStoreRecycler.setAdapter(movieStoreAdapter);
     }
 
     private void initializeViews() {
-        movieFragmentFeedRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        celebrityFragmentStoreRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager=getActivity().getSupportFragmentManager();
     }
 }

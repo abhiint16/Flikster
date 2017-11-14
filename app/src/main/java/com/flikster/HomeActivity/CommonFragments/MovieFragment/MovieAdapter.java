@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentStore;
 
@@ -30,21 +31,26 @@ public class MovieAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if(position==0)
         {
-            return  new MovieFragmentFeed();
+            MovieFragmentFeed movieFragmentFeed=new MovieFragmentFeed();
+            movieFragmentFeed.setArguments(data);
+            return  movieFragmentFeed;
         }
         else if(position==1)
         {
             MovieFragmentInfo movieFragmentInfo=new MovieFragmentInfo();
+            Log.e("DataMovie", data +"");
             movieFragmentInfo.setArguments(data);
             return movieFragmentInfo;
         }
         else if(position==2)
         {
-            return new CelebrityFragmentStore();
+            MovieFragmentStore movieFragmentStore=new MovieFragmentStore();
+            movieFragmentStore.setArguments(data);
+            return movieFragmentStore;
         }
         else
         {
-            return null;
+            return null ;
         }
 
     }

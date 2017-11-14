@@ -45,18 +45,22 @@ public class MovieFragmentInfo extends Fragment {
         initializeViews();
         bundle=getArguments();
         this.slug=bundle.getString("slug");
+        Log.e("slugMovieInfo1", "SSS");
+        Log.e("slugMovieInfo1", slug + "Shiva");
         retrofitInit();
         initializeRest();
         return view;
     }
 
     private void retrofitInit() {
+        Log.e("slugMovieInfo", slug);
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/").create(ApiInterface.class);
         Call<MovieData> call = apiInterface.getMovieData("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/"+slug);
         call.enqueue(new Callback<MovieData>() {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
                 items = response.body().getItems();
+                Log.e("ResData", items.toString()+"");
                 movieInfoAdapter = new MovieInfoAdapter(getActivity(), fragmentManager,items);
                 movieFragmentInfoRecycler.setAdapter(movieInfoAdapter);
             }

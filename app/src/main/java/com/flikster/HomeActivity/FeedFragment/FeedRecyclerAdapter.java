@@ -111,7 +111,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(stealStyleLayoutManager);
             stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext(), fragmentManager);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(stealStyleViewHolder);*/
-            ((ViewHolder2) holder).card_quote_tv.setText(items.get(position).getTitle());
+            ((ViewHolder2) holder).card_quote_tv.setText(items.get(position).getText());
             if (items.get(position).getMovie() != null) {
                 Log.e("pic", "" + items.get(position).getMovie().get(0).getProfilePic());
                 Glide.with(context).load(items.get(position).getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
@@ -122,13 +122,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder2) holder).tv_tag_desc.setText(items.get(position).getCeleb().get(0).getType());
                 ((ViewHolder2) holder).tv_tag_name.setText(items.get(position).getCeleb().get(0).getName());
             }
-            if (items.get(position).getText() == null)
+            //if (items.get(position).getText() == null)
                 ((ViewHolder2) holder).tv_description.setVisibility(View.GONE);
-            else if (items.get(position).getText() != null)
-                ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(items.get(position).getText()));
+            //else if (items.get(position).getText() != null)
+              //  ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(items.get(position).getText()));
             ((ViewHolder2) holder).tv_name.setText(items.get(position).getTitle());
         } else if (holder.getItemViewType() == 3) {
 
+            Log.e("hfdhhd","insde news"+items.get(position).getMovie());
             if (items.get(position).getMovie() != null) {
                 Log.e("CelaDta", "news_card" + items.get(position).getMovie().get(0).getProfilePic());
                 Log.e("pic", "" + items.get(position).getMovie().get(0).getProfilePic());
@@ -151,11 +152,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             // Common.makeTextViewResizable(((ViewHolder3) holder).tv_description, 3, "View More", true);
 
         } else if (holder.getItemViewType() == 4) {
-            if (items.get(position).getMovie() != null) {
+            if (items.get(position).getMovie() != null && items.get(position).getMovie().size() != 0) {
                 Glide.with(context).load(items.get(position).getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
                 ((ViewHolder4) holder).tv_tag_desc.setText(items.get(position).getMovie().get(0).getType());
                 ((ViewHolder4) holder).tv_tag_name.setText(items.get(position).getMovie().get(0).getName());
-            } else if (items.get(position).getCeleb() != null) {
+            } else if (items.get(position).getCeleb() != null && items.get(position).getCeleb().size() != 0) {
                 Glide.with(context).load(items.get(position).getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
                 ((ViewHolder4) holder).tv_tag_desc.setText(items.get(position).getCeleb().get(0).getType());
                 ((ViewHolder4) holder).tv_tag_name.setText(items.get(position).getCeleb().get(0).getName());
@@ -199,7 +200,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(items.get(position).getProfilePic()).into(((ViewHolder6) holder).card_gallary1_img1);
             ((ViewHolder6) holder).tv_name.setText(items.get(position).getTitle());
         } else if (holder.getItemViewType() == 7) {
-            if (items.get(position).getMovie() != null) {
+            if (items.get(position).getMovie() != null && items.get(position).getMovie().size() != 0) {
                 Glide.with(context).load(items.get(position).getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
                 ((ViewHolder7) holder).tv_tag_desc.setText(items.get(position).getMovie().get(0).getType());
                 ((ViewHolder7) holder).tv_tag_name.setText(items.get(position).getMovie().get(0).getName());
@@ -253,6 +254,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case "social-buzz":
                 return 4;
             case "interview":
+                return 4;
+            case "trailer":
                 return 4;
         }
         return super.getItemViewType(position);
@@ -421,9 +424,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         .addToBackStack("")
                         .commit();
             } else if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                if (items.get(getAdapterPosition()).getCeleb() == null) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
                     testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (items.get(getAdapterPosition()).getMovie() == null) {
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             }
@@ -460,7 +463,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
                 if (items.get(getAdapterPosition()).getMovie() != null) {
                     testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                    Log.e("movie-making","movie making");
                 } else if (items.get(getAdapterPosition()).getCeleb() != null) {
+                    Log.e("celeb-making","celeb making");
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             }

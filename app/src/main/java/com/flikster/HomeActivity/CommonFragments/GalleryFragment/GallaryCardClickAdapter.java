@@ -66,10 +66,7 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        if (galleryImgLinks.size() != 0) {
             return galleryImgLinks.size() + 1;
-        }
-        return 1;
     }
 
     @Override

@@ -34,7 +34,6 @@
         android:layout_marginTop="40dp"
         android:background="@color/white"
         android:scaleType="fitXY"
-        android:padding="@dimen/five"
         android:src="@drawable/usericonsquare" />
 
     <TextView

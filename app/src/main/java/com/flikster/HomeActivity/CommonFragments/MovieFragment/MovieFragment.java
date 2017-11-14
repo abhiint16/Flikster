@@ -7,13 +7,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityAdapter;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 16-10-2017.
@@ -26,15 +38,57 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     MovieAdapter movieAdapter;
     FragmentManager fragmentManager;
     TextView toolbar_frag_title;
+    ApiInterface apiInterface;
     ImageButton toolbar_back_navigation_btn;
+    Bundle arguments = new Bundle();
+    List<MovieData.MovieInnerData> items;
     String slug;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_celebrity,container,false);
         initializeViews();
+        Log.e("slug",""+slug);
+        tempMethod();
         initializeRest();
         return view;
+    }
+
+    private void tempMethod() {
+        Log.e("slug1",""+slug);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/").create(ApiInterface.class);
+        Call<MovieData> call = apiInterface.getMovieData("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/" + "psv-garuda-vega-tollywood");
+        call.enqueue(new Callback<MovieData>() {
+            @Override
+            public void onResponse(Call<MovieData> call, Response<MovieData> response) {
+                items = response.body().getItems();
+                Log.e("CeleprofilePic", items.size()+"Shiv");
+                Log.e("CeleprofilePic1", items.get(0).getCoverPic()+"Shiv");
+                Log.e("slugjsjjsjsj1","ajja"+slug+" "+arguments);
+
+                if (items.size() != 0){
+                    arguments.putString("profilepic", items.get(0).getProfilePic());
+                    arguments.putString("coverpic", items.get(0).getCoverPic());
+                    arguments.putString("name", items.get(0).getTitle());
+                    //arguments.putStringArrayList("role", (ArrayList<String>) items.get(0).getRole());
+                    movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
+                    viewPager.setAdapter(movieAdapter);
+                }else {
+                    arguments.putString("profilepic", "");
+                    arguments.putString("coverpic", "");
+                    arguments.putString("name", "");
+                    arguments.putStringArrayList("role", new  ArrayList<String>(){{add("");add("");}});
+                    movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
+                    viewPager.setAdapter(movieAdapter);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<MovieData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
     @Override
@@ -60,10 +114,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initializeRest() {
-        Bundle arguments=new Bundle();
         arguments.putString("slug",slug);
-        movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
-        viewPager.setAdapter(movieAdapter);
+        Log.e("slugjsjjsjsj","ajja"+slug+" "+arguments);
         tabLayout.setupWithViewPager(viewPager);
         toolbar_frag_title.setText("Movies");
         toolbar_back_navigation_btn.setOnClickListener(this);
