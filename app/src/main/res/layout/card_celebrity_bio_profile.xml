@@ -17,7 +17,7 @@
             android:layout_height="0dp"
             android:layout_weight="1.5"
             android:scaleType="fitXY"
-            android:background="#4e4e4e"></ImageView>
+            android:background="@color/color_tab_2"/>
 
         <View
             android:layout_width="match_parent"
@@ -32,15 +32,17 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:src="@drawable/pooja2"
-        android:scaleType="fitXY"/>
+        android:background="@color/white"
+        android:scaleType="fitXY"
+        android:paddingTop="@dimen/five"
+        android:padding="@dimen/five"
+        android:src="@drawable/usericonsquare" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="55dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="80dp"
-        android:layout_toLeftOf="@+id/card_celebrity_bio_profile_profilepic"
         android:text="258 Followers"
         android:textColor="@color/white"
         android:textSize="12sp" />
@@ -48,7 +50,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="80dp"
         android:layout_toRightOf="@+id/card_celebrity_bio_profile_profilepic"
         android:background="@drawable/white_round_border"

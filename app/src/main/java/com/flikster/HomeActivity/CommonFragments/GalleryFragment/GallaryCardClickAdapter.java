@@ -29,23 +29,21 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     List<String> galleryImgLinks;
-    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder=new CelebrityBioAdapterImagesViewHolder(context);
-    public GallaryCardClickAdapter(Context context, FragmentManager fragmentManager,List<String> galleryImgLinks) {
-        this.context=context;
-        globalData=new GlobalData();
-        this.fragmentManager=fragmentManager;
-        this.galleryImgLinks=galleryImgLinks;
+    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
+
+    public GallaryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
+        this.context = context;
+        globalData = new GlobalData();
+        this.fragmentManager = fragmentManager;
+        this.galleryImgLinks = galleryImgLinks;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType==0)
-        {
-            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary_item_onclick_recycler_item,parent,false);
+        if (viewType == 0) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary_item_onclick_recycler_item, parent, false);
             return new ViewHolder1(view);
-        }
-        else
-        {
+        } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
             return new ViewHolder2(view);
         }
@@ -55,28 +53,28 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         //holder.gallary_recycler_item_img.setContentDescription("aaaaaaaaaaaa");
         //Glide.with(holder.itemView.getContext()).load(globalData.imag.get(position)).into(holder.gallary_recycler_item_img);
-        if(holder.getItemViewType()==0)
-        {
+        if (holder.getItemViewType() == 0) {
             //((ViewHolder1)holder).gallary_recycler_item_img.setImageResource(galleryImgLinks.get(position));
             Glide.with(context).load(galleryImgLinks.get(position)).asBitmap().into(((ViewHolder1) holder).gallary_recycler_item_img);
-        }
-        else
-        {
-            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
-            layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
-            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            ((ViewHolder2)holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
+        } else {
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
+            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
         }
     }
 
     @Override
     public int getItemCount() {
-        return galleryImgLinks.size()+1;
+        if (galleryImgLinks.size() != 0) {
+            return galleryImgLinks.size() + 1;
+        }
+        return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if((position)==galleryImgLinks.size())
+        if ((position) == galleryImgLinks.size())
             return 1;
         else
             return 0;
@@ -84,28 +82,28 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView gallary_recycler_item_img;
+
         public ViewHolder1(View itemView) {
             super(itemView);
-            gallary_recycler_item_img=(ImageView)itemView.findViewById(R.id.gallary_recycler_item_img);
+            gallary_recycler_item_img = (ImageView) itemView.findViewById(R.id.gallary_recycler_item_img);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(context,GallaryFullScreen.class);
+            Intent intent = new Intent(context, GallaryFullScreen.class);
             context.startActivity(intent);
         }
     }
 
-    public  class ViewHolder2 extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder2 extends RecyclerView.ViewHolder {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
-        public ViewHolder2(View itemView)
-        {
+
+        public ViewHolder2(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title=(TextView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler=(RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,16 +37,26 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
     CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
     List<CelebrityData.CelebrityInnerData> items;
-    Boolean biographyBoolean=true;
+    Boolean biographyBoolean = true;
 
-    public CelebrityBioAdapter(Context context, FragmentManager fragmentManager,List<CelebrityData.CelebrityInnerData> items) {
+    public CelebrityBioAdapter(Context context, FragmentManager fragmentManager, List<CelebrityData.CelebrityInnerData> items) {
         this.context = context;
         this.fragmentManager = fragmentManager;
-        type.add(1);type.add(2);type.add(3);type.add(4);
-        type.add(5);type.add(6);type.add(7);type.add(8);
-        type.add(9);type.add(3);type.add(4);type.add(3);
-        type.add(4);type.add(7);
-        this.items=items;
+        type.add(1);
+        type.add(2);
+        type.add(3);
+        type.add(4);
+        type.add(5);
+        type.add(6);
+        type.add(7);
+        type.add(8);
+        type.add(9);
+        type.add(3);
+        type.add(4);
+        type.add(3);
+        type.add(4);
+        type.add(7);
+        this.items = items;
     }
 
     @Override
@@ -80,32 +91,27 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public  String formatDOB(String dob)
-    {
-        String subString=dob.substring(3,dob.indexOf("GMT")-9);
+    public String formatDOB(String dob) {
+        String subString = dob.substring(3, dob.indexOf("GMT") - 9);
         return subString;
     }
 
-    public String formatRole()
-    {
-        String roleString="";
-        for(int i=0;i<items.get(0).role.size();i++)
-        {
-            if(i<items.get(0).role.size()-1)
-                roleString=roleString+items.get(0).getRole().get(i)+" , ";
+    public String formatRole() {
+        String roleString = "";
+        for (int i = 0; i < items.get(0).role.size(); i++) {
+            if (i < items.get(0).role.size() - 1)
+                roleString = roleString + items.get(0).getRole().get(i) + " , ";
             else
-                roleString=roleString+items.get(0).getRole().get(i);
+                roleString = roleString + items.get(0).getRole().get(i);
         }
         return roleString;
     }
 
-    public Spannable formatBiography()
-    {
-        String storyLine=items.get(0).getBiography();
+    public Spannable formatBiography() {
+        String storyLine = items.get(0).getBiography();
         Spannable spannable = null;
-        if(storyLine.length()>200)
-        {
-            storyLine=storyLine.substring(0,190)+" ...Click To Expand";
+        if (storyLine.length() > 200) {
+            storyLine = storyLine.substring(0, 190) + " ...Click To Expand";
             spannable = new SpannableString(storyLine);
             spannable.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorAccent)), 190
                     , storyLine.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -113,43 +119,50 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         return spannable;
     }
-    public void storyLineOnClick(CelebrityBioAdapter.ViewHolder1 holder)
-    {
-        String storyLine=items.get(0).getBiography();
-        if(storyLine.length()>200&&biographyBoolean==true)
-        {
+
+    public void storyLineOnClick(CelebrityBioAdapter.ViewHolder1 holder) {
+        String storyLine = items.get(0).getBiography();
+        if (storyLine.length() > 200 && biographyBoolean == true) {
             holder.card_celebrity_bio_profile_biography.setText(items.get(0).getBiography());
-            biographyBoolean=false;
-        }
-        else if(storyLine.length()>200&&biographyBoolean==false)
-        {
+            biographyBoolean = false;
+        } else if (storyLine.length() > 200 && biographyBoolean == false) {
             holder.card_celebrity_bio_profile_biography.setText(formatBiography());
-            biographyBoolean=true;
+            biographyBoolean = true;
         }
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        if(holder.getItemViewType()==1)
-        {
-            if(items.get(0).getBiography().length()<=200)
-                ((ViewHolder1)holder).card_celebrity_bio_profile_biography.setText(items.get(0).getBiography());
-            else if(items.get(0).getBiography().length()>200)
-                ((ViewHolder1)holder).card_celebrity_bio_profile_biography.setText(formatBiography(),TextView.BufferType.SPANNABLE);
-            ((ViewHolder1)holder).card_celebrity_bio_profile_biography.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    storyLineOnClick(((ViewHolder1)holder));
+        if (holder.getItemViewType() == 1) {
+            Log.e("DOB", "Shiva" + items.size());
+            if (items.size() != 0){
+                try {
+                    if (items.get(0).getBiography() != null && !items.get(0).getBiography().isEmpty() && items.get(0).getBiography().length() != 0) {
+                        if (items.get(0).getBiography().length() <= 200)
+                            ((ViewHolder1) holder).card_celebrity_bio_profile_biography.setText(items.get(0).getBiography());
+                        else if (items.get(0).getBiography().length() > 200)
+                            ((ViewHolder1) holder).card_celebrity_bio_profile_biography.setText(formatBiography(), TextView.BufferType.SPANNABLE);
+                    }
+
+                    ((ViewHolder1) holder).card_celebrity_bio_profile_biography.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            storyLineOnClick(((ViewHolder1) holder));
+                        }
+                    });
+                    Log.e("DOB", "Shiva" + formatDOB(items.get(0).getDateOfBirth()));
+                    ((ViewHolder1) holder).card_celebrity_bio_profile_dob.setText(formatDOB(items.get(0).getDateOfBirth() + ""));
+                    ((ViewHolder1) holder).card_celebrity_bio_profile_name.setText(items.get(0).getName() + "");
+                    ((ViewHolder1) holder).card_celebrity_bio_profile_pob.setText(items.get(0).getPlaceOfBirth() + "");
+                    ((ViewHolder1) holder).card_celebrity_bio_profile_role.setText(formatRole() + "");
+                    Glide.with(context).load(items.get(0).getProfilePic()).asBitmap().into(((ViewHolder1) holder).card_celebrity_bio_profile_profilepic);
+                    Glide.with(context).load(items.get(0).getCoverPic()).asBitmap().into(((ViewHolder1) holder).card_celebrity_bio_profile_coverpic);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
-            ((ViewHolder1)holder).card_celebrity_bio_profile_dob.setText(formatDOB(items.get(0).getDateOfBirth()));
-            ((ViewHolder1)holder).card_celebrity_bio_profile_name.setText(items.get(0).getName());
-            ((ViewHolder1)holder).card_celebrity_bio_profile_pob.setText(items.get(0).getPlaceOfBirth());
-            ((ViewHolder1)holder).card_celebrity_bio_profile_role.setText(formatRole());
-            Glide.with(context).load(items.get(0).getProfilePic()).asBitmap().into(((ViewHolder1)holder).card_celebrity_bio_profile_profilepic);
-            Glide.with(context).load(items.get(0).getCoverPic()).asBitmap().into(((ViewHolder1)holder).card_celebrity_bio_profile_coverpic);
-        }
-        else if (holder.getItemViewType() == 2) {
+            }
+
+        } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
@@ -162,13 +175,13 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
         } else if (holder.getItemViewType() == 5) {
-            ((ViewHolder5)holder).fragment_common_recyclerview_with_tv_title.setText("Filmography");
+            ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_title.setText("Filmography");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder();
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFilmographyViewHolder);
         } else if (holder.getItemViewType() == 6) {
-            ((ViewHolder6)holder).fragment_common_recyclerview_with_tv_title.setText("Peers");
+            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Peers");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder();
@@ -194,18 +207,18 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
-        ImageView card_celebrity_bio_profile_coverpic,card_celebrity_bio_profile_profilepic;
-        TextView card_celebrity_bio_profile_pob,card_celebrity_bio_profile_dob
-                ,card_celebrity_bio_profile_role,card_celebrity_bio_profile_biography,card_celebrity_bio_profile_name;
+        ImageView card_celebrity_bio_profile_coverpic, card_celebrity_bio_profile_profilepic;
+        TextView card_celebrity_bio_profile_pob, card_celebrity_bio_profile_dob, card_celebrity_bio_profile_role, card_celebrity_bio_profile_biography, card_celebrity_bio_profile_name;
+
         public ViewHolder1(View itemView) {
             super(itemView);
-            card_celebrity_bio_profile_coverpic=(ImageView)itemView.findViewById(R.id.card_celebrity_bio_profile_coverpic);
-            card_celebrity_bio_profile_profilepic=(ImageView)itemView.findViewById(R.id.card_celebrity_bio_profile_profilepic);
-            card_celebrity_bio_profile_pob=(TextView)itemView.findViewById(R.id.card_celebrity_bio_profile_pob);
-            card_celebrity_bio_profile_dob=(TextView)itemView.findViewById(R.id.card_celebrity_bio_profile_dob);
-            card_celebrity_bio_profile_role=(TextView)itemView.findViewById(R.id.card_celebrity_bio_profile_role);
-            card_celebrity_bio_profile_biography=(TextView)itemView.findViewById(R.id.card_celebrity_bio_profile_biography);
-            card_celebrity_bio_profile_name=(TextView)itemView.findViewById(R.id.card_celebrity_bio_profile_name);
+            card_celebrity_bio_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celebrity_bio_profile_coverpic);
+            card_celebrity_bio_profile_profilepic = (ImageView) itemView.findViewById(R.id.card_celebrity_bio_profile_profilepic);
+            card_celebrity_bio_profile_pob = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_pob);
+            card_celebrity_bio_profile_dob = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_dob);
+            card_celebrity_bio_profile_role = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_role);
+            card_celebrity_bio_profile_biography = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_biography);
+            card_celebrity_bio_profile_name = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_name);
         }
     }
 
@@ -243,7 +256,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder5(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title=(TextView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }
@@ -254,7 +267,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder6(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title =(TextView)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
     }

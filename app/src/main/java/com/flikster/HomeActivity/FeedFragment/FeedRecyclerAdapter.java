@@ -291,7 +291,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_quote_tv;
-        LinearLayout card_description_linear;
+        LinearLayout card_description_linear, header_linear;
 
         public ViewHolder2(View itemView) {
             super(itemView);
@@ -302,12 +302,19 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_quote_tv = (TextView) itemView.findViewById(R.id.card_quote_tv);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            header_linear.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_description_linear) {
+            if (view.getId() == R.id.header_linear) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
+                    testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
+                    testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                }
             }
         }
     }
@@ -343,9 +350,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Intent intent = new Intent(context, VideoPlayerActivity.class);
                 context.startActivity(intent);
             } else if ((view.getId() == R.id.profile_image) || (view.getId() == R.id.header_linear)) {
-                if (items.get(getAdapterPosition()).getCeleb() == null) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
                     testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (items.get(getAdapterPosition()).getMovie() == null) {
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_description_linear) {
@@ -367,7 +374,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             items.get(getAdapterPosition()).getTitle(),
                             items.get(getAdapterPosition()).getText(), new NewsOnClickFragment()
                     );
-                }else {
+                } else {
                     testing.newsCardOnClick("",
                             "",
                             "",
@@ -451,9 +458,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                if (items.get(getAdapterPosition()).getCeleb() == null) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
                     testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (items.get(getAdapterPosition()).getMovie() == null) {
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             }
