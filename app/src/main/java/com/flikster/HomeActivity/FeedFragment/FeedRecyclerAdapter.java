@@ -111,7 +111,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(stealStyleLayoutManager);
             stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext(), fragmentManager);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(stealStyleViewHolder);*/
-            ((ViewHolder2) holder).card_quote_tv.setText(items.get(position).getTitle());
+            ((ViewHolder2) holder).card_quote_tv.setText(items.get(position).getText());
             if (items.get(position).getMovie() != null) {
                 Log.e("pic", "" + items.get(position).getMovie().get(0).getProfilePic());
                 Glide.with(context).load(items.get(position).getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
@@ -122,10 +122,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder2) holder).tv_tag_desc.setText(items.get(position).getCeleb().get(0).getType());
                 ((ViewHolder2) holder).tv_tag_name.setText(items.get(position).getCeleb().get(0).getName());
             }
-            if (items.get(position).getText() == null)
+            //if (items.get(position).getText() == null)
                 ((ViewHolder2) holder).tv_description.setVisibility(View.GONE);
-            else if (items.get(position).getText() != null)
-                ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(items.get(position).getText()));
+            //else if (items.get(position).getText() != null)
+              //  ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(items.get(position).getText()));
             ((ViewHolder2) holder).tv_name.setText(items.get(position).getTitle());
         } else if (holder.getItemViewType() == 3) {
 
