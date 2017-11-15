@@ -116,6 +116,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, GalleryFullScreen.class);
+            intent.putExtra("galleryimglink",galleryImgLinks.get(getAdapterPosition()));
             context.startActivity(intent);
         }
     }

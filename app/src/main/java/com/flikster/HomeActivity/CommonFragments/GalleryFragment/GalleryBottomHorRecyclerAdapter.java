@@ -55,7 +55,7 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Galler
             super(itemView);
             carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
             carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
         }
 
         @Override

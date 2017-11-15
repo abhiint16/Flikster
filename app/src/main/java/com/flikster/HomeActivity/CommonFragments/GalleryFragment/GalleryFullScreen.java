@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 
@@ -35,7 +36,7 @@ public class GalleryFullScreen extends AppCompatActivity implements View.OnClick
     private void initializeRest() {
         videoView.setVisibility(View.GONE);
         scrollView.setVisibility(View.VISIBLE);
-        imageView.setImageResource(R.drawable.pooja);
+        Glide.with(this).load(getIntent().getStringExtra("galleryimglink")).into(imageView);
         closebtn.setOnClickListener(this);
     }
 
