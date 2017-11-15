@@ -363,7 +363,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             items.get(getAdapterPosition()).getMovie().get(0).getType(),
                             items.get(getAdapterPosition()).getProfilePic(),
                             items.get(getAdapterPosition()).getTitle(),
-                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment()
+                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment(),
+                            items.get(getAdapterPosition()).getContentType()
                     );
                 } else if (items.get(getAdapterPosition()).getCeleb() != null) {
                     Log.e("Card_data", "Celebr" + items.get(getAdapterPosition()).getCeleb().get(0).getName());
@@ -372,7 +373,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             items.get(getAdapterPosition()).getCeleb().get(0).getType(),
                             items.get(getAdapterPosition()).getProfilePic(),
                             items.get(getAdapterPosition()).getTitle(),
-                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment()
+                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment(),
+                            items.get(getAdapterPosition()).getContentType()
                     );
                 } else {
                     testing.newsCardOnClick("",
@@ -380,14 +382,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "",
                             items.get(getAdapterPosition()).getProfilePic(),
                             items.get(getAdapterPosition()).getTitle(),
-                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment());
+                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment(),
+                            items.get(getAdapterPosition()).getContentType());
                 }
-
-
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.main_container, new NewsOnClickFragment())
-//                        .addToBackStack("")
-//                        .commit();
             }
         }
 
@@ -446,12 +443,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
-            //video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
-            //video_btn.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
         }
 
@@ -464,6 +459,34 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (items.get(getAdapterPosition()).getCeleb() != null) {
                     Log.e("celeb-making","celeb making");
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                }
+            }
+            else if (view.getId() == R.id.card_description_linear) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
+                    Log.e("Card_data", "Movies" + items.get(getAdapterPosition()).getMovie().get(0).getName());
+                    testing.newsCardOnClick(items.get(getAdapterPosition()).getMovie().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getName(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType()
+                    );
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
+                    Log.e("Card_data", "Celebr" + items.get(getAdapterPosition()).getCeleb().get(0).getName());
+                    testing.newsCardOnClick(items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getName(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType()
+                    );
+                } else {
+                    testing.newsCardOnClick("",
+                            "",
+                            "",
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType());
                 }
             }
         }

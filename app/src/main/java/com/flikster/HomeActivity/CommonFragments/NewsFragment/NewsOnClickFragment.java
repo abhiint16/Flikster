@@ -47,7 +47,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     TextView tv_tag_name, tv_tag_desc;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
     NewsBottomHorRecyclerAdapter newsBottomHorRecyclerAdapter;
-    String profilePic, title, type, bannerImg, headertitle, description;
+    String profilePic, title, type, bannerImg, headertitle, description,contentType;
     RoundedImageView profile_image;
     ApiInterface apiInterface;
     List<NewsData.NewsInnerData> items;
@@ -68,13 +68,15 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         if (!description.isEmpty()){
             tv_description.setText(Html.fromHtml(description)+ "");
         }
+        if(description.trim().length()==0)
+            tv_description.setVisibility(View.GONE);
         Log.e("Picimag2", profilePic + "");
         return view;
     }
 
     private void bottomHorRecyclerRetrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/news").create(ApiInterface.class);
-        Call<NewsData> call = apiInterface.getNewsData("http://apiv3.flikster.com/v3/content-ms/getContentByType/news");
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/"+contentType).create(ApiInterface.class);
+        Call<NewsData> call = apiInterface.getNewsData("http://apiv3.flikster.com/v3/content-ms/getContentByType/"+contentType);
         call.enqueue(new Callback<NewsData>() {
             @Override
             public void onResponse(Call<NewsData> call, Response<NewsData> response) {
@@ -154,7 +156,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
-    public void updateImage(String profilePic, String title, String type, String bannerImg, String headertitle, String description) {
+    public void updateImage(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String contentType) {
 
         this.profilePic = profilePic;
         this.title = title;
@@ -162,5 +164,6 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         this.bannerImg = bannerImg;
         this.headertitle = headertitle;
         this.description = description;
+        this.contentType=contentType;
     }
 }

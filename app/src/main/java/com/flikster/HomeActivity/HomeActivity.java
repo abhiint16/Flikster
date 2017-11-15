@@ -556,9 +556,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment) {
+    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment,String contentType) {
         NewsOnClickFragment gallaryCardClick=(NewsOnClickFragment)fragment;
-        gallaryCardClick.updateImage(profilePic,title,type,bannerImg,headertitle,description);
+        gallaryCardClick.updateImage(profilePic,title,type,bannerImg,headertitle,description,contentType);
         firstTimeLaunch(fragment);
     }
 }
