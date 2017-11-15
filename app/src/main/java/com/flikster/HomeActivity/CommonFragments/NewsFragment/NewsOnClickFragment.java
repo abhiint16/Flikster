@@ -94,8 +94,8 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     }
 
     private void headerTitlesChange() {
-        toolbar_frag_title.setText("News");
-        fragment_common_recyclerview_with_tv_title.setText("Recommended News");
+        toolbar_frag_title.setText(contentType);
+        fragment_common_recyclerview_with_tv_title.setText("Recommended "+contentType);
     }
 
     private void initializeViews() {

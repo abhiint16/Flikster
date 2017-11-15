@@ -525,6 +525,34 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             }
+            else if (view.getId() == R.id.card_description_linear) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
+                    Log.e("Card_data", "Movies" + items.get(getAdapterPosition()).getMovie().get(0).getName());
+                    testing.newsCardOnClick(items.get(getAdapterPosition()).getMovie().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getName(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType()
+                    );
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
+                    Log.e("Card_data", "Celebr" + items.get(getAdapterPosition()).getCeleb().get(0).getName());
+                    testing.newsCardOnClick(items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getName(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType()
+                    );
+                } else {
+                    testing.newsCardOnClick("",
+                            "",
+                            "",
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType());
+                }
+            }
         }
     }
 
