@@ -7,7 +7,7 @@
 
     <include layout="@layout/toolbar_frag_multiicons" />
 
-    <include layout="@layout/fragment_common_recyclerview_with_tv" />
+    <include layout="@layout/fragment_common_recyclerview_with_tv_one" />
 
 
 </LinearLayout>

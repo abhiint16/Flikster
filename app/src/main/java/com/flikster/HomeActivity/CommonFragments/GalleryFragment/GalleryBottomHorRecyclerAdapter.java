@@ -1,32 +1,33 @@
-package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
+package com.flikster.HomeActivity.CommonFragments.GalleryFragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by abhishek on 13-10-2017.
  */
 
-public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<CelebrityBioAdapterImagesViewHolder.ViewHolder> {
-    List<String> imag=new ArrayList<>();
+public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<GalleryBottomHorRecyclerAdapter.ViewHolder> {
     Context context;
-    public CelebrityBioAdapterImagesViewHolder(Context context) {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+    List<GalleryRecommendedRecyclerData.GalleryInnerData> items;
+    int Count;
+    public GalleryBottomHorRecyclerAdapter(Context context, List<GalleryRecommendedRecyclerData.GalleryInnerData> items, int Count) {
         this.context=context;
+        this.items=items;
+        this.Count=Count;
     }
 
     @Override
@@ -37,20 +38,24 @@ public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<Ce
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //holder.imageView.setImageResource(R.drawable.pooja);
+            Glide.with(context).load(items.get(position).getProfilePic()).into(holder.carousel_image);
+            holder.carousel_title.setText(items.get(position).getTitle());
+
     }
 
     @Override
     public int getItemCount() {
-        return imag.size();
+        return Count;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView imageView;
+        ImageView carousel_image;
+        TextView carousel_title;
         public ViewHolder(View itemView) {
             super(itemView);
-            //imageView=(ImageView)itemView.findViewById(R.id.card_celebrity_bio_peers_recycler);
-            itemView.setOnClickListener(this);
+            carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
+            carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
+            //itemView.setOnClickListener(this);
         }
 
         @Override

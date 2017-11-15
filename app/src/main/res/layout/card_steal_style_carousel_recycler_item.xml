@@ -10,14 +10,14 @@
         android:layout_height="0dp"
         android:layout_weight="7"
         android:id="@+id/card_steal_style_recycler_item_imageview"
-        android:src="@drawable/bahubai"
+        android:background="@color/tw__light_gray"
         android:scaleType="fitXY"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/card_steal_style_recycler_item_desc"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:gravity="center_vertical"
         android:text="Brand Name"
         android:textColor="@color/black"

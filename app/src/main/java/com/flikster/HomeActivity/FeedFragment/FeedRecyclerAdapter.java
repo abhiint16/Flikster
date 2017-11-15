@@ -3,14 +3,12 @@ package com.flikster.HomeActivity.FeedFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,7 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionDetailFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.Util.Common;
 import com.flikster.Util.GlobalData;
@@ -28,7 +26,6 @@ import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragmen
 import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
 import com.flikster.HomeActivity.StealStyleViewHolder;
-import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
 import java.util.List;
@@ -366,7 +363,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             items.get(getAdapterPosition()).getMovie().get(0).getType(),
                             items.get(getAdapterPosition()).getProfilePic(),
                             items.get(getAdapterPosition()).getTitle(),
-                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment()
+                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment(),
+                            items.get(getAdapterPosition()).getContentType()
                     );
                 } else if (items.get(getAdapterPosition()).getCeleb() != null) {
                     Log.e("Card_data", "Celebr" + items.get(getAdapterPosition()).getCeleb().get(0).getName());
@@ -375,7 +373,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             items.get(getAdapterPosition()).getCeleb().get(0).getType(),
                             items.get(getAdapterPosition()).getProfilePic(),
                             items.get(getAdapterPosition()).getTitle(),
-                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment()
+                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment(),
+                            items.get(getAdapterPosition()).getContentType()
                     );
                 } else {
                     testing.newsCardOnClick("",
@@ -383,14 +382,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "",
                             items.get(getAdapterPosition()).getProfilePic(),
                             items.get(getAdapterPosition()).getTitle(),
-                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment());
+                            items.get(getAdapterPosition()).getText(), new NewsOnClickFragment(),
+                            items.get(getAdapterPosition()).getContentType());
                 }
-
-
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.main_container, new NewsOnClickFragment())
-//                        .addToBackStack("")
-//                        .commit();
             }
         }
 
@@ -420,7 +414,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View view) {
             if (view.getId() == R.id.card_gallary4_img_container) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.main_container, new GallaryCardClick())
+                        .replace(R.id.main_container, new GalleryCardClick())
                         .addToBackStack("")
                         .commit();
             } else if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
@@ -449,12 +443,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
-            //video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
-            //video_btn.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
         }
 
@@ -467,6 +459,34 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (items.get(getAdapterPosition()).getCeleb() != null) {
                     Log.e("celeb-making","celeb making");
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                }
+            }
+            else if (view.getId() == R.id.card_description_linear) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
+                    Log.e("Card_data", "Movies" + items.get(getAdapterPosition()).getMovie().get(0).getName());
+                    testing.newsCardOnClick(items.get(getAdapterPosition()).getMovie().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getName(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType()
+                    );
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
+                    Log.e("Card_data", "Celebr" + items.get(getAdapterPosition()).getCeleb().get(0).getName());
+                    testing.newsCardOnClick(items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getName(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType()
+                    );
+                } else {
+                    testing.newsCardOnClick("",
+                            "",
+                            "",
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType());
                 }
             }
         }
@@ -503,6 +523,34 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
                 } else if (items.get(getAdapterPosition()).getMovie() == null) {
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                }
+            }
+            else if (view.getId() == R.id.card_description_linear) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
+                    Log.e("Card_data", "Movies" + items.get(getAdapterPosition()).getMovie().get(0).getName());
+                    testing.newsCardOnClick(items.get(getAdapterPosition()).getMovie().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getName(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType()
+                    );
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
+                    Log.e("Card_data", "Celebr" + items.get(getAdapterPosition()).getCeleb().get(0).getName());
+                    testing.newsCardOnClick(items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getName(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType()
+                    );
+                } else {
+                    testing.newsCardOnClick("",
+                            "",
+                            "",
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            " ", new NewsOnClickFragment(),items.get(getAdapterPosition()).getContentType());
                 }
             }
         }
@@ -550,7 +598,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 testing.galleryCardOnClick(items.get(getAdapterPosition()).getMedia().getGallery(),
                         items.get(getAdapterPosition()).getCeleb().get(0).getName(),
                         items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(), items.get(getAdapterPosition()).getCeleb().get(0).getType(),
-                        items.get(getAdapterPosition()).getTitle(), new GallaryCardClick());
+                        items.get(getAdapterPosition()).getTitle(), new GalleryCardClick());
             }
 
         }

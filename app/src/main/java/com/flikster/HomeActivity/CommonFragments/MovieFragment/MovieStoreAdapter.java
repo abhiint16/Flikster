@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
 import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.HomeActivity.StealStyleViewHolder;
@@ -18,6 +21,10 @@ import com.flikster.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -30,8 +37,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     RecyclerView.LayoutManager layoutManager;
     ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
     CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
-    StealStyleViewHolder stealStyleViewHolder;
+    MovieFeedRecommendedProductViewHolder movieFeedRecommendedProductViewHolder;
     RecyclerView.LayoutManager layoutManager2;
+    ApiInterface apiInterface;
+    List<RecommendedProductData.RecommendedProductInnerData> items;
     String profilepic;
     String coverpic;
     String name;
@@ -91,10 +100,6 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ((MovieStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_name.setText(name);
             }
 
-            /*if (role.get(0) != null && !role.get(0).isEmpty()){
-                ((MovieStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_role.setText(role.get(0) + "");
-            }*/
-
             if (profilepic != null && !profilepic.isEmpty()) {
                 Glide.with(context).load(profilepic).asBitmap()
                         .into(((MovieStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_image);
@@ -127,13 +132,30 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ((ViewHolder5) holder).card_store_product_gallary_title.setText("Latest trend");
             ((ViewHolder5) holder).card_store_product_gallary_cost.setText("7500/-");
         } else if (holder.getItemViewType() == 6) {
-            ((ViewHolder6) holder).card_steal_style_carousel_title.setText("Recommended Products");
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
-            layoutManager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager2);
-            stealStyleViewHolder = new StealStyleViewHolder("celebrity_store");
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(stealStyleViewHolder);
+            recommendedMoviesRetrofitInit(holder);
         }
+    }
+
+    private void recommendedMoviesRetrofitInit(final RecyclerView.ViewHolder holder) {
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/product-ms/products").create(ApiInterface.class);
+        Call<RecommendedProductData> call = apiInterface.getRecommendedProductData("http://apiv3.flikster.com/v3/product-ms/products");
+        call.enqueue(new Callback<RecommendedProductData>() {
+            @Override
+            public void onResponse(Call<RecommendedProductData> call, Response<RecommendedProductData> response) {
+                items = response.body().getItems();
+                ((MovieStoreAdapter.ViewHolder6) holder).card_steal_style_carousel_title.setText("Recommended Products");
+                ((MovieStoreAdapter.ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
+                layoutManager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                ((MovieStoreAdapter.ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager2);
+                movieFeedRecommendedProductViewHolder = new MovieFeedRecommendedProductViewHolder(items, context);
+                ((MovieStoreAdapter.ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieFeedRecommendedProductViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<RecommendedProductData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
     @Override

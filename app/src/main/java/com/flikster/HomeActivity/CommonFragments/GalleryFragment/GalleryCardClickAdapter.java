@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,26 +13,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsBottomHorRecyclerAdapter;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.Util.GlobalData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.R;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by abhishek on 05-10-2017.
  */
 
-public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     GlobalData globalData;
     Context context;
     FragmentManager fragmentManager;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     List<String> galleryImgLinks;
-    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
+    GalleryBottomHorRecyclerAdapter galleryBottomHorRecyclerAdapter;
+    ApiInterface apiInterface;
+    List<GalleryRecommendedRecyclerData.GalleryInnerData> items;
+    Integer Count;
 
-    public GallaryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
+    public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
         this.context = context;
         globalData = new GlobalData();
         this.fragmentManager = fragmentManager;
@@ -51,17 +63,32 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        //holder.gallary_recycler_item_img.setContentDescription("aaaaaaaaaaaa");
-        //Glide.with(holder.itemView.getContext()).load(globalData.imag.get(position)).into(holder.gallary_recycler_item_img);
         if (holder.getItemViewType() == 0) {
-            //((ViewHolder1)holder).gallary_recycler_item_img.setImageResource(galleryImgLinks.get(position));
             Glide.with(context).load(galleryImgLinks.get(position)).asBitmap().into(((ViewHolder1) holder).gallary_recycler_item_img);
         } else {
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
+            galleryBottomHorRecyclerRetrofitInit(holder);
         }
+    }
+
+    private void galleryBottomHorRecyclerRetrofitInit(final RecyclerView.ViewHolder viewholder) {
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/gallery").create(ApiInterface.class);
+        Call<GalleryRecommendedRecyclerData> call = apiInterface.getGalleryData("http://apiv3.flikster.com/v3/content-ms/getContentByType/gallery");
+        call.enqueue(new Callback<GalleryRecommendedRecyclerData>() {
+            @Override
+            public void onResponse(Call<GalleryRecommendedRecyclerData> call, Response<GalleryRecommendedRecyclerData> response) {
+                items = response.body().getItems();
+                Count = response.body().getCount();
+                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
+                layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+                galleryBottomHorRecyclerAdapter=new GalleryBottomHorRecyclerAdapter(context,items,Count);
+                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
+            }
+            @Override
+            public void onFailure(Call<GalleryRecommendedRecyclerData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
     @Override
@@ -88,7 +115,8 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, GallaryFullScreen.class);
+            Intent intent = new Intent(context, GalleryFullScreen.class);
+            intent.putExtra("galleryimglink",galleryImgLinks.get(getAdapterPosition()));
             context.startActivity(intent);
         }
     }
