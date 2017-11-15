@@ -5,15 +5,25 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,6 +31,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -38,11 +49,14 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.flikster.BuildConfig;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
@@ -64,12 +78,25 @@ import com.flikster.MenuFragments.SettingsFragment;
 import com.flikster.HomeActivity.StoreFragment.StoreFragment;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.MenuFragments.WishListFragment;
+import com.flikster.SharedPref.SharedPref;
+import com.flikster.Util.Common;
 import com.flikster.Util.DateUtil;
+import com.flikster.Util.SharedPrefsUtil;
+import com.flikster.permission.DangerousPermResponseCallBack;
+import com.flikster.permission.DangerousPermissionResponse;
+import com.flikster.permission.DangerousPermissionUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,FeedFragment.Testing {
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+
+public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing {
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -85,10 +112,23 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
+    ///Image Capture
+    private static final String IMAGE_DIRECTORY_NAME = "Hello Camera";
+    private File mCapturedImageFile;
+    private Bitmap capturedImage = null;
+    private static int RESULT_LOAD_IMAGE = 1;
+    ArrayList<String> capturelist = new ArrayList<String>();
+    private static int CAMERA_REQUES_CODE = 101;
+    String captured_img_str;
+    boolean cameracaptured = false;
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
 
     //Bottom Navigation
     private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
     private AHBottomNavigation bottomNavigation;
+
+    static int TAKE_PICTURE = 1;
+    final int ACTIVITY_SELECT_IMAGE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +233,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 } else if (position == 3) {
                     beginTransact(new FashionFragment());
                 } else if (position == 4) {
-                    beginTransact(new StoreFragment());
+                    beginTransact(new MyStyleFragment());
                 } /*else if (position == 5) {
                     beginTransact(new RatingFragment());
                 }*/
@@ -311,17 +351,21 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         dialog_camera_click_select_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
+               /* Intent intent = new Intent();
+                intent.setType("image*//*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivity(intent);
+                startActivity(intent);*/
+
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, ACTIVITY_SELECT_IMAGE);
+
                 dialog.dismiss();
             }
         });
         dialog_camera_click_click_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cameraAccessPermission();
+                cameraAccessPermission(CAMERA_REQUES_CODE);
                 dialog.dismiss();
             }
         });
@@ -391,30 +435,23 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         return false;
     }
 
-
-    //Camera request
-    private void cameraAccessPermission() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (getFromPref(this, ALLOW_KEY)) {
-                showSettingsAlert();
-            } else if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.CAMERA)
-                    != PackageManager.PERMISSION_GRANTED) {
-                // Should we show an explanation?
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.CAMERA)) {
-                    showAlert();
-                } else {
-                    // No explanation needed, we can request the permission.
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
-                            MY_PERMISSIONS_REQUEST_CAMERA);
-                }
-            }
-        } else {
-            openCamera();
-        }
+    private void cameraAccessPermission(int requestCode) {
+        DangerousPermissionUtils.getPermission(mContext, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, requestCode)
+                .enqueue(new DangerousPermResponseCallBack() {
+                    @Override
+                    public void onComplete(final DangerousPermissionResponse permissionResponse) {
+                        if (permissionResponse.isGranted()) {
+                            if (permissionResponse.getRequestCode() == CAMERA_REQUES_CODE) {
+                                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED && ActivityCompat
+                                        .checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                                    return;
+                                }
+                                cameracaptured = true;
+                                openCamera();
+                            }
+                        }
+                    }
+                });
     }
 
     public static void saveToPreferences(Context context, String key,
@@ -426,11 +463,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         prefsEditor.commit();
     }
 
-    public static Boolean getFromPref(Context context, String key) {
-        SharedPreferences myPrefs = context.getSharedPreferences
-                (CAMERA_PREF, Context.MODE_PRIVATE);
-        return (myPrefs.getBoolean(key, false));
-    }
 
     private void showAlert() {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -456,28 +488,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         alertDialog.show();
     }
 
-    private void showSettingsAlert() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("App needs to access the Camera.");
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        //finish();
-                    }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "SETTINGS",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        startInstalledAppDetailsActivity(HomeActivity.this);
-
-                    }
-                });
-        alertDialog.show();
-    }
-
 
     @Override
     public void onRequestPermissionsResult
@@ -493,21 +503,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                         if (showRationale) {
                             showAlert();
                         } else if (!showRationale) {
-                            // user denied flagging NEVER ASK AGAIN
-                            // you can either enable some fall back,
-                            // disable features of your app
-                            // or open another dialog explaining
-                            // again the permission and directing to
-                            // the app setting
                             saveToPreferences(HomeActivity.this, ALLOW_KEY, true);
                         }
                     }
                 }
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-
         }
     }
 
@@ -526,40 +526,65 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     private void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, TAKE_PICTURE);
     }
 
+
     @Override
-    public void test(String name, Fragment fragment,int getClass) {
-        if(getClass==1)
-        {
-            MovieFragment movieFragment= (MovieFragment) fragment;
+    public void test(String name, Fragment fragment, int getClass) {
+        if (getClass == 1) {
+            MovieFragment movieFragment = (MovieFragment) fragment;
             movieFragment.updateInfo(name);
-            Log.e("inside home movie","indies home movie"+name);
+            Log.e("inside home movie", "indies home movie" + name);
             firstTimeLaunch(fragment);
-        }
-        else if(getClass==2)
-        {
-            CelebrityFragment celebrityFragment=(CelebrityFragment)fragment;
+        } else if (getClass == 2) {
+            CelebrityFragment celebrityFragment = (CelebrityFragment) fragment;
             celebrityFragment.updateInfo(name);
-            Log.e("inside home celeb","indie home celbe");
+            Log.e("inside home celeb", "indie home celbe");
             firstTimeLaunch(fragment);
         }
     }
 
     @Override
-    public void galleryCardOnClick(List<String> galleryImgLinks,String name,String profilePic,String type,
-                                   String title,Fragment fragment) {
-        GallaryCardClick gallaryCardClick=(GallaryCardClick)fragment;
-        gallaryCardClick.updateImage(galleryImgLinks,name,profilePic,type,title);
+    public void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type,
+                                   String title, Fragment fragment) {
+        GallaryCardClick gallaryCardClick = (GallaryCardClick) fragment;
+        gallaryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment) {
-        NewsOnClickFragment gallaryCardClick=(NewsOnClickFragment)fragment;
-        gallaryCardClick.updateImage(profilePic,title,type,bannerImg,headertitle,description);
+    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment) {
+        NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
+        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description);
         firstTimeLaunch(fragment);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK) {
+            Toast.makeText(getApplicationContext(), "Captured successfully.", Toast.LENGTH_SHORT).show();
+            Bitmap photoBitmap = (Bitmap) intent.getExtras().get("data");
+//            String captureStr = Common.BitMapToString(photoBitmap);
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "ImageString", Common.BitMapToString(photoBitmap));
+        } else if (requestCode == ACTIVITY_SELECT_IMAGE) {
+            //Toast.makeText(getApplicationContext(), "Gallery Image Picked successfully.", Toast.LENGTH_SHORT).show();
+            Uri selectedImage = intent.getData();
+            String[] filePath = {MediaStore.Images.Media.DATA};
+            Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePath[0]);
+            String picturePath = c.getString(columnIndex);
+            c.close();
+            Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "ImageString", Common.BitMapToString(thumbnail));
+//            Drawable drawable = new BitmapDrawable(thumbnail);
+//            backGroundImageLinearLayout.setBackgroundDrawable(drawable);
+        } else {
+            Toast.makeText(getApplicationContext(), "User cancelled image capture.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }
