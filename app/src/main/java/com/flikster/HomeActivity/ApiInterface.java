@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -24,4 +25,7 @@ public interface ApiInterface {
 
     @GET
     Call<CelebrityData> getCelebrityData(@Url String url);
+
+    @GET
+    Call<NewsData> getNewsData(@Url String url);
 }
