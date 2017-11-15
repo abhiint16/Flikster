@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="7"
         android:id="@+id/card_steal_style_recycler_item_imageview"
-        android:src="@drawable/bahubai"
+        android:background="@color/tw__light_gray"
         android:scaleType="fitXY"/>
 
     <TextView

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryBottomHorRecyclerAdapter;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClickAdapter;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.R;
 import com.flikster.HomeActivity.StealStyleViewHolder;
@@ -20,6 +26,10 @@ import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragm
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -30,8 +40,11 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
     List<String> imag = new ArrayList<>();
-    StealStyleViewHolder stealStyleViewHolder;
+    MovieFeedRecommendedMoviesViewHolder movieFeedRecommendedMoviesViewHolder;
     RecyclerView.LayoutManager layoutManager2;
+    ApiInterface apiInterface;
+    List<RecommendedMoviesData.RecommendedMoviesInnerData> items;
+    Integer Count;
 
     String profilepic;
     String coverpic;
@@ -40,22 +53,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public MovieFeedAdapter(Context context, FragmentManager fragmentManager, String profilepic, String coverpic,
                             String name, ArrayList<String> role) {
-        /*this.context = context;
+        this.context = context;
         this.fragmentManager = fragmentManager;
-        type.add(1);
-        type.add(2);
-        type.add(3);
-        type.add(4);
-        type.add(5);
-        type.add(6);
-        type.add(7);
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
-        imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
-        imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");*/
-
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -107,28 +106,17 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            /*((ViewHolder1) holder).card_celebrity_feed_profile_name.setText("3 Idiots");
-            ((ViewHolder1) holder).card_celebrity_feed_profile_desc.setText("Romance . Drama . Comedy");
-            ((ViewHolder1) holder).card_celebrity_feed_profile_image.setImageResource(R.drawable.movie);*/
-
             if (name != null && !name.isEmpty()) {
                 ((ViewHolder1) holder).card_celebrity_feed_profile_name.setText(name);
             }
-
-            /*if (role.get(0) != null && !role.get(0).isEmpty()){
-                ((MovieStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_role.setText(role.get(0) + "");
-            }*/
-
             if (profilepic != null && !profilepic.isEmpty()) {
                 Glide.with(context).load(profilepic).asBitmap()
                         .into(((ViewHolder1) holder).card_celebrity_feed_profile_image);
             }
-
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
                         .into(((ViewHolder1) holder).card_celebrity_feed_profile_coverpic);
             }
-
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).card_celebrity_feed_gallary_title.setText("Photo Gallary");
             ((ViewHolder2) holder).card_celebrity_feed_gallary_img1.setImageResource(R.drawable.idiots1);
@@ -149,14 +137,31 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((ViewHolder5) holder).card_celebrity_feed_video_image.setImageResource(R.drawable.idiots2);
         } else if (holder.getItemViewType() == 6) {
         } else if (holder.getItemViewType() == 7) {
-            ((ViewHolder7) holder).card_steal_style_carousel_title.setText("Recommended Movies");
-            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
-            layoutManager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager2);
-            stealStyleViewHolder = new StealStyleViewHolder("movie_feed");
-            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(stealStyleViewHolder);
+            recommendedMoviesRetrofitInit(holder);
         }
 
+    }
+
+    private void recommendedMoviesRetrofitInit(final RecyclerView.ViewHolder holder) {
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/movie-ms/movies").create(ApiInterface.class);
+        Call<RecommendedMoviesData> call = apiInterface.getRecommendedMoviesData("http://apiv3.flikster.com/v3/movie-ms/movies");
+        call.enqueue(new Callback<RecommendedMoviesData>() {
+            @Override
+            public void onResponse(Call<RecommendedMoviesData> call, Response<RecommendedMoviesData> response) {
+                items = response.body().getItems();
+                //Count = response.body().getCount();
+                ((ViewHolder7) holder).card_steal_style_carousel_title.setText("Recommended Movies");
+                ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
+                layoutManager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager2);
+                movieFeedRecommendedMoviesViewHolder = new MovieFeedRecommendedMoviesViewHolder(items,context);
+                ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieFeedRecommendedMoviesViewHolder);
+            }
+            @Override
+            public void onFailure(Call<RecommendedMoviesData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
     @Override
