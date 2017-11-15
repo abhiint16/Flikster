@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.CommonFragments.NewsFragment;
+package com.flikster.HomeActivity.CommonFragments.GalleryFragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.R;
 
 import java.util.List;
@@ -20,12 +20,12 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBottomHorRecyclerAdapter.ViewHolder> {
+public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<GalleryBottomHorRecyclerAdapter.ViewHolder> {
     Context context;
     List<NewsData.NewsInnerData> items;
     int Count;
     String bannerimg;
-    public NewsBottomHorRecyclerAdapter(Context context, List<NewsData.NewsInnerData> items,int Count,String bannerimg) {
+    public GalleryBottomHorRecyclerAdapter(Context context, List<NewsData.NewsInnerData> items, int Count, String bannerimg) {
         this.context=context;
         this.items=items;
         this.Count=Count;

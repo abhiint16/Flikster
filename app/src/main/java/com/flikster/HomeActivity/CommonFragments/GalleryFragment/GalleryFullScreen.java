@@ -18,7 +18,7 @@ import com.flikster.R;
  * Created by abhishek on 05-10-2017.
  */
 
-public class GallaryFullScreen extends AppCompatActivity implements View.OnClickListener {
+public class GalleryFullScreen extends AppCompatActivity implements View.OnClickListener {
     ImageView imageView;
     ScrollView scrollView;
     VideoView videoView;

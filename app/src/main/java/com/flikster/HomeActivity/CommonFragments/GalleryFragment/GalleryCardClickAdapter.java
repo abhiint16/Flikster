@@ -22,7 +22,7 @@ import java.util.List;
  * Created by abhishek on 05-10-2017.
  */
 
-public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     GlobalData globalData;
     Context context;
     FragmentManager fragmentManager;
@@ -31,7 +31,7 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     List<String> galleryImgLinks;
     CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
 
-    public GallaryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
+    public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
         this.context = context;
         globalData = new GlobalData();
         this.fragmentManager = fragmentManager;
@@ -51,10 +51,7 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        //holder.gallary_recycler_item_img.setContentDescription("aaaaaaaaaaaa");
-        //Glide.with(holder.itemView.getContext()).load(globalData.imag.get(position)).into(holder.gallary_recycler_item_img);
         if (holder.getItemViewType() == 0) {
-            //((ViewHolder1)holder).gallary_recycler_item_img.setImageResource(galleryImgLinks.get(position));
             Glide.with(context).load(galleryImgLinks.get(position)).asBitmap().into(((ViewHolder1) holder).gallary_recycler_item_img);
         } else {
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
@@ -88,7 +85,7 @@ public class GallaryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, GallaryFullScreen.class);
+            Intent intent = new Intent(context, GalleryFullScreen.class);
             context.startActivity(intent);
         }
     }

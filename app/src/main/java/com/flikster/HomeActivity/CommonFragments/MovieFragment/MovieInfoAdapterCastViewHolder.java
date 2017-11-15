@@ -10,10 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryFullScreen;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,7 +58,7 @@ public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<MovieIn
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(context,GallaryFullScreen.class);
+            Intent intent=new Intent(context,GalleryFullScreen.class);
             context.startActivity(intent);
         }
     }

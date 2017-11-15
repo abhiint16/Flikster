@@ -1,7 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,19 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.flikster.GlobalDataStorage;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.R;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -152,7 +146,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new GallaryCardClick())
+                    .replace(R.id.main_container, new GalleryCardClick())
                     .addToBackStack("")
                     .commit();
         }

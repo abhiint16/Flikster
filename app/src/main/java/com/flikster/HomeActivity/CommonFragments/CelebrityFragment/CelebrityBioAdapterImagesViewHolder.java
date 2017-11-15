@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryFullScreen;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<Ce
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(context,GallaryFullScreen.class);
+            Intent intent=new Intent(context,GalleryFullScreen.class);
             context.startActivity(intent);
         }
     }

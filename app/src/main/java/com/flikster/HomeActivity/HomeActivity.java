@@ -47,9 +47,8 @@ import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragmen
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
-import com.flikster.HomeActivity.WatchFragment.WatchTrailerFragment;
 import com.flikster.MenuFragments.FliksterCreditFragment;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.MenuFragments.LogoutFragment;
 import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.MyAccountFragment;
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
@@ -220,7 +219,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                     .commit();
         } else if ("GallaryFullscreen".equals(getIntent().getStringExtra("GallaryFullscreen"))) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new GallaryCardClick())
+                    .replace(R.id.main_container, new GalleryCardClick())
                     .commit();
         } else
             firstTimeLaunch(new FeedFragment());
@@ -551,8 +550,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     @Override
     public void galleryCardOnClick(List<String> galleryImgLinks,String name,String profilePic,String type,
                                    String title,Fragment fragment) {
-        GallaryCardClick gallaryCardClick=(GallaryCardClick)fragment;
-        gallaryCardClick.updateImage(galleryImgLinks,name,profilePic,type,title);
+        GalleryCardClick galleryCardClick =(GalleryCardClick)fragment;
+        galleryCardClick.updateImage(galleryImgLinks,name,profilePic,type,title);
         firstTimeLaunch(fragment);
     }
 

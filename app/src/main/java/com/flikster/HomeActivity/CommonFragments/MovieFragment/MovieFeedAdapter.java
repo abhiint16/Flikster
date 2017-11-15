@@ -12,10 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GallaryCardClick;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
-import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
 import com.flikster.HomeActivity.StealStyleViewHolder;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
@@ -201,7 +199,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View view) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new GallaryCardClick())
+                    .replace(R.id.main_container, new GalleryCardClick())
                     .addToBackStack("")
                     .commit();
         }

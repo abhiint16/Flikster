@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +22,11 @@ import java.util.List;
  * Created by abhishek on 05-10-2017.
  */
 
-public class GallaryCardClick extends Fragment {
+public class GalleryCardClick extends Fragment {
     View view;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
     RecyclerView.LayoutManager gallaryLayoutManager;
-    GallaryCardClickAdapter gallaryCardClickAdapter;
+    GalleryCardClickAdapter galleryCardClickAdapter;
     FragmentManager fragmentManager;
     TextView fragment_common_recyclerview_with_tv_title, tv_tag_name, tv_tag_desc;
     ImageView profile_image;
@@ -63,8 +62,8 @@ public class GallaryCardClick extends Fragment {
         tv_tag_desc.setText(type);
         gallaryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(gallaryLayoutManager);
-        gallaryCardClickAdapter = new GallaryCardClickAdapter(getActivity(), fragmentManager,galleryImgLinks);
-        fragment_common_recyclerview_with_tv_recycler.setAdapter(gallaryCardClickAdapter);
+        galleryCardClickAdapter = new GalleryCardClickAdapter(getActivity(), fragmentManager,galleryImgLinks);
+        fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryCardClickAdapter);
     }
 
     private void initializeViews() {
