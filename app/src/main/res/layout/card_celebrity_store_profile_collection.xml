@@ -51,7 +51,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/whatsapp_icon" />
+                    android:src="@drawable/whatsapp_icon"
+                    android:background="@color/transparent"
+                    android:layout_gravity="center" />
 
                 <ImageButton
                     android:id="@+id/ib_messenger"
@@ -60,7 +62,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/ib_whatsapp"
-                    android:background="@drawable/messenger_icon" />
+                    android:src="@drawable/messenger_icon"
+                    android:background="@color/transparent"
+                    android:layout_gravity="center"/>
 
                 <ImageButton
                     android:id="@+id/ib_like"
@@ -69,7 +73,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/ib_messenger"
-                    android:background="@drawable/like_icon" />
+                    android:src="@drawable/like_icon"
+                    android:background="@color/transparent"
+                    android:layout_gravity="center" />
 
             </LinearLayout>
         </LinearLayout>
