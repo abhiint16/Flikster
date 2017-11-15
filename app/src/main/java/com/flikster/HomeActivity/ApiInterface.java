@@ -6,6 +6,7 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 
 import retrofit2.Call;
@@ -36,4 +37,7 @@ public interface ApiInterface {
 
     @GET
     Call<RecommendedMoviesData> getRecommendedMoviesData(@Url String url);
+
+    @GET
+    Call<RecommendedProductData> getRecommendedProductData(@Url String url);
 }
