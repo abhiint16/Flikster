@@ -3,6 +3,7 @@ package com.flikster.HomeActivity;
 import android.util.Log;
 
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 
@@ -28,4 +29,7 @@ public interface ApiInterface {
 
     @GET
     Call<NewsData> getNewsData(@Url String url);
+
+    @GET
+    Call<GalleryRecommendedRecyclerData> getGalleryData(@Url String url);
 }

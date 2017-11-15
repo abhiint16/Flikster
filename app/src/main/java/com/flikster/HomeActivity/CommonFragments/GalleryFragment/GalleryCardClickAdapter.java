@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsBottomHorRecyclerAdapter;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.Util.GlobalData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.R;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 05-10-2017.
@@ -29,7 +38,10 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     List<String> galleryImgLinks;
-    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
+    GalleryBottomHorRecyclerAdapter galleryBottomHorRecyclerAdapter;
+    ApiInterface apiInterface;
+    List<GalleryRecommendedRecyclerData.GalleryInnerData> items;
+    Integer Count;
 
     public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
         this.context = context;
@@ -54,11 +66,29 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (holder.getItemViewType() == 0) {
             Glide.with(context).load(galleryImgLinks.get(position)).asBitmap().into(((ViewHolder1) holder).gallary_recycler_item_img);
         } else {
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
+            galleryBottomHorRecyclerRetrofitInit(holder);
         }
+    }
+
+    private void galleryBottomHorRecyclerRetrofitInit(final RecyclerView.ViewHolder viewholder) {
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/gallery").create(ApiInterface.class);
+        Call<GalleryRecommendedRecyclerData> call = apiInterface.getGalleryData("http://apiv3.flikster.com/v3/content-ms/getContentByType/gallery");
+        call.enqueue(new Callback<GalleryRecommendedRecyclerData>() {
+            @Override
+            public void onResponse(Call<GalleryRecommendedRecyclerData> call, Response<GalleryRecommendedRecyclerData> response) {
+                items = response.body().getItems();
+                Count = response.body().getCount();
+                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
+                layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+                galleryBottomHorRecyclerAdapter=new GalleryBottomHorRecyclerAdapter(context,items,Count);
+                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
+            }
+            @Override
+            public void onFailure(Call<GalleryRecommendedRecyclerData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
     @Override

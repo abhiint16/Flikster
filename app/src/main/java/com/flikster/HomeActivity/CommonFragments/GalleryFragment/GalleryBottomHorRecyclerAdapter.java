@@ -22,14 +22,12 @@ import java.util.List;
 
 public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<GalleryBottomHorRecyclerAdapter.ViewHolder> {
     Context context;
-    List<NewsData.NewsInnerData> items;
+    List<GalleryRecommendedRecyclerData.GalleryInnerData> items;
     int Count;
-    String bannerimg;
-    public GalleryBottomHorRecyclerAdapter(Context context, List<NewsData.NewsInnerData> items, int Count, String bannerimg) {
+    public GalleryBottomHorRecyclerAdapter(Context context, List<GalleryRecommendedRecyclerData.GalleryInnerData> items, int Count) {
         this.context=context;
         this.items=items;
         this.Count=Count;
-        this.bannerimg=bannerimg;
     }
 
     @Override
@@ -40,13 +38,9 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Galler
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.e(bannerimg+"jajaj",items.get(position).getTitle().trim()+"jajaj");
-        if(bannerimg.trim()!=items.get(position).getTitle().trim())
-        {
-            Log.e(bannerimg,items.get(position).getTitle().trim());
             Glide.with(context).load(items.get(position).getProfilePic()).into(holder.carousel_image);
             holder.carousel_title.setText(items.get(position).getTitle());
-        }
+
     }
 
     @Override
