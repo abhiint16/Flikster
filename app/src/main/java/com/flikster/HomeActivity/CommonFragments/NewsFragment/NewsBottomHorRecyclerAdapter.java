@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.CommonFragments.NewsFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,12 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
     Context context;
     List<NewsData.NewsInnerData> items;
     int Count;
-    public NewsBottomHorRecyclerAdapter(Context context, List<NewsData.NewsInnerData> items,int Count) {
+    String bannerimg;
+    public NewsBottomHorRecyclerAdapter(Context context, List<NewsData.NewsInnerData> items,int Count,String bannerimg) {
         this.context=context;
         this.items=items;
         this.Count=Count;
+        this.bannerimg=bannerimg;
     }
 
     @Override
@@ -38,8 +41,13 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(context).load(items.get(position).getProfilePic()).into(holder.carousel_image);
-        holder.carousel_title.setText(items.get(position).getTitle());
+        Log.e(bannerimg+"jajaj",items.get(position).getTitle().trim()+"jajaj");
+        if(bannerimg.trim()!=items.get(position).getTitle().trim())
+        {
+            Log.e(bannerimg,items.get(position).getTitle().trim());
+            Glide.with(context).load(items.get(position).getProfilePic()).into(holder.carousel_image);
+            holder.carousel_title.setText(items.get(position).getTitle());
+        }
     }
 
     @Override
