@@ -6,12 +6,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieInfoAdapter;
+import com.flikster.HomeActivity.FeedData;
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -23,11 +36,16 @@ public class WatchFragment extends Fragment {
     RecyclerView.LayoutManager movieFragmentInfoLayoutManager;
     WatchAdapter watchAdapter;
     FragmentManager fragmentManager;
+    ApiInterface apiInterface;
+    List<FeedInnerData> items;
+    Integer Count;
+    FeedFragment.Testing testing;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
+//        retrofitInit();
         initializeViews();
         initializeRest();
         return view;
@@ -43,5 +61,26 @@ public class WatchFragment extends Fragment {
     private void initializeViews() {
         movieFragmentInfoRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager = getActivity().getSupportFragmentManager();
+    }
+
+
+    private void retrofitInit() {
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies();
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                items = response.body().getItems();
+                Count = response.body().getCount();
+//                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, items, Count, testing);
+//                fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 }

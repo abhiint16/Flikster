@@ -1,14 +1,16 @@
-package com.flikster.HomeActivity.WatchFragment;
+package com.flikster.HomeActivity.WatchFragment.TrailerOrPromos;
 
-import android.support.v4.app.FragmentManager;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment.ShopByVideoFragment;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
+import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,25 +19,20 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class WatchTrailerViewHolder extends RecyclerView.Adapter<WatchTrailerViewHolder.ViewHolder> {
+public class TrailersViewHolder extends RecyclerView.Adapter<TrailersViewHolder.ViewHolder> {
     List<String> imag=new ArrayList<>();
-    FragmentManager fragmentManager;
-    int a;
-
-    public WatchTrailerViewHolder() {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
-        imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
+    Context context;
+    public TrailersViewHolder(Context context) {
+        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
-        imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
+        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
-        this.fragmentManager=fragmentManager;
+        this.context=context;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_watch_play,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -50,19 +47,17 @@ public class WatchTrailerViewHolder extends RecyclerView.Adapter<WatchTrailerVie
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_latest_trailer_img;
+        ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
-            card_latest_trailer_img=(ImageView)itemView.findViewById(R.id.card_latest_trailer_img);
+            //imageView=(ImageView)itemView.findViewById(R.id.card_celebrity_bio_peers_recycler);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container,new MusicGridFragment())
-                    .addToBackStack("")
-                    .commit();
+            Intent intent=new Intent(context,VideoPlayerActivity.class);
+            context.startActivity(intent);
         }
     }
 }

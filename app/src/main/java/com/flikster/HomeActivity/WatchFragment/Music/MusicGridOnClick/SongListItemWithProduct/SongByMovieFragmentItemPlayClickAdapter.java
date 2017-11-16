@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.WatchFragment;
+package com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongListItemWithProduct;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;

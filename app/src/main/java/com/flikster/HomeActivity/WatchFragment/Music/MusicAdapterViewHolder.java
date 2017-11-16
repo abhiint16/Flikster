@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.WatchFragment;
+package com.flikster.HomeActivity.WatchFragment.Music;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment.ShopByVideoFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;

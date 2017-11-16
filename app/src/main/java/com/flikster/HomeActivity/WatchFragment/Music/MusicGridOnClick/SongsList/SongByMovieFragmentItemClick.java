@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.WatchFragment;
+package com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -10,18 +10,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.VideoView;
 
-import com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment.ShopByVideoFragmentItemClickAdapter;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongListItemWithProduct.SongByMovieFragmentItemPlayClickAdapter;
 import com.flikster.R;
 
 import java.io.IOException;

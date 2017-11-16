@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.WatchFragment;
+package com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment.ShopByVideoFragmentItemClick;
 import com.flikster.R;
 import com.flikster.Util.GlobalData;
 
@@ -16,24 +15,24 @@ import com.flikster.Util.GlobalData;
  * Created by abhishek on 01-11-2017.
  */
 
-public class SongByMovieItemAdapter extends RecyclerView.Adapter<SongByMovieItemAdapter.ViewHolder> {
+public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAdapter.ViewHolder> {
     Context context;
     GlobalData globalData = new GlobalData();
     FragmentManager fragmentManager;
 
-    public SongByMovieItemAdapter(Context context, FragmentManager fragmentManager) {
+    public MovieSongsListAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
     }
 
     @Override
-    public SongByMovieItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieSongsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_music_with_tv_recycler_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(SongByMovieItemAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(MovieSongsListAdapter.ViewHolder holder, int position) {
 //        holder.card_shopby_video_recycler_image.setImageResource(globalData.style.get(position));
     }
 

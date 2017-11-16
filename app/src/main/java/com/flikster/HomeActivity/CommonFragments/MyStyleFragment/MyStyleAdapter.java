@@ -10,12 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterPeersViewHolder;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
-import com.flikster.HomeActivity.WatchFragment.WatchTrailerViewHolder;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
@@ -33,15 +27,8 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     List<Integer> type = new ArrayList<>();
     List<String> imag = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
-    CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
     MyStyleAdapterViewHolder myStyleAdapterViewHolder;
-    WatchTrailerViewHolder watchTrailerViewHolder;
-    CelebrityBioAdapterFamilyViewHolder celebrityBioAdapterFamilyViewHolder;
-    CelebrityBioAdapterFilmographyViewHolder celebrityBioAdapterFilmographyViewHolder;
-    CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
-    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
 
-    int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
 
     public MyStyleAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
@@ -73,7 +60,6 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            // SharedPrefsUtil.getStringPreference(getContext(), "ImageString");
             String imgStr = SharedPrefsUtil.getStringPreference(context, "ImageString");
             Bitmap image = Common.StringToBitMap(imgStr);
             ((ViewHolder1) holder).captureimg.setImageBitmap(image);

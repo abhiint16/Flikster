@@ -1,11 +1,11 @@
-package com.flikster.HomeActivity.WatchFragment;
+package com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,22 +14,21 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment.ShopByVideoFragmentAdapter;
 import com.flikster.R;
 
 /**
  * Created by abhishek on 01-11-2017.
  */
 
-public class MusicGridFragment extends Fragment implements View.OnClickListener {
+public class MovieSongsListFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerShopByVideoFragment;
-    MusicGridItemAdapter musicGridItemAdapter;
+    MovieSongsListAdapter shopByVideoFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
-    TextView toolbar_frag_multiicons_title;
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart, toolbar_frag_multiicons_overflow;
+    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart, toolbar_frag_multiicons_search, toolbar_frag_multiicons_overflow;
     FragmentManager fragmentManager;
+    TextView toolbar_frag_multiicons_title;
 
     @Nullable
     @Override
@@ -53,16 +52,17 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeRest() {
-        toolbar_frag_multiicons_title.setText("Music");
         fragmentManager = getActivity().getSupportFragmentManager();
-        layoutManagerShopByVideoFragment = new GridLayoutManager(getActivity(), 2);
+        toolbar_frag_multiicons_title.setText("Saho");
+        layoutManagerShopByVideoFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerShopByVideoFragment);
-        musicGridItemAdapter = new MusicGridItemAdapter(getActivity(), fragmentManager);
-        fragment_common_recyclerview_recycler.setAdapter(musicGridItemAdapter);
+        shopByVideoFragmentAdapter = new MovieSongsListAdapter(getActivity(), fragmentManager);
+        fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_notification.setVisibility(View.GONE);
         toolbar_frag_multiicons_cart.setVisibility(View.GONE);
         toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
+        toolbar_frag_multiicons_search.setVisibility(View.GONE);
     }
 
     private void initializeViews() {
@@ -73,12 +73,13 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
         toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
+        toolbar_frag_multiicons_search = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_search);
     }
 
     @Override
     public void onClick(View view) {
-//        if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
-        fragmentManager.popBackStackImmediate();
-//        }
+        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
+            fragmentManager.popBackStackImmediate();
+        }
     }
 }

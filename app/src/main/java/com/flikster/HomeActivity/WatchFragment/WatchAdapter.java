@@ -1,7 +1,6 @@
 package com.flikster.HomeActivity.WatchFragment;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,20 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterPeersViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
-import com.flikster.HomeActivity.FeedFragment.FeedCelebrityRecyclerItemAdapter;
-import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
+import com.flikster.HomeActivity.WatchFragment.Comedy.ComedyViewHolder;
+import com.flikster.HomeActivity.WatchFragment.LatestMovieTrailers.WatchTrailerViewHolder;
+import com.flikster.HomeActivity.WatchFragment.Movies.MoviesViewHolder;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicAdapterViewHolder;
+import com.flikster.HomeActivity.WatchFragment.SocialBuzzOrInterview.SocialBuzzOrInterViewsViewHolder;
+import com.flikster.HomeActivity.WatchFragment.TrailerOrPromos.TrailersViewHolder;
+import com.flikster.HomeActivity.WatchFragment.TvShows.TvShowsViewHolder;
 import com.flikster.R;
 import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
-import com.synnapps.carouselview.ViewListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +39,12 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     List<Integer> type = new ArrayList<>();
     List<String> imag = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
-    CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
     MusicAdapterViewHolder musicAdapterViewHolder;
-    WatchTrailerViewHolder watchTrailerViewHolder;
-    CelebrityBioAdapterFamilyViewHolder celebrityBioAdapterFamilyViewHolder;
-    CelebrityBioAdapterFilmographyViewHolder celebrityBioAdapterFilmographyViewHolder;
-    CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
-    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
+    SocialBuzzOrInterViewsViewHolder msocialBuzzOrInterViewsViewHolder;
+    TrailersViewHolder trailersViewHolder;
+    TvShowsViewHolder tvShowsViewHolder;
+    MoviesViewHolder moviesViewHolder;
+    ComedyViewHolder comedyViewHolder;
 
     int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
 
@@ -135,32 +135,32 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Tv Shows");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
-            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
+            tvShowsViewHolder = new TvShowsViewHolder(context);
+            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(tvShowsViewHolder);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder();
-            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFilmographyViewHolder);
+            msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context);
+            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(msocialBuzzOrInterViewsViewHolder);
         } else if (holder.getItemViewType() == 5) {
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_title.setText("Movies");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder();
-            ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFilmographyViewHolder);
+            moviesViewHolder = new MoviesViewHolder(context);
+            ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(moviesViewHolder);
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder();
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterPeersViewHolder);
+            trailersViewHolder = new TrailersViewHolder(context);
+            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(trailersViewHolder);
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Comedy");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder();
-            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterPeersViewHolder);
+            comedyViewHolder = new ComedyViewHolder(context);
+            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(comedyViewHolder);
         } else {
         }
     }
