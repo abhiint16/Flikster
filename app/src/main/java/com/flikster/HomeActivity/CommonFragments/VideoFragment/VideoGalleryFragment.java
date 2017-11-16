@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,18 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
+import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 16-10-2017.
@@ -32,7 +42,12 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     TextView toolbar_frag_title, titlehedertxt, fragment_common_recyclerview_with_tv_title, tv_name, tv_description;
     Context mContext;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
+    String profilePic, title, type, bannerImg, headertitle, description,contentType;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
+    ApiInterface apiInterface;
+    List<NewsData.NewsInnerData> items;
+    VideoGalleryAdapter videoGalleryAdapter;
+    Integer Count;
 
     @Nullable
     @Override
@@ -40,17 +55,18 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         view = inflater.inflate(R.layout.fragment_video_gallery, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         initializeViews();
+        bottomHorRecyclerRetrofitInit();
         headerTitlesChange();
         initializeRest();
         playLocalVideo();
-        titlehedertxt.setText("Two Years Of Bahubali: Lessons Its Success Taught The Industry");
-        tv_description.setText("Ranbir said: \"I have really liked Prabhas. He is amazing in Baahubali");
+        titlehedertxt.setText(title);
+        tv_description.setText(description);
         return view;
     }
 
     private void headerTitlesChange() {
-        toolbar_frag_title.setText("Videos");
-        fragment_common_recyclerview_with_tv_title.setText("Recommended Videos");
+        toolbar_frag_title.setText(contentType);
+        fragment_common_recyclerview_with_tv_title.setText("Recommended "+contentType);
     }
 
     private void initializeViews() {
@@ -62,7 +78,6 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         tv_description = (TextView) view.findViewById(R.id.tv_description);
         fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
-
         playVideo.setVisibility(View.VISIBLE);
         tv_name.setVisibility(View.GONE);
     }
@@ -72,8 +87,6 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
-        fragment_common_recyclerview_with_tv_recycler.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
@@ -112,5 +125,35 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         playVideo.setVideoURI(uri);
         playVideo.requestFocus();
         playVideo.start();
+    }
+
+
+    private void bottomHorRecyclerRetrofitInit() {
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/"+contentType).create(ApiInterface.class);
+        Call<NewsData> call = apiInterface.getNewsData("http://apiv3.flikster.com/v3/content-ms/getContentByType/"+contentType);
+        call.enqueue(new Callback<NewsData>() {
+            @Override
+            public void onResponse(Call<NewsData> call, Response<NewsData> response) {
+                items = response.body().getItems();
+                Count = response.body().getCount();
+                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(),items,Count,title);
+                fragment_common_recyclerview_with_tv_recycler.setAdapter(videoGalleryAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<NewsData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
+    public void updateImage(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String contentType) {
+        this.profilePic = profilePic;
+        this.title = title;
+        this.type = type;
+        this.bannerImg = bannerImg;
+        this.headertitle = headertitle;
+        this.description = description;
+        this.contentType=contentType;
     }
 }

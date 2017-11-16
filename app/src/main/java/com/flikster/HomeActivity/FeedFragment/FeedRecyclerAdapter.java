@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionDetailFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
+import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.Util.Common;
 import com.flikster.Util.GlobalData;
@@ -422,6 +423,36 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
                 } else if (items.get(getAdapterPosition()).getCeleb() != null) {
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                }
+            }else if (view.getId() == R.id.card_description_linear) {
+                if (items.get(getAdapterPosition()).getMovie() != null) {
+                    Log.e("Card_data", "Movies" + items.get(getAdapterPosition()).getMovie().get(0).getName());
+                    testing.videoCardOnClick(items.get(getAdapterPosition()).getMovie().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getName(),
+                            items.get(getAdapterPosition()).getMovie().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            items.get(getAdapterPosition()).getText(), new VideoGalleryFragment(),
+                            items.get(getAdapterPosition()).getContentType()
+                    );
+                } else if (items.get(getAdapterPosition()).getCeleb() != null) {
+                    Log.e("Card_data", "Celebr" + items.get(getAdapterPosition()).getCeleb().get(0).getName());
+                    testing.videoCardOnClick(items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getName(),
+                            items.get(getAdapterPosition()).getCeleb().get(0).getType(),
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            items.get(getAdapterPosition()).getText(), new VideoGalleryFragment(),
+                            items.get(getAdapterPosition()).getContentType()
+                    );
+                } else {
+                    testing.videoCardOnClick("",
+                            "",
+                            "",
+                            items.get(getAdapterPosition()).getProfilePic(),
+                            items.get(getAdapterPosition()).getTitle(),
+                            items.get(getAdapterPosition()).getText(), new VideoGalleryFragment(),
+                            items.get(getAdapterPosition()).getContentType());
                 }
             }
 

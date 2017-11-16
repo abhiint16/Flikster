@@ -562,6 +562,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
+    public void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType) {
+        VideoGalleryFragment  videoGalleryFragment = (VideoGalleryFragment) fragment;
+        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK) {
             Toast.makeText(getApplicationContext(), "Captured successfully.", Toast.LENGTH_SHORT).show();
