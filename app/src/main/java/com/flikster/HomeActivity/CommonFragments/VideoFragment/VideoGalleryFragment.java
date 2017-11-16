@@ -48,6 +48,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     List<NewsData.NewsInnerData> items;
     VideoGalleryAdapter videoGalleryAdapter;
     Integer Count;
+    TextView tv_tag_desc,tv_tag_name;
 
     @Nullable
     @Override
@@ -76,6 +77,8 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
+        tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
+        tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
         fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         playVideo.setVisibility(View.VISIBLE);
