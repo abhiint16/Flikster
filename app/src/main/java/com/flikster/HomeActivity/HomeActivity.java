@@ -23,6 +23,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -554,9 +555,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment,String contentType) {
-        NewsOnClickFragment gallaryCardClick=(NewsOnClickFragment)fragment;
-        gallaryCardClick.updateImage(profilePic,title,type,bannerImg,headertitle,description,contentType);
+    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType) {
+        NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
+        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType);
         firstTimeLaunch(fragment);
     }
 
@@ -583,6 +584,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else {
             Toast.makeText(getApplicationContext(), "User cancelled image capture.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void switchContent(int id, Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(id, fragment, fragment.toString());
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 

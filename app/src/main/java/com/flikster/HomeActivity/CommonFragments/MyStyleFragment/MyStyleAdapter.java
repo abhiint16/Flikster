@@ -9,25 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterPeersViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
-import com.flikster.HomeActivity.WatchFragment.MusicAdapterViewHolder;
 import com.flikster.HomeActivity.WatchFragment.WatchTrailerViewHolder;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -40,7 +34,7 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     List<String> imag = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
     CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
-    FragmentAdapterViewHolder fragmentAdapterViewHolder;
+    MyStyleAdapterViewHolder myStyleAdapterViewHolder;
     WatchTrailerViewHolder watchTrailerViewHolder;
     CelebrityBioAdapterFamilyViewHolder celebrityBioAdapterFamilyViewHolder;
     CelebrityBioAdapterFilmographyViewHolder celebrityBioAdapterFilmographyViewHolder;
@@ -86,8 +80,8 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else if (holder.getItemViewType() == 2) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
-            fragmentAdapterViewHolder = new FragmentAdapterViewHolder(context, fragmentManager);
-            ((ViewHolder2) holder).fragment_common_recyclerview_recycler.setAdapter(fragmentAdapterViewHolder);
+            myStyleAdapterViewHolder = new MyStyleAdapterViewHolder(context, fragmentManager);
+            ((ViewHolder2) holder).fragment_common_recyclerview_recycler.setAdapter(myStyleAdapterViewHolder);
         } else {
         }
     }

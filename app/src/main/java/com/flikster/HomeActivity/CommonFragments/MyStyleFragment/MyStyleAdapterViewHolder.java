@@ -2,13 +2,11 @@ package com.flikster.HomeActivity.CommonFragments.MyStyleFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
@@ -18,8 +16,6 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioA
 import com.flikster.HomeActivity.WatchFragment.MusicAdapterViewHolder;
 import com.flikster.HomeActivity.WatchFragment.WatchTrailerViewHolder;
 import com.flikster.R;
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,22 +24,14 @@ import java.util.List;
  * Created by abhishek on 12-10-2017.
  */
 
-public class FragmentAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyStyleAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
     List<String> imag = new ArrayList<>();
-    RecyclerView.LayoutManager layoutManager;
-    CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
-    MusicAdapterViewHolder musicAdapterViewHolder;
-    WatchTrailerViewHolder watchTrailerViewHolder;
-    CelebrityBioAdapterFamilyViewHolder celebrityBioAdapterFamilyViewHolder;
-    CelebrityBioAdapterFilmographyViewHolder celebrityBioAdapterFilmographyViewHolder;
-    CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
-    CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
 
 
-    public FragmentAdapterViewHolder(Context context, FragmentManager fragmentManager) {
+    public MyStyleAdapterViewHolder(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -63,22 +51,22 @@ public class FragmentAdapterViewHolder extends RecyclerView.Adapter<RecyclerView
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_my_style_one, parent, false);
-            return new FragmentAdapterViewHolder.ViewHolder1(view);
+            return new MyStyleAdapterViewHolder.ViewHolder1(view);
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_my_style_two, parent, false);
-            return new FragmentAdapterViewHolder.ViewHolder2(view);
+            return new MyStyleAdapterViewHolder.ViewHolder2(view);
         } else if (viewType == 3) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_my_style_three, parent, false);
-            return new FragmentAdapterViewHolder.ViewHolder3(view);
+            return new MyStyleAdapterViewHolder.ViewHolder3(view);
         } else if (viewType == 4) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_my_style_four, parent, false);
-            return new FragmentAdapterViewHolder.ViewHolder4(view);
+            return new MyStyleAdapterViewHolder.ViewHolder4(view);
         } else if (viewType == 5) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_my_style_five, parent, false);
-            return new FragmentAdapterViewHolder.ViewHolder5(view);
+            return new MyStyleAdapterViewHolder.ViewHolder5(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_my_style_five, parent, false);
-            return new FragmentAdapterViewHolder.ViewHolder5(view);
+            return new MyStyleAdapterViewHolder.ViewHolder5(view);
         }
     }
 
@@ -103,13 +91,31 @@ public class FragmentAdapterViewHolder extends RecyclerView.Adapter<RecyclerView
         return type.get(position);
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder {
+    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout mystyle_layout_one;
+
         public ViewHolder1(View itemView) {
             super(itemView);
+            mystyle_layout_one = (LinearLayout) itemView.findViewById(R.id.mystyle_layout_one);
+            mystyle_layout_one.setOnClickListener(this);
+        }
 
-//            carouselView = (CarouselView) itemView.findViewById(R.id.carouselView);
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.mystyle_layout_one) {
+//                fragmentJump(item);
+            }
 
         }
+
+      /*  private void fragmentJump(Feed mItemSelected) {
+            mFragment = new Fragment2();
+            mBundle = new Bundle();
+            mBundle.putParcelable("item_selected_key", mItemSelected);
+            fragmentManager.setArguments(mBundle);
+            switchContent(R.id.frag1, fragmentManager);
+        }*/
+
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder {

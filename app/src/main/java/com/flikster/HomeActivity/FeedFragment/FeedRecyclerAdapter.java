@@ -127,13 +127,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (holder.getItemViewType() == 3) {
 
             Log.e("hfdhhd","insde news"+items.get(position).getMovie());
-            if (items.get(position).getMovie() != null) {
+            if (items.get(position).getMovie() != null && items.get(position).getMovie().size() != 0) {
                 Log.e("CelaDta", "news_card" + items.get(position).getMovie().get(0).getProfilePic());
                 Log.e("pic", "" + items.get(position).getMovie().get(0).getProfilePic());
                 Glide.with(context).load(items.get(position).getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
                 ((ViewHolder3) holder).tv_tag_desc.setText(items.get(position).getMovie().get(0).getType());
                 ((ViewHolder3) holder).tv_tag_name.setText(items.get(position).getMovie().get(0).getName());
-            } else if (items.get(position).getCeleb() != null) {
+            } else if (items.get(position).getCeleb() != null && items.get(position).getCeleb().size() != 0 ) {
                 Log.e("MovieDta", "news_card" + items.get(position).getCeleb());
                 Log.e("pic", "" + items.get(position).getCeleb().get(0).getProfilePic());
                 Glide.with(context).load(items.get(position).getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
