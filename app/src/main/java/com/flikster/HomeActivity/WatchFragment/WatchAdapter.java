@@ -156,6 +156,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(tvShowsViewHolder);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
+            socialInterviewImg.clear();
+            socialInterviewTitle.clear();
             for (int i=0;i<Count;i++)
             {
                 if("social-buzz".equals(items.get(i).getContentType()) || "interview".equals(items.get(i).getContentType()))
@@ -177,6 +179,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(moviesViewHolder);
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
+            trailerPromoImg.clear();
+            trailerPromoTitle.clear();
             for (int i=0;i<Count;i++)
             {
                 if("trailer".equals(items.get(i).getContentType()) || "promo".equals(items.get(i).getContentType()))
@@ -191,6 +195,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(trailersViewHolder);
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Comedy");
+            comedyImg.clear();
+            comedyTitle.clear();
             for (int i=0;i<Count;i++)
             {
                 if("comedy-clip".equals(items.get(i).getContentType()))
