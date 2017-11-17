@@ -20,7 +20,7 @@
         android:layout_gravity="top"
         app:tabGravity="fill"
         />
-    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.flikster.Util.ScrollableViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,6 +28,6 @@
         android:layout_marginTop="@dimen/five"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </android.support.v4.view.ViewPager>
+    </com.flikster.Util.ScrollableViewPager>
 
 </LinearLayout>

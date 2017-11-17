@@ -32,6 +32,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.R;
+import com.flikster.Util.ScrollableViewPager;
 
 /**
  * Created by abhishek on 17-10-2017.
@@ -45,7 +46,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     Toolbar toolbar_frag_multiicons_toolbar;
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
     TabLayout tabLayout;
-    private ViewPager viewPage;
+    private ScrollableViewPager viewPage;
 
     @Nullable
     @Override
@@ -91,7 +92,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
-        viewPage = (ViewPager) view.findViewById(R.id.viewpager);
+        viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 
     }
