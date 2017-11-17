@@ -60,6 +60,7 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
+import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.MenuFragments.FliksterCreditFragment;
@@ -231,7 +232,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 } else if (position == 2) {
                     //cameraAccessPermission();
                 } else if (position == 3) {
-                    beginTransact(new FashionFragment());
+//                    beginTransact(new FashionFragment());
+                    beginTransact(new FashionLandingFragment());
                 } else if (position == 4) {
                     beginTransact(new MyStyleFragment());
                 } /*else if (position == 5) {
