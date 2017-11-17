@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,8 +87,6 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
-//            return new WatchAdapter.ViewHolder1(view);
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.carouselview, parent, false);
             return new WatchAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
@@ -157,10 +156,19 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(tvShowsViewHolder);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
+            for (int i=0;i<Count;i++)
+            {
+                if("social-buzz".equals(items.get(i).getContentType()) || "interview".equals(items.get(i).getContentType()))
+                {
+                    socialInterviewImg.add(items.get(i).getProfilePic());
+                    socialInterviewTitle.add(items.get(i).getTitle());
+                }
+            }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context);
+            msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context,socialInterviewTitle,socialInterviewImg);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(msocialBuzzOrInterViewsViewHolder);
+
         } else if (holder.getItemViewType() == 5) {
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_title.setText("Movies");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -169,15 +177,31 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(moviesViewHolder);
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
+            for (int i=0;i<Count;i++)
+            {
+                if("trailer".equals(items.get(i).getContentType()) || "promo".equals(items.get(i).getContentType()))
+                {
+                    trailerPromoImg.add(items.get(i).getProfilePic());
+                    trailerPromoTitle.add(items.get(i).getTitle());
+                }
+            }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            trailersViewHolder = new TrailersViewHolder(context);
+            trailersViewHolder = new TrailersViewHolder(context,trailerPromoImg,trailerPromoTitle);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(trailersViewHolder);
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Comedy");
+            for (int i=0;i<Count;i++)
+            {
+                if("comedy-clip".equals(items.get(i).getContentType()))
+                {
+                    comedyImg.add(items.get(i).getProfilePic());
+                    comedyTitle.add(items.get(i).getTitle());
+                }
+            }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            comedyViewHolder = new ComedyViewHolder(context);
+            comedyViewHolder = new ComedyViewHolder(context,comedyImg,comedyTitle);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(comedyViewHolder);
         } else {
         }

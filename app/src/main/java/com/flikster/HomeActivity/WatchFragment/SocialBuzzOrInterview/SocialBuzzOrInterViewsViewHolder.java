@@ -3,11 +3,14 @@ package com.flikster.HomeActivity.WatchFragment.SocialBuzzOrInterview;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
@@ -22,12 +25,16 @@ import java.util.List;
 public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<SocialBuzzOrInterViewsViewHolder.ViewHolder> {
     List<String> imag=new ArrayList<>();
     Context context;
-    public SocialBuzzOrInterViewsViewHolder(Context context) {
+    List<String> socialInterviewImg=new ArrayList<>();
+    List<String> socialInterviewTitle=new ArrayList<>();
+    public SocialBuzzOrInterViewsViewHolder(Context context,List<String> socialInterviewTitle,List<String> socialInterviewImg) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
         this.context=context;
+        this.socialInterviewImg=socialInterviewImg;
+        this.socialInterviewTitle=socialInterviewTitle;
     }
 
     @Override
@@ -38,19 +45,22 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Socia
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //holder.imageView.setImageResource(R.drawable.pooja);
+        Glide.with(context).load(socialInterviewImg.get(position)).into(holder.imageView);
+        holder.carousel_title.setText(socialInterviewTitle.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return imag.size();
+        return socialInterviewImg.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
+        TextView carousel_title;
         public ViewHolder(View itemView) {
             super(itemView);
-            //imageView=(ImageView)itemView.findViewById(R.id.card_celebrity_bio_peers_recycler);
+            imageView=(ImageView)itemView.findViewById(R.id.carousel_image);
+            carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
             itemView.setOnClickListener(this);
         }
 
