@@ -10,7 +10,7 @@ import android.view.MotionEvent;
  */
 
 public class ScrollableViewPager extends ViewPager {
-    private boolean canScroll = true;
+    private boolean canScroll = false;
 
     public ScrollableViewPager(Context context) {
         super(context);
