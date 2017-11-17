@@ -73,6 +73,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                     //arguments.putStringArrayList("role", (ArrayList<String>) items.get(0).getRole());
                     movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
                     viewPager.setAdapter(movieAdapter);
+                    viewPager.setCurrentItem(1);
                 }else {
                     arguments.putString("profilepic", "");
                     arguments.putString("coverpic", "");
@@ -80,6 +81,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                     arguments.putStringArrayList("role", new  ArrayList<String>(){{add("");add("");}});
                     movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
                     viewPager.setAdapter(movieAdapter);
+                    viewPager.setCurrentItem(1);
                 }
 
             }
