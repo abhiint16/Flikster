@@ -15,6 +15,9 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioA
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterPeersViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
+import com.flikster.HomeActivity.FeedFragment.FeedCelebrityRecyclerItemAdapter;
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Comedy.ComedyViewHolder;
 import com.flikster.HomeActivity.WatchFragment.LatestMovieTrailers.WatchTrailerViewHolder;
 import com.flikster.HomeActivity.WatchFragment.Movies.MoviesViewHolder;
@@ -45,10 +48,20 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     TvShowsViewHolder tvShowsViewHolder;
     MoviesViewHolder moviesViewHolder;
     ComedyViewHolder comedyViewHolder;
+    List<String> socialInterviewImg=new ArrayList<>();
+    List<String> socialInterviewTitle=new ArrayList<>();
+    List<String> trailerPromoImg=new ArrayList<>();
+    List<String> trailerPromoTitle=new ArrayList<>();
+    List<String> comedyImg=new ArrayList<>();
+    List<String> comedyTitle=new ArrayList<>();
+    List<FeedInnerData> items;
+    Integer Count;
+    FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
+    FeedFragment.Testing testing;
 
     int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
 
-    public WatchAdapter(Context context, FragmentManager fragmentManager) {
+    public WatchAdapter(Context context, FragmentManager fragmentManager, List<FeedInnerData> items, Integer Count, FeedFragment.Testing testing) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -64,6 +77,10 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
         imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+
+        this.items = items;
+        this.Count = Count;
+        this.testing = testing;
     }
 
     @Override
@@ -81,6 +98,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             return new WatchAdapter.ViewHolder3(view);
         } else if (viewType == 4) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+//            if
             return new WatchAdapter.ViewHolder4(view);
         } else if (viewType == 5) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
@@ -202,6 +220,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
+        //508001
     }
 
     public class ViewHolder3 extends RecyclerView.ViewHolder {

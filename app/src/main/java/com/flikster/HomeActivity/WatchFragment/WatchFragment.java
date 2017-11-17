@@ -45,7 +45,7 @@ public class WatchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
-//        retrofitInit();
+        retrofitInit();
         initializeViews();
         initializeRest();
         return view;
@@ -54,8 +54,8 @@ public class WatchFragment extends Fragment {
     private void initializeRest() {
         movieFragmentInfoLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         movieFragmentInfoRecycler.setLayoutManager(movieFragmentInfoLayoutManager);
-        watchAdapter = new WatchAdapter(getActivity(), fragmentManager);
-        movieFragmentInfoRecycler.setAdapter(watchAdapter);
+//        watchAdapter = new WatchAdapter(getActivity(), fragmentManager);
+//        movieFragmentInfoRecycler.setAdapter(watchAdapter);
     }
 
     private void initializeViews() {
@@ -72,8 +72,9 @@ public class WatchFragment extends Fragment {
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 items = response.body().getItems();
                 Count = response.body().getCount();
+                watchAdapter = new WatchAdapter(getActivity(), fragmentManager, items, Count, testing);
+                movieFragmentInfoRecycler.setAdapter(watchAdapter);
 //                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, items, Count, testing);
-//                fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
 
             }
 
