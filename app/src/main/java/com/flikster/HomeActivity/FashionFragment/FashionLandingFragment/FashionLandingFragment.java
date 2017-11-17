@@ -2,6 +2,7 @@ package com.flikster.HomeActivity.FashionFragment.FashionLandingFragment;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
@@ -129,15 +130,21 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
         tabLayout.getTabAt(2).setCustomView(tabThree);
 
-       /* TextView tabfour = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabThree.setText("Womens Store");
-        tabThree.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        TextView tabfour = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
+        tabfour.setText("Womens Store");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            tabfour.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+        }
+        tabfour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
         tabLayout.getTabAt(3).setCustomView(tabfour);
 
         TextView tabfive = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabThree.setText("All Store");
-        tabThree.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-        tabLayout.getTabAt(4).setCustomView(tabfive);*/
+        tabfive.setText("All Store");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            tabfive.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        }
+        tabfive.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
+        tabLayout.getTabAt(4).setCustomView(tabfive);
 
     }
 
@@ -146,8 +153,8 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         adapter.addFrag(new MovieStoreFragment(), "Movie Store");
         adapter.addFrag(new MovieStoreFragment(), "Celeb Store");
         adapter.addFrag(new MovieStoreFragment(), "Mens Store");
-        /*adapter.addFrag(new MovieStoreFragment(), "Womens Store");
-        adapter.addFrag(new MovieStoreFragment(), "All Store");*/
+        adapter.addFrag(new MovieStoreFragment(), "Womens Store");
+        adapter.addFrag(new MovieStoreFragment(), "All Store");
         viewPager.setAdapter(adapter);
 //        viewPager.setOffscreenPageLimit(3);
     }

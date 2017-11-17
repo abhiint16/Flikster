@@ -69,6 +69,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                     arguments.putStringArrayList("role", (ArrayList<String>) items.get(0).getRole());
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setAdapter(celebrityAdapter);
+                    viewPager.setCurrentItem(1);
                 }else {
                     arguments.putString("profilepic", "");
                     arguments.putString("coverpic", "");
@@ -76,6 +77,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                     arguments.putStringArrayList("role", new  ArrayList<String>(){{add("");add("");}});
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setAdapter(celebrityAdapter);
+                    viewPager.setCurrentItem(1);
                 }
 
             }
