@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -57,12 +58,6 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        try {
-//            ((AppCompatActivity) getActivity()).getSupportActionBar().setNavigationMode((ActionBar.NAVIGATION_MODE_TABS));
-        } catch (Exception e) {
-
-        }
-
         initializeViews();
         initializeRest();
         return view;
@@ -71,20 +66,10 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     private void initializeRest() {
         createViewPager(viewPage);
         tabLayout.setupWithViewPager(viewPage);
-
         createTabIcons();
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_notification.setOnClickListener(this);
         toolbar_frag_multiicons_cart.setOnClickListener(this);
-
-       /* for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
-            p.setMargins(0, 0, 50, 0);
-            tab.requestLayout();
-
-        }
-        View tab = ((ViewGroup) tabLayout.getChildAt(0));*/
     }
 
     private void initializeViews() {
@@ -104,8 +89,6 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     }
 
     private void createTabIcons() {
-
-
         TextView tabOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
         tabOne.setText("Movie Store");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -150,14 +133,15 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     }
 
     private void createViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         adapter.addFrag(new MovieStoreFragment(), "Movie Store");
         adapter.addFrag(new MovieStoreFragment(), "Celeb Store");
         adapter.addFrag(new MovieStoreFragment(), "Mens Store");
         adapter.addFrag(new MovieStoreFragment(), "Womens Store");
         adapter.addFrag(new MovieStoreFragment(), "All Store");
         viewPager.setAdapter(adapter);
-//        viewPager.setOffscreenPageLimit(3);
+        viewPage.setCurrentItem(0);
+
     }
 
     @Override
