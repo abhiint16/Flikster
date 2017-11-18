@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -243,7 +244,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
             ((ViewHolder8)holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
             ((ViewHolder8)holder).fragment_common_recyclerview_recycler.setAdapter(jukeBoxRecyclerViewHolder);
-
+            ((ViewHolder8)holder).card_footer_container.setVisibility(View.GONE);
         }
     }
 
@@ -670,6 +671,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         LinearLayout header_linear;
         LinearLayout card_description_linear;
         RecyclerView fragment_common_recyclerview_recycler;
+        RelativeLayout card_footer_container;
 
         public ViewHolder8(View itemView) {
             super(itemView);
@@ -678,18 +680,22 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_footer_container=(RelativeLayout)itemView.findViewById(R.id.card_footer_container);
+            header_linear=(LinearLayout)itemView.findViewById(R.id.header_linear);
+            header_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
+            //card_description_linear.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            /*globalData.a = 1;
             if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
                 if (items.get(getAdapterPosition()).getCeleb() == null) {
                     testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
                 } else if (items.get(getAdapterPosition()).getMovie() == null) {
                     testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            } /*else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new AuctionDetailFragment())
                         .addToBackStack("")
@@ -699,8 +705,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         items.get(getAdapterPosition()).getCeleb().get(0).getName(),
                         items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(), items.get(getAdapterPosition()).getCeleb().get(0).getType(),
                         items.get(getAdapterPosition()).getTitle(), new GalleryCardClick());
-            }*/
-
+            }
+*/
         }
     }
 }
