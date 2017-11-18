@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.FeedFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
@@ -29,6 +30,7 @@ import com.flikster.R;
 import com.flikster.HomeActivity.StealStyleViewHolder;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +49,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     Integer Count;
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
     FeedFragment.Testing testing;
+    JukeBoxRecyclerViewHolder jukeBoxRecyclerViewHolder;
+    List<String> audio=new ArrayList<>();
+    RecyclerView.LayoutManager layoutManager;
 
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, List<FeedInnerData> items, Integer Count, FeedFragment.Testing testing) {
         this.context = context;
@@ -54,6 +59,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.items = items;
         this.Count = Count;
         this.testing = testing;
+        audio.add("http://content.flikster.com/audio/legendd1.mp3");
     }
 
     @Override
@@ -80,6 +86,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (viewType == 7) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1, parent, false);
             return new ViewHolder7(view);
+        }
+        else if (viewType == 8) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_audio_jukebox, parent, false);
+            return new ViewHolder8(view);
         }
 
         return null;
@@ -215,6 +225,26 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(items.get(position).getProfilePic()).into(((ViewHolder7) holder).card_gallary1_img1);
             ((ViewHolder7) holder).tv_name.setText(items.get(position).getTitle());
         }
+
+        else if(holder.getItemViewType()==8)
+        {
+            if (items.get(position).getMovie() != null && items.get(position).getMovie().size() != 0) {
+                Glide.with(context).load(items.get(position).getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
+                ((ViewHolder8) holder).tv_tag_desc.setText(items.get(position).getMovie().get(0).getType());
+                ((ViewHolder8) holder).tv_tag_name.setText(items.get(position).getMovie().get(0).getName());
+            } else if (items.get(position).getCeleb() != null) {
+                Glide.with(context).load(items.get(position).getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
+                ((ViewHolder8) holder).tv_tag_desc.setText(items.get(position).getCeleb().get(0).getType());
+                ((ViewHolder8) holder).tv_tag_name.setText(items.get(position).getCeleb().get(0).getName());
+                Log.e("check", "" + items.get(position).getMedia().getGallery());
+            }
+            Glide.with(context).load(items.get(position).getProfilePic()).into(((ViewHolder8) holder).card_audio_jukebox_imageview);
+            jukeBoxRecyclerViewHolder=new JukeBoxRecyclerViewHolder(context,audio);
+            layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
+            ((ViewHolder8)holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
+            ((ViewHolder8)holder).fragment_common_recyclerview_recycler.setAdapter(jukeBoxRecyclerViewHolder);
+
+        }
     }
 
     @Override
@@ -244,9 +274,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case "movie-making":
                 return 4;
             case "audio-song":
-                return 4;
+                return 8;
             case "dialouge":
-                return 4;
+                return 8;
             case "critic-review":
                 return 1;
             case "social-buzz":
@@ -629,6 +659,47 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(), items.get(getAdapterPosition()).getCeleb().get(0).getType(),
                         items.get(getAdapterPosition()).getTitle(), new GalleryCardClick());
             }
+
+        }
+    }
+
+    public class ViewHolder8 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView card_audio_jukebox_imageview, profile_image;
+        TextView tv_tag_name, tv_tag_desc;
+        ImageButton video_btn;
+        LinearLayout header_linear;
+        LinearLayout card_description_linear;
+        RecyclerView fragment_common_recyclerview_recycler;
+
+        public ViewHolder8(View itemView) {
+            super(itemView);
+            card_audio_jukebox_imageview=(ImageView)itemView.findViewById(R.id.card_audio_jukebox_imageview);
+            fragment_common_recyclerview_recycler=(RecyclerView)itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+        }
+
+        @Override
+        public void onClick(View view) {
+            /*globalData.a = 1;
+            if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
+                if (items.get(getAdapterPosition()).getCeleb() == null) {
+                    testing.test(items.get(getAdapterPosition()).getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (items.get(getAdapterPosition()).getMovie() == null) {
+                    testing.test(items.get(getAdapterPosition()).getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                }
+            } else if (view.getId() == R.id.card_description_linear) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container, new AuctionDetailFragment())
+                        .addToBackStack("")
+                        .commit();
+            } else if (view.getId() == R.id.card_gallary1_img1) {
+                testing.galleryCardOnClick(items.get(getAdapterPosition()).getMedia().getGallery(),
+                        items.get(getAdapterPosition()).getCeleb().get(0).getName(),
+                        items.get(getAdapterPosition()).getCeleb().get(0).getProfilePic(), items.get(getAdapterPosition()).getCeleb().get(0).getType(),
+                        items.get(getAdapterPosition()).getTitle(), new GalleryCardClick());
+            }*/
 
         }
     }

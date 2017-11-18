@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:background="@color/white"
     android:orientation="vertical">
@@ -12,17 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/movie" />
+        android:id="@+id/card_audio_jukebox_imageview"/>
 
     <include layout="@layout/card_footer" />
 
-    <include layout="@layout/card_audio_clip" />
+    <include layout="@layout/fragment_common_recyclerview"
+        android:background="@color/white"></include>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/blue"
+        android:textColor="@color/colorAccent"
         android:layout_gravity="right|center_vertical"
         android:layout_marginBottom="@dimen/five"
         android:layout_marginRight="@dimen/ten"
