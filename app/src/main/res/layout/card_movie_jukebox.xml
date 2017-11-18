@@ -18,8 +18,6 @@
 
     <include layout="@layout/card_audio_clip" />
 
-    <include layout="@layout/card_audio_clip" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
