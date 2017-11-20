@@ -2,6 +2,7 @@ package com.flikster.HomeActivity.WatchFragment.SocialBuzzOrInterview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
@@ -27,7 +31,8 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Socia
     Context context;
     List<String> socialInterviewImg=new ArrayList<>();
     List<String> socialInterviewTitle=new ArrayList<>();
-    public SocialBuzzOrInterViewsViewHolder(Context context,List<String> socialInterviewTitle,List<String> socialInterviewImg) {
+    FragmentManager fragmentManager;
+    public SocialBuzzOrInterViewsViewHolder(Context context, List<String> socialInterviewTitle, List<String> socialInterviewImg, FragmentManager fragmentManager) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
@@ -35,6 +40,7 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Socia
         this.context=context;
         this.socialInterviewImg=socialInterviewImg;
         this.socialInterviewTitle=socialInterviewTitle;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -66,8 +72,10 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Socia
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(context,VideoPlayerActivity.class);
-            context.startActivity(intent);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, new MovieSongsListFragment())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }

@@ -7,8 +7,8 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_margin="5dp"
         android:elevation="8dp"
         app:cardCornerRadius="8dp">
@@ -16,11 +16,10 @@
 
         <ImageView
             android:id="@+id/movieimg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:scaleType="centerCrop"
-            android:src="@drawable/prabha" />
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:background="@color/colorImageBackgroundGrey"
+            android:scaleType="centerCrop" />
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>

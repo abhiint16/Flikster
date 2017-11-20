@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<MusicAdapterVie
         @Override
         public void onClick(View view) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MusicGridFragment())
+                    .replace(R.id.main_container, new MovieSongsListFragment())
                     .addToBackStack("")
                     .commit();
         }
