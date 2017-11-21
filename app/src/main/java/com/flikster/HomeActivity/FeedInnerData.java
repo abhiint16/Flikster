@@ -16,86 +16,152 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FeedInnerData {
 
-    @SerializedName("title")
-    public String title;
-    @SerializedName("contentType")
-    public String contentType;
-    @SerializedName("profilePic")
-    public String profilePic;
-    @SerializedName("text")
-    public String text;
-    @SerializedName("movie")
-    public List<FeedMovieInnerMoreData> movie;
-    @SerializedName("celeb")
-    public List<FeedCelebInnerMoreData> celeb;
-    @SerializedName("media")
-    public  FeedMediaInnerData media;
+    @SerializedName("total")
+    public Integer total;
+    @SerializedName("hits")
+    public List<FeedInnerMoreData> hits;
 
-    public FeedMediaInnerData getMedia() {
-        return media;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setMedia(FeedMediaInnerData media) {
-        this.media = media;
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
-    public String getText() {
-        return text;
+    public List<FeedInnerMoreData> getHits() {
+        return hits;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setHits(List<FeedInnerMoreData> hits) {
+        this.hits = hits;
     }
 
-    public List<FeedMovieInnerMoreData> getMovie() {
-        return movie;
+    public class FeedInnerMoreData
+    {
+        @SerializedName("_source")
+        public FeedInnerMostData _source;
+
+        public FeedInnerMostData get_source() {
+            return _source;
+        }
+
+        public void set_source(FeedInnerMostData _source) {
+            this._source = _source;
+        }
     }
 
-    public void setMovie(List<FeedMovieInnerMoreData> movie) {
-        this.movie = movie;
-    }
-
-    public List<FeedCelebInnerMoreData> getCeleb() {
-        return celeb;
-    }
-
-    public void setCeleb(List<FeedCelebInnerMoreData> celeb) {
-        this.celeb = celeb;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public String getProfilePic() {
-        return profilePic;
-    }
-
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
-    }
-
-    public class FeedMovieInnerMoreData{
-        @SerializedName("name")
-        public String name;
-        @SerializedName("type")
-        public String type;
+    public class FeedInnerMostData
+    {
+        @SerializedName("contentType")
+        public String contentType;
+        @SerializedName("tags")
+        public List<String> tags;
+        @SerializedName("title")
+        public String title;
         @SerializedName("profilePic")
         public String profilePic;
+        @SerializedName("movie")
+        public List<FeedMovieData> movie;
+        @SerializedName("celeb")
+        public List<FeedCelebData> celeb;
+        @SerializedName("media")
+        public FeedMediaData media;
+
+        public List<FeedCelebData> getCeleb() {
+            return celeb;
+        }
+
+        public void setCeleb(List<FeedCelebData> celeb) {
+            this.celeb = celeb;
+        }
+
+        public String getContentType() {
+            return contentType;
+        }
+
+        public void setContentType(String contentType) {
+            this.contentType = contentType;
+        }
+
+        public List<String> getTags() {
+            return tags;
+        }
+
+        public void setTags(List<String> tags) {
+            this.tags = tags;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getProfilePic() {
+            return profilePic;
+        }
+
+        public void setProfilePic(String profilePic) {
+            this.profilePic = profilePic;
+        }
+
+        public List<FeedMovieData> getMovie() {
+            return movie;
+        }
+
+        public void setMovie(List<FeedMovieData> movie) {
+            this.movie = movie;
+        }
+
+        public FeedMediaData getMedia() {
+            return media;
+        }
+
+        public void setMedia(FeedMediaData media) {
+            this.media = media;
+        }
+    }
+
+
+    public class FeedMovieData
+    {
+        @SerializedName("id")
+        public String id;
+        @SerializedName("profilePic")
+        public String profilePic;
+        @SerializedName("type")
+        public String type;
         @SerializedName("slug")
         public String slug;
+        @SerializedName("name")
+        public String name;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getProfilePic() {
+            return profilePic;
+        }
+
+        public void setProfilePic(String profilePic) {
+            this.profilePic = profilePic;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
 
         public String getSlug() {
             return slug;
@@ -112,13 +178,27 @@ public class FeedInnerData {
         public void setName(String name) {
             this.name = name;
         }
+    }
 
-        public String getType() {
-            return type;
+    public class FeedCelebData
+    {
+        @SerializedName("id")
+        public String id;
+        @SerializedName("profilePic")
+        public String profilePic;
+        @SerializedName("type")
+        public String type;
+        @SerializedName("slug")
+        public String slug;
+        @SerializedName("name")
+        public String name;
+
+        public String getId() {
+            return id;
         }
 
-        public void setType(String type) {
-            this.type = type;
+        public void setId(String id) {
+            this.id = id;
         }
 
         public String getProfilePic() {
@@ -128,17 +208,14 @@ public class FeedInnerData {
         public void setProfilePic(String profilePic) {
             this.profilePic = profilePic;
         }
-    }
 
-    public class FeedCelebInnerMoreData{
-        @SerializedName("name")
-        public String name;
-        @SerializedName("type")
-        public String type;
-        @SerializedName("profilePic")
-        public String profilePic;
-        @SerializedName("slug")
-        public String slug;
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
 
         public String getSlug() {
             return slug;
@@ -147,6 +224,7 @@ public class FeedInnerData {
         public void setSlug(String slug) {
             this.slug = slug;
         }
+
         public String getName() {
             return name;
         }
@@ -154,32 +232,33 @@ public class FeedInnerData {
         public void setName(String name) {
             this.name = name;
         }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getProfilePic() {
-            return profilePic;
-        }
-
-        public void setProfilePic(String profilePic) {
-            this.profilePic = profilePic;
-        }
     }
 
-    public class FeedMediaInnerData {
-        @SerializedName("gallery")
-        List<String> gallery;
-
+    public  class FeedMediaData
+    {
         /*@SerializedName("audio")
-        String audio;
+        public List<String> audio;
         @SerializedName("video")
-        String video;
+        public List<String> video;*/
+        @SerializedName("gallery")
+        public List<String> gallery;
+
+        /*public List<String> getAudio() {
+
+            return audio;
+        }
+
+        public void setAudio(List<String> audio) {
+            this.audio = audio;
+        }
+
+        public List<String> getVideo() {
+            return video;
+        }
+
+        public void setVideo(List<String> video) {
+            this.video = video;
+        }
 */
         public List<String> getGallery() {
             return gallery;
@@ -188,22 +267,7 @@ public class FeedInnerData {
         public void setGallery(List<String> gallery) {
             this.gallery = gallery;
         }
-
-        /*public String getAudio() {
-            return audio;
-        }
-
-        public void setAudio(String audio) {
-            this.audio = audio;
-        }
-
-        public String getVideo() {
-            return video;
-        }
-
-        public void setVideo(String video) {
-            this.video = video;
-        }
-    }*/
     }
+
+
 }

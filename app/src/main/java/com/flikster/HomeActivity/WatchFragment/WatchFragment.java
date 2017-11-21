@@ -37,7 +37,7 @@ public class WatchFragment extends Fragment {
     WatchAdapter watchAdapter;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    List<FeedInnerData> items;
+    FeedInnerData outerHits;
     Integer Count;
     FeedFragment.Testing testing;
 
@@ -65,14 +65,14 @@ public class WatchFragment extends Fragment {
 
 
     private void retrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getTopRatedMovies();
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search?pretty=true&q=*/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(true,"*");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
-                items = response.body().getItems();
-                Count = response.body().getCount();
-                watchAdapter = new WatchAdapter(getActivity(), fragmentManager, items, Count, testing);
+                outerHits = response.body().getHits();
+                Count = outerHits.getTotal();
+                watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
                 movieFragmentInfoRecycler.setAdapter(watchAdapter);
 //                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, items, Count, testing);
 

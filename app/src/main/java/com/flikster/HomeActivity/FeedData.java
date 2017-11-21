@@ -12,35 +12,14 @@ import java.util.List;
 
 public class FeedData {
 
-    @SerializedName("Count")
-    public Integer Count;
-    @SerializedName("ScannedCount")
-    public Integer ScannedCount;
-    @SerializedName("Items")
-    public List<FeedInnerData> Items;
+    @SerializedName("hits")
+    public FeedInnerData hits;
 
-    public Integer getCount() {
-        return Count;
+    public FeedInnerData getHits() {
+        return hits;
     }
 
-    public void setCount(Integer count) {
-        Count = count;
-    }
-
-    public Integer getScannedCount() {
-        return ScannedCount;
-    }
-
-    public void setScannedCount(Integer scannedCount) {
-        ScannedCount = scannedCount;
-    }
-
-    public List<FeedInnerData> getItems() {
-        Log.e("eeeeeee","eeeeeeeeee");
-        return Items;
-    }
-
-    public void setItems(List<FeedInnerData> items) {
-        Items = items;
+    public void setHits(FeedInnerData hits) {
+        this.hits = hits;
     }
 }

@@ -55,14 +55,14 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     List<String> trailerPromoTitle=new ArrayList<>();
     List<String> comedyImg=new ArrayList<>();
     List<String> comedyTitle=new ArrayList<>();
-    List<FeedInnerData> items;
+    FeedInnerData outerHits;
     Integer Count;
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
     FeedFragment.Testing testing;
 
     int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
 
-    public WatchAdapter(Context context, FragmentManager fragmentManager, List<FeedInnerData> items, Integer Count, FeedFragment.Testing testing) {
+    public WatchAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits,Integer Count, FeedFragment.Testing testing) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -79,7 +79,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
 
-        this.items = items;
+        this.outerHits = outerHits;
         this.Count = Count;
         this.testing = testing;
     }
@@ -160,10 +160,10 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             socialInterviewTitle.clear();
             for (int i=0;i<Count;i++)
             {
-                if("social-buzz".equals(items.get(i).getContentType()) || "interview".equals(items.get(i).getContentType()))
+                if("social-buzz".equals(outerHits.getHits().get(position).get_source().getContentType()) || "interview".equals(outerHits.getHits().get(position).get_source().getContentType()))
                 {
-                    socialInterviewImg.add(items.get(i).getProfilePic());
-                    socialInterviewTitle.add(items.get(i).getTitle());
+                    socialInterviewImg.add(outerHits.getHits().get(position).get_source().getProfilePic());
+                    socialInterviewTitle.add(outerHits.getHits().get(position).get_source().getTitle());
                 }
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -183,10 +183,10 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             trailerPromoTitle.clear();
             for (int i=0;i<Count;i++)
             {
-                if("trailer".equals(items.get(i).getContentType()) || "promo".equals(items.get(i).getContentType()))
+                if("trailer".equals(outerHits.getHits().get(position).get_source().getContentType()) || "promo".equals(outerHits.getHits().get(position).get_source().getContentType()))
                 {
-                    trailerPromoImg.add(items.get(i).getProfilePic());
-                    trailerPromoTitle.add(items.get(i).getTitle());
+                    trailerPromoImg.add(outerHits.getHits().get(position).get_source().getProfilePic());
+                    trailerPromoTitle.add(outerHits.getHits().get(position).get_source().getTitle());
                 }
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -199,10 +199,10 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             comedyTitle.clear();
             for (int i=0;i<Count;i++)
             {
-                if("comedy-clip".equals(items.get(i).getContentType()))
+                if("comedy-clip".equals(outerHits.getHits().get(position).get_source().getContentType()))
                 {
-                    comedyImg.add(items.get(i).getProfilePic());
-                    comedyTitle.add(items.get(i).getTitle());
+                    comedyImg.add(outerHits.getHits().get(position).get_source().getProfilePic());
+                    comedyTitle.add(outerHits.getHits().get(position).get_source().getTitle());
                 }
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);

@@ -20,8 +20,9 @@ import retrofit2.http.Url;
 
 public interface ApiInterface {
 
-    @GET("contents")
-    Call<FeedData> getTopRatedMovies();
+    @GET("http://apiv3-es.flikster.com/contents/_search")
+    Call<FeedData> getTopRatedMovies(@Query("pretty") Boolean s,
+                                     @Query("q") String c);
 
     @GET
     Call<MovieData> getMovieData(@Url String url);

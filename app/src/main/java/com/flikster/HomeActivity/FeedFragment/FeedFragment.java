@@ -35,7 +35,7 @@ public class FeedFragment extends Fragment {
     RecyclerView.LayoutManager feedLayoutManager;
     FeedRecyclerAdapter feedAdapter;
     FragmentManager fragmentManager;
-    List<FeedInnerData> items;
+    FeedInnerData outerHits;
     Integer Count;
     Testing testing;
 
@@ -50,14 +50,14 @@ public class FeedFragment extends Fragment {
     }
 
     private void retrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getTopRatedMovies();
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(true,"*");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
-                items = response.body().getItems();
-                Count = response.body().getCount();
-                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, items, Count, testing);
+                outerHits = response.body().getHits();
+                Count = outerHits.getTotal();
+                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
                 fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
             }
 
