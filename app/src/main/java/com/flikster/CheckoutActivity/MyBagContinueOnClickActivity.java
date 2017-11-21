@@ -2,6 +2,7 @@ package com.flikster.CheckoutActivity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,13 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
+import com.flikster.CheckoutActivity.CheckoutFragment.CheckoutFragment;
 import com.flikster.R;
 
 /**
  * Created by abhishek on 24-10-2017.
  */
 
-public class MyBagContinueOnClickActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyBagContinueOnClickActivity extends AppCompatActivity implements View.OnClickListener ,AddressFragment.CheckoutUserData {
     ImageButton toolbar_frag_multiicons_back_navigation;
     FragmentManager fragmentManager;
     LinearLayout activity_mybag_continue_onclick_tabs_address_linear,activity_mybag_continue_onclick_tabs_checkout_linear
@@ -72,9 +74,20 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
         }*/
     }
 
-    private void addressFragmentLaunch() {
+    private void launchFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .replace(R.id.activity_mybag_continue_onclick_container,new AddressFragment())
+                .add(R.id.activity_mybag_continue_onclick_container, fragment)
                 .commit();
+    }
+
+    private void addressFragmentLaunch() {
+        launchFragment(new AddressFragment());
+    }
+
+    @Override
+    public void userInput(String name, String mobileNo, String Address, String city, String PinCode, String state, String landmark, String additionMobile, Fragment fragment) {
+        CheckoutFragment checkoutFragment = (CheckoutFragment) fragment;
+        checkoutFragment.userData(name,mobileNo,Address,city,PinCode,state,landmark,additionMobile);
+        launchFragment(fragment);
     }
 }

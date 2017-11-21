@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true">
+    android:layout_alignParentStart="true"
+    android:layout_above="@+id/fragment_address_bottom_btn">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,22 +31,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="name"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:id="@+id/address_fragment_name"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="Mobile No"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:id="@+id/address_fragment_mobileno"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="Address"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:id="@+id/address_fragment_address"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="City"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:id="@+id/address_fragment_city"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -56,24 +61,28 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:hint="Pin Code"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="5dp"
+                    android:id="@+id/address_fragment_pin"/>
                 <EditText
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:hint="State"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="5dp"
+                    android:id="@+id/address_fragment_state"/>
             </LinearLayout>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="Landmark (Optional)"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:id="@+id/address_fragment_landmark"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="Addition Mobile No (Optional)"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:id="@+id/address_fragment_additionmobile"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -88,4 +88,11 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                     .commit();
         }
     }
+
+    public void userData(String name,String mobile,String address,String city,String pin,String state,String landmark,
+                         String additionalMobile)
+    {
+
+    }
+
 }
