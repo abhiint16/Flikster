@@ -17,12 +17,15 @@ import android.widget.TextView;
 
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapter;
+import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.ViewPagerAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment.MovieStoreFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.R;
+import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.ScrollableViewPager;
+import com.flikster.Util.SharedPrefsUtil;
 
 /**
  * Created by abhishek on 17-10-2017.
@@ -37,6 +40,8 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
     TabLayout tabLayout;
     private ScrollableViewPager viewPage;
+    TextView toolbar_frag_multiicons_title;
+
 
     @Nullable
     @Override
@@ -53,6 +58,12 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
     }
 
     private void initializeRest() {
+
+        if (SharedPrefsUtil.getStringPreference(getContext(),"HEADER_NAME").equals("MEN")){
+            toolbar_frag_multiicons_title.setText("Men Fashion");
+        }else {
+            toolbar_frag_multiicons_title.setText("Women Fashion");
+        }
         createViewPager(viewPage);
         tabLayout.setupWithViewPager(viewPage);
         createTabIcons();
@@ -62,13 +73,14 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
     }
 
     private void initializeViews() {
+        toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
+//        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
 
     }
 
@@ -118,7 +130,7 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
         if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_container, new FeedFragment())
+                    .replace(R.id.main_container, new FashionLandingFragment())
                     .addToBackStack("")
                     .commit();
         } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {

@@ -45,22 +45,22 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celeb_profile, parent, false);
             return new ViewHolder1(view);
         } else if (viewType == 2) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv_one, parent, false);
             return new ViewHolder2(view);
         } else if (viewType == 3) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_product_singleimg, parent, false);
             return new ViewHolder3(view);
         } else if (viewType == 4) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv_one, parent, false);
             return new ViewHolder4(view);
         } else if (viewType == 5) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_product_singleimg, parent, false);
             return new ViewHolder5(view);
         } else if (viewType == 6) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv_one, parent, false);
             return new ViewHolder6(view);
         } else if (viewType == 7) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_product_singleimg, parent, false);
@@ -121,10 +121,10 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         TextView card_celebrity_feed_profile_name,card_celebrity_feed_profile_role;
         public ViewHolder1(View itemView) {
             super(itemView);
-            card_celebrity_feed_profile_name  = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_name);
-            card_celebrity_feed_profile_role  = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_role);
-            card_celebrity_feed_profile_name.setVisibility(View.GONE);
-            card_celebrity_feed_profile_role.setVisibility(View.GONE);
+//            card_celebrity_feed_profile_name  = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_name);
+//            card_celebrity_feed_profile_role  = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_role);
+//            card_celebrity_feed_profile_name.setVisibility(View.GONE);
+//            card_celebrity_feed_profile_role.setVisibility(View.GONE);
         }
 
         @Override

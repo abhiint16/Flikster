@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +10,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/ten"
         android:background="@drawable/white_box"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:padding="@dimen/ten">
 
         <ImageView
             android:id="@+id/card_store_gallary4_img1"
@@ -21,19 +21,18 @@
             android:layout_marginTop="@dimen/twenty"
             android:background="@color/transparent"
             android:scaleType="fitXY"
-            android:src="@drawable/maxi1" />
+            android:src="@drawable/gray_rectange_border" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/brannametxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/ten"
         android:background="@color/transparent"
         android:text="BRAND NAME"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/black"
-        android:layout_marginBottom="@dimen/ten"
-
+        android:textColor="@color/grey_txt_label"
         android:textSize="20sp" />
 
 </LinearLayout>

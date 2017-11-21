@@ -27,6 +27,7 @@ import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.R;
 import com.flikster.Util.ScrollableViewPager;
+import com.flikster.Util.SharedPrefsUtil;
 
 /**
  * Created by abhishek on 17-10-2017.
@@ -123,6 +124,62 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         tabfive.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
         tabLayout.getTabAt(4).setCustomView(tabfive);
 
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPage.setCurrentItem(tab.getPosition());
+                if (tab.getPosition() == 0) {
+
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_container, new CeleStoreFragment())
+                            .addToBackStack("")
+                            .commit();
+                } else if (tab.getPosition() == 1) {
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_container, new CeleStoreFragment())
+                            .addToBackStack("")
+                            .commit();
+                } else if (tab.getPosition() == 2) {
+
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_container, new MenFashionLandingFragment())
+                            .addToBackStack("")
+                            .commit();
+                } else if (tab.getPosition() == 3) {
+                    SharedPrefsUtil.setStringPreference(getContext(),"HEADER_NAME","MEN");
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_container, new MenFashionLandingFragment())
+                            .addToBackStack("")
+                            .commit();
+                } else if (tab.getPosition() == 4) {
+                    SharedPrefsUtil.setStringPreference(getContext(),"HEADER_NAME","Women");
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_container, new MenFashionLandingFragment())
+                            .addToBackStack("")
+                            .commit();
+                } else if (tab.getPosition() == 5) {
+
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     private void createViewPager(ViewPager viewPager) {
@@ -136,6 +193,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         viewPage.setCurrentItem(0);
 
     }
+
 
     @Override
     public void onClick(View view) {

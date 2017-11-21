@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
+import com.flikster.HomeActivity.FashionFragment.FashionType.BuyFashionTypeProductFragment.BuyFashionTypeProductFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.R;
 
@@ -57,19 +59,22 @@ public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<Me
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 //        ImageView movieimg;
+        Button buybtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
 //            movieimg = (ImageView) itemView.findViewById(R.id.fashion_proimg);
+            buybtn = (Button) itemView.findViewById(R.id.buybtn);
 //            movieimg.setOnClickListener(this);
+            buybtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.main_container, new MovieSongsListFragment())
-//                    .addToBackStack("")
-//                    .commit();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, new BuyFashionTypeProductFragment())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }

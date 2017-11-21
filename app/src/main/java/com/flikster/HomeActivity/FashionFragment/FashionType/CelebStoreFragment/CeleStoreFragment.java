@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapter;
+import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.ViewPagerAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFirstTypeFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
@@ -37,6 +38,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
     TabLayout tabLayout;
     private ScrollableViewPager viewPage;
+    TextView toolbar_frag_multiicons_title;
 
     @Nullable
     @Override
@@ -53,6 +55,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeRest() {
+        toolbar_frag_multiicons_title.setText("Men Fashion");
         createViewPager(viewPage);
         tabLayout.setupWithViewPager(viewPage);
         createTabIcons();
@@ -62,13 +65,14 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeViews() {
+        toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
+//        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
 
     }
 
@@ -118,7 +122,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
         if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_container, new FeedFragment())
+                    .replace(R.id.main_container, new FashionLandingFragment())
                     .addToBackStack("")
                     .commit();
         } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
