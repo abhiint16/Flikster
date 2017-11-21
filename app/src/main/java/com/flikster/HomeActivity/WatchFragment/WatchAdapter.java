@@ -23,6 +23,8 @@ import com.flikster.HomeActivity.WatchFragment.Comedy.ComedyViewHolder;
 import com.flikster.HomeActivity.WatchFragment.LatestMovieTrailers.WatchTrailerViewHolder;
 import com.flikster.HomeActivity.WatchFragment.Movies.MoviesViewHolder;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicAdapterViewHolder;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.SocialBuzzOrInterview.SocialBuzzOrInterViewsViewHolder;
 import com.flikster.HomeActivity.WatchFragment.TrailerOrPromos.TrailersViewHolder;
 import com.flikster.HomeActivity.WatchFragment.TvShows.TvShowsViewHolder;
@@ -133,15 +135,6 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             };
             //
             ((ViewHolder1) holder).carouselView.setImageListener(imageListeners);
-//            ViewListener viewListener = new ViewListener() {
-//                @Override
-//                public View setViewForPosition(int position) {
-//                    View imgview = inflater.inflate(R.layout.card_image_item, null);
-//                    return imgview;
-//                }
-//            };
-
-
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Music");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -152,7 +145,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Tv Shows");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            tvShowsViewHolder = new TvShowsViewHolder(context);
+//            tvShowsViewHolder = new TvShowsViewHolder(context);
+            tvShowsViewHolder = new TvShowsViewHolder(fragmentManager);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(tvShowsViewHolder);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
@@ -168,14 +162,14 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context,socialInterviewTitle,socialInterviewImg);
+            msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, socialInterviewTitle, socialInterviewImg,fragmentManager);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(msocialBuzzOrInterViewsViewHolder);
 
         } else if (holder.getItemViewType() == 5) {
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_title.setText("Movies");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            moviesViewHolder = new MoviesViewHolder(context);
+            moviesViewHolder = new MoviesViewHolder(context,fragmentManager);
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(moviesViewHolder);
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
@@ -191,7 +185,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            trailersViewHolder = new TrailersViewHolder(context,trailerPromoImg,trailerPromoTitle);
+            trailersViewHolder = new TrailersViewHolder(context, trailerPromoImg, trailerPromoTitle,fragmentManager);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(trailersViewHolder);
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Comedy");
@@ -207,7 +201,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            comedyViewHolder = new ComedyViewHolder(context,comedyImg,comedyTitle);
+            comedyViewHolder = new ComedyViewHolder(context, comedyImg, comedyTitle,fragmentManager);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(comedyViewHolder);
         } else {
         }
@@ -234,26 +228,31 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
 //            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
 //            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
-
             carouselView = (CarouselView) itemView.findViewById(R.id.carouselView);
             carouselView.setPageCount(sampleImages.length);
 
         }
     }
 
-    public class ViewHolder2 extends RecyclerView.ViewHolder {
-        TextView fragment_common_recyclerview_with_tv_title;
-        RecyclerView fragment_common_recyclerview_with_tv_recycler;
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView fragment_common_recyclerview_with_tv_title;
+        public RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder2(View itemView) {
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            innerTitleClick(v);
         }
         //508001
     }
 
-    public class ViewHolder3 extends RecyclerView.ViewHolder {
+    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
@@ -261,10 +260,18 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            innerTitleClick(v);
         }
     }
 
-    public class ViewHolder4 extends RecyclerView.ViewHolder {
+
+    public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
@@ -272,10 +279,16 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            innerTitleClick(v);
         }
     }
 
-    public class ViewHolder5 extends RecyclerView.ViewHolder {
+    public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
@@ -283,11 +296,17 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            innerTitleClick(v);
         }
     }
 
 
-    public class ViewHolder6 extends RecyclerView.ViewHolder {
+    public class ViewHolder6 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
@@ -295,10 +314,16 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            innerTitleClick(v);
         }
     }
 
-    public class ViewHolder7 extends RecyclerView.ViewHolder {
+    public class ViewHolder7 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
@@ -306,11 +331,24 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
-            fragment_common_recyclerview_with_tv_title.setText("Comedy");
+            fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
         }
 
 
+        @Override
+        public void onClick(View v) {
+            innerTitleClick(v);
+        }
     }
 
+    private void innerTitleClick(View vieww) {
+//        Share
+        if (vieww.getId() == R.id.fragment_common_recyclerview_with_tv_title) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, new MusicGridFragment())
+                    .addToBackStack("")
+                    .commit();
 
+        }
+    }
 }

@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="180dp"
         android:layout_gravity="bottom"
-        android:background="@drawable/sahoomusic"
+        android:background="@drawable/gray_rectange_border"
         android:gravity="bottom">
 
 

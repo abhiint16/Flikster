@@ -1,12 +1,14 @@
-package com.flikster.HomeActivity.WatchFragment.Music;
+package com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
+import com.flikster.HomeActivity.FashionFragment.FashionType.BuyFashionTypeProductFragment.BuyFashionTypeProductFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.R;
 
@@ -17,12 +19,12 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class MusicAdapterViewHolder extends RecyclerView.Adapter<MusicAdapterViewHolder.ViewHolder> {
+public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<MenFashionFragmentAdapterViewHolder.ViewHolder> {
     List<String> imag = new ArrayList<>();
     FragmentManager fragmentManager;
     int a;
 
-    public MusicAdapterViewHolder(FragmentManager fragmentManager) {
+    public MenFashionFragmentAdapterViewHolder(FragmentManager fragmentManager) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
         imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
@@ -32,13 +34,10 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<MusicAdapterVie
         this.fragmentManager = fragmentManager;
     }
 
-    public MusicAdapterViewHolder(int a) {
-        this.a = a;
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_music_recycler_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_product_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -49,22 +48,31 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<MusicAdapterVie
 
     @Override
     public int getItemCount() {
-        return imag.size();
+        //return imag.size();
+        return 4;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return 4;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView movieimg;
+//        ImageView movieimg;
+        Button buybtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            movieimg = (ImageView) itemView.findViewById(R.id.movieimg);
-            movieimg.setOnClickListener(this);
+//            movieimg = (ImageView) itemView.findViewById(R.id.fashion_proimg);
+            buybtn = (Button) itemView.findViewById(R.id.buybtn);
+//            movieimg.setOnClickListener(this);
+            buybtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MovieSongsListFragment())
+                    .replace(R.id.main_container, new BuyFashionTypeProductFragment())
                     .addToBackStack("")
                     .commit();
         }

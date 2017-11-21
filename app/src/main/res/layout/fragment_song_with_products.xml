@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="180dp"
         android:layout_gravity="bottom"
-        android:background="@drawable/sahoomusic"
+        android:background="@color/colorImageBackgroundGrey"
         android:gravity="bottom">
 
         <VideoView
@@ -64,9 +64,8 @@
     <include
         layout="@layout/fragment_common_recyclerview_with_tv"
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/five"
         android:layout_gravity="center_horizontal"
-
         android:background="@color/white" />
 </LinearLayout>

@@ -9,7 +9,8 @@
         android:id="@+id/movieimg"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="@drawable/sahoomusic" />
+        android:padding="@dimen/five"
+        android:background="@drawable/gray_rectange_border" />
 
     <TextView
         android:id="@+id/imageView1"
@@ -21,7 +22,7 @@
         android:hint="@string/enter_bid"
         android:layout_marginLeft="@dimen/ten"
         android:text="@string/song_title"
-        android:textColor="@color/white"
+        android:textColor="@color/header_background"
         android:textColorHint="@color/white"
         android:textStyle="bold" />
 

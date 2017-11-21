@@ -2,6 +2,7 @@ package com.flikster.HomeActivity.WatchFragment.TrailerOrPromos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
@@ -26,7 +29,8 @@ public class TrailersViewHolder extends RecyclerView.Adapter<TrailersViewHolder.
     Context context;
     List<String> trailerPromoImg=new ArrayList<>();
     List<String> trailerPromoTitle=new ArrayList<>();
-    public TrailersViewHolder(Context context,List<String> trailerPromoImg,List<String> trailerPromoTitle) {
+    FragmentManager fragmentManager;
+    public TrailersViewHolder(Context context, List<String> trailerPromoImg, List<String> trailerPromoTitle, FragmentManager fragmentManager) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
@@ -34,6 +38,7 @@ public class TrailersViewHolder extends RecyclerView.Adapter<TrailersViewHolder.
         this.context=context;
         this.trailerPromoImg=trailerPromoImg;
         this.trailerPromoTitle=trailerPromoTitle;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -65,8 +70,10 @@ public class TrailersViewHolder extends RecyclerView.Adapter<TrailersViewHolder.
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(context,VideoPlayerActivity.class);
-            context.startActivity(intent);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, new MovieSongsListFragment())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }
