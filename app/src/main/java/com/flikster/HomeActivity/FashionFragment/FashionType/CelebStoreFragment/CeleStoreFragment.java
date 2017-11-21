@@ -75,7 +75,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     private void createTabIcons() {
@@ -103,11 +103,11 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
 
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFrag(new MenFashionFirstTypeFragment(), "Clothing");
-        adapter.addFrag(new MenFashionFirstTypeFragment(), "Eye Wear");
-        adapter.addFrag(new MenFashionFirstTypeFragment(), "Foot Wear");
-        adapter.addFrag(new MenFashionFirstTypeFragment(), "Accessories");
-        adapter.addFrag(new MenFashionFirstTypeFragment(), "Other");
+        adapter.addFrag(new CelebStoreFirstTypeFragment(), "Clothing");
+        adapter.addFrag(new CelebStoreFirstTypeFragment(), "Eye Wear");
+        adapter.addFrag(new CelebStoreFirstTypeFragment(), "Foot Wear");
+        adapter.addFrag(new CelebStoreFirstTypeFragment(), "Accessories");
+        adapter.addFrag(new CelebStoreFirstTypeFragment(), "Other");
         viewPager.setAdapter(adapter);
         viewPage.setCurrentItem(0);
 

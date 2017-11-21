@@ -24,7 +24,7 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
-    MenFashionFragmentAdapter menFashionFragmentAdapter;
+    CelebStoreFragmentAdapter celebStoreFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
     FragmentManager fragmentManager;
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
@@ -42,8 +42,8 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     private void initializeRest() {
         layoutManagerFashionFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerFashionFragment);
-        menFashionFragmentAdapter = new MenFashionFragmentAdapter(getContext(), fragmentManager);
-        fragment_common_recyclerview_recycler.setAdapter(menFashionFragmentAdapter);
+        celebStoreFragmentAdapter = new CelebStoreFragmentAdapter(getContext(), fragmentManager);
+        fragment_common_recyclerview_recycler.setAdapter(celebStoreFragmentAdapter);
     }
 
     private void initializeViews() {

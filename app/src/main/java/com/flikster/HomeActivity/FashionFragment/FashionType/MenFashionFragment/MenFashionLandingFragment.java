@@ -75,7 +75,7 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     private void createTabIcons() {
