@@ -9,12 +9,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flikster.HomeActivity.HomeActivity;
+import com.flikster.KeyCloak.KeycloakHelper;
 import com.flikster.R;
+
+import org.jboss.aerogear.android.core.Callback;
 
 public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button btnLoginPhone, btnLoginEmail;
-    private Button btnLoginGoogle, btnLoginFacebook;
+    private Button btnLoginGoogle, btnLoginFacebook,keycloak;
     private TextView tvLoginTermsCond;
 
     @Override
@@ -30,7 +34,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         btnLoginGoogle = (Button)findViewById(R.id.btn_login_google);
         btnLoginFacebook = (Button)findViewById(R.id.btn_login_facebook);
         tvLoginTermsCond = (TextView)findViewById(R.id.tv_login_terms);
+        keycloak=(Button)findViewById(R.id.keycloak);
 
+        keycloak.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
         btnLoginEmail.setOnClickListener(this);
         btnLoginGoogle.setOnClickListener(this);
@@ -54,6 +60,34 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             gotoFacebookLogin();
         else if (view.getId() == R.id.tv_login_terms)
             showTermsConditions();
+        else if(view.getId()==R.id.keycloak)
+        {
+            if (!KeycloakHelper.isConnected()) {
+                Log.e("inside if not cnnect","inside if not cnnect");
+                KeycloakHelper.connect(AuthenticationActivity.this, new Callback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        Log.e("inside inSuccess","insde onsuccess");
+                        Toast.makeText(getApplicationContext(), "heaven beings here", Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.e("insde onFailure","insied onfilaure"+e);
+                        Toast.makeText(getApplicationContext(), "hell begins here", Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+            else if(KeycloakHelper.isConnected())
+            {
+                Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 
     private void gotoPhoneLogin() {
