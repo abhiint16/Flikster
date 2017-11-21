@@ -1,9 +1,9 @@
-package com.flikster.HomeActivity.FashionFragment.FashionType;
+package com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,22 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
-import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapter;
-import com.flikster.HomeActivity.FeedFragment.FeedFragment;
-import com.flikster.MyBagActivity.MyBagActivity;
+import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFragmentAdapter;
 import com.flikster.R;
 
 /**
  * Created by Logins on 17-11-2017.
  */
 
-public class MovieStoreFragment extends Fragment implements View.OnClickListener {
+public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
-    MovieStoreFragmentAdapter movieStoreFragmentAdapter;
+    MenFashionFragmentAdapter menFashionFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
+    FragmentManager fragmentManager;
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
 
     @Nullable
@@ -44,12 +42,13 @@ public class MovieStoreFragment extends Fragment implements View.OnClickListener
     private void initializeRest() {
         layoutManagerFashionFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerFashionFragment);
-        movieStoreFragmentAdapter = new MovieStoreFragmentAdapter(getActivity());
-        fragment_common_recyclerview_recycler.setAdapter(movieStoreFragmentAdapter);
+        menFashionFragmentAdapter = new MenFashionFragmentAdapter(getContext(), fragmentManager);
+        fragment_common_recyclerview_recycler.setAdapter(menFashionFragmentAdapter);
     }
 
     private void initializeViews() {
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        fragmentManager =  getActivity().getSupportFragmentManager();
     }
 
     @Override

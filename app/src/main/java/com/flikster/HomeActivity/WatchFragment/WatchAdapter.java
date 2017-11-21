@@ -229,8 +229,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView fragment_common_recyclerview_with_tv_title;
-        RecyclerView fragment_common_recyclerview_with_tv_recycler;
+        public TextView fragment_common_recyclerview_with_tv_title;
+        public RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder2(View itemView) {
             super(itemView);

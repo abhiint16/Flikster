@@ -1,9 +1,6 @@
-package com.flikster.HomeActivity.FashionFragment.FashionLandingFragment;
+package com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -20,9 +17,8 @@ import android.widget.TextView;
 
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapter;
-import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CeleStoreFragment;
-import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionLandingFragment;
-import com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment.MovieStoreFragment;
+import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.ViewPagerAdapter;
+import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFirstTypeFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.R;
@@ -32,7 +28,7 @@ import com.flikster.Util.ScrollableViewPager;
  * Created by abhishek on 17-10-2017.
  */
 
-public class FashionLandingFragment extends Fragment implements View.OnClickListener {
+public class CeleStoreFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
@@ -72,6 +68,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
 
     }
 
@@ -82,56 +79,35 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     }
 
     private void createTabIcons() {
-        TextView tabOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabOne.setText("Movie Store");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tabOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_tab_2)));
-        }
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
+        TextView tabOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
+        tabOne.setText("Clothing");
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
-        TextView tabTwo = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabTwo.setText("Celeb Store");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tabTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.red)));
-        }
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
+        TextView tabTwo = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
+        tabTwo.setText("Eye Wear");
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
-        TextView tabThree = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabThree.setText("Mens Store");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tabThree.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.yellowthink)));
-        }
-//        tabThree.setBackgroundColor(getResources().getColor(R.color.yellowthink));
-        tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
+        TextView tabThree = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
+        tabThree.setText("Foot Wear");
         tabLayout.getTabAt(2).setCustomView(tabThree);
 
-        TextView tabfour = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabfour.setText("Womens Store");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tabfour.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
-        }
-        tabfour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
+        TextView tabfour = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
+        tabfour.setText("Accessories");
         tabLayout.getTabAt(3).setCustomView(tabfour);
 
-        TextView tabfive = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabfive.setText("All Store");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tabfive.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
-        }
-        tabfive.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
+        TextView tabfive = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
+        tabfive.setText("Other");
         tabLayout.getTabAt(4).setCustomView(tabfive);
 
     }
 
     private void createViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFrag(new MovieStoreFragment(), "Movie Store");
-        adapter.addFrag(new CeleStoreFragment(), "Celeb Store");
-        adapter.addFrag(new MenFashionLandingFragment(), "Mens Store");
-        adapter.addFrag(new MenFashionLandingFragment(), "Womens Store");
-        adapter.addFrag(new MovieStoreFragment(), "All Store");
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFrag(new MenFashionFirstTypeFragment(), "Clothing");
+        adapter.addFrag(new MenFashionFirstTypeFragment(), "Eye Wear");
+        adapter.addFrag(new MenFashionFirstTypeFragment(), "Foot Wear");
+        adapter.addFrag(new MenFashionFirstTypeFragment(), "Accessories");
+        adapter.addFrag(new MenFashionFirstTypeFragment(), "Other");
         viewPager.setAdapter(adapter);
         viewPage.setCurrentItem(0);
 

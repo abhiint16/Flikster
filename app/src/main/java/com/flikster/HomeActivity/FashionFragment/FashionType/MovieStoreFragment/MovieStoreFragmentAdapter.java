@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.FashionFragment.FashionType;
+package com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
