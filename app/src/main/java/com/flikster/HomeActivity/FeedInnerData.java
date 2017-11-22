@@ -17,9 +17,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FeedInnerData {
 
     @SerializedName("total")
-    public Integer total;
+    private Integer total;
     @SerializedName("hits")
-    public List<FeedInnerMoreData> hits;
+    private List<FeedInnerMoreData> hits;
 
     public Integer getTotal() {
         return total;
@@ -40,7 +40,7 @@ public class FeedInnerData {
     public class FeedInnerMoreData
     {
         @SerializedName("_source")
-        public FeedInnerMostData _source;
+        private FeedInnerMostData _source;
 
         public FeedInnerMostData get_source() {
             return _source;
@@ -54,21 +54,21 @@ public class FeedInnerData {
     public class FeedInnerMostData
     {
         @SerializedName("contentType")
-        public String contentType;
+        private String contentType;
         @SerializedName("text")
-        public String text;
+        private String text;
         @SerializedName("tags")
-        public List<String> tags;
+        private List<String> tags;
         @SerializedName("title")
-        public String title;
+        private String title;
         @SerializedName("profilePic")
-        public String profilePic;
+        private String profilePic;
         @SerializedName("rating")
-        public  String rating;
+        private  String rating;
         @SerializedName("movie")
-        public List<FeedMovieData> movie;
+        private List<FeedMovieData> movie;
         @SerializedName("celeb")
-        public List<FeedCelebData> celeb;
+        private List<FeedCelebData> celeb;
         @SerializedName("media")
         public FeedMediaData media;
 
@@ -149,15 +149,15 @@ public class FeedInnerData {
     public class FeedMovieData
     {
         @SerializedName("id")
-        public String id;
+        private String id;
         @SerializedName("profilePic")
-        public String profilePic;
+        private String profilePic;
         @SerializedName("type")
-        public String type;
+        private String type;
         @SerializedName("slug")
-        public String slug;
+        private String slug;
         @SerializedName("name")
-        public String name;
+        private String name;
 
         public String getId() {
             return id;
@@ -203,15 +203,15 @@ public class FeedInnerData {
     public class FeedCelebData
     {
         @SerializedName("id")
-        public String id;
+        private String id;
         @SerializedName("profilePic")
-        public String profilePic;
+        private String profilePic;
         @SerializedName("type")
-        public String type;
+        private String type;
         @SerializedName("slug")
-        public String slug;
+        private String slug;
         @SerializedName("name")
-        public String name;
+        private String name;
 
         public String getId() {
             return id;
@@ -261,7 +261,7 @@ public class FeedInnerData {
         @SerializedName("video")
         public List<String> video;*/
         @SerializedName("gallery")
-        public List<String> gallery;
+        private List<String> gallery;
 
         /*public List<String> getAudio() {
 

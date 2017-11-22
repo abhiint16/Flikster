@@ -100,22 +100,22 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder.getItemViewType() == 1) {
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1) holder).card_critic_review_main_image);
-            if (outerHits.getHits().get(position)._source.getMovie() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
-                ((ViewHolder1) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
-                ((ViewHolder1) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-                ((ViewHolder1) holder).card_critic_review_moviename.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position)._source.getCeleb() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
-                ((ViewHolder1) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
-                ((ViewHolder1) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
+            if (outerHits.getHits().get(position).get_source().getMovie() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
+                ((ViewHolder1) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder1) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+                ((ViewHolder1) holder).card_critic_review_moviename.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
+                ((ViewHolder1) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder1) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             ((ViewHolder1) holder).card_movie_review_bottom_header_criticrating.setText(outerHits.getHits().get(position).get_source().getRating());
             if (outerHits.getHits().get(position).get_source().getText()== null)
                 ((ViewHolder1) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder1) holder).tv_description.setText(Html.fromHtml(Common.formatString(outerHits.getHits().get(position).get_source().getText())));
-            ((ViewHolder1) holder).tv_name.setText(outerHits.getHits().get(position)._source.getTitle());
+            ((ViewHolder1) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 2) {
             /*((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("You won't believe these");
             stealStyleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -123,116 +123,116 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             stealStyleViewHolder = new StealStyleViewHolder(((ViewHolder2) holder).itemView.getContext(), fragmentManager);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(stealStyleViewHolder);*/
             //((ViewHolder2) holder).card_quote_tv.setText(items.get(position).getText());
-            if (outerHits.getHits().get(position)._source.getMovie() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
-                ((ViewHolder2) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
-                ((ViewHolder2) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position)._source.getCeleb() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
-                ((ViewHolder2) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
-                ((ViewHolder2) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
+            if (outerHits.getHits().get(position).get_source().getMovie() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
+                ((ViewHolder2) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder2) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
+                ((ViewHolder2) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder2) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             if (outerHits.getHits().get(position).get_source().getText() == null)
             ((ViewHolder2) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
               ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-            ((ViewHolder2) holder).tv_name.setText(outerHits.getHits().get(position)._source.getTitle());
+            ((ViewHolder2) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 3) {
-            if (outerHits.getHits().get(position)._source.getMovie() != null && outerHits.getHits().get(position)._source.getMovie().size() != 0) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
-                ((ViewHolder3) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
-                ((ViewHolder3) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position)._source.getCeleb() != null && outerHits.getHits().get(position)._source.getCeleb().size() != 0) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
-                ((ViewHolder3) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
-                ((ViewHolder3) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
+                ((ViewHolder3) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder3) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
+                ((ViewHolder3) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder3) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder3) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder3) holder).tv_description.setText(Html.fromHtml(Common.formatString(outerHits.getHits().get(position).get_source().getText())));
-            Glide.with(context).load(outerHits.getHits().get(position)._source.getProfilePic()).into(((ViewHolder3) holder).card_gallary1_img1);
-            ((ViewHolder3) holder).tv_name.setText(outerHits.getHits().get(position)._source.getTitle());
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder3) holder).card_gallary1_img1);
+            ((ViewHolder3) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
             // Common.makeTextViewResizable(((ViewHolder3) holder).tv_description, 3, "View More", true);
 
         } else if (holder.getItemViewType() == 4) {
-            if (outerHits.getHits().get(position)._source.getMovie() != null && outerHits.getHits().get(position)._source.getMovie().size() != 0) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
-                ((ViewHolder4) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
-                ((ViewHolder4) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position)._source.getCeleb() != null && outerHits.getHits().get(position)._source.getCeleb().size() != 0) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
-                ((ViewHolder4) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
-                ((ViewHolder4) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
+                ((ViewHolder4) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder4) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
+                ((ViewHolder4) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder4) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder4) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder4) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-            Glide.with(context).load(outerHits.getHits().get(position)._source.getProfilePic()).into(((ViewHolder4) holder).news_img);
-            ((ViewHolder4) holder).tv_name.setText(outerHits.getHits().get(position)._source.getTitle());
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder4) holder).news_img);
+            ((ViewHolder4) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 5) {
-            if (outerHits.getHits().get(position)._source.getMovie() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder5) holder).profile_image));
-                ((ViewHolder5) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
-                ((ViewHolder5) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position)._source.getCeleb() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder5) holder).profile_image));
-                ((ViewHolder5) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
-                ((ViewHolder5) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
+            if (outerHits.getHits().get(position).get_source().getMovie() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder5) holder).profile_image));
+                ((ViewHolder5) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder5) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder5) holder).profile_image));
+                ((ViewHolder5) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder5) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder5) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder5) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-            Glide.with(context).load(outerHits.getHits().get(position)._source.getProfilePic()).into(((ViewHolder5) holder).card_gallary1_img1);
-            ((ViewHolder5) holder).tv_name.setText(outerHits.getHits().get(position)._source.getTitle());
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder5) holder).card_gallary1_img1);
+            ((ViewHolder5) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 6) {
-            if (outerHits.getHits().get(position)._source.getMovie() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
-                ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
-                ((ViewHolder6) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position)._source.getCeleb() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
-                ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
-                ((ViewHolder6) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
+            if (outerHits.getHits().get(position).get_source().getMovie() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
+                ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder6) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
+                ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder6) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder6) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder6) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-            Glide.with(context).load(outerHits.getHits().get(position)._source.getProfilePic()).into(((ViewHolder6) holder).card_gallary1_img1);
-            ((ViewHolder6) holder).tv_name.setText(outerHits.getHits().get(position)._source.getTitle());
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder6) holder).card_gallary1_img1);
+            ((ViewHolder6) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 7) {
-            if (outerHits.getHits().get(position)._source.getMovie() != null && outerHits.getHits().get(position)._source.getMovie().size() != 0) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
-                ((ViewHolder7) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
-                ((ViewHolder7) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position)._source.getCeleb() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
-                ((ViewHolder7) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
-                ((ViewHolder7) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
+                ((ViewHolder7) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder7) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
+                ((ViewHolder7) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder7) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-            Glide.with(context).load(outerHits.getHits().get(position)._source.getProfilePic()).into(((ViewHolder7) holder).card_gallary1_img1);
-            ((ViewHolder7) holder).tv_name.setText(outerHits.getHits().get(position)._source.getTitle());
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder7) holder).card_gallary1_img1);
+            ((ViewHolder7) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         }
 
         else if(holder.getItemViewType()==8)
         {
-            if (outerHits.getHits().get(position)._source.getMovie() != null && outerHits.getHits().get(position)._source.getMovie().size() != 0) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
-                ((ViewHolder8) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
-                ((ViewHolder8) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position)._source.getCeleb() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
-                ((ViewHolder8) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
-                ((ViewHolder8) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
+                ((ViewHolder8) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder8) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null) {
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
+                ((ViewHolder8) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder8) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
-            Glide.with(context).load(outerHits.getHits().get(position)._source.getProfilePic()).into(((ViewHolder8) holder).card_audio_jukebox_imageview);
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder8) holder).card_audio_jukebox_imageview);
             jukeBoxRecyclerViewHolder=new JukeBoxRecyclerViewHolder(context,audio);
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
             ((ViewHolder8)holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
@@ -248,7 +248,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        switch (outerHits.getHits().get(position)._source.getContentType()) {
+        switch (outerHits.getHits().get(position).get_source().getContentType()) {
             case "comedy-clip":
                 return 4;
             case "quote":
@@ -305,10 +305,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             if ((view.getId() == R.id.profile_image) || (view.getId() == R.id.header_linear)) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null && outerHits.getHits().get(getAdapterPosition())._source.getMovie().size() != 0) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null && outerHits.getHits().get(getAdapterPosition())._source.getCeleb().size() != 0) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             }
         }
@@ -336,10 +336,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.header_linear) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null && outerHits.getHits().get(getAdapterPosition())._source.getMovie().size() != 0) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null && outerHits.getHits().get(getAdapterPosition())._source.getCeleb().size() != 0) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new CelebrityFragment(), 2);
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             }
         }
@@ -376,25 +376,25 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Intent intent = new Intent(context, VideoPlayerActivity.class);
                 context.startActivity(intent);
             } else if ((view.getId() == R.id.profile_image) || (view.getId() == R.id.header_linear)) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_description_linear) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null && outerHits.getHits().get(getAdapterPosition())._source.getMovie().size() != 0) {
-                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getType(),
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
+                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null && outerHits.getHits().get(getAdapterPosition())._source.getCeleb().size() != 0) {
-                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getType(),
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
+                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
@@ -442,25 +442,25 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         .addToBackStack("")
                         .commit();
             } else if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_description_linear) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null && outerHits.getHits().get(getAdapterPosition())._source.getMovie().size() != 0) {
-                    testing.videoCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getType(),
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
+                    testing.videoCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null && outerHits.getHits().get(getAdapterPosition())._source.getCeleb().size() != 0) {
-                    testing.videoCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getType(),
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
+                    testing.videoCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new VideoGalleryFragment(),
@@ -505,24 +505,24 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_description_linear) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null) {
-                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getType(),
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
+                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null) {
-                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getType(),
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             " ",new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic()
@@ -566,35 +566,35 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() == null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() == null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() == null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() == null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_description_linear) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null) {
-                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getType(),
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
+                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null) {
-                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getType(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getTitle(),
-                            " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition())._source.getContentType()
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+                    testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
                 } else {
                     testing.newsCardOnClick("",
                             "",
                             "",
-                            outerHits.getHits().get(getAdapterPosition())._source.getProfilePic(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getTitle(),
-                            " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition())._source.getContentType());
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
             }
         }
@@ -628,10 +628,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View view) {
             globalData.a = 1;
             if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() == null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() == null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() == null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() == null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
@@ -639,22 +639,22 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         .addToBackStack("")
                         .commit();
             } else if (view.getId() == R.id.card_gallary1_img1) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null) {
-                    testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getMedia().getGallery(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getType(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getTitle(), new GalleryCardClick());
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
+                    testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
                 }
-                else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null) {
-                    testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getMedia().getGallery(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getType(),
-                            outerHits.getHits().get(getAdapterPosition())._source.getTitle(), new GalleryCardClick());
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+                    testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
                 }
                 else{
-                    testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getMedia().getGallery(),
+                    testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             "",
-                            "","",outerHits.getHits().get(getAdapterPosition())._source.getTitle(), new GalleryCardClick());
+                            "","",outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
 
                 }
             }
@@ -687,10 +687,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() == null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() == null) {
-                    testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() == null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() == null) {
+                    testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } /*else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()

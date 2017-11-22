@@ -13,7 +13,7 @@ import java.util.List;
 public class FeedData {
 
     @SerializedName("hits")
-    public FeedInnerData hits;
+    private FeedInnerData hits;
 
     public FeedInnerData getHits() {
         return hits;
