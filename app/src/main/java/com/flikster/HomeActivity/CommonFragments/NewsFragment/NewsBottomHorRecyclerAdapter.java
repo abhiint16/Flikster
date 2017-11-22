@@ -22,12 +22,12 @@ import java.util.List;
 
 public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBottomHorRecyclerAdapter.ViewHolder> {
     Context context;
-    List<NewsData.NewsInnerData> items;
+    NewsData.NewsInnerData outerHits;
     int Count;
     String bannerimg;
-    public NewsBottomHorRecyclerAdapter(Context context, List<NewsData.NewsInnerData> items,int Count,String bannerimg) {
+    public NewsBottomHorRecyclerAdapter(Context context, NewsData.NewsInnerData outerHits,int Count,String bannerimg) {
         this.context=context;
-        this.items=items;
+        this.outerHits=outerHits;
         this.Count=Count;
         this.bannerimg=bannerimg;
     }
@@ -40,12 +40,12 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.e(bannerimg+"jajaj",items.get(position).getTitle().trim()+"jajaj");
-        if(bannerimg.trim()!=items.get(position).getTitle().trim())
+        Log.e(bannerimg+"jajaj",outerHits.getHits().get(position).get_source().getTitle()+"jajaj");
+        if(bannerimg.trim()!=outerHits.getHits().get(position).get_source().getTitle())
         {
-            Log.e(bannerimg,items.get(position).getTitle().trim());
-            Glide.with(context).load(items.get(position).getProfilePic()).into(holder.carousel_image);
-            holder.carousel_title.setText(items.get(position).getTitle());
+            Log.e(bannerimg,outerHits.getHits().get(position).get_source().getTitle());
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(holder.carousel_image);
+            holder.carousel_title.setText(outerHits.getHits().get(position).get_source().getTitle());
         }
     }
 

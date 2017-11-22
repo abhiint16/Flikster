@@ -66,7 +66,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_news, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_critic_review, parent, false);
             return new ViewHolder1(view);
         } else if (viewType == 2) {
             //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_steal_style_carousel, parent, false);
@@ -99,16 +99,18 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder.getItemViewType() == 1) {
-            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1) holder).news_img);
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1) holder).card_critic_review_main_image);
             if (outerHits.getHits().get(position)._source.getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position)._source.getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
                 ((ViewHolder1) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getType());
                 ((ViewHolder1) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
+                ((ViewHolder1) holder).card_critic_review_moviename.setText(outerHits.getHits().get(position)._source.getMovie().get(0).getName());
             } else if (outerHits.getHits().get(position)._source.getCeleb() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position)._source.getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
                 ((ViewHolder1) holder).tv_tag_desc.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getType());
                 ((ViewHolder1) holder).tv_tag_name.setText(outerHits.getHits().get(position)._source.getCeleb().get(0).getName());
             }
+            ((ViewHolder1) holder).card_movie_review_bottom_header_criticrating.setText(outerHits.getHits().get(position).get_source().getRating());
             if (outerHits.getHits().get(position).get_source().getText()== null)
                 ((ViewHolder1) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
@@ -281,13 +283,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView news_img, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
+        ImageView card_critic_review_main_image, profile_image;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_critic_review_moviename,card_movie_review_bottom_header_criticrating;
         LinearLayout header_linear, card_description_linear;
 
         public ViewHolder1(View itemView) {
             super(itemView);
-            news_img = (ImageView) itemView.findViewById(R.id.news_img);
+            card_critic_review_main_image = (ImageView) itemView.findViewById(R.id.card_critic_review_main_image);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
@@ -295,15 +297,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            card_critic_review_moviename = (TextView) itemView.findViewById(R.id.card_critic_review_moviename);
+            card_movie_review_bottom_header_criticrating = (TextView) itemView.findViewById(R.id.card_movie_review_bottom_header_criticrating);
             header_linear.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if ((view.getId() == R.id.profile_image) || (view.getId() == R.id.header_linear)) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() == null) {
+                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null && outerHits.getHits().get(getAdapterPosition())._source.getMovie().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() == null) {
+                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null && outerHits.getHits().get(getAdapterPosition())._source.getCeleb().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             }
@@ -332,9 +336,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.header_linear) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null) {
+                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null && outerHits.getHits().get(getAdapterPosition())._source.getMovie().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null) {
+                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null && outerHits.getHits().get(getAdapterPosition())._source.getCeleb().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             }
@@ -378,7 +382,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_description_linear) {
-                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null) {
+                if (outerHits.getHits().get(getAdapterPosition())._source.getMovie() != null && outerHits.getHits().get(getAdapterPosition())._source.getMovie().size() != 0) {
                     testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getName(),
                             outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getType(),
@@ -387,7 +391,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
-                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null) {
+                } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null && outerHits.getHits().get(getAdapterPosition())._source.getCeleb().size() != 0) {
                     testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getName(),
                             outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getType(),
@@ -450,7 +454,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition())._source.getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
                 } else if (outerHits.getHits().get(getAdapterPosition())._source.getCeleb() != null && outerHits.getHits().get(getAdapterPosition())._source.getCeleb().size() != 0) {
@@ -459,7 +463,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition())._source.getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
                 } else {

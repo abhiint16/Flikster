@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/white_solid_border"
+    android:baselineAligned="false"
     android:orientation="vertical"
-    android:padding="5dp"
-    android:baselineAligned="false">
+    android:padding="5dp">
 
     <include layout="@layout/card_header" />
 
@@ -20,7 +20,7 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/rating_comming_soon_frag_recycle_item_image"
+                android:id="@+id/card_critic_review_main_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
@@ -37,57 +37,137 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/movie_name_tv"
+                android:id="@+id/card_critic_review_moviename"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
-                android:text="Mahanubavudu"
+                android:text="Movie Name(no data)"
                 android:textColor="#000"
                 android:textSize="20sp" />
-            <TextView
-                android:id="@+id/movie_releasedate_time_tv"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="15dp"
-                android:gravity="center_vertical"
-                android:text="27 Sep 2017 | 2hrs 20min | U/A"
-                android:textColor="#818181"
-                android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/movie_type"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:layout_marginLeft="15dp"
-                android:gravity="center_vertical"
-                android:text="Telugu | Romance,Drama"
-                android:textColor="#000"
-                android:textSize="16sp" />
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/moviecast_tv"
+                <TextView
+                    android:id="@+id/card_critic_review_relaesedate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="DOR (no data)"
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/card_critic_review_duration"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="movie dur(no data)"
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/card_critic_review_censorcerti"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="censor certi(no data)"
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:layout_marginLeft="15dp"
-                android:gravity="center_vertical"
-                android:text="Cast : Sharwanand as Anand,Mehreen Prizada,Venela"
-                android:textColor="#818181"
-                android:textSize="12sp" />
-            <TextView
-                android:id="@+id/director_tv"
+                android:layout_weight="1.5">
+
+                <TextView
+                    android:id="@+id/card_critic_review_lang"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center_vertical"
+                    android:text="lang(no data)"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/movie_type"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center_vertical"
+                    android:text="genre(no data)"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1.5"
-                android:gravity="center_vertical"
-                android:text="Director : Maruthi Dasari"
-                android:textColor="#818181"
-                android:textSize="12sp" />
+                android:layout_weight="1.5">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center_vertical"
+                    android:text="Cast : "
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/card_critic_review_cast"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:text="no data"
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center_vertical"
+                    android:text="Director : "
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/card_critic_review_director"
+                    android:layout_width="6dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="6"
+                    android:gravity="center_vertical"
+                    android:text="no data"
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
         </LinearLayout>
 

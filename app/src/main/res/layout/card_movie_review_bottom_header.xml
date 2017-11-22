@@ -35,9 +35,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/seven"
                 android:gravity="center_vertical"
-                android:text="9.0"
+                android:text="null"
                 android:textSize="18sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:id="@+id/card_movie_review_bottom_header_userrating"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -82,9 +83,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/seven"
                 android:gravity="center_vertical"
-                android:text="3"
+                android:text="null"
                 android:textSize="18sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:id="@+id/card_movie_review_bottom_header_criticrating"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -50,7 +50,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     String profilePic, title, type, bannerImg, headertitle, description,contentType;
     RoundedImageView profile_image;
     ApiInterface apiInterface;
-    List<NewsData.NewsInnerData> items;
+    NewsData.NewsInnerData outerHits;
     int Count;
 
     @Nullable
@@ -75,14 +75,14 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     }
 
     private void bottomHorRecyclerRetrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/"+contentType).create(ApiInterface.class);
-        Call<NewsData> call = apiInterface.getNewsData("http://apiv3.flikster.com/v3/content-ms/getContentByType/"+contentType);
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search?pretty=true&q="+contentType).create(ApiInterface.class);
+        Call<NewsData> call = apiInterface.getNewsData("http://apiv3-es.flikster.com/contents/_search?pretty=true&q="+contentType);
         call.enqueue(new Callback<NewsData>() {
             @Override
             public void onResponse(Call<NewsData> call, Response<NewsData> response) {
-                items = response.body().getItems();
-                Count = response.body().getCount();
-                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(),items,Count,title);
+                outerHits = response.body().getHits();
+                Count = outerHits.getTotal();
+                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(),outerHits,Count,title);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(newsBottomHorRecyclerAdapter);
             }
 
@@ -132,7 +132,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         if (!profilePic.isEmpty()){
             Glide.with(getContext()).load(profilePic).asBitmap().into(profile_image);
         }
-        if (!bannerImg.isEmpty()){
+        if (bannerImg!=null && !bannerImg.isEmpty()){
             Glide.with(getContext()).load(bannerImg).asBitmap().into(newsimg);
         }
 

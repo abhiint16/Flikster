@@ -63,12 +63,22 @@ public class FeedInnerData {
         public String title;
         @SerializedName("profilePic")
         public String profilePic;
+        @SerializedName("rating")
+        public  String rating;
         @SerializedName("movie")
         public List<FeedMovieData> movie;
         @SerializedName("celeb")
         public List<FeedCelebData> celeb;
         @SerializedName("media")
         public FeedMediaData media;
+
+        public String getRating() {
+            return rating;
+        }
+
+        public void setRating(String rating) {
+            this.rating = rating;
+        }
 
         public String getText() {
             return text;

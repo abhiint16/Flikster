@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:clickable="false"
-        android:text="dfcdsfgdgfhfghng"
+        android:text="no data"
         android:textSize="16sp"/>
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:clickable="false"
         android:layout_height="wrap_content"
-        android:text="dsgfdhgtfhjmnhmnhnjhnjhynmjhmnjhnm"
+        android:text="no data"
         android:textStyle="normal"
         android:textColor="@android:color/secondary_text_light"
         android:textSize="12sp"/>

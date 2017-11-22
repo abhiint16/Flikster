@@ -23,13 +23,13 @@ import java.util.List;
 
 public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapter.ViewHolder> {
     Context context;
-    List<NewsData.NewsInnerData> items;
+    NewsData.NewsInnerData outerHits;
     String title;
     Integer Count;
-    public VideoGalleryAdapter(Context context,List<NewsData.NewsInnerData> items,Integer Count,String title) {
+    public VideoGalleryAdapter(Context context,NewsData.NewsInnerData outerHits,Integer Count,String title) {
         this.context=context;
         this.title=title;
-        this.items=items;
+        this.outerHits=outerHits;
         this.Count=Count;
     }
 
@@ -41,8 +41,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
 
     @Override
     public void onBindViewHolder(VideoGalleryAdapter.ViewHolder holder, int position) {
-        holder.carousel_title.setText(items.get(position).getTitle());
-        Glide.with(context).load(items.get(position).getProfilePic()).into(holder.carousel_image);
+        holder.carousel_title.setText(outerHits.getHits().get(position).get_source().getTitle());
+        Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(holder.carousel_image);
     }
 
     @Override

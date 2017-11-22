@@ -45,7 +45,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     String profilePic, title, type, bannerImg, headertitle, description,contentType;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
     ApiInterface apiInterface;
-    List<NewsData.NewsInnerData> items;
+    NewsData.NewsInnerData outerHits;
     VideoGalleryAdapter videoGalleryAdapter;
     Integer Count;
     TextView tv_tag_desc,tv_tag_name;
@@ -132,14 +132,14 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
 
     private void bottomHorRecyclerRetrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/"+contentType).create(ApiInterface.class);
-        Call<NewsData> call = apiInterface.getNewsData("http://apiv3.flikster.com/v3/content-ms/getContentByType/"+contentType);
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search?pretty=true&q="+contentType).create(ApiInterface.class);
+        Call<NewsData> call = apiInterface.getNewsData("http://apiv3-es.flikster.com/contents/_search?pretty=true&q="+contentType);
         call.enqueue(new Callback<NewsData>() {
             @Override
             public void onResponse(Call<NewsData> call, Response<NewsData> response) {
-                items = response.body().getItems();
-                Count = response.body().getCount();
-                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(),items,Count,title);
+                outerHits = response.body().getHits();
+                Count = outerHits.getTotal();
+                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(),outerHits,Count,title);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(videoGalleryAdapter);
             }
 

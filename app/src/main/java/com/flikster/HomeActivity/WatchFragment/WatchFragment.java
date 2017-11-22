@@ -65,7 +65,7 @@ public class WatchFragment extends Fragment {
 
 
     private void retrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search?pretty=true&q=*/").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getTopRatedMovies(true,"*");
         call.enqueue(new Callback<FeedData>() {
             @Override
