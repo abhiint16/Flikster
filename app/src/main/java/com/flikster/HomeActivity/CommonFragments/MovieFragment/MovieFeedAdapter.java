@@ -130,6 +130,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             {
                 ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(genre.get(0));
             }
+            ((ViewHolder1) holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).card_celebrity_feed_gallary_title.setText("Photo Gallary");
             ((ViewHolder2) holder).card_celebrity_feed_gallary_img1.setImageResource(R.drawable.idiots1);
@@ -189,7 +190,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
         TextView card_movie_feed_profile_moviename, card_movie_feed_profile_censor,card_movie_feed_profile_dor,
-                card_movie_feed_profile_dur,card_movie_feed_profile_genre;
+                card_movie_feed_profile_dur,card_movie_feed_profile_genre,card_movie_feed_profile_storyline;
         ImageView card_movie_feed_profile_image;
 
         public ViewHolder1(View itemView) {
@@ -200,6 +201,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_movie_feed_profile_dor = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dor);
             card_movie_feed_profile_dur = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dur);
             card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
+            card_movie_feed_profile_storyline = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_storyline);
         }
     }
 

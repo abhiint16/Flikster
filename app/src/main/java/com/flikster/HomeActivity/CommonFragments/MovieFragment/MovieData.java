@@ -76,6 +76,24 @@ public class MovieData {
                  private  String duration;
                  @SerializedName("cast")
                  private List<MovieCastData> cast;
+                 @SerializedName("storyLine")
+                 private  String storyLine;
+
+                 public List<MovieCastData> getCast() {
+                     return cast;
+                 }
+
+                 public void setCast(List<MovieCastData> cast) {
+                     this.cast = cast;
+                 }
+
+                 public String getStoryLine() {
+                     return storyLine;
+                 }
+
+                 public void setStoryLine(String storyLine) {
+                     this.storyLine = storyLine;
+                 }
 
                  public String getDateOfRelease() {
                      return dateOfRelease;

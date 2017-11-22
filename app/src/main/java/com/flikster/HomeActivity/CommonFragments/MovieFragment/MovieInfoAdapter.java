@@ -50,9 +50,10 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     String duration;
     String title;
     ArrayList<String> genre = new ArrayList<>();
+    String storyline;
 
     public MovieInfoAdapter(Context context, FragmentManager fragmentManager,String coverpic, String censor,
-                            String dor, ArrayList<String> genre,String duration,String title) {
+                            String dor, ArrayList<String> genre,String duration,String title,String storyline) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.items=items;
@@ -67,6 +68,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.dor = dor;
         this.censor=censor;
         this.duration=duration;
+        this.storyline=storyline;
     }
 
     @Override
@@ -194,6 +196,10 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             {
                 ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(genre.get(0));
             }
+            if (storyline!=null && !storyline.isEmpty())
+            {
+                ((ViewHolder1) holder).card_movie_feed_profile_storyline.setText(storyline);
+            }
         }
         /*else if (holder.getItemViewType() == 2) {
 //            ((ViewHolder2) holder).textView.setText("Videos");
@@ -240,7 +246,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
         TextView card_movie_feed_profile_moviename, card_movie_feed_profile_censor,card_movie_feed_profile_dor,
-                card_movie_feed_profile_dur,card_movie_feed_profile_genre;
+                card_movie_feed_profile_dur,card_movie_feed_profile_genre,card_movie_feed_profile_storyline;
         ImageView card_movie_feed_profile_image;
 
         public ViewHolder1(View itemView) {
@@ -251,6 +257,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_movie_feed_profile_dor = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dor);
             card_movie_feed_profile_dur = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dur);
             card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
+            card_movie_feed_profile_storyline = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_storyline);
         }
     }
 

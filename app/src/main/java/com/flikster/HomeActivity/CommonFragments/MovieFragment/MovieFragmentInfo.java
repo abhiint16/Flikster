@@ -78,7 +78,7 @@ public class MovieFragmentInfo extends Fragment {
         movieFragmentInfoRecycler.setLayoutManager(movieFragmentInfoLayoutManager);
         movieInfoAdapter = new MovieInfoAdapter(getActivity(), fragmentManager,getArguments().getString("coverpic"),
                 getArguments().getString("censor"),getArguments().getString("dor"),getArguments().getStringArrayList("genre"),
-                getArguments().getString("duration"),getArguments().getString("title"));
+                getArguments().getString("duration"),getArguments().getString("title"),getArguments().getString("storyline"));
         movieFragmentInfoRecycler.setAdapter(movieInfoAdapter);
     }
 
