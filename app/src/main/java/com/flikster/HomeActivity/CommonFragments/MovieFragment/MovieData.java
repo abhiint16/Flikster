@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
+import com.flikster.HomeActivity.FeedInnerData;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -10,177 +11,157 @@ import java.util.List;
 
 public class MovieData {
 
-    @SerializedName("Items")
-    public List<MovieInnerData> Items;
+    @SerializedName("hits")
+    private MovieInnerData hits;
 
-    public List<MovieInnerData> getItems() {
-        return Items;
+    public MovieInnerData getHits() {
+        return hits;
     }
 
-    public void setItems(List<MovieInnerData> items) {
-        Items = items;
+    public void setHits(MovieInnerData hits) {
+        this.hits = hits;
     }
 
     public class MovieInnerData
      {
-         @SerializedName("dateOfRelease")
-         public String dateOfRelease;
-         @SerializedName("industry")
-         public String industry;
-         @SerializedName("profilePic")
-         public String profilePic;
-         @SerializedName("storyLine")
-         public String storyLine;
-         @SerializedName("coverPic")
-         public String coverPic;
-         @SerializedName("criticRating")
-         public String criticRating;
-         @SerializedName("duration")
-         public String duration;
-         @SerializedName("title")
-         public String title;
-         @SerializedName("genre")
-         public List<String> genre;
-         @SerializedName("cast")
-         public List<MovieInnerCastData> cast;
-         @SerializedName("crew")
-         public List<MovieInnerCastData> crew;
+         @SerializedName("total")
+         private Integer total;
+         @SerializedName("hits")
+         private List<MovieInnerInnerData> hits;
 
-         public List<MovieInnerCastData> getCrew() {
-             return crew;
+         public Integer getTotal() {
+             return total;
          }
 
-         public void setCrew(List<MovieInnerCastData> crew) {
-             this.crew = crew;
+         public void setTotal(Integer total) {
+             this.total = total;
          }
 
-         public List<MovieInnerCastData> getCast() {
-             return cast;
+         public List<MovieInnerInnerData> getHits() {
+             return hits;
          }
 
-         public void setCast(List<MovieInnerCastData> cast) {
-             this.cast = cast;
+         public void setHits(List<MovieInnerInnerData> hits) {
+             this.hits = hits;
          }
 
-         public List<String> getGenre() {
-             return genre;
-         }
 
-         public void setGenre(List<String> genre) {
-             this.genre = genre;
-         }
-
-         public String getDateOfRelease() {
-             return dateOfRelease;
-         }
-
-         public void setDateOfRelease(String dateOfRelease) {
-             this.dateOfRelease = dateOfRelease;
-         }
-
-         public String getIndustry() {
-             return industry;
-         }
-
-         public void setIndustry(String industry) {
-             this.industry = industry;
-         }
-
-         public String getProfilePic() {
-             return profilePic;
-         }
-
-         public void setProfilePic(String profilePic) {
-             this.profilePic = profilePic;
-         }
-
-         public String getStoryLine() {
-             return storyLine;
-         }
-
-         public void setStoryLine(String storyLine) {
-             this.storyLine = storyLine;
-         }
-
-         public String getCoverPic() {
-             return coverPic;
-         }
-
-         public void setCoverPic(String coverPic) {
-             this.coverPic = coverPic;
-         }
-
-         public String getCriticRating() {
-             return criticRating;
-         }
-
-         public void setCriticRating(String criticRating) {
-             this.criticRating = criticRating;
-         }
-
-         public String getDuration() {
-             return duration;
-         }
-
-         public void setDuration(String duration) {
-             this.duration = duration;
-         }
-
-         public String getTitle() {
-             return title;
-         }
-
-         public void setTitle(String title) {
-             this.title = title;
-         }
-
-         public class MovieInnerCastData
+         public class MovieInnerInnerData
          {
-             @SerializedName("name")
-             public String name;
-             @SerializedName("profilePic")
-             public String profilePic;
+             @SerializedName("_source")
+             private MovieInnerMostData _source;
 
-             public String getName() {
-                 return name;
+             public MovieInnerMostData get_source() {
+                 return _source;
              }
 
-             public void setName(String name) {
-                 this.name = name;
+             public void set_source(MovieInnerMostData _source) {
+                 this._source = _source;
              }
 
-             public String getProfilePic() {
-                 return profilePic;
-             }
 
-             public void setProfilePic(String profilePic) {
-                 this.profilePic = profilePic;
+             public  class MovieInnerMostData
+             {
+                 @SerializedName("dateOfRelease")
+                 private String dateOfRelease;
+                 @SerializedName("title")
+                 private String title;
+                 @SerializedName("censorCertificate")
+                 private String censorCertificate;
+                 @SerializedName("coverPic")
+                 private String coverPic;
+                 @SerializedName("genre")
+                 private List<String> genre;
+                 @SerializedName("duration")
+                 private  String duration;
+                 @SerializedName("cast")
+                 private List<MovieCastData> cast;
+
+                 public String getDateOfRelease() {
+                     return dateOfRelease;
+                 }
+
+                 public void setDateOfRelease(String dateOfRelease) {
+                     this.dateOfRelease = dateOfRelease;
+                 }
+
+                 public String getTitle() {
+                     return title;
+                 }
+
+                 public void setTitle(String title) {
+                     this.title = title;
+                 }
+
+                 public String getCensorCertificate() {
+                     return censorCertificate;
+                 }
+
+                 public void setCensorCertificate(String censorCertificate) {
+                     this.censorCertificate = censorCertificate;
+                 }
+
+                 public String getCoverPic() {
+                     return coverPic;
+                 }
+
+                 public void setCoverPic(String coverPic) {
+                     this.coverPic = coverPic;
+                 }
+
+                 public List<String> getGenre() {
+                     return genre;
+                 }
+
+                 public void setGenre(List<String> genre) {
+                     this.genre = genre;
+                 }
+
+                 public String getDuration() {
+                     return duration;
+                 }
+
+                 public void setDuration(String duration) {
+                     this.duration = duration;
+                 }
+
+
+                 public class MovieCastData
+                 {
+                     @SerializedName("profilePic")
+                     private String profilePic;
+                     @SerializedName("name")
+                     private String name;
+                     @SerializedName("slug")
+                     private List<String> slug;
+
+                     public String getProfilePic() {
+                         return profilePic;
+                     }
+
+                     public void setProfilePic(String profilePic) {
+                         this.profilePic = profilePic;
+                     }
+
+                     public String getName() {
+                         return name;
+                     }
+
+                     public void setName(String name) {
+                         this.name = name;
+                     }
+
+                     public List<String> getSlug() {
+                         return slug;
+                     }
+
+                     public void setSlug(List<String> slug) {
+                         this.slug = slug;
+                     }
+                 }
              }
          }
 
-         public class MovieInnerCrewData
-         {
-             @SerializedName("name")
-             public String name;
-             @SerializedName("profilePic")
-             public String profilePic;
-
-             public String getName() {
-                 return name;
-             }
-
-             public void setName(String name) {
-                 this.name = name;
-             }
-
-             public String getProfilePic() {
-                 return profilePic;
-             }
-
-             public void setProfilePic(String profilePic) {
-                 this.profilePic = profilePic;
-             }
-         }
 
      }
 

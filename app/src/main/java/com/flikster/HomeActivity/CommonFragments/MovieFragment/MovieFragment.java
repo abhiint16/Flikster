@@ -41,7 +41,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     ApiInterface apiInterface;
     ImageButton toolbar_back_navigation_btn;
     Bundle arguments = new Bundle();
-    List<MovieData.MovieInnerData> items;
+    MovieData.MovieInnerData hits;
     String slug;
     @Nullable
     @Override
@@ -56,34 +56,22 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
     private void tempMethod() {
         Log.e("slug1",""+slug);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/").create(ApiInterface.class);
-        Call<MovieData> call = apiInterface.getMovieData("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/" + "psv-garuda-vega-tollywood");
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/movies/_search?pretty=true&q=slug:").create(ApiInterface.class);
+        Call<MovieData> call = apiInterface.getMovieData("http://apiv3-es.flikster.com/movies/_search?pretty=true&q=slug:" +"fidaa");
         call.enqueue(new Callback<MovieData>() {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
-                items = response.body().getItems();
-                Log.e("CeleprofilePic", items.size()+"Shiv");
-                Log.e("CeleprofilePic1", items.get(0).getCoverPic()+"Shiv");
+                hits = response.body().getHits();
+                arguments.putString("coverpic",hits.getHits().get(0).get_source().getCoverPic());
+                arguments.putString("censor",hits.getHits().get(0).get_source().getCensorCertificate());
+                arguments.putString("dor",hits.getHits().get(0).get_source().getDateOfRelease());
+                arguments.putStringArrayList("genre", (ArrayList<String>) hits.getHits().get(0).get_source().getGenre());
+                arguments.putString("duration",hits.getHits().get(0).get_source().getDuration());
+                arguments.putString("title",hits.getHits().get(0).get_source().getTitle());
                 Log.e("slugjsjjsjsj1","ajja"+slug+" "+arguments);
-
-                if (items.size() != 0){
-                    arguments.putString("profilepic", items.get(0).getProfilePic());
-                    arguments.putString("coverpic", items.get(0).getCoverPic());
-                    arguments.putString("name", items.get(0).getTitle());
-                    //arguments.putStringArrayList("role", (ArrayList<String>) items.get(0).getRole());
-                    movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
-                    viewPager.setAdapter(movieAdapter);
-                    viewPager.setCurrentItem(1);
-                }else {
-                    arguments.putString("profilepic", "");
-                    arguments.putString("coverpic", "");
-                    arguments.putString("name", "");
-                    arguments.putStringArrayList("role", new  ArrayList<String>(){{add("");add("");}});
-                    movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
-                    viewPager.setAdapter(movieAdapter);
-                    viewPager.setCurrentItem(1);
-                }
-
+                movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
+                viewPager.setAdapter(movieAdapter);
+                viewPager.setCurrentItem(1);
             }
 
             @Override

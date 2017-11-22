@@ -635,9 +635,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void onClick(View view) {
             globalData.a = 1;
             if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
-                if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() == null) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
-                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() == null) {
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_description_linear) {
