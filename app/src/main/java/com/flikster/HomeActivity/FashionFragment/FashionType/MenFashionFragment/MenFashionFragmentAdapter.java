@@ -8,10 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.flikster.R;
 import com.flikster.Util.ExpandedGridView;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +68,7 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (viewType == 7) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_product_singleimg, parent, false);
             return new ViewHolder7(view);
-        }else {
+        } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
             return new ViewHolder1(view);
         }
@@ -74,11 +77,27 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
+
+
+
+
+            if (SharedPrefsUtil.getStringPreference(context, "HEADER_NAME").equals("MEN")) {
+                ((ViewHolder1) holder).card_celebrity_feed_profile_layout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.white_radius_yellow_fill));
+                ((ViewHolder1) holder).card_celebrity_feed_profile_coverpic.setBackgroundColor(context.getResources().getColor(R.color.yellowthink));
+                ((ViewHolder1) holder).fashionname.setText("Men Fashion");
+                ((ViewHolder1) holder).profileimg.setImageResource(R.drawable.menuser);
+            } else {
+                ((ViewHolder1) holder).card_celebrity_feed_profile_layout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.white_radius_womentab));
+                ((ViewHolder1) holder).card_celebrity_feed_profile_coverpic.setBackgroundColor(context.getResources().getColor(R.color.dark_blue));
+                ((ViewHolder1) holder).profileimg.setImageResource(R.drawable.womenuser);
+//                ((ViewHolder1) holder).profileimg.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.womenuser));
+                ((ViewHolder1) holder).fashionname.setText("Women Fashion");
+            }
         } else if (holder.getItemViewType() == 2) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             layoutManager = new GridLayoutManager(context, 2);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(fragmentManager);
+            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context,fragmentManager);
 //            ((ViewHolder2) holder).expandgrid.setAdapter(menFashionFragmentlistAdapterViewHolder);
 //            ((ViewHolder2) holder).expandgrid.setExpanded(true);
             layoutManager.setAutoMeasureEnabled(true);
@@ -88,13 +107,13 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             layoutManager = new GridLayoutManager(context, 2);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(fragmentManager);
+            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context,fragmentManager);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
         } else if (holder.getItemViewType() == 5) {
         } else if (holder.getItemViewType() == 6) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(fragmentManager);
+            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context,fragmentManager);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
         }
 
@@ -118,10 +137,16 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView card_celebrity_feed_profile_name,card_celebrity_feed_profile_role;
+        TextView fashionname;
+        ImageView card_celebrity_feed_profile_coverpic,profileimg;
+        LinearLayout card_celebrity_feed_profile_layout;
+
         public ViewHolder1(View itemView) {
             super(itemView);
-//            card_celebrity_feed_profile_name  = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_name);
+            profileimg = (ImageView) itemView.findViewById(R.id.profileimg);
+            card_celebrity_feed_profile_layout = (LinearLayout) itemView.findViewById(R.id.card_celebrity_feed_profile_layout);
+            fashionname = (TextView) itemView.findViewById(R.id.fashionname);
+            card_celebrity_feed_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_coverpic);
 //            card_celebrity_feed_profile_role  = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_role);
 //            card_celebrity_feed_profile_name.setVisibility(View.GONE);
 //            card_celebrity_feed_profile_role.setVisibility(View.GONE);

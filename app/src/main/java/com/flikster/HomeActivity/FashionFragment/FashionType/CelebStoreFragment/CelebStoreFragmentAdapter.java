@@ -9,15 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityStoreAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreRecyclerItemAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreTredingCelebFashionRecyclerItemAdapter;
-import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFragmentAdapterViewHolder;
-import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
 import com.flikster.Util.ExpandedGridView;
+import com.flikster.Util.SharedPrefsUtil;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -33,7 +32,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     Context context;
     List<Integer> type = new ArrayList<>();
     FragmentManager fragmentManager;
-    MenFashionFragmentAdapterViewHolder menFashionFragmentAdapterViewHolder;
+    CelebShopByVideosFragmentAdapterViewHolder celebShopByVideosFragmentAdapterViewHolder;
     CeleStoreRecyclerItemAdapter celeStoreRecyclerItemAdapter;
     CeleStoreTredingCelebFashionRecyclerItemAdapter celeStoreTredingCelebFashionRecyclerItemAdapter;
     //    MenFashionFragmentListAdapterViewHolder menFashionFragmentlistAdapterViewHolder;
@@ -83,6 +82,16 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
+            if (SharedPrefsUtil.getStringPreference(context, "HEADER_NAME").equals("MOVIE_STORE")) {
+                ((ViewHolder1) holder).fashionname.setText("Movie Store");
+                ((ViewHolder1) holder).card_celebrity_feed_profile_layout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.white_radius_moviestoretab));
+                ((ViewHolder1) holder).card_celebrity_feed_profile_coverpic.setBackgroundColor(context.getResources().getColor(R.color.ligth_blue_grey));
+                ((ViewHolder1) holder).profileimg.setImageResource(R.drawable.moviestore);
+            } else {
+                ((ViewHolder1) holder).fashionname.setText("Celebrity Store");
+            }
+
+
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).carouselView.setImageListener(imageListener);
         } else if (holder.getItemViewType() == 3) {
@@ -101,14 +110,14 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Shop By Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(fragmentManager);
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
+            celebShopByVideosFragmentAdapterViewHolder = new CelebShopByVideosFragmentAdapterViewHolder(context,fragmentManager);
+            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebShopByVideosFragmentAdapterViewHolder);
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Products");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(fragmentManager);
-            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
+            celebShopByVideosFragmentAdapterViewHolder = new CelebShopByVideosFragmentAdapterViewHolder(context,fragmentManager);
+            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebShopByVideosFragmentAdapterViewHolder);
         }
 
 
@@ -131,14 +140,16 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-//        TextView card_celebrity_feed_profile_name, card_celebrity_feed_profile_role;
+        TextView fashionname;
+        ImageView card_celebrity_feed_profile_coverpic,profileimg;
+        LinearLayout card_celebrity_feed_profile_layout;
 
         public ViewHolder1(View itemView) {
             super(itemView);
-//            card_celebrity_feed_profile_name = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_name);
-//            card_celebrity_feed_profile_role = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_role);
-//            card_celebrity_feed_profile_name.setVisibility(View.GONE);
-//            card_celebrity_feed_profile_role.setVisibility(View.GONE);
+            profileimg = (ImageView) itemView.findViewById(R.id.profileimg);
+            card_celebrity_feed_profile_layout = (LinearLayout) itemView.findViewById(R.id.card_celebrity_feed_profile_layout);
+            fashionname = (TextView) itemView.findViewById(R.id.fashionname);
+            card_celebrity_feed_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_coverpic);
         }
 
         @Override

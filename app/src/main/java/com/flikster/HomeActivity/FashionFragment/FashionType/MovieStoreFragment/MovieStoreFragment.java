@@ -30,7 +30,7 @@ public class MovieStoreFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         initializeViews();
         initializeRest();
         return view;

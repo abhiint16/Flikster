@@ -38,7 +38,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     FashionFragmentAdapter fashionFragmentAdapter;
-    Toolbar toolbar_frag_multiicons_toolbar;
+    Toolbar toolbar_frag_toolbar;
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
     TabLayout tabLayout;
     private ScrollableViewPager viewPage;
@@ -47,10 +47,10 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fashion_landing, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         initializeViews();
         initializeRest();
@@ -61,30 +61,31 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         createViewPager(viewPage);
         tabLayout.setupWithViewPager(viewPage);
         createTabIcons();
-        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setOnClickListener(this);
-        toolbar_frag_multiicons_cart.setOnClickListener(this);
+//        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
+//        toolbar_frag_multiicons_notification.setOnClickListener(this);
+//        toolbar_frag_multiicons_cart.setOnClickListener(this);
     }
 
     private void initializeViews() {
-        toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
-        toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        toolbar_frag_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_toolbar);
+//        toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
+//        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+//        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        toolbar_frag_toolbar.setVisibility(View.GONE);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-    }
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+//    }
 
     private void createTabIcons() {
         TextView tabOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabOne.setText("Movie Store");
+        tabOne.setText("All Store");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             tabOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_tab_2)));
         }
@@ -94,13 +95,13 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         TextView tabTwo = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
         tabTwo.setText("Celeb Store");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tabTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.red)));
+            tabTwo.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.horizontal_line)));
         }
         tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabThree.setText("Mens Store");
+        tabThree.setText("Men Fashion");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             tabThree.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.yellowthink)));
         }
@@ -109,58 +110,58 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         tabLayout.getTabAt(2).setCustomView(tabThree);
 
         TextView tabfour = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabfour.setText("Womens Store");
+        tabfour.setText("Women Fashion");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tabfour.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+            tabfour.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_blue)));
         }
         tabfour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
         tabLayout.getTabAt(3).setCustomView(tabfour);
 
         TextView tabfive = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
-        tabfive.setText("All Store");
+        tabfive.setText("Movie Store");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            tabfive.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+            tabfive.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.ligth_blue_grey)));
         }
         tabfive.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
         tabLayout.getTabAt(4).setCustomView(tabfive);
 
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPage.setCurrentItem(tab.getPosition());
+//                viewPage.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0) {
-
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_container, new CeleStoreFragment())
+                            .replace(R.id.main_container, new MovieStoreFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 1) {
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(),"HEADER_NAME","CELEB_STORE");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_container, new CeleStoreFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 2) {
-
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(),"HEADER_NAME","MEN");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_container, new MenFashionLandingFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 3) {
-                    SharedPrefsUtil.setStringPreference(getContext(),"HEADER_NAME","MEN");
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(),"HEADER_NAME","WOMEN");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_container, new MenFashionLandingFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 4) {
-                    SharedPrefsUtil.setStringPreference(getContext(),"HEADER_NAME","Women");
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(),"HEADER_NAME","MOVIE_STORE");
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_container, new MenFashionLandingFragment())
+                            .replace(R.id.main_container, new CeleStoreFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 5) {
@@ -180,30 +181,31 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
             }
         });
 
+
+
     }
 
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         adapter.addFrag(new MovieStoreFragment(), "Movie Store");
-        adapter.addFrag(new CeleStoreFragment(), "Celeb Store");
-        adapter.addFrag(new MenFashionLandingFragment(), "Mens Store");
-        adapter.addFrag(new MenFashionLandingFragment(), "Womens Store");
+        adapter.addFrag(new MovieStoreFragment(), "Celeb Store");
+        adapter.addFrag(new MovieStoreFragment(), "Mens Store");
+        adapter.addFrag(new MovieStoreFragment(), "Womens Store");
         adapter.addFrag(new MovieStoreFragment(), "All Store");
         viewPager.setAdapter(adapter);
-        viewPage.setCurrentItem(0);
-
+//        viewPage.setCurrentItem(0);
     }
 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
+       /* if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new FeedFragment())
                     .addToBackStack("")
                     .commit();
-        } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
+        }*//* else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new NotificationFragment())
@@ -212,6 +214,6 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         } else if (view.getId() == R.id.toolbar_frag_multiicons_cart) {
             Intent intent = new Intent(getActivity(), MyBagActivity.class);
             startActivity(intent);
-        }
+        }*/
     }
 }
