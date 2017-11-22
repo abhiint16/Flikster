@@ -24,6 +24,9 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioA
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.List;
 
@@ -42,13 +45,15 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     TextView toolbar_frag_title, titlehedertxt, fragment_common_recyclerview_with_tv_title, tv_name, tv_description;
     Context mContext;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
-    String profilePic, title, type, bannerImg, headertitle, description,contentType;
+    String profilePic, title, type, bannerImg, headertitle, description,contentType,videolink;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
     ApiInterface apiInterface;
     NewsData.NewsInnerData outerHits;
     VideoGalleryAdapter videoGalleryAdapter;
     Integer Count;
     TextView tv_tag_desc,tv_tag_name;
+    YouTubePlayerView youTubePlayerView;
+    final String API_KEY="AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
 
     @Nullable
     @Override
@@ -91,6 +96,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
         toolbar_back_navigation_btn.setOnClickListener(this);
+        //youTubePlayerView.initialize(API_KEY,this);
     }
 
     @Override
@@ -150,7 +156,8 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         });
     }
 
-    public void updateImage(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String contentType) {
+    public void updateImage(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String contentType,
+                            String videolink) {
         this.profilePic = profilePic;
         this.title = title;
         this.type = type;
@@ -158,5 +165,6 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         this.headertitle = headertitle;
         this.description = description;
         this.contentType=contentType;
+        this.videolink=videolink;
     }
 }

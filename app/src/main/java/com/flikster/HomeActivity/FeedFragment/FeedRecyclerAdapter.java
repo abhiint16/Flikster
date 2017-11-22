@@ -76,7 +76,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1, parent, false);
             return new ViewHolder3(view);
         } else if (viewType == 4) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_news, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video, parent, false);
             return new ViewHolder4(view);
         } else if (viewType == 5) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1, parent, false);
@@ -156,6 +156,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             // Common.makeTextViewResizable(((ViewHolder3) holder).tv_description, 3, "View More", true);
 
         } else if (holder.getItemViewType() == 4) {
+            Log.e("videosonglink","videosonglink "+outerHits.getHits().get(position).get_source().getMedia().getVideo());
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
                 ((ViewHolder4) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -454,7 +455,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new VideoGalleryFragment(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
+                            new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
@@ -463,7 +466,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new VideoGalleryFragment(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
+                            new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
                     );
                 } else {
@@ -472,7 +477,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "",
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
+                            new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
             }

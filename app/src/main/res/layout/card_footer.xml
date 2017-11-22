@@ -35,7 +35,7 @@
             android:layout_marginStart="18dp"
             android:layout_toEndOf="@+id/ib_whatsapp"
             android:layout_toRightOf="@+id/ib_whatsapp"
-            android:background="@drawable/messengerblackicon" />
+            android:background="@drawable/messenger_icon" />
 
         <TextView
             android:id="@+id/ib_like"

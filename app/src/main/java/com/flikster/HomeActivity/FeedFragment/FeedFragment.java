@@ -86,7 +86,7 @@ public class FeedFragment extends Fragment {
 
         void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment,String contentType);
 
-        void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment,String contentType);
+        void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String videolink,Fragment fragment,String contentType);
     }
 
     @Override

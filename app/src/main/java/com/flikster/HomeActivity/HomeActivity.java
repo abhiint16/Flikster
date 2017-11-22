@@ -564,9 +564,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType) {
+    public void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String videolink, Fragment fragment, String contentType) {
         VideoGalleryFragment  videoGalleryFragment = (VideoGalleryFragment) fragment;
-        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType);
+        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType,videolink);
         firstTimeLaunch(fragment);
     }
 
