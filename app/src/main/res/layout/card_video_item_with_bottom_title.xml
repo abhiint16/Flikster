@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="220dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ten"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/ten"
+        android:text="Date 11 Dec 2017"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/carousel_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="@dimen/ten"
+        android:background="@drawable/white_radius_box" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ten"
+        android:text="#Title"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ten"
+        android:layout_marginLeft="@dimen/ten"
+        android:layout_marginTop="3dp"
+        android:text="#Available"
+        android:textColor="@color/black" />
+</LinearLayout>

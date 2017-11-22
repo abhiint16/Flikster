@@ -30,6 +30,9 @@
         android:id="@+id/menu_rating"
         android:title="Rating"></item>
     <item
+        android:id="@+id/menu_auction"
+        android:title="Auction"></item>
+    <item
         android:id="@+id/menu_logout"
         android:title="Logout"></item>
 </menu>

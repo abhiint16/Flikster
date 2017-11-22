@@ -6,7 +6,7 @@
     android:baselineAligned="false"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_frag_multiicons" />
+    <include layout="@layout/toolbar_frag" />
 
 
     <include layout="@layout/card_custom_tabs" />

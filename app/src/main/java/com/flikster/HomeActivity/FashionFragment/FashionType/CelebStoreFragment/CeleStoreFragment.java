@@ -24,6 +24,7 @@ import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.R;
 import com.flikster.Util.ScrollableViewPager;
+import com.flikster.Util.SharedPrefsUtil;
 
 /**
  * Created by abhishek on 17-10-2017.
@@ -55,21 +56,28 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeRest() {
-        toolbar_frag_multiicons_title.setText("Men Fashion");
+
+
+        if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "HEADER_NAME").equals("MOVIE_STORE")) {
+            toolbar_frag_multiicons_title.setText("Movie Store");
+        } else {
+            toolbar_frag_multiicons_title.setText("Celeb Store");
+        }
+
         createViewPager(viewPage);
         tabLayout.setupWithViewPager(viewPage);
         createTabIcons();
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setOnClickListener(this);
-        toolbar_frag_multiicons_cart.setOnClickListener(this);
+//        toolbar_frag_multiicons_notification.setOnClickListener(this);
+//        toolbar_frag_multiicons_cart.setOnClickListener(this);
     }
 
     private void initializeViews() {
-        toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
-        toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
-        toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
+        toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_toolbar);
+        toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
+//        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+//        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 //        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
@@ -119,13 +127,13 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
+        if (view.getId() == R.id.toolbar_back_navigation_btn) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new FashionLandingFragment())
                     .addToBackStack("")
                     .commit();
-        } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
+        } /*else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new NotificationFragment())
@@ -134,6 +142,6 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
         } else if (view.getId() == R.id.toolbar_frag_multiicons_cart) {
             Intent intent = new Intent(getActivity(), MyBagActivity.class);
             startActivity(intent);
-        }
+        }*/
     }
 }

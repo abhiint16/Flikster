@@ -59,23 +59,24 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
 
     private void initializeRest() {
 
-        if (SharedPrefsUtil.getStringPreference(getContext(),"HEADER_NAME").equals("MEN")){
+        if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(),"HEADER_NAME").equals("MEN")){
             toolbar_frag_multiicons_title.setText("Men Fashion");
         }else {
             toolbar_frag_multiicons_title.setText("Women Fashion");
         }
+//        toolbar_frag_multiicons_title.setText("Men Fashion");
         createViewPager(viewPage);
         tabLayout.setupWithViewPager(viewPage);
         createTabIcons();
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setOnClickListener(this);
-        toolbar_frag_multiicons_cart.setOnClickListener(this);
+//        toolbar_frag_multiicons_notification.setOnClickListener(this);
+//        toolbar_frag_multiicons_cart.setOnClickListener(this);
     }
 
     private void initializeViews() {
-        toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
-        toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
-        toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
+        toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
+        toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_toolbar);
+        toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
@@ -127,13 +128,13 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
+        if (view.getId() == R.id.toolbar_back_navigation_btn) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new FashionLandingFragment())
                     .addToBackStack("")
                     .commit();
-        } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
+        } /*else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new NotificationFragment())
@@ -142,6 +143,6 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
         } else if (view.getId() == R.id.toolbar_frag_multiicons_cart) {
             Intent intent = new Intent(getActivity(), MyBagActivity.class);
             startActivity(intent);
-        }
+        }*/
     }
 }

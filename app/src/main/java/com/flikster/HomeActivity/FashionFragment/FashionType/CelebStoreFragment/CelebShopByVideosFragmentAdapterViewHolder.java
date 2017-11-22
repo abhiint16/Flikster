@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment;
+package com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.flikster.HomeActivity.FashionFragment.FashionType.BuyFashionTypeProductFragment.BuyFashionTypeProductFragment;
-import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -21,13 +19,13 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<MenFashionFragmentAdapterViewHolder.ViewHolder> {
+public class CelebShopByVideosFragmentAdapterViewHolder extends RecyclerView.Adapter<CelebShopByVideosFragmentAdapterViewHolder.ViewHolder> {
     List<String> imag = new ArrayList<>();
     FragmentManager fragmentManager;
     int a;
     Context context;
 
-    public MenFashionFragmentAdapterViewHolder(Context context, FragmentManager fragmentManager) {
+    public CelebShopByVideosFragmentAdapterViewHolder(Context context, FragmentManager fragmentManager) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
         imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
@@ -41,13 +39,13 @@ public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<Me
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_product_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_item_with_bottom_title, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //holder.imageView.setImageResource(R.drawable.pooja);
+//        holder.movieimg.setImageResource(R.drawable.pooja);
     }
 
     @Override
@@ -62,15 +60,12 @@ public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<Me
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        //        ImageView movieimg;
+        ImageView movieimg;
         Button buybtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            movieimg = (ImageView) itemView.findViewById(R.id.fashion_proimg);
-            buybtn = (Button) itemView.findViewById(R.id.buybtn);
-//            movieimg.setOnClickListener(this);
-            buybtn.setOnClickListener(this);
+            movieimg = (ImageView) itemView.findViewById(R.id.carousel_image);
         }
 
         @Override

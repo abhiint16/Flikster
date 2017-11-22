@@ -55,6 +55,7 @@ import android.widget.Toast;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.flikster.BuildConfig;
+import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
@@ -432,6 +433,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             case R.id.menu_rating:
                 beginTransact(new RatingFragment());
                 break;
+                //menu_auction
+            case R.id.menu_auction:
+                beginTransact(new AuctionFeedFragment());
+                break;
+
 
         }
         return false;
