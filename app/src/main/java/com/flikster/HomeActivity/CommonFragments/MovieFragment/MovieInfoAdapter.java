@@ -44,8 +44,15 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     MovieInfoAdapterCastViewHolder movieInfoAdapterCastViewHolder;
     List<MovieData.MovieInnerData> items;
     Boolean storyLineBoolean=true;
+    String censor;
+    String coverpic;
+    String dor;
+    String duration;
+    String title;
+    ArrayList<String> genre = new ArrayList<>();
 
-    public MovieInfoAdapter(Context context, FragmentManager fragmentManager,List<MovieData.MovieInnerData> items) {
+    public MovieInfoAdapter(Context context, FragmentManager fragmentManager,String coverpic, String censor,
+                            String dor, ArrayList<String> genre,String duration,String title) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.items=items;
@@ -54,12 +61,18 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         type.add(7);type.add(8);type.add(9);
         type.add(3);type.add(4);type.add(3);
         type.add(4);type.add(7);
+        this.genre = genre;
+        this.coverpic = coverpic;
+        this.title = title;
+        this.dor = dor;
+        this.censor=censor;
+        this.duration=duration;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_info_profile, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_feed_profile, parent, false);
             return new MovieInfoAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
@@ -116,7 +129,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         String subString=dateOfRelease.substring(3,dateOfRelease.indexOf("GMT")-9);
         return subString;
     }
-    public String formatGenre()
+    /*public String formatGenre()
     {
         String genre="";
         for(int i=0;i<items.get(0).genre.size();i++)
@@ -156,37 +169,33 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             holder.card_movie_info_profile_storyline.setText(formatStoryLine());
             storyLineBoolean=true;
         }
-    }
+    }*/
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        if(holder.getItemViewType()==1)
-        {
-            Log.e("CriticRate", items.size() + "");
-            /*if (items.get(0).getCriticRating() != null && !items.get(0).getCriticRating().isEmpty()){
-                ((ViewHolder1)holder).card_movie_info_profile_critic_rating.setText(items.get(0).getCriticRating() + "");
-            }*/
-            if (items.size() != 0){
-                ((ViewHolder1)holder).card_movie_info_profile_duration.setText(items.get(0).getDuration());
-                ((ViewHolder1)holder).card_movie_info_profile_releasedate.setText(formatDate(items.get(0).getDateOfRelease()));
-                ((ViewHolder1)holder).card_movie_info_profile_genre.setText(formatGenre());
-                if(items.get(0).getStoryLine().length()<=200)
-                    ((ViewHolder1)holder).card_movie_info_profile_storyline.setText(items.get(0).getStoryLine());
-                else if(items.get(0).getStoryLine().length()>200)
-                    ((ViewHolder1)holder).card_movie_info_profile_storyline.setText(formatStoryLine(),TextView.BufferType.SPANNABLE);
-                ((ViewHolder1)holder).card_movie_info_profile_storyline.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        storyLineOnClick(((ViewHolder1)holder));
-                    }
-                });
-                ((ViewHolder1)holder).card_movie_info_profile_title.setText(items.get(0).getTitle());
-                Glide.with(context).load(items.get(0).getCoverPic()).asBitmap().into(((ViewHolder1)holder).card_movie_info_profile_coverpic);
-                Glide.with(context).load(items.get(0).getProfilePic()).asBitmap().into(((ViewHolder1)holder).card_movie_info_profile_profilepic);
+        if (holder.getItemViewType() == 1) {
+            if (title != null && !title.isEmpty()) {
+                ((ViewHolder1) holder).card_movie_feed_profile_moviename.setText(title);
             }
-
+            if (coverpic != null && !coverpic.isEmpty()) {
+                Glide.with(context).load(coverpic).asBitmap()
+                        .into(((ViewHolder1) holder).card_movie_feed_profile_image);
+            }
+            if (censor != null && !censor.isEmpty()) {
+                ((ViewHolder1) holder).card_movie_feed_profile_censor.setText(censor);
+            }
+            if(dor != null && !dor.isEmpty()){
+                ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(dor);
+            }
+            if(duration != null && !duration.isEmpty()){
+                ((ViewHolder1) holder).card_movie_feed_profile_dur.setText(duration);
+            }
+            if(genre != null && !genre.isEmpty())
+            {
+                ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(genre.get(0));
+            }
         }
-        else if (holder.getItemViewType() == 2) {
+        /*else if (holder.getItemViewType() == 2) {
 //            ((ViewHolder2) holder).textView.setText("Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
@@ -216,7 +225,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context,items.get(0).getCast().size(),items);
             ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCastViewHolder);
-        }
+        }*/
     }
 
     @Override
@@ -230,21 +239,18 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
-        ImageView card_movie_info_profile_coverpic,card_movie_info_profile_profilepic;
-        TextView card_movie_info_profile_critic_rating,card_movie_info_profile_duration,card_movie_info_profile_genre
-                ,card_movie_info_profile_lang,card_movie_info_profile_releasedate,card_movie_info_profile_title
-                ,card_movie_info_profile_storyline;
+        TextView card_movie_feed_profile_moviename, card_movie_feed_profile_censor,card_movie_feed_profile_dor,
+                card_movie_feed_profile_dur,card_movie_feed_profile_genre;
+        ImageView card_movie_feed_profile_image;
+
         public ViewHolder1(View itemView) {
             super(itemView);
-            card_movie_info_profile_coverpic=(ImageView)itemView.findViewById(R.id.card_movie_info_profile_coverpic);
-            card_movie_info_profile_profilepic=(ImageView)itemView.findViewById(R.id.card_movie_info_profile_profilepic);
-            card_movie_info_profile_critic_rating=(TextView)itemView.findViewById(R.id.card_movie_info_profile_critic_rating);
-            card_movie_info_profile_duration=(TextView)itemView.findViewById(R.id.card_movie_info_profile_duration);
-            card_movie_info_profile_genre=(TextView)itemView.findViewById(R.id.card_movie_info_profile_genre);
-            card_movie_info_profile_lang=(TextView)itemView.findViewById(R.id.card_movie_info_profile_lang);
-            card_movie_info_profile_releasedate=(TextView)itemView.findViewById(R.id.card_movie_info_profile_releasedate);
-            card_movie_info_profile_title=(TextView)itemView.findViewById(R.id.card_movie_info_profile_title);
-            card_movie_info_profile_storyline=(TextView)itemView.findViewById(R.id.card_movie_info_profile_storyline);
+            card_movie_feed_profile_moviename = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_moviename);
+            card_movie_feed_profile_censor = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_censor);
+            card_movie_feed_profile_image = (ImageView) itemView.findViewById(R.id.card_movie_feed_profile_image);
+            card_movie_feed_profile_dor = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dor);
+            card_movie_feed_profile_dur = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dur);
+            card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
         }
     }
 

@@ -76,7 +76,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<MovieData> call, Throwable t) {
-                Log.e("vvvvvvvvvv", "vv" + call + t);
+                Log.e("xxx", "xxx" + call + t);
             }
         });
     }

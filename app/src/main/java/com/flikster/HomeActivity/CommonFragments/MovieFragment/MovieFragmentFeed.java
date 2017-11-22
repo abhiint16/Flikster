@@ -34,8 +34,9 @@ public class MovieFragmentFeed extends Fragment{
     private void initializeRest() {
         movieFragmentFeedLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         movieFragmentFeedRecycler.setLayoutManager(movieFragmentFeedLayoutManager);
-        movieFeedAdapter = new MovieFeedAdapter(getActivity(),fragmentManager,getArguments().getString("profilepic"),
-                getArguments().getString("coverpic"),getArguments().getString("name"),getArguments().getStringArrayList("role"));
+        movieFeedAdapter = new MovieFeedAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
+                getArguments().getString("censor"),getArguments().getString("dor"),getArguments().getStringArrayList("genre"),
+                getArguments().getString("duration"),getArguments().getString("title"));
         movieFragmentFeedRecycler.setAdapter(movieFeedAdapter);
     }
 

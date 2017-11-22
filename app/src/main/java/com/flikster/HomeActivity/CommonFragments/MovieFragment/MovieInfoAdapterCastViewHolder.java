@@ -37,8 +37,8 @@ public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<MovieIn
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.card_movie_info_cast_recycler_item_name.setText(items.get(0).getCast().get(position).getName());
-        Glide.with(context).load(items.get(0).getCast().get(position).getProfilePic()).asBitmap().into(holder.card_movie_info_cast_recycler_item_image);
+        /*holder.card_movie_info_cast_recycler_item_name.setText(items.get(0).getCast().get(position).getName());
+        Glide.with(context).load(items.get(0).getCast().get(position).getProfilePic()).asBitmap().into(holder.card_movie_info_cast_recycler_item_image);*/
     }
 
     @Override

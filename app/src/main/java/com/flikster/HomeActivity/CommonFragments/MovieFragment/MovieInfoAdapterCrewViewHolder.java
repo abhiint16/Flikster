@@ -36,9 +36,9 @@ public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<MovieIn
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.card_movie_info_cast_recycler_item_name.setText(items.get(0).getCrew().get(position).getName());
+        /*holder.card_movie_info_cast_recycler_item_name.setText(items.get(0).getCrew().get(position).getName());
         Glide.with(context).load(items.get(0).getCrew().get(position).getProfilePic()).asBitmap()
-                .into(holder.card_movie_info_cast_recycler_item_image);
+                .into(holder.card_movie_info_cast_recycler_item_image);*/
     }
 
     @Override

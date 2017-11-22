@@ -133,7 +133,7 @@ public class MovieData {
                      @SerializedName("name")
                      private String name;
                      @SerializedName("slug")
-                     private List<String> slug;
+                     private String slug;
 
                      public String getProfilePic() {
                          return profilePic;
@@ -151,11 +151,11 @@ public class MovieData {
                          this.name = name;
                      }
 
-                     public List<String> getSlug() {
+                     public String getSlug() {
                          return slug;
                      }
 
-                     public void setSlug(List<String> slug) {
+                     public void setSlug(String slug) {
                          this.slug = slug;
                      }
                  }

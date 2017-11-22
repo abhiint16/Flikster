@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/card_movie_feed_profile_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/white_solid_round_border"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movie Name(No Data)"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:id="@+id/card_movie_feed_profile_moviename"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="censor certi"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/card_movie_feed_profile_censor"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DOR(No)"
+                android:layout_gravity="center"
+                android:id="@+id/card_movie_feed_profile_dor"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="genre(No)"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/card_movie_feed_profile_genre"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="duration(No)"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/card_movie_feed_profile_dur"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
