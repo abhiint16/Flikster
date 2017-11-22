@@ -4,6 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ten"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/ten"
+        android:text="Date 11 Dec 2017"
+        android:textColor="@color/black" />
 
     <ImageView
         android:id="@+id/carousel_image"
@@ -16,8 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/ten"
-
-        android:text="Video title"
+        android:text="#Title"
         android:textColor="@color/black" />
 
     <TextView
@@ -26,6 +34,6 @@
         android:layout_marginBottom="@dimen/ten"
         android:layout_marginLeft="@dimen/ten"
         android:layout_marginTop="3dp"
-        android:text="No of videos"
+        android:text="#Available"
         android:textColor="@color/black" />
 </LinearLayout>
