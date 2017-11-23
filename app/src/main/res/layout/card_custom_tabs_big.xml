@@ -3,21 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/transparent"
-    android:fitsSystemWindows="true">
-
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
-        android:layout_marginTop="@dimen/five"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        app:tabIndicatorColor="@color/red"
-        app:tabMode="scrollable"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
         app:tabGravity="fill"
-        />
+        app:tabMaxWidth="100dp"
+        app:tabIndicatorColor="@color/transparent"
+        app:tabMode="scrollable" />
+
     <com.flikster.Util.ScrollableViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/viewpager"
         android:layout_width="match_parent"

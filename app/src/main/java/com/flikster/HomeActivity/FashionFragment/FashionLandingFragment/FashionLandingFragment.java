@@ -16,6 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
@@ -42,6 +45,8 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
     TabLayout tabLayout;
     private ScrollableViewPager viewPage;
+
+    int[] tabImages = {R.drawable.celebritystore, R.drawable.menstoreicon, R.drawable.moviestrore, R.drawable.celebritystore, R.drawable.moviestrore};
 
     @Nullable
     @Override
@@ -84,7 +89,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
 //    }
 
     private void createTabIcons() {
-        TextView tabOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
+       /* TextView tabOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
         tabOne.setText("All Store");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             tabOne.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_tab_2)));
@@ -123,7 +128,45 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
             tabfive.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.ligth_blue_grey)));
         }
         tabfive.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.shoppingcart, 0, 0);
-        tabLayout.getTabAt(4).setCustomView(tabfive);
+        tabLayout.getTabAt(4).setCustomView(tabfive);*/
+
+        /*mTabLayout.setupWithViewPager(mViewPager);
+        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+            mTabLayout.getTabAt(i).setIcon(R.drawable.your_icon);
+        }*/
+//        tabLayout.setCo
+
+        /*View view1 = getContext().getLayoutInflater().inflate(R.layout.customtab, null);
+        view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.my1);
+        tabLayout.addTab(tabLayout.newTab().setCustomView(view1));
+
+
+        View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
+        view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.my2);
+        tabLayout.addTab(tabLayout.newTab().setCustomView(view2));
+
+
+        View view3 = getLayoutInflater().inflate(R.layout.customtab, null);
+        view3.findViewById(R.id.icon).setBackgroundResource(R.drawable.my3);
+        tabLayout.addTab(tabLayout.newTab().setCustomView(view3));
+
+        tabLayout.setupWithViewPager(viewPage);*/
+
+
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.menstoreicon));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.menstoreicon));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.menstoreicon));
+
+        for (int j = 0; j < tabLayout.getTabCount(); j++) {
+            ImageView imageView = new ImageView(getContext());
+            imageView.setMinimumHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+            imageView.setMaxHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+//            imageView.set
+            imageView.setImageResource(tabImages[j]);
+            tabLayout.getTabAt(j).setCustomView(imageView);
+        }
+
+
 
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -137,28 +180,28 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 1) {
-                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(),"HEADER_NAME","CELEB_STORE");
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "CELEB_STORE");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_container, new CeleStoreFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 2) {
-                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(),"HEADER_NAME","MEN");
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "MEN");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_container, new MenFashionLandingFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 3) {
-                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(),"HEADER_NAME","WOMEN");
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "WOMEN");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_container, new MenFashionLandingFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 4) {
-                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(),"HEADER_NAME","MOVIE_STORE");
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "MOVIE_STORE");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_container, new CeleStoreFragment())
@@ -182,16 +225,27 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         });
 
 
+    }
+
+    private void allotEachTabWithEqualWidth () {
+
+        ViewGroup slidingTabStrip = (ViewGroup) tabLayout.getChildAt(0);
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            View tab = slidingTabStrip.getChildAt(i);
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) tab.getLayoutParams();
+            layoutParams.weight = 1;
+            tab.setLayoutParams(layoutParams);
+        }
 
     }
 
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFrag(new MovieStoreFragment(), "Movie Store");
-        adapter.addFrag(new MovieStoreFragment(), "Celeb Store");
-        adapter.addFrag(new MovieStoreFragment(), "Mens Store");
-        adapter.addFrag(new MovieStoreFragment(), "Womens Store");
-        adapter.addFrag(new MovieStoreFragment(), "All Store");
+        adapter.addFrag(new MovieStoreFragment(), null);
+        adapter.addFrag(new MovieStoreFragment(), null);
+        adapter.addFrag(new MovieStoreFragment(), null);
+        adapter.addFrag(new MovieStoreFragment(), null);
+        adapter.addFrag(new MovieStoreFragment(), null);
         viewPager.setAdapter(adapter);
 //        viewPage.setCurrentItem(0);
     }

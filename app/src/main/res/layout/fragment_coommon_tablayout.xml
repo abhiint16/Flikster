@@ -9,6 +9,6 @@
     <include layout="@layout/toolbar_frag" />
 
 
-    <include layout="@layout/card_custom_tabs_big" />
+    <include layout="@layout/card_custom_tabs" />
 
 </LinearLayout>

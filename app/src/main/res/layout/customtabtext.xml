@@ -1,13 +1,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tab"
     android:layout_width="wrap_content"
-    android:layout_height="35dp"
-    android:drawablePadding="@dimen/five"
-    android:background="@drawable/gray_rectange_border"
-    android:gravity="center_horizontal|center_vertical"
-    android:paddingBottom="@dimen/ten"
-    android:paddingLeft="@dimen/fifteen"
-    android:paddingRight="@dimen/fifteen"
-    android:paddingTop="@dimen/ten"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/five"
     android:text="store"
-    android:textSize="13sp" />
+    android:textSize="15sp" />

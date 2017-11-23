@@ -46,7 +46,7 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_fashion_landing, container, false);
+        view = inflater.inflate(R.layout.fragment_coommon_tablayout, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -59,9 +59,9 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
 
     private void initializeRest() {
 
-        if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(),"HEADER_NAME").equals("MEN")){
+        if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "HEADER_NAME").equals("MEN")) {
             toolbar_frag_multiicons_title.setText("Men Fashion");
-        }else {
+        } else {
             toolbar_frag_multiicons_title.setText("Women Fashion");
         }
 //        toolbar_frag_multiicons_title.setText("Men Fashion");
@@ -81,6 +81,7 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        tabLayout.setSelectedTabIndicatorColor(getContext().getResources().getColor(R.color.yellowthink));
 //        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
 
     }

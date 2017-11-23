@@ -44,7 +44,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_fashion_landing, container, false);
+        view = inflater.inflate(R.layout.fragment_coommon_tablayout, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -79,7 +79,9 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
 //        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
 //        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
+
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        tabLayout.setSelectedTabIndicatorColor(getContext().getResources().getColor(R.color.horizontal_line));
 //        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
 
     }
