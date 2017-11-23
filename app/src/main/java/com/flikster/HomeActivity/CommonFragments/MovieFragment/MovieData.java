@@ -76,8 +76,18 @@ public class MovieData {
                  private  String duration;
                  @SerializedName("cast")
                  private List<MovieCastData> cast;
+                 @SerializedName("crew")
+                 private List<MovieCrewData> crew;
                  @SerializedName("storyLine")
                  private  String storyLine;
+
+                 public List<MovieCrewData> getCrew() {
+                     return crew;
+                 }
+
+                 public void setCrew(List<MovieCrewData> crew) {
+                     this.crew = crew;
+                 }
 
                  public List<MovieCastData> getCast() {
                      return cast;
@@ -177,6 +187,41 @@ public class MovieData {
                          this.slug = slug;
                      }
                  }
+
+                 public class MovieCrewData
+                 {
+                     @SerializedName("profilePic")
+                     private String profilePic;
+                     @SerializedName("name")
+                     private String name;
+                     @SerializedName("slug")
+                     private String slug;
+
+                     public String getProfilePic() {
+                         return profilePic;
+                     }
+
+                     public void setProfilePic(String profilePic) {
+                         this.profilePic = profilePic;
+                     }
+
+                     public String getName() {
+                         return name;
+                     }
+
+                     public void setName(String name) {
+                         this.name = name;
+                     }
+
+                     public String getSlug() {
+                         return slug;
+                     }
+
+                     public void setSlug(String slug) {
+                         this.slug = slug;
+                     }
+                 }
+
              }
          }
 

@@ -21,11 +21,11 @@ import java.util.List;
 public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<MovieInfoAdapterCrewViewHolder.ViewHolder> {
     Context context;
     int size;
-    List<MovieData.MovieInnerData> items;
-    public MovieInfoAdapterCrewViewHolder(Context context, int size, List<MovieData.MovieInnerData> items) {
+    MovieData.MovieInnerData hits;
+    public MovieInfoAdapterCrewViewHolder(Context context,MovieData.MovieInnerData hits) {
         this.context=context;
         this.size=size;
-        this.items=items;
+        this.hits=hits;
     }
 
     @Override
@@ -36,14 +36,20 @@ public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<MovieIn
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        /*holder.card_movie_info_cast_recycler_item_name.setText(items.get(0).getCrew().get(position).getName());
-        Glide.with(context).load(items.get(0).getCrew().get(position).getProfilePic()).asBitmap()
-                .into(holder.card_movie_info_cast_recycler_item_image);*/
+        if(this.hits.getHits().get(0).get_source().getCrew()!=null)
+        {
+            holder.card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(0).get_source().getCrew().get(position).getName());
+            Glide.with(context).load(hits.getHits().get(0).get_source().getCrew().get(position).getProfilePic()).asBitmap()
+                    .into(holder.card_movie_info_cast_recycler_item_image);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return size;
+        if(this.hits.getHits().get(0).get_source().getCrew()!=null)
+        return this.hits.getHits().get(0).get_source().getCrew().size();
+        else
+            return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
