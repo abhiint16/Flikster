@@ -68,7 +68,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onSuccess(String data) {
                         Log.e("inside inSuccess","insde onsuccess");
-                        Toast.makeText(getApplicationContext(), "heaven beings here", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "heaven begins here", Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
                         startActivity(intent);
                     }
@@ -76,9 +76,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onFailure(Exception e) {
                         Log.e("insde onFailure","insied onfilaure"+e);
-                        Toast.makeText(getApplicationContext(), "hell begins here", Toast.LENGTH_LONG).show();
-                        Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
-                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "hell begins here! Couldn't connect. Try again", Toast.LENGTH_LONG).show();
+                        /*Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
+                        startActivity(intent);*/
                     }
                 });
             }
