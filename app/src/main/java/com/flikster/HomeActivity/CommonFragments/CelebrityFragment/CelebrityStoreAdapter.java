@@ -63,7 +63,8 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
+//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celeb_store_profile, parent, false);
             return new CelebrityStoreAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_store_gallary4_1, parent, false);
@@ -91,10 +92,10 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
 
             ((CelebrityStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_role.setText(role.get(0));
-            if (profilepic != null && !profilepic.isEmpty()) {
-                Glide.with(context).load(profilepic).asBitmap()
-                        .into(((CelebrityStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_image);
-            }
+//            if (profilepic != null && !profilepic.isEmpty()) {
+//                Glide.with(context).load(profilepic).asBitmap()
+//                        .into(((CelebrityStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_image);
+//            }
 
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
@@ -148,10 +149,10 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         public ViewHolder1(View itemView) {
             super(itemView);
-            card_celebrity_feed_profile_image = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_image);
-            card_celebrity_feed_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_coverpic);
-            card_celebrity_feed_profile_name = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_name);
-            card_celebrity_feed_profile_role = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_role);
+//            card_celebrity_feed_profile_image = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_image);
+            card_celebrity_feed_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celeb_store_profile_coverpic);
+            card_celebrity_feed_profile_name = (TextView) itemView.findViewById(R.id.card_celeb_store_profile_name);
+            card_celebrity_feed_profile_role = (TextView) itemView.findViewById(R.id.card_celeb_store_collection);
         }
     }
 
