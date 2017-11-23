@@ -22,7 +22,7 @@ public class KeycloakHelper {
     private static final String ACCESS_TOKEN_ENDPOINT = "/realms/Flikster_Android/protocol/openid-connect/token";
     private static final String REFRESH_TOKEN_ENDPOINT = "/realms/Flikster_Android/protocol/openid-connect/token";
     private static final String AUTHZ_ACCOOUNT_ID = "keycloak-token";
-    private static final String AUTHZ_CLIENT_ID = "flikster-android";
+    private static final String AUTHZ_CLIENT_ID = "flikster-android-abhi";
     private static final String AUTHZ_REDIRECT_URL = "http://flikster.com/home";
     private static final String MODULE_NAME = "Flikster";
 

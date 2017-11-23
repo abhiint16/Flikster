@@ -35,8 +35,8 @@ public class MovieFragmentInfo extends Fragment {
     FragmentManager fragmentManager;
     Bundle bundle;
     ApiInterface apiInterface;
-    List<MovieData.MovieInnerData> items;
     String slug;
+    MovieData.MovieInnerData hits;
 
     @Nullable
     @Override
@@ -47,21 +47,22 @@ public class MovieFragmentInfo extends Fragment {
         this.slug=bundle.getString("slug");
         Log.e("slugMovieInfo1", "SSS");
         Log.e("slugMovieInfo1", slug + "Shiva");
-        //retrofitInit();
         initializeRest();
+        retrofitInit();
         return view;
     }
 
-    /*private void retrofitInit() {
-        Log.e("slugMovieInfo", slug);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/").create(ApiInterface.class);
-        Call<MovieData> call = apiInterface.getMovieData("http://apiv3.flikster.com/v3/movie-ms/getMovieBySlug/"+slug);
+    private void retrofitInit() {
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/movies/_search?pretty=true&q=slug:").create(ApiInterface.class);
+        Call<MovieData> call = apiInterface.getMovieData("http://apiv3-es.flikster.com/movies/_search?pretty=true&q=slug:"+"fidaa");
         call.enqueue(new Callback<MovieData>() {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
-                items = response.body().getItems();
-                Log.e("ResData", items.toString()+"");
-                movieInfoAdapter = new MovieInfoAdapter(getActivity(), fragmentManager,items);
+                hits = response.body().getHits();
+                movieInfoAdapter = new MovieInfoAdapter(getActivity(), fragmentManager,getArguments().getString("coverpic"),
+                        getArguments().getString("censor"),getArguments().getString("dor"),getArguments().getStringArrayList("genre"),
+                        getArguments().getString("duration"),getArguments().getString("title"),getArguments().getString("storyline"),
+                        getArguments().getString("slug"),hits);
                 movieFragmentInfoRecycler.setAdapter(movieInfoAdapter);
             }
 
@@ -71,15 +72,10 @@ public class MovieFragmentInfo extends Fragment {
             }
         });
     }
-*/
 
     private void initializeRest() {
         movieFragmentInfoLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         movieFragmentInfoRecycler.setLayoutManager(movieFragmentInfoLayoutManager);
-        movieInfoAdapter = new MovieInfoAdapter(getActivity(), fragmentManager,getArguments().getString("coverpic"),
-                getArguments().getString("censor"),getArguments().getString("dor"),getArguments().getStringArrayList("genre"),
-                getArguments().getString("duration"),getArguments().getString("title"),getArguments().getString("storyline"));
-        movieFragmentInfoRecycler.setAdapter(movieInfoAdapter);
     }
 
     private void initializeViews() {

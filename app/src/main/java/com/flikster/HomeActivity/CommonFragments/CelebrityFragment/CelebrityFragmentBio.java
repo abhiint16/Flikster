@@ -44,13 +44,13 @@ public class CelebrityFragmentBio extends Fragment{
         view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
         initializeViews();
         bundle=getArguments();
-        this.slug=bundle.getString("slug");
-        retrofitInit();
+        //this.slug=bundle.getString("slug");
+       // retrofitInit();
         initializeRest();
         return  view;
     }
 
-    private void retrofitInit() {
+    /*private void retrofitInit() {
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/celeb-ms/getCelebBySlug/").create(ApiInterface.class);
         Call<CelebrityData> call = apiInterface.getCelebrityData("http://apiv3.flikster.com/v3/celeb-ms/getCelebBySlug/"+slug);
         call.enqueue(new Callback<CelebrityData>() {
@@ -66,11 +66,16 @@ public class CelebrityFragmentBio extends Fragment{
                 Log.e("vvvvvvvvvv","vv"+call+t);
             }
         });
-    }
+    }*/
 
     private void initializeRest() {
         celebrityFragmentBioLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentBioRecycler.setLayoutManager(celebrityFragmentBioLayoutManager);
+        celebrityBioAdapter = new CelebrityBioAdapter(getActivity(), fragmentManager,getArguments().getString("coverpic"),
+                getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
+                getArguments().getString("placeOfBirth"),
+                getArguments().getString("name"));
+        celebrityFragmentBioRecycler.setAdapter(celebrityBioAdapter);
     }
 
     private void initializeViews() {

@@ -31,13 +31,15 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
     StealStyleViewHolder stealStyleViewHolder;
     RecyclerView.LayoutManager layoutManager2;
-    String profilepic;
+    String biography;
     String coverpic;
     String name;
     ArrayList<String> role = new ArrayList<>();
+    String dateOfBirth;
+    String placeOfBirth;
 
-    public CelebrityStoreAdapter(Context context, FragmentManager fragmentManager, String profilepic, String coverpic,
-                                 String name, ArrayList<String> role) {
+    public CelebrityStoreAdapter(Context context, FragmentManager fragmentManager, String coverpic, String biography,
+                                 String dateOfBirth, ArrayList<String> role,String placeOfBirth,String name) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -54,10 +56,12 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         type.add(3);
         type.add(4);
         type.add(7);
-        this.profilepic = profilepic;
+        this.placeOfBirth = placeOfBirth;
         this.coverpic = coverpic;
         this.name = name;
         this.role = role;
+        this.biography=biography;
+        this.dateOfBirth=dateOfBirth;
     }
 
     @Override

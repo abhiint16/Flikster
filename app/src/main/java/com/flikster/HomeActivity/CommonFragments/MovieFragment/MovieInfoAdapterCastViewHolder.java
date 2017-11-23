@@ -22,11 +22,11 @@ import java.util.List;
 public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<MovieInfoAdapterCastViewHolder.ViewHolder> {
     Context context;
     int size;
-    List<MovieData.MovieInnerData> items;
-    public MovieInfoAdapterCastViewHolder(Context context, int size, List<MovieData.MovieInnerData> items) {
+    MovieData.MovieInnerData hits;
+    public MovieInfoAdapterCastViewHolder(Context context, MovieData.MovieInnerData hits) {
         this.context=context;
         this.size=size;
-        this.items=items;
+        this.hits=hits;
     }
 
     @Override
@@ -37,13 +37,17 @@ public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<MovieIn
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        /*holder.card_movie_info_cast_recycler_item_name.setText(items.get(0).getCast().get(position).getName());
-        Glide.with(context).load(items.get(0).getCast().get(position).getProfilePic()).asBitmap().into(holder.card_movie_info_cast_recycler_item_image);*/
+        if(this.hits.getHits().get(0).get_source().getCast()!=null)
+        holder.card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(0).get_source().getCast().get(position).getName());
+        Glide.with(context).load(hits.getHits().get(0).get_source().getCast().get(position).getProfilePic()).asBitmap().into(holder.card_movie_info_cast_recycler_item_image);
     }
 
     @Override
     public int getItemCount() {
-        return this.size;
+        if(this.hits.getHits().get(0).get_source().getCast()!=null)
+        return this.hits.getHits().get(0).get_source().getCast().size();
+        else
+            return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

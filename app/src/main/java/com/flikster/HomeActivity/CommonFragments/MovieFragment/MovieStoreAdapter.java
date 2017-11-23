@@ -41,13 +41,17 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     RecyclerView.LayoutManager layoutManager2;
     ApiInterface apiInterface;
     List<RecommendedProductData.RecommendedProductInnerData> items;
-    String profilepic;
+    String censor;
     String coverpic;
-    String name;
-    ArrayList<String> role = new ArrayList<>();
+    String dor;
+    String duration;
+    String title;
+    ArrayList<String> genre = new ArrayList<>();
+    String storyline;
+    String slug;
 
-    public MovieStoreAdapter(Context context, FragmentManager fragmentManager, String profilepic, String coverpic,
-                             String name, ArrayList<String> role) {
+    public MovieStoreAdapter(Context context, FragmentManager fragmentManager, String coverpic, String censor,
+                             String dor, ArrayList<String> genre,String duration,String title,String storyline,String slug) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -64,16 +68,20 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         type.add(3);
         type.add(4);
         type.add(7);
-        this.profilepic = profilepic;
+        this.genre = genre;
         this.coverpic = coverpic;
-        this.name = name;
-        this.role = role;
+        this.title = title;
+        this.dor = dor;
+        this.censor=censor;
+        this.duration=duration;
+        this.storyline=storyline;
+        this.slug=slug;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_feed_profile, parent, false);
             return new MovieStoreAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_store_gallary4_1, parent, false);
@@ -93,22 +101,48 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    public  String formatDate(String dateOfRelease)
+    {
+        String subString=dateOfRelease.substring(3,dateOfRelease.indexOf("GMT")-9);
+        return subString;
+    }
+    public String formatGenre()
+    {
+        String genre="";
+        for(int i=0;i<this.genre.size();i++)
+        {
+            if(i<genre.length()-1)
+                genre=genre+this.genre.get(i)+" | ";
+            else
+                genre=genre+this.genre.get(i);
+        }
+        return genre;
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            if (name != null && !name.isEmpty()) {
-                ((MovieStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_name.setText(name);
+            if (title != null && !title.isEmpty()) {
+                ((ViewHolder1) holder).card_movie_feed_profile_moviename.setText(title);
             }
-
-            if (profilepic != null && !profilepic.isEmpty()) {
-                Glide.with(context).load(profilepic).asBitmap()
-                        .into(((MovieStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_image);
-            }
-
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
-                        .into(((MovieStoreAdapter.ViewHolder1) holder).card_celebrity_feed_profile_coverpic);
+                        .into(((ViewHolder1) holder).card_movie_feed_profile_image);
             }
+            if (censor != null && !censor.isEmpty()) {
+                ((ViewHolder1) holder).card_movie_feed_profile_censor.setText(censor);
+            }
+            if(dor != null && !dor.isEmpty()){
+                ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(formatDate(dor));
+            }
+            if(duration != null && !duration.isEmpty()){
+                ((ViewHolder1) holder).card_movie_feed_profile_dur.setText(duration);
+            }
+            if(genre != null && !genre.isEmpty())
+            {
+                ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(formatGenre());
+            }
+            ((ViewHolder1)holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
 
 
         } else if (holder.getItemViewType() == 2) {
@@ -169,15 +203,20 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
-        ImageView card_celebrity_feed_profile_image, card_celebrity_feed_profile_coverpic;
-        TextView card_celebrity_feed_profile_name, card_celebrity_feed_profile_role;
+        TextView card_movie_feed_profile_moviename, card_movie_feed_profile_censor,card_movie_feed_profile_dor,
+                card_movie_feed_profile_dur,card_movie_feed_profile_genre,card_movie_feed_profile_storyline;
+        ImageView card_movie_feed_profile_image;
+
 
         public ViewHolder1(View itemView) {
             super(itemView);
-            card_celebrity_feed_profile_image = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_image);
-            card_celebrity_feed_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_coverpic);
-            card_celebrity_feed_profile_name = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_name);
-            card_celebrity_feed_profile_role = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_role);
+            card_movie_feed_profile_moviename = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_moviename);
+            card_movie_feed_profile_censor = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_censor);
+            card_movie_feed_profile_image = (ImageView) itemView.findViewById(R.id.card_movie_feed_profile_image);
+            card_movie_feed_profile_dor = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dor);
+            card_movie_feed_profile_dur = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dur);
+            card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
+            card_movie_feed_profile_storyline = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_storyline);
         }
     }
 

@@ -41,7 +41,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     ApiInterface apiInterface;
     ImageButton toolbar_back_navigation_btn;
     String slug;
-    List<CelebrityData.CelebrityInnerData> items;
+    CelebrityData.CelebrityInnerData hits;
     Bundle arguments = new Bundle();
 
     @Nullable
@@ -55,26 +55,29 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     }
 
     private void tempMethod() {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/celeb-ms/getCelebBySlug/").create(ApiInterface.class);
-        Call<CelebrityData> call = apiInterface.getCelebrityData("http://apiv3.flikster.com/v3/celeb-ms/getCelebBySlug/" + slug);
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/celebrity/_search?pretty=true&q=slug:").create(ApiInterface.class);
+        Call<CelebrityData> call = apiInterface.getCelebrityData("http://apiv3-es.flikster.com/celebrity/_search?pretty=true&q=slug:" + "praveen-sattaru");
         call.enqueue(new Callback<CelebrityData>() {
             @Override
             public void onResponse(Call<CelebrityData> call, Response<CelebrityData> response) {
-                items = response.body().getItems();
-                Log.e("CeleprofilePic", items.size()+"Shiv");
-                if (items.size() != 0){
-                    arguments.putString("profilepic", items.get(0).getProfilePic());
-                    arguments.putString("coverpic", items.get(0).getCoverPic());
-                    arguments.putString("name", items.get(0).getName());
-                    arguments.putStringArrayList("role", (ArrayList<String>) items.get(0).getRole());
+                hits = response.body().getHits();
+                if (hits.getHits().size() != 0){
+                    arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
+                    arguments.putString("biography", hits.getHits().get(0).get_source().getBiography());
+                    arguments.putString("dateOfBirth", hits.getHits().get(0).get_source().getDateOfBirth());
+                    arguments.putStringArrayList("role", (ArrayList<String>) hits.getHits().get(0).get_source().getRole());
+                    arguments.putString("placeOfBirth",hits.getHits().get(0).get_source().getPlaceOfBirth());
+                    arguments.putString("name",hits.getHits().get(0).get_source().getName());
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setAdapter(celebrityAdapter);
                     viewPager.setCurrentItem(1);
                 }else {
-                    arguments.putString("profilepic", "");
                     arguments.putString("coverpic", "");
-                    arguments.putString("name", "");
+                    arguments.putString("biography", "");
+                    arguments.putString("dateOfBirth", "");
                     arguments.putStringArrayList("role", new  ArrayList<String>(){{add("");add("");}});
+                    arguments.putString("placeOfBirth", "");
+                    arguments.putString("name", "");
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setAdapter(celebrityAdapter);
                     viewPager.setCurrentItem(1);
@@ -104,7 +107,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     private void initializeRest() {
         arguments.putString("slug", slug);
         tabLayout.setupWithViewPager(viewPager);
-        toolbar_frag_title.setText("Celebrity");
+//        toolbar_frag_title.setText("Celebrity");
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
 

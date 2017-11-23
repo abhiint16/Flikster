@@ -51,9 +51,12 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     String title;
     ArrayList<String> genre = new ArrayList<>();
     String storyline;
+    String slug;
+    MovieData.MovieInnerData hits;
 
     public MovieInfoAdapter(Context context, FragmentManager fragmentManager,String coverpic, String censor,
-                            String dor, ArrayList<String> genre,String duration,String title,String storyline) {
+                            String dor, ArrayList<String> genre,String duration,String title,String storyline,String slug,
+                            MovieData.MovieInnerData hits) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.items=items;
@@ -69,6 +72,8 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.censor=censor;
         this.duration=duration;
         this.storyline=storyline;
+        this.slug=slug;
+        this.hits=hits;
     }
 
     @Override
@@ -131,20 +136,20 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         String subString=dateOfRelease.substring(3,dateOfRelease.indexOf("GMT")-9);
         return subString;
     }
-    /*public String formatGenre()
+    public String formatGenre()
     {
         String genre="";
-        for(int i=0;i<items.get(0).genre.size();i++)
+        for(int i=0;i<this.genre.size();i++)
         {
-            if(i<items.get(0).genre.size()-1)
-                genre=genre+items.get(0).getGenre().get(i)+" | ";
+            if(i<genre.length()-1)
+                genre=genre+this.genre.get(i)+" | ";
             else
-                genre=genre+items.get(0).getGenre().get(i);
+                genre=genre+this.genre.get(i);
         }
         return genre;
     }
 
-    public Spannable formatStoryLine()
+   /*  public Spannable formatStoryLine()
     {
         String storyLine=items.get(0).getStoryLine();
         Spannable spannable = null;
@@ -187,21 +192,21 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder1) holder).card_movie_feed_profile_censor.setText(censor);
             }
             if(dor != null && !dor.isEmpty()){
-                ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(dor);
+                ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(formatDate(dor));
             }
             if(duration != null && !duration.isEmpty()){
                 ((ViewHolder1) holder).card_movie_feed_profile_dur.setText(duration);
             }
             if(genre != null && !genre.isEmpty())
             {
-                ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(genre.get(0));
+                ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(formatGenre());
             }
             if (storyline!=null && !storyline.isEmpty())
             {
                 ((ViewHolder1) holder).card_movie_feed_profile_storyline.setText(storyline);
             }
         }
-        /*else if (holder.getItemViewType() == 2) {
+        else if (holder.getItemViewType() == 2) {
 //            ((ViewHolder2) holder).textView.setText("Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
@@ -211,13 +216,13 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((ViewHolder3)holder).fragment_common_recyclerview_with_tv_title.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context,items.get(0).getCast().size(),items);
+            movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context,hits);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCastViewHolder);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4)holder).fragment_common_recyclerview_with_tv_title.setText("Crew");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            movieInfoAdapterCrewViewHolder = new MovieInfoAdapterCrewViewHolder(context,items.get(0).getCrew().size(),items);
+            movieInfoAdapterCrewViewHolder = new MovieInfoAdapterCrewViewHolder(context,hits);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCrewViewHolder);
         } else if (holder.getItemViewType() == 6) {
             //((ViewHolder6)holder).textView.setText("videos");
@@ -225,7 +230,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder();
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterPeersViewHolder);
-        } else if (holder.getItemViewType() == 9) {
+        } /*else if (holder.getItemViewType() == 9) {
 //            ((ViewHolder3) holder).textView.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);

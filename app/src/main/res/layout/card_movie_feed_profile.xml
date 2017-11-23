@@ -8,11 +8,12 @@
         android:id="@+id/card_movie_feed_profile_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/black" />
+        android:background="@color/black"
+        android:scaleType="fitXY"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="180dp"
@@ -77,6 +78,77 @@
                 android:id="@+id/card_movie_feed_profile_dur"
                 />
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/dark_grey"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/likesmallicon"
+                    android:background="@color/transparent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="no-of-likes"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/dark_grey"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/unlikesmallicon"
+                    android:background="@color/transparent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="no-of-unlikes"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/dark_grey"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/corner_rounded"
+                android:text="FOLLOW"
+                android:textColor="@color/dark_grey"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
@@ -87,5 +159,6 @@
         android:background="@color/white"
         android:layout_marginTop="10dp"
         android:padding="10dp"
+        android:layout_margin="10dp"
         android:id="@+id/card_movie_feed_profile_storyline"/>
 </RelativeLayout>

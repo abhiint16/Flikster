@@ -38,8 +38,16 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
     List<CelebrityData.CelebrityInnerData> items;
     Boolean biographyBoolean = true;
+    String biography;
+    String coverpic;
+    String name;
+    ArrayList<String> role = new ArrayList<>();
+    String dateOfBirth;
+    String placeOfBirth;
 
-    public CelebrityBioAdapter(Context context, FragmentManager fragmentManager, List<CelebrityData.CelebrityInnerData> items) {
+
+    public CelebrityBioAdapter(Context context, FragmentManager fragmentManager, String coverpic, String biography,
+                               String dateOfBirth, ArrayList<String> role,String placeOfBirth,String name) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -56,7 +64,12 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         type.add(3);
         type.add(4);
         type.add(7);
-        this.items = items;
+        this.placeOfBirth = placeOfBirth;
+        this.coverpic = coverpic;
+        this.name = name;
+        this.role = role;
+        this.biography=biography;
+        this.dateOfBirth=dateOfBirth;
     }
 
     @Override
@@ -99,16 +112,16 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public String formatRole() {
         String roleString = "";
-        for (int i = 0; i < items.get(0).role.size(); i++) {
-            if (i < items.get(0).role.size() - 1)
-                roleString = roleString + items.get(0).getRole().get(i) + " , ";
+        for (int i = 0; i < role.size(); i++) {
+            if (i < role.size() - 1)
+                roleString = roleString + role.get(i) + " , ";
             else
-                roleString = roleString + items.get(0).getRole().get(i);
+                roleString = roleString + role.get(i);
         }
         return roleString;
     }
 
-    public Spannable formatBiography() {
+    /*public Spannable formatBiography() {
         String storyLine = items.get(0).getBiography();
         Spannable spannable = null;
         if (storyLine.length() > 200) {
@@ -131,14 +144,13 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             biographyBoolean = true;
         }
     }
-
+*/
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            Log.e("DOB", "Shiva" + items.size());
-            if (items.size() != 0){
+            /*if (items.size() != 0){
                 try {
-                    if (items.get(0).getBiography() != null && !items.get(0).getBiography().isEmpty() && items.get(0).getBiography().length() != 0) {
+                    if (biography != null && !items.get(0).getBiography().isEmpty() && items.get(0).getBiography().length() != 0) {
                         if (items.get(0).getBiography().length() <= 200)
                             ((ViewHolder1) holder).card_celebrity_bio_profile_biography.setText(items.get(0).getBiography());
                         else if (items.get(0).getBiography().length() > 200)
@@ -161,7 +173,13 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
+            }*/
+            ((ViewHolder1) holder).card_celebrity_bio_profile_biography.setText(biography);
+            ((ViewHolder1) holder).card_celebrity_bio_profile_name.setText(name);
+            ((ViewHolder1) holder).card_celebrity_bio_profile_pob.setText(placeOfBirth);
+            ((ViewHolder1) holder).card_celebrity_bio_profile_dob.setText(formatDOB(dateOfBirth));
+            ((ViewHolder1) holder).card_celebrity_bio_profile_role.setText(formatRole());
+            Glide.with(context).load(coverpic).into(((ViewHolder1) holder).card_celebrity_bio_profile_coverpic);
 
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Videos");

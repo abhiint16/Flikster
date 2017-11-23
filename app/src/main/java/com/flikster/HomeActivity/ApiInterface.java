@@ -41,4 +41,8 @@ public interface ApiInterface {
 
     @GET
     Call<RecommendedProductData> getRecommendedProductData(@Url String url);
+
+    @GET("http://apiv3-es.flikster.com/contents/_search")
+    Call<FeedData> getMovieFeedData(@Query("pretty") Boolean s,
+                                     @Query("q") String c);
 }
