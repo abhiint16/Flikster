@@ -2,7 +2,6 @@ package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
@@ -11,20 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryBottomHorRecyclerAdapter;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClickAdapter;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
-import com.flikster.HomeActivity.StealStyleViewHolder;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 
 import java.util.ArrayList;
@@ -94,30 +88,48 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_feed_profile, parent, false);
             return new ViewHolder0(view);
         } else if (viewType == 2) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_gallary, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_common_feed_quote, parent, false);
             return new ViewHolder2(view);
         } else if (viewType == 3) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_news, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_common_feed_gallary1, parent, false);
             return new ViewHolder3(view);
         } else if (viewType == 4) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_dialogue, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_common_feed_gallary1, parent, false);
             return new ViewHolder4(view);
         } else if (viewType == 5) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_video, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_common_feed_gallary1, parent, false);
             return new ViewHolder5(view);
         } else if (viewType == 6) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_feed_jukebox, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_common_feed_gallary1, parent, false);
             return new ViewHolder6(view);
         } else if(viewType==7){
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_gallary1, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_common_feed_gallary1, parent, false);
             return new ViewHolder7(view);
         }
         return null;
     }
 
+    public  String formatDate(String dateOfRelease)
+    {
+        String subString=dateOfRelease.substring(3,dateOfRelease.indexOf("GMT")-9);
+        return subString;
+    }
+    public String formatGenre()
+    {
+        String genre="";
+        for(int i=0;i<this.genre.size();i++)
+        {
+            if(i<genre.length()-1)
+                genre=genre+this.genre.get(i)+" | ";
+            else
+                genre=genre+this.genre.get(i);
+        }
+        return genre;
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == 1) {
+        /*if (holder.getItemViewType() == 1) {
             if (title != null && !title.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_moviename.setText(title);
             }
@@ -139,8 +151,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(genre.get(0));
             }
             ((ViewHolder1) holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
-        }
-        else if(holder.getItemViewType()==0)
+        }*/
+         if(holder.getItemViewType()==0)
         {
             Log.e("contenttypechecc","assdsa"+hits.getHits().get(0).get_source().getContentType());
             if (title != null && !title.isEmpty()) {
@@ -154,37 +166,58 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder0) holder).card_movie_feed_profile_censor.setText(censor);
             }
             if(dor != null && !dor.isEmpty()){
-                ((ViewHolder0) holder).card_movie_feed_profile_dor.setText(dor);
+                ((ViewHolder0) holder).card_movie_feed_profile_dor.setText(formatDate(dor));
             }
             if(duration != null && !duration.isEmpty()){
                 ((ViewHolder0) holder).card_movie_feed_profile_dur.setText(duration);
             }
             if(genre != null && !genre.isEmpty())
             {
-                ((ViewHolder0) holder).card_movie_feed_profile_genre.setText(genre.get(0));
+                ((ViewHolder0) holder).card_movie_feed_profile_genre.setText(formatGenre());
             }
             ((ViewHolder0)holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
         }
 
         else if (holder.getItemViewType() == 2) {
-            ((ViewHolder2) holder).card_celebrity_feed_gallary_title.setText("Photo Gallary");
-            ((ViewHolder2) holder).card_celebrity_feed_gallary_img1.setImageResource(R.drawable.idiots1);
-            ((ViewHolder2) holder).card_celebrity_feed_gallary_img2.setImageResource(R.drawable.idiots2);
-            ((ViewHolder2) holder).card_celebrity_feed_gallary_img3.setImageResource(R.drawable.idiots3);
+            if (hits.getHits().get(position-1).get_source().getText() == null)
+                ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
+            else if (hits.getHits().get(position-1).get_source().getText() != null)
+                ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position-1).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position-1).get_source().getProfilePic()).into(((ViewHolder7) holder).card_celebrity_feed_gallery1_img);
+            ((ViewHolder7) holder).tv_name.setText(hits.getHits().get(position-1).get_source().getTitle());
+            ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position-1).get_source().getTitle());
         } else if (holder.getItemViewType() == 3) {
-            ((ViewHolder3) holder).card_celebrity_feed_news_title.setText("Amir Khan in the shooting of 3Idiots");
-            ((ViewHolder3) holder).name.setText("Amir interview after shooting");
-            ((ViewHolder3) holder).desc.setText("Amir is busy these days in the shooting of 3Idiots. It is a movie based on the " +
-                    "novel of Chetan Bhagat");
-            ((ViewHolder3) holder).card_celebrity_feed_news_image.setImageResource(R.drawable.movie);
+            if (hits.getHits().get(position-1).get_source().getText() == null)
+                ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
+            else if (hits.getHits().get(position-1).get_source().getText() != null)
+                ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position-1).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position-1).get_source().getProfilePic()).into(((ViewHolder7) holder).card_celebrity_feed_gallery1_img);
+            ((ViewHolder7) holder).tv_name.setText(hits.getHits().get(position-1).get_source().getTitle());
+            ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position-1).get_source().getTitle());
         } else if (holder.getItemViewType() == 4) {
-            ((ViewHolder4) holder).card_dialogue_title.setText("Dialogue");
-            ((ViewHolder4) holder).tv_name.setText("All is well Song");
-            ((ViewHolder4) holder).tv_description.setVisibility(View.GONE);
+            if (hits.getHits().get(position-1).get_source().getText() == null)
+                ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
+            else if (hits.getHits().get(position-1).get_source().getText() != null)
+                ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position-1).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position-1).get_source().getProfilePic()).into(((ViewHolder7) holder).card_celebrity_feed_gallery1_img);
+            ((ViewHolder7) holder).tv_name.setText(hits.getHits().get(position-1).get_source().getTitle());
+            ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position-1).get_source().getTitle());
         } else if (holder.getItemViewType() == 5) {
-            ((ViewHolder5) holder).card_celebrity_feed_video_title.setText("Watch the teaser of 3 Idiots");
-            ((ViewHolder5) holder).card_celebrity_feed_video_image.setImageResource(R.drawable.idiots2);
+            if (hits.getHits().get(position-1).get_source().getText() == null)
+                ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
+            else if (hits.getHits().get(position-1).get_source().getText() != null)
+                ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position-1).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position-1).get_source().getProfilePic()).into(((ViewHolder7) holder).card_celebrity_feed_gallery1_img);
+            ((ViewHolder7) holder).tv_name.setText(hits.getHits().get(position-1).get_source().getTitle());
+            ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position-1).get_source().getTitle());
         } else if (holder.getItemViewType() == 6) {
+            if (hits.getHits().get(position-1).get_source().getText() == null)
+                ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
+            else if (hits.getHits().get(position-1).get_source().getText() != null)
+                ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position-1).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position-1).get_source().getProfilePic()).into(((ViewHolder7) holder).card_celebrity_feed_gallery1_img);
+            ((ViewHolder7) holder).tv_name.setText(hits.getHits().get(position-1).get_source().getTitle());
+            ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position-1).get_source().getTitle());
         } else if (holder.getItemViewType() == 7) {
             Log.e("contenttypecheccbind","assdsa"+hits.getHits().get(0).get_source().getContentType());
             if (hits.getHits().get(position-1).get_source().getText() == null)
@@ -284,7 +317,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder {
+    /*public class ViewHolder1 extends RecyclerView.ViewHolder {
         TextView card_movie_feed_profile_moviename, card_movie_feed_profile_censor,card_movie_feed_profile_dor,
                 card_movie_feed_profile_dur,card_movie_feed_profile_genre,card_movie_feed_profile_storyline;
         ImageView card_movie_feed_profile_image;
@@ -299,18 +332,18 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
             card_movie_feed_profile_storyline = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_storyline);
         }
-    }
+    }*/
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView card_celebrity_feed_gallary_title;
-        ImageView card_celebrity_feed_gallary_img1, card_celebrity_feed_gallary_img2, card_celebrity_feed_gallary_img3;
+        ImageView card_celebrity_feed_gallery1_img;
+        TextView tv_name, tv_description,card_celebrity_feed_gallery1_title;
 
         public ViewHolder2(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallary_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallary_title);
-            card_celebrity_feed_gallary_img1 = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_gallary_img1);
-            card_celebrity_feed_gallary_img2 = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_gallary_img2);
-            card_celebrity_feed_gallary_img3 = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_gallary_img3);
+            card_celebrity_feed_gallery1_img=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_img);
+            tv_name=(TextView)itemView.findViewById(R.id.tv_name);
+            tv_description=(TextView)itemView.findViewById(R.id.tv_description);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
 
             itemView.setOnClickListener(this);
         }
@@ -325,16 +358,15 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView card_celebrity_feed_news_title, desc, name;
-        ImageView card_celebrity_feed_news_image;
+        ImageView card_celebrity_feed_gallery1_img;
+        TextView tv_name, tv_description,card_celebrity_feed_gallery1_title;
 
         public ViewHolder3(View itemView) {
             super(itemView);
-            card_celebrity_feed_news_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_news_title);
-            desc = (TextView) itemView.findViewById(R.id.tv_description);
-            name = (TextView) itemView.findViewById(R.id.tv_name);
-            card_celebrity_feed_news_image = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_news_image);
-            itemView.setOnClickListener(this);
+            card_celebrity_feed_gallery1_img=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_img);
+            tv_name=(TextView)itemView.findViewById(R.id.tv_name);
+            tv_description=(TextView)itemView.findViewById(R.id.tv_description);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
         }
 
         @Override
@@ -347,27 +379,28 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class ViewHolder4 extends RecyclerView.ViewHolder {
-        ImageButton ib_play;
-        TextView card_dialogue_title, tv_name, tv_description;
+        ImageView card_celebrity_feed_gallery1_img;
+        TextView tv_name, tv_description,card_celebrity_feed_gallery1_title;
 
         public ViewHolder4(View itemView) {
             super(itemView);
-            card_dialogue_title = (TextView) itemView.findViewById(R.id.card_dialogue_title);
-            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
-            tv_description = (TextView) itemView.findViewById(R.id.tv_description);
-            ib_play = (ImageButton) itemView.findViewById(R.id.ib_play);
+            card_celebrity_feed_gallery1_img=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_img);
+            tv_name=(TextView)itemView.findViewById(R.id.tv_name);
+            tv_description=(TextView)itemView.findViewById(R.id.tv_description);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
         }
     }
 
     public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView card_celebrity_feed_video_title;
-        ImageView card_celebrity_feed_video_image;
+        ImageView card_celebrity_feed_gallery1_img;
+        TextView tv_name, tv_description,card_celebrity_feed_gallery1_title;
 
         public ViewHolder5(View itemView) {
             super(itemView);
-            card_celebrity_feed_video_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_video_title);
-            card_celebrity_feed_video_image = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_video_image);
-            itemView.setOnClickListener(this);
+            card_celebrity_feed_gallery1_img=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_img);
+            tv_name=(TextView)itemView.findViewById(R.id.tv_name);
+            tv_description=(TextView)itemView.findViewById(R.id.tv_description);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
         }
 
         @Override
@@ -380,8 +413,14 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class ViewHolder6 extends RecyclerView.ViewHolder {
+        ImageView card_celebrity_feed_gallery1_img;
+        TextView tv_name, tv_description,card_celebrity_feed_gallery1_title;
         public ViewHolder6(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_img=(ImageView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_img);
+            tv_name=(TextView)itemView.findViewById(R.id.tv_name);
+            tv_description=(TextView)itemView.findViewById(R.id.tv_description);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
         }
     }
 

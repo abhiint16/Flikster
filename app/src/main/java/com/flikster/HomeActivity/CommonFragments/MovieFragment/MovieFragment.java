@@ -71,6 +71,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                 arguments.putString("storyline",hits.getHits().get(0).get_source().getStoryLine());
                 arguments.putString("slug",slug);
                 Log.e("slugjsjjsjsj1","ajja"+slug+" "+arguments);
+                viewPager.setOffscreenPageLimit(2);
                 movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
                 viewPager.setAdapter(movieAdapter);
                 viewPager.setCurrentItem(1);

@@ -133,20 +133,20 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         String subString=dateOfRelease.substring(3,dateOfRelease.indexOf("GMT")-9);
         return subString;
     }
-    /*public String formatGenre()
+    public String formatGenre()
     {
         String genre="";
-        for(int i=0;i<items.get(0).genre.size();i++)
+        for(int i=0;i<this.genre.size();i++)
         {
-            if(i<items.get(0).genre.size()-1)
-                genre=genre+items.get(0).getGenre().get(i)+" | ";
+            if(i<genre.length()-1)
+                genre=genre+this.genre.get(i)+" | ";
             else
-                genre=genre+items.get(0).getGenre().get(i);
+                genre=genre+this.genre.get(i);
         }
         return genre;
     }
 
-    public Spannable formatStoryLine()
+   /*  public Spannable formatStoryLine()
     {
         String storyLine=items.get(0).getStoryLine();
         Spannable spannable = null;
@@ -189,14 +189,14 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder1) holder).card_movie_feed_profile_censor.setText(censor);
             }
             if(dor != null && !dor.isEmpty()){
-                ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(dor);
+                ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(formatDate(dor));
             }
             if(duration != null && !duration.isEmpty()){
                 ((ViewHolder1) holder).card_movie_feed_profile_dur.setText(duration);
             }
             if(genre != null && !genre.isEmpty())
             {
-                ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(genre.get(0));
+                ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(formatGenre());
             }
             if (storyline!=null && !storyline.isEmpty())
             {
