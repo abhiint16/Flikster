@@ -99,7 +99,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/like_icon"
+                    android:src="@drawable/likesmallicon"
                     android:background="@color/transparent"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/like_icon"
+                    android:src="@drawable/unlikesmallicon"
                     android:background="@color/transparent"/>
                 <TextView
                     android:layout_width="wrap_content"

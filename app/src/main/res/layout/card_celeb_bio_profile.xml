@@ -11,26 +11,20 @@
         android:layout_height="200dp"
         android:background="@color/black" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/seven"
-        android:layout_marginRight="@dimen/seven"
-        android:layout_marginTop="180dp"
-        android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/white_grey_radius_border"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/seven"
+            android:layout_marginRight="@dimen/seven"
+            android:layout_marginTop="180dp"
+            android:id="@+id/card_celeb_bio_container">
 
             <TextView
                 android:id="@+id/card_celeb_bio_profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="@dimen/five"
                 android:gravity="center"
                 android:text="Name"
@@ -85,7 +79,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center"
-
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -102,7 +95,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=","
-
                     android:textColor="@color/grey_txt_label" />
 
                 <TextView
@@ -234,15 +226,14 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/card_celeb_bio_profile_biography"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ten"
-            android:layout_marginTop="@dimen/seven"
-            android:background="@drawable/white_grey_radius_border"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="@string/bio" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Data"
+        android:layout_below="@+id/card_celeb_bio_container"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:id="@+id/card_celeb_bio_profile_biography"/>
 </RelativeLayout>

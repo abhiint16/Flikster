@@ -28,13 +28,15 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     Context context;
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
-    String profilepic;
+    String biography;
     String coverpic;
     String name;
     ArrayList<String> role = new ArrayList<>();
+    String dateOfBirth;
+    String placeOfBirth;
 
-    public CelebrityFeedAdapter(Context context, FragmentManager fragmentManager, String profilepic, String coverpic,
-                                String name, ArrayList<String> role) {
+    public CelebrityFeedAdapter(Context context, FragmentManager fragmentManager, String coverpic, String biography,
+                                String dateOfBirth, ArrayList<String> role,String placeOfBirth,String name) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -42,10 +44,12 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         type.add(3);
         type.add(4);
         type.add(5);
-        this.profilepic = profilepic;
+        this.placeOfBirth = placeOfBirth;
         this.coverpic = coverpic;
         this.name = name;
         this.role = role;
+        this.biography=biography;
+        this.dateOfBirth=dateOfBirth;
     }
 
     @Override
@@ -72,20 +76,26 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    public String formatRole()
+    {
+        String genre="";
+        for(int i=0;i<this.role.size();i++)
+        {
+            if(i<genre.length()-1)
+                genre=genre+this.role.get(i)+" | ";
+            else
+                genre=genre+this.role.get(i);
+        }
+        return genre;
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            Log.e("check4global", " " + new GlobalDataStorage().getCelebrityProfilePic());
-            Log.e("check4global1", " " + profilepic);
             if (name != null && !name.isEmpty()) {
                 ((ViewHolder1) holder).card_celebrity_feed_profile_name.setText(name);
             }
-
-            ((ViewHolder1) holder).card_celebrity_feed_profile_role.setText(role.get(0));
-
-            /*if (profilepic != null && !profilepic.isEmpty()) {
-                Glide.with(context).load(profilepic).asBitmap().into(((ViewHolder1) holder).card_celebrity_feed_profile_image);
-            }*/
+            ((ViewHolder1) holder).card_celebrity_feed_profile_role.setText(formatRole());
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap().into(((ViewHolder1) holder).card_celebrity_feed_profile_coverpic);
             }

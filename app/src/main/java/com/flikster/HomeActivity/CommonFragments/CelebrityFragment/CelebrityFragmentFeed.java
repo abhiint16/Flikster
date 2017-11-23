@@ -34,8 +34,10 @@ public class CelebrityFragmentFeed extends Fragment{
     private void initializeRest() {
         celebrityFragmentFeedLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentFeedRecycler.setLayoutManager(celebrityFragmentFeedLayoutManager);
-        celebrityFeedAdapter = new CelebrityFeedAdapter(getActivity(),fragmentManager,getArguments().getString("profilepic"),
-                getArguments().getString("coverpic"),getArguments().getString("name"),getArguments().getStringArrayList("role"));
+        celebrityFeedAdapter = new CelebrityFeedAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
+                getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
+                getArguments().getString("placeOfBirth"),
+                getArguments().getString("name"));
         celebrityFragmentFeedRecycler.setAdapter(celebrityFeedAdapter);
     }
 
