@@ -69,6 +69,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                 arguments.putString("duration",hits.getHits().get(0).get_source().getDuration());
                 arguments.putString("title",hits.getHits().get(0).get_source().getTitle());
                 arguments.putString("storyline",hits.getHits().get(0).get_source().getStoryLine());
+                arguments.putString("slug",slug);
                 Log.e("slugjsjjsjsj1","ajja"+slug+" "+arguments);
                 movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
                 viewPager.setAdapter(movieAdapter);
@@ -108,7 +109,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         arguments.putString("slug",slug);
         Log.e("slugjsjjsjsj","ajja"+slug+" "+arguments);
         tabLayout.setupWithViewPager(viewPager);
-        toolbar_frag_title.setText("Movies");
+//        toolbar_frag_title.setText("Movies");
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
 

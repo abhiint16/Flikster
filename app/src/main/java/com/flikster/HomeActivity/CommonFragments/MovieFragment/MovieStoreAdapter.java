@@ -45,9 +45,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     String coverpic;
     String name;
     ArrayList<String> role = new ArrayList<>();
+    String slug;
 
     public MovieStoreAdapter(Context context, FragmentManager fragmentManager, String profilepic, String coverpic,
-                             String name, ArrayList<String> role) {
+                             String name, ArrayList<String> role,String slug) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -68,6 +69,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.coverpic = coverpic;
         this.name = name;
         this.role = role;
+        this.slug=slug;
     }
 
     @Override

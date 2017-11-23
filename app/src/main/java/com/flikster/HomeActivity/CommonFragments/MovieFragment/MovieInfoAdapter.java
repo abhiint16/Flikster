@@ -51,9 +51,10 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     String title;
     ArrayList<String> genre = new ArrayList<>();
     String storyline;
+    String slug;
 
     public MovieInfoAdapter(Context context, FragmentManager fragmentManager,String coverpic, String censor,
-                            String dor, ArrayList<String> genre,String duration,String title,String storyline) {
+                            String dor, ArrayList<String> genre,String duration,String title,String storyline,String slug) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.items=items;
@@ -69,6 +70,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.censor=censor;
         this.duration=duration;
         this.storyline=storyline;
+        this.slug=slug;
     }
 
     @Override

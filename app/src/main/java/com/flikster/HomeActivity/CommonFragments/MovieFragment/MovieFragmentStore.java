@@ -35,7 +35,8 @@ public class MovieFragmentStore extends Fragment{
         celebrityFragmentStoreLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentStoreRecycler.setLayoutManager(celebrityFragmentStoreLayoutManager);
         movieStoreAdapter = new MovieStoreAdapter(getActivity(),fragmentManager,getArguments().getString("profilepic"),
-                getArguments().getString("coverpic"),getArguments().getString("name"),getArguments().getStringArrayList("role"));
+                getArguments().getString("coverpic"),getArguments().getString("name"),getArguments().getStringArrayList("role"),
+                getArguments().getString("slug"));
         celebrityFragmentStoreRecycler.setAdapter(movieStoreAdapter);
     }
 
