@@ -51,7 +51,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
+            //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celeb_feed_profile, parent, false);
             return new ViewHolder1(view);
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_gallary, parent, false);
@@ -82,9 +83,9 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             ((ViewHolder1) holder).card_celebrity_feed_profile_role.setText(role.get(0));
 
-            if (profilepic != null && !profilepic.isEmpty()) {
+            /*if (profilepic != null && !profilepic.isEmpty()) {
                 Glide.with(context).load(profilepic).asBitmap().into(((ViewHolder1) holder).card_celebrity_feed_profile_image);
-            }
+            }*/
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap().into(((ViewHolder1) holder).card_celebrity_feed_profile_coverpic);
             }
@@ -118,15 +119,16 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
-        ImageView card_celebrity_feed_profile_image, card_celebrity_feed_profile_coverpic;
+        //        ImageView card_celebrity_feed_profile_image,
+        ImageView card_celebrity_feed_profile_coverpic;
         TextView card_celebrity_feed_profile_name, card_celebrity_feed_profile_role;
 
         public ViewHolder1(View itemView) {
             super(itemView);
-            card_celebrity_feed_profile_image = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_image);
-            card_celebrity_feed_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_coverpic);
-            card_celebrity_feed_profile_name = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_name);
-            card_celebrity_feed_profile_role = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_role);
+//            card_celebrity_feed_profile_image = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_image);
+            card_celebrity_feed_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celeb_feed_profile_coverpic);
+            card_celebrity_feed_profile_name = (TextView) itemView.findViewById(R.id.card_celeb_feed_profile_name);
+            card_celebrity_feed_profile_role = (TextView) itemView.findViewById(R.id.card_celeb_feed_profile_role);
         }
     }
 

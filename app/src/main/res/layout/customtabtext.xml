@@ -9,6 +9,5 @@
     android:paddingLeft="@dimen/fifteen"
     android:paddingRight="@dimen/fifteen"
     android:paddingTop="@dimen/ten"
-    android:textColor="@color/black"
-    android:text="Shiva"
+    android:text="store"
     android:textSize="13sp" />

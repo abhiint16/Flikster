@@ -62,7 +62,8 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_profile, parent, false);
+//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_profile, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celeb_bio_profile, parent, false);
             return new CelebrityBioAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
@@ -155,7 +156,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     ((ViewHolder1) holder).card_celebrity_bio_profile_name.setText(items.get(0).getName() + "");
                     ((ViewHolder1) holder).card_celebrity_bio_profile_pob.setText(items.get(0).getPlaceOfBirth() + "");
                     ((ViewHolder1) holder).card_celebrity_bio_profile_role.setText(formatRole() + "");
-                    Glide.with(context).load(items.get(0).getProfilePic()).asBitmap().into(((ViewHolder1) holder).card_celebrity_bio_profile_profilepic);
+//                    Glide.with(context).load(items.get(0).getProfilePic()).asBitmap().into(((ViewHolder1) holder).card_celebrity_bio_profile_profilepic);
                     Glide.with(context).load(items.get(0).getCoverPic()).asBitmap().into(((ViewHolder1) holder).card_celebrity_bio_profile_coverpic);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -207,18 +208,18 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
-        ImageView card_celebrity_bio_profile_coverpic, card_celebrity_bio_profile_profilepic;
+        ImageView card_celebrity_bio_profile_coverpic;
         TextView card_celebrity_bio_profile_pob, card_celebrity_bio_profile_dob, card_celebrity_bio_profile_role, card_celebrity_bio_profile_biography, card_celebrity_bio_profile_name;
 
         public ViewHolder1(View itemView) {
             super(itemView);
-            card_celebrity_bio_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celebrity_bio_profile_coverpic);
-            card_celebrity_bio_profile_profilepic = (ImageView) itemView.findViewById(R.id.card_celebrity_bio_profile_profilepic);
-            card_celebrity_bio_profile_pob = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_pob);
-            card_celebrity_bio_profile_dob = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_dob);
-            card_celebrity_bio_profile_role = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_role);
-            card_celebrity_bio_profile_biography = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_biography);
-            card_celebrity_bio_profile_name = (TextView) itemView.findViewById(R.id.card_celebrity_bio_profile_name);
+            card_celebrity_bio_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celeb_bio_profile_coverpic);
+//            card_celebrity_bio_profile_profilepic = (ImageView) itemView.findViewById(R.id.card_celebrity_bio_profile_profilepic);
+            card_celebrity_bio_profile_pob = (TextView) itemView.findViewById(R.id.card_celeb_bio_location);
+            card_celebrity_bio_profile_dob = (TextView) itemView.findViewById(R.id.card_celeb_bio_dob);
+            card_celebrity_bio_profile_role = (TextView) itemView.findViewById(R.id.card_celeb_bio_role);
+            card_celebrity_bio_profile_biography = (TextView) itemView.findViewById(R.id.card_celeb_bio_profile_biography);
+            card_celebrity_bio_profile_name = (TextView) itemView.findViewById(R.id.card_celeb_bio_profile_name);
         }
     }
 
@@ -230,6 +231,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_recycler.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.white_grey_radius_border));
         }
     }
 
