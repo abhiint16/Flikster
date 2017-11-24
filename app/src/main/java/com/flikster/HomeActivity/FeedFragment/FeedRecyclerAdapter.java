@@ -109,6 +109,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder.getItemViewType() == 1) {
             new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder1) holder).ib_like, context);
+                if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                    new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder1) holder).followbtn, context);
+                else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder1) holder).followbtn, context);
+                if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                    new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder1) holder).ib_bookmark, context);
+                else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder1) holder).ib_bookmark, context);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1) holder).card_critic_review_main_image);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
@@ -128,6 +136,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder1) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 2) {
             new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_like, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder2) holder).followbtn, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder2) holder).followbtn, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder2) holder).ib_bookmark, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder2) holder).ib_bookmark, context);
             /*((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("You won't believe these");
             stealStyleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(stealStyleLayoutManager);
@@ -150,6 +166,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder2) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 3) {
             new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder3) holder).ib_like, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder3) holder).followbtn, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder3) holder).followbtn, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder3) holder).ib_bookmark, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder3) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
                 ((ViewHolder3) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -169,6 +193,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         } else if (holder.getItemViewType() == 4) {
             new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder4) holder).ib_like, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder4) holder).followbtn, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder4) holder).followbtn, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder4) holder).ib_bookmark, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder4) holder).ib_bookmark, context);
             Log.e("videosonglink", "videosonglink " + outerHits.getHits().get(position).get_source().getMedia().getVideo());
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
@@ -187,6 +219,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder4) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 5) {
             new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_like, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder5) holder).followbtn, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder5) holder).followbtn, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder5) holder).ib_bookmark, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder5) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder5) holder).profile_image));
                 ((ViewHolder5) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -204,6 +244,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder5) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 6) {
             new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder6) holder).ib_like, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder6) holder).followbtn, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder6) holder).followbtn, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder6) holder).ib_bookmark, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder6) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
                 ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -221,6 +269,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder6) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 7) {
             new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder7) holder).ib_like, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder7) holder).followbtn, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder7) holder).followbtn, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder7) holder).ib_bookmark, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder7) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
                 ((ViewHolder7) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -238,6 +294,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder7) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 8) {
             new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder8) holder).ib_like, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder8) holder).followbtn, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForFollow("follow", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder8) holder).followbtn, context);
+            if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder8) holder).ib_bookmark, context);
+            else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
+                new PostRetrofit().checkForBookmark("bookmark", "hell", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder8) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
                 ((ViewHolder8) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -345,13 +409,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.ib_like) {
                 Log.e("inside like clikc", "inside like click");
                 ib_like.setImageResource(R.drawable.like_pink);
-                String s = new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-
-                if ("success".equals(s))
-                    Toast.makeText(context, "successful like", Toast.LENGTH_LONG).show();
-                else
-
-                    Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+                new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
             } else if (view.getId() == R.id.followbtn) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);

@@ -20,9 +20,7 @@ import retrofit2.Response;
 public class PostRetrofit {
     ApiInterface apiInterface;
 
-    public String postRetrofitMethod(String type, String userId, String entityId, final ImageButton ib_like, final Context context) {
-        final String[] s = new String[1];
-        Log.e("insied postRetrofitMtd","insied postRetrofitMtd"+type+userId+entityId);
+    public void postRetrofitMethod(String type, String userId, String entityId, final ImageButton ib_like, final Context context) {
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus").create(ApiInterface.class);
         Call<ModelForPostRequest> call=apiInterface.likeItem(modelForPostRequest);
@@ -30,19 +28,14 @@ public class PostRetrofit {
             @Override
             public void onResponse(Call<ModelForPostRequest> call, Response<ModelForPostRequest> response) {
                 Log.e("insied onResonse","insied onrespnse"+call+"bcbbc"+response+"gggg"+response.body());
-                //ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_pink));
-                s[0] ="success";
             }
 
             @Override
             public void onFailure(Call<ModelForPostRequest> call, Throwable t) {
                 Log.e("insied onfailure","insied onfailre"+call+"bcbbc"+t);
                 ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
-                s[0] ="failure";
             }
         });
-
-        return s[0];
     }
 
     public  void checkForLike(String type, String userId, String entityId,final ImageButton ib_like, final Context context)
@@ -53,7 +46,6 @@ public class PostRetrofit {
         call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
             @Override
             public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
-                Log.e("geting respne","  "+response.body().toString());
                 if("1".equals(response.body().getData().getCount().trim()))
                 {
                     ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_pink));
@@ -71,57 +63,96 @@ public class PostRetrofit {
         });
     }
 
-    public String postRetrofitFollowMethod(String type, String userId, String entityId, final Button followBtn, final Context context) {
-        final String[] s = new String[1];
-        Log.e("insied postRetrofitMtd","insied postRetrofitMtd"+type+userId+entityId);
+    public void postRetrofitFollowMethod(String type, String userId, String entityId, final Button followBtn, final Context context) {
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus").create(ApiInterface.class);
         Call<ModelForPostRequest> call=apiInterface.likeItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForPostRequest>() {
             @Override
             public void onResponse(Call<ModelForPostRequest> call, Response<ModelForPostRequest> response) {
-                Log.e("insied onResonse","insied onrespnse"+call+"bcbbc"+response+"gggg"+response.body());
                 followBtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-                followBtn.setText("Followed");
+                followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
+                followBtn.setText("Following");
                 followBtn.setTextColor(context.getResources().getColor(R.color.white));
-                s[0] ="success";
             }
 
             @Override
             public void onFailure(Call<ModelForPostRequest> call, Throwable t) {
                 Log.e("insied onfailure","insied onfailre"+call+"bcbbc"+t);
-                //followBtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-                s[0] ="failure";
             }
         });
+    }
 
-        return s[0];
+    public  void checkForFollow(String type, String userId, String entityId,final Button followBtn, final Context context)
+    {
+        ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus").create(ApiInterface.class);
+        Call<ModelForIsLikedPostRequest> call=apiInterface.isLikedItem(modelForPostRequest);
+        call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
+            @Override
+            public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
+                if("1".equals(response.body().getData().getCount().trim()))
+                {
+                    followBtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+                    followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
+                    followBtn.setText("Following");
+                    followBtn.setTextColor(context.getResources().getColor(R.color.white));
+                }
+                else if("0".equals(response.body().getData().getCount().trim()))
+                {
+                    //ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelForIsLikedPostRequest> call, Throwable t) {
+                Log.e("insied onfailure","insied onfailre"+call+"bcbbc"+t);
+            }
+        });
     }
 
 
-    public String postRetrofitBookmarkMethod(String type, String userId, String entityId, final ImageButton bookmarkBtn, final Context context) {
-        final String[] s = new String[1];
-        Log.e("insied postRetrofitMtd","insied postRetrofitMtd"+type+userId+entityId);
+
+    public void postRetrofitBookmarkMethod(String type, String userId, String entityId, final ImageButton bookmarkBtn, final Context context) {
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus").create(ApiInterface.class);
         Call<ModelForPostRequest> call=apiInterface.likeItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForPostRequest>() {
             @Override
             public void onResponse(Call<ModelForPostRequest> call, Response<ModelForPostRequest> response) {
-                Log.e("insied onResonse","insied onrespnse"+call+"bcbbc"+response+"gggg"+response.body());
                 bookmarkBtn.setImageResource(R.drawable.bookmark_yellow);
-                s[0] ="success";
             }
 
             @Override
             public void onFailure(Call<ModelForPostRequest> call, Throwable t) {
                 Log.e("insied onfailure","insied onfailre"+call+"bcbbc"+t);
-                //followBtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-                s[0] ="failure";
             }
         });
-
-        return s[0];
     }
 
+
+    public  void checkForBookmark(String type, String userId, String entityId,final ImageButton bookmarkBtn, final Context context)
+    {
+        ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus").create(ApiInterface.class);
+        Call<ModelForIsLikedPostRequest> call=apiInterface.isLikedItem(modelForPostRequest);
+        call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
+            @Override
+            public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
+                if("1".equals(response.body().getData().getCount().trim()))
+                {
+                    bookmarkBtn.setImageResource(R.drawable.bookmark_yellow);
+                }
+                else if("0".equals(response.body().getData().getCount().trim()))
+                {
+                    //ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelForIsLikedPostRequest> call, Throwable t) {
+                Log.e("insied onfailure","insied onfailre"+call+"bcbbc"+t);
+            }
+        });
+    }
 }
