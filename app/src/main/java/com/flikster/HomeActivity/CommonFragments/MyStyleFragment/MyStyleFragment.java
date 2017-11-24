@@ -81,6 +81,9 @@ public class MyStyleFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        fragmentManager.popBackStackImmediate();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_container, new FeedFragment())
+                .addToBackStack("")
+                .commit();
     }
 }

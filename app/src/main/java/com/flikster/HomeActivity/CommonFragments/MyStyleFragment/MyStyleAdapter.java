@@ -46,10 +46,10 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_mystyle_display, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_custom_style, parent, false);
             return new MyStyleAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_my_style_bottom, parent, false);
             return new MyStyleAdapter.ViewHolder2(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview, parent, false);

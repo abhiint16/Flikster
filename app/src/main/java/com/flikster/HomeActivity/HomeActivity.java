@@ -123,7 +123,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     private static int CAMERA_REQUES_CODE = 101;
     String captured_img_str;
     boolean cameracaptured = false;
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+//    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
 
     //Bottom Navigation
     private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
@@ -433,7 +433,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             case R.id.menu_rating:
                 beginTransact(new RatingFragment());
                 break;
-                //menu_auction
+            //menu_auction
             case R.id.menu_auction:
                 beginTransact(new AuctionFeedFragment());
                 break;
@@ -534,6 +534,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     private void openCamera() {
+        SharedPrefsUtil.setStringPreference(getApplicationContext(), "ACCESS_FRAGMENT_CAPTURE", "DISENBLE");
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, TAKE_PICTURE);
     }
@@ -570,35 +571,40 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String videolink, Fragment fragment, String contentType) {
-        VideoGalleryFragment  videoGalleryFragment = (VideoGalleryFragment) fragment;
-        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType,videolink);
+    public void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, String videolink, Fragment fragment, String contentType) {
+        VideoGalleryFragment videoGalleryFragment = (VideoGalleryFragment) fragment;
+        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink);
         firstTimeLaunch(fragment);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK) {
-            Toast.makeText(getApplicationContext(), "Captured successfully.", Toast.LENGTH_SHORT).show();
-            Bitmap photoBitmap = (Bitmap) intent.getExtras().get("data");
+        super.onActivityResult(requestCode, resultCode, intent);
+        String enable = SharedPrefsUtil.getStringPreference(getApplicationContext(), "ACCESS_FRAGMENT_CAPTURE");
+        if (!enable.equals("ENABLE")) {
+            if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(), "Captured successfully.", Toast.LENGTH_SHORT).show();
+                Bitmap photoBitmap = (Bitmap) intent.getExtras().get("data");
 //            String captureStr = Common.BitMapToString(photoBitmap);
-            SharedPrefsUtil.setStringPreference(getApplicationContext(), "ImageString", Common.BitMapToString(photoBitmap));
-        } else if (requestCode == ACTIVITY_SELECT_IMAGE) {
-            //Toast.makeText(getApplicationContext(), "Gallery Image Picked successfully.", Toast.LENGTH_SHORT).show();
-            Uri selectedImage = intent.getData();
-            String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
-            c.moveToFirst();
-            int columnIndex = c.getColumnIndex(filePath[0]);
-            String picturePath = c.getString(columnIndex);
-            c.close();
-            Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-            SharedPrefsUtil.setStringPreference(getApplicationContext(), "ImageString", Common.BitMapToString(thumbnail));
+                SharedPrefsUtil.setStringPreference(getApplicationContext(), "ImageString", Common.BitMapToString(photoBitmap));
+            } else if (requestCode == ACTIVITY_SELECT_IMAGE) {
+                //Toast.makeText(getApplicationContext(), "Gallery Image Picked successfully.", Toast.LENGTH_SHORT).show();
+                Uri selectedImage = intent.getData();
+                String[] filePath = {MediaStore.Images.Media.DATA};
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+                c.moveToFirst();
+                int columnIndex = c.getColumnIndex(filePath[0]);
+                String picturePath = c.getString(columnIndex);
+                c.close();
+                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                SharedPrefsUtil.setStringPreference(getApplicationContext(), "ImageString", Common.BitMapToString(thumbnail));
 //            Drawable drawable = new BitmapDrawable(thumbnail);
 //            backGroundImageLinearLayout.setBackgroundDrawable(drawable);
-        } else {
-            Toast.makeText(getApplicationContext(), "User cancelled image capture.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "User cancelled image capture.", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
 
     public void switchContent(int id, Fragment fragment) {
