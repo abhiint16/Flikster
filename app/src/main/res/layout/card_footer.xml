@@ -24,7 +24,7 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/whatsappblackicon" />
 
-        <TextView
+        <ImageButton
             android:id="@+id/ib_messenger"
             android:layout_width="23dp"
             android:layout_height="23dp"
@@ -37,14 +37,14 @@
             android:layout_toRightOf="@+id/ib_whatsapp"
             android:background="@drawable/messenger_icon" />
 
-        <TextView
+        <ImageButton
             android:id="@+id/ib_like"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/ib_messenger"
-            android:background="@drawable/loveblackicon" />
+            android:background="@drawable/like_icon" />
 
         <ImageButton
             android:id="@+id/ib_bookmark"

@@ -57,6 +57,8 @@ public class FeedInnerData {
         private String contentType;
         @SerializedName("text")
         private String text;
+        @SerializedName("id")
+        private String id;
         @SerializedName("tags")
         private List<String> tags;
         @SerializedName("title")
@@ -71,6 +73,14 @@ public class FeedInnerData {
         private List<FeedCelebData> celeb;
         @SerializedName("media")
         public FeedMediaData media;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public String getRating() {
             return rating;

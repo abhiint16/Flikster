@@ -10,7 +10,9 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProduc
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -46,4 +48,15 @@ public interface ApiInterface {
     @GET("http://apiv3-es.flikster.com/contents/_search")
     Call<FeedData> getMovieFeedData(@Query("pretty") Boolean s,
                                      @Query("q") String c);
+
+
+
+    ////////////////////////////////////////////////////////////
+    //POST Request
+
+    @POST("http://apiv3.flikster.com/v3/likes-ms/postCardStatus")
+    Call<ModelForPostRequest> likeItem(@Body ModelForPostRequest modelForPostRequest);
+
+    @POST("http://apiv3.flikster.com/v3/likes-ms/isPostStatus")
+    Call<ModelForIsLikedPostRequest> isLikedItem(@Body ModelForPostRequest modelForPostRequest);
 }

@@ -10,11 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionDetailFragment;
@@ -22,6 +24,7 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFrag
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.HomeActivity.FeedInnerData;
+import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.Util.Common;
 import com.flikster.Util.GlobalData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
@@ -51,7 +54,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
     FeedFragment.Testing testing;
     JukeBoxRecyclerViewHolder jukeBoxRecyclerViewHolder;
-    List<String> audio=new ArrayList<>();
+    List<String> audio = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
 
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count, FeedFragment.Testing testing) {
@@ -61,6 +64,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.Count = Count;
         this.testing = testing;
         audio.add("http://content.flikster.com/audio/legendd1.mp3");
+        setHasStableIds(true);
     }
 
     @Override
@@ -87,18 +91,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (viewType == 7) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1, parent, false);
             return new ViewHolder7(view);
-        }
-        else if (viewType == 8) {
+        } else if (viewType == 8) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_audio_jukebox, parent, false);
             return new ViewHolder8(view);
-        }
-        else if(viewType==0)
-        {
+        } else if (viewType == 0) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnull, parent, false);
             return new ViewHolder9(view);
-        }
-        else if(viewType==100)
-        {
+        } else if (viewType == 100) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnocard, parent, false);
             return new ViewHolder9(view);
         }
@@ -109,6 +108,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder.getItemViewType() == 1) {
+            new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder1) holder).ib_like, context);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1) holder).card_critic_review_main_image);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
@@ -121,12 +121,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder1) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             ((ViewHolder1) holder).card_movie_review_bottom_header_criticrating.setText(outerHits.getHits().get(position).get_source().getRating());
-            if (outerHits.getHits().get(position).get_source().getText()== null)
+            if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder1) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder1) holder).tv_description.setText(Html.fromHtml(Common.formatString(outerHits.getHits().get(position).get_source().getText())));
             ((ViewHolder1) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 2) {
+            new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_like, context);
             /*((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("You won't believe these");
             stealStyleLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(stealStyleLayoutManager);
@@ -143,11 +144,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder2) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             if (outerHits.getHits().get(position).get_source().getText() == null)
-            ((ViewHolder2) holder).tv_description.setVisibility(View.GONE);
+                ((ViewHolder2) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
-              ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
             ((ViewHolder2) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 3) {
+            new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder3) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
                 ((ViewHolder3) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -166,7 +168,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             // Common.makeTextViewResizable(((ViewHolder3) holder).tv_description, 3, "View More", true);
 
         } else if (holder.getItemViewType() == 4) {
-            Log.e("videosonglink","videosonglink "+outerHits.getHits().get(position).get_source().getMedia().getVideo());
+            new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder4) holder).ib_like, context);
+            Log.e("videosonglink", "videosonglink " + outerHits.getHits().get(position).get_source().getMedia().getVideo());
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
                 ((ViewHolder4) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -183,6 +186,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder4) holder).news_img);
             ((ViewHolder4) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 5) {
+            new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder5) holder).profile_image));
                 ((ViewHolder5) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -199,6 +203,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder5) holder).card_gallary1_img1);
             ((ViewHolder5) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 6) {
+            new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder6) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
                 ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -215,6 +220,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder6) holder).card_gallary1_img1);
             ((ViewHolder6) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 7) {
+            new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder7) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
                 ((ViewHolder7) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -230,10 +236,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder7) holder).card_gallary1_img1);
             ((ViewHolder7) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
-        }
-
-        else if(holder.getItemViewType()==8)
-        {
+        } else if (holder.getItemViewType() == 8) {
+            new PostRetrofit().checkForLike("like", "hell", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder8) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
                 ((ViewHolder8) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -244,25 +248,24 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder8) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder8) holder).card_audio_jukebox_imageview);
-            jukeBoxRecyclerViewHolder=new JukeBoxRecyclerViewHolder(context,audio);
-            layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
-            ((ViewHolder8)holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
-            ((ViewHolder8)holder).fragment_common_recyclerview_recycler.setAdapter(jukeBoxRecyclerViewHolder);
-            ((ViewHolder8)holder).card_footer_container.setVisibility(View.GONE);
+            jukeBoxRecyclerViewHolder = new JukeBoxRecyclerViewHolder(context, audio);
+            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+            ((ViewHolder8) holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
+            ((ViewHolder8) holder).fragment_common_recyclerview_recycler.setAdapter(jukeBoxRecyclerViewHolder);
+            ((ViewHolder8) holder).card_footer_container.setVisibility(View.GONE);
         }
     }
 
     @Override
     public int getItemCount() {
-        Log.e("size","size"+outerHits.getHits().size());
+        Log.e("size", "size" + outerHits.getHits().size());
         return outerHits.getHits().size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (outerHits.getHits().get(position).get_source().getContentType()!=null)
-        {
-            switch (outerHits.getHits().get(position).get_source().getContentType()) {
+        if (outerHits.getHits().get(position).get_source().getContentType() != null) {
+            switch (outerHits.getHits().get(position).get_source().getContentType().toLowerCase()) {
                 case "comedy-clip":
                     return 4;
                 case "quote":
@@ -274,6 +277,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 case "first-look":
                     return 5;
                 case "poster":
+                    return 6;
+                case "write-up":
                     return 6;
                 case "gallery": {
                     return 7;
@@ -292,6 +297,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     return 4;
                 case "trailer":
                     return 4;
+                case "teasers-promos":
+                    return 4;
             }
             return 100;
         }
@@ -300,11 +307,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_critic_review_main_image, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_critic_review_moviename,card_movie_review_bottom_header_criticrating;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_critic_review_moviename,
+                card_movie_review_bottom_header_criticrating;
+        ImageButton ib_like,ib_bookmark;
         LinearLayout header_linear, card_description_linear;
+        Button followbtn;
 
         public ViewHolder1(View itemView) {
             super(itemView);
+
             card_critic_review_main_image = (ImageView) itemView.findViewById(R.id.card_critic_review_main_image);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -313,8 +324,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(this);
             card_critic_review_moviename = (TextView) itemView.findViewById(R.id.card_critic_review_moviename);
             card_movie_review_bottom_header_criticrating = (TextView) itemView.findViewById(R.id.card_movie_review_bottom_header_criticrating);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
         }
 
@@ -326,6 +342,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
+            } else if (view.getId() == R.id.ib_like) {
+                Log.e("inside like clikc", "inside like click");
+                ib_like.setImageResource(R.drawable.like_pink);
+                String s = new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
+
+                if ("success".equals(s))
+                    Toast.makeText(context, "successful like", Toast.LENGTH_LONG).show();
+                else
+
+                    Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+            } else if (view.getId() == R.id.followbtn) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
             }
         }
     }
@@ -334,6 +365,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_quote_tv;
         LinearLayout card_description_linear, header_linear;
+        Button followbtn;
+        ImageButton ib_like,ib_bookmark;
 
         public ViewHolder2(View itemView) {
             super(itemView);
@@ -345,6 +378,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_quote_tv = (TextView) itemView.findViewById(R.id.card_quote_tv);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(this);
+            ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            ib_bookmark.setOnClickListener(this);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
         }
@@ -357,14 +396,32 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
+            } else if (view.getId() == R.id.ib_like) {
+                Log.e("inside like clikc", "inside like click");
+                ib_like.setImageResource(R.drawable.like_pink);
+                new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
+            }
+            else if (view.getId() == R.id.followbtn) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+            }
+            else if (view.getId() == R.id.ib_bookmark) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), ib_bookmark, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
         }
     }
 
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
+        ImageButton ib_like,ib_bookmark;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         ImageButton video_btn;
+        Button followbtn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
 
@@ -379,6 +436,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             //video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(this);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            ib_like.setOnClickListener(this);
+            ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            ib_bookmark.setOnClickListener(this);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
             //video_btn.setOnClickListener(this);
@@ -425,6 +488,22 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
+            } else if (view.getId() == R.id.ib_like) {
+                Log.e("inside like clikc", "inside like click");
+                ib_like.setImageResource(R.drawable.like_pink);
+                new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
+            }
+            else if (view.getId() == R.id.followbtn) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+            }
+            else if (view.getId() == R.id.ib_bookmark) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), ib_bookmark, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
         }
 
@@ -433,6 +512,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView news_img, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
+        ImageButton ib_like,ib_bookmark;
+        Button followbtn;
         LinearLayout header_linear, card_description_linear;
 
         public ViewHolder4(View itemView) {
@@ -445,6 +526,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(this);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            ib_like.setOnClickListener(this);
+            ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            ib_bookmark.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
             header_linear.setOnClickListener(this);
@@ -497,6 +584,22 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
+            } else if (view.getId() == R.id.ib_like) {
+                Log.e("inside like clikc", "inside like click");
+                ib_like.setImageResource(R.drawable.like_pink);
+                new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
+            }
+            else if (view.getId() == R.id.followbtn) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+            }
+            else if (view.getId() == R.id.ib_bookmark) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), ib_bookmark, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
 
         }
@@ -505,6 +608,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
+        ImageButton ib_like,ib_bookmark;
+        Button followbtn;
         ImageButton video_btn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
@@ -519,6 +624,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(this);
+            ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            ib_bookmark.setOnClickListener(this);
+            ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
@@ -547,7 +658,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            " ",new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic()
+                            " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic()
                     );
                 } else {
                     testing.newsCardOnClick("",
@@ -557,6 +668,22 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
+            } else if (view.getId() == R.id.ib_like) {
+                Log.e("inside like clikc", "inside like click");
+                ib_like.setImageResource(R.drawable.like_pink);
+                new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
+            }
+            else if (view.getId() == R.id.followbtn) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+            }
+            else if (view.getId() == R.id.ib_bookmark) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), ib_bookmark, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
         }
     }
@@ -564,7 +691,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder6 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
+        ImageButton ib_like,ib_bookmark;
         ImageButton video_btn;
+        Button followbtn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
 
@@ -579,6 +708,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             //video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(this);
+            ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            ib_bookmark.setOnClickListener(this);
+            ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
             //video_btn.setOnClickListener(this);
@@ -618,6 +753,22 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
+            } else if (view.getId() == R.id.ib_like) {
+                Log.e("inside like clikc", "inside like click");
+                ib_like.setImageResource(R.drawable.like_pink);
+                new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
+            }
+            else if (view.getId() == R.id.followbtn) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+            }
+            else if (view.getId() == R.id.ib_bookmark) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), ib_bookmark, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
         }
     }
@@ -627,6 +778,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         ImageButton video_btn;
+        ImageButton ib_like,ib_bookmark;
+        Button followbtn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
 
@@ -640,6 +793,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(this);
+            ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            ib_bookmark.setOnClickListener(this);
+            ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
@@ -666,19 +825,33 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
-                }
-                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
-                }
-                else{
+                } else {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             "",
-                            "","",outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
+                            "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
 
                 }
+            } else if (view.getId() == R.id.ib_like) {
+                Log.e("inside like clikc", "inside like click");
+                ib_like.setImageResource(R.drawable.like_pink);
+                new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
+            }
+            else if (view.getId() == R.id.followbtn) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+            }
+            else if (view.getId() == R.id.ib_bookmark) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), ib_bookmark, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
         }
     }
@@ -686,21 +859,29 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder8 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_audio_jukebox_imageview, profile_image;
         TextView tv_tag_name, tv_tag_desc;
+        ImageButton ib_like,ib_bookmark;
         ImageButton video_btn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
         RecyclerView fragment_common_recyclerview_recycler;
         RelativeLayout card_footer_container;
+        Button followbtn;
 
         public ViewHolder8(View itemView) {
             super(itemView);
-            card_audio_jukebox_imageview=(ImageView)itemView.findViewById(R.id.card_audio_jukebox_imageview);
-            fragment_common_recyclerview_recycler=(RecyclerView)itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
+            card_audio_jukebox_imageview = (ImageView) itemView.findViewById(R.id.card_audio_jukebox_imageview);
+            fragment_common_recyclerview_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
-            card_footer_container=(RelativeLayout)itemView.findViewById(R.id.card_footer_container);
-            header_linear=(LinearLayout)itemView.findViewById(R.id.header_linear);
+            card_footer_container = (RelativeLayout) itemView.findViewById(R.id.card_footer_container);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(this);
+            ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            ib_bookmark.setOnClickListener(this);
+            ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
             //card_description_linear.setOnClickListener(this);
@@ -714,7 +895,24 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() == null) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
-            } /*else if (view.getId() == R.id.card_description_linear) {
+            } else if (view.getId() == R.id.ib_like) {
+                Log.e("inside like clikc", "inside like click");
+                ib_like.setImageResource(R.drawable.like_pink);
+                new PostRetrofit().postRetrofitMethod("like", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
+            }
+            else if (view.getId() == R.id.followbtn) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+            }
+            else if (view.getId() == R.id.ib_bookmark) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), ib_bookmark, context);
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
+                    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
+            }
+            /*else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new AuctionDetailFragment())
                         .addToBackStack("")
@@ -729,11 +927,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public  class ViewHolder9 extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder9 extends RecyclerView.ViewHolder {
 
         public ViewHolder9(View itemView) {
             super(itemView);
         }
     }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+
 }

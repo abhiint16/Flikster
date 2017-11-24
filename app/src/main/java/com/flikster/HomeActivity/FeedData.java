@@ -22,4 +22,11 @@ public class FeedData {
     public void setHits(FeedInnerData hits) {
         this.hits = hits;
     }
+
+    @Override
+    public String toString() {
+        return "FeedData{" +
+                "hits=" + hits +
+                '}';
+    }
 }
