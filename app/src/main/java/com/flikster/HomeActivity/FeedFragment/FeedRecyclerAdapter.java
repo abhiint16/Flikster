@@ -92,6 +92,16 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_audio_jukebox, parent, false);
             return new ViewHolder8(view);
         }
+        else if(viewType==0)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnull, parent, false);
+            return new ViewHolder9(view);
+        }
+        else if(viewType==100)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnocard, parent, false);
+            return new ViewHolder9(view);
+        }
 
         return null;
     }
@@ -244,43 +254,48 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
+        Log.e("size","size"+outerHits.getHits().size());
         return outerHits.getHits().size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        switch (outerHits.getHits().get(position).get_source().getContentType()) {
-            case "comedy-clip":
-                return 4;
-            case "quote":
-                return 2;
-            case "news":
-                return 3;
-            case "video-song":
-                return 4;
-            case "first-look":
-                return 5;
-            case "poster":
-                return 6;
-            case "gallery": {
-                return 7;
+        if (outerHits.getHits().get(position).get_source().getContentType()!=null)
+        {
+            switch (outerHits.getHits().get(position).get_source().getContentType()) {
+                case "comedy-clip":
+                    return 4;
+                case "quote":
+                    return 2;
+                case "news":
+                    return 3;
+                case "video-song":
+                    return 4;
+                case "first-look":
+                    return 5;
+                case "poster":
+                    return 6;
+                case "gallery": {
+                    return 7;
+                }
+                case "movie-making":
+                    return 4;
+                case "audio-song":
+                    return 8;
+                case "dialouge":
+                    return 8;
+                case "critic-review":
+                    return 1;
+                case "social-buzz":
+                    return 4;
+                case "interview":
+                    return 4;
+                case "trailer":
+                    return 4;
             }
-            case "movie-making":
-                return 4;
-            case "audio-song":
-                return 8;
-            case "dialouge":
-                return 8;
-            case "critic-review":
-                return 1;
-            case "social-buzz":
-                return 4;
-            case "interview":
-                return 4;
-            case "trailer":
-                return 4;
+            return 100;
         }
-        return super.getItemViewType(position);
+        return 0;
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -711,6 +726,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         items.get(getAdapterPosition()).getTitle(), new GalleryCardClick());
             }
 */
+        }
+    }
+
+    public  class ViewHolder9 extends RecyclerView.ViewHolder
+    {
+
+        public ViewHolder9(View itemView) {
+            super(itemView);
         }
     }
 }
