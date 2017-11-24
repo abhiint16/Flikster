@@ -1,6 +1,8 @@
 package com.flikster.HomeActivity.CommonFragments.MyStyleFragment;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -95,47 +99,67 @@ public class MyStyleAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.mystyle_layout_one) {
-//                fragmentJump(item);
-            }
-
+            customizingStyle("FIRST_STYLE");
         }
-
-      /*  private void fragmentJump(Feed mItemSelected) {
-            mFragment = new Fragment2();
-            mBundle = new Bundle();
-            mBundle.putParcelable("item_selected_key", mItemSelected);
-            fragmentManager.setArguments(mBundle);
-            switchContent(R.id.frag1, fragmentManager);
-        }*/
-
     }
 
-    public class ViewHolder2 extends RecyclerView.ViewHolder {
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout mystyle_layout_two;
 
         public ViewHolder2(View itemView) {
             super(itemView);
+            mystyle_layout_two = (LinearLayout) itemView.findViewById(R.id.mystyle_layout_two);
+            mystyle_layout_two.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            customizingStyle("SECOND_STYLE");
         }
     }
 
-    public class ViewHolder3 extends RecyclerView.ViewHolder {
+    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout mystyle_layout_three;
 
         public ViewHolder3(View itemView) {
             super(itemView);
+            mystyle_layout_three = (LinearLayout) itemView.findViewById(R.id.mystyle_layout_three);
+            mystyle_layout_three.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            customizingStyle("THIRD_STYLE");
         }
     }
 
-    public class ViewHolder4 extends RecyclerView.ViewHolder {
+    public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout mystyle_layout_four;
 
         public ViewHolder4(View itemView) {
             super(itemView);
+            mystyle_layout_four = (LinearLayout) itemView.findViewById(R.id.mystyle_layout_four);
+            mystyle_layout_four.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            customizingStyle("FOURTH_STYLE");
         }
     }
 
-    public class ViewHolder5 extends RecyclerView.ViewHolder {
+    public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout mystyle_layout_five;
 
         public ViewHolder5(View itemView) {
             super(itemView);
+            mystyle_layout_five = (LinearLayout) itemView.findViewById(R.id.mystyle_layout_five);
+            mystyle_layout_five.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            customizingStyle("FIFTH_STYLE");
         }
     }
 
@@ -154,5 +178,15 @@ public class MyStyleAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
+    private void customizingStyle(String type) {
+        MyStyleFragmentOne fragment = new MyStyleFragmentOne();
+        Bundle bundle = new Bundle();
+        bundle.putString("MY_STYLE_TYPE", type);
+        fragment.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .replace(R.id.mystyle_container, fragment)
+                .addToBackStack("")
+                .commit();
+    }
 
 }

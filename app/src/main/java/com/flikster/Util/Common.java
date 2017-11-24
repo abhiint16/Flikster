@@ -1,8 +1,11 @@
 package com.flikster.Util;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -17,6 +20,9 @@ import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.flikster.R;
+import com.flikster.permission.DangerousPermResponseCallBack;
+import com.flikster.permission.DangerousPermissionResponse;
+import com.flikster.permission.DangerousPermissionUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -103,14 +109,10 @@ public class Common {
     }
 
 
-
-
-    public static String formatString(String name)
-    {
-        String s=name;
-        if(s.length()>=120)
-        {
-            s=s.substring(0,115)+" ...";
+    public static String formatString(String name) {
+        String s = name;
+        if (s.length() >= 120) {
+            s = s.substring(0, 115) + " ...";
         }
         return s;
     }
@@ -134,4 +136,5 @@ public class Common {
             return null;
         }
     }
+
 }
