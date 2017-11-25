@@ -59,4 +59,7 @@ public interface ApiInterface {
 
     @POST("http://apiv3.flikster.com/v3/likes-ms/isPostStatus")
     Call<ModelForIsLikedPostRequest> isLikedItem(@Body ModelForPostRequest modelForPostRequest);
+
+    @POST("http://apiv3.flikster.com/v3/comments-ms/postComment")
+    Call<ModelForPostCommentRequest> commentItem(@Body ModelForPostCommentRequest modelForPostRequest);
 }

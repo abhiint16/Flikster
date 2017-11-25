@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -373,7 +374,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView card_critic_review_main_image, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_critic_review_moviename,
                 card_movie_review_bottom_header_criticrating;
-        ImageButton ib_like,ib_bookmark;
+        ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
         LinearLayout header_linear, card_description_linear;
         Button followbtn;
 
@@ -394,6 +396,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_movie_review_bottom_header_criticrating = (TextView) itemView.findViewById(R.id.card_movie_review_bottom_header_criticrating);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            card_comment_text_send_btn=(ImageButton)itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt=(EditText)itemView.findViewById(R.id.card_comment_text_edittxt);
             ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
         }
@@ -416,6 +421,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
             }
+            else if(view.getId()==R.id.card_comment_text_send_btn)
+            {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar","abhiint",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),card_comment_text_edittxt.getText().toString(),card_comment_text_edittxt,context);
+            }
         }
     }
 
@@ -424,7 +434,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_quote_tv;
         LinearLayout card_description_linear, header_linear;
         Button followbtn;
-        ImageButton ib_like,ib_bookmark;
+        ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
 
         public ViewHolder2(View itemView) {
             super(itemView);
@@ -441,6 +452,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
             ib_bookmark.setOnClickListener(this);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            card_comment_text_send_btn=(ImageButton)itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt=(EditText)itemView.findViewById(R.id.card_comment_text_edittxt);
             ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
@@ -471,6 +485,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
+            else if(view.getId()==R.id.card_comment_text_send_btn)
+            {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar","abhiint",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),card_comment_text_edittxt.getText().toString(),card_comment_text_edittxt,context);
+            }
         }
     }
 
@@ -478,7 +497,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView card_gallary1_img1, profile_image;
         ImageButton ib_like,ib_bookmark;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
-        ImageButton video_btn;
+        ImageButton video_btn,card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
         Button followbtn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
@@ -495,6 +515,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_comment_text_send_btn=(ImageButton)itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt=(EditText)itemView.findViewById(R.id.card_comment_text_edittxt);
             followbtn.setOnClickListener(this);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             ib_like.setOnClickListener(this);
@@ -563,6 +586,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
+            else if(view.getId()==R.id.card_comment_text_send_btn)
+            {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar","abhiint",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),card_comment_text_edittxt.getText().toString(),card_comment_text_edittxt,context);
+            }
         }
 
     }
@@ -570,7 +598,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView news_img, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
-        ImageButton ib_like,ib_bookmark;
+        ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
         Button followbtn;
         LinearLayout header_linear, card_description_linear;
 
@@ -587,6 +616,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             followbtn.setOnClickListener(this);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            card_comment_text_send_btn=(ImageButton)itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt=(EditText)itemView.findViewById(R.id.card_comment_text_edittxt);
             ib_like.setOnClickListener(this);
             ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
             ib_bookmark.setOnClickListener(this);
@@ -659,6 +691,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
+            else if(view.getId()==R.id.card_comment_text_send_btn)
+            {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar","abhiint",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),card_comment_text_edittxt.getText().toString(),card_comment_text_edittxt,context);
+            }
 
         }
     }
@@ -668,7 +705,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         ImageButton ib_like,ib_bookmark;
         Button followbtn;
-        ImageButton video_btn;
+        ImageButton video_btn,card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
 
@@ -686,6 +724,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             followbtn.setOnClickListener(this);
             ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            card_comment_text_send_btn=(ImageButton)itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt=(EditText)itemView.findViewById(R.id.card_comment_text_edittxt);
             ib_bookmark.setOnClickListener(this);
             ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
@@ -743,6 +784,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
+            else if(view.getId()==R.id.card_comment_text_send_btn)
+            {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar","abhiint",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),card_comment_text_edittxt.getText().toString(),card_comment_text_edittxt,context);
+            }
         }
     }
 
@@ -750,7 +796,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         ImageButton ib_like,ib_bookmark;
-        ImageButton video_btn;
+        ImageButton video_btn,card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
         Button followbtn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
@@ -768,6 +815,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_comment_text_send_btn=(ImageButton)itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt=(EditText)itemView.findViewById(R.id.card_comment_text_edittxt);
             followbtn.setOnClickListener(this);
             ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
             ib_bookmark.setOnClickListener(this);
@@ -828,6 +878,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
+            else if(view.getId()==R.id.card_comment_text_send_btn)
+            {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar","abhiint",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),card_comment_text_edittxt.getText().toString(),card_comment_text_edittxt,context);
+            }
         }
     }
 
@@ -836,7 +891,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description;
         ImageButton video_btn;
-        ImageButton ib_like,ib_bookmark;
+        ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
         Button followbtn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
@@ -855,6 +911,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             followbtn.setOnClickListener(this);
             ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
+            card_comment_text_send_btn=(ImageButton)itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt=(EditText)itemView.findViewById(R.id.card_comment_text_edittxt);
             ib_bookmark.setOnClickListener(this);
             ib_like.setOnClickListener(this);
             header_linear.setOnClickListener(this);
@@ -911,13 +970,19 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
             }
+            else if(view.getId()==R.id.card_comment_text_send_btn)
+            {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar","abhiint",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),card_comment_text_edittxt.getText().toString(),card_comment_text_edittxt,context);
+            }
         }
     }
 
     public class ViewHolder8 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_audio_jukebox_imageview, profile_image;
         TextView tv_tag_name, tv_tag_desc;
-        ImageButton ib_like,ib_bookmark;
+        ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
         ImageButton video_btn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
@@ -937,6 +1002,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             followbtn.setOnClickListener(this);
+            card_comment_text_send_btn=(ImageButton)itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt=(EditText)itemView.findViewById(R.id.card_comment_text_edittxt);
             ib_bookmark=(ImageButton)itemView.findViewById(R.id.ib_bookmark);
             ib_bookmark.setOnClickListener(this);
             ib_like.setOnClickListener(this);
@@ -969,6 +1037,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), ib_bookmark, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);
+            }
+            else if(view.getId()==R.id.card_comment_text_send_btn)
+            {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar","abhiint",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),card_comment_text_edittxt.getText().toString(),card_comment_text_edittxt,context);
             }
             /*else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()

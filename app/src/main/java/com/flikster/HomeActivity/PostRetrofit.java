@@ -3,6 +3,7 @@ package com.flikster.HomeActivity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -155,4 +156,28 @@ public class PostRetrofit {
             }
         });
     }
+
+    public void postRetrofitCommentMethod(String userName, String userId, String entityId, String commentText, final EditText editText, final Context context) {
+        if(commentText.trim().length()==0 || commentText==null)
+        {
+            Toast.makeText(context,"First Write Something!",Toast.LENGTH_LONG).show();
+            editText.setError("write something");
+            return;
+        }
+        ModelForPostCommentRequest modelForPostRequest = new ModelForPostCommentRequest(userName, userId, entityId,commentText);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/comments-ms/postComment").create(ApiInterface.class);
+        Call<ModelForPostCommentRequest> call=apiInterface.commentItem(modelForPostRequest);
+        call.enqueue(new Callback<ModelForPostCommentRequest>() {
+            @Override
+            public void onResponse(Call<ModelForPostCommentRequest> call, Response<ModelForPostCommentRequest> response) {
+                Toast.makeText(context,"Comment Successful",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<ModelForPostCommentRequest> call, Throwable t) {
+                Toast.makeText(context,"Comment Unsuccessful! Please try again.",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 }
