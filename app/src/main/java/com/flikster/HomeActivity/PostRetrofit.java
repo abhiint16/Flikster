@@ -171,6 +171,7 @@ public class PostRetrofit {
             @Override
             public void onResponse(Call<ModelForPostCommentRequest> call, Response<ModelForPostCommentRequest> response) {
                 Toast.makeText(context,"Comment Successful",Toast.LENGTH_LONG).show();
+                editText.setText("");
             }
 
             @Override
