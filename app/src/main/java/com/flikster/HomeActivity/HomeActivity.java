@@ -579,9 +579,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void seeMoreComments(String entityId) {
+    public void seeMoreComments(String userName,String userId,String entityId) {
         Intent intent=new Intent(HomeActivity.this, AllCommentActivity.class);
         intent.putExtra("entityId",entityId);
+        intent.putExtra("userName",userName);
+        intent.putExtra("userId",userId);
         startActivity(intent);
     }
 

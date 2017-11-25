@@ -88,7 +88,7 @@ public class FeedFragment extends Fragment {
 
         void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String videolink,Fragment fragment,String contentType);
 
-        void seeMoreComments(String entityId);
+        void seeMoreComments(String userName,String userId,String entityId);
     }
 
     @Override

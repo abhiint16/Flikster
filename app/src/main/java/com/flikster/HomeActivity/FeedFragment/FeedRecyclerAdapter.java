@@ -433,7 +433,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else if(view.getId()==R.id.card_comment_text_see_more_comments)
             {
-                testing.seeMoreComments(outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar","abhiint",outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
@@ -505,7 +505,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else if(view.getId()==R.id.card_comment_text_see_more_comments)
             {
-                testing.seeMoreComments(outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar","abhiint",outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
@@ -614,7 +614,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else if(view.getId()==R.id.card_comment_text_see_more_comments)
             {
-                testing.seeMoreComments(outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar","abhiint",outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
 
@@ -727,7 +727,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else if(view.getId()==R.id.card_comment_text_see_more_comments)
             {
-                testing.seeMoreComments(outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar","abhiint",outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
 
         }
@@ -828,7 +828,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else if(view.getId()==R.id.card_comment_text_see_more_comments)
             {
-                testing.seeMoreComments(outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar","abhiint",outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
@@ -930,7 +930,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else if(view.getId()==R.id.card_comment_text_see_more_comments)
             {
-                testing.seeMoreComments(outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar","abhiint",outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
@@ -1030,7 +1030,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else if(view.getId()==R.id.card_comment_text_see_more_comments)
             {
-                testing.seeMoreComments(outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar","abhiint",outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
@@ -1106,7 +1106,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             else if(view.getId()==R.id.card_comment_text_see_more_comments)
             {
-                testing.seeMoreComments(outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar","abhiint",outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
             /*else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
