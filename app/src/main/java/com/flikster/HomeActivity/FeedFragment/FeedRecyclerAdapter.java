@@ -423,6 +423,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+                else
+                    Toast.makeText(context,"Movie & Celeb is not there in the JSON File",Toast.LENGTH_LONG).show();
             }
             else if(view.getId()==R.id.card_comment_text_send_btn)
             {
@@ -487,6 +489,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+                else
+                    Toast.makeText(context,"Movie & Celeb is not there in the JSON File",Toast.LENGTH_LONG).show();
             }
             else if (view.getId() == R.id.ib_bookmark) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
@@ -594,6 +598,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+                else
+                    Toast.makeText(context,"Movie & Celeb is not there in the JSON File",Toast.LENGTH_LONG).show();
             }
             else if (view.getId() == R.id.ib_bookmark) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
@@ -705,6 +711,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+                else
+                    Toast.makeText(context,"Movie & Celeb is not there in the JSON File",Toast.LENGTH_LONG).show();
             }
             else if (view.getId() == R.id.ib_bookmark) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
@@ -804,6 +812,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+                else
+                    Toast.makeText(context,"Movie & Celeb is not there in the JSON File",Toast.LENGTH_LONG).show();
             }
             else if (view.getId() == R.id.ib_bookmark) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
@@ -904,6 +914,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+                else
+                    Toast.makeText(context,"Movie & Celeb is not there in the JSON File",Toast.LENGTH_LONG).show();
             }
             else if (view.getId() == R.id.ib_bookmark) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
@@ -1002,6 +1014,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+                else
+                    Toast.makeText(context,"Movie & Celeb is not there in the JSON File",Toast.LENGTH_LONG).show();
             }
             else if (view.getId() == R.id.ib_bookmark) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
@@ -1076,6 +1090,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
                     new PostRetrofit().postRetrofitFollowMethod("follow", "hell", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
+                else
+                    Toast.makeText(context,"Movie & Celeb is not there in the JSON File",Toast.LENGTH_LONG).show();
             }
             else if (view.getId() == R.id.ib_bookmark) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
