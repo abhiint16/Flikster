@@ -2,6 +2,7 @@ package com.flikster.HomeActivity;
 
 import android.util.Log;
 
+import com.flikster.AllCommentActivity.CommentsData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
@@ -49,6 +50,9 @@ public interface ApiInterface {
     Call<FeedData> getMovieFeedData(@Query("pretty") Boolean s,
                                      @Query("q") String c);
 
+    @GET
+    Call<CommentsData> getAllComments(@Url String url);
+
 
 
     ////////////////////////////////////////////////////////////
@@ -59,4 +63,7 @@ public interface ApiInterface {
 
     @POST("http://apiv3.flikster.com/v3/likes-ms/isPostStatus")
     Call<ModelForIsLikedPostRequest> isLikedItem(@Body ModelForPostRequest modelForPostRequest);
+
+    @POST("http://apiv3.flikster.com/v3/comments-ms/postComment")
+    Call<ModelForPostCommentRequest> commentItem(@Body ModelForPostCommentRequest modelForPostRequest);
 }

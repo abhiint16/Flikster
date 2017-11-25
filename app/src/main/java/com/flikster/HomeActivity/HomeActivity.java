@@ -54,6 +54,7 @@ import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.flikster.AllCommentActivity.AllCommentActivity;
 import com.flikster.BuildConfig;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
@@ -575,6 +576,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         VideoGalleryFragment videoGalleryFragment = (VideoGalleryFragment) fragment;
         videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink);
         firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void seeMoreComments(String entityId) {
+        Intent intent=new Intent(HomeActivity.this, AllCommentActivity.class);
+        intent.putExtra("entityId",entityId);
+        startActivity(intent);
     }
 
     @Override
