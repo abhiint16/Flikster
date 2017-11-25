@@ -2,6 +2,7 @@ package com.flikster.HomeActivity;
 
 import android.util.Log;
 
+import com.flikster.AllCommentActivity.CommentsData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
@@ -48,6 +49,9 @@ public interface ApiInterface {
     @GET("http://apiv3-es.flikster.com/contents/_search")
     Call<FeedData> getMovieFeedData(@Query("pretty") Boolean s,
                                      @Query("q") String c);
+
+    @GET
+    Call<CommentsData> getAllComments(@Url String url);
 
 
 

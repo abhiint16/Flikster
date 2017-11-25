@@ -13,12 +13,13 @@
    android:background="@drawable/border"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_below="@+id/view_comment"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:id="@+id/comment_container">
     <EditText
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -36,4 +37,12 @@
             android:background="@color/transparent"
             android:id="@+id/card_comment_text_send_btn"/>
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="See More Comments"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/comment_container"
+        android:padding="5dp"
+        android:id="@+id/card_comment_text_see_more_comments"/>
 </RelativeLayout>

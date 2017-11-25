@@ -40,7 +40,6 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.e(bannerimg+"jajaj",outerHits.getHits().get(position).get_source().getTitle()+"jajaj");
         if(bannerimg.trim()!=outerHits.getHits().get(position).get_source().getTitle())
         {
             Log.e(bannerimg,outerHits.getHits().get(position).get_source().getTitle());
