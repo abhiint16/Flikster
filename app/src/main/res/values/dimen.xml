@@ -20,4 +20,5 @@
     <dimen name="fifteen">15dp</dimen>
     <dimen name="thirty">30dp</dimen>
     <dimen name="twenty">20dp</dimen>
+    <dimen name="fifty">50dp</dimen>
 </resources>

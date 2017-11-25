@@ -61,8 +61,11 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
             String imgStr = SharedPrefsUtil.getStringPreference(context, "ImageString");
-            Bitmap image = Common.StringToBitMap(imgStr);
-            ((ViewHolder1) holder).captureimg.setImageBitmap(image);
+            if (imgStr != null && !imgStr.isEmpty()) {
+                Bitmap image = Common.StringToBitMap(imgStr);
+                ((ViewHolder1) holder).captureimg.setImageBitmap(image);
+            }
+
         } else if (holder.getItemViewType() == 2) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
@@ -99,6 +102,7 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public ViewHolder2(View itemView) {
             super(itemView);
             fragment_common_recyclerview_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
+            fragment_common_recyclerview_recycler.setBackgroundColor(context.getResources().getColor(R.color.white));
         }
     }
 

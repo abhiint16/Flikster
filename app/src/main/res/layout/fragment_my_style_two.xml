@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/style_background"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:background="@color/style_background"
         android:orientation="vertical">
 
         <ImageView
@@ -14,14 +15,15 @@
             android:layout_height="0dp"
             android:layout_margin="5dp"
             android:layout_weight="1.5"
-            android:scaleType="centerCrop"
-            android:src="@drawable/white_radius_box" />
+            android:scaleType="center"
+            android:background="@color/white"
+            android:src="@drawable/plus_medium" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/style_background"
             android:orientation="horizontal">
 
             <ImageView
@@ -30,9 +32,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/five"
-                android:scaleType="centerCrop"
                 android:layout_marginRight="@dimen/five"
-                android:src="@drawable/white_radius_box" />
+                android:scaleType="center"
+                android:background="@color/white"
+                android:src="@drawable/plus_small" />
 
             <ImageView
 
@@ -41,8 +44,9 @@
                 android:layout_marginRight="@dimen/five"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/white_radius_box" />
+                android:scaleType="center"
+                android:background="@color/white"
+                android:src="@drawable/plus_small" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
