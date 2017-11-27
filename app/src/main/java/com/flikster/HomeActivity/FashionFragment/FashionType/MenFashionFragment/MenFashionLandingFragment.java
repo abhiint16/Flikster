@@ -1,6 +1,5 @@
 package com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,15 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.ViewPagerAdapter;
-import com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment.MovieStoreFragment;
-import com.flikster.HomeActivity.FeedFragment.FeedFragment;
-import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.R;
-import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.ScrollableViewPager;
 import com.flikster.Util.SharedPrefsUtil;
 
