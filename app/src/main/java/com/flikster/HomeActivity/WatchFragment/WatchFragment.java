@@ -72,6 +72,9 @@ public class WatchFragment extends Fragment {
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
+                Log.e("whatch inside",""+Count);
+                Log.e("whatch inside",""+outerHits.getHits().get(0).get_source().getTitle());
+                Log.e("whatch inside",""+outerHits);
                 watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
                 movieFragmentInfoRecycler.setAdapter(watchAdapter);
 //                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, items, Count, testing);

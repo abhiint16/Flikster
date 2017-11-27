@@ -150,8 +150,10 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(tvShowsViewHolder);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
-            socialInterviewImg.clear();
-            socialInterviewTitle.clear();
+            /*socialInterviewImg.clear();
+            socialInterviewTitle.clear();*/
+            Log.e("whatch inside adapter",""+Count);
+            Log.e("whatch inside",""+outerHits.getHits().get(position).get_source().getProfilePic());
             for (int i=0;i<Count;i++)
             {
                 if("social-buzz".equals(outerHits.getHits().get(position).get_source().getContentType()) || "interview".equals(outerHits.getHits().get(position).get_source().getContentType()))
@@ -160,6 +162,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     socialInterviewTitle.add(outerHits.getHits().get(position).get_source().getTitle());
                 }
             }
+            Log.e("whatch inside adapter",""+socialInterviewImg+socialInterviewTitle);
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, socialInterviewTitle, socialInterviewImg,fragmentManager);
