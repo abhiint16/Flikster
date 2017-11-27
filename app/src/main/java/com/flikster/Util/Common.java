@@ -1,10 +1,14 @@
 package com.flikster.Util;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.Spannable;
@@ -15,8 +19,11 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.flikster.R;
@@ -135,6 +142,15 @@ public class Common {
             e.getMessage();
             return null;
         }
+    }
+
+    public static void setKeyboardFocus(final EditText primaryTextField) {
+        (new Handler()).postDelayed(new Runnable() {
+            public void run() {
+                primaryTextField.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, 0, 0, 0));
+                primaryTextField.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP , 0, 0, 0));
+            }
+        }, 100);
     }
 
 }

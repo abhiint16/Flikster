@@ -19,7 +19,7 @@
         <activity
             android:name=".HomeActivity.HomeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
         <activity
             android:name=".Authentication.AuthenticationActivity"
             android:screenOrientation="portrait"

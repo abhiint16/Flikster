@@ -26,6 +26,8 @@ public class MyStyleAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
     List<String> imag = new ArrayList<>();
+    MyStyleFragmentOne fragment = new MyStyleFragmentOne();
+    Bundle bundle = new Bundle();
 
 
     public MyStyleAdapterViewHolder(Context context, FragmentManager fragmentManager) {
@@ -179,8 +181,8 @@ public class MyStyleAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.
     }
 
     private void customizingStyle(String type) {
-        MyStyleFragmentOne fragment = new MyStyleFragmentOne();
-        Bundle bundle = new Bundle();
+        fragment = new MyStyleFragmentOne();
+        bundle = new Bundle();
         bundle.putString("MY_STYLE_TYPE", type);
         fragment.setArguments(bundle);
         fragmentManager.beginTransaction()
