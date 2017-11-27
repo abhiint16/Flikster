@@ -1,33 +1,20 @@
 package com.flikster.HomeActivity.FashionFragment.FashionLandingFragment;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
-import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CeleStoreFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionLandingFragment;
-import com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment.MovieStoreFragment;
-import com.flikster.HomeActivity.FeedFragment.FeedFragment;
-import com.flikster.MyBagActivity.MyBagActivity;
+import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreFragment;
 import com.flikster.R;
 import com.flikster.Util.ScrollableViewPager;
 import com.flikster.Util.SharedPrefsUtil;
@@ -38,25 +25,16 @@ import com.flikster.Util.SharedPrefsUtil;
 
 public class FashionLandingFragment extends Fragment implements View.OnClickListener {
     View view;
-    RecyclerView fragment_common_recyclerview_recycler;
-    RecyclerView.LayoutManager layoutManagerFashionFragment;
-    FashionFragmentAdapter fashionFragmentAdapter;
     Toolbar toolbar_frag_toolbar;
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
     TabLayout tabLayout;
     private ScrollableViewPager viewPage;
 
-    int[] tabImages = {R.drawable.celebritystore, R.drawable.menstoreicon, R.drawable.moviestrore, R.drawable.celebritystore, R.drawable.moviestrore};
+    int[] tabImages = {R.drawable.celebritystore, R.drawable.celebritystore, R.drawable.menstoreicon, R.drawable.moviestrore, R.drawable.moviestrore};
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fashion_landing, container, false);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         initializeViews();
         initializeRest();
         return view;
@@ -66,27 +44,15 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         createViewPager(viewPage);
         tabLayout.setupWithViewPager(viewPage);
         createTabIcons();
-//        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-//        toolbar_frag_multiicons_notification.setOnClickListener(this);
-//        toolbar_frag_multiicons_cart.setOnClickListener(this);
     }
 
     private void initializeViews() {
         toolbar_frag_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_toolbar);
-//        toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
-//        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-//        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         toolbar_frag_toolbar.setVisibility(View.GONE);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 
     }
-
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-//    }
 
     private void createTabIcons() {
        /* TextView tabOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtab, null);
@@ -149,14 +115,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         View view3 = getLayoutInflater().inflate(R.layout.customtab, null);
         view3.findViewById(R.id.icon).setBackgroundResource(R.drawable.my3);
         tabLayout.addTab(tabLayout.newTab().setCustomView(view3));
-
         tabLayout.setupWithViewPager(viewPage);*/
-
-
-//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.menstoreicon));
-//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.menstoreicon));
-//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.menstoreicon));
-
         for (int j = 0; j < tabLayout.getTabCount(); j++) {
             ImageView imageView = new ImageView(getContext());
             imageView.setMinimumHeight(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -165,18 +124,13 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
             imageView.setImageResource(tabImages[j]);
             tabLayout.getTabAt(j).setCustomView(imageView);
         }
-
-
-
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-//                viewPage.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_container, new MovieStoreFragment())
+                            .replace(R.id.main_container, new AllStoreFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 1) {
@@ -227,7 +181,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
 
     }
 
-    private void allotEachTabWithEqualWidth () {
+    private void allotEachTabWithEqualWidth() {
 
         ViewGroup slidingTabStrip = (ViewGroup) tabLayout.getChildAt(0);
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
@@ -241,11 +195,11 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
 
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFrag(new MovieStoreFragment(), null);
-        adapter.addFrag(new MovieStoreFragment(), null);
-        adapter.addFrag(new MovieStoreFragment(), null);
-        adapter.addFrag(new MovieStoreFragment(), null);
-        adapter.addFrag(new MovieStoreFragment(), null);
+        adapter.addFrag(new AllStoreFragment(), null);
+        adapter.addFrag(new AllStoreFragment(), null);
+        adapter.addFrag(new AllStoreFragment(), null);
+        adapter.addFrag(new AllStoreFragment(), null);
+        adapter.addFrag(new AllStoreFragment(), null);
         viewPager.setAdapter(adapter);
 //        viewPage.setCurrentItem(0);
     }

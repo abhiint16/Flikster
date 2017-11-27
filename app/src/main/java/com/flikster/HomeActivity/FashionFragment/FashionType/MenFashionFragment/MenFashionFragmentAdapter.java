@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.flikster.R;
 import com.flikster.Util.ExpandedGridView;
 import com.flikster.Util.SharedPrefsUtil;
+import com.flikster.Util.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +80,6 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         if (holder.getItemViewType() == 1) {
 
 
-
-
             if (SharedPrefsUtil.getStringPreference(context, "HEADER_NAME").equals("MEN")) {
                 ((ViewHolder1) holder).card_celebrity_feed_profile_layout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.white_radius_yellow_fill));
                 ((ViewHolder1) holder).card_celebrity_feed_profile_coverpic.setBackgroundColor(context.getResources().getColor(R.color.yellowthink));
@@ -95,9 +94,10 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             }
         } else if (holder.getItemViewType() == 2) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            layoutManager = new GridLayoutManager(context, 2);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context,fragmentManager);
+//            layoutManager = new GridLayoutManager(context, 2);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.addItemDecoration(new SpacesItemDecoration(2, 2));
+//            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context, fragmentManager);
 //            ((ViewHolder2) holder).expandgrid.setAdapter(menFashionFragmentlistAdapterViewHolder);
 //            ((ViewHolder2) holder).expandgrid.setExpanded(true);
             layoutManager.setAutoMeasureEnabled(true);
@@ -107,13 +107,13 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             layoutManager = new GridLayoutManager(context, 2);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context,fragmentManager);
+            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context, fragmentManager);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
         } else if (holder.getItemViewType() == 5) {
         } else if (holder.getItemViewType() == 6) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context,fragmentManager);
+            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context, fragmentManager);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
         }
 
@@ -138,7 +138,7 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView fashionname;
-        ImageView card_celebrity_feed_profile_coverpic,profileimg;
+        ImageView card_celebrity_feed_profile_coverpic, profileimg;
         LinearLayout card_celebrity_feed_profile_layout;
 
         public ViewHolder1(View itemView) {

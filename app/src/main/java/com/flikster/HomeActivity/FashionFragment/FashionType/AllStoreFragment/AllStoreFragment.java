@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment;
+package com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,11 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.flikster.R;
 
@@ -18,14 +16,11 @@ import com.flikster.R;
  * Created by Logins on 17-11-2017.
  */
 
-public class MovieStoreFragment extends Fragment implements View.OnClickListener {
+public class AllStoreFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
-    MovieStoreFragmentAdapter movieStoreFragmentAdapter;
-    Toolbar toolbar_frag_multiicons_toolbar;
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
-
+    AllStoreFragmentAdapter allStoreFragmentAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,8 +34,8 @@ public class MovieStoreFragment extends Fragment implements View.OnClickListener
     private void initializeRest() {
         layoutManagerFashionFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerFashionFragment);
-        movieStoreFragmentAdapter = new MovieStoreFragmentAdapter(getActivity());
-        fragment_common_recyclerview_recycler.setAdapter(movieStoreFragmentAdapter);
+        allStoreFragmentAdapter = new AllStoreFragmentAdapter(getActivity());
+        fragment_common_recyclerview_recycler.setAdapter(allStoreFragmentAdapter);
     }
 
     private void initializeViews() {

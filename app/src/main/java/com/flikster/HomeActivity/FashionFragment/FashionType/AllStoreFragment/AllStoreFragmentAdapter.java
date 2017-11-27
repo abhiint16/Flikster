@@ -1,15 +1,11 @@
-package com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment;
+package com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapterJustArrivedViewHolder;
@@ -20,13 +16,10 @@ import com.flikster.R;
  * Created by abhishek on 23-10-2017.
  */
 
-public class MovieStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    RecyclerView.LayoutManager layoutManager;
-    FashionFragmentAdapterJustArrivedViewHolder fashionFragmentAdapterJustArrivedViewHolder;
-    FashionFragmentAdapterRecommenedViewHolder fashionFragmentAdapterRecommenedViewHolder;
+public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
 
-    public MovieStoreFragmentAdapter(Context context) {
+    public AllStoreFragmentAdapter(Context context) {
         this.context = context;
     }
 
