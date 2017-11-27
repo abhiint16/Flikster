@@ -52,19 +52,13 @@ import static android.app.Activity.RESULT_OK;
 
 public class MyStyleFragmentOne extends Fragment implements View.OnClickListener {
     View view;
-    RecyclerView movieFragmentInfoRecycler;
-    RecyclerView.LayoutManager movieFragmentInfoLayoutManager;
-    MyStyleAdapter myStyleAdapter;
     FragmentManager fragmentManager;
-    TextView fragment_common_recyclerview_with_tv_title, toolbar_frag_multiicons_title;
     ImageView captureimg, productthingimg, productimg, productthingextraimg;
     Bundle bundle = new Bundle();
     String styletype = "";
 
     private static int CAMERA_REQUES_CODEE = 101;
-    final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODEE = 1234;
     boolean cameracaptured = false;
-
     final int ACTIVITY_SELECT_IMAGE = 2;
 
     @Nullable
@@ -101,6 +95,7 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
                 captureimg.setImageBitmap(bitmap);
             } else {
                 Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
@@ -112,6 +107,7 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         String imgStr = SharedPrefsUtil.getStringPreference(getContext(), "ImageString");
         if (imgStr != null && !imgStr.isEmpty()) {
             Bitmap image = Common.StringToBitMap(imgStr);
+            captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
             captureimg.setImageBitmap(image);
         }
         captureimg.setOnClickListener(this);

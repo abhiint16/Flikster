@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/mystyle_container"
     android:layout_marginLeft="@dimen/five"
+    android:windowSoftInputMode="adjustPan"
     android:layout_marginRight="@dimen/five"
     android:background="@color/style_main_background"
     android:orientation="vertical">

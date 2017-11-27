@@ -28,7 +28,7 @@ public class WatchTrailerFragment extends Fragment {
 
     CarouselView carouselView;
 
-    int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
+    int[] sampleImages = {R.drawable.white_grey_radius_border, R.drawable.white_grey_radius_border, R.drawable.white_grey_radius_border, R.drawable.white_grey_radius_border, R.drawable.white_grey_radius_border};
 
 
     @Nullable

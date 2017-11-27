@@ -43,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="290dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/five"
             android:layout_weight="1"
             android:background="@drawable/gray_rectange_border"
             android:scaleType="centerCrop" />
@@ -54,6 +55,7 @@
             android:layout_marginLeft="@dimen/five"
             android:layout_marginRight="@dimen/ten"
             android:layout_weight="1"
+
             android:gravity="center_vertical"
             android:layout_marginTop="@dimen/five"
             android:orientation="vertical">
@@ -61,7 +63,7 @@
             <TextView
                 android:id="@+id/card_gallary3_img2"
                 android:layout_width="wrap_content"
-                android:layout_height="145dp"
+                android:layout_height="140dp"
                 android:layout_marginTop="@dimen/five"
                 android:background="@drawable/gray_rectange_border"
                 android:gravity="center_vertical|center_horizontal"
@@ -70,7 +72,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="145dp"
+                android:layout_height="140dp"
                 android:layout_marginBottom="@dimen/five"
                 android:text="@string/product_info"
                 android:background="@drawable/gray_rectange_border"

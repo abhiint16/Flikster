@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.flikster.R;
@@ -63,6 +64,7 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             String imgStr = SharedPrefsUtil.getStringPreference(context, "ImageString");
             if (imgStr != null && !imgStr.isEmpty()) {
                 Bitmap image = Common.StringToBitMap(imgStr);
+                ((ViewHolder1) holder).captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
                 ((ViewHolder1) holder).captureimg.setImageBitmap(image);
             }
 
@@ -103,6 +105,7 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             fragment_common_recyclerview_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
             fragment_common_recyclerview_recycler.setBackgroundColor(context.getResources().getColor(R.color.white));
+
         }
     }
 

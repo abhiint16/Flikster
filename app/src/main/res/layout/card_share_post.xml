@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/style_main_background"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/datalayot"
@@ -17,21 +13,23 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:windowSoftInputMode="adjustPan"
             android:layout_margin="@dimen/ten">
 
             <EditText
                 android:id="@+id/sayet"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:windowSoftInputMode="adjustPan"
                 android:background="@color/white"
                 android:cursorVisible="true"
-                android:textCursorDrawable="@drawable/cursor_color"
+                android:focusable="true"
                 android:hint="Say Something"
                 android:padding="@dimen/seven"
                 android:textColor="@color/grey_txt_label"
-                android:textColorHint="#F2F2F2" />
+                android:textColorHint="#F2F2F2"
+                android:textCursorDrawable="@drawable/cursor_color">
+
+                <requestFocus />
+            </EditText>
         </FrameLayout>
 
         <LinearLayout
@@ -94,5 +92,4 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/fragment_common_recyclerview" />
 </LinearLayout>

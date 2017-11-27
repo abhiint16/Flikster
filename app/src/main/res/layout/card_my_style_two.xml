@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mystyle_layout_two"
     android:layout_width="wrap_content"
     android:layout_height="120dp"
-    android:id="@+id/mystyle_layout_two"
-    android:background="@color/white"
-
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="115dp"
         android:background="@color/white"
         android:orientation="vertical">
