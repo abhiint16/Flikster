@@ -43,16 +43,11 @@ import java.util.List;
  */
 
 public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    Boolean news = true, profile1 = true, profile4 = true, collection = true;
     GlobalData globalData = new GlobalData();
     Context context;
     FragmentManager fragmentManager;
-    RecyclerView.LayoutManager stealStyleLayoutManager, profileCollectionRecyclerLayoutManager;
-    StealStyleViewHolder stealStyleViewHolder;
-    ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
     FeedInnerData outerHits;
     Integer Count;
-    FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
     FeedFragment.Testing testing;
     JukeBoxRecyclerViewHolder jukeBoxRecyclerViewHolder;
     List<String> audio = new ArrayList<>();

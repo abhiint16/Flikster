@@ -28,6 +28,8 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     Toolbar toolbar_frag_toolbar;
     TabLayout tabLayout;
     private ScrollableViewPager viewPage;
+    Bundle bundle;
+    String flagEnable = "";
 
     int[] tabImages = {R.drawable.celebritystore, R.drawable.celebritystore, R.drawable.menstoreicon, R.drawable.moviestrore, R.drawable.moviestrore};
 
@@ -35,9 +37,22 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fashion_landing, container, false);
+        checkcliclickLayout();
         initializeViews();
         initializeRest();
+
         return view;
+    }
+
+    private void checkcliclickLayout() {
+        bundle = getArguments();
+        try {
+            if (bundle.getString("BUY_FASHION_PAGE") != null && !bundle.getString("BUY_FASHION_PAGE").isEmpty()) {
+                flagEnable = bundle.getString("BUY_FASHION_PAGE");
+            }
+        } catch (Exception e) {
+
+        }
     }
 
     private void initializeRest() {
@@ -202,6 +217,17 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
         adapter.addFrag(new AllStoreFragment(), null);
         viewPager.setAdapter(adapter);
 //        viewPage.setCurrentItem(0);
+        if (flagEnable != null && !flagEnable.isEmpty()) {
+            viewPage.setCurrentItem(2);
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "MEN");
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, new MenFashionLandingFragment())
+                    .addToBackStack("")
+                    .commit();
+        } else {
+//            viewPage.setCurrentItem(0);
+        }
     }
 
 

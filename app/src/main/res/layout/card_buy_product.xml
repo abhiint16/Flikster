@@ -3,51 +3,64 @@
     android:id="@+id/buylayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="@dimen/ten"
+    android:layout_marginRight="@dimen/ten"
+    android:layout_marginLeft="@dimen/ten"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/carouselview" />
-
-
-    <ImageView
-        android:id="@+id/buyimg"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/twenty"
-        android:layout_marginTop="@dimen/twenty"
-        android:background="@drawable/gray_rectange_border"
-        android:visibility="gone" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/ten"
-        android:layout_marginLeft="@dimen/ten"
-        android:layout_marginRight="@dimen/ten"
-        android:orientation="horizontal">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/brannametxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:text="Rs 6,500/-"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_weight="0.8"
-            android:background="@drawable/corner_rounded"
-            android:backgroundTint="@color/horizontal_line"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="+BUY"
+        <ImageView
+            android:id="@+id/buyimg"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/twenty"
+            android:layout_marginTop="@dimen/twenty"
+            android:background="@drawable/gray_box"
+            />
 
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/ten"
+            android:layout_marginLeft="@dimen/ten"
+            android:layout_marginRight="@dimen/ten"
+            android:background="@color/transparent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/brannametxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Rs 7,500/-"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buyBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="right"
+                android:background="@drawable/corner_rounded"
+                android:backgroundTint="@color/horizontal_line"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="+BUY"
+
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

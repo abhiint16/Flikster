@@ -2,12 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:orientation="vertical">
-
-    <include
-        layout="@layout/toolbar_frag_multiicons"
-        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -25,7 +20,7 @@
             android:layout_weight="1"
             android:gravity="left"
             android:text="BUY ALL PRODUCTS(5) "
-            android:textColor="@color/black"
+            android:textColor="@color/header_background"
             android:textSize="17sp" />
 
         <TextView
@@ -34,18 +29,23 @@
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:text="Rs 10000/-"
-            android:textColor="@color/black"
+            android:textColor="@color/header_background"
             android:textSize="17sp" />
     </LinearLayout>
 
+
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/buyBtn"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/ten"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:layout_marginTop="@dimen/ten"
         android:background="@drawable/corner_rounded"
         android:backgroundTint="@color/horizontal_line"
+        android:gravity="center_horizontal|center"
         android:text="+Buy"
         android:textColor="@color/white"
         android:textSize="15sp" />

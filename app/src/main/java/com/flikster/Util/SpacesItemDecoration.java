@@ -1,76 +1,41 @@
 package com.flikster.Util;
 
+import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.flikster.R;
 
 /**
  * Created by Logins on 27-11-2017.
  */
 
 public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-    private int space;
-    private int mNumCol;
+    private Drawable mDivider;
 
-    public SpacesItemDecoration(int space, int numCol) {
-        this.space = space;
-        this.mNumCol=numCol;
+    public SpacesItemDecoration(Context context) {
+        mDivider = context.getResources().getDrawable(R.drawable.linedivider);
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view,
-                               RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        int left = parent.getPaddingLeft();
+        int right = parent.getWidth() - parent.getPaddingRight();
 
-        //outRect.right = space;
-        outRect.bottom = space;
-        //outRect.left = space;
+        int childCount = parent.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View child = parent.getChildAt(i);
 
-        //Log.d("ttt", "item position" + parent.getChildLayoutPosition(view));
-        int position=parent.getChildLayoutPosition(view);
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
-        if(mNumCol<=2) {
-            if (position == 0) {
-                outRect.left = space;
-                outRect.right = space / 2;
-            } else {
-                if ((position % mNumCol) != 0) {
-                    outRect.left = space / 2;
-                    outRect.right = space;
-                } else {
-                    outRect.left = space;
-                    outRect.right = space / 2;
-                }
-            }
-        }else{
-            if (position == 0) {
-                outRect.left = space;
-                outRect.right = space / 2;
-            } else {
-                if ((position % mNumCol) == 0) {
-                    outRect.left = space;
-                    outRect.right = space/2;
-                } else if((position % mNumCol) == (mNumCol-1)){
-                    outRect.left = space/2;
-                    outRect.right = space;
-                }else{
-                    outRect.left=space/2;
-                    outRect.right=space/2;
-                }
-            }
+            int top = child.getBottom() + params.bottomMargin;
+            int bottom = top + mDivider.getIntrinsicHeight();
 
+            mDivider.setBounds(2, 2, 2, 2);
+            mDivider.draw(c);
         }
-
-        if(position<mNumCol){
-            outRect.top=space;
-        }else{
-            outRect.top=0;
-        }
-        // Add top margin only for the first item to avoid double space between items
-        /*
-        if (parent.getChildLayoutPosition(view) == 0 ) {
-
-        } else {
-            outRect.top = 0;
-        }*/
     }
 }

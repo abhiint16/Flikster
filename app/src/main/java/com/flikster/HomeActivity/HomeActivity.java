@@ -256,7 +256,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     private void checkForLaunch() {
         if ("MyBag".equals(getIntent().getStringExtra("MyBag"))) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new FashionFragment())
+                    .replace(R.id.main_container, new FashionLandingFragment())
                     .commit();
         } else if ("VideoPlayer".equals(getIntent().getStringExtra("VideoPlayer"))) {
             fragmentManager.beginTransaction()
@@ -327,7 +327,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         if (viewId == R.id.feed_button) {
             beginTransact(new FeedFragment());
         } else if (viewId == R.id.fashion_button) {
-            beginTransact(new FashionFragment());
+            beginTransact(new FashionLandingFragment());
         } else if (viewId == R.id.toolbar_main_notification) {
             beginTransact(new NotificationFragment());
         } else if (viewId == R.id.menu_search) {
@@ -579,11 +579,21 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
+<<<<<<< HEAD
     public void seeMoreComments(String userName,String userId,String entityId) {
         Intent intent=new Intent(HomeActivity.this, AllCommentActivity.class);
         intent.putExtra("entityId",entityId);
         intent.putExtra("userName",userName);
         intent.putExtra("userId",userId);
+||||||| merged common ancestors
+    public void seeMoreComments(String entityId) {
+        Intent intent=new Intent(HomeActivity.this, AllCommentActivity.class);
+        intent.putExtra("entityId",entityId);
+=======
+    public void seeMoreComments(String entityId) {
+        Intent intent = new Intent(HomeActivity.this, AllCommentActivity.class);
+        intent.putExtra("entityId", entityId);
+>>>>>>> d9919a687fad3e04a45077bf73087e85680adf59
         startActivity(intent);
     }
 

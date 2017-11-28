@@ -31,6 +31,7 @@ public class RatingAdapter extends FragmentStatePagerAdapter {
         }
         else
         {
+
             return null;
         }
 
