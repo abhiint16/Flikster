@@ -84,6 +84,7 @@
             android:id="@+id/card_gallary5_text"
             android:textColor="@color/white"
             android:layout_margin="5dp"
+            android:gravity="center"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
