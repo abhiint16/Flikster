@@ -8,7 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/ten"
+        android:layout_marginTop="@dimen/five"
+        android:layout_marginLeft="@dimen/ten"
+        android:layout_marginRight="@dimen/ten"
+        android:layout_marginBottom="@dimen/ten"
         android:background="@drawable/white_box"
         android:gravity="center_horizontal"
         android:padding="@dimen/ten">

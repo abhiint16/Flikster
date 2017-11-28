@@ -36,6 +36,7 @@ import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.R;
+import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
 import com.flikster.permission.DangerousPermResponseCallBack;
@@ -95,6 +96,9 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+                SharedPrefsUtil.setStringPreference(getContext(), "ImageString", Common.BitMapToString(bitmap));
+
                 captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
                 captureimg.setImageBitmap(bitmap);
             } else {

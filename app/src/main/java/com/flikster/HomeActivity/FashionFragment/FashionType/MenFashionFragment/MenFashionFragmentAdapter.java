@@ -32,6 +32,7 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     List<Integer> type = new ArrayList<>();
     FragmentManager fragmentManager;
     MenFashionFragmentAdapterViewHolder menFashionFragmentAdapterViewHolder;
+    MenFashionFragmentAdapterVideosViewHolder menFashionFragmentAdapterVideosViewHolder;
 //    MenFashionFragmentListAdapterViewHolder menFashionFragmentlistAdapterViewHolder;
 
     public MenFashionFragmentAdapter(Context context, FragmentManager fragmentManager) {
@@ -78,8 +79,6 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-
-
             if (SharedPrefsUtil.getStringPreference(context, "HEADER_NAME").equals("MEN")) {
                 ((ViewHolder1) holder).card_celebrity_feed_profile_layout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.white_radius_yellow_fill));
                 ((ViewHolder1) holder).card_celebrity_feed_profile_coverpic.setBackgroundColor(context.getResources().getColor(R.color.yellowthink));
@@ -94,14 +93,13 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             }
         } else if (holder.getItemViewType() == 2) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-//            layoutManager = new GridLayoutManager(context, 2);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.addItemDecoration(new SpacesItemDecoration(2, 2));
-//            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+            layoutManager = new GridLayoutManager(context, 2);
+
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context, fragmentManager);
-//            ((ViewHolder2) holder).expandgrid.setAdapter(menFashionFragmentlistAdapterViewHolder);
-//            ((ViewHolder2) holder).expandgrid.setExpanded(true);
-            layoutManager.setAutoMeasureEnabled(true);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setBackgroundColor(context.getResources().getColor(R.color.style_main_background));
+//            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.addItemDecoration(new SpacesItemDecoration(context));
         } else if (holder.getItemViewType() == 3) {
         } else if (holder.getItemViewType() == 4) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -109,12 +107,13 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context, fragmentManager);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
+            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setBackgroundColor(context.getResources().getColor(R.color.style_main_background));
         } else if (holder.getItemViewType() == 5) {
         } else if (holder.getItemViewType() == 6) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterViewHolder = new MenFashionFragmentAdapterViewHolder(context, fragmentManager);
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterViewHolder);
+            menFashionFragmentAdapterVideosViewHolder = new MenFashionFragmentAdapterVideosViewHolder(context, fragmentManager);
+            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterVideosViewHolder);
         }
 
 
