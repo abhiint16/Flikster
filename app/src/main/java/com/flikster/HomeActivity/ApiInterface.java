@@ -9,6 +9,7 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
+import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -52,6 +53,9 @@ public interface ApiInterface {
 
     @GET
     Call<CommentsData> getAllComments(@Url String url);
+
+    @GET
+    Call<AllStoreData> getAllStore(@Url String url);
 
 
 

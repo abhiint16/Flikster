@@ -6,11 +6,18 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Logins on 17-11-2017.
@@ -21,6 +28,8 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     AllStoreFragmentAdapter allStoreFragmentAdapter;
+    ApiInterface apiInterface;
+    AllStoreInnerData hits;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,14 +37,30 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         initializeViews();
         initializeRest();
+        retrofitInit();
         return view;
     }
 
+    private void retrofitInit() {
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/products/_search?pretty=true&sort=createdAt:desc&q=*").create(ApiInterface.class);
+        Call<AllStoreData> call = apiInterface.getAllStore("http://apiv3-es.flikster.com/products/_search?pretty=true&sort=createdAt:desc&q=*");
+        call.enqueue(new Callback<AllStoreData>() {
+            @Override
+            public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
+                hits = response.body().getHits();
+                allStoreFragmentAdapter = new AllStoreFragmentAdapter(getActivity(),hits);
+                fragment_common_recyclerview_recycler.setAdapter(allStoreFragmentAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<AllStoreData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
     private void initializeRest() {
         layoutManagerFashionFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerFashionFragment);
-        allStoreFragmentAdapter = new AllStoreFragmentAdapter(getActivity());
-        fragment_common_recyclerview_recycler.setAdapter(allStoreFragmentAdapter);
     }
 
     private void initializeViews() {

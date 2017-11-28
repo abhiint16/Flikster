@@ -15,7 +15,6 @@ import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapterJustArriv
 import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapterRecommenedViewHolder;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFragmentAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFragmentAdapterViewHolder;
-import com.flikster.HomeActivity.FashionFragment.FashionType.MovieStoreFragment.MovieStoreFragmentAdapter;
 import com.flikster.R;
 
 /**

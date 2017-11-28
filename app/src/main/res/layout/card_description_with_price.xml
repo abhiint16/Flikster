@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:layout_height="wrap_content"
+    android:id="@+id/card_description_linear"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="4">
+    <TextView
+        android:id="@+id/card_description_with_price_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:clickable="false"
+        android:text="no data"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/card_description_with_price_desc"
+        android:layout_width="match_parent"
+        android:clickable="false"
+        android:layout_height="wrap_content"
+        android:text="no data"
+        android:textStyle="normal"
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="12sp"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Price"
+        android:gravity="center"
+        android:id="@+id/card_description_with_price_price"/>
+</LinearLayout>

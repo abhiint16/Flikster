@@ -11,7 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:id="@+id/card_gallery3_1_img_container">
 
         <ImageView
             android:id="@+id/card_gallary3_img1"
@@ -20,35 +22,35 @@
             android:layout_margin="5dp"
             android:layout_weight="1.5"
             android:scaleType="centerCrop"
-            android:src="@drawable/white_radius_box" />
+            android:src="@drawable/no_image"
+            android:clickable="false"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginTop="@dimen/five"
             android:layout_marginRight="@dimen/five"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/five"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:clickable="false">
 
             <ImageView
                 android:id="@+id/card_gallary3_img2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="#484848"
-                android:scaleType="centerCrop"
                 android:layout_marginBottom="@dimen/five"
-                android:src="@drawable/white_radius_box" />
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_image" />
 
             <ImageView
+                android:id="@+id/card_gallary3_img3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="#2b2b2b"
-                android:id="@+id/card_gallary3_img3"
                 android:layout_marginBottom="@dimen/five"
+                android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/white_radius_box" />
+                android:src="@drawable/no_image" />
         </LinearLayout>
     </LinearLayout>
 

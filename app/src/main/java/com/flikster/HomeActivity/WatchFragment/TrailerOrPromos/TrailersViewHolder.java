@@ -24,7 +24,7 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class TrailersViewHolder extends RecyclerView.Adapter<TrailersViewHolder.ViewHolder> {
+public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<String> imag=new ArrayList<>();
     Context context;
     List<String> trailerPromoImg=new ArrayList<>();
@@ -42,26 +42,52 @@ public class TrailersViewHolder extends RecyclerView.Adapter<TrailersViewHolder.
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item,parent,false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(viewType==0)
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_not_available_layout,parent,false);
+            return new ViewHolder1(view);
+        }
+        else
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item,parent,false);
+            return new ViewHolder2(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(context).load(trailerPromoImg.get(position)).into(holder.imageView);
-        holder.carousel_title.setText(trailerPromoTitle.get(position));
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(holder.getItemViewType()==0)
+        {
+
+        }
+        else
+        {
+            Glide.with(context).load(trailerPromoImg.get(position)).into(((ViewHolder2)holder).imageView);
+            ((ViewHolder2)holder).carousel_title.setText(trailerPromoTitle.get(position));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return trailerPromoImg.size();
+        if(trailerPromoImg.size()==0)
+            return 1;
+        else
+            return trailerPromoImg.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    @Override
+    public int getItemViewType(int position) {
+        if(trailerPromoImg.size()==0)
+            return 0;
+        else
+            return 1;
+    }
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         TextView carousel_title;
-        public ViewHolder(View itemView) {
+        public ViewHolder2(View itemView) {
             super(itemView);
             imageView=(ImageView)itemView.findViewById(R.id.carousel_image);
             carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
@@ -74,6 +100,12 @@ public class TrailersViewHolder extends RecyclerView.Adapter<TrailersViewHolder.
                     .replace(R.id.main_container, new MovieSongsListFragment())
                     .addToBackStack("")
                     .commit();
+        }
+    }
+
+    public class ViewHolder1 extends RecyclerView.ViewHolder{
+        public ViewHolder1(View itemView) {
+            super(itemView);
         }
     }
 }

@@ -10,18 +10,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="300dp"
+        android:clickable="true"
+        android:id="@+id/card_gallery5_img_container">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorImageBackgroundGrey"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clickable="false">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="false">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -30,7 +34,8 @@
                 android:layout_weight="2"
                 android:id="@+id/card_gallary5_img1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bahubai" />
+                android:src="@drawable/no_image"
+                android:clickable="false"/>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -39,14 +44,16 @@
                 android:id="@+id/card_gallary5_img2"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bahubai" />
+                android:src="@drawable/no_image"
+                android:clickable="false"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="false">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -55,7 +62,8 @@
                 android:id="@+id/card_gallary5_img3"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bahubai" />
+                android:src="@drawable/no_image"
+                android:clickable="false"/>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -64,7 +72,8 @@
                 android:id="@+id/card_gallary5_img4"
                 android:layout_weight="2"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bahubai" />
+                android:src="@drawable/no_image"
+                android:clickable="false"/>
         </LinearLayout>
     </LinearLayout>
         <TextView
