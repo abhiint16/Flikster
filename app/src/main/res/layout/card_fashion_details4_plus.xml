@@ -4,17 +4,19 @@
     android:layout_height="wrap_content"
     android:background="@drawable/white_solid_border"
     android:baselineAligned="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
 
     <include layout="@layout/card_header" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="300dp"
+        android:background="@color/white">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorImageBackgroundGrey"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -29,7 +31,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="2"
                     android:id="@+id/card_fashion_details4_plus_img1"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitXY"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -37,7 +39,7 @@
                     android:layout_margin="5dp"
                     android:id="@+id/card_fashion_details4_plus_img2"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitXY"/>
             </LinearLayout>
 
             <LinearLayout
@@ -52,7 +54,7 @@
                     android:layout_margin="5dp"
                     android:id="@+id/card_fashion_details4_plus_img3"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitXY"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -60,7 +62,7 @@
                     android:layout_margin="5dp"
                     android:id="@+id/card_fashion_details4_plus_img4"
                     android:layout_weight="2"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitXY"/>
             </LinearLayout>
         </LinearLayout>
         <TextView

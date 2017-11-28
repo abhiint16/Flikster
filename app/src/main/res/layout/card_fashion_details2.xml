@@ -4,33 +4,34 @@
     android:layout_height="wrap_content"
     android:background="@drawable/white_solid_border"
     android:baselineAligned="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
 
     <include layout="@layout/card_header" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@color/colorImageBackgroundGrey"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
             android:background="#696969"
             android:id="@+id/card_fashion_details2_img1"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY"/>
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:background="#484848"
             android:id="@+id/card_fashion_details2_img2"
             android:layout_weight="1"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY"/>
     </LinearLayout>
 
 
