@@ -447,6 +447,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1)).into(((ViewHolder14) holder).card_gallary5_img3);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(2)).into(((ViewHolder14) holder).card_gallary5_img4);
             ((ViewHolder14) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder14)holder).card_gallary5_text.setText("+"+((outerHits.getHits().get(position).get_source().getMedia().getGallery().size()+1)-4));
         }
     }
 
@@ -1590,7 +1591,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder14 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary5_img1,card_gallary5_img2,card_gallary5_img3,card_gallary5_img4, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,card_gallary5_text;
         ImageButton video_btn;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -1605,6 +1606,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_gallary5_img2 = (ImageView) itemView.findViewById(R.id.card_gallary5_img2);
             card_gallary5_img3 = (ImageView) itemView.findViewById(R.id.card_gallary5_img3);
             card_gallary5_img4 = (ImageView) itemView.findViewById(R.id.card_gallary5_img4);
+            card_gallary5_text=(TextView)itemView.findViewById(R.id.card_gallary5_text);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
