@@ -33,6 +33,7 @@ public class BuyFashionTypeProductFragment extends Fragment implements View.OnCl
     FragmentManager fragmentManager;
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
     TextView toolbar_frag_multiicons_title;
+    FashionLandingFragment fashionLandingFragment;
 
     @Nullable
     @Override
@@ -73,9 +74,13 @@ public class BuyFashionTypeProductFragment extends Fragment implements View.OnCl
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
+            fashionLandingFragment = new FashionLandingFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("BUY_FASHION_PAGE", "ENABLE");
+            fashionLandingFragment.setArguments(bundle);
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_container, new FashionLandingFragment())
+                    .replace(R.id.main_container, fashionLandingFragment)
                     .addToBackStack("")
                     .commit();
         } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
