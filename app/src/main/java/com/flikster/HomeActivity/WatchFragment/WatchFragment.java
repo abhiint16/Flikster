@@ -19,6 +19,7 @@ import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import java.util.List;
 
@@ -40,14 +41,15 @@ public class WatchFragment extends Fragment {
     FeedInnerData outerHits;
     Integer Count;
     FeedFragment.Testing testing;
+    SimpleArcLoader simpleArcLoader;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
-        retrofitInit();
         initializeViews();
         initializeRest();
+        retrofitInit();
         return view;
     }
 
@@ -61,10 +63,13 @@ public class WatchFragment extends Fragment {
     private void initializeViews() {
         movieFragmentInfoRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager = getActivity().getSupportFragmentManager();
+        simpleArcLoader=(SimpleArcLoader)view.findViewById(R.id.arc_loader);
     }
 
 
     private void retrofitInit() {
+        simpleArcLoader.setVisibility(View.VISIBLE);
+        simpleArcLoader.start();
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getTopRatedMovies(true,100,"*");
         call.enqueue(new Callback<FeedData>() {
@@ -76,6 +81,8 @@ public class WatchFragment extends Fragment {
                 Log.e("whatch inside",""+outerHits.getHits().get(0).get_source().getTitle());
                 Log.e("whatch inside",""+outerHits);
                 watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
+                simpleArcLoader.setVisibility(View.GONE);
+                simpleArcLoader.stop();
                 movieFragmentInfoRecycler.setAdapter(watchAdapter);
 //                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, items, Count, testing);
 

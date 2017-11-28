@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.R;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +31,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
     AllStoreFragmentAdapter allStoreFragmentAdapter;
     ApiInterface apiInterface;
     AllStoreInnerData hits;
+    SimpleArcLoader simpleArcLoader;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
     }
 
     private void retrofitInit() {
+        simpleArcLoader.setVisibility(View.VISIBLE);
+        simpleArcLoader.start();
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/products/_search?pretty=true&sort=createdAt:desc&q=*").create(ApiInterface.class);
         Call<AllStoreData> call = apiInterface.getAllStore("http://apiv3-es.flikster.com/products/_search?pretty=true&sort=createdAt:desc&q=*");
         call.enqueue(new Callback<AllStoreData>() {
@@ -49,6 +53,8 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
                 allStoreFragmentAdapter = new AllStoreFragmentAdapter(getActivity(),hits);
+                simpleArcLoader.setVisibility(View.GONE);
+                simpleArcLoader.stop();
                 fragment_common_recyclerview_recycler.setAdapter(allStoreFragmentAdapter);
             }
 
@@ -65,6 +71,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
 
     private void initializeViews() {
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        simpleArcLoader=(SimpleArcLoader)view.findViewById(R.id.arc_loader);
     }
 
     @Override
