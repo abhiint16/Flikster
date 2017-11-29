@@ -21,7 +21,7 @@ import java.util.List;
  * Created by abhishek on 01-11-2017.
  */
 
-public class MusicGridAdapter extends RecyclerView.Adapter<MusicGridAdapter.ViewHolder> {
+public class MusicGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     FragmentManager fragmentManager;
     List<String> img=new ArrayList<>();
@@ -35,27 +35,62 @@ public class MusicGridAdapter extends RecyclerView.Adapter<MusicGridAdapter.View
     }
 
     @Override
-    public MusicGridAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_music_recycler_item, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType==0)
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_no_comments,parent,false);
+            return new ViewHolder1(view);
+        }
+        else
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_music_recycler_item, parent, false);
+            return new ViewHolder2(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(MusicGridAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(img.get(position).trim()).into(holder.card_music_recycler_item_img);
-        holder.card_music_recycler_item_title.setText(title.get(position));
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(holder.getItemViewType()==0)
+        {
+            ((ViewHolder1)holder).activity_no_comments_tv.setText("No Item Available");
+        }
+        else if(holder.getItemViewType()==1)
+        {
+            Glide.with(context).load(img.get(position).trim()).into(((ViewHolder2)holder).card_music_recycler_item_img);
+            ((ViewHolder2)holder).card_music_recycler_item_title.setText(title.get(position));
+        }
     }
 
     @Override
     public int getItemCount() {
+        if(img.size()==0)
+            return 1;
+        else
         return img.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    @Override
+    public int getItemViewType(int position) {
+        if(img.size()==0)
+            return 0;
+        else
+            return 1;
+    }
+
+    public class ViewHolder1 extends RecyclerView.ViewHolder {
+        TextView activity_no_comments_tv;
+        public ViewHolder1(View itemView)
+        {
+            super(itemView);
+            activity_no_comments_tv=(TextView)itemView.findViewById(R.id.activity_no_comments_tv);
+        }
+    }
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_music_recycler_item_img;
         TextView card_music_recycler_item_title;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder2(View itemView) {
             super(itemView);
             card_music_recycler_item_img = (ImageView) itemView.findViewById(R.id.card_music_recycler_item_img);
             card_music_recycler_item_title=(TextView)itemView.findViewById(R.id.card_music_recycler_item_title);

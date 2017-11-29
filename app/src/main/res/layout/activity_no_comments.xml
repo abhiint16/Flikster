@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:text="Be the first to comment on this item."
         android:textColor="@color/colorAccent"
-        android:textSize="22sp"/>
+        android:textSize="22sp"
+        android:id="@+id/activity_no_comments_tv"/>
 </LinearLayout>
