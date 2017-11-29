@@ -57,6 +57,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     List<String> trailerPromoTitle=new ArrayList<>();
     List<String> comedyImg=new ArrayList<>();
     List<String> comedyTitle=new ArrayList<>();
+    List<String> musicImg=new ArrayList<>();
+    List<String> musicTitle=new ArrayList<>();
     FeedInnerData outerHits;
     Integer Count;
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
@@ -136,10 +138,18 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             //
             ((ViewHolder1) holder).carouselView.setImageListener(imageListeners);
         } else if (holder.getItemViewType() == 2) {
+            for (int i=0;i<Count;i++)
+            {
+                if("audio-song".equals(outerHits.getHits().get(i).get_source().getContentType()))
+                {
+                    musicImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    musicTitle.add(outerHits.getHits().get(i).get_source().getTitle());
+                }
+            }
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Music");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            musicAdapterViewHolder = new MusicAdapterViewHolder(fragmentManager);
+            musicAdapterViewHolder = new MusicAdapterViewHolder(context,musicTitle,musicImg,fragmentManager);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(musicAdapterViewHolder);
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Tv Shows");
@@ -152,17 +162,14 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
             /*socialInterviewImg.clear();
             socialInterviewTitle.clear();*/
-            Log.e("whatch inside adapter",""+Count);
-            Log.e("whatch inside",""+outerHits.getHits().get(position).get_source().getProfilePic());
             for (int i=0;i<Count;i++)
             {
-                if("social-buzz".equals(outerHits.getHits().get(position).get_source().getContentType()) || "interview".equals(outerHits.getHits().get(position).get_source().getContentType()))
+                if("social-buzz".equals(outerHits.getHits().get(i).get_source().getContentType()) || "interview".equals(outerHits.getHits().get(i).get_source().getContentType()))
                 {
-                    socialInterviewImg.add(outerHits.getHits().get(position).get_source().getProfilePic());
-                    socialInterviewTitle.add(outerHits.getHits().get(position).get_source().getTitle());
+                    socialInterviewImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    socialInterviewTitle.add(outerHits.getHits().get(i).get_source().getTitle());
                 }
             }
-            Log.e("whatch inside adapter",""+socialInterviewImg+socialInterviewTitle);
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, socialInterviewTitle, socialInterviewImg,fragmentManager);
@@ -180,10 +187,10 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             trailerPromoTitle.clear();
             for (int i=0;i<Count;i++)
             {
-                if("trailer".equals(outerHits.getHits().get(position).get_source().getContentType()) || "promo".equals(outerHits.getHits().get(position).get_source().getContentType()))
+                if("trailer".equals(outerHits.getHits().get(i).get_source().getContentType()) || "promo".equals(outerHits.getHits().get(i).get_source().getContentType()))
                 {
-                    trailerPromoImg.add(outerHits.getHits().get(position).get_source().getProfilePic());
-                    trailerPromoTitle.add(outerHits.getHits().get(position).get_source().getTitle());
+                    trailerPromoImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    trailerPromoTitle.add(outerHits.getHits().get(i).get_source().getTitle());
                 }
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -196,10 +203,10 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             comedyTitle.clear();
             for (int i=0;i<Count;i++)
             {
-                if("comedy-clip".equals(outerHits.getHits().get(position).get_source().getContentType()))
+                if("comedy-clip".equals(outerHits.getHits().get(i).get_source().getContentType()))
                 {
-                    comedyImg.add(outerHits.getHits().get(position).get_source().getProfilePic());
-                    comedyTitle.add(outerHits.getHits().get(position).get_source().getTitle());
+                    comedyImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    comedyTitle.add(outerHits.getHits().get(i).get_source().getTitle());
                 }
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -212,6 +219,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
+        Log.e("print hits",""+outerHits.getHits().size());
         return 7;
     }
 

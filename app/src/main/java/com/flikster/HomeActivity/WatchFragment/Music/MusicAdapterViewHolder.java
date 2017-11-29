@@ -1,12 +1,15 @@
 package com.flikster.HomeActivity.WatchFragment.Music;
 
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.R;
 
@@ -17,48 +20,77 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class MusicAdapterViewHolder extends RecyclerView.Adapter<MusicAdapterViewHolder.ViewHolder> {
-    List<String> imag = new ArrayList<>();
+public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    List<String> musicImg = new ArrayList<>();
+    List<String> musicTitle=new ArrayList<>();
     FragmentManager fragmentManager;
-    int a;
+    Context context;
 
-    public MusicAdapterViewHolder(FragmentManager fragmentManager) {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
-        imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
-        imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+
+    public MusicAdapterViewHolder(Context context, List<String> musicTitle, List<String> musicImg, FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
-    }
-
-    public MusicAdapterViewHolder(int a) {
-        this.a = a;
-    }
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_music_recycler_item, parent, false);
-        return new ViewHolder(view);
+        this.musicImg=musicImg;
+        this.musicTitle=musicTitle;
+        this.context=context;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        //holder.imageView.setImageResource(R.drawable.pooja);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(viewType==0)
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_not_available_layout,parent,false);
+            return new ViewHolder1(view);
+        }
+        else
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item, parent, false);
+            return new ViewHolder2(view);
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(holder.getItemViewType()==0)
+        {
+
+        }
+        else
+        {
+            Glide.with(context).load(musicImg.get(position)).into(((ViewHolder2)holder).carousel_image);
+            ((ViewHolder2)holder).carousel_title.setText(musicTitle.get(position));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return imag.size();
+        if(musicImg.size()==0)
+            return 1;
+        else
+            return musicImg.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView movieimg;
+    @Override
+    public int getItemViewType(int position) {
+        if(musicImg.size()==0)
+            return 0;
+        else
+            return 1;
+    }
 
-        public ViewHolder(View itemView) {
+    public class ViewHolder1 extends RecyclerView.ViewHolder{
+        public ViewHolder1(View itemView) {
             super(itemView);
-            movieimg = (ImageView) itemView.findViewById(R.id.movieimg);
-            movieimg.setOnClickListener(this);
+        }
+    }
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView carousel_image;
+        TextView carousel_title;
+        public ViewHolder2(View itemView) {
+            super(itemView);
+            carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
+            carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
+            itemView.setOnClickListener(this);
         }
 
         @Override
