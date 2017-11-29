@@ -64,6 +64,7 @@ import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragmen
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.MenuFragments.FliksterCreditFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
@@ -99,7 +100,7 @@ import java.util.Locale;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing {
+public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface {
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -625,4 +626,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
 
+    @Override
+    public void carouselContainerClick(String toolbarTitle, List<String> img, List<String> title, Fragment fragment) {
+        MusicGridFragment musicGridFragment=(MusicGridFragment)fragment;
+        musicGridFragment.getAllData(toolbarTitle,img,title);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void carouselItemClick() {
+    }
 }

@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import com.flikster.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by abhishek on 01-11-2017.
  */
@@ -29,6 +32,9 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     TextView toolbar_frag_multiicons_title;
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart, toolbar_frag_multiicons_overflow;
     FragmentManager fragmentManager;
+    String tootbarTitle;
+    List<String> img=new ArrayList<>();
+    List<String> title=new ArrayList<>();
 
     @Nullable
     @Override
@@ -52,11 +58,11 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeRest() {
-        toolbar_frag_multiicons_title.setText("Music");
+        toolbar_frag_multiicons_title.setText(tootbarTitle);
         fragmentManager = getActivity().getSupportFragmentManager();
         layoutManagerShopByVideoFragment = new GridLayoutManager(getActivity(), 2);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerShopByVideoFragment);
-        musicGridAdapter = new MusicGridAdapter(getActivity(), fragmentManager);
+        musicGridAdapter = new MusicGridAdapter(getActivity(), fragmentManager,img,title);
         fragment_common_recyclerview_recycler.setAdapter(musicGridAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_notification.setVisibility(View.GONE);
@@ -80,4 +86,12 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
         fragmentManager.popBackStackImmediate();
 //        }
     }
+
+    public void getAllData(String tootbarTitle, List<String> img,List<String> title)
+    {
+        this.tootbarTitle=tootbarTitle;
+        this.img=img;
+        this.title=title;
+    }
+
 }

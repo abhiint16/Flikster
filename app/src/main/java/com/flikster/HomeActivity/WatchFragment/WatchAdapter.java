@@ -1,6 +1,7 @@
 package com.flikster.HomeActivity.WatchFragment;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,14 +60,18 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     List<String> comedyTitle=new ArrayList<>();
     List<String> musicImg=new ArrayList<>();
     List<String> musicTitle=new ArrayList<>();
+    List<String> tvShowsImg=new ArrayList<>();
+    List<String> tvShowsTitle=new ArrayList<>();
+    List<String> moviesImg=new ArrayList<>();
+    List<String> moviesTitle=new ArrayList<>();
     FeedInnerData outerHits;
     Integer Count;
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
-    FeedFragment.Testing testing;
+    WatchFragment.WatchFragCommInterface watchFragCommInterface;
 
     int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
 
-    public WatchAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits,Integer Count, FeedFragment.Testing testing) {
+    public WatchAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits,Integer Count, WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -85,7 +90,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         this.outerHits = outerHits;
         this.Count = Count;
-        this.testing = testing;
+        this.watchFragCommInterface = watchFragCommInterface;
     }
 
     @Override
@@ -258,7 +263,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v);
+            innerTitleClick(v,"Music",musicImg,musicTitle,new MusicGridFragment());
         }
         //508001
     }
@@ -277,7 +282,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v);
+            innerTitleClick(v,"TV Shows",tvShowsImg,tvShowsTitle,new MusicGridFragment());
         }
     }
 
@@ -295,7 +300,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v);
+            innerTitleClick(v,"Social Buzz/Interviews",socialInterviewImg,socialInterviewTitle,new MusicGridFragment());
         }
     }
 
@@ -312,7 +317,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v);
+            innerTitleClick(v,"Movies",moviesImg,moviesTitle,new MusicGridFragment());
         }
     }
 
@@ -330,7 +335,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v);
+            innerTitleClick(v,"Trailer & Promos",trailerPromoImg,trailerPromoTitle,new MusicGridFragment());
         }
     }
 
@@ -348,18 +353,12 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v);
+            innerTitleClick(v,"Comedy",comedyImg,comedyTitle,new MusicGridFragment());
         }
     }
 
-    private void innerTitleClick(View vieww) {
-//        Share
-        if (vieww.getId() == R.id.fragment_common_recyclerview_with_tv_title) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MusicGridFragment())
-                    .addToBackStack("")
-                    .commit();
-
+    private void innerTitleClick(View view,String toolbarTitle,List<String> img,List<String> title,Fragment fragment) {
+        watchFragCommInterface.carouselContainerClick(toolbarTitle,img,title,fragment);
         }
-    }
 }
+

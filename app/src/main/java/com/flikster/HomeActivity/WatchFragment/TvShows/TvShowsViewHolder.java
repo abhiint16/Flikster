@@ -58,12 +58,12 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<TvShowsViewHolder.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView movieimg;
+        ImageView card_music_recycler_item_img;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            movieimg = (ImageView) itemView.findViewById(R.id.movieimg);
-            movieimg.setOnClickListener(this);
+            card_music_recycler_item_img = (ImageView) itemView.findViewById(R.id.card_music_recycler_item_img);
+            card_music_recycler_item_img.setOnClickListener(this);
         }
 
         @Override

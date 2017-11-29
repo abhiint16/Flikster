@@ -43,7 +43,7 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
         }
         else
         {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_music_recycler_item, parent, false);
             return new ViewHolder2(view);
         }
     }
@@ -56,8 +56,8 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
         }
         else
         {
-            Glide.with(context).load(musicImg.get(position)).into(((ViewHolder2)holder).carousel_image);
-            ((ViewHolder2)holder).carousel_title.setText(musicTitle.get(position));
+            Glide.with(context).load(musicImg.get(position)).into(((ViewHolder2)holder).card_music_recycler_item_img);
+            ((ViewHolder2)holder).card_music_recycler_item_title.setText(musicTitle.get(position));
         }
     }
 
@@ -84,12 +84,12 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView carousel_image;
-        TextView carousel_title;
+        ImageView card_music_recycler_item_img;
+        TextView card_music_recycler_item_title;
         public ViewHolder2(View itemView) {
             super(itemView);
-            carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
-            carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
+            card_music_recycler_item_img=(ImageView)itemView.findViewById(R.id.card_music_recycler_item_img);
+            card_music_recycler_item_title=(TextView)itemView.findViewById(R.id.card_music_recycler_item_title);
             itemView.setOnClickListener(this);
         }
 

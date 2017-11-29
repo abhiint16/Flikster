@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.WatchFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -40,8 +41,8 @@ public class WatchFragment extends Fragment {
     ApiInterface apiInterface;
     FeedInnerData outerHits;
     Integer Count;
-    FeedFragment.Testing testing;
     SimpleArcLoader simpleArcLoader;
+    WatchFragCommInterface watchFragCommInterface;
 
     @Nullable
     @Override
@@ -80,7 +81,7 @@ public class WatchFragment extends Fragment {
                 Log.e("whatch inside",""+Count);
                 Log.e("whatch inside",""+outerHits.getHits().get(0).get_source().getTitle());
                 Log.e("whatch inside",""+outerHits);
-                watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
+                watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, watchFragCommInterface);
                 simpleArcLoader.setVisibility(View.GONE);
                 simpleArcLoader.stop();
                 movieFragmentInfoRecycler.setAdapter(watchAdapter);
@@ -93,5 +94,17 @@ public class WatchFragment extends Fragment {
                 Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
+    }
+
+
+    public interface WatchFragCommInterface {
+        void carouselContainerClick(String toolbarTitle,List<String> img,List<String> title,Fragment fragment);
+        void carouselItemClick();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        watchFragCommInterface = (WatchFragCommInterface) activity;
     }
 }
