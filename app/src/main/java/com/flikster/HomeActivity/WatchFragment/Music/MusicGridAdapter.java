@@ -103,8 +103,6 @@ public class MusicGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     .replace(R.id.main_container, new MovieSongsListFragment())
                     .addToBackStack("")
                     .commit();
-
-
         }
     }
 }

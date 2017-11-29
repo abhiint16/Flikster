@@ -99,7 +99,7 @@ public class WatchFragment extends Fragment {
 
     public interface WatchFragCommInterface {
         void carouselContainerClick(String toolbarTitle,List<String> img,List<String> title,Fragment fragment);
-        void carouselItemClick();
+        void carouselItemClick(String toolbarTitle,List<String> img,List<String> title,Fragment fragment);
     }
 
     @Override

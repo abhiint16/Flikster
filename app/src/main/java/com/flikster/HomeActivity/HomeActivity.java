@@ -65,6 +65,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.MenuFragments.FliksterCreditFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
@@ -634,6 +635,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void carouselItemClick() {
+    public void carouselItemClick(String toolbarTitle, List<String> img, List<String> title, Fragment fragment) {
+        MovieSongsListFragment movieSongsListFragment=(MovieSongsListFragment)fragment;
+        movieSongsListFragment.getAllData(toolbarTitle,img,title);
+        firstTimeLaunch(fragment);
     }
 }

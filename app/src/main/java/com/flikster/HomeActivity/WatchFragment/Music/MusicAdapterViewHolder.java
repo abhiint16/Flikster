@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -25,13 +26,15 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
     List<String> musicTitle=new ArrayList<>();
     FragmentManager fragmentManager;
     Context context;
+    WatchFragment.WatchFragCommInterface watchFragCommInterface;
 
-
-    public MusicAdapterViewHolder(Context context, List<String> musicTitle, List<String> musicImg, FragmentManager fragmentManager) {
+    public MusicAdapterViewHolder(Context context, List<String> musicTitle, List<String> musicImg, FragmentManager fragmentManager,
+                                  WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         this.fragmentManager = fragmentManager;
         this.musicImg=musicImg;
         this.musicTitle=musicTitle;
         this.context=context;
+        this.watchFragCommInterface=watchFragCommInterface;
     }
 
     @Override
@@ -95,10 +98,7 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MovieSongsListFragment())
-                    .addToBackStack("")
-                    .commit();
+            watchFragCommInterface.carouselItemClick(musicTitle.get(getAdapterPosition()),musicImg,musicTitle,new MovieSongsListFragment());
         }
     }
 }

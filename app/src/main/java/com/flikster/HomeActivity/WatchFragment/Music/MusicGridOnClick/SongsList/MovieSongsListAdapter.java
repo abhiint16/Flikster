@@ -7,9 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.R;
 import com.flikster.Util.GlobalData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by abhishek on 01-11-2017.
@@ -17,12 +22,15 @@ import com.flikster.Util.GlobalData;
 
 public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAdapter.ViewHolder> {
     Context context;
-    GlobalData globalData = new GlobalData();
     FragmentManager fragmentManager;
+    List<String> img=new ArrayList<>();
+    List<String> title=new ArrayList<>();
 
-    public MovieSongsListAdapter(Context context, FragmentManager fragmentManager) {
+    public MovieSongsListAdapter(Context context, FragmentManager fragmentManager, List<String> img,List<String> title) {
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.img=img;
+        this.title=title;
     }
 
     @Override
@@ -33,7 +41,8 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
 
     @Override
     public void onBindViewHolder(MovieSongsListAdapter.ViewHolder holder, int position) {
-//        holder.card_shopby_video_recycler_image.setImageResource(globalData.style.get(position));
+        Glide.with(context).load(img.get(0).trim()).into(holder.movieimg);
+        holder.movietitle.setText("Song No. "+position);
     }
 
     @Override
@@ -42,12 +51,14 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_shopby_video_recycler_image;
+        ImageView movieimg;
+        TextView movietitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            card_shopby_video_recycler_image = (ImageView) itemView.findViewById(R.id.movieimg);
-            card_shopby_video_recycler_image.setOnClickListener(this);
+            movieimg = (ImageView) itemView.findViewById(R.id.movieimg);
+            movietitle=(TextView)itemView.findViewById(R.id.movietitle);
+            movieimg.setOnClickListener(this);
         }
 
         @Override
