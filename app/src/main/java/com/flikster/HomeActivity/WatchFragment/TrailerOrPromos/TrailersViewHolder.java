@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
@@ -30,7 +31,9 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
     List<String> trailerPromoImg=new ArrayList<>();
     List<String> trailerPromoTitle=new ArrayList<>();
     FragmentManager fragmentManager;
-    public TrailersViewHolder(Context context, List<String> trailerPromoImg, List<String> trailerPromoTitle, FragmentManager fragmentManager) {
+    WatchFragment.WatchFragCommInterface watchFragCommInterface;
+    public TrailersViewHolder(Context context, List<String> trailerPromoTitle, List<String> trailerPromoImg, FragmentManager fragmentManager,
+                              WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
@@ -39,6 +42,7 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.trailerPromoImg=trailerPromoImg;
         this.trailerPromoTitle=trailerPromoTitle;
         this.fragmentManager = fragmentManager;
+        this.watchFragCommInterface=watchFragCommInterface;
     }
 
     @Override
@@ -63,7 +67,7 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
         else
         {
-            Glide.with(context).load(trailerPromoImg.get(position)).into(((ViewHolder2)holder).imageView);
+            Glide.with(context).load(trailerPromoImg.get(position)).into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setText(trailerPromoTitle.get(position));
         }
     }
@@ -85,21 +89,18 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView imageView;
+        ImageView carousel_image;
         TextView carousel_title;
         public ViewHolder2(View itemView) {
             super(itemView);
-            imageView=(ImageView)itemView.findViewById(R.id.carousel_image);
+            carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
             carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MovieSongsListFragment())
-                    .addToBackStack("")
-                    .commit();
+            watchFragCommInterface.carouselItemClick(trailerPromoTitle.get(getAdapterPosition()),trailerPromoImg,trailerPromoTitle,new MovieSongsListFragment());
         }
     }
 

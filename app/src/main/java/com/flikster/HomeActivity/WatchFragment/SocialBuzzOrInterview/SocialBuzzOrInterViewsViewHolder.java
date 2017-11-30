@@ -16,6 +16,7 @@ import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScre
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
@@ -32,7 +33,9 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
     List<String> socialInterviewImg=new ArrayList<>();
     List<String> socialInterviewTitle=new ArrayList<>();
     FragmentManager fragmentManager;
-    public SocialBuzzOrInterViewsViewHolder(Context context, List<String> socialInterviewTitle, List<String> socialInterviewImg, FragmentManager fragmentManager) {
+    WatchFragment.WatchFragCommInterface watchFragCommInterface;
+    public SocialBuzzOrInterViewsViewHolder(Context context, List<String> socialInterviewTitle, List<String> socialInterviewImg, FragmentManager fragmentManager,
+                                            WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
@@ -41,6 +44,7 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
         this.socialInterviewImg=socialInterviewImg;
         this.socialInterviewTitle=socialInterviewTitle;
         this.fragmentManager = fragmentManager;
+        this.watchFragCommInterface=watchFragCommInterface;
     }
 
     @Override
@@ -65,7 +69,7 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
         }
         else
         {
-            Glide.with(context).load(socialInterviewImg.get(position)).into(((ViewHolder2)holder).imageView);
+            Glide.with(context).load(socialInterviewImg.get(position)).into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setText(socialInterviewTitle.get(position));
         }
     }
@@ -87,21 +91,18 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView imageView;
+        ImageView carousel_image;
         TextView carousel_title;
         public ViewHolder2(View itemView) {
             super(itemView);
-            imageView=(ImageView)itemView.findViewById(R.id.carousel_image);
+            carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
             carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MovieSongsListFragment())
-                    .addToBackStack("")
-                    .commit();
+            watchFragCommInterface.carouselItemClick(socialInterviewTitle.get(getAdapterPosition()),socialInterviewImg,socialInterviewTitle,new MovieSongsListFragment());
         }
     }
 
