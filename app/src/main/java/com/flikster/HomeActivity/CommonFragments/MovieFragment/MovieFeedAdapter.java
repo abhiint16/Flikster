@@ -190,7 +190,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
             ((ViewHolder0)holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
         }
-        if (holder.getItemViewType() == 1) {
+        else if (holder.getItemViewType() == 1) {
             ((ViewHolder1)holder).card_header_container.setVisibility(View.GONE);
             Glide.with(context).load(hits.getHits().get(position-1).get_source().getProfilePic()).into(((ViewHolder1) holder).card_critic_review_main_image);
             if (hits.getHits().get(position-1).get_source().getMovie() != null) {
