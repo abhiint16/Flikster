@@ -46,8 +46,8 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
     private void retrofitInit() {
         simpleArcLoader.setVisibility(View.VISIBLE);
         simpleArcLoader.start();
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/products/_search?pretty=true&sort=createdAt:desc&q=*").create(ApiInterface.class);
-        Call<AllStoreData> call = apiInterface.getAllStore("http://apiv3-es.flikster.com/products/_search?pretty=true&sort=createdAt:desc&q=*");
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=*").create(ApiInterface.class);
+        Call<AllStoreData> call = apiInterface.getAllStore("http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=*");
         call.enqueue(new Callback<AllStoreData>() {
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
