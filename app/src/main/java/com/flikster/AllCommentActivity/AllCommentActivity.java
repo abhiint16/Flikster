@@ -45,7 +45,7 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void retrofitInit() {
-        http://apiv3-es.flikster.com/comments/_search?pretty=true&sort=createdAt:desc&size=1000&q=entityId:%22749cb9be-29ba-4d50-ae45-d811b7069961%22
+       // http://apiv3-es.flikster.com/comments/_search?pretty=true&sort=createdAt:desc&size=1000&q=entityId:%22749cb9be-29ba-4d50-ae45-d811b7069961%22
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/comments/_search?pretty=true&sort=createdAt:desc&size=1000&q="+"entityId:\""+getIntent().getStringExtra("entityId")+"\"").create(ApiInterface.class);
         Call<CommentsData> call = apiInterface.getAllComments("http://apiv3-es.flikster.com/comments/_search?pretty=true&sort=createdAt:desc&size=1000&q="+"entityId:\""+getIntent().getStringExtra("entityId")+"\"");
         call.enqueue(new Callback<CommentsData>() {

@@ -125,6 +125,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder.getItemViewType() == 1) {
+            ((ViewHolder1)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder1) holder).ib_like, context);
                 if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                     new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder1) holder).followbtn, context);
@@ -152,6 +153,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder1) holder).tv_description.setText(Html.fromHtml(Common.formatString(outerHits.getHits().get(position).get_source().getText())));
             ((ViewHolder1) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 2) {
+            ((ViewHolder2)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder2) holder).followbtn, context);
@@ -182,6 +184,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
             ((ViewHolder2) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 3) {
+            ((ViewHolder3)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder3) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder3) holder).followbtn, context);
@@ -209,6 +212,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             // Common.makeTextViewResizable(((ViewHolder3) holder).tv_description, 3, "View More", true);
 
         } else if (holder.getItemViewType() == 4) {
+            ((ViewHolder4)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder4) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder4) holder).followbtn, context);
@@ -235,6 +239,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder4) holder).news_img);
             ((ViewHolder4) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 5) {
+            ((ViewHolder5)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder5) holder).followbtn, context);
@@ -260,6 +265,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder5) holder).card_gallary1_img1);
             ((ViewHolder5) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 6) {
+            ((ViewHolder6)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder6) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder6) holder).followbtn, context);
@@ -285,6 +291,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder6) holder).card_gallary1_img1);
             ((ViewHolder6) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 10) {
+            ((ViewHolder7)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder7) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder7) holder).followbtn, context);
@@ -310,6 +317,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder7) holder).card_gallary1_img1);
             ((ViewHolder7) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 8) {
+            ((ViewHolder8)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder8) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder8) holder).followbtn, context);
@@ -336,6 +344,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder8) holder).card_footer_container.setVisibility(View.GONE);
         }
         else if (holder.getItemViewType() ==11) {
+            ((ViewHolder11)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder11) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder11) holder).followbtn, context);
@@ -363,6 +372,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder11) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         }
         else if (holder.getItemViewType() == 12) {
+            ((ViewHolder12)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder12) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder12) holder).followbtn, context);
@@ -391,6 +401,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder12) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         }
         else if (holder.getItemViewType() == 13) {
+            ((ViewHolder13)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder13) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder13) holder).followbtn, context);
@@ -420,6 +431,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder13) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         }
         else if (holder.getItemViewType() == 14) {
+            ((ViewHolder14)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             new PostRetrofit().checkForLike("like", "neera", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder14) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
                 new PostRetrofit().checkForFollow("follow", "neera", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder14) holder).followbtn, context);
@@ -517,7 +529,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_critic_review_main_image, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_critic_review_moviename,
-                card_movie_review_bottom_header_criticrating,
+                card_movie_review_bottom_header_criticrating,card_celebrity_feed_gallery1_title,
                 card_comment_text_see_more_comments;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -526,7 +538,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder1(View itemView) {
             super(itemView);
-
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_critic_review_main_image = (ImageView) itemView.findViewById(R.id.card_critic_review_main_image);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -590,7 +602,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_quote_tv,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_quote_tv,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         LinearLayout card_description_linear, header_linear;
         Button followbtn;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
@@ -598,6 +611,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder2(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
@@ -663,7 +677,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         ImageButton ib_like,ib_bookmark;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         ImageButton video_btn,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         Button followbtn;
@@ -672,6 +687,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder3(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -772,7 +788,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView news_img, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         Button followbtn;
@@ -780,6 +797,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder4(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             news_img = (ImageView) itemView.findViewById(R.id.news_img);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -885,7 +903,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         ImageButton ib_like,ib_bookmark;
         Button followbtn;
         ImageButton video_btn,card_comment_text_send_btn;
@@ -895,6 +914,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder5(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -985,7 +1005,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder6 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         ImageButton ib_like,ib_bookmark;
         ImageButton video_btn,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -995,6 +1016,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder6(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -1088,7 +1110,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder7 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         ImageButton video_btn;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -1098,6 +1121,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder7(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -1187,7 +1211,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder8 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_audio_jukebox_imageview, profile_image;
-        TextView tv_tag_name, tv_tag_desc,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc,card_comment_text_see_more_comments,card_celebrity_feed_gallery1_title;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         ImageButton video_btn;
@@ -1199,6 +1223,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder8(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_audio_jukebox_imageview = (ImageView) itemView.findViewById(R.id.card_audio_jukebox_imageview);
             fragment_common_recyclerview_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
@@ -1282,7 +1307,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder11 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary2_img1,card_gallary2_img2, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         ImageButton video_btn;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -1292,6 +1318,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder11(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary2_img1 = (ImageView) itemView.findViewById(R.id.card_gallary2_img1);
             card_gallary2_img2 = (ImageView) itemView.findViewById(R.id.card_gallary2_img2);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
@@ -1384,7 +1411,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder12 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary3_img1,card_gallary3_img2,card_gallary3_img3, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         ImageButton video_btn;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -1394,6 +1422,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder12(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary3_img1 = (ImageView) itemView.findViewById(R.id.card_gallary3_img1);
             card_gallary3_img2 = (ImageView) itemView.findViewById(R.id.card_gallary3_img2);
             card_gallary3_img3 = (ImageView) itemView.findViewById(R.id.card_gallary3_img3);
@@ -1487,7 +1516,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder13 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary4_img1,card_gallary4_img2,card_gallary4_img3,card_gallary4_img4, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title;
         ImageButton video_btn;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -1497,6 +1527,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder13(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary4_img1 = (ImageView) itemView.findViewById(R.id.card_gallary4_img1);
             card_gallary4_img2 = (ImageView) itemView.findViewById(R.id.card_gallary4_img2);
             card_gallary4_img3 = (ImageView) itemView.findViewById(R.id.card_gallary4_img3);
@@ -1591,7 +1622,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder14 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary5_img1,card_gallary5_img2,card_gallary5_img3,card_gallary5_img4, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,card_gallary5_text;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title,card_gallary5_text;
         ImageButton video_btn;
         ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -1602,6 +1634,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder14(View itemView) {
             super(itemView);
+            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary5_img1 = (ImageView) itemView.findViewById(R.id.card_gallary5_img1);
             card_gallary5_img2 = (ImageView) itemView.findViewById(R.id.card_gallary5_img2);
             card_gallary5_img3 = (ImageView) itemView.findViewById(R.id.card_gallary5_img3);
