@@ -15,7 +15,7 @@
         android:textColor="@color/black" />
 
     <ImageView
-        android:id="@+id/carousel_image"
+        android:id="@+id/card_video_item_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="@dimen/ten"
@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/ten"
         android:text="#Title"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:id="@+id/card_video_item_title"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -35,5 +36,6 @@
         android:layout_marginLeft="@dimen/ten"
         android:layout_marginTop="3dp"
         android:text="#Available"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:id="@+id/card_video_item_desc"/>
 </LinearLayout>

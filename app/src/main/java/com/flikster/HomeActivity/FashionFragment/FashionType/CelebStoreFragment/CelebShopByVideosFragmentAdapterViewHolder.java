@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -24,8 +27,9 @@ public class CelebShopByVideosFragmentAdapterViewHolder extends RecyclerView.Ada
     FragmentManager fragmentManager;
     int a;
     Context context;
-
-    public CelebShopByVideosFragmentAdapterViewHolder(Context context, FragmentManager fragmentManager) {
+    ShopByVideoData.ShopByVideoInnerData outerHits;
+    public CelebShopByVideosFragmentAdapterViewHolder(Context context, FragmentManager fragmentManager,
+                                                      ShopByVideoData.ShopByVideoInnerData outerHits) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
         imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
@@ -34,6 +38,7 @@ public class CelebShopByVideosFragmentAdapterViewHolder extends RecyclerView.Ada
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
         this.fragmentManager = fragmentManager;
         this.context = context;
+        this.outerHits=outerHits;
     }
 
 
@@ -45,36 +50,29 @@ public class CelebShopByVideosFragmentAdapterViewHolder extends RecyclerView.Ada
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        holder.movieimg.setImageResource(R.drawable.pooja);
+        Glide.with(context).load(outerHits.getHits().get(position).get_source().getThumbnail().trim()).into(holder.card_video_item_image);
+        holder.card_video_item_desc.setVisibility(View.GONE);
+        holder.card_video_item_title.setText(outerHits.getHits().get(position).get_source().getTitle());
     }
 
     @Override
     public int getItemCount() {
-        //return imag.size();
-        return 4;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 4;
+        return outerHits.getHits().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView movieimg;
-        Button buybtn;
-
+        ImageView card_video_item_image;
+        TextView card_video_item_title,card_video_item_desc;
         public ViewHolder(View itemView) {
             super(itemView);
-            movieimg = (ImageView) itemView.findViewById(R.id.carousel_image);
+            card_video_item_image = (ImageView) itemView.findViewById(R.id.card_video_item_image);
+            card_video_item_title=(TextView)itemView.findViewById(R.id.card_video_item_title);
+            card_video_item_desc=(TextView)itemView.findViewById(R.id.card_video_item_desc);
         }
 
         @Override
         public void onClick(View view) {
             Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-            /*fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new BuyFashionTypeProductFragment())
-                    .addToBackStack("")
-                    .commit();*/
         }
     }
 }

@@ -58,6 +58,10 @@ public interface ApiInterface {
     @GET
     Call<AllStoreData> getAllStore(@Url String url);
 
+    @GET
+    Call<ShopByVideoData> getShopByVideo(@Url String url);
+
+
     @GET("http://apiv3-es.flikster.com/products/_search")
     Call<AllStoreData> getCelebMovieStoreData(@Query("pretty") Boolean s,
                                     @Query("size") Integer d,

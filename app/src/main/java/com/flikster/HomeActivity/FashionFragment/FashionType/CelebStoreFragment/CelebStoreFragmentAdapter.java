@@ -1,19 +1,28 @@
 package com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreRecyclerItemAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreTredingCelebFashionRecyclerItemAdapter;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.ExpandedGridView;
 import com.flikster.Util.SharedPrefsUtil;
@@ -22,6 +31,10 @@ import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 23-10-2017.
@@ -35,10 +48,12 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     CelebShopByVideosFragmentAdapterViewHolder celebShopByVideosFragmentAdapterViewHolder;
     CeleStoreRecyclerItemAdapter celeStoreRecyclerItemAdapter;
     CeleStoreTredingCelebFashionRecyclerItemAdapter celeStoreTredingCelebFashionRecyclerItemAdapter;
-    //    MenFashionFragmentListAdapterViewHolder menFashionFragmentlistAdapterViewHolder;
-    int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
+    List<String> carouselImg=new ArrayList<>();
+    AllStoreInnerData hits;
+    ApiInterface apiInterface;
+    ShopByVideoData.ShopByVideoInnerData outerHits;
 
-    public CelebStoreFragmentAdapter(Context context, FragmentManager fragmentManager) {
+    public CelebStoreFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits) {
         type.add(1);
         type.add(2);
         type.add(3);
@@ -48,6 +63,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         type.add(7);
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.hits=hits;
     }
 
     @Override
@@ -64,19 +80,39 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (viewType == 4) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv_one, parent, false);
             return new ViewHolder4(view);
-        } else if (viewType == 5) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_gallary1, parent, false);
-            return new ViewHolder5(view);
-        } else if (viewType == 6) {
+        }  else if (viewType == 6) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv_one, parent, false);
             return new ViewHolder6(view);
         } else if (viewType == 7) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv_one, parent, false);
             return new ViewHolder7(view);
+        }else if (viewType == 11) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details1, parent, false);
+            return new ViewHolder11(view);
+        }else if (viewType == 12) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details2, parent, false);
+            return new ViewHolder12(view);
+        }else if (viewType == 13) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details3, parent, false);
+            return new ViewHolder13(view);
+        }else if (viewType == 14) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details4, parent, false);
+            return new ViewHolder14(view);
+        }else if (viewType == 15) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details4_plus, parent, false);
+            return new ViewHolder15(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
             return new ViewHolder1(view);
         }
+    }
+
+    public String formatRole(List<String> role) {
+        String roleString = "";
+        for (int i = 0; i < role.size(); i++) {
+            roleString = roleString + ", " + role.get(i);
+        }
+        return roleString;
     }
 
     @Override
@@ -93,6 +129,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
 
         } else if (holder.getItemViewType() == 2) {
+            ((ViewHolder2) holder).carouselView.setPageCount(hits.getHits().size());
+            for(int i=0;i<hits.getHits().size();i++)
+            {
+                carouselImg.add(hits.getHits().get(i).get_source().getImageGallery().get(0));
+            }
             ((ViewHolder2) holder).carouselView.setImageListener(imageListener);
         } else if (holder.getItemViewType() == 3) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -105,31 +146,196 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celeStoreTredingCelebFashionRecyclerItemAdapter = new CeleStoreTredingCelebFashionRecyclerItemAdapter(context, 3, fragmentManager);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celeStoreTredingCelebFashionRecyclerItemAdapter);
-        } else if (holder.getItemViewType() == 5) {
-        } else if (holder.getItemViewType() == 6) {
+        }  else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Shop By Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebShopByVideosFragmentAdapterViewHolder = new CelebShopByVideosFragmentAdapterViewHolder(context,fragmentManager);
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebShopByVideosFragmentAdapterViewHolder);
+            initRetrofit(((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler,
+                    "http://apiv3-es.flikster.com/shopbyvideos/_search?size=10000&pretty=true&q=category:\"celebrity\"");
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Products");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebShopByVideosFragmentAdapterViewHolder = new CelebShopByVideosFragmentAdapterViewHolder(context,fragmentManager);
+            //celebShopByVideosFragmentAdapterViewHolder = new CelebShopByVideosFragmentAdapterViewHolder(context,fragmentManager);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebShopByVideosFragmentAdapterViewHolder);
+        }if (holder.getItemViewType() == 11) {
+            ((ViewHolder11) holder).followbtn.setText("BUY");
+            if (hits.getHits().get(position-4).get_source().getName() != null) {
+                ((ViewHolder11) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
+            }
+            if (hits.getHits().get(position-4).get_source().getCeleb() != null&&hits.getHits().get(position-4).get_source().getCeleb().size()!=0) {
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder11) holder).tv_tag_name.setText(hits.getHits().get(position-4).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic())
+                            .asBitmap().into(((ViewHolder11) holder).profile_image);
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder11) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole()));
+            }
+            if (hits.getHits().get(position-4).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(0).trim())
+                        .into(((ViewHolder11) holder).card_fashion_details1_img);
+            }
+        } else if (holder.getItemViewType() == 12) {
+            ((ViewHolder12) holder).followbtn.setText("BUY");
+            if (hits.getHits().get(position-4).get_source().getName() != null) {
+                ((ViewHolder12) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
+            }
+            if (hits.getHits().get(position-4).get_source().getCeleb() != null&&hits.getHits().get(position-4).get_source().getCeleb().size()!=0) {
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder12) holder).tv_tag_name.setText(hits.getHits().get(position-4).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic())
+                            .asBitmap().into(((ViewHolder12) holder).profile_image);
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder12) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole()));
+            }
+            if (hits.getHits().get(position-4).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(0).trim())
+                        .into(((ViewHolder12) holder).card_fashion_details2_img1);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(1).trim())
+                        .into(((ViewHolder12) holder).card_fashion_details2_img2);
+            }
+        } else if (holder.getItemViewType() == 13) {
+            ((ViewHolder13) holder).followbtn.setText("BUY");
+            if (hits.getHits().get(position-4).get_source().getName() != null) {
+                ((ViewHolder13) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
+            }
+            if (hits.getHits().get(position-4).get_source().getCeleb() != null &&hits.getHits().get(position-4).get_source().getCeleb().size()!=0) {
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder13) holder).tv_tag_name.setText(hits.getHits().get(position-4).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic())
+                            .asBitmap().into(((ViewHolder13) holder).profile_image);
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder13) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole()));
+            }
+            if (hits.getHits().get(position-4).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(0).trim())
+                        .into(((ViewHolder13) holder).card_fashion_details3_img1);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(1).trim())
+                        .into(((ViewHolder13) holder).card_fashion_details3_img2);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(2).trim())
+                        .into(((ViewHolder13) holder).card_fashion_details3_img3);
+            }
+        } else if (holder.getItemViewType() == 14) {
+            ((ViewHolder14) holder).followbtn.setText("BUY");
+            if (hits.getHits().get(position-4).get_source().getName() != null) {
+                ((ViewHolder14) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
+            }
+            if (hits.getHits().get(position-4).get_source().getCeleb() != null&&hits.getHits().get(position-4).get_source().getCeleb().size()!=0) {
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder14) holder).tv_tag_name.setText(hits.getHits().get(position-4).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic())
+                            .asBitmap().into(((ViewHolder14) holder).profile_image);
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder14) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole()));
+            }
+            if (hits.getHits().get(position-4).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(0).trim())
+                        .into(((ViewHolder14) holder).card_fashion_details4_img1);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(1).trim())
+                        .into(((ViewHolder14) holder).card_fashion_details4_img2);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(2).trim())
+                        .into(((ViewHolder14) holder).card_fashion_details4_img3);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(3).trim())
+                        .into(((ViewHolder14) holder).card_fashion_details4_img4);
+            }
+        } else if (holder.getItemViewType() == 15) {
+            ((ViewHolder15) holder).followbtn.setText("BUY");
+            if (hits.getHits().get(position-4).get_source().getName() != null) {
+                ((ViewHolder15) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
+            }
+            if (hits.getHits().get(position-4).get_source().getCeleb() != null&&hits.getHits().get(position-4).get_source().getCeleb().size()!=0) {
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder15) holder).tv_tag_name.setText(hits.getHits().get(position-4).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic())
+                            .asBitmap()
+                            .into(((ViewHolder15) holder).profile_image);
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder15) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole()));
+            }
+            if (hits.getHits().get(position-4).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(0).trim())
+                        .into(((ViewHolder15) holder).card_fashion_details4_plus_img1);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(1).trim())
+                        .into(((ViewHolder15) holder).card_fashion_details4_plus_img2);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(2).trim())
+                        .into(((ViewHolder15) holder).card_fashion_details4_plus_img3);
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getImageGallery().get(3).trim())
+                        .into(((ViewHolder15) holder).card_fashion_details4_plus_img4);
+            }
+            ((ViewHolder15) holder).card_fashion_details4_plus_text.setText("+ " + (hits.getHits().get(position-4).get_source().getImageGallery().size() - 4));
         }
 
 
     }
 
+    private void initRetrofit(final RecyclerView recyclerView, String url) {
+
+        apiInterface = ApiClient.getClient(url).create(ApiInterface.class);
+        Call<ShopByVideoData> call = apiInterface.getShopByVideo(url);
+        call.enqueue(new Callback<ShopByVideoData>() {
+            @Override
+            public void onResponse(Call<ShopByVideoData> call, Response<ShopByVideoData> response) {
+                outerHits = response.body().getHits();
+                celebShopByVideosFragmentAdapterViewHolder = new CelebShopByVideosFragmentAdapterViewHolder(context,fragmentManager,outerHits);
+                recyclerView.setAdapter(celebShopByVideosFragmentAdapterViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<ShopByVideoData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
     @Override
     public int getItemCount() {
-        return 7;
+        Log.e("size map",""+(hits.getHits().size()+6));
+        return (hits.getHits().size()+6);
     }
 
     @Override
     public int getItemViewType(int position) {
+        if (position==0)
+            return 1;
+        else if (position==1)
+            return 2;
+        else if(position==2)
+            return 3;
+        else if(position==3)
+            return 4;
+        else if (position==(hits.getHits().size()+6)-2)
+        {
+            return 6;
+        }
+        else if(position==(hits.getHits().size()+6)-1)
+        {
+            return 7;
+        }
+        else
+        {
+            switch (hits.getHits().get(position-4).get_source().getImageGallery().size()) {
+                case 1:
+                    return 11;
+                case 2:
+                    return 12;
+                case 3:
+                    return 13;
+                case 4:
+                    return 14;
+                case 5:
+                    return 15;
+            }
+        }
         return type.get(position);
     }
 
@@ -171,7 +377,6 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 //            expandgrid = (ExpandedGridView) itemView.findViewById(R.id.expandgrid);
 //            fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
             carouselView = (CarouselView) itemView.findViewById(R.id.carouselView);
-            carouselView.setPageCount(sampleImages.length);
         }
 
         @Override
@@ -256,10 +461,156 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         }
     }
 
+    public class ViewHolder11 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        Button followbtn;
+        ImageView card_fashion_details1_img, profile_image;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name;
+
+        public ViewHolder11(View itemView) {
+            super(itemView);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_fashion_details1_img = (ImageView) itemView.findViewById(R.id.card_fashion_details1_img);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
+            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.followbtn) {
+                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
+
+    public class ViewHolder12 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        Button followbtn;
+        ImageView card_fashion_details2_img1, card_fashion_details2_img2, profile_image;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name;
+
+        public ViewHolder12(View itemView) {
+            super(itemView);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_fashion_details2_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img1);
+            card_fashion_details2_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img2);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
+            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.followbtn) {
+                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
+
+            }
+
+        }
+    }
+
+    public class ViewHolder13 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        Button followbtn;
+        ImageView card_fashion_details3_img1, card_fashion_details3_img2, card_fashion_details3_img3, profile_image;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name;
+
+        public ViewHolder13(View itemView) {
+            super(itemView);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_fashion_details3_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img1);
+            card_fashion_details3_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img2);
+            card_fashion_details3_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img3);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
+            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.followbtn) {
+                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
+
+    public class ViewHolder14 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        Button followbtn;
+        ImageView card_fashion_details4_img1, card_fashion_details4_img2, card_fashion_details4_img3,
+                card_fashion_details4_img4, profile_image;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name;
+
+        public ViewHolder14(View itemView) {
+            super(itemView);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_fashion_details4_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img1);
+            card_fashion_details4_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img2);
+            card_fashion_details4_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img3);
+            card_fashion_details4_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img4);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
+            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.followbtn) {
+                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
+
+    public class ViewHolder15 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        Button followbtn;
+        ImageView card_fashion_details4_plus_img1, card_fashion_details4_plus_img2, card_fashion_details4_plus_img3,
+                card_fashion_details4_plus_img4, profile_image;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name, card_fashion_details4_plus_text;
+
+        public ViewHolder15(View itemView) {
+            super(itemView);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_fashion_details4_plus_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img1);
+            card_fashion_details4_plus_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img2);
+            card_fashion_details4_plus_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img3);
+            card_fashion_details4_plus_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img4);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_fashion_details4_plus_text = (TextView) itemView.findViewById(R.id.card_fashion_details4_plus_text);
+            card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
+            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.followbtn) {
+                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
+
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-            imageView.setImageResource(sampleImages[position]);
+            Glide.with(context).load(carouselImg.get(position).trim()).into(imageView);
+            //imageView.setImageURI(Uri.parse(carouselImg.get(position)));
         }
     };
 }
