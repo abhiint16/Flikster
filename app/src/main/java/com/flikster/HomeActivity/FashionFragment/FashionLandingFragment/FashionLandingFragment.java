@@ -31,7 +31,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     Bundle bundle;
     String flagEnable = "";
 
-    int[] tabImages = {R.drawable.celebritystore, R.drawable.celebritystore, R.drawable.menstoreicon, R.drawable.moviestrore, R.drawable.moviestrore};
+    int[] tabImages = {R.drawable.allstore, R.drawable.celebritystore, R.drawable.menstoreicon, R.drawable.moviestrore, R.drawable.fashion_womenstore_tab};
 
     @Nullable
     @Override
@@ -163,17 +163,17 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 3) {
-                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "WOMEN");
-                    getFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_container, new MenFashionLandingFragment())
-                            .addToBackStack("")
-                            .commit();
-                } else if (tab.getPosition() == 4) {
                     SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "MOVIE_STORE");
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_container, new CeleStoreFragment())
+                            .addToBackStack("")
+                            .commit();
+                } else if (tab.getPosition() == 4) {
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "WOMEN");
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_container, new MenFashionLandingFragment())
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 5) {
