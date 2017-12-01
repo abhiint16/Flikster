@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
@@ -31,7 +32,9 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
     List<String> comedyImg=new ArrayList<>();
     List<String> comedyTitle=new ArrayList<>();
     FragmentManager fragmentManager;
-    public ComedyViewHolder(Context context,List<String> comedyImg,List<String> comedyTitle,FragmentManager fragmentManager) {
+    WatchFragment.WatchFragCommInterface watchFragCommInterface;
+    public ComedyViewHolder(Context context, List<String> comedyTitle, List<String> comedyImg, FragmentManager fragmentManager,
+                            WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
@@ -40,6 +43,7 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.comedyImg=comedyImg;
         this.comedyTitle=comedyTitle;
         this.fragmentManager = fragmentManager;
+        this.watchFragCommInterface=watchFragCommInterface;
     }
 
     @Override
@@ -98,10 +102,7 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MovieSongsListFragment())
-                    .addToBackStack("")
-                    .commit();
+            watchFragCommInterface.carouselItemClick(comedyTitle.get(getAdapterPosition()),comedyImg,comedyTitle,new MovieSongsListFragment());
         }
     }
 

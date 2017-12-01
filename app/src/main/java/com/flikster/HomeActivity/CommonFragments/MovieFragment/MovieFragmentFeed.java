@@ -45,12 +45,15 @@ public class MovieFragmentFeed extends Fragment{
     }
 
     private void retrofitInit() {
+        Log.e("searching for slug",""+getArguments().getString("slug"));
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getMovieFeedData(true,"tags:mayabazar");
+        Call<FeedData> call = apiInterface.getMovieFeedData(true,100,"slug:\""+getArguments().getString("slug")+"\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 hits = response.body().getHits();
+
+                Log.e("searching for slug",""+hits.getHits().get(0).get_source().getId());
                 movieFeedAdapter = new MovieFeedAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
                         getArguments().getString("censor"),getArguments().getString("dor"),getArguments().getStringArrayList("genre"),
                         getArguments().getString("duration"),getArguments().getString("title"),getArguments().getString("slug"),hits);

@@ -49,6 +49,7 @@ public interface ApiInterface {
 
     @GET("http://apiv3-es.flikster.com/contents/_search")
     Call<FeedData> getMovieFeedData(@Query("pretty") Boolean s,
+                                    @Query("size") Integer d,
                                      @Query("q") String c);
 
     @GET
@@ -57,8 +58,10 @@ public interface ApiInterface {
     @GET
     Call<AllStoreData> getAllStore(@Url String url);
 
-
-
+    @GET("http://apiv3-es.flikster.com/products/_search")
+    Call<AllStoreData> getCelebMovieStoreData(@Query("pretty") Boolean s,
+                                    @Query("size") Integer d,
+                                    @Query("q") String c);
     ////////////////////////////////////////////////////////////
     //POST Request
 

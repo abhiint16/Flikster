@@ -11,6 +11,14 @@
 
     <include layout="@layout/card_header" />
 
+    <TextView
+        android:id="@+id/card_celebrity_feed_gallery1_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

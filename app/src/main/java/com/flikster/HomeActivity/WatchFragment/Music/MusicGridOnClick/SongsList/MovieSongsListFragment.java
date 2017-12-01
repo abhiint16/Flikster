@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import com.flikster.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by abhishek on 01-11-2017.
  */
@@ -29,6 +32,9 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart, toolbar_frag_multiicons_search, toolbar_frag_multiicons_overflow;
     FragmentManager fragmentManager;
     TextView toolbar_frag_multiicons_title;
+    String toolbarTitle;
+    List<String> img=new ArrayList<>();
+    List<String> title=new ArrayList<>();
 
     @Nullable
     @Override
@@ -53,10 +59,10 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
 
     private void initializeRest() {
         fragmentManager = getActivity().getSupportFragmentManager();
-        toolbar_frag_multiicons_title.setText("Saho");
+        toolbar_frag_multiicons_title.setText(toolbarTitle);
         layoutManagerShopByVideoFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerShopByVideoFragment);
-        shopByVideoFragmentAdapter = new MovieSongsListAdapter(getActivity(), fragmentManager);
+        shopByVideoFragmentAdapter = new MovieSongsListAdapter(getActivity(), fragmentManager,img,title);
         fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_notification.setVisibility(View.GONE);
@@ -82,4 +88,12 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
             fragmentManager.popBackStackImmediate();
         }
     }
+
+    public void getAllData(String toolbarTitle, List<String> img, List<String> title)
+    {
+        this.toolbarTitle=toolbarTitle;
+        this.title=title;
+        this.img=img;
+    }
+
 }

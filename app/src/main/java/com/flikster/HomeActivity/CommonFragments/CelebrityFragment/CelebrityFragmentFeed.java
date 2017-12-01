@@ -6,11 +6,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.FeedData;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -22,23 +31,42 @@ public class CelebrityFragmentFeed extends Fragment{
     RecyclerView.LayoutManager celebrityFragmentFeedLayoutManager;
     CelebrityFeedAdapter celebrityFeedAdapter;
     FragmentManager fragmentManager;
+    FeedInnerData hits;
+    ApiInterface apiInterface;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
         initializeViews();
         initializeRest();
+        retrofitInit();
         return  view;
+    }
+
+    private void retrofitInit() {
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getMovieFeedData(true,100,"slug:\""+getArguments().getString("slug")+"\"");
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                hits = response.body().getHits();
+                celebrityFeedAdapter = new CelebrityFeedAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
+                        getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
+                        getArguments().getString("placeOfBirth"),
+                        getArguments().getString("name"),hits);
+                celebrityFragmentFeedRecycler.setAdapter(celebrityFeedAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("xxx", "xxx" + call + t);
+            }
+        });
     }
 
     private void initializeRest() {
         celebrityFragmentFeedLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentFeedRecycler.setLayoutManager(celebrityFragmentFeedLayoutManager);
-        celebrityFeedAdapter = new CelebrityFeedAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
-                getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
-                getArguments().getString("placeOfBirth"),
-                getArguments().getString("name"));
-        celebrityFragmentFeedRecycler.setAdapter(celebrityFeedAdapter);
     }
 
     private void initializeViews() {

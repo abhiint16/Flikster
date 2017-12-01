@@ -56,7 +56,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
 
     private void tempMethod() {
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/celebrity/_search?pretty=true&q=slug:").create(ApiInterface.class);
-        Call<CelebrityData> call = apiInterface.getCelebrityData("http://apiv3-es.flikster.com/celebrity/_search?pretty=true&q=slug:" + "praveen-sattaru");
+        Call<CelebrityData> call = apiInterface.getCelebrityData("http://apiv3-es.flikster.com/celebrity/_search?pretty=true&q=slug:" + slug);
         call.enqueue(new Callback<CelebrityData>() {
             @Override
             public void onResponse(Call<CelebrityData> call, Response<CelebrityData> response) {
@@ -68,6 +68,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                     arguments.putStringArrayList("role", (ArrayList<String>) hits.getHits().get(0).get_source().getRole());
                     arguments.putString("placeOfBirth",hits.getHits().get(0).get_source().getPlaceOfBirth());
                     arguments.putString("name",hits.getHits().get(0).get_source().getName());
+                    arguments.putString("slug",slug);
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setAdapter(celebrityAdapter);
                     viewPager.setCurrentItem(1);
@@ -78,6 +79,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                     arguments.putStringArrayList("role", new  ArrayList<String>(){{add("");add("");}});
                     arguments.putString("placeOfBirth", "");
                     arguments.putString("name", "");
+                    arguments.putString("slug",slug);
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setAdapter(celebrityAdapter);
                     viewPager.setCurrentItem(1);

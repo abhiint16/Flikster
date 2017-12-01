@@ -17,6 +17,8 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+import com.leo.simplearcloader.SimpleArcDialog;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import java.util.List;
 
@@ -38,18 +40,21 @@ public class FeedFragment extends Fragment {
     FeedInnerData outerHits;
     Integer Count;
     Testing testing;
+    SimpleArcLoader mDialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
-        retrofitInit();
         initializeViews();
         initializeRest();
+        retrofitInit();
         return view;
     }
 
     private void retrofitInit() {
+        mDialog.setVisibility(View.VISIBLE);
+        mDialog.start();
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getTopRatedMovies(true,100,"*");
         call.enqueue(new Callback<FeedData>() {
@@ -58,6 +63,8 @@ public class FeedFragment extends Fragment {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
                 feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
                 fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
             }
 
@@ -71,6 +78,9 @@ public class FeedFragment extends Fragment {
     private void initializeRest() {
         feedLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(feedLayoutManager);
+        mDialog=(SimpleArcLoader)view.findViewById(R.id.arc_loader);
+        //mDialog = new SimpleArcDialog(getActivity());
+        //mDialog.setConfiguration(new ArcConfiguration(MainActivity.this));
         fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.colorImageBackgroundGrey));
     }
 

@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/white_solid_border"
     android:baselineAligned="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
 
     <include layout="@layout/card_header" />
 
