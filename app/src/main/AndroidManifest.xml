@@ -12,6 +12,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:vmSafeMode="true"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -83,6 +84,7 @@
         <activity
             android:name="com.flikster.permission.DangerousPermissionActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
         <activity android:name=".AllCommentActivity.AllCommentActivity"></activity>
         <service android:name="org.jboss.aerogear.android.authorization.oauth2.OAuth2AuthzService"/>
     </application>

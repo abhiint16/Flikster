@@ -6,7 +6,10 @@
     android:clickable="true"
     android:layout_height="wrap_content"
     android:id="@+id/card_description_linear"
-    android:padding="12dp">
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="@dimen/five"
+    android:paddingBottom="@dimen/five">
 
     <TextView
         android:id="@+id/tv_name"

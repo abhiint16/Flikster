@@ -30,7 +30,7 @@
             android:layout_height="23dp"
             android:layout_alignTop="@+id/ib_like"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="19dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/five"
             android:layout_marginStart="18dp"
             android:layout_toEndOf="@+id/ib_whatsapp"
@@ -42,9 +42,10 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_centerVertical="true"
+            android:background="@color/transparent"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/ib_messenger"
-            android:background="@drawable/like_icon" />
+            android:src="@drawable/like_icon" />
 
         <ImageButton
             android:id="@+id/ib_bookmark"
@@ -53,7 +54,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/bookmark_icon" />
+            android:background="@color/transparent"
+            android:src="@drawable/bookmark_icon" />
 
         <TextView
             android:layout_width="wrap_content"

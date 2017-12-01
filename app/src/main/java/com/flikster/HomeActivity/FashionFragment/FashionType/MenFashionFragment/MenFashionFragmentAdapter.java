@@ -20,7 +20,6 @@ import com.flikster.Util.SpacesItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
 /**
  * Created by abhishek on 23-10-2017.

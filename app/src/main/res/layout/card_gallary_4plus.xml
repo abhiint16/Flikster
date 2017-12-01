@@ -16,8 +16,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorImageBackgroundGrey"
         android:orientation="horizontal"
+        android:background="@color/white"
         android:clickable="false">
 
         <LinearLayout
@@ -34,17 +34,19 @@
                 android:layout_weight="2"
                 android:id="@+id/card_gallary5_img1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/no_image"
+                android:src="@drawable/placeholdergaller"
                 android:clickable="false"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_margin="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="@dimen/five"
                 android:id="@+id/card_gallary5_img2"
                 android:layout_weight="1"
+                android:layout_marginLeft="@dimen/five"
                 android:scaleType="centerCrop"
-                android:src="@drawable/no_image"
+                android:src="@drawable/placeholdergaller"
                 android:clickable="false"/>
         </LinearLayout>
 
@@ -58,21 +60,24 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_margin="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="@dimen/five"
+                android:layout_marginBottom="@dimen/five"
                 android:id="@+id/card_gallary5_img3"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/no_image"
+                android:src="@drawable/placeholdergaller"
                 android:clickable="false"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_margin="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="@dimen/five"
                 android:id="@+id/card_gallary5_img4"
                 android:layout_weight="2"
                 android:scaleType="centerCrop"
-                android:src="@drawable/no_image"
+                android:src="@drawable/placeholdergaller"
                 android:clickable="false"/>
         </LinearLayout>
     </LinearLayout>
@@ -85,6 +90,7 @@
             android:textColor="@color/white"
             android:layout_margin="5dp"
             android:gravity="center"
+            android:textSize="@dimen/fifteen"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 

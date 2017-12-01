@@ -13,8 +13,7 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/usericon"
-         />
+        android:src="@drawable/usericon" />
 
     <LinearLayout
         android:id="@+id/header_linear"

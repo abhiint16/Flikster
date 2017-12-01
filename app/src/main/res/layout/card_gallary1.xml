@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginBottom="10dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <include layout="@layout/card_header"></include>
 
     <ImageView
+        android:id="@+id/card_gallary1_img1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorImageBackgroundGrey"
-        android:id="@+id/card_gallary1_img1"
-        android:src="@drawable/bahubai" />
+        android:background="@color/style_background"
+        android:src="@drawable/placeholdergaller" />
 
     <include layout="@layout/card_footer"></include>
 

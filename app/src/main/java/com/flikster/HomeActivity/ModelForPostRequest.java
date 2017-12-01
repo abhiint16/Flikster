@@ -20,6 +20,7 @@ public class ModelForPostRequest {
         this.type = type;
         this.userId = userId;
         this.entityId = entityId;
+
         Log.e("insied ModelForPost","insied ModelForPostRequest"+this.type+this.userId+this.entityId);
     }
 
