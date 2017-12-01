@@ -6,11 +6,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
+import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -22,22 +31,42 @@ public class CelebrityFragmentStore extends Fragment{
     RecyclerView.LayoutManager celebrityFragmentStoreLayoutManager;
     CelebrityStoreAdapter celebrityStoreAdapter;
     FragmentManager fragmentManager;
+    ApiInterface apiInterface;
+    AllStoreInnerData hits;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
         initializeViews();
         initializeRest();
+        retrofitInit();
         return  view;
     }
+
+    private void retrofitInit() {
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=*").create(ApiInterface.class);
+        Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true,100,"tags:\""+getArguments().getString("slug")+"\"");
+        call.enqueue(new Callback<AllStoreData>() {
+            @Override
+            public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
+                hits = response.body().getHits();
+                celebrityStoreAdapter = new CelebrityStoreAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
+                        getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
+                        getArguments().getString("placeOfBirth"),
+                        getArguments().getString("name"),hits);
+                celebrityFragmentStoreRecycler.setAdapter(celebrityStoreAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<AllStoreData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
     private void initializeRest() {
         celebrityFragmentStoreLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentStoreRecycler.setLayoutManager(celebrityFragmentStoreLayoutManager);
-        celebrityStoreAdapter = new CelebrityStoreAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
-                getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
-                getArguments().getString("placeOfBirth"),
-                getArguments().getString("name"));
-        celebrityFragmentStoreRecycler.setAdapter(celebrityStoreAdapter);
     }
 
     private void initializeViews() {
