@@ -30,7 +30,7 @@ import com.flikster.Util.SharedPrefsUtil;
  * Created by abhishek on 17-10-2017.
  */
 
-public class CeleStoreFragment extends Fragment implements View.OnClickListener {
+public class CeleStoreFragment extends Fragment implements View.OnClickListener, TabLayout.OnTabSelectedListener {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerFashionFragment;
@@ -40,50 +40,42 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
     TabLayout tabLayout;
     private ScrollableViewPager viewPage;
     TextView toolbar_frag_multiicons_title;
+    String storeType;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_coommon_tablayout, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         initializeViews();
         initializeRest();
         return view;
     }
 
     private void initializeRest() {
-
-
         if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "HEADER_NAME").equals("MOVIE_STORE")) {
+            this.storeType="Movie";
             toolbar_frag_multiicons_title.setText("Movie Store");
         } else {
+            this.storeType="Celeb";
             toolbar_frag_multiicons_title.setText("Celeb Store");
         }
-
         createViewPager(viewPage);
         tabLayout.setupWithViewPager(viewPage);
         createTabIcons();
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-//        toolbar_frag_multiicons_notification.setOnClickListener(this);
-//        toolbar_frag_multiicons_cart.setOnClickListener(this);
+        tabLayout.addOnTabSelectedListener(this);
     }
 
     private void initializeViews() {
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_toolbar);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
-//        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-//        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         viewPage = (ScrollableViewPager) view.findViewById(R.id.viewpager);
-
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setSelectedTabIndicatorColor(getContext().getResources().getColor(R.color.horizontal_line));
-//        toolbar_frag_multiicons_toolbar.setVisibility(View.GONE);
-
     }
 
     @Override
@@ -93,38 +85,38 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
     }
 
     private void createTabIcons() {
+        TextView tabfive = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
+        tabfive.setText("All");
+        tabLayout.getTabAt(0).setCustomView(tabfive);
+
         TextView tabOne = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
         tabOne.setText("Clothing");
-        tabLayout.getTabAt(0).setCustomView(tabOne);
+        tabLayout.getTabAt(1).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
         tabTwo.setText("Eye Wear");
-        tabLayout.getTabAt(1).setCustomView(tabTwo);
+        tabLayout.getTabAt(2).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
         tabThree.setText("Foot Wear");
-        tabLayout.getTabAt(2).setCustomView(tabThree);
+        tabLayout.getTabAt(3).setCustomView(tabThree);
 
         TextView tabfour = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
         tabfour.setText("Accessories");
-        tabLayout.getTabAt(3).setCustomView(tabfour);
-
-        TextView tabfive = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.customtabtext, null);
-        tabfive.setText("Other");
-        tabLayout.getTabAt(4).setCustomView(tabfive);
-
+        tabLayout.getTabAt(4).setCustomView(tabfour);
     }
 
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFrag(new CelebStoreFirstTypeFragment(), "All");
         adapter.addFrag(new CelebStoreFirstTypeFragment(), "Clothing");
         adapter.addFrag(new CelebStoreFirstTypeFragment(), "Eye Wear");
         adapter.addFrag(new CelebStoreFirstTypeFragment(), "Foot Wear");
         adapter.addFrag(new CelebStoreFirstTypeFragment(), "Accessories");
-        adapter.addFrag(new CelebStoreFirstTypeFragment(), "Other");
         viewPager.setAdapter(adapter);
+        SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
+        SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "ALL");
         viewPage.setCurrentItem(0);
-
     }
 
     @Override
@@ -145,5 +137,58 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener 
             Intent intent = new Intent(getActivity(), MyBagActivity.class);
             startActivity(intent);
         }*/
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        if (tab.getPosition() == 0) {
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "ALL");
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
+                    .commit();
+        } else if (tab.getPosition() == 1) {
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "CLOTHING");
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
+                    .commit();
+        }
+        else if (tab.getPosition() == 1) {
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "EYEWEAR");
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
+                    .commit();
+        }
+        else if (tab.getPosition() == 1) {
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "FOOTWEAR");
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
+                    .commit();
+        }
+        else if (tab.getPosition() == 1) {
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
+            SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "ACCESSORIES");
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
+                    .commit();
+        }
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }

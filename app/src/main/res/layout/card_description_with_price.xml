@@ -1,42 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_gravity="center"
-    android:layout_width="match_parent"
-    android:clickable="true"
-    android:layout_height="wrap_content"
     android:id="@+id/card_description_linear"
-    android:padding="12dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:clickable="true"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="4"
         android:orientation="vertical"
-        android:layout_weight="4">
-    <TextView
-        android:id="@+id/card_description_with_price_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:clickable="false"
-        android:text="no data"
-        android:textSize="16sp"/>
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
-    <TextView
-        android:id="@+id/card_description_with_price_desc"
-        android:layout_width="match_parent"
-        android:clickable="false"
-        android:layout_height="wrap_content"
-        android:text="no data"
-        android:textStyle="normal"
-        android:textColor="@android:color/secondary_text_light"
-        android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/card_description_with_price_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:text="no data"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/card_description_with_price_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:text="no data"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="12sp"
+            android:textStyle="normal" />
     </LinearLayout>
-    <TextView
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Price"
-        android:gravity="center"
-        android:id="@+id/card_description_with_price_price"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Price"
+            android:textColor="@color/black"
+            android:textStyle="bold|italic"/>
+
+        <TextView
+            android:id="@+id/card_description_with_price_price"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="null" />
+    </LinearLayout>
 </LinearLayout>

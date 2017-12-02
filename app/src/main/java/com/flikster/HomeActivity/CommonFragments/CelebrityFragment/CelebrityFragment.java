@@ -70,6 +70,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                     arguments.putString("name",hits.getHits().get(0).get_source().getName());
                     arguments.putString("slug",slug);
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
+                    viewPager.setOffscreenPageLimit(2);
                     viewPager.setAdapter(celebrityAdapter);
                     viewPager.setCurrentItem(1);
                 }else {
@@ -82,6 +83,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                     arguments.putString("slug",slug);
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setAdapter(celebrityAdapter);
+                    viewPager.setOffscreenPageLimit(2);
                     viewPager.setCurrentItem(1);
                 }
 

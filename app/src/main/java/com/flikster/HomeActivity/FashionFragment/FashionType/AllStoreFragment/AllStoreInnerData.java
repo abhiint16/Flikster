@@ -51,6 +51,26 @@ public class AllStoreInnerData {
         private List<String> imageGallery;
         @SerializedName("name")
         private String name;
+        @SerializedName("price")
+        private String price;
+        @SerializedName("productDescription")
+        private String productDescription;
+
+        public String getProductDescription() {
+            return productDescription;
+        }
+
+        public void setProductDescription(String productDescription) {
+            this.productDescription = productDescription;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
 
         public List<AllStoreCelebData> getCeleb() {
             return celeb;

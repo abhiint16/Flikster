@@ -37,6 +37,7 @@ public class CelebrityFragmentStore extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
+        Log.e("insdei createview",""+getArguments().getString("slug"));
         initializeViews();
         initializeRest();
         retrofitInit();
@@ -44,12 +45,14 @@ public class CelebrityFragmentStore extends Fragment{
     }
 
     private void retrofitInit() {
+        Log.e("check slug store",""+getArguments().getString("slug"));
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=*").create(ApiInterface.class);
         Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true,100,"tags:\""+getArguments().getString("slug")+"\"");
         call.enqueue(new Callback<AllStoreData>() {
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
+                Log.e("check slug store",""+getArguments().getString("slug")+hits.getHits().size());
                 celebrityStoreAdapter = new CelebrityStoreAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
                         getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
                         getArguments().getString("placeOfBirth"),
