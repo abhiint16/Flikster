@@ -84,6 +84,11 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
         {
             this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb";
         }
+        else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("CLOTHING"))
+        {
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb";
+        }
     }
 
     private void initializeRest() {

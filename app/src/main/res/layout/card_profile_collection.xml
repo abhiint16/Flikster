@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="350dp"
     android:layout_marginBottom="10dp"
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/card_profile_collection_main_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -16,10 +16,10 @@
         android:textSize="18sp" />
 
     <LinearLayout
-        android:id="@+id/l"
+        android:id="@+id/card_profile_collection_main_container"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_below="@+id/tv"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/card_profile_collection_main_title"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -30,7 +30,7 @@
             android:padding="5dp">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/card_profile_collection_main_img"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
@@ -50,26 +50,32 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/whatsapp_icon" />
+                    android:background="@color/transparent"
+                    android:src="@drawable/whatsapp_icon" />
 
                 <ImageButton
                     android:id="@+id/ib_messenger"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/ib_whatsapp"
-                    android:background="@drawable/messenger_icon" />
+                    android:background="@color/transparent"
+                    android:src="@drawable/messenger_icon" />
 
                 <ImageButton
                     android:id="@+id/ib_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@+id/ib_messenger"
-                    android:background="@drawable/like_icon" />
+                    android:background="@color/transparent"
+                    android:src="@drawable/like_icon" />
 
             </LinearLayout>
         </LinearLayout>
@@ -80,7 +86,7 @@
             android:layout_weight="0.7"></LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/quote"
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -119,28 +125,32 @@
             android:textColor="@color/black"
             android:textSize="10sp" />
     </LinearLayout>
-
-    <include layout="@layout/fragment_common_recyclerview"
+-->
+    <include
+        layout="@layout/fragment_common_recyclerview"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/quote"></include>
-
+        android:background="@color/transparent" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/card_profile_collection_celeb_desc"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_above="@+id/fragment_common_recyclerview_recycler"
-        android:layout_toLeftOf="@+id/quote"
+        android:layout_above="@+id/fragment_common_recycler_container"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:id="@+id/profile_collection_linear">
+        android:padding="5dp">
 
         <com.flikster.Util.RoundedImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/pooja"
-            android:id="@+id/profile_collection_dp"/>
+            android:id="@+id/profile_collection_dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/pooja" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,20 +159,21 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/card_profile_collection_celeb_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/dp_name"
                 android:layout_weight="1"
                 android:text="POOJA HEGDE"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/card_profile_collection_role"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="#ACTOR"
-                android:textSize="10sp"/>
+                android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

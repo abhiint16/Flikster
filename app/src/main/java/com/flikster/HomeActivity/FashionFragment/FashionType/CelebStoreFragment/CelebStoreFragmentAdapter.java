@@ -1,7 +1,9 @@
 package com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.Al
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreRecyclerItemAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreTredingCelebFashionRecyclerItemAdapter;
 import com.flikster.HomeActivity.ShopByVideoData;
+import com.flikster.HomeActivity.WidgetData;
 import com.flikster.R;
 import com.flikster.Util.ExpandedGridView;
 import com.flikster.Util.SharedPrefsUtil;
@@ -52,6 +56,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     AllStoreInnerData hits;
     ApiInterface apiInterface;
     ShopByVideoData.ShopByVideoInnerData outerHits;
+    WidgetData.WidgetInnerData widgetHits;
 
     public CelebStoreFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits) {
         type.add(1);
@@ -75,7 +80,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.carouselview, parent, false);
             return new ViewHolder2(view);
         } else if (viewType == 3) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_store_profile_collection, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview, parent, false);
             return new ViewHolder3(view);
         } else if (viewType == 4) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv_one, parent, false);
@@ -137,9 +142,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder2) holder).carouselView.setImageListener(imageListener);
         } else if (holder.getItemViewType() == 3) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ((ViewHolder3) holder).fragment_common_recycler_container.setLayoutParams(layoutParams);
             ((ViewHolder3) holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
-            celeStoreRecyclerItemAdapter = new CeleStoreRecyclerItemAdapter(context, 3, fragmentManager);
-            ((ViewHolder3) holder).fragment_common_recyclerview_recycler.setAdapter(celeStoreRecyclerItemAdapter);
+            initRetrofitProfileCollection(((ViewHolder3) holder).fragment_common_recyclerview_recycler,
+                    "http://apiv3-es.flikster.com/widgets/_search?pretty=true&size=100&q=*");
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Trending Celebrity Fashions");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -278,6 +285,23 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
     }
 
+    private void initRetrofitProfileCollection(final RecyclerView recyclerView, String url) {
+        apiInterface = ApiClient.getClient(url).create(ApiInterface.class);
+        Call<WidgetData> call = apiInterface.getWidgetData(url);
+        call.enqueue(new Callback<WidgetData>() {
+            @Override
+            public void onResponse(Call<WidgetData> call, Response<WidgetData> response) {
+                widgetHits = response.body().getHits();
+                celeStoreRecyclerItemAdapter = new CeleStoreRecyclerItemAdapter(context,fragmentManager,widgetHits);
+                recyclerView.setAdapter(celeStoreRecyclerItemAdapter);
+            }
+            @Override
+            public void onFailure(Call<WidgetData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
     private void initRetrofit(final RecyclerView recyclerView, String url) {
 
         apiInterface = ApiClient.getClient(url).create(ApiInterface.class);
@@ -387,11 +411,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         RecyclerView fragment_common_recyclerview_recycler;
-
+        RelativeLayout fragment_common_recycler_container;
         public ViewHolder3(View itemView) {
             super(itemView);
             fragment_common_recyclerview_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
-
+            fragment_common_recycler_container=(RelativeLayout)itemView.findViewById(R.id.fragment_common_recycler_container);
         }
 
         @Override
