@@ -17,9 +17,14 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsBottomHorRecyclerAdapter;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
+import com.flikster.HomeActivity.FeedData;
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.Util.GlobalData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.R;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import java.util.List;
 
@@ -42,6 +47,10 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     ApiInterface apiInterface;
     List<GalleryRecommendedRecyclerData.GalleryInnerData> items;
     Integer Count;
+
+//    GalleryCardClick.Galleryimageclick testing;
+    SimpleArcLoader mDialog;
+    GalleryInnerData outerHits;
 
     public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
         this.context = context;
@@ -70,7 +79,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    private void galleryBottomHorRecyclerRetrofitInit(final RecyclerView.ViewHolder viewholder) {
+    /*private void galleryBottomHorRecyclerRetrofitInit(final RecyclerView.ViewHolder viewholder) {
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/gallery").create(ApiInterface.class);
         Call<GalleryRecommendedRecyclerData> call = apiInterface.getGalleryData("http://apiv3.flikster.com/v3/content-ms/getContentByType/gallery");
         call.enqueue(new Callback<GalleryRecommendedRecyclerData>() {
@@ -78,14 +87,44 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
             public void onResponse(Call<GalleryRecommendedRecyclerData> call, Response<GalleryRecommendedRecyclerData> response) {
                 items = response.body().getItems();
                 Count = response.body().getCount();
-                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-                galleryBottomHorRecyclerAdapter=new GalleryBottomHorRecyclerAdapter(context,items,Count);
-                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+                galleryBottomHorRecyclerAdapter = new GalleryBottomHorRecyclerAdapter(context, items, Count);
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
             }
+
             @Override
             public void onFailure(Call<GalleryRecommendedRecyclerData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }*/
+
+    private void galleryBottomHorRecyclerRetrofitInit(final RecyclerView.ViewHolder viewholder) {
+//        mDialog.setVisibility(View.VISIBLE);
+        String gallery = "contentType:" + "\"gallery\"";
+        Log.e("gallery", gallery);
+//        mDialog.start();
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search").create(ApiInterface.class);
+        Call<GalleryData> call = apiInterface.getAllGalleryData(true, "createdAt:desc", 1000, gallery);
+        Log.e("GAlleryAPI", call + "");
+        call.enqueue(new Callback<GalleryData>() {
+            @Override
+            public void onResponse(Call<GalleryData> call, Response<GalleryData> response) {
+                outerHits = response.body().getHits();
+                Count = outerHits.getTotal();
+                Log.e("Count", Count + "");
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
+                layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+//                galleryBottomHorRecyclerAdapter = new GalleryBottomHorRecyclerAdapter(context, fragmentManager, outerHits, Count, testing);
+                galleryBottomHorRecyclerAdapter = new GalleryBottomHorRecyclerAdapter(context, fragmentManager, outerHits, Count);
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<GalleryData> call, Throwable t) {
                 Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
@@ -93,7 +132,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-            return galleryImgLinks.size() + 1;
+        return galleryImgLinks.size() + 1;
     }
 
     @Override
@@ -116,7 +155,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, GalleryFullScreen.class);
-            intent.putExtra("galleryimglink",galleryImgLinks.get(getAdapterPosition()));
+            intent.putExtra("galleryimglink", galleryImgLinks.get(getAdapterPosition()));
             context.startActivity(intent);
         }
     }

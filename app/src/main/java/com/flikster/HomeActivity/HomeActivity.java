@@ -101,7 +101,8 @@ import java.util.Locale;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface {
+public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing, WatchFragment.WatchFragCommInterface {
+//class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing, GalleryCardClick.Galleryimageclick, WatchFragment.WatchFragCommInterface {
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -566,6 +567,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         firstTimeLaunch(fragment);
     }
 
+
     @Override
     public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType) {
         NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
@@ -581,11 +583,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void seeMoreComments(String userName,String userId,String entityId) {
-        Intent intent=new Intent(HomeActivity.this, AllCommentActivity.class);
-        intent.putExtra("entityId",entityId);
-        intent.putExtra("userName",userName);
-        intent.putExtra("userId",userId);
+    public void seeMoreComments(String userName, String userId, String entityId) {
+        Intent intent = new Intent(HomeActivity.this, AllCommentActivity.class);
+        intent.putExtra("entityId", entityId);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userId", userId);
         startActivity(intent);
     }
 
@@ -629,15 +631,22 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void carouselContainerClick(String toolbarTitle, List<String> img, List<String> title, Fragment fragment) {
-        MusicGridFragment musicGridFragment=(MusicGridFragment)fragment;
-        musicGridFragment.getAllData(toolbarTitle,img,title);
+        MusicGridFragment musicGridFragment = (MusicGridFragment) fragment;
+        musicGridFragment.getAllData(toolbarTitle, img, title);
         firstTimeLaunch(fragment);
     }
 
     @Override
     public void carouselItemClick(String toolbarTitle, List<String> img, List<String> title, Fragment fragment) {
-        MovieSongsListFragment movieSongsListFragment=(MovieSongsListFragment)fragment;
-        movieSongsListFragment.getAllData(toolbarTitle,img,title);
+        MovieSongsListFragment movieSongsListFragment = (MovieSongsListFragment) fragment;
+        movieSongsListFragment.getAllData(toolbarTitle, img, title);
         firstTimeLaunch(fragment);
     }
+
+    /*@Override
+    public void galleryCardOnItemEvent(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment) {
+        GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
+        galleryCardClick.onClickupdateImage(galleryImgLinks, name, profilePic, type, title);
+        firstTimeLaunch(fragment);
+    }*/
 }

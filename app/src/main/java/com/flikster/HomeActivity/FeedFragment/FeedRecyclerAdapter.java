@@ -1162,7 +1162,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -1704,7 +1705,6 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             "",
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
-
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,

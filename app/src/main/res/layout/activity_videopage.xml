@@ -10,13 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <Button
             android:id="@+id/closebtn"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_margin="@dimen/ten"
+            android:clickable="true"
+            android:layout_marginTop="@dimen/ten"
+            android:layout_marginLeft="@dimen/fifteen"
             android:background="@drawable/closeicon" />
 
         <ImageButton
