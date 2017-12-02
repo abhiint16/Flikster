@@ -57,6 +57,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     JukeBoxRecyclerViewHolder jukeBoxRecyclerViewHolder;
     List<String> audio = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
+    String userId = "PAWANKALYAN";
+
 
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count, FeedFragment.Testing testing) {
         this.context = context;
@@ -121,14 +123,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder.getItemViewType() == 1) {
-            new PostRetrofit().checkForLike("like", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder1) holder).ib_like, context);
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder1) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder1) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder1) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder1) holder).followbtn, context);
-            //if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder1) holder).ib_bookmark, context);
-            ((ViewHolder1)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder1) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder1) holder).ib_bookmark, context);
+            ((ViewHolder1) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1) holder).card_critic_review_main_image);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
@@ -147,13 +148,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder1) holder).tv_description.setText(Html.fromHtml(Common.formatString(outerHits.getHits().get(position).get_source().getText())));
             ((ViewHolder1) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 2) {
-            new PostRetrofit().checkForLike("like", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_like, context);
-            ((ViewHolder2)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_like, context);
+            ((ViewHolder2) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder2) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder2) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder2) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder2) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
                 ((ViewHolder2) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -169,16 +170,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
             ((ViewHolder2) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 3) {
-            new PostRetrofit().checkForLike("like", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder3) holder).ib_like, context);
-            ((ViewHolder3)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder3) holder).ib_like, context);
+            ((ViewHolder3) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder3) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder3) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder3) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder3) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder3) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder3) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
                 ((ViewHolder3) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                Log.e("profilename", outerHits.getHits().get(position).get_source().getMovie().get(0).getName() + "");
                 ((ViewHolder3) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
             } else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder3) holder).profile_image));
@@ -192,13 +194,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder3) holder).card_gallary1_img1);
             ((ViewHolder3) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 4) {
-            new PostRetrofit().checkForLike("like", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder4) holder).ib_like, context);
-            ((ViewHolder4)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder4) holder).ib_like, context);
+            ((ViewHolder4) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder4) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder4) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder4) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder4) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder4) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder4) holder).ib_bookmark, context);
             Log.e("videosonglink", "videosonglink " + outerHits.getHits().get(position).get_source().getMedia().getVideo());
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder4) holder).profile_image));
@@ -216,13 +218,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder4) holder).news_img);
             ((ViewHolder4) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 5) {
-            new PostRetrofit().checkForLike("like", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_like, context);
-            ((ViewHolder5)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_like, context);
+            ((ViewHolder5) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder5) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder5) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder5) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder5) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder5) holder).profile_image));
                 ((ViewHolder5) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -239,13 +241,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder5) holder).card_gallary1_img1);
             ((ViewHolder5) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 6) {
-            new PostRetrofit().checkForLike("like", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder6) holder).ib_like, context);
-            ((ViewHolder6)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder6) holder).ib_like, context);
+            ((ViewHolder6) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder6) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder6) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder6) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder6) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder6) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder6) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
                 ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -262,13 +264,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder6) holder).card_gallary1_img1);
             ((ViewHolder6) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 10) {
-            new PostRetrofit().checkForLike("like", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder7) holder).ib_like, context);
-            ((ViewHolder7)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder7) holder).ib_like, context);
+            ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder7) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder7) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder7) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder7) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder7) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder7) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder7) holder).profile_image));
                 ((ViewHolder7) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -285,13 +287,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder7) holder).card_gallary1_img1);
             ((ViewHolder7) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 8) {
-            new PostRetrofit().checkForLike("like", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder8) holder).ib_like, context);
-            ((ViewHolder8)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder8) holder).ib_like, context);
+            ((ViewHolder8) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder8) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder8) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder8) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder8) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder8) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder8) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder8) holder).profile_image));
                 ((ViewHolder8) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -307,14 +309,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder8) holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
             ((ViewHolder8) holder).fragment_common_recyclerview_recycler.setAdapter(jukeBoxRecyclerViewHolder);
             ((ViewHolder8) holder).card_footer_container.setVisibility(View.GONE);
-        }
-        else if (holder.getItemViewType() ==11) {
-            ((ViewHolder11)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+        } else if (holder.getItemViewType() == 11) {
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder11) holder).ib_like, context);
+            ((ViewHolder11) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder11) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder11) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder11) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder11) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder11) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder11) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder11) holder).profile_image));
                 ((ViewHolder11) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -331,14 +333,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder11) holder).card_gallary2_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder11) holder).card_gallary2_img2);
             ((ViewHolder11) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
-        }
-        else if (holder.getItemViewType() == 12) {
-            ((ViewHolder12)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+        } else if (holder.getItemViewType() == 12) {
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder12) holder).ib_like, context);
+            ((ViewHolder12) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder12) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder12) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder12) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder12) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder12) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder12) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder12) holder).profile_image));
                 ((ViewHolder12) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -356,14 +358,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder12) holder).card_gallary3_img2);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1)).into(((ViewHolder12) holder).card_gallary3_img3);
             ((ViewHolder12) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
-        }
-        else if (holder.getItemViewType() == 13) {
-            ((ViewHolder13)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+        } else if (holder.getItemViewType() == 13) {
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder13) holder).ib_like, context);
+            ((ViewHolder13) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder13) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder13) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder13) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder13) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder13) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder13) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder13) holder).profile_image));
                 ((ViewHolder13) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -382,14 +384,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1)).into(((ViewHolder13) holder).card_gallary4_img3);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(2)).into(((ViewHolder13) holder).card_gallary4_img4);
             ((ViewHolder13) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
-        }
-        else if (holder.getItemViewType() == 14) {
-            ((ViewHolder14)holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
+        } else if (holder.getItemViewType() == 14) {
+            new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder14) holder).ib_like, context);
+            ((ViewHolder14) holder).card_celebrity_feed_gallery1_title.setVisibility(View.GONE);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder14) holder).followbtn, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getMovie().get(0).getId(), ((ViewHolder14) holder).followbtn, context);
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
-                new PostRetrofit().checkForFollow("follow", "VIJAY", outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder14) holder).followbtn, context);
-            new PostRetrofit().checkForBookmark("bookmark", "VIJAY", outerHits.getHits().get(position).get_source().getId(), ((ViewHolder14) holder).ib_bookmark, context);
+                new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder14) holder).followbtn, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder14) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder14) holder).profile_image));
                 ((ViewHolder14) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
@@ -478,7 +480,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_critic_review_main_image, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_critic_review_moviename,
-                card_movie_review_bottom_header_criticrating,card_celebrity_feed_gallery1_title,
+                card_movie_review_bottom_header_criticrating, card_celebrity_feed_gallery1_title,
                 card_comment_text_see_more_comments;
         ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -490,7 +492,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder1(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_critic_review_main_image = (ImageView) itemView.findViewById(R.id.card_critic_review_main_image);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -547,21 +549,18 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//            }
         }
     }
 
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_quote_tv,card_comment_text_see_more_comments,
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_quote_tv, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
         LinearLayout card_description_linear, header_linear;
         Button followbtn;
@@ -573,7 +572,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder2(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
@@ -626,41 +625,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
-            } else if (view.getId() == R.id.ib_like) {
-                Log.e("inside like clikc", "inside like click");
-                ib_like.setImageResource(0);
-                ib_like.setImageResource(R.drawable.like_pink);
-                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
 
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
-        ImageButton ib_like,ib_bookmark;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+        ImageButton ib_like, ib_bookmark;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
-        ImageButton video_btn,card_comment_text_send_btn;
+        ImageButton video_btn, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         private Button followbtn;
         LinearLayout header_linear;
@@ -672,7 +651,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder3(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -761,43 +740,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
-            }
-            //else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "news or Movie inside like click");
-//                Log.e("actionLike", "" + actionLike);
-//                if (actionLike) {
-//                    Toast.makeText(context, "User Liked" + getAdapterPosition(), Toast.LENGTH_SHORT).show();
-//                    ib_like.setImageResource(0);
-//                    ib_like.setImageResource(R.drawable.like_pink);
-//                    new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//                    actionLike = false;
-//                } else {
-//                    Toast.makeText(context, "User UnLiked" + getAdapterPosition(), Toast.LENGTH_SHORT).show();
-//                    ib_like.setImageResource(0);
-//                    ib_like.setImageResource(R.drawable.like_icon);
-//                    new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//                    actionLike = true;
-//                }
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
 
@@ -806,9 +753,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView news_img, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
-        ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
+        ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         Button followbtn;
         LinearLayout header_linear, card_description_linear;
@@ -818,7 +765,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder4(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             news_img = (ImageView) itemView.findViewById(R.id.news_img);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -911,32 +858,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
 
         }
@@ -944,9 +870,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
-        ImageButton ib_like,ib_bookmark;
+        ImageButton ib_like, ib_bookmark;
         Button followbtn;
         ImageButton video_btn, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -959,7 +885,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder5(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -1038,42 +964,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
 
     public class ViewHolder6 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
-        ImageButton ib_like,ib_bookmark;
-        ImageButton video_btn,card_comment_text_send_btn;
+        ImageButton ib_like, ib_bookmark;
+        ImageButton video_btn, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         Button followbtn;
         LinearLayout header_linear;
@@ -1084,7 +989,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder6(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -1165,32 +1070,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             " ", new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
@@ -1198,7 +1082,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder7 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
         ImageButton video_btn;
         ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
@@ -1213,7 +1097,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder7(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary1_img1 = (ImageView) itemView.findViewById(R.id.card_gallary1_img1);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -1291,40 +1175,19 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
 
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
 
     public class ViewHolder8 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_audio_jukebox_imageview, profile_image;
-        TextView tv_tag_name, tv_tag_desc,card_comment_text_see_more_comments,card_celebrity_feed_gallery1_title;
-        ImageButton ib_like,ib_bookmark,card_comment_text_send_btn;
+        TextView tv_tag_name, tv_tag_desc, card_comment_text_see_more_comments, card_celebrity_feed_gallery1_title;
+        ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         ImageButton video_btn;
         LinearLayout header_linear;
@@ -1338,7 +1201,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder8(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_audio_jukebox_imageview = (ImageView) itemView.findViewById(R.id.card_audio_jukebox_imageview);
             fragment_common_recyclerview_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_recycler);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
@@ -1391,32 +1254,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() == null) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2);
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
             /*else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
@@ -1441,8 +1283,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolder11 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_gallary2_img1,card_gallary2_img2, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+        ImageView card_gallary2_img1, card_gallary2_img2, profile_image;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
         ImageButton video_btn;
         ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
@@ -1456,7 +1298,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder11(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary2_img1 = (ImageView) itemView.findViewById(R.id.card_gallary2_img1);
             card_gallary2_img2 = (ImageView) itemView.findViewById(R.id.card_gallary2_img2);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
@@ -1538,37 +1380,19 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
 
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
 
 
     public class ViewHolder12 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_gallary3_img1,card_gallary3_img2,card_gallary3_img3, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+        ImageView card_gallary3_img1, card_gallary3_img2, card_gallary3_img3, profile_image;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
         ImageButton video_btn;
         ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
@@ -1583,7 +1407,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder12(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary3_img1 = (ImageView) itemView.findViewById(R.id.card_gallary3_img1);
             card_gallary3_img2 = (ImageView) itemView.findViewById(R.id.card_gallary3_img2);
             card_gallary3_img3 = (ImageView) itemView.findViewById(R.id.card_gallary3_img3);
@@ -1664,37 +1488,19 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
 
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
 
 
     public class ViewHolder13 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_gallary4_img1,card_gallary4_img2,card_gallary4_img3,card_gallary4_img4, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
+        ImageView card_gallary4_img1, card_gallary4_img2, card_gallary4_img3, card_gallary4_img4, profile_image;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
         ImageButton video_btn;
         ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
@@ -1708,7 +1514,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder13(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary4_img1 = (ImageView) itemView.findViewById(R.id.card_gallary4_img1);
             card_gallary4_img2 = (ImageView) itemView.findViewById(R.id.card_gallary4_img2);
             card_gallary4_img3 = (ImageView) itemView.findViewById(R.id.card_gallary4_img3);
@@ -1790,41 +1596,20 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
 
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
 
 
     public class ViewHolder14 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView card_gallary5_img1,card_gallary5_img2,card_gallary5_img3,card_gallary5_img4, profile_image;
-        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description,card_comment_text_see_more_comments,
-                card_celebrity_feed_gallery1_title,card_gallary5_text;
+        ImageView card_gallary5_img1, card_gallary5_img2, card_gallary5_img3, card_gallary5_img4, profile_image;
+        TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
+                card_celebrity_feed_gallery1_title, card_gallary5_text;
         ImageButton video_btn;
         ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
@@ -1838,7 +1623,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public ViewHolder14(View itemView) {
             super(itemView);
-            card_celebrity_feed_gallery1_title=(TextView)itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
+            card_celebrity_feed_gallery1_title = (TextView) itemView.findViewById(R.id.card_celebrity_feed_gallery1_title);
             card_gallary5_img1 = (ImageView) itemView.findViewById(R.id.card_gallary5_img1);
             card_gallary5_img2 = (ImageView) itemView.findViewById(R.id.card_gallary5_img2);
             card_gallary5_img3 = (ImageView) itemView.findViewById(R.id.card_gallary5_img3);
@@ -1921,32 +1706,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
 
                 }
-            }
-//            else if (view.getId() == R.id.ib_like) {
-//                Log.e("inside like clikc", "inside like click");
-//                ib_like.setImageResource(0);
-//                ib_like.setImageResource(R.drawable.like_pink);
-//                new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_like, context);
-//            }
-//            else if (view.getId() == R.id.followbtn) {
-//                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(), followbtn, context);
-//                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)
-//                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), followbtn, context);
-//                else
-//                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-//            }
-//            else if (view.getId() == R.id.ib_bookmark) {
-//                /*if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0)*/
-//                new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId(), ib_bookmark, context);
-//                /*else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0)*/
-//                /*    new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(), ib_bookmark, context);*/
-//            }
-            else if (view.getId() == R.id.card_comment_text_send_btn) {
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", "VIJAY",
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", "VIJAY", outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }
@@ -1970,7 +1734,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (actionLikee) {
             ib_like.setImageResource(0);
             ib_like.setImageResource(R.drawable.like_pink);
-            new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPositionValue).get_source().getId(), ib_like, context);
+            new PostRetrofit().postRetrofitMethod("like", userId, outerHits.getHits().get(getAdapterPositionValue).get_source().getId(), ib_like, context);
             actionLikee = false;
             Toast.makeText(context, "You Like " + getAdapterPositionValue, Toast.LENGTH_SHORT).show();
             Log.e("inside like clikc", "news or Movie inside like click");
@@ -1979,7 +1743,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Toast.makeText(context, "You UnLike " + getAdapterPositionValue, Toast.LENGTH_SHORT).show();
             ib_like.setImageResource(0);
             ib_like.setImageResource(R.drawable.like_icon);
-            new PostRetrofit().postRetrofitMethod("like", "VIJAY", outerHits.getHits().get(getAdapterPositionValue).get_source().getId(), ib_like, context);
+            new PostRetrofit().postRetrofitMethod("like", userId, outerHits.getHits().get(getAdapterPositionValue).get_source().getId(), ib_like, context);
             actionLikee = true;
             Log.e("inside like clikc", "news or Movie inside like click");
             Log.e("actionLike", "" + actionLikee);
@@ -1988,33 +1752,30 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     //Follow or UnFollow action
     private void followOrUnFollow(boolean actionFollow, final Button followbtn, int adapterPositionValue) {
-        try {
-            Log.e("TextData", followbtn.getText().toString() + "");
-            if (followbtn.getText().toString().equals("follow")) {
-                if (outerHits.getHits().get(adapterPositionValue).get_source().getMovie() != null && outerHits.getHits().get(adapterPositionValue).get_source().getMovie().size() != 0) {
-                    followcolorChange(followbtn);
-                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(adapterPositionValue).get_source().getMovie().get(0).getId(), followbtn, context);
-                } else if (outerHits.getHits().get(adapterPositionValue).get_source().getCeleb() != null && outerHits.getHits().get(adapterPositionValue).get_source().getCeleb().size() != 0) {
-                    followcolorChange(followbtn);
-                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(adapterPositionValue).get_source().getMovie().get(0).getId(), followbtn, context);
-                } else {
-                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-                }
+        Log.e("TextData", followbtn.getText().toString() + "");
+        if (followbtn.getText().toString().equals("follow")) {
+            if (outerHits.getHits().get(adapterPositionValue).get_source().getMovie() != null && outerHits.getHits().get(adapterPositionValue).get_source().getMovie().size() != 0) {
+                followcolorChange(followbtn);
+                new PostRetrofit().postRetrofitFollowMethod("follow", userId, outerHits.getHits().get(adapterPositionValue).get_source().getMovie().get(0).getId(), followbtn, context);
+            } else if (outerHits.getHits().get(adapterPositionValue).get_source().getCeleb() != null && outerHits.getHits().get(adapterPositionValue).get_source().getCeleb().size() != 0) {
+                followcolorChange(followbtn);
+                new PostRetrofit().postRetrofitFollowMethod("follow", userId, outerHits.getHits().get(adapterPositionValue).get_source().getCeleb().get(0).getId(), followbtn, context);
             } else {
-                Toast.makeText(context, "You Unfollowing", Toast.LENGTH_LONG).show();
-                if (outerHits.getHits().get(adapterPositionValue).get_source().getMovie() != null && outerHits.getHits().get(adapterPositionValue).get_source().getMovie().size() != 0) {
-                    unfollowcolorChange(followbtn);
-                    new PostRetrofit().postRetrofitFollowMethod("follow", "VIJAY", outerHits.getHits().get(adapterPositionValue).get_source().getMovie().get(0).getId(), followbtn, context);
-                } else if (outerHits.getHits().get(adapterPositionValue).get_source().getCeleb() != null && outerHits.getHits().get(adapterPositionValue).get_source().getCeleb().size() != 0) {
-                    unfollowcolorChange(followbtn);
-                } else {
-                    Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
-                }
+                Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("Error ", "Eror on Data");
+        } else {
+            Toast.makeText(context, "You Unfollowing", Toast.LENGTH_LONG).show();
+            if (outerHits.getHits().get(adapterPositionValue).get_source().getMovie() != null && outerHits.getHits().get(adapterPositionValue).get_source().getMovie().size() != 0) {
+                unfollowcolorChange(followbtn);
+                new PostRetrofit().postRetrofitFollowMethod("follow", userId, outerHits.getHits().get(adapterPositionValue).get_source().getMovie().get(0).getId(), followbtn, context);
+            } else if (outerHits.getHits().get(adapterPositionValue).get_source().getCeleb() != null && outerHits.getHits().get(adapterPositionValue).get_source().getCeleb().size() != 0) {
+                unfollowcolorChange(followbtn);
+                new PostRetrofit().postRetrofitFollowMethod("follow", userId, outerHits.getHits().get(adapterPositionValue).get_source().getCeleb().get(0).getId(), followbtn, context);
+            } else {
+                Toast.makeText(context, "Movie & Celeb is not there in the JSON File", Toast.LENGTH_LONG).show();
+            }
         }
+
 
     }
 
@@ -2045,7 +1806,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (bookmarkAction) {
             bookmark.setImageResource(0);
             bookmark.setImageResource(R.drawable.bookmark_yellow);
-            new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPositionValue).get_source().getId(), bookmark, context);
+            new PostRetrofit().postRetrofitBookmarkMethod("bookmark", userId, outerHits.getHits().get(getAdapterPositionValue).get_source().getId(), bookmark, context);
             bookmarkAction = false;
             Toast.makeText(context, "You Like " + getAdapterPositionValue, Toast.LENGTH_SHORT).show();
             Log.e("inside like clikc", "news or Movie inside like click");
@@ -2054,7 +1815,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Toast.makeText(context, "You UnLike " + getAdapterPositionValue, Toast.LENGTH_SHORT).show();
             bookmark.setImageResource(0);
             bookmark.setImageResource(R.drawable.bookmark_icon);
-            new PostRetrofit().postRetrofitBookmarkMethod("bookmark", "VIJAY", outerHits.getHits().get(getAdapterPositionValue).get_source().getId(), bookmark, context);
+            new PostRetrofit().postRetrofitBookmarkMethod("bookmark", userId, outerHits.getHits().get(getAdapterPositionValue).get_source().getId(), bookmark, context);
             bookmarkAction = true;
             Log.e("inside like clikc", "news or Movie inside like click");
             Log.e("actionLike", "" + bookmarkAction);

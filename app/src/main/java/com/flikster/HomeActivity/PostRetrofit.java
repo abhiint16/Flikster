@@ -50,9 +50,7 @@ public class PostRetrofit {
         call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
             @Override
             public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
-                Log.e("Like SUCCESS", response.body().getData().getCount() + "SUCCEESS");
-                Log.e("Like Screen Success", "Like Screen Success");
-                try {
+                Log.e("LikeSTATUS", response.body().getData().getCount() + "SUCCEESS");
                     if (response.body().getData().getCount() != null && !response.body().getData().getCount().isEmpty()) {
                         if (response.body().getData().getCount().equals("1")) {
                             ib_like.setImageResource(0);
@@ -63,13 +61,11 @@ public class PostRetrofit {
                             ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
                         }
                     }
-                } catch (Exception e) {
-                }
             }
 
             @Override
             public void onFailure(Call<ModelForIsLikedPostRequest> call, Throwable t) {
-                Log.e("Like Screen Failed", "Like Screen Failed" + call + "bcbbc" + t);
+                Log.e("LikeSTATUS", "Like Screen Failed" + call + "bcbbc" + t);
                 access = false;
                 ib_like.setImageResource(0);
                 ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.warning));
