@@ -30,9 +30,10 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
     Context context;
     List<String> trailerPromoImg=new ArrayList<>();
     List<String> trailerPromoTitle=new ArrayList<>();
+    List<String> trailerPromoVideo=new ArrayList<>();
     FragmentManager fragmentManager;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-    public TrailersViewHolder(Context context, List<String> trailerPromoTitle, List<String> trailerPromoImg, FragmentManager fragmentManager,
+    public TrailersViewHolder(Context context, List<String> trailerPromoTitle, List<String> trailerPromoImg,List<String> trailerPromoVideo, FragmentManager fragmentManager,
                               WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
@@ -41,6 +42,7 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.context=context;
         this.trailerPromoImg=trailerPromoImg;
         this.trailerPromoTitle=trailerPromoTitle;
+        this.trailerPromoVideo=trailerPromoVideo;
         this.fragmentManager = fragmentManager;
         this.watchFragCommInterface=watchFragCommInterface;
     }
@@ -100,7 +102,7 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         @Override
         public void onClick(View view) {
-            //watchFragCommInterface.carouselItemClick(trailerPromoTitle.get(getAdapterPosition()),trailerPromoImg,trailerPromoTitle,new MovieSongsListFragment());
+            watchFragCommInterface.carouselItemClick(trailerPromoTitle.get(getAdapterPosition()),trailerPromoImg.get(getAdapterPosition()),trailerPromoTitle.get(getAdapterPosition()),trailerPromoVideo.get(getAdapterPosition()),"video",new MovieSongsListFragment());
         }
     }
 

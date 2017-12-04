@@ -71,7 +71,7 @@ public class WatchFragment extends Fragment {
     private void retrofitInit() {
         simpleArcLoader.setVisibility(View.VISIBLE);
         simpleArcLoader.start();
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getTopRatedMovies(true,"createdAt:desc",100,"*");
         call.enqueue(new Callback<FeedData>() {
             @Override
@@ -98,8 +98,8 @@ public class WatchFragment extends Fragment {
 
 
     public interface WatchFragCommInterface {
-        void carouselContainerClick(String toolbarTitle,List<String> img,List<String> title,Fragment fragment);
-        void carouselItemClick(String toolbarTitle,String img,String title,String audio,Fragment fragment);
+        void carouselContainerClick(String toolbarTitle,List<String> img,List<String> title,List<String> audioVideoLink,Fragment fragment);
+        void carouselItemClick(String toolbarTitle,String img,String title,String audio,String type,Fragment fragment);
     }
 
     @Override

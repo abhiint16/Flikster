@@ -55,7 +55,7 @@ public class FeedFragment extends Fragment {
     private void retrofitInit() {
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getTopRatedMovies(true,"createdAt:desc",100,"*");
         call.enqueue(new Callback<FeedData>() {
             @Override

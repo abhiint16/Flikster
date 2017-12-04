@@ -32,9 +32,10 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
     Context context;
     List<String> socialInterviewImg=new ArrayList<>();
     List<String> socialInterviewTitle=new ArrayList<>();
+    List<String> socialInterviewVideo=new ArrayList<>();
     FragmentManager fragmentManager;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-    public SocialBuzzOrInterViewsViewHolder(Context context, List<String> socialInterviewTitle, List<String> socialInterviewImg, FragmentManager fragmentManager,
+    public SocialBuzzOrInterViewsViewHolder(Context context, List<String> socialInterviewTitle, List<String> socialInterviewImg,List<String> socialImterviewVideo, FragmentManager fragmentManager,
                                             WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
@@ -43,6 +44,7 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
         this.context=context;
         this.socialInterviewImg=socialInterviewImg;
         this.socialInterviewTitle=socialInterviewTitle;
+        this.socialInterviewVideo=socialImterviewVideo;
         this.fragmentManager = fragmentManager;
         this.watchFragCommInterface=watchFragCommInterface;
     }
@@ -102,7 +104,7 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
 
         @Override
         public void onClick(View view) {
-            //watchFragCommInterface.carouselItemClick(socialInterviewTitle.get(getAdapterPosition()),socialInterviewImg,socialInterviewTitle,new MovieSongsListFragment());
+            watchFragCommInterface.carouselItemClick(socialInterviewTitle.get(getAdapterPosition()),socialInterviewImg.get(getAdapterPosition()),socialInterviewTitle.get(getAdapterPosition()),socialInterviewVideo.get(getAdapterPosition()),"video",new MovieSongsListFragment());
         }
     }
 

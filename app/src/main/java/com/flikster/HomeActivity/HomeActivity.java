@@ -103,7 +103,7 @@ import java.util.Locale;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface
-        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce {
+        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag{
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -630,23 +630,30 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
 
     @Override
-    public void carouselContainerClick(String toolbarTitle, List<String> img, List<String> title, Fragment fragment) {
+    public void carouselContainerClick(String toolbarTitle, List<String> img, List<String> title, List<String> audioVideoLink,Fragment fragment) {
         MusicGridFragment musicGridFragment=(MusicGridFragment)fragment;
-        musicGridFragment.getAllData(toolbarTitle,img,title);
+        musicGridFragment.getAllData(toolbarTitle,img,title,audioVideoLink);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void playAudioOrVideoPage(String audioLink, Fragment fragment,String audioImg) {
+    public void playAudioOrVideoPage(String audioLink, Fragment fragment,String audioImg,String type) {
         SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
-        songByMovieFragmentItemClick.getAudioLink(audioLink,audioImg);
+        songByMovieFragmentItemClick.getAudioLink(audioLink,audioImg,type);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void carouselItemClick(String toolbarTitle, String img, String title, String audio, Fragment fragment) {
+    public void carouselItemClick(String toolbarTitle, String img, String title, String audio,String type, Fragment fragment) {
         MovieSongsListFragment movieSongsListFragment=(MovieSongsListFragment)fragment;
-        movieSongsListFragment.getAllData(toolbarTitle,img,title,audio);
+        movieSongsListFragment.getAllData(toolbarTitle,img,title,audio,type);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void sendAudioVideoLink(String toolbarTitle, String img, String title, String audioVideoLink, Fragment fragment) {
+        SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
+        songByMovieFragmentItemClick.getAudioLink(audioVideoLink,img,"video");
         firstTimeLaunch(fragment);
     }
 }

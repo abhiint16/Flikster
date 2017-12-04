@@ -55,8 +55,8 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     }
 
     private void tempMethod() {
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/celebrity/_search?pretty=true&q=slug:").create(ApiInterface.class);
-        Call<CelebrityData> call = apiInterface.getCelebrityData("http://apiv3-es.flikster.com/celebrity/_search?pretty=true&q=slug:" + slug);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/celebrity/_search?pretty=true&q=slug:").create(ApiInterface.class);
+        Call<CelebrityData> call = apiInterface.getCelebrityData("http://apiservice-ec.flikster.com/celebrity/_search?pretty=true&q=slug:" + slug);
         call.enqueue(new Callback<CelebrityData>() {
             @Override
             public void onResponse(Call<CelebrityData> call, Response<CelebrityData> response) {

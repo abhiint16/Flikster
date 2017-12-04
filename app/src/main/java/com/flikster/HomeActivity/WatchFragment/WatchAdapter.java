@@ -219,7 +219,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, socialInterviewTitle, socialInterviewImg,fragmentManager,watchFragCommInterface);
+            msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, socialInterviewTitle, socialInterviewImg,socialInterviewVideo,fragmentManager,watchFragCommInterface);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(msocialBuzzOrInterViewsViewHolder);
 
         } else if (holder.getItemViewType() == 5) {
@@ -244,7 +244,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            trailersViewHolder = new TrailersViewHolder(context, trailerPromoTitle,trailerPromoImg,fragmentManager,watchFragCommInterface);
+            trailersViewHolder = new TrailersViewHolder(context, trailerPromoTitle,trailerPromoImg,trailerPromoVideo,fragmentManager,watchFragCommInterface);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(trailersViewHolder);
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Comedy");
@@ -262,7 +262,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            comedyViewHolder = new ComedyViewHolder(context, comedyTitle,comedyImg,fragmentManager,watchFragCommInterface);
+            comedyViewHolder = new ComedyViewHolder(context, comedyTitle,comedyImg,comedyVideo,fragmentManager,watchFragCommInterface);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(comedyViewHolder);
         } else {
         }
@@ -309,7 +309,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Music",musicImg,musicTitle,new MusicGridFragment());
+            innerTitleClick(v,"Music",musicImg,musicTitle,musicAudio,new MusicGridFragment());
         }
         //508001
     }
@@ -328,7 +328,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"TV Shows",tvShowsImg,tvShowsTitle,new MusicGridFragment());
+            innerTitleClick(v,"TV Shows",tvShowsImg,tvShowsTitle,tvShowsVideo,new MusicGridFragment());
         }
     }
 
@@ -346,7 +346,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Social Buzz/Interviews",socialInterviewImg,socialInterviewTitle,new MusicGridFragment());
+            innerTitleClick(v,"Social Buzz/Interviews",socialInterviewImg,socialInterviewTitle,socialInterviewVideo,new MusicGridFragment());
         }
     }
 
@@ -363,7 +363,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Movies",moviesImg,moviesTitle,new MusicGridFragment());
+            innerTitleClick(v,"Movies",moviesImg,moviesTitle,moviesVideo,new MusicGridFragment());
         }
     }
 
@@ -381,7 +381,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Trailer & Promos",trailerPromoImg,trailerPromoTitle,new MusicGridFragment());
+            innerTitleClick(v,"Trailer & Promos",trailerPromoImg,trailerPromoTitle,trailerPromoVideo,new MusicGridFragment());
         }
     }
 
@@ -399,12 +399,12 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Comedy",comedyImg,comedyTitle,new MusicGridFragment());
+            innerTitleClick(v,"Comedy",comedyImg,comedyTitle,comedyVideo,new MusicGridFragment());
         }
     }
 
-    private void innerTitleClick(View view,String toolbarTitle,List<String> img,List<String> title,Fragment fragment) {
-        watchFragCommInterface.carouselContainerClick(toolbarTitle,img,title,fragment);
+    private void innerTitleClick(View view,String toolbarTitle,List<String> img,List<String> title,List<String> audioVideoLink,Fragment fragment) {
+        watchFragCommInterface.carouselContainerClick(toolbarTitle,img,title,audioVideoLink,fragment);
         }
 }
 

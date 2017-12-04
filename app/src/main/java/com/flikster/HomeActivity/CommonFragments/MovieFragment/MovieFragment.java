@@ -56,8 +56,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
 
     private void tempMethod() {
         Log.e("slug1",""+slug);
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/movies/_search?pretty=true&q=slug:").create(ApiInterface.class);
-        Call<MovieData> call = apiInterface.getMovieData("http://apiv3-es.flikster.com/movies/_search?pretty=true&q=slug:" +slug);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:").create(ApiInterface.class);
+        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:" +slug);
         call.enqueue(new Callback<MovieData>() {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {

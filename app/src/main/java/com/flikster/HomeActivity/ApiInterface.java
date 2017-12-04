@@ -24,7 +24,7 @@ import retrofit2.http.Url;
 
 public interface ApiInterface {
 
-    @GET("http://apiv3-es.flikster.com/contents/_search")
+    @GET("http://apiservice-ec.flikster.com/contents/_search")
     Call<FeedData> getTopRatedMovies(@Query("pretty") Boolean s,
                                      @Query("sort") String d,
                                      @Query("size") Integer i,
@@ -48,7 +48,7 @@ public interface ApiInterface {
     @GET
     Call<RecommendedProductData> getRecommendedProductData(@Url String url);
 
-    @GET("http://apiv3-es.flikster.com/contents/_search")
+    @GET("http://apiservice-ec.flikster.com/contents/_search")
     Call<FeedData> getMovieFeedData(@Query("pretty") Boolean s,
                                     @Query("size") Integer d,
                                      @Query("q") String c);
@@ -66,7 +66,7 @@ public interface ApiInterface {
     Call<WidgetData> getWidgetData(@Url String url);
 
 
-    @GET("http://apiv3-es.flikster.com/products/_search")
+    @GET("http://apiservice-ec.flikster.com/products/_search")
     Call<AllStoreData> getCelebMovieStoreData(@Query("pretty") Boolean s,
                                     @Query("size") Integer d,
                                     @Query("q") String c);

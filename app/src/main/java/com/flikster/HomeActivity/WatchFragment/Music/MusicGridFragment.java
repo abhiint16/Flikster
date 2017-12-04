@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.WatchFragment.Music;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,8 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     String tootbarTitle;
     List<String> img=new ArrayList<>();
     List<String> title=new ArrayList<>();
+    List<String> audioVideoLink=new ArrayList<>();
+    WatchAudioVideoSendFromGridFrag watchAudioVideoSendFromGridFrag;
 
     @Nullable
     @Override
@@ -62,7 +65,7 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
         fragmentManager = getActivity().getSupportFragmentManager();
         layoutManagerShopByVideoFragment = new GridLayoutManager(getActivity(), 2);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerShopByVideoFragment);
-        musicGridAdapter = new MusicGridAdapter(getActivity(), fragmentManager,img,title);
+        musicGridAdapter = new MusicGridAdapter(getActivity(), fragmentManager,img,title,audioVideoLink,watchAudioVideoSendFromGridFrag);
         fragment_common_recyclerview_recycler.setAdapter(musicGridAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_notification.setVisibility(View.GONE);
@@ -87,11 +90,22 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
 //        }
     }
 
-    public void getAllData(String tootbarTitle, List<String> img,List<String> title)
+    public void getAllData(String tootbarTitle, List<String> img,List<String> title,List<String> audioVideoLink)
     {
         this.tootbarTitle=tootbarTitle;
         this.img=img;
         this.title=title;
+        this.audioVideoLink=audioVideoLink;
+    }
+
+    public interface WatchAudioVideoSendFromGridFrag {
+        void sendAudioVideoLink(String toolbarTitle,String img,String title,String audioVideoLink,Fragment fragment);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        watchAudioVideoSendFromGridFrag = (WatchAudioVideoSendFromGridFrag) activity;
     }
 
 }

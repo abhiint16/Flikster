@@ -46,7 +46,7 @@ public class CelebrityFragmentStore extends Fragment{
 
     private void retrofitInit() {
         Log.e("check slug store",""+getArguments().getString("slug"));
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=*").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search?pretty=true&size=100&q=*").create(ApiInterface.class);
         Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true,100,"tags:\""+getArguments().getString("slug")+"\"");
         call.enqueue(new Callback<AllStoreData>() {
             @Override

@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongListItemWithProduct.SongByMovieFragmentItemPlayClickAdapter;
 import com.flikster.R;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.io.IOException;
 
@@ -42,16 +47,21 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     MediaPlayer musicplay;
     SeekBar seekBar;
     ImageButton playibtn;
-    String audioLink,audioImg;
+    String audioLink,audioImg,type;
     Handler han = new Handler();
     Boolean playClick=false;
     ImageView audio_frame_image;
+    LinearLayout audio_frame;
+    YouTubePlayerSupportFragment youTubePlayerFragment;
+    YouTubePlayer yPlayer;
+    final String API_KEY="AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_song_with_products, container, false);
         initializeViews();
+        hideAudioOrVideo();
         initializeRest();
 //        playLocalVideo();
         musicplay = MediaPlayer.create(getContext(), R.raw.ringtone);
@@ -59,6 +69,11 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         SeekUpdation();
         seekBar.setOnSeekBarChangeListener(this);
         return view;
+    }
+
+    private void hideAudioOrVideo() {
+        if (type=="video")
+            audio_frame.setVisibility(View.GONE);
     }
 
     private void initializeRest() {
@@ -77,6 +92,25 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         ib_bookmark.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.playlist));
         Glide.with(getActivity()).load(audioImg).into(audio_frame_image);
         playibtn.setOnClickListener(this);
+        youTubePlayerFragment.initialize(API_KEY, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                yPlayer=youTubePlayer;
+                Log.e("chce link",""+audioLink);
+                if(audioLink.contains("https://www.youtube.com/embed/"))
+                yPlayer.loadVideo(audioLink.substring(30));
+                else if(audioLink.contains("https://youtu.be/"))
+                    yPlayer.loadVideo(audioLink.substring(17));
+                else if(audioLink.contains("https://www.youtube.com/"))
+                    yPlayer.loadVideo(audioLink.substring(24));
+                yPlayer.play();
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
     }
 
     private void initializeViews() {
@@ -87,6 +121,14 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         audio_frame_image=(ImageView)view.findViewById(R.id.audio_frame_image);
+
+        youTubePlayerFragment=YouTubePlayerSupportFragment.newInstance();
+        FragmentTransaction fragmentTransaction=getChildFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.youtube_fragment,youTubePlayerFragment).commit();
+
+        audio_frame=(LinearLayout)view.findViewById(R.id.audio_frame);
+         /*youTubePlayerFragment= (YouTubePlayerSupportFragment) getActivity().getSupportFragmentManager()
+                .findFragmentById(R.id.youtube_fragment);*/
         toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
         ib_bookmark = (ImageButton) view.findViewById(R.id.ib_bookmark);
@@ -165,10 +207,11 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     };
 
 
-    public void getAudioLink(String audioLink,String audioImg)
+    public void getAudioLink(String audioLink,String audioImg,String type)
     {
         this.audioLink=audioLink;
         this.audioImg=audioImg;
+        this.type=type;
     }
 
     @Override

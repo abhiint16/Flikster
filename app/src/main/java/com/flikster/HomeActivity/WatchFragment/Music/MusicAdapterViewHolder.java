@@ -101,7 +101,7 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
         @Override
         public void onClick(View view) {
             watchFragCommInterface.carouselItemClick(musicTitle.get(getAdapterPosition()),musicImg.get(getAdapterPosition()),
-                    musicTitle.get(getAdapterPosition()),musicAudio.get(getAdapterPosition()),new MovieSongsListFragment());
+                    musicTitle.get(getAdapterPosition()),musicAudio.get(getAdapterPosition()),"audio",new MovieSongsListFragment());
         }
     }
 }

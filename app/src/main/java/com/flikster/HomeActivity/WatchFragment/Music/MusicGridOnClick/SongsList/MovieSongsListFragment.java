@@ -37,7 +37,7 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
     String toolbarTitle;
     String img;
     String title;
-    String audio;
+    String audio,type;
     WatchPlayAudioOrVideoInterafce watchPlayAudioOrVideoInterafce;
 
     @Nullable
@@ -66,7 +66,7 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
         toolbar_frag_multiicons_title.setText(toolbarTitle);
         layoutManagerShopByVideoFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerShopByVideoFragment);
-        shopByVideoFragmentAdapter = new MovieSongsListAdapter(getActivity(), fragmentManager,img,title,audio,watchPlayAudioOrVideoInterafce);
+        shopByVideoFragmentAdapter = new MovieSongsListAdapter(getActivity(), fragmentManager,img,title,audio,type,watchPlayAudioOrVideoInterafce);
         fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_notification.setVisibility(View.GONE);
@@ -93,16 +93,17 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
         }
     }
 
-    public void getAllData(String toolbarTitle, String img, String title, String audio)
+    public void getAllData(String toolbarTitle, String img, String title, String audio,String type)
     {
         this.toolbarTitle=toolbarTitle;
         this.title=title;
         this.img=img;
         this.audio=audio;
+        this.type=type;
     }
 
     public interface WatchPlayAudioOrVideoInterafce {
-        void playAudioOrVideoPage(String audioLink,Fragment fragment,String audioImg);
+        void playAudioOrVideoPage(String audioLink,Fragment fragment,String audioImg,String type);
     }
 
     @Override

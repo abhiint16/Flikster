@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.R;
 import com.flikster.Util.GlobalData;
 
@@ -26,12 +27,17 @@ public class MusicGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     FragmentManager fragmentManager;
     List<String> img=new ArrayList<>();
     List<String> title=new ArrayList<>();
+    List<String> audioVideoLink=new ArrayList<>();
+    MusicGridFragment.WatchAudioVideoSendFromGridFrag watchAudioVideoSendFromGridFrag;
 
-    public MusicGridAdapter(Context context, FragmentManager fragmentManager, List<String> img,List<String> title) {
+    public MusicGridAdapter(Context context, FragmentManager fragmentManager, List<String> img, List<String> title,
+                            List<String> audioVideoLink, MusicGridFragment.WatchAudioVideoSendFromGridFrag watchAudioVideoSendFromGridFrag) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.img=img;
         this.title=title;
+        this.audioVideoLink=audioVideoLink;
+        this.watchAudioVideoSendFromGridFrag=watchAudioVideoSendFromGridFrag;
     }
 
     @Override
@@ -99,10 +105,8 @@ public class MusicGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MovieSongsListFragment())
-                    .addToBackStack("")
-                    .commit();
+            watchAudioVideoSendFromGridFrag.sendAudioVideoLink(title.get(getAdapterPosition()),img.get(getAdapterPosition()),title.get(getAdapterPosition()),
+                    audioVideoLink.get(getAdapterPosition()),new SongByMovieFragmentItemClick());
         }
     }
 }

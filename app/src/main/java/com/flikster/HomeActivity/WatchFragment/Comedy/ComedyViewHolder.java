@@ -31,9 +31,10 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
     Context context;
     List<String> comedyImg=new ArrayList<>();
     List<String> comedyTitle=new ArrayList<>();
+    List<String> comedyVideo=new ArrayList<>();
     FragmentManager fragmentManager;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-    public ComedyViewHolder(Context context, List<String> comedyTitle, List<String> comedyImg, FragmentManager fragmentManager,
+    public ComedyViewHolder(Context context, List<String> comedyTitle, List<String> comedyImg,List<String> comedyVideo, FragmentManager fragmentManager,
                             WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
@@ -44,6 +45,7 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.comedyTitle=comedyTitle;
         this.fragmentManager = fragmentManager;
         this.watchFragCommInterface=watchFragCommInterface;
+        this.comedyVideo=comedyVideo;
     }
 
     @Override
@@ -102,7 +104,8 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            //watchFragCommInterface.carouselItemClick(comedyTitle.get(getAdapterPosition()),comedyImg,comedyTitle,new MovieSongsListFragment());
+            watchFragCommInterface.carouselItemClick(comedyTitle.get(getAdapterPosition()),comedyImg.get(getAdapterPosition())
+                    ,comedyTitle.get(getAdapterPosition()),comedyVideo.get(getAdapterPosition()),"video",new MovieSongsListFragment());
         }
     }
 

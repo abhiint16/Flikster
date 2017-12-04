@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,15 +29,17 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
     String title;
     String videoLink;
     String audio;
+    String type;
     MovieSongsListFragment.WatchPlayAudioOrVideoInterafce watchPlayAudioOrVideoInterafce;
 
-    public MovieSongsListAdapter(Context context, FragmentManager fragmentManager, String img, String title, String audio,
+    public MovieSongsListAdapter(Context context, FragmentManager fragmentManager, String img, String title, String audio,String type,
                                  MovieSongsListFragment.WatchPlayAudioOrVideoInterafce watchPlayAudioOrVideoInterafce) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.img=img;
         this.title=title;
         this.audio=audio;
+        this.type=type;
         this.watchPlayAudioOrVideoInterafce=watchPlayAudioOrVideoInterafce;
     }
 
@@ -48,7 +51,8 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
 
     @Override
     public void onBindViewHolder(MovieSongsListAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(img.trim()).into(holder.movieimg);
+        Log.e("chcek image",""+img);
+        Glide.with(context).load(img).into(holder.movieimg);
         holder.movietitle.setText("Item No. "+position);
     }
 
@@ -70,7 +74,7 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
 
         @Override
         public void onClick(View view) {
-            watchPlayAudioOrVideoInterafce.playAudioOrVideoPage(audio,new SongByMovieFragmentItemClick(), img);
+            watchPlayAudioOrVideoInterafce.playAudioOrVideoPage(audio,new SongByMovieFragmentItemClick(), img,type);
         }
     }
 }
