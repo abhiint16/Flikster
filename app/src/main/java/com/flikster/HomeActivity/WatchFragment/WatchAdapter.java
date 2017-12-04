@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
@@ -68,7 +69,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     Integer Count;
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-
+    List<String> carouselImgWatch=new ArrayList<>();
     int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
 
     public WatchAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits,Integer Count, WatchFragment.WatchFragCommInterface watchFragCommInterface) {
@@ -87,7 +88,6 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
         imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
-
         this.outerHits = outerHits;
         this.Count = Count;
         this.watchFragCommInterface = watchFragCommInterface;
@@ -123,24 +123,54 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    ImageListener imageListeners = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            Glide.with(context).load(carouselImgWatch.get(position).trim()).into(imageView);
+        }
+    };
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-
-            final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
-//            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-//            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-//            watchTrailerViewHolder = new WatchTrailerViewHolder();
-//            ((ViewHolder1) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(watchTrailerViewHolder);
-            ImageListener imageListeners;
-            imageListeners = new ImageListener() {
-                @Override
-                public void setImageForPosition(int position, ImageView imageView) {
-                    imageView.setImageResource(sampleImages[position]);
+            //final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            carouselImgWatch.clear();
+            Boolean audio=false,tv=false,social=false,movie=false,trailer=false,comedy=false;
+            for (int i=0;i<outerHits.getHits().size();i++)
+            {
+                if ("audio-song".equals(outerHits.getHits().get(i).get_source().getContentType())&&audio==false)
+                {
+                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    audio=true;
                 }
-            };
-            //
+                if ("tv-shows".equals(outerHits.getHits().get(i).get_source().getContentType())&&tv==false)
+                {
+                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    tv=true;
+                }
+                if (("social-buzz".equals(outerHits.getHits().get(i).get_source().getContentType())||
+                        "interview".equals(outerHits.getHits().get(i).get_source().getContentType()))&&social==false)
+                {
+                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    social=true;
+                }
+                if ("movies".equals(outerHits.getHits().get(i).get_source().getContentType())&&movie==false)
+                {
+                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    movie=true;
+                }
+                if (("trailer".equals(outerHits.getHits().get(i).get_source().getContentType())||
+                        "prome".equals(outerHits.getHits().get(i).get_source().getContentType()))&&trailer==false)
+                {
+                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    trailer=true;
+                }
+                if ("comedy-clip".equals(outerHits.getHits().get(i).get_source().getContentType())&&comedy==false)
+                {
+                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    comedy=true;
+                }
+            }
+            ((ViewHolder1) holder).carouselView.setPageCount(carouselImgWatch.size());
             ((ViewHolder1) holder).carouselView.setImageListener(imageListeners);
         } else if (holder.getItemViewType() == 2) {
             for (int i=0;i<outerHits.getHits().size();i++)
