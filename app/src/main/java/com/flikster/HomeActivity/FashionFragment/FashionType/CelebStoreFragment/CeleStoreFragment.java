@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +115,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener,
         adapter.addFrag(new CelebStoreFirstTypeFragment(), "Foot Wear");
         adapter.addFrag(new CelebStoreFirstTypeFragment(), "Accessories");
         viewPager.setAdapter(adapter);
+        Log.e("inseid createviewpager","inseid createviewpager");
         SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
         SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "ALL");
         viewPage.setCurrentItem(0);
@@ -144,11 +146,13 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener,
         if (tab.getPosition() == 0) {
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "ALL");
+
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
                     .commit();
         } else if (tab.getPosition() == 1) {
+            Log.e("clikcing clothing","clikcing cllothing");
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "CLOTHING");
             getFragmentManager()
@@ -156,7 +160,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener,
                     .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
                     .commit();
         }
-        else if (tab.getPosition() == 1) {
+        else if (tab.getPosition() == 2) {
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "EYEWEAR");
             getFragmentManager()
@@ -164,7 +168,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener,
                     .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
                     .commit();
         }
-        else if (tab.getPosition() == 1) {
+        else if (tab.getPosition() == 3) {
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "FOOTWEAR");
             getFragmentManager()
@@ -172,7 +176,7 @@ public class CeleStoreFragment extends Fragment implements View.OnClickListener,
                     .replace(R.id.main_container, new CelebStoreFirstTypeFragment())
                     .commit();
         }
-        else if (tab.getPosition() == 1) {
+        else if (tab.getPosition() == 4) {
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "CELEB_STORE", storeType);
             SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "TAB_NO", "ACCESSORIES");
             getFragmentManager()

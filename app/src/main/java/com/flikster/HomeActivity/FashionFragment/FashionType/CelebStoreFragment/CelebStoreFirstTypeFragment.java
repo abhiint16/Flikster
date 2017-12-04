@@ -46,7 +46,6 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         initURL();
         initializeViews();
         initializeRest();
@@ -74,12 +73,9 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     }
 
     private void initURL() {
+        Log.e("indie initurl","");
         Log.e("check shared",""+SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE"));
-        if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
-                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ALL")) {
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie";
-        }
-        else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
+        if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ALL"))
         {
             this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb";
@@ -87,7 +83,41 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
         else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("CLOTHING"))
         {
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb";
+            Log.e("insied clothing else if","inside clothign else if");
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20Clothing";
+        }
+        else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("EYEWEAR"))
+        {
+            Log.e("insied clothing else if","inside clothign else if");
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20eyewear";
+        }
+        else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("FOOTWEAR"))
+        {
+            Log.e("insied clothing else if","inside clothign else if");
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20footwear";
+        }
+        else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ACCESSORIES"))
+        {
+            Log.e("insied clothing else if","inside clothign else if");
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20accessories";
+        }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ALL")) {
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie";
+        }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("CLOTHING")) {
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie%20AND%20Clothing";
+        }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("EYEWEAR")) {
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20Eyewear";
+        }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("FOOTWEAR")) {
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie%20AND%20Footwear";
+        }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
+                && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ACCESSORIES")) {
+            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie%20AND%20Accessories";
         }
     }
 
@@ -102,9 +132,15 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
     @Override

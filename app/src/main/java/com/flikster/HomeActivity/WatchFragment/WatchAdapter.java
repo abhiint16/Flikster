@@ -143,10 +143,12 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             //
             ((ViewHolder1) holder).carouselView.setImageListener(imageListeners);
         } else if (holder.getItemViewType() == 2) {
-            for (int i=0;i<Count;i++)
+            for (int i=0;i<outerHits.getHits().size();i++)
             {
+                Log.e("check count",""+Count);
                 if("audio-song".equals(outerHits.getHits().get(i).get_source().getContentType()))
                 {
+                    Log.e("chck music size",""+musicImg.size());
                     musicImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
                     musicTitle.add(outerHits.getHits().get(i).get_source().getTitle());
                 }
@@ -167,7 +169,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
             /*socialInterviewImg.clear();
             socialInterviewTitle.clear();*/
-            for (int i=0;i<Count;i++)
+            for (int i=0;i<outerHits.getHits().size();i++)
             {
                 if("social-buzz".equals(outerHits.getHits().get(i).get_source().getContentType()) || "interview".equals(outerHits.getHits().get(i).get_source().getContentType()))
                 {
@@ -190,7 +192,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
             trailerPromoImg.clear();
             trailerPromoTitle.clear();
-            for (int i=0;i<Count;i++)
+            for (int i=0;i<outerHits.getHits().size();i++)
             {
                 if("trailer".equals(outerHits.getHits().get(i).get_source().getContentType()) || "promo".equals(outerHits.getHits().get(i).get_source().getContentType()))
                 {
@@ -206,7 +208,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Comedy");
             comedyImg.clear();
             comedyTitle.clear();
-            for (int i=0;i<Count;i++)
+            for (int i=0;i<outerHits.getHits().size();i++)
             {
                 if("comedy-clip".equals(outerHits.getHits().get(i).get_source().getContentType()))
                 {

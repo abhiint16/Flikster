@@ -72,7 +72,7 @@ public class WatchFragment extends Fragment {
         simpleArcLoader.setVisibility(View.VISIBLE);
         simpleArcLoader.start();
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getTopRatedMovies(true,100,"*");
+        Call<FeedData> call = apiInterface.getTopRatedMovies(true,"createdAt:desc",100,"*");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
