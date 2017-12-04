@@ -100,7 +100,7 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         @Override
         public void onClick(View view) {
-            watchFragCommInterface.carouselItemClick(trailerPromoTitle.get(getAdapterPosition()),trailerPromoImg,trailerPromoTitle,new MovieSongsListFragment());
+            //watchFragCommInterface.carouselItemClick(trailerPromoTitle.get(getAdapterPosition()),trailerPromoImg,trailerPromoTitle,new MovieSongsListFragment());
         }
     }
 

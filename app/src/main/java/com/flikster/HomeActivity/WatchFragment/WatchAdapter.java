@@ -55,16 +55,22 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     ComedyViewHolder comedyViewHolder;
     List<String> socialInterviewImg=new ArrayList<>();
     List<String> socialInterviewTitle=new ArrayList<>();
+    List<String> socialInterviewVideo=new ArrayList<>();
     List<String> trailerPromoImg=new ArrayList<>();
     List<String> trailerPromoTitle=new ArrayList<>();
+    List<String> trailerPromoVideo=new ArrayList<>();
     List<String> comedyImg=new ArrayList<>();
     List<String> comedyTitle=new ArrayList<>();
+    List<String> comedyVideo=new ArrayList<>();
     List<String> musicImg=new ArrayList<>();
     List<String> musicTitle=new ArrayList<>();
+    List<String> musicAudio=new ArrayList<>();
     List<String> tvShowsImg=new ArrayList<>();
     List<String> tvShowsTitle=new ArrayList<>();
+    List<String> tvShowsVideo=new ArrayList<>();
     List<String> moviesImg=new ArrayList<>();
     List<String> moviesTitle=new ArrayList<>();
+    List<String> moviesVideo=new ArrayList<>();
     FeedInnerData outerHits;
     Integer Count;
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
@@ -181,12 +187,14 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     Log.e("chck music size",""+musicImg.size());
                     musicImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
                     musicTitle.add(outerHits.getHits().get(i).get_source().getTitle());
+                    if(outerHits.getHits().get(i).get_source().getMedia().getAudio()!=null&&outerHits.getHits().get(i).get_source().getMedia().getAudio().size()!=0)
+                        musicAudio.add(outerHits.getHits().get(i).get_source().getMedia().getAudio().get(0));
                 }
             }
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Music");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            musicAdapterViewHolder = new MusicAdapterViewHolder(context,musicTitle,musicImg,fragmentManager,watchFragCommInterface);
+            musicAdapterViewHolder = new MusicAdapterViewHolder(context,musicTitle,musicImg,musicAudio,fragmentManager,watchFragCommInterface);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(musicAdapterViewHolder);
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Tv Shows");
@@ -205,6 +213,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 {
                     socialInterviewImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
                     socialInterviewTitle.add(outerHits.getHits().get(i).get_source().getTitle());
+                    if(outerHits.getHits().get(i).get_source().getMedia().getVideo()!=null&&outerHits.getHits().get(i).get_source().getMedia().getVideo().size()!=0)
+                        socialInterviewVideo.add(outerHits.getHits().get(i).get_source().getMedia().getVideo().get(0));
                 }
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -228,6 +238,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 {
                     trailerPromoImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
                     trailerPromoTitle.add(outerHits.getHits().get(i).get_source().getTitle());
+                    if(outerHits.getHits().get(i).get_source().getMedia().getVideo()!=null&&outerHits.getHits().get(i).get_source().getMedia().getVideo().size()!=0)
+                        trailerPromoVideo.add(outerHits.getHits().get(i).get_source().getMedia().getVideo().get(0));
                 }
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -244,6 +256,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 {
                     comedyImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
                     comedyTitle.add(outerHits.getHits().get(i).get_source().getTitle());
+                    if(outerHits.getHits().get(i).get_source().getMedia().getVideo()!=null&&outerHits.getHits().get(i).get_source().getMedia().getVideo().size()!=0)
+                        comedyVideo.add(outerHits.getHits().get(i).get_source().getMedia().getVideo().get(0));
                 }
             }
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);

@@ -102,7 +102,7 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            watchFragCommInterface.carouselItemClick(comedyTitle.get(getAdapterPosition()),comedyImg,comedyTitle,new MovieSongsListFragment());
+            //watchFragCommInterface.carouselItemClick(comedyTitle.get(getAdapterPosition()),comedyImg,comedyTitle,new MovieSongsListFragment());
         }
     }
 

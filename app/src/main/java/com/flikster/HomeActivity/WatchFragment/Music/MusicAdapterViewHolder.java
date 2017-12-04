@@ -24,17 +24,19 @@ import java.util.List;
 public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<String> musicImg = new ArrayList<>();
     List<String> musicTitle=new ArrayList<>();
+    List<String> musicAudio=new ArrayList<>();
     FragmentManager fragmentManager;
     Context context;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
 
-    public MusicAdapterViewHolder(Context context, List<String> musicTitle, List<String> musicImg, FragmentManager fragmentManager,
+    public MusicAdapterViewHolder(Context context, List<String> musicTitle, List<String> musicImg,List<String> musicAudio, FragmentManager fragmentManager,
                                   WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         this.fragmentManager = fragmentManager;
         this.musicImg=musicImg;
         this.musicTitle=musicTitle;
         this.context=context;
         this.watchFragCommInterface=watchFragCommInterface;
+        this.musicAudio=musicAudio;
     }
 
     @Override
@@ -98,7 +100,8 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
 
         @Override
         public void onClick(View view) {
-            watchFragCommInterface.carouselItemClick(musicTitle.get(getAdapterPosition()),musicImg,musicTitle,new MovieSongsListFragment());
+            watchFragCommInterface.carouselItemClick(musicTitle.get(getAdapterPosition()),musicImg.get(getAdapterPosition()),
+                    musicTitle.get(getAdapterPosition()),musicAudio.get(getAdapterPosition()),new MovieSongsListFragment());
         }
     }
 }

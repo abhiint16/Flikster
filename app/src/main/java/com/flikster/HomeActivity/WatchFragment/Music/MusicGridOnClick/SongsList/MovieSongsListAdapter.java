@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 import com.flikster.Util.GlobalData;
 
@@ -23,14 +24,20 @@ import java.util.List;
 public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAdapter.ViewHolder> {
     Context context;
     FragmentManager fragmentManager;
-    List<String> img=new ArrayList<>();
-    List<String> title=new ArrayList<>();
+    String img;
+    String title;
+    String videoLink;
+    String audio;
+    MovieSongsListFragment.WatchPlayAudioOrVideoInterafce watchPlayAudioOrVideoInterafce;
 
-    public MovieSongsListAdapter(Context context, FragmentManager fragmentManager, List<String> img,List<String> title) {
+    public MovieSongsListAdapter(Context context, FragmentManager fragmentManager, String img, String title, String audio,
+                                 MovieSongsListFragment.WatchPlayAudioOrVideoInterafce watchPlayAudioOrVideoInterafce) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.img=img;
         this.title=title;
+        this.audio=audio;
+        this.watchPlayAudioOrVideoInterafce=watchPlayAudioOrVideoInterafce;
     }
 
     @Override
@@ -41,13 +48,13 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
 
     @Override
     public void onBindViewHolder(MovieSongsListAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(img.get(0).trim()).into(holder.movieimg);
-        holder.movietitle.setText("Song No. "+position);
+        Glide.with(context).load(img.trim()).into(holder.movieimg);
+        holder.movietitle.setText("Item No. "+position);
     }
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -63,10 +70,7 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new SongByMovieFragmentItemClick())
-                    .addToBackStack("")
-                    .commit();
+            watchPlayAudioOrVideoInterafce.playAudioOrVideoPage(audio,new SongByMovieFragmentItemClick(), img);
         }
     }
 }

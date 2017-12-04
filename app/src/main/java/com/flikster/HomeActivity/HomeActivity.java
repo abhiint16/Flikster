@@ -66,6 +66,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionL
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
+import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.MenuFragments.FliksterCreditFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
@@ -101,7 +102,8 @@ import java.util.Locale;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface {
+public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface
+        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce {
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -635,9 +637,16 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void carouselItemClick(String toolbarTitle, List<String> img, List<String> title, Fragment fragment) {
+    public void playAudioOrVideoPage(String audioLink, Fragment fragment,String audioImg) {
+        SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
+        songByMovieFragmentItemClick.getAudioLink(audioLink,audioImg);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void carouselItemClick(String toolbarTitle, String img, String title, String audio, Fragment fragment) {
         MovieSongsListFragment movieSongsListFragment=(MovieSongsListFragment)fragment;
-        movieSongsListFragment.getAllData(toolbarTitle,img,title);
+        movieSongsListFragment.getAllData(toolbarTitle,img,title,audio);
         firstTimeLaunch(fragment);
     }
 }

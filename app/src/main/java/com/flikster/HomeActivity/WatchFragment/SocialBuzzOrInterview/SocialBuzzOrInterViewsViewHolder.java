@@ -102,7 +102,7 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
 
         @Override
         public void onClick(View view) {
-            watchFragCommInterface.carouselItemClick(socialInterviewTitle.get(getAdapterPosition()),socialInterviewImg,socialInterviewTitle,new MovieSongsListFragment());
+            //watchFragCommInterface.carouselItemClick(socialInterviewTitle.get(getAdapterPosition()),socialInterviewImg,socialInterviewTitle,new MovieSongsListFragment());
         }
     }
 

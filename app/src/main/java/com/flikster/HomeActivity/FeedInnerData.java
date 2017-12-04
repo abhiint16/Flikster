@@ -266,21 +266,21 @@ public class FeedInnerData {
 
     public  class FeedMediaData
     {
-        /*@SerializedName("audio")
-        public List<String> audio;*/
+        @SerializedName("audio")
+        private List<String> audio;
         @SerializedName("video")
         private List<String> video;
         @SerializedName("gallery")
         private List<String> gallery;
 
-        /*public List<String> getAudio() {
+        public List<String> getAudio() {
 
             return audio;
         }
 
         public void setAudio(List<String> audio) {
             this.audio = audio;
-        }*/
+        }
 
         public List<String> getVideo() {
             return video;
