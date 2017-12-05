@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.List;
@@ -40,7 +42,6 @@ import retrofit2.Response;
 
 public class VideoGalleryFragment extends Fragment implements View.OnClickListener {
     View view;
-    VideoView playVideo;
     ImageButton toolbar_back_navigation_btn;
     TextView toolbar_frag_title, titlehedertxt, fragment_common_recyclerview_with_tv_title, tv_name, tv_description;
     Context mContext;
@@ -52,7 +53,8 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     VideoGalleryAdapter videoGalleryAdapter;
     Integer Count;
     TextView tv_tag_desc,tv_tag_name;
-    YouTubePlayerView youTubePlayerView;
+    YouTubePlayerSupportFragment youTubePlayerFragment;
+    YouTubePlayer yPlayer;
     final String API_KEY="AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
 
     @Nullable
@@ -64,7 +66,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         bottomHorRecyclerRetrofitInit();
         headerTitlesChange();
         initializeRest();
-        playLocalVideo();
+        //playLocalVideo();
         titlehedertxt.setText(title);
         tv_description.setText(description);
         return view;
@@ -77,16 +79,18 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
     private void initializeViews() {
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
-        playVideo = (VideoView) view.findViewById(R.id.playVideo);
         titlehedertxt = (TextView) view.findViewById(R.id.titlehedertxt);
         fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
         tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
+        youTubePlayerFragment=YouTubePlayerSupportFragment.newInstance();
+        FragmentTransaction fragmentTransaction=getChildFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_video_gallery_youtube_container,youTubePlayerFragment).commit();
         fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
-        playVideo.setVisibility(View.VISIBLE);
+        //playVideo.setVisibility(View.VISIBLE);
         tv_name.setVisibility(View.GONE);
     }
 
@@ -96,7 +100,24 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
         toolbar_back_navigation_btn.setOnClickListener(this);
-        //youTubePlayerView.initialize(API_KEY,this);
+        youTubePlayerFragment.initialize(API_KEY, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                yPlayer=youTubePlayer;
+                if(videolink.contains("https://www.youtube.com/embed/"))
+                    yPlayer.loadVideo(videolink.substring(30));
+                else if(videolink.contains("https://youtu.be/"))
+                    yPlayer.loadVideo(videolink.substring(17));
+                else if(videolink.contains("https://www.youtube.com/"))
+                    yPlayer.loadVideo(videolink.substring(24));
+                yPlayer.play();
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
     }
 
     @Override
@@ -122,7 +143,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
-    private void playLocalVideo() {
+    /*private void playLocalVideo() {
         //Creating MediaController
         MediaController mediaController = new MediaController(getContext());
         mediaController.setAnchorView(playVideo);
@@ -134,7 +155,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         playVideo.setVideoURI(uri);
         playVideo.requestFocus();
         playVideo.start();
-    }
+    }*/
 
 
     private void bottomHorRecyclerRetrofitInit() {
