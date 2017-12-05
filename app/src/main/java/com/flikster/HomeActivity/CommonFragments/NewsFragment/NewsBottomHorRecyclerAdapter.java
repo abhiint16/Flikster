@@ -55,7 +55,7 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
 
     @Override
     public int getItemCount() {
-        return outerHits.getHits().size()-1;
+        return outerHits.getHits().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
