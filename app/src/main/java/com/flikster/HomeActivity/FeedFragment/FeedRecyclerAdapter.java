@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.FullScreenYoutubeView.FullScreenYoutubeView;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionDetailFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
@@ -477,7 +478,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 case "critic-review":
                     return 1;
                 case "social-buzz":
-                    return 4;
+                    return 3;
                 case "interview":
                     return 4;
                 case "trailer":
@@ -671,7 +672,6 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
-            //video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
@@ -709,7 +709,6 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
             });
 
-            //video_btn.setOnClickListener(this);
 
             card_description_linear.setOnClickListener(this);
         }
@@ -768,7 +767,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView news_img, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
-        ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
+        ImageButton ib_like, ib_bookmark, card_comment_text_send_btn,video_btn;
         EditText card_comment_text_edittxt;
         Button followbtn;
         LinearLayout header_linear, card_description_linear;
@@ -789,6 +788,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            video_btn=(ImageButton)itemView.findViewById(R.id.video_btn);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
             card_comment_text_send_btn.setOnClickListener(this);
             card_comment_text_edittxt = (EditText) itemView.findViewById(R.id.card_comment_text_edittxt);
@@ -798,6 +798,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_description_linear.setOnClickListener(this);
             profile_image.setOnClickListener(this);
             header_linear.setOnClickListener(this);
+            video_btn.setOnClickListener(this);
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -831,7 +832,22 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         .replace(R.id.main_container, new GalleryCardClick())
                         .addToBackStack("")
                         .commit();
-            } else if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
+            }else if(view.getId()==R.id.video_btn)
+            {
+             Intent intent=new Intent(context, FullScreenYoutubeView.class);
+                if(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo()!=null&&
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().size()!=0)
+                {
+                    intent.putExtra("video_link",outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0));
+                }
+                else
+                {
+                    intent.putExtra("video_link"," ");
+                }
+                context.startActivity(intent);
+
+            }
+            else if ((view.getId() == R.id.header_linear) || (view.getId() == R.id.profile_image)) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1);
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {

@@ -112,7 +112,6 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
                     yPlayer.loadVideo(videolink.substring(24));
                 yPlayer.play();
             }
-
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 

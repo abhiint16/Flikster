@@ -86,6 +86,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity android:name=".AllCommentActivity.AllCommentActivity"></activity>
+        <activity android:name=".FullScreenYoutubeView.FullScreenYoutubeView"></activity>
         <service android:name="org.jboss.aerogear.android.authorization.oauth2.OAuth2AuthzService"/>
     </application>
 
