@@ -78,46 +78,46 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
         if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ALL"))
         {
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=celeb";
         }
         else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("CLOTHING"))
         {
             Log.e("insied clothing else if","inside clothign else if");
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20Clothing";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=celeb%20AND%20Clothing";
         }
         else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("EYEWEAR"))
         {
             Log.e("insied clothing else if","inside clothign else if");
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20eyewear";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=celeb%20AND%20eyewear";
         }
         else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("FOOTWEAR"))
         {
             Log.e("insied clothing else if","inside clothign else if");
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20footwear";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=celeb%20AND%20footwear";
         }
         else if(SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Celeb")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ACCESSORIES"))
         {
             Log.e("insied clothing else if","inside clothign else if");
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20accessories";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=celeb%20AND%20accessories";
         }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ALL")) {
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=movie";
         }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("CLOTHING")) {
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie%20AND%20Clothing";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=movie%20AND%20Clothing";
         }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("EYEWEAR")) {
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=celeb%20AND%20Eyewear";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=celeb%20AND%20Eyewear";
         }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("FOOTWEAR")) {
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie%20AND%20Footwear";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=movie%20AND%20Footwear";
         }else if (SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "CELEB_STORE").equals("Movie")
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ACCESSORIES")) {
-            this.URL="http://apiv3-es.flikster.com/products/_search?pretty=true&size=100&q=movie%20AND%20Accessories";
+            this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=movie%20AND%20Accessories";
         }
     }
 

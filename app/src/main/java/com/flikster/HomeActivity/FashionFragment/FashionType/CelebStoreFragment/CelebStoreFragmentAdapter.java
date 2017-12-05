@@ -33,6 +33,8 @@ import com.flikster.Util.SharedPrefsUtil;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,7 +108,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         }else if (viewType == 15) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details4_plus, parent, false);
             return new ViewHolder15(view);
-        } else {
+        }else if (viewType == 20) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details1, parent, false);
+            return new ViewHolder20(view);
+        }
+        else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
             return new ViewHolder1(view);
         }
@@ -134,11 +140,16 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
 
         } else if (holder.getItemViewType() == 2) {
-            ((ViewHolder2) holder).carouselView.setPageCount(hits.getHits().size());
+            int j=0;
             for(int i=0;i<hits.getHits().size();i++)
             {
-                carouselImg.add(hits.getHits().get(i).get_source().getImageGallery().get(0));
+                if(hits.getHits().get(i).get_source().getImageGallery()!=null&&hits.getHits().get(i).get_source().getImageGallery().size()!=0)
+                {
+                    carouselImg.add(hits.getHits().get(i).get_source().getImageGallery().get(0));
+                    j=++j;
+                }
             }
+            ((ViewHolder2) holder).carouselView.setPageCount(j);
             ((ViewHolder2) holder).carouselView.setImageListener(imageListener);
         } else if (holder.getItemViewType() == 3) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -167,6 +178,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebShopByVideosFragmentAdapterViewHolder);
         }if (holder.getItemViewType() == 11) {
             ((ViewHolder11) holder).followbtn.setText("BUY");
+            ((ViewHolder11) holder).card_fashion_details1_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder11) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -186,6 +198,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             }
         } else if (holder.getItemViewType() == 12) {
             ((ViewHolder12) holder).followbtn.setText("BUY");
+            ((ViewHolder12) holder).card_fashion_details2_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder12) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -207,6 +220,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             }
         } else if (holder.getItemViewType() == 13) {
             ((ViewHolder13) holder).followbtn.setText("BUY");
+            ((ViewHolder13) holder).card_fashion_details3_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder13) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -230,6 +244,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             }
         } else if (holder.getItemViewType() == 14) {
             ((ViewHolder14) holder).followbtn.setText("BUY");
+            ((ViewHolder14) holder).card_fashion_details4_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder14) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -255,6 +270,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             }
         } else if (holder.getItemViewType() == 15) {
             ((ViewHolder15) holder).followbtn.setText("BUY");
+            ((ViewHolder15) holder).card_fashion_details4_plus_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder15) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -280,6 +296,26 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         .into(((ViewHolder15) holder).card_fashion_details4_plus_img4);
             }
             ((ViewHolder15) holder).card_fashion_details4_plus_text.setText("+ " + (hits.getHits().get(position-4).get_source().getImageGallery().size() - 4));
+        }else if (holder.getItemViewType() == 20) {
+            ((ViewHolder20) holder).followbtn.setText("BUY");
+            ((ViewHolder20) holder).card_fashion_details1_txt.setVisibility(View.GONE);
+            if (hits.getHits().get(position-4).get_source().getName() != null) {
+                ((ViewHolder20) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
+            }
+            if (hits.getHits().get(position-4).get_source().getCeleb() != null&&hits.getHits().get(position-4).get_source().getCeleb().size()!=0) {
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder20) holder).tv_tag_name.setText(hits.getHits().get(position-4).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position-4).get_source().getCeleb().get(0).getProfilePic())
+                            .asBitmap().into(((ViewHolder20) holder).profile_image);
+                if (hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder20) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-4).get_source().getCeleb().get(0).getRole()));
+            }
+            if (hits.getHits().get(position-4).get_source().getProfilePic() != null) {
+                Glide.with(context).load(hits.getHits().get(position-4).get_source().getProfilePic().trim())
+                        .into(((ViewHolder20) holder).card_fashion_details1_img);
+            }
         }
 
 
@@ -347,18 +383,23 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         }
         else
         {
-            switch (hits.getHits().get(position-4).get_source().getImageGallery().size()) {
-                case 1:
-                    return 11;
-                case 2:
-                    return 12;
-                case 3:
-                    return 13;
-                case 4:
-                    return 14;
-                case 5:
-                    return 15;
+            if(hits.getHits().get(position-4).get_source().getImageGallery()!=null&&hits.getHits().get(position-4).get_source().getImageGallery().size()!=0)
+            {
+                switch (hits.getHits().get(position-4).get_source().getImageGallery().size()) {
+                    case 1:
+                        return 11;
+                    case 2:
+                        return 12;
+                    case 3:
+                        return 13;
+                    case 4:
+                        return 14;
+                    case 5:
+                        return 15;
+                }
             }
+            else
+                return 20;
         }
         return type.get(position);
     }
@@ -488,12 +529,14 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     public class ViewHolder11 extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button followbtn;
         ImageView card_fashion_details1_img, profile_image;
-        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
+                tv_tag_desc, tv_tag_name,card_fashion_details1_txt;
 
         public ViewHolder11(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             card_fashion_details1_img = (ImageView) itemView.findViewById(R.id.card_fashion_details1_img);
+            card_fashion_details1_txt=(TextView)itemView.findViewById(R.id.card_fashion_details1_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
@@ -515,13 +558,15 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     public class ViewHolder12 extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button followbtn;
         ImageView card_fashion_details2_img1, card_fashion_details2_img2, profile_image;
-        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
+                tv_tag_desc, tv_tag_name,card_fashion_details2_txt;
 
         public ViewHolder12(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             card_fashion_details2_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img1);
             card_fashion_details2_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img2);
+            card_fashion_details2_txt=(TextView)itemView.findViewById(R.id.card_fashion_details2_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
@@ -544,7 +589,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     public class ViewHolder13 extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button followbtn;
         ImageView card_fashion_details3_img1, card_fashion_details3_img2, card_fashion_details3_img3, profile_image;
-        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
+                tv_tag_desc, tv_tag_name,card_fashion_details3_txt;
 
         public ViewHolder13(View itemView) {
             super(itemView);
@@ -552,6 +598,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details3_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img1);
             card_fashion_details3_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img2);
             card_fashion_details3_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img3);
+            card_fashion_details3_txt=(TextView)itemView.findViewById(R.id.card_fashion_details3_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
@@ -573,7 +620,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         Button followbtn;
         ImageView card_fashion_details4_img1, card_fashion_details4_img2, card_fashion_details4_img3,
                 card_fashion_details4_img4, profile_image;
-        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
+                tv_tag_desc, tv_tag_name,card_fashion_details4_txt;
 
         public ViewHolder14(View itemView) {
             super(itemView);
@@ -582,6 +630,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details4_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img2);
             card_fashion_details4_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img3);
             card_fashion_details4_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img4);
+            card_fashion_details4_txt=(TextView)itemView.findViewById(R.id.card_fashion_details4_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
@@ -603,7 +652,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         Button followbtn;
         ImageView card_fashion_details4_plus_img1, card_fashion_details4_plus_img2, card_fashion_details4_plus_img3,
                 card_fashion_details4_plus_img4, profile_image;
-        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name, card_fashion_details4_plus_text;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
+                tv_tag_desc, tv_tag_name, card_fashion_details4_plus_text,card_fashion_details4_plus_txt;
 
         public ViewHolder15(View itemView) {
             super(itemView);
@@ -612,6 +662,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details4_plus_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img2);
             card_fashion_details4_plus_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img3);
             card_fashion_details4_plus_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img4);
+            card_fashion_details4_plus_txt=(TextView)itemView.findViewById(R.id.card_fashion_details4_plus_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_fashion_details4_plus_text = (TextView) itemView.findViewById(R.id.card_fashion_details4_plus_text);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
@@ -619,6 +670,35 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.followbtn) {
+                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
+
+    public class ViewHolder20 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        Button followbtn;
+        ImageView card_fashion_details1_img, profile_image;
+        TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
+                tv_tag_desc, tv_tag_name,card_fashion_details1_txt;
+
+        public ViewHolder20(View itemView) {
+            super(itemView);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_fashion_details1_img = (ImageView) itemView.findViewById(R.id.card_fashion_details1_img);
+            card_fashion_details1_txt=(TextView)itemView.findViewById(R.id.card_fashion_details1_txt);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
+            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
+            tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
+            tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
         }
 
         @Override

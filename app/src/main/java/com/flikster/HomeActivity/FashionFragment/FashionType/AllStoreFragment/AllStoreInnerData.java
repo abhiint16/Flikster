@@ -51,6 +51,8 @@ public class AllStoreInnerData {
         private List<String> imageGallery;
         @SerializedName("name")
         private String name;
+        @SerializedName("profilePic")
+        private String profilePic;
         @SerializedName("price")
         private String price;
         @SerializedName("productDescription")
@@ -62,6 +64,14 @@ public class AllStoreInnerData {
 
         public void setProductDescription(String productDescription) {
             this.productDescription = productDescription;
+        }
+
+        public String getProfilePic() {
+            return profilePic;
+        }
+
+        public void setProfilePic(String profilePic) {
+            this.profilePic = profilePic;
         }
 
         public String getPrice() {
