@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.flikster.AllCommentActivity.CommentsData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
@@ -51,7 +52,7 @@ public interface ApiInterface {
     @GET("http://apiservice-ec.flikster.com/contents/_search")
     Call<FeedData> getMovieFeedData(@Query("pretty") Boolean s,
                                     @Query("size") Integer d,
-                                     @Query("q") String c);
+                                    @Query("q") String c);
 
     @GET
     Call<CommentsData> getAllComments(@Url String url);
@@ -68,8 +69,8 @@ public interface ApiInterface {
 
     @GET("http://apiservice-ec.flikster.com/products/_search")
     Call<AllStoreData> getCelebMovieStoreData(@Query("pretty") Boolean s,
-                                    @Query("size") Integer d,
-                                    @Query("q") String c);
+                                              @Query("size") Integer d,
+                                              @Query("q") String c);
     ////////////////////////////////////////////////////////////
     //POST Request
 
@@ -81,4 +82,10 @@ public interface ApiInterface {
 
     @POST("http://apiv3.flikster.com/v3/comments-ms/postComment")
     Call<ModelForPostCommentRequest> commentItem(@Body ModelForPostCommentRequest modelForPostRequest);
+
+    @GET("http://apiv3-es.flikster.com/contents/_search")
+    Call<GalleryData> getAllGalleryData(@Query("pretty") Boolean s,
+                                        @Query("sort") String sort,
+                                        @Query("size") Integer i,
+                                        @Query("q") String c);
 }

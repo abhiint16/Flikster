@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +25,7 @@ public class GalleryFullScreen extends AppCompatActivity implements View.OnClick
     ScrollView scrollView;
     VideoView videoView;
     Button closebtn;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +43,19 @@ public class GalleryFullScreen extends AppCompatActivity implements View.OnClick
     }
 
     private void initializeViews() {
-        videoView=(VideoView)findViewById(R.id.playVideo);
-        scrollView=(ScrollView)findViewById(R.id.gallary_fullscreen_scrollimg);
-        imageView=(ImageView)findViewById(R.id.gallary_fullscreen_img);
-        closebtn=(Button)findViewById(R.id.closebtn);
+        videoView = (VideoView) findViewById(R.id.playVideo);
+        scrollView = (ScrollView) findViewById(R.id.gallary_fullscreen_scrollimg);
+        imageView = (ImageView) findViewById(R.id.gallary_fullscreen_img);
+        closebtn = (Button) findViewById(R.id.closebtn);
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.closebtn)
-        {
-            Intent intent=new Intent(this,HomeActivity.class);
-            intent.putExtra("GallaryFullscreen","GallaryFullscreen");
+        if (view.getId() == R.id.closebtn) {
+            Toast.makeText(getApplicationContext(), "Close", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("GallaryFullscreen", "GallaryFullscreen");
             startActivity(intent);
         }
     }
