@@ -103,7 +103,7 @@ import java.util.Locale;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface
-        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag{
+        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,NewsOnClickFragment.NewsRecommendedClick{
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -654,6 +654,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void sendAudioVideoLink(String toolbarTitle, String img, String title, String audioVideoLink, Fragment fragment) {
         SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
         songByMovieFragmentItemClick.getAudioLink(audioVideoLink,img,"video");
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void newsRecommendedClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType) {
+        NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
+        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType);
         firstTimeLaunch(fragment);
     }
 }

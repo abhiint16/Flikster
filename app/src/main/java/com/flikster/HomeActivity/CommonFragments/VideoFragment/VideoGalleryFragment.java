@@ -23,7 +23,9 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
+import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -49,7 +51,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     String profilePic, title, type, bannerImg, headertitle, description,contentType,videolink;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
     ApiInterface apiInterface;
-    NewsData.NewsInnerData outerHits;
+    FeedInnerData outerHits;
     VideoGalleryAdapter videoGalleryAdapter;
     Integer Count;
     TextView tv_tag_desc,tv_tag_name;
@@ -159,10 +161,10 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
     private void bottomHorRecyclerRetrofitInit() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"").create(ApiInterface.class);
-        Call<NewsData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"");
-        call.enqueue(new Callback<NewsData>() {
+        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"");
+        call.enqueue(new Callback<FeedData>() {
             @Override
-            public void onResponse(Call<NewsData> call, Response<NewsData> response) {
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
                 videoGalleryAdapter = new VideoGalleryAdapter(getActivity(),outerHits,Count,title);
@@ -170,7 +172,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
             }
 
             @Override
-            public void onFailure(Call<NewsData> call, Throwable t) {
+            public void onFailure(Call<FeedData> call, Throwable t) {
                 Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });

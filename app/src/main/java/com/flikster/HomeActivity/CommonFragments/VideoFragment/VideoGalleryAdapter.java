@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
 
 import java.util.List;
@@ -23,10 +24,10 @@ import java.util.List;
 
 public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapter.ViewHolder> {
     Context context;
-    NewsData.NewsInnerData outerHits;
+    FeedInnerData outerHits;
     String title;
     Integer Count;
-    public VideoGalleryAdapter(Context context,NewsData.NewsInnerData outerHits,Integer Count,String title) {
+    public VideoGalleryAdapter(Context context,FeedInnerData outerHits,Integer Count,String title) {
         this.context=context;
         this.title=title;
         this.outerHits=outerHits;

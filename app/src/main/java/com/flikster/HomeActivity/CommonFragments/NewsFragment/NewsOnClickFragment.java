@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.NewsFragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -50,8 +51,9 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     String profilePic, title, type, bannerImg, headertitle, description,contentType;
     RoundedImageView profile_image;
     ApiInterface apiInterface;
-    NewsData.NewsInnerData outerHits;
+    FeedInnerData outerHits;
     int Count;
+    NewsRecommendedClick newsRecommendedClick;
 
     @Nullable
     @Override
@@ -77,18 +79,18 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     private void bottomHorRecyclerRetrofitInit() {
         Log.e("check poster",""+"http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"");
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"").create(ApiInterface.class);
-        Call<NewsData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"");
-        call.enqueue(new Callback<NewsData>() {
+        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"");
+        call.enqueue(new Callback<FeedData>() {
             @Override
-            public void onResponse(Call<NewsData> call, Response<NewsData> response) {
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(),outerHits,Count,title,bannerImg);
+                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(),outerHits,Count,title,bannerImg,newsRecommendedClick);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(newsBottomHorRecyclerAdapter);
             }
 
             @Override
-            public void onFailure(Call<NewsData> call, Throwable t) {
+            public void onFailure(Call<FeedData> call, Throwable t) {
                 Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
@@ -167,4 +169,16 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         this.description = description;
         this.contentType=contentType;
     }
+
+    public interface NewsRecommendedClick {
+        void newsRecommendedClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description,Fragment fragment,String contentType);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        newsRecommendedClick = (NewsRecommendedClick) activity;
+    }
+
 }
+

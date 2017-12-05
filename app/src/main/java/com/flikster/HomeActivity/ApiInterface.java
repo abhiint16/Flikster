@@ -37,7 +37,7 @@ public interface ApiInterface {
     Call<CelebrityData> getCelebrityData(@Url String url);
 
     @GET
-    Call<NewsData> getNewsData(@Url String url);
+    Call<FeedData> getNewsData(@Url String url);
 
     @GET
     Call<FeedData> getGalleryData(@Url String url);
