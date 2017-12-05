@@ -33,6 +33,8 @@ public class FullScreenYoutubeView extends YouTubeBaseActivity implements YouTub
             video_id=getIntent().getStringExtra("video_link").substring(17);
         else if(getIntent().getStringExtra("video_link").contains("https://www.youtube.com/"))
             video_id=getIntent().getStringExtra("video_link").substring(24);
+        else if(getIntent().getStringExtra("video_link").contains("https://www.youtube.com/watch?v="))
+            video_id=getIntent().getStringExtra("video_link").substring(32);
     }
 
     private void initializeRest() {
