@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.VideoFragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     YouTubePlayerSupportFragment youTubePlayerFragment;
     YouTubePlayer yPlayer;
     final String API_KEY="AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
+    VideoRecommendationClick videoRecommendationClick;
 
     @Nullable
     @Override
@@ -167,7 +169,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(),outerHits,Count,title);
+                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(),outerHits,Count,title,videoRecommendationClick);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(videoGalleryAdapter);
             }
 
@@ -188,5 +190,16 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         this.description = description;
         this.contentType=contentType;
         this.videolink=videolink;
+    }
+
+    public interface VideoRecommendationClick
+    {
+        void videoRecommendationClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String videolink,Fragment fragment,String contentType);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        videoRecommendationClick = (VideoRecommendationClick) activity;
     }
 }

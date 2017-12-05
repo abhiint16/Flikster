@@ -103,7 +103,7 @@ import java.util.Locale;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface
-        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,NewsOnClickFragment.NewsRecommendedClick{
+        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,NewsOnClickFragment.NewsRecommendedClick,VideoGalleryFragment.VideoRecommendationClick{
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -277,7 +277,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void firstTimeLaunch(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .add(R.id.main_container, fragment)
+                .replace(R.id.main_container, fragment)
                 .commit();
     }
 
@@ -661,6 +661,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void newsRecommendedClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType) {
         NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
         gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void videoRecommendationClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description, String videolink, Fragment fragment, String contentType) {
+        VideoGalleryFragment videoGalleryFragment = (VideoGalleryFragment) fragment;
+        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink);
         firstTimeLaunch(fragment);
     }
 }
