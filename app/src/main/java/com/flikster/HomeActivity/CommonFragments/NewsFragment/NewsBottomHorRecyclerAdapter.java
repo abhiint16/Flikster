@@ -24,12 +24,14 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
     Context context;
     NewsData.NewsInnerData outerHits;
     int Count;
-    String bannerimg;
-    public NewsBottomHorRecyclerAdapter(Context context, NewsData.NewsInnerData outerHits,int Count,String bannerimg) {
+    String title;
+    String bannerImg;
+    public NewsBottomHorRecyclerAdapter(Context context, NewsData.NewsInnerData outerHits,int Count,String title,String bannerImg) {
         this.context=context;
         this.outerHits=outerHits;
         this.Count=Count;
-        this.bannerimg=bannerimg;
+        this.title=title;
+        this.bannerImg=bannerImg;
     }
 
     @Override
@@ -40,17 +42,20 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(bannerimg.trim()!=outerHits.getHits().get(position).get_source().getTitle())
+        //if(!bannerImg.equals(outerHits.getHits().get(position).get_source().getProfilePic()))
+        if(outerHits.getHits().get(position).get_source().getTitle()!=null)
         {
-            Log.e(bannerimg,outerHits.getHits().get(position).get_source().getTitle());
-            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(holder.carousel_image);
             holder.carousel_title.setText(outerHits.getHits().get(position).get_source().getTitle());
+        }
+        if (outerHits.getHits().get(position).get_source().getProfilePic()!=null)
+        {
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(holder.carousel_image);
         }
     }
 
     @Override
     public int getItemCount() {
-        return Count;
+        return outerHits.getHits().size()-1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

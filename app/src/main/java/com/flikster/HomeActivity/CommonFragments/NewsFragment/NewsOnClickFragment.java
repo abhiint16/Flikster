@@ -75,14 +75,14 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     }
 
     private void bottomHorRecyclerRetrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search?pretty=true&q=contentType:"+contentType).create(ApiInterface.class);
-        Call<NewsData> call = apiInterface.getNewsData("http://apiv3-es.flikster.com/contents/_search?pretty=true&q=contentType:"+contentType);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+contentType).create(ApiInterface.class);
+        Call<NewsData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+contentType);
         call.enqueue(new Callback<NewsData>() {
             @Override
             public void onResponse(Call<NewsData> call, Response<NewsData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(),outerHits,Count,title);
+                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(),outerHits,Count,title,bannerImg);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(newsBottomHorRecyclerAdapter);
             }
 
