@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
 
 import java.util.List;
@@ -22,12 +23,10 @@ import java.util.List;
 
 public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<GalleryBottomHorRecyclerAdapter.ViewHolder> {
     Context context;
-    List<GalleryRecommendedRecyclerData.GalleryInnerData> items;
-    int Count;
-    public GalleryBottomHorRecyclerAdapter(Context context, List<GalleryRecommendedRecyclerData.GalleryInnerData> items, int Count) {
+    FeedInnerData hits;
+    public GalleryBottomHorRecyclerAdapter(Context context, FeedInnerData hits) {
         this.context=context;
-        this.items=items;
-        this.Count=Count;
+        this.hits=hits;
     }
 
     @Override
@@ -38,14 +37,25 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Galler
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-            Glide.with(context).load(items.get(position).getProfilePic()).into(holder.carousel_image);
-            holder.carousel_title.setText(items.get(position).getTitle());
+        if(hits.getHits().get(position).get_source().getProfilePic()!=null)
+            Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic()).into(holder.carousel_image);
+        else if (hits.getHits().get(position).get_source().getProfilePic()==null)
+        {
+            if(hits.getHits().get(position).get_source().getMedia()!=null)
+            {
+                if(hits.getHits().get(position).get_source().getMedia().getGallery()!=null&&hits.getHits().get(position).get_source().getMedia().getGallery().size()!=0)
+                    Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(holder.carousel_image);
+            }
+
+        }
+        if(hits.getHits().get(position).get_source().getTitle()!=null)
+            holder.carousel_title.setText(hits.getHits().get(position).get_source().getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return Count;
+        return hits.getHits().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

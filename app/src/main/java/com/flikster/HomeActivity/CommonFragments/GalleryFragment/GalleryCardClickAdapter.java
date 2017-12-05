@@ -17,6 +17,8 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsBottomHorRecyclerAdapter;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
+import com.flikster.HomeActivity.FeedData;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.Util.GlobalData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.R;
@@ -40,7 +42,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     List<String> galleryImgLinks;
     GalleryBottomHorRecyclerAdapter galleryBottomHorRecyclerAdapter;
     ApiInterface apiInterface;
-    List<GalleryRecommendedRecyclerData.GalleryInnerData> items;
+    FeedInnerData hits;
     Integer Count;
 
     public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
@@ -71,21 +73,20 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void galleryBottomHorRecyclerRetrofitInit(final RecyclerView.ViewHolder viewholder) {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/content-ms/getContentByType/gallery").create(ApiInterface.class);
-        Call<GalleryRecommendedRecyclerData> call = apiInterface.getGalleryData("http://apiv3.flikster.com/v3/content-ms/getContentByType/gallery");
-        call.enqueue(new Callback<GalleryRecommendedRecyclerData>() {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+"gallery"+"\"").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getGalleryData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+"gallery"+"\"");
+        call.enqueue(new Callback<FeedData>() {
             @Override
-            public void onResponse(Call<GalleryRecommendedRecyclerData> call, Response<GalleryRecommendedRecyclerData> response) {
-                items = response.body().getItems();
-                Count = response.body().getCount();
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                hits = response.body().getHits();
                 ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-                galleryBottomHorRecyclerAdapter=new GalleryBottomHorRecyclerAdapter(context,items,Count);
+                galleryBottomHorRecyclerAdapter=new GalleryBottomHorRecyclerAdapter(context,hits);
                 ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
             }
             @Override
-            public void onFailure(Call<GalleryRecommendedRecyclerData> call, Throwable t) {
+            public void onFailure(Call<FeedData> call, Throwable t) {
                 Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });

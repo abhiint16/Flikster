@@ -40,7 +40,7 @@ public interface ApiInterface {
     Call<NewsData> getNewsData(@Url String url);
 
     @GET
-    Call<GalleryRecommendedRecyclerData> getGalleryData(@Url String url);
+    Call<FeedData> getGalleryData(@Url String url);
 
     @GET
     Call<RecommendedMoviesData> getRecommendedMoviesData(@Url String url);
