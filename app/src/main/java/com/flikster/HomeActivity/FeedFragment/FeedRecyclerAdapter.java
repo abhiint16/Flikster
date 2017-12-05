@@ -284,6 +284,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+            if(outerHits.getHits().get(position).get_source().getProfilePic()!=null)
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder7) holder).card_gallary1_img1);
             ((ViewHolder7) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 8) {
@@ -330,7 +331,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder11) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder11) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+            if(outerHits.getHits().get(position).get_source().getProfilePic()!=null)
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder11) holder).card_gallary2_img1);
+            else if(outerHits.getHits().get(position).get_source().getProfilePic()==null)
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder11) holder).card_gallary2_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder11) holder).card_gallary2_img2);
             ((ViewHolder11) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 12) {
@@ -354,7 +358,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder12) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder12) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+            if(outerHits.getHits().get(position).get_source().getProfilePic()!=null)
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder12) holder).card_gallary3_img1);
+            else if(outerHits.getHits().get(position).get_source().getProfilePic()==null)
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder12) holder).card_gallary3_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder12) holder).card_gallary3_img2);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1)).into(((ViewHolder12) holder).card_gallary3_img3);
             ((ViewHolder12) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
@@ -379,7 +386,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder13) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder13) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+            if(outerHits.getHits().get(position).get_source().getProfilePic()!=null)
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder13) holder).card_gallary4_img1);
+            else if(outerHits.getHits().get(position).get_source().getProfilePic()==null)
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder13) holder).card_gallary4_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder13) holder).card_gallary4_img2);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1)).into(((ViewHolder13) holder).card_gallary4_img3);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(2)).into(((ViewHolder13) holder).card_gallary4_img4);
@@ -405,7 +415,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder14) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder14) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+            if(outerHits.getHits().get(position).get_source().getProfilePic()!=null)
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder14) holder).card_gallary5_img1);
+            else if(outerHits.getHits().get(position).get_source().getProfilePic()==null)
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder14) holder).card_gallary5_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder14) holder).card_gallary5_img2);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1)).into(((ViewHolder14) holder).card_gallary5_img3);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(2)).into(((ViewHolder14) holder).card_gallary5_img4);
