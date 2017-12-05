@@ -158,8 +158,8 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
 
     private void bottomHorRecyclerRetrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/contents/_search?pretty=true&q="+contentType).create(ApiInterface.class);
-        Call<NewsData> call = apiInterface.getNewsData("http://apiv3-es.flikster.com/contents/_search?pretty=true&q="+contentType);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"").create(ApiInterface.class);
+        Call<NewsData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"");
         call.enqueue(new Callback<NewsData>() {
             @Override
             public void onResponse(Call<NewsData> call, Response<NewsData> response) {
