@@ -103,7 +103,8 @@ import java.util.Locale;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface
-        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,NewsOnClickFragment.NewsRecommendedClick,VideoGalleryFragment.VideoRecommendationClick{
+        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,
+        NewsOnClickFragment.NewsRecommendedClick,VideoGalleryFragment.VideoRecommendationClick,GalleryCardClick.GalleryRecommendationItemClick{
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -668,6 +669,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void videoRecommendationClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description, String videolink, Fragment fragment, String contentType) {
         VideoGalleryFragment videoGalleryFragment = (VideoGalleryFragment) fragment;
         videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void galleryRecommendationItemClickMethod(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment) {
+        GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title);
         firstTimeLaunch(fragment);
     }
 }

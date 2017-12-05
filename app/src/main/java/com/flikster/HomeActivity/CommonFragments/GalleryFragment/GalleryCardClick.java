@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.GalleryFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ public class GalleryCardClick extends Fragment {
     ImageView profile_image;
     List<String> galleryImgLinks;
     String name,profilepic,type,title;
+    GalleryRecommendationItemClick galleryRecommendationItemClick;
 
     @Nullable
     @Override
@@ -62,7 +64,7 @@ public class GalleryCardClick extends Fragment {
         tv_tag_desc.setText(type);
         gallaryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(gallaryLayoutManager);
-        galleryCardClickAdapter = new GalleryCardClickAdapter(getActivity(), fragmentManager,galleryImgLinks);
+        galleryCardClickAdapter = new GalleryCardClickAdapter(getActivity(), fragmentManager,galleryImgLinks,galleryRecommendationItemClick);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryCardClickAdapter);
     }
 
@@ -82,6 +84,17 @@ public class GalleryCardClick extends Fragment {
         this.profilepic=profilePic;
         this.type=type;
         this.title=title;
+    }
+
+    public interface GalleryRecommendationItemClick
+    {
+        void galleryRecommendationItemClickMethod(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        galleryRecommendationItemClick = (GalleryRecommendationItemClick) activity;
     }
 
 }

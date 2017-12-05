@@ -44,12 +44,15 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     ApiInterface apiInterface;
     FeedInnerData hits;
     Integer Count;
+    GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick;
 
-    public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks) {
+    public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks,
+                                   GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick) {
         this.context = context;
         globalData = new GlobalData();
         this.fragmentManager = fragmentManager;
         this.galleryImgLinks = galleryImgLinks;
+        this.galleryRecommendationItemClick=galleryRecommendationItemClick;
     }
 
     @Override
@@ -82,7 +85,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
                 ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-                galleryBottomHorRecyclerAdapter=new GalleryBottomHorRecyclerAdapter(context,hits);
+                galleryBottomHorRecyclerAdapter=new GalleryBottomHorRecyclerAdapter(context,hits,galleryRecommendationItemClick);
                 ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
             }
             @Override
