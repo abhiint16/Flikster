@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
@@ -279,7 +280,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return type.get(position);
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder {
+    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
         CarouselView carouselView;
@@ -291,8 +292,16 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 //            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
 //            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
             carouselView = (CarouselView) itemView.findViewById(R.id.carouselView);
-            carouselView.setPageCount(sampleImages.length);
+            carouselView.setOnClickListener(this);
 
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view.getId()==R.id.carouselView);
+            {
+                Toast.makeText(context,""+carouselView.getCurrentItem(),Toast.LENGTH_LONG).show();
+            }
         }
     }
 
