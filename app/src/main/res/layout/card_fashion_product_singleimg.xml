@@ -1,41 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:layout_marginRight="5dp"
+    android:background="#efefef"
+    android:elevation="10dp">
+
+
+    <ImageView
+        android:id="@+id/card_fashion_product_singleimg_img"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/gray_rectange_border" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/five"
-        android:layout_marginLeft="@dimen/ten"
-        android:layout_marginRight="@dimen/ten"
-        android:layout_marginBottom="@dimen/ten"
-        android:background="@drawable/white_box"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/ten">
+        android:layout_height="50dp"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/card_store_gallary4_img1"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginBottom="@dimen/twenty"
-            android:layout_marginTop="@dimen/twenty"
+        <TextView
+            android:id="@+id/card_fashion_product_singleimg_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:layout_gravity="center_horizontal"
             android:background="@color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/gray_rectange_border" />
+            android:gravity="center"
+            android:text="BRAND NAME"
+            android:textColor="@color/grey_txt_label"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/card_fashion_product_singleimg_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="BRAND NAME"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:textStyle="bold" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/brannametxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/ten"
-        android:background="@color/transparent"
-        android:text="BRAND NAME"
-        android:textColor="@color/grey_txt_label"
-        android:textSize="20sp" />
-
 </LinearLayout>

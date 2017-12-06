@@ -401,7 +401,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             else
                 return 20;
         }
-        return type.get(position);
+        return 20;
     }
 
     /*@Override
