@@ -41,6 +41,9 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     String URL="";
     ApiInterface apiInterface;
     AllStoreInnerData hits;
+    private boolean isViewShown = false;
+    private Boolean isStarted = false;
+    private Boolean isVisible = false;
 
     @Nullable
     @Override
@@ -53,6 +56,31 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
         Log.e("check URL",""+URL);
         return view;
     }
+    /*@Override
+    public void onStart() {
+        super.onStart();
+        isStarted = true;
+        if (isVisible && isStarted){
+            retrofitInit();
+        }
+    }*/
+    /*@Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        isVisible = isVisibleToUser;
+        if (isStarted && isVisible) {
+            retrofitInit();
+        }
+       *//* if(getView()!=null)
+        {
+            isViewShown=true;
+            retrofitInit();
+        }
+        else
+        {
+            isViewShown=false;
+        }*//*
+    }*/
 
     private void retrofitInit() {
         apiInterface = ApiClient.getClient(this.URL).create(ApiInterface.class);
@@ -129,18 +157,6 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     private void initializeViews() {
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager =  getActivity().getSupportFragmentManager();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
     @Override
