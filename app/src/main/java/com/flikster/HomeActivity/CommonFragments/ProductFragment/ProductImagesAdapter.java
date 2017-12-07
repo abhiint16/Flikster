@@ -3,11 +3,13 @@ package com.flikster.HomeActivity.CommonFragments.ProductFragment;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -21,9 +23,10 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
     List<String> imag = new ArrayList<>();
     FragmentManager fragmentManager;
     Context context;
-    String a;
+    List<String> imageGallery;
 
-    public ProductImagesAdapter(Context context, FragmentManager fragmentManager) {
+    public ProductImagesAdapter(Context context, FragmentManager fragmentManager,
+                                List<String> imageGallery) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
@@ -32,10 +35,7 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
         imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
-    }
-    public ProductImagesAdapter(String a)
-    {
-        this.a=a;
+        this.imageGallery=imageGallery;
     }
 
     @Override
@@ -46,21 +46,22 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //holder.imageView.setImageResource(R.drawable.pooja);
+        Glide.with(context).load(imageGallery.get(position)).into(holder.card_image_item_img);
     }
 
     @Override
     public int getItemCount() {
-        return imag.size();
+        Log.e("checke img",""+imageGallery.size()+imageGallery);
+        return imageGallery.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView imageView;
+        ImageView card_image_item_img;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.imageitem);
-            imageView.setOnClickListener(this);
+            card_image_item_img = (ImageView) itemView.findViewById(R.id.card_image_item_img);
+            //card_image_item_img.setOnClickListener(this);
         }
 
         @Override

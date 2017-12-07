@@ -136,6 +136,8 @@ public class MenFashionFirstTypeFragment extends Fragment  {
 
     public interface ShopByVideoMenInterafce {
         void playShopByVideoMenMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
+        void onBuyClick(String productId,List<String> size,String userId,String price,String profilePic,String productTitle,
+                        String productSlug,List<String> imageGallery,Fragment fragment);
     }
 
     @Override

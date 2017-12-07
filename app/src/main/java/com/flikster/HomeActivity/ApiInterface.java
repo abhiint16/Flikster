@@ -10,12 +10,15 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -88,4 +91,9 @@ public interface ApiInterface {
                                         @Query("sort") String sort,
                                         @Query("size") Integer i,
                                         @Query("q") String c);
+
+    @Multipart
+    @POST("http://apiv3.flikster.com/v3/cart-ms/createCart")
+    Call<ProductDetailsDataToSend> postSendToCartData(@Part("productId") String productId,
+                                                      @Part("size") String size, @Part("userId") String userId, @Part("productDetails") ProductDetailsDataToSend productDetailsDataToSend);
 }

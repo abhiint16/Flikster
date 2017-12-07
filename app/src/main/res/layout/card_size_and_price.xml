@@ -13,16 +13,62 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Casual Formal Shirt"
-            android:textSize="14sp" />
+            android:text="Product title"
+            android:textSize="14sp"
+            android:id="@+id/buy_click_product_title"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:padding="8dp"
-            android:text="Rs 9,750/-"
-            android:textSize="14sp" />
-
+            android:text="price"
+            android:textSize="14sp"
+            android:id="@+id/buy_click_product_price"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="-"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/black_square_border"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/buy_click_product_quantity_minus_btn"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="0"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/black_square_border"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:id="@+id/buy_click_product_quantity_no"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="+"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/black_square_border"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:id="@+id/buy_click_product_quantity_plus_btn"/>
+            </LinearLayout>
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="0.3dp"
@@ -72,7 +118,8 @@
                 android:paddingTop="@dimen/five"
                 android:text="S"
                 android:textColor="#474747"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:id="@+id/buy_click_product_size_small"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,7 +133,8 @@
                 android:paddingTop="@dimen/five"
                 android:text="M"
                 android:textColor="#474747"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:id="@+id/buy_click_product_size_medium"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -98,7 +146,8 @@
                 android:paddingTop="@dimen/five"
                 android:text="L"
                 android:textColor="#474747"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:id="@+id/buy_click_product_size_large"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,7 +158,7 @@
                 android:paddingBottom="@dimen/five"
                 android:paddingLeft="@dimen/ten"
                 android:paddingRight="@dimen/ten"
-
+                android:id="@+id/buy_click_product_size_extra_large"
                 android:paddingTop="@dimen/five"
                 android:text="XL"
                 android:textColor="#474747"
@@ -125,7 +174,8 @@
                 android:paddingTop="@dimen/five"
                 android:text="XLL"
                 android:textColor="#474747"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:id="@+id/buy_click_product_size_extra_extra_large"/>
         </LinearLayout>
     </LinearLayout>
 

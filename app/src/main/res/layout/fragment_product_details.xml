@@ -20,13 +20,9 @@
             <include
                 layout="@layout/fragment_common_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
-                android:layout_below="@id/toolbar_frag_toolbar"
+                android:layout_height="400dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/ten" />
-
-            <include layout="@layout/card_footer" />
 
             <include layout="@layout/card_product_price_size_descr" />
 

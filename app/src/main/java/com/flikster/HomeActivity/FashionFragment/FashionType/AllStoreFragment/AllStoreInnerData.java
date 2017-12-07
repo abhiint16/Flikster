@@ -59,6 +59,46 @@ public class AllStoreInnerData {
         private String productDescription;
         @SerializedName("brand")
         private String brand;
+        @SerializedName("size")
+        private List<String> size;
+        @SerializedName("id")
+        private String id;
+        @SerializedName("productInfo")
+        private String productInfo;
+        @SerializedName("slug")
+        private String slug;
+
+        public String getSlug() {
+            return slug;
+        }
+
+        public void setSlug(String slug) {
+            this.slug = slug;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getProductInfo() {
+            return productInfo;
+        }
+
+        public void setProductInfo(String productInfo) {
+            this.productInfo = productInfo;
+        }
+
+        public List<String> getSize() {
+            return size;
+        }
+
+        public void setSize(List<String> size) {
+            this.size = size;
+        }
 
         public String getBrand() {
             return brand;

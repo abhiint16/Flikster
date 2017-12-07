@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.BuyFashionTypeProductFragment.BuyFashionTypeProductFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
@@ -30,8 +31,10 @@ public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<Me
     FragmentManager fragmentManager;
     Context context;
     AllStoreInnerData.AllStoreInnerMostData _source;
+    MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce;
 
-    public MenFashionFragmentAdapterViewHolder(Context context, FragmentManager fragmentManager,AllStoreInnerData.AllStoreInnerMostData _source) {
+    public MenFashionFragmentAdapterViewHolder(Context context, FragmentManager fragmentManager, AllStoreInnerData.AllStoreInnerMostData _source,
+                                               MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
         imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
@@ -41,6 +44,7 @@ public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<Me
         this.fragmentManager = fragmentManager;
         this.context = context;
         this._source=_source;
+        this.shopByVideoMenInterafce=shopByVideoMenInterafce;
         Log.e("checkbit",""+_source.getPrice());
     }
 
@@ -83,17 +87,13 @@ public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<Me
             card_fashion_men_item_price=(TextView)itemView.findViewById(R.id.card_fashion_men_item_price);
             card_fashion_men_item_title=(TextView)itemView.findViewById(R.id.card_fashion_men_item_title);
             buybtn = (Button) itemView.findViewById(R.id.buybtn);
-//            movieimg.setOnClickListener(this);
             buybtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new BuyFashionTypeProductFragment())
-                    .addToBackStack("")
-                    .commit();
+            shopByVideoMenInterafce.onBuyClick(_source.getId(),_source.getSize(),"abhiint",_source.getPrice(),
+                    _source.getProfilePic(),_source.getProductInfo(),_source.getSlug(),_source.getImageGallery(),new ProductOnClick());
         }
     }
 }

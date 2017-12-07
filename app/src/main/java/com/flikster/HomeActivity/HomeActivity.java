@@ -61,6 +61,7 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFrag
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreFirstTypeFragment;
@@ -695,4 +696,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         songByMovieFragmentItemClick.getShopByVideo(audioLink,audioImg,type,listOfProducts);
         firstTimeLaunch(fragment);
     }
+
+    @Override
+    public void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle, String productSlug,List<String> imageGallery, Fragment fragment) {
+        ProductOnClick productOnClick=(ProductOnClick)fragment;
+        productOnClick.getProductData(productId,size,userId,price,profilePic,productTitle,productSlug,imageGallery);
+        firstTimeLaunch(fragment);
+    }
+
 }
