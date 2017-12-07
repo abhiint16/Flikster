@@ -64,6 +64,16 @@ public class ShopByVideoData {
                 private String title;
                 @SerializedName("thumbnail")
                 private String thumbnail;
+                @SerializedName("products")
+                private List<ShopByVideoAllProduct> products;
+
+                public List<ShopByVideoAllProduct> getProducts() {
+                    return products;
+                }
+
+                public void setProducts(List<ShopByVideoAllProduct> products) {
+                    this.products = products;
+                }
 
                 public String getVideoUrl() {
                     return videoUrl;
@@ -87,6 +97,50 @@ public class ShopByVideoData {
 
                 public void setThumbnail(String thumbnail) {
                     this.thumbnail = thumbnail;
+                }
+
+                public class ShopByVideoAllProduct
+                {
+                    @SerializedName("productTitle")
+                    private String productTitle;
+                    @SerializedName("productSlug")
+                    private String productSlug;
+                    @SerializedName("productBrand")
+                    private String productBrand;
+                    @SerializedName("productProfilePic")
+                    private String productProfilePic;
+
+                    public String getProductTitle() {
+                        return productTitle;
+                    }
+
+                    public void setProductTitle(String productTitle) {
+                        this.productTitle = productTitle;
+                    }
+
+                    public String getProductSlug() {
+                        return productSlug;
+                    }
+
+                    public void setProductSlug(String productSlug) {
+                        this.productSlug = productSlug;
+                    }
+
+                    public String getProductBrand() {
+                        return productBrand;
+                    }
+
+                    public void setProductBrand(String productBrand) {
+                        this.productBrand = productBrand;
+                    }
+
+                    public String getProductProfilePic() {
+                        return productProfilePic;
+                    }
+
+                    public void setProductProfilePic(String productProfilePic) {
+                        this.productProfilePic = productProfilePic;
+                    }
                 }
             }
         }

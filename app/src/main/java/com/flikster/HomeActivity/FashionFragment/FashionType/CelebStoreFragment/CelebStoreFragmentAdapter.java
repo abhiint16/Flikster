@@ -59,8 +59,10 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     ApiInterface apiInterface;
     ShopByVideoData.ShopByVideoInnerData outerHits;
     WidgetData.WidgetInnerData widgetHits;
+    CelebStoreFirstTypeFragment.ShopByVideoInterafce shopByVideoInterafce;
 
-    public CelebStoreFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits) {
+    public CelebStoreFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits,
+                                     CelebStoreFirstTypeFragment.ShopByVideoInterafce shopByVideoInterafce) {
         type.add(1);
         type.add(2);
         type.add(3);
@@ -71,6 +73,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.hits=hits;
+        this.shopByVideoInterafce=shopByVideoInterafce;
     }
 
     @Override
@@ -169,7 +172,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             initRetrofit(((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler,
-                    "http://apiv3-es.flikster.com/shopbyvideos/_search?size=10000&pretty=true&q=category:\"celebrity\"");
+                    "http://apiv3-es.flikster.com/shopbyvideos/_search?size=100&pretty=true&q=category:\"celebrity\"");
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Products");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -346,7 +349,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             @Override
             public void onResponse(Call<ShopByVideoData> call, Response<ShopByVideoData> response) {
                 outerHits = response.body().getHits();
-                celebShopByVideosFragmentAdapterViewHolder = new CelebShopByVideosFragmentAdapterViewHolder(context,fragmentManager,outerHits);
+                celebShopByVideosFragmentAdapterViewHolder = new CelebShopByVideosFragmentAdapterViewHolder(context,fragmentManager,outerHits,shopByVideoInterafce);
                 recyclerView.setAdapter(celebShopByVideosFragmentAdapterViewHolder);
             }
 

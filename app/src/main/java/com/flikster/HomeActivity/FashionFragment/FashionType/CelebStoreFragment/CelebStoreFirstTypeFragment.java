@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,8 +20,11 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFragmentAdapter;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +45,7 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     String URL="";
     ApiInterface apiInterface;
     AllStoreInnerData hits;
+    ShopByVideoInterafce shopByVideoInterafce;
     private boolean isViewShown = false;
     private Boolean isStarted = false;
     private Boolean isVisible = false;
@@ -89,7 +94,7 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
-                celebStoreFragmentAdapter = new CelebStoreFragmentAdapter(getContext(), fragmentManager,hits);
+                celebStoreFragmentAdapter = new CelebStoreFragmentAdapter(getContext(), fragmentManager,hits,shopByVideoInterafce);
                 fragment_common_recyclerview_recycler.setAdapter(celebStoreFragmentAdapter);
             }
 
@@ -177,5 +182,15 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
             Intent intent = new Intent(getActivity(), MyBagActivity.class);
             startActivity(intent);
         }*/
+    }
+
+    public interface ShopByVideoInterafce {
+        void playShopByVideoMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        shopByVideoInterafce = (ShopByVideoInterafce) activity;
     }
 }

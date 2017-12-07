@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongListItemWithProduct.SongByMovieFragmentItemPlayClickAdapter;
 import com.flikster.R;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -31,6 +32,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by abhishek on 01-11-2017.
@@ -53,6 +55,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     ImageView audio_frame_image;
     LinearLayout audio_frame;
     YouTubePlayerSupportFragment youTubePlayerFragment;
+    List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts;
     YouTubePlayer yPlayer;
     final String API_KEY="AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
 
@@ -78,11 +81,12 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
 
     private void initializeRest() {
         toolbar_frag_multiicons_title.setText("Saho");
-        fragment_common_recyclerview_with_tv_title.setText("10 Styles tagged");
+        if (listOfProducts!=null&&listOfProducts.size()!=0)
+        fragment_common_recyclerview_with_tv_title.setText(listOfProducts.size() +"Styles tagged");
         fragmentManager = getActivity().getSupportFragmentManager();
         layoutManager = new GridLayoutManager(getActivity(), 2);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
-        shopByVideoFragmentItemClickAdapter = new SongByMovieFragmentItemPlayClickAdapter(getActivity(), fragmentManager);
+        shopByVideoFragmentItemClickAdapter = new SongByMovieFragmentItemPlayClickAdapter(getActivity(), fragmentManager,listOfProducts);
         fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentItemClickAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
         toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
@@ -103,6 +107,8 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
                     yPlayer.loadVideo(audioLink.substring(17));
                 else if(audioLink.contains("https://www.youtube.com/"))
                     yPlayer.loadVideo(audioLink.substring(24));
+                else if(audioLink.contains("https://www.youtube.com/watch?v="))
+                    yPlayer.loadVideo(audioLink.substring(32));
                 yPlayer.play();
             }
 
@@ -212,6 +218,15 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         this.audioLink=audioLink;
         this.audioImg=audioImg;
         this.type=type;
+    }
+
+    public void getShopByVideo(String audioLink,String audioImg,String type,
+                               List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts)
+    {
+        this.audioLink=audioLink;
+        this.audioImg=audioImg;
+        this.type=type;
+        this.listOfProducts=listOfProducts;
     }
 
     @Override
