@@ -8,6 +8,7 @@
     <color name="white">#fff</color>
     <color name="black">#000</color>
 
+    <color name="recycle_color">#f2f2f2</color>
     <color name="dark_grey">#949494</color>
     <color name="colorImageBackgroundGrey">#cecece</color>
     <color name="colorRectangleBorderGrey">#767676</color>

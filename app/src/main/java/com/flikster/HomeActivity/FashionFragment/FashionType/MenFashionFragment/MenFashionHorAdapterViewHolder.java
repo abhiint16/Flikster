@@ -48,8 +48,8 @@ public class MenFashionHorAdapterViewHolder extends RecyclerView.Adapter<MenFash
         Glide.with(context).load(_source.getImageGallery().get(position)).into(holder.card_fashion_product_singleimg_img);
         if (_source.getName()!=null)
         holder.card_fashion_product_singleimg_title.setText(_source.getName());
-        if (_source.getPrice()!=null)
-        holder.card_fashion_product_singleimg_price.setText(_source.getPrice());
+        if (_source.getBrand()!=null)
+        holder.card_fashion_product_singleimg_brandname.setText(_source.getBrand());
     }
 
     @Override
@@ -61,13 +61,13 @@ public class MenFashionHorAdapterViewHolder extends RecyclerView.Adapter<MenFash
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_fashion_product_singleimg_img;
-        TextView card_fashion_product_singleimg_title,card_fashion_product_singleimg_price;
+        TextView card_fashion_product_singleimg_title,card_fashion_product_singleimg_brandname;
         Button buybtn;
         public ViewHolder(View itemView) {
             super(itemView);
             card_fashion_product_singleimg_img = (ImageView) itemView.findViewById(R.id.card_fashion_product_singleimg_img);
             card_fashion_product_singleimg_title=(TextView)itemView.findViewById(R.id.card_fashion_product_singleimg_title);
-            card_fashion_product_singleimg_price=(TextView)itemView.findViewById(R.id.card_fashion_product_singleimg_price);
+            card_fashion_product_singleimg_brandname=(TextView)itemView.findViewById(R.id.card_fashion_product_singleimg_brandname);
         }
 
         @Override

@@ -57,6 +57,16 @@ public class AllStoreInnerData {
         private String price;
         @SerializedName("productDescription")
         private String productDescription;
+        @SerializedName("brand")
+        private String brand;
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public void setBrand(String brand) {
+            this.brand = brand;
+        }
 
         public String getProductDescription() {
             return productDescription;

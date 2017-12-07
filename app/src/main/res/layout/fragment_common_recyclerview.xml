@@ -13,7 +13,7 @@
         android:id="@+id/fragment_common_recyclerview_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f2f2f2" />
+        android:background="@color/recycle_color" />
 
     <com.leo.simplearcloader.SimpleArcLoader
         android:visibility="gone"

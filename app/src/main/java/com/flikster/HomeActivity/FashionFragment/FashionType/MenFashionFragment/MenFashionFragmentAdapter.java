@@ -102,6 +102,7 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setBackgroundColor(context.getResources().getColor(R.color.recycle_color));
             menFashionHorAdapterViewHolder=new MenFashionHorAdapterViewHolder(context, fragmentManager,hits.getHits().get(position-1).get_source());
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionHorAdapterViewHolder);
         }  else if (holder.getItemViewType() == 4) {

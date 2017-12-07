@@ -58,7 +58,7 @@ public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<Me
         if (_source.getName()!=null)
         holder.card_fashion_men_item_title.setText(_source.getName());
         if (_source.getPrice()!=null)
-        holder.card_fashion_men_item_price.setText(_source.getPrice());
+        holder.card_fashion_men_item_price.setText(_source.getPrice()+" /-");
     }
 
     @Override
