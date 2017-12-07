@@ -66,7 +66,7 @@ public class SongByMovieFragmentItemPlayClickAdapter extends RecyclerView.Adapte
 
     @Override
     public int getItemCount() {
-        if (listOfProducts.size()!=0)
+        if (listOfProducts!=null&&listOfProducts.size()!=0)
         return listOfProducts.size();
         else
             return 1;
@@ -74,7 +74,7 @@ public class SongByMovieFragmentItemPlayClickAdapter extends RecyclerView.Adapte
 
     @Override
     public int getItemViewType(int position) {
-        if (listOfProducts.size()!=0)
+        if (listOfProducts!=null&&listOfProducts.size()!=0)
             return 1;
         else
             return 2;

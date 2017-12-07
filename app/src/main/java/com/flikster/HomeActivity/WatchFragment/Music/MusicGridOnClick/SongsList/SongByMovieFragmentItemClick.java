@@ -101,6 +101,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 yPlayer=youTubePlayer;
                 Log.e("chce link",""+audioLink);
+                Log.e("chce link",""+audioLink.substring(32));
                 if(audioLink.contains("https://www.youtube.com/embed/"))
                 yPlayer.loadVideo(audioLink.substring(30));
                 else if(audioLink.contains("https://youtu.be/"))

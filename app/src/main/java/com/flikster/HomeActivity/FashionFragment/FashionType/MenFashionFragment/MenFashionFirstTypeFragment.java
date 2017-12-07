@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,8 +19,11 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +44,7 @@ public class MenFashionFirstTypeFragment extends Fragment  {
     String URL="";
     ApiInterface apiInterface;
     AllStoreInnerData hits;
+    ShopByVideoMenInterafce shopByVideoMenInterafce;
 
     @Nullable
     @Override
@@ -59,7 +64,7 @@ public class MenFashionFirstTypeFragment extends Fragment  {
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
-                menFashionFragmentAdapter = new MenFashionFragmentAdapter(getContext(), fragmentManager,hits);
+                menFashionFragmentAdapter = new MenFashionFragmentAdapter(getContext(), fragmentManager,hits,shopByVideoMenInterafce);
                 fragment_common_recyclerview_recycler.setAdapter(menFashionFragmentAdapter);
             }
 
@@ -127,6 +132,16 @@ public class MenFashionFirstTypeFragment extends Fragment  {
                 && SharedPrefsUtil.getStringPreference(getActivity().getApplicationContext(), "TAB_NO").equals("ACCESSORIES")) {
             this.URL="http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&q=category:%22Women%20Fashion%22AND%22Accessories%22";
         }
+    }
+
+    public interface ShopByVideoMenInterafce {
+        void playShopByVideoMenMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        shopByVideoMenInterafce = (ShopByVideoMenInterafce) activity;
     }
 
 }

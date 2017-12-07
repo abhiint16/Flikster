@@ -13,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.ExpandedGridView;
 import com.flikster.Util.SharedPrefsUtil;
@@ -21,6 +24,10 @@ import com.flikster.Util.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -37,8 +44,12 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     MenFashionHorAdapterViewHolder menFashionHorAdapterViewHolder;
     AllStoreInnerData hits;
     Boolean first=true;
+    ApiInterface apiInterface;
+    ShopByVideoData.ShopByVideoInnerData outerHits;
+    MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce;
 
-    public MenFashionFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits) {
+    public MenFashionFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits,
+                                     MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce) {
         type.add(1);
         type.add(2);
         type.add(3);
@@ -49,6 +60,7 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.hits=hits;
+        this.shopByVideoMenInterafce=shopByVideoMenInterafce;
 
     }
 
@@ -108,11 +120,30 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         }  else if (holder.getItemViewType() == 4) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            menFashionFragmentAdapterVideosViewHolder = new MenFashionFragmentAdapterVideosViewHolder(context, fragmentManager);
-            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(menFashionFragmentAdapterVideosViewHolder);
+            initRetrofit(((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler,
+                    "http://apiv3-es.flikster.com/shopbyvideos/_search?size=100&pretty=true&q=category:\"Menfashion\"");
         }
 
 
+    }
+
+    private void initRetrofit(final RecyclerView recyclerView, String url) {
+
+        apiInterface = ApiClient.getClient(url).create(ApiInterface.class);
+        Call<ShopByVideoData> call = apiInterface.getShopByVideo(url);
+        call.enqueue(new Callback<ShopByVideoData>() {
+            @Override
+            public void onResponse(Call<ShopByVideoData> call, Response<ShopByVideoData> response) {
+                outerHits = response.body().getHits();
+                menFashionFragmentAdapterVideosViewHolder = new MenFashionFragmentAdapterVideosViewHolder(context, fragmentManager,outerHits,shopByVideoMenInterafce);
+                recyclerView.setAdapter(menFashionFragmentAdapterVideosViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<ShopByVideoData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
     @Override

@@ -64,6 +64,7 @@ import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragmen
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreFirstTypeFragment;
+import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFirstTypeFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
@@ -106,7 +107,7 @@ import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface
         ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,
         NewsOnClickFragment.NewsRecommendedClick,VideoGalleryFragment.VideoRecommendationClick,GalleryCardClick.GalleryRecommendationItemClick
-        ,CelebStoreFirstTypeFragment.ShopByVideoInterafce{
+        ,CelebStoreFirstTypeFragment.ShopByVideoInterafce,MenFashionFirstTypeFragment.ShopByVideoMenInterafce{
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -683,6 +684,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void playShopByVideoMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts) {
+        SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
+        songByMovieFragmentItemClick.getShopByVideo(audioLink,audioImg,type,listOfProducts);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void playShopByVideoMenMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts) {
         SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
         songByMovieFragmentItemClick.getShopByVideo(audioLink,audioImg,type,listOfProducts);
         firstTimeLaunch(fragment);
