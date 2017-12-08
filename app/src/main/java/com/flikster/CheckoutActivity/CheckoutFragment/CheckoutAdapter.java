@@ -90,7 +90,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ImageButton notification_item_cancel_btn;
         public ViewHolder2(View itemView) {
             super(itemView);
-            notification_item_cancel_btn=(ImageButton)itemView.findViewById(R.id.notification_item_cancel_btn);
+            //notification_item_cancel_btn=(ImageButton)itemView.findViewById(R.id.notification_item_cancel_btn);
         }
     }
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {

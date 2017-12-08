@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <ImageButton
+    <!--<ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:background="@color/black"
         android:src="@drawable/cancel_white"
-        android:id="@+id/notification_item_cancel_btn"/>
+        android:id="@+id/notification_item_cancel_btn"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:background="@drawable/black_round_border"
             android:padding="5dp"
-            android:src="@drawable/shoes" />
+            android:src="@drawable/no_image" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -43,7 +43,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Men's Capri Athletic Shoes "
+                android:text="product title "
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -53,7 +53,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Sperry Shoes"
+                android:text="product desc"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -69,12 +69,12 @@
                     android:gravity="center_vertical|start"
                     android:text="Color: " />
 
-                <Button
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/notification_item_color"
-                    android:background="@color/colorAccent"
+                    android:text="null"
                     android:gravity="center_vertical|start" />
 
                 <TextView
@@ -89,16 +89,18 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|start"
-                    android:text="7" />
+                    android:text="null"
+                    android:id="@+id/notification_item_size"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="end|center_vertical"
-                    android:text="Rs. 1971/-"
+                    android:text="null"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:id="@+id/notification_item_price"/>
             </LinearLayout>
 
             <LinearLayout
@@ -119,11 +121,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center_vertical|start"
-                    android:text="28 Sep 2017"
+                    android:text="null"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/no_of_item"
+                    android:id="@+id/notification_item_quantity"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

@@ -12,6 +12,7 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProduc
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
+import com.flikster.MyBagActivity.MyBagData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -69,6 +70,8 @@ public interface ApiInterface {
     @GET
     Call<WidgetData> getWidgetData(@Url String url);
 
+    @GET
+    Call<MyBagData> getMyBagData(@Url String url);
 
     @GET("http://apiservice-ec.flikster.com/products/_search")
     Call<AllStoreData> getCelebMovieStoreData(@Query("pretty") Boolean s,
@@ -92,8 +95,11 @@ public interface ApiInterface {
                                         @Query("size") Integer i,
                                         @Query("q") String c);
 
-    @Multipart
+    /*@Multipart
     @POST("http://apiv3.flikster.com/v3/cart-ms/createCart")
     Call<ProductDetailsDataToSend> postSendToCartData(@Part("productId") String productId,
-                                                      @Part("size") String size, @Part("userId") String userId, @Part("productDetails") ProductDetailsDataToSend productDetailsDataToSend);
+                                                      @Part("size") String size, @Part("userId") String userId, @Part("productDetails") ProductDetailsDataToSend productDetailsDataToSend);*/
+
+    @POST("http://apiv3.flikster.com/v3/cart-ms/createCart")
+    Call<ProductDetailsDataToSend> postSendToCartData(@Body ProductDetailsDataToSend productDetailsDataToSend);
 }

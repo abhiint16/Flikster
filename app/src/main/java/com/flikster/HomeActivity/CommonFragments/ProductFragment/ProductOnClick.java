@@ -23,6 +23,7 @@ import com.flikster.CheckoutActivity.MyBagContinueOnClickActivity;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.MyBagActivity.MyBagActivity;
+import com.flikster.MyBagActivity.MyBagData;
 import com.flikster.R;
 
 import java.util.List;
@@ -135,15 +136,18 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     }
 
     private void postRetrofitAddToCart() {
-        ProductDetailsDataToSend productDetailsDataToSend = new ProductDetailsDataToSend(price, productId, profilePic,productTitle,
-                productSlug,Integer.parseInt(product_quantity_txt.getText().toString()));
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus").create(ApiInterface.class);
-        Call<ProductDetailsDataToSend> call = apiInterface.postSendToCartData(productId,
-                "s",userId,productDetailsDataToSend);
+        ProductDetailsDataToSend productDetailsDataToSend = new ProductDetailsDataToSend(userId,productId,"S","RED",new ProductDetailsDataToSend.InnerProductData(price,productId,profilePic,productTitle,productSlug,1,"RED","S"));
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/cart-ms/createCart").create(ApiInterface.class);
+        Call<ProductDetailsDataToSend> call = apiInterface.postSendToCartData(productDetailsDataToSend);
         call.enqueue(new Callback<ProductDetailsDataToSend>() {
             @Override
             public void onResponse(Call<ProductDetailsDataToSend> call, Response<ProductDetailsDataToSend> response) {
-                Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body());
+                Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
+                Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
+                Intent intent=new Intent(getActivity(),MyBagActivity.class);
+                intent.putExtra("userId",userId);
+                startActivity(intent);
+                //getCartData(userId);
             }
 
             @Override
@@ -164,6 +168,12 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         this.productTitle=productTitle;
         this.productSlug=productSlug;
         this.imageGallery=imageGallery;
+        Log.e("check userId",""+this.userId);
+        Log.e("check userId",""+this.price);
+        Log.e("check userId",""+this.size);
+        Log.e("check userId",""+this.productId);
+        Log.e("check userId",""+this.productSlug);
+        Log.e("check userId",""+this.imageGallery);
     }
 
     @Override
