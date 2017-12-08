@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     android:layout_marginTop="10dp"
     android:background="@color/white"
     android:orientation="vertical"
@@ -125,23 +125,33 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center_vertical|end"
+                    android:text="Quantity :"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/notification_item_quantity"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center_vertical|end"
                     android:text="2"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <ImageButton
+                <!--<ImageButton
                     android:id="@+id/plus_btn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/transparent"
-                    android:src="@drawable/add_icon" />
+                    android:src="@drawable/add_icon" />-->
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

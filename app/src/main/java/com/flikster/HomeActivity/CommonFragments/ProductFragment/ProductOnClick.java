@@ -77,6 +77,8 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         fragment_product_details_recyclerview.setLayoutManager(layoutManager);
         productImagesAdapter = new ProductImagesAdapter(getActivity(), fragmentManager,imageGallery);
         fragment_product_details_recyclerview.setAdapter(productImagesAdapter);
+        product_title.setText(productTitle);
+        product_price.setText(price);
         toolbar_back_navigation_btn.setOnClickListener(this);
         add.setOnClickListener(this);
         buy.setOnClickListener(this);
@@ -109,13 +111,21 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view.getId() == R.id.buy_now_btn) {
             Intent intent=new Intent(getActivity(),MyBagContinueOnClickActivity.class);
+            intent.putExtra("productId",productId);
+            intent.putExtra("productSlug",productSlug);
+            intent.putExtra("productTitle",productTitle);
+            intent.putExtra("userId",userId);
+            intent.putExtra("size",size.get(0));
+            intent.putExtra("color","RED");
+            intent.putExtra("profilePic",profilePic);
+            intent.putExtra("price",price);
+            intent.putExtra("quantity",Integer.parseInt(product_quantity_txt.getText().toString()));
             startActivity(intent);
-        } else if (view.getId() == R.id.add_to_cart_btn) {
+        }
+        else if (view.getId() == R.id.add_to_cart_btn) {
             postRetrofitAddToCart();
-            /*Intent intent=new Intent(getActivity(),MyBagActivity.class);
-            startActivity(intent);*/
-
-        } else if (view.getId() == R.id.toolbar_back_navigation_btn) {
+        }
+        else if (view.getId() == R.id.toolbar_back_navigation_btn) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new FeedFragment())
@@ -125,7 +135,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         else if(view.getId()==R.id.buy_click_product_quantity_minus_btn)
         {
             int i= Integer.parseInt(product_quantity_txt.getText().toString());
-            if (i>0)
+            if (i>1)
             product_quantity_txt.setText(""+(i-1));
         }
         else if (view.getId()==R.id.buy_click_product_quantity_plus_btn)
@@ -136,7 +146,8 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     }
 
     private void postRetrofitAddToCart() {
-        ProductDetailsDataToSend productDetailsDataToSend = new ProductDetailsDataToSend(userId,productId,"S","RED",new ProductDetailsDataToSend.InnerProductData(price,productId,profilePic,productTitle,productSlug,1,"RED","S"));
+        ProductDetailsDataToSend productDetailsDataToSend = new ProductDetailsDataToSend(userId,productId,size.get(0),"RED",new ProductDetailsDataToSend.InnerProductData(price,productId,profilePic,productTitle,productSlug,
+                Integer.parseInt(product_quantity_txt.getText().toString()),"RED","S"));
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/cart-ms/createCart").create(ApiInterface.class);
         Call<ProductDetailsDataToSend> call = apiInterface.postSendToCartData(productDetailsDataToSend);
         call.enqueue(new Callback<ProductDetailsDataToSend>() {

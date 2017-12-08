@@ -104,7 +104,7 @@ public class MyBagData {
                     @SerializedName("productTitle")
                     private String productTitle;
                     @SerializedName("quantity")
-                    private String quantity;
+                    private Integer quantity;
                     @SerializedName("color")
                     private String color;
                     @SerializedName("productPic")
@@ -122,11 +122,11 @@ public class MyBagData {
                         this.productTitle = productTitle;
                     }
 
-                    public String getQuantity() {
+                    public Integer getQuantity() {
                         return quantity;
                     }
 
-                    public void setQuantity(String quantity) {
+                    public void setQuantity(Integer quantity) {
                         this.quantity = quantity;
                     }
 

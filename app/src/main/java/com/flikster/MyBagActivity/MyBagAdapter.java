@@ -60,6 +60,7 @@ public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder1)holder).notification_item_title.setText(myBagInnerData.getHits().get(position).get_source().getProductDetails().getProductTitle());
             ((ViewHolder1)holder).notification_item_color.setText(myBagInnerData.getHits().get(position).get_source().getColor());
         ((ViewHolder1)holder).notification_item_size.setText(myBagInnerData.getHits().get(position).get_source().getProductDetails().getSize());
+//        ((ViewHolder1)holder).notification_item_quantity.setText(myBagInnerData.getHits().get(position).get_source().getProductDetails().getQuantity());
         //}
     }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
 import com.flikster.R;
 
@@ -23,9 +27,39 @@ import com.flikster.R;
 public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     FragmentManager fragmentManager;
     Context context;
-    public CheckoutAdapter(FragmentManager fragmentManager,Context context) {
+    String name;
+    String address;
+    String city;String state;
+    String pin;
+    String mobile;
+    String landmark;
+    String additionMobile;
+    String productId;String productSlug;String productTitle;String userId;String size;
+    String color;String profilePic;String price;
+    int quantity;
+    public CheckoutAdapter(FragmentManager fragmentManager,Context context,String name,String address,String city,String state,
+                           String pin,String mobile,String landmark,String additionMobile,String productId,
+                           String productSlug,String productTitle,String userId,String size,String color,String profilePic,
+                           String price,int quantity) {
         this.fragmentManager=fragmentManager;
         this.context=context;
+        this.name=name;
+        this.address=address;
+        this.city=city;
+        this.state=state;
+        this.additionMobile=additionMobile;
+        this.pin=pin;
+        this.mobile=mobile;
+        this.landmark=landmark;
+        this.productId=productId;
+        this.productSlug=productSlug;
+        this.productTitle=productTitle;
+        this.userId=userId;
+        this.size=size;
+        this.color=color;
+        this.profilePic=profilePic;
+        this.price=price;
+        this.quantity=quantity;
     }
 
     @Override
@@ -33,30 +67,46 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if(viewType==0)
         {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_checkout_customer_details,parent,false);
-            return new ViewHolder1(view);
+            return new ViewHolder0(view);
         }
         else if(viewType==1)
         {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_mybag_recycler_item,parent,false);
-            return new ViewHolder2(view);
+            return new ViewHolder1(view);
         }
         else if(viewType==2)
         {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_checkout_promo,parent,false);
-            return new ViewHolder3(view);
+            return new ViewHolder2(view);
         }
         else
         {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fragment_mybag_order_summary,parent,false);
-            return new ViewHolder4(view);
+            return new ViewHolder3(view);
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder.getItemViewType()==1)
+        if(holder.getItemViewType()==0)
         {
-            ((ViewHolder2)holder).notification_item_cancel_btn.setVisibility(View.GONE);
+            ((ViewHolder0)holder).card_checkout_customer_details_name.setText(name);
+            ((ViewHolder0)holder).card_checkout_customer_details_address.setText(address);
+            ((ViewHolder0)holder).card_checkout_customer_details_city.setText(city);
+            ((ViewHolder0)holder).card_checkout_customer_details_state.setText(state);
+            ((ViewHolder0)holder).card_checkout_customer_details_mobile.setText(mobile);
+            ((ViewHolder0)holder).card_checkout_customer_details_state.setText(state);
+            ((ViewHolder0)holder).card_checkout_customer_details_pin.setText(pin);
+        }
+        if (holder.getItemViewType()==1)
+        {
+            Log.e("check checkout dat",""+profilePic+productTitle+color+size);
+            Glide.with(context).load(profilePic).into(((ViewHolder1)holder).notification_item_img);
+            ((ViewHolder1)holder).notification_item_title.setText(productTitle);
+            ((ViewHolder1)holder).notification_item_color.setText(color);
+            ((ViewHolder1)holder).notification_item_size.setText(size);
+            ((ViewHolder1)holder).notification_item_price.setText(price+" /-");
+            ((ViewHolder1)holder).notification_item_quantity.setText(""+quantity);
         }
     }
 
@@ -70,11 +120,19 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return position;
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder0 extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button card_checkout_customer_details_button;
-        public ViewHolder1(View itemView) {
+        TextView card_checkout_customer_details_name,card_checkout_customer_details_address,card_checkout_customer_details_city
+        ,card_checkout_customer_details_state,card_checkout_customer_details_pin,card_checkout_customer_details_mobile;
+        public ViewHolder0(View itemView) {
             super(itemView);
             card_checkout_customer_details_button=(Button)itemView.findViewById(R.id.card_checkout_customer_details_button);
+            card_checkout_customer_details_name=(TextView)itemView.findViewById(R.id.card_checkout_customer_details_name);
+            card_checkout_customer_details_address=(TextView)itemView.findViewById(R.id.card_checkout_customer_details_address);
+            card_checkout_customer_details_city=(TextView)itemView.findViewById(R.id.card_checkout_customer_details_city);
+            card_checkout_customer_details_state=(TextView)itemView.findViewById(R.id.card_checkout_customer_details_state);
+            card_checkout_customer_details_pin=(TextView)itemView.findViewById(R.id.card_checkout_customer_details_pin);
+            card_checkout_customer_details_mobile=(TextView)itemView.findViewById(R.id.card_checkout_customer_details_mobile);
             card_checkout_customer_details_button.setOnClickListener(this);
         }
 
@@ -86,16 +144,24 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .commit();
         }
     }
-    public class ViewHolder2 extends RecyclerView.ViewHolder {
-        ImageButton notification_item_cancel_btn;
-        public ViewHolder2(View itemView) {
+    public class ViewHolder1 extends RecyclerView.ViewHolder {
+        TextView notification_item_title,notification_item_desc,notification_item_color,notification_item_quantity,
+                notification_item_price,notification_item_size;
+        ImageView notification_item_img;
+        public ViewHolder1(View itemView) {
             super(itemView);
-            //notification_item_cancel_btn=(ImageButton)itemView.findViewById(R.id.notification_item_cancel_btn);
+            notification_item_color=(TextView)itemView.findViewById(R.id.notification_item_color);
+            notification_item_desc=(TextView)itemView.findViewById(R.id.notification_item_desc);
+            notification_item_title=(TextView)itemView.findViewById(R.id.notification_item_title);
+            notification_item_img=(ImageView)itemView.findViewById(R.id.notification_item_img);
+            notification_item_quantity=(TextView) itemView.findViewById(R.id.notification_item_quantity);
+            notification_item_price=(TextView) itemView.findViewById(R.id.notification_item_price);
+            notification_item_size=(TextView) itemView.findViewById(R.id.notification_item_size);
         }
     }
-    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button button;
-        public ViewHolder3(View itemView) {
+        public ViewHolder2(View itemView) {
             super(itemView);
             button=(Button)itemView.findViewById(R.id.card_checkout_promo_btn);
             button.setOnClickListener(this);
@@ -127,8 +193,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             dialog.show();
         }
     }
-    public class ViewHolder4 extends RecyclerView.ViewHolder {
-        public ViewHolder4(View itemView) {
+    public class ViewHolder3 extends RecyclerView.ViewHolder {
+        public ViewHolder3(View itemView) {
             super(itemView);
         }
     }

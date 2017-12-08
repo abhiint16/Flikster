@@ -88,6 +88,10 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
     public void userInput(String name, String mobileNo, String Address, String city, String PinCode, String state, String landmark, String additionMobile, Fragment fragment) {
         CheckoutFragment checkoutFragment = (CheckoutFragment) fragment;
         checkoutFragment.userData(name,mobileNo,Address,city,PinCode,state,landmark,additionMobile);
+        checkoutFragment.productData(getIntent().getStringExtra("productId"),getIntent().getStringExtra("productSlug")
+                ,getIntent().getStringExtra("productTitle"),getIntent().getStringExtra("userId"),
+                getIntent().getStringExtra("size"),getIntent().getStringExtra("color"),getIntent().getStringExtra("profilePic"),
+                getIntent().getStringExtra("price"),getIntent().getIntExtra("quantity",0));
         launchFragment(fragment);
     }
 }
