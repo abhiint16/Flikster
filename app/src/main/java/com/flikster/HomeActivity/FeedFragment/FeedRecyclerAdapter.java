@@ -498,7 +498,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_critic_review_moviename,
                 card_movie_review_bottom_header_criticrating, card_celebrity_feed_gallery1_title,
                 card_comment_text_see_more_comments;
-        ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
+        ImageButton ib_like, ib_bookmark, card_comment_text_send_btn,card_footer_share;
         EditText card_comment_text_edittxt;
         LinearLayout header_linear, card_description_linear;
         Button followbtn;
@@ -523,6 +523,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             card_comment_text_send_btn.setOnClickListener(this);
             card_comment_text_edittxt = (EditText) itemView.findViewById(R.id.card_comment_text_edittxt);
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
@@ -570,6 +572,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
     }
 
@@ -582,6 +589,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Button followbtn;
         ImageButton ib_like, ib_bookmark, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
+        ImageButton card_footer_share;
         boolean actionLike = true;
         boolean actionFollow = true;
         boolean actionbookmark = true;
@@ -601,6 +609,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             card_comment_text_send_btn.setOnClickListener(this);
             card_comment_text_edittxt = (EditText) itemView.findViewById(R.id.card_comment_text_edittxt);
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
@@ -647,6 +657,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
     }
 
@@ -658,6 +673,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageButton video_btn, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         private Button followbtn;
+        ImageButton card_footer_share;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
 
@@ -677,6 +693,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
             card_comment_text_send_btn.setOnClickListener(this);
             card_comment_text_edittxt = (EditText) itemView.findViewById(R.id.card_comment_text_edittxt);
@@ -760,6 +778,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
 
     }
@@ -774,6 +797,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Button followbtn;
         LinearLayout header_linear, card_description_linear;
         boolean actionLike = true;
+        ImageButton card_footer_share;
         boolean actionFollow = true;
         boolean actionbookmark = true;
 
@@ -791,6 +815,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             video_btn=(ImageButton)itemView.findViewById(R.id.video_btn);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
             card_comment_text_send_btn.setOnClickListener(this);
             card_comment_text_edittxt = (EditText) itemView.findViewById(R.id.card_comment_text_edittxt);
@@ -895,6 +921,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
 
         }
     }
@@ -909,6 +940,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         EditText card_comment_text_edittxt;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
+        ImageButton card_footer_share;
         boolean actionLike = true;
         boolean actionFollow = true;
         boolean actionbookmark = true;
@@ -925,6 +957,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
@@ -1001,6 +1035,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
     }
 
@@ -1012,6 +1051,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageButton video_btn, card_comment_text_send_btn;
         EditText card_comment_text_edittxt;
         Button followbtn;
+        ImageButton card_footer_share;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
         boolean actionLike = true;
@@ -1031,6 +1071,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
             card_comment_text_send_btn.setOnClickListener(this);
@@ -1107,6 +1149,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
     }
 
@@ -1121,6 +1168,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Button followbtn;
         LinearLayout header_linear;
         LinearLayout card_description_linear;
+        ImageButton card_footer_share;
         boolean actionLike = true;
         boolean actionFollow = true;
         boolean actionbookmark = true;
@@ -1138,6 +1186,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
@@ -1213,6 +1263,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
     }
 
@@ -1226,6 +1281,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         LinearLayout card_description_linear;
         RecyclerView fragment_common_recyclerview_recycler;
         RelativeLayout card_footer_container;
+        ImageButton card_footer_share;
         Button followbtn;
         boolean actionLike = true;
         boolean actionFollow = true;
@@ -1244,6 +1300,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             card_comment_text_send_btn.setOnClickListener(this);
             card_comment_text_edittxt = (EditText) itemView.findViewById(R.id.card_comment_text_edittxt);
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
@@ -1292,6 +1350,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
             /*else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, new AuctionDetailFragment())
@@ -1324,6 +1387,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Button followbtn;
         LinearLayout header_linear, card_gallery2_img_container;
         LinearLayout card_description_linear;
+        ImageButton card_footer_share;
         boolean actionLike = true;
         boolean actionFollow = true;
         boolean actionbookmark = true;
@@ -1338,6 +1402,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_gallery2_img_container = (LinearLayout) itemView.findViewById(R.id.card_gallery2_img_container);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
@@ -1418,6 +1484,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
     }
 
@@ -1432,6 +1503,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Button followbtn;
         LinearLayout header_linear, card_gallery3_1_img_container;
         LinearLayout card_description_linear;
+        ImageButton card_footer_share;
         boolean actionLike = true;
         boolean actionFollow = true;
         boolean actionbookmark = true;
@@ -1452,6 +1524,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_gallery3_1_img_container = (LinearLayout) itemView.findViewById(R.id.card_gallery3_1_img_container);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
@@ -1526,6 +1600,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
     }
 
@@ -1540,6 +1619,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Button followbtn;
         LinearLayout header_linear, card_gallery4_img_container;
         LinearLayout card_description_linear;
+        ImageButton card_footer_share;
         boolean actionLike = true;
         boolean actionFollow = true;
         boolean actionbookmark = true;
@@ -1556,6 +1636,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_gallery4_img_container = (LinearLayout) itemView.findViewById(R.id.card_gallery4_img_container);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
@@ -1634,6 +1716,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+            }
         }
     }
 
@@ -1649,6 +1736,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         LinearLayout header_linear;
         RelativeLayout card_gallery5_img_container;
         LinearLayout card_description_linear;
+        ImageButton card_footer_share;
         boolean actionLike = true;
         boolean actionFollow = true;
         boolean actionbookmark = true;
@@ -1666,6 +1754,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
+            card_footer_share=(ImageButton)itemView.findViewById(R.id.card_footer_share);
+            card_footer_share.setOnClickListener(this);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_gallery5_img_container = (RelativeLayout) itemView.findViewById(R.id.card_gallery5_img_container);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
@@ -1742,6 +1832,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+            }
+            else if (view.getId()==R.id.card_footer_share)
+            {
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                        .getProfilePic()+"\n\n\n"+"Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
             }
         }
     }
@@ -1852,4 +1947,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Log.e("actionLike", "" + bookmarkAction);
         }
     }
+
+    public void shareClick(String shareableLink)
+    {
+        Intent shareIntent=new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT,"Flikster");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,shareableLink);
+        shareIntent.setType("text/plain");
+        context.startActivity(Intent.createChooser(shareIntent,"Complete action using ...."));
+
+    }
+
 }
