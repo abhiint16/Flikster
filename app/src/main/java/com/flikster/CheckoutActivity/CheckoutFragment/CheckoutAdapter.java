@@ -98,7 +98,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((ViewHolder0)holder).card_checkout_customer_details_state.setText(state);
             ((ViewHolder0)holder).card_checkout_customer_details_pin.setText(pin);
         }
-        if (holder.getItemViewType()==1)
+        else if (holder.getItemViewType()==1)
         {
             Log.e("check checkout dat",""+profilePic+productTitle+color+size);
             Glide.with(context).load(profilePic).into(((ViewHolder1)holder).notification_item_img);
@@ -107,6 +107,14 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((ViewHolder1)holder).notification_item_size.setText(size);
             ((ViewHolder1)holder).notification_item_price.setText(price+" /-");
             ((ViewHolder1)holder).notification_item_quantity.setText(""+quantity);
+        }
+        else if(holder.getItemViewType()==2)
+        {
+        }
+        else if(holder.getItemViewType()==3)
+        {
+            ((ViewHolder3)holder).card_fragment_mybag_order_summary_product_cost.setText("Rs. "+price+"/-");
+            ((ViewHolder3)holder).card_fragment_mybag_order_summary_total_cost.setText("Rs. "+price+"/-");
         }
     }
 
@@ -194,8 +202,13 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
     public class ViewHolder3 extends RecyclerView.ViewHolder {
+        TextView card_fragment_mybag_order_summary_product_cost,card_fragment_mybag_order_summary_shipping_cost,
+                card_fragment_mybag_order_summary_total_cost;
         public ViewHolder3(View itemView) {
             super(itemView);
+            card_fragment_mybag_order_summary_product_cost=(TextView)itemView.findViewById(R.id.card_fragment_mybag_order_summary_product_cost);
+            card_fragment_mybag_order_summary_shipping_cost=(TextView)itemView.findViewById(R.id.card_fragment_mybag_order_summary_shipping_cost);
+            card_fragment_mybag_order_summary_total_cost=(TextView)itemView.findViewById(R.id.card_fragment_mybag_order_summary_total_cost);
         }
     }
 }

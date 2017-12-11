@@ -485,6 +485,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     return 4;
                 case "teasers-promos":
                     return 4;
+                case "tweet":
+                    return 3;
             }
             return 100;
         }
