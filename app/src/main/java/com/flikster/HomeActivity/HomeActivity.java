@@ -77,6 +77,7 @@ import com.flikster.MenuFragments.LogoutFragment;
 import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.MyAccountFragment;
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
 import com.flikster.MenuFragments.OrdersFragment;
+import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.R;
 import com.flikster.HomeActivity.RatingFragment.RatingFragment;
 import com.flikster.MenuFragments.ReferFragment;
@@ -246,7 +247,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 //                    beginTransact(new FashionFragment());
                     beginTransact(new FashionLandingFragment());
                 } else if (position == 4) {
-                    beginTransact(new MyStyleFragment());
+                    Intent intent=new Intent(HomeActivity.this, MyBagActivity.class);
+                    intent.putExtra("userId","abhiint");
+                    startActivity(intent);
+                    /*beginTransact(new MyStyleFragment());*/
                 } /*else if (position == 5) {
                     beginTransact(new RatingFragment());
                 }*/
@@ -348,7 +352,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if (viewId == R.id.plus_button) {
 //            cameraAccessPermission();
         } else if (viewId == R.id.camera_fab) {
-            openCameraClickDialog();
+           // openCameraClickDialog();
+            beginTransact(new MyStyleFragment());
         }
     }
 
@@ -652,6 +657,20 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void carouselItemClick(String toolbarTitle, String img, String title, String audio,String type, Fragment fragment) {
         MovieSongsListFragment movieSongsListFragment=(MovieSongsListFragment)fragment;
         movieSongsListFragment.getAllData(toolbarTitle,img,title,audio,type);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void carouselItemToMovie(String slug, Fragment fragment) {
+        MovieFragment movieFragment=(MovieFragment)fragment;
+        movieFragment.updateInfo(slug);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void carouselItemToGallery(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment) {
+        GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title);
         firstTimeLaunch(fragment);
     }
 

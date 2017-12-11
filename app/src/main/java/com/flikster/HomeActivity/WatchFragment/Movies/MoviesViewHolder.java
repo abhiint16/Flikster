@@ -4,14 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
@@ -22,51 +27,91 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class MoviesViewHolder extends RecyclerView.Adapter<MoviesViewHolder.ViewHolder> {
+public class MoviesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<String> imag=new ArrayList<>();
     Context context;
     FragmentManager fragmentManager;
-    public MoviesViewHolder(Context context,FragmentManager fragmentManager) {
+    List<String> movieImg;
+    List<String> movieTitle;
+    List<String> movieSlug;
+    WatchFragment.WatchFragCommInterface watchFragCommInterface;
+    public MoviesViewHolder(Context context,FragmentManager fragmentManager,List<String> movieImg,List<String> movieTitle,
+                            List<String> movieSlug,WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
         imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
         imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
         imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
         this.context=context;
         this.fragmentManager = fragmentManager;
+        this.movieImg=movieImg;
+        this.movieTitle=movieTitle;
+        this.movieSlug=movieSlug;
+        this.watchFragCommInterface=watchFragCommInterface;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item,parent,false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(viewType==0)
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_not_available_layout,parent,false);
+            return new ViewHolder1(view);
+        }
+        else
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item,parent,false);
+            return new ViewHolder2(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        //holder.imageView.setImageResource(R.drawable.pooja);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(holder.getItemViewType()==0)
+        {
+
+        }
+        else
+        {
+            Glide.with(context).load(movieImg.get(position)).into(((ViewHolder2)holder).carousel_image);
+            ((ViewHolder2)holder).carousel_title.setText(movieTitle.get(position));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return imag.size();
+        if(movieImg.size()==0)
+            return 1;
+        else
+            return movieSlug.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView imageView;
-        public ViewHolder(View itemView) {
+    @Override
+    public int getItemViewType(int position) {
+        if(movieImg.size()==0)
+            return 0;
+        else
+            return 1;
+    }
+
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView carousel_image;
+        TextView carousel_title;
+        public ViewHolder2(View itemView) {
             super(itemView);
-            //imageView=(ImageView)itemView.findViewById(R.id.card_celebrity_bio_peers_recycler);
+            carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
+            carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            /*Intent intent=new Intent(context,VideoPlayerActivity.class);
-            context.startActivity(intent);*/
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new MovieSongsListFragment())
-                    .addToBackStack("")
-                    .commit();
+              watchFragCommInterface.carouselItemToMovie(movieSlug.get(getAdapterPosition()),new MovieFragment());
+        }
+    }
+
+    public class ViewHolder1 extends RecyclerView.ViewHolder{
+        public ViewHolder1(View itemView) {
+            super(itemView);
         }
     }
 }

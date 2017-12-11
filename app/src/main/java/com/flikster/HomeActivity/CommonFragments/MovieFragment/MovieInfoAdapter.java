@@ -192,7 +192,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder1) holder).card_movie_feed_profile_censor.setText(censor);
             }
             if(dor != null && !dor.isEmpty()){
-                ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(formatDate(dor));
+                ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(dor);
             }
             if(duration != null && !duration.isEmpty()){
                 ((ViewHolder1) holder).card_movie_feed_profile_dur.setText(duration);

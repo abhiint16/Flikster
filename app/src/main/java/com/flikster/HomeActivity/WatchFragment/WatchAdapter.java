@@ -14,11 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterPeersViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.FeedFragment.FeedCelebrityRecyclerItemAdapter;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.FeedInnerData;
@@ -37,6 +40,10 @@ import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -68,15 +75,17 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     List<String> musicAudio=new ArrayList<>();
     List<String> tvShowsImg=new ArrayList<>();
     List<String> tvShowsTitle=new ArrayList<>();
-    List<String> tvShowsVideo=new ArrayList<>();
+    List<ArrayList<String>> tvShowsVideo=new ArrayList<ArrayList<String>>();
     List<String> moviesImg=new ArrayList<>();
     List<String> moviesTitle=new ArrayList<>();
-    List<String> moviesVideo=new ArrayList<>();
+    List<String> moviesSlug=new ArrayList<>();
     FeedInnerData outerHits;
     Integer Count;
+    ApiInterface apiInterface;
     FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
     List<String> carouselImgWatch=new ArrayList<>();
+    MovieData.MovieInnerData moviehits;
     int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
 
     public WatchAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits,Integer Count, WatchFragment.WatchFragCommInterface watchFragCommInterface) {
@@ -149,9 +158,9 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
                     audio=true;
                 }
-                if ("tv-shows".equals(outerHits.getHits().get(i).get_source().getContentType())&&tv==false)
+                if ("gallery".equals(outerHits.getHits().get(i).get_source().getContentType())&&tv==false)
                 {
-                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getMedia().getGallery().get(0));
                     tv=true;
                 }
                 if (("social-buzz".equals(outerHits.getHits().get(i).get_source().getContentType())||
@@ -198,11 +207,26 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             musicAdapterViewHolder = new MusicAdapterViewHolder(context,musicTitle,musicImg,musicAudio,fragmentManager,watchFragCommInterface);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(musicAdapterViewHolder);
         } else if (holder.getItemViewType() == 3) {
-            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Tv Shows");
+            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Gallery");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
 //            tvShowsViewHolder = new TvShowsViewHolder(context);
-            tvShowsViewHolder = new TvShowsViewHolder(fragmentManager);
+            for (int i=0;i<outerHits.getHits().size();i++)
+            {
+                Log.e("cehck gallery",""+tvShowsVideo);
+                if("gallery".equals(outerHits.getHits().get(i).get_source().getContentType()))
+                {
+                    tvShowsImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
+                    tvShowsTitle.add(outerHits.getHits().get(i).get_source().getTitle());
+                    if(outerHits.getHits().get(i).get_source().getMedia().getGallery()!=null&&outerHits.getHits().get(i).get_source().getMedia().getGallery().size()!=0)
+                        Log.e("check pos",""+outerHits.getHits().size()+"nalsl"+i);
+                        Log.e("check gallery inner",""+outerHits.getHits().get(i).get_source().getMedia().getGallery());
+                        tvShowsVideo.add((ArrayList<String>) outerHits.getHits().get(i).get_source().getMedia().getGallery());
+                        //socialInterviewVideo.add(outerHits.getHits().get(i).get_source().getMedia().getVideo().get(0));
+                }
+            }
+            tvShowsViewHolder = new TvShowsViewHolder(context,fragmentManager,tvShowsImg,tvShowsTitle,tvShowsVideo,watchFragCommInterface,
+                    outerHits);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(tvShowsViewHolder);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
@@ -227,8 +251,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_title.setText("Movies");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            moviesViewHolder = new MoviesViewHolder(context,fragmentManager);
-            ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(moviesViewHolder);
+            initMovieRetrofit(((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler);
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
             trailerPromoImg.clear();
@@ -267,6 +290,30 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(comedyViewHolder);
         } else {
         }
+    }
+
+    private void initMovieRetrofit(final RecyclerView recyclerView) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/movies/").create(ApiInterface.class);
+        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?size=4&sort=createdAt:desc");
+        call.enqueue(new Callback<MovieData>() {
+            @Override
+            public void onResponse(Call<MovieData> call, Response<MovieData> response) {
+                moviehits = response.body().getHits();
+                for (int i=0;i<moviehits.getHits().size();i++)
+                {
+                    moviesImg.add(moviehits.getHits().get(i).get_source().getCoverPic());
+                    moviesTitle.add(moviehits.getHits().get(i).get_source().getTitle());
+                    moviesSlug.add(moviehits.getHits().get(i).get_source().getSlug());
+                }
+                moviesViewHolder = new MoviesViewHolder(context,fragmentManager,moviesImg,moviesTitle,moviesSlug,watchFragCommInterface);
+                recyclerView.setAdapter(moviesViewHolder);
+                }
+
+            @Override
+            public void onFailure(Call<MovieData> call, Throwable t) {
+                Log.e("xxx", "xxx" + call + t);
+            }
+        });
     }
 
     @Override
@@ -337,7 +384,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"TV Shows",tvShowsImg,tvShowsTitle,tvShowsVideo,new MusicGridFragment());
+            //innerTitleClick(v,"TV Shows",tvShowsImg,tvShowsTitle,tvShowsVideo,new MusicGridFragment());
         }
     }
 
@@ -372,7 +419,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Movies",moviesImg,moviesTitle,moviesVideo,new MusicGridFragment());
+            //innerTitleClick(v,"Movies",moviesImg,moviesTitle,moviesVideo,new MusicGridFragment());
         }
     }
 

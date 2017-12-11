@@ -80,6 +80,16 @@ public class MovieData {
                  private List<MovieCrewData> crew;
                  @SerializedName("storyLine")
                  private  String storyLine;
+                 @SerializedName("slug")
+                 private  String slug;
+
+                 public String getSlug() {
+                     return slug;
+                 }
+
+                 public void setSlug(String slug) {
+                     this.slug = slug;
+                 }
 
                  public List<MovieCrewData> getCrew() {
                      return crew;
