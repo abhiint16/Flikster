@@ -89,7 +89,9 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
-            fragmentManager.popBackStackImmediate();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new WatchFragment())
+                    .commit();
         }
     }
 

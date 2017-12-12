@@ -18,6 +18,7 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityAdapter;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -124,7 +125,9 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId()==R.id.toolbar_back_navigation_btn)
         {
-            getFragmentManager().popBackStackImmediate();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new FeedFragment())
+                    .commit();
         }
     }
 }

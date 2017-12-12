@@ -6,7 +6,18 @@
     android:orientation="vertical"
     android:id="@+id/aaa">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/toolbar_back_navigation_btn"
+            android:src="@drawable/arrow_black"
+            android:background="@color/transparent"/>
     <include layout="@layout/card_header"></include>
+    </LinearLayout>
 
 
     <include

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -86,7 +87,9 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
 //        if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
-        fragmentManager.popBackStackImmediate();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_container,new WatchFragment())
+                .commit();
 //        }
     }
 

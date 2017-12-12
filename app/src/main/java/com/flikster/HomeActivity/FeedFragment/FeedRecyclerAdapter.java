@@ -26,10 +26,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.flikster.FullScreenYoutubeView.FullScreenYoutubeView;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionDetailFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
+import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.Util.Common;
@@ -43,6 +46,10 @@ import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 04-10-2017.
@@ -59,6 +66,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     List<String> audio = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
     String userId = "PAWANKALYAN";
+    ApiInterface apiInterface;
+    int listSize;
 
 
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count, FeedFragment.Testing testing) {
@@ -68,6 +77,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.Count = Count;
         this.testing = testing;
         audio.add("http://content.flikster.com/audio/legendd1.mp3");
+        listSize=outerHits.getHits().size();
         setHasStableIds(true);
     }
 

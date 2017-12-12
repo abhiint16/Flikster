@@ -18,6 +18,7 @@ import com.flikster.GlobalDataStorage;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieAdapter;
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -128,7 +129,9 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_back_navigation_btn) {
-            getFragmentManager().popBackStackImmediate();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new FeedFragment())
+                    .commit();
         }
     }
 

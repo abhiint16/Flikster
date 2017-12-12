@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 
 import java.io.IOException;
@@ -82,8 +83,10 @@ public class SongByMovieProductFragmentItemClick extends Fragment implements Vie
             pauseAudioSong();
         } else if (view.getId() == R.id.closeimgv) {
             fragmentManager.popBackStackImmediate();
-        } else {
-            fragmentManager.popBackStackImmediate();
+        } else if(view.getId()==R.id.toolbar_back_navigation_btn){
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new WatchFragment())
+                    .commit();
         }
     }
 

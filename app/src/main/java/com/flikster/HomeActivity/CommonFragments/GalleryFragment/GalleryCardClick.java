@@ -11,10 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
 
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.List;
  * Created by abhishek on 05-10-2017.
  */
 
-public class GalleryCardClick extends Fragment {
+public class GalleryCardClick extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
     RecyclerView.LayoutManager gallaryLayoutManager;
@@ -34,6 +36,7 @@ public class GalleryCardClick extends Fragment {
     List<String> galleryImgLinks;
     String name,profilepic,type,title;
     GalleryRecommendationItemClick galleryRecommendationItemClick;
+    ImageButton toolbar_back_navigation_btn;
 
     @Nullable
     @Override
@@ -66,6 +69,7 @@ public class GalleryCardClick extends Fragment {
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(gallaryLayoutManager);
         galleryCardClickAdapter = new GalleryCardClickAdapter(getActivity(), fragmentManager,galleryImgLinks,galleryRecommendationItemClick);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryCardClickAdapter);
+        toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
     private void initializeViews() {
@@ -74,6 +78,7 @@ public class GalleryCardClick extends Fragment {
         profile_image = (ImageView) view.findViewById(R.id.profile_image);
         tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
+        toolbar_back_navigation_btn=(ImageButton)view.findViewById(R.id.toolbar_back_navigation_btn);
         fragmentManager = getActivity().getSupportFragmentManager();
     }
 
@@ -84,6 +89,16 @@ public class GalleryCardClick extends Fragment {
         this.profilepic=profilePic;
         this.type=type;
         this.title=title;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId()==R.id.toolbar_back_navigation_btn)
+        {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container,new FeedFragment())
+                    .commit();
+        }
     }
 
     public interface GalleryRecommendationItemClick
