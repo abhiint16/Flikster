@@ -182,6 +182,10 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         }if (holder.getItemViewType() == 11) {
             ((ViewHolder11) holder).followbtn.setText("BUY");
             ((ViewHolder11) holder).card_fashion_details1_txt.setVisibility(View.GONE);
+            if (hits.getHits().get(position-4).get_source().getPrice()!=null)
+            {
+                ((ViewHolder11)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-4).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder11) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -202,6 +206,10 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (holder.getItemViewType() == 12) {
             ((ViewHolder12) holder).followbtn.setText("BUY");
             ((ViewHolder12) holder).card_fashion_details2_txt.setVisibility(View.GONE);
+            if (hits.getHits().get(position-4).get_source().getPrice()!=null)
+            {
+                ((ViewHolder12)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-4).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder12) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -224,6 +232,10 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (holder.getItemViewType() == 13) {
             ((ViewHolder13) holder).followbtn.setText("BUY");
             ((ViewHolder13) holder).card_fashion_details3_txt.setVisibility(View.GONE);
+            if (hits.getHits().get(position-4).get_source().getPrice()!=null)
+            {
+                ((ViewHolder13)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-4).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder13) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -248,6 +260,10 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (holder.getItemViewType() == 14) {
             ((ViewHolder14) holder).followbtn.setText("BUY");
             ((ViewHolder14) holder).card_fashion_details4_txt.setVisibility(View.GONE);
+            if (hits.getHits().get(position-4).get_source().getPrice()!=null)
+            {
+                ((ViewHolder14)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-4).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder14) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -274,6 +290,10 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (holder.getItemViewType() == 15) {
             ((ViewHolder15) holder).followbtn.setText("BUY");
             ((ViewHolder15) holder).card_fashion_details4_plus_txt.setVisibility(View.GONE);
+            if (hits.getHits().get(position-4).get_source().getPrice()!=null)
+            {
+                ((ViewHolder15)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-4).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder15) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
             }
@@ -301,6 +321,10 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder15) holder).card_fashion_details4_plus_text.setText("+ " + (hits.getHits().get(position-4).get_source().getImageGallery().size() - 4));
         }else if (holder.getItemViewType() == 20) {
             ((ViewHolder20) holder).followbtn.setText("BUY");
+            if (hits.getHits().get(position-4).get_source().getPrice()!=null)
+            {
+                ((ViewHolder20)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-4).get_source().getPrice()+" /-");
+            }
             ((ViewHolder20) holder).card_fashion_details1_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position-4).get_source().getName() != null) {
                 ((ViewHolder20) holder).card_description_with_price_title.setText(hits.getHits().get(position-4).get_source().getName());
@@ -542,7 +566,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details1_txt=(TextView)itemView.findViewById(R.id.card_fashion_details1_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -572,7 +596,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details2_txt=(TextView)itemView.findViewById(R.id.card_fashion_details2_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -604,7 +628,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details3_txt=(TextView)itemView.findViewById(R.id.card_fashion_details3_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -636,7 +660,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details4_txt=(TextView)itemView.findViewById(R.id.card_fashion_details4_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+           // card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -669,7 +693,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_fashion_details4_plus_text = (TextView) itemView.findViewById(R.id.card_fashion_details4_plus_text);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+           // card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -697,7 +721,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details1_txt=(TextView)itemView.findViewById(R.id.card_fashion_details1_txt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+           // card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);

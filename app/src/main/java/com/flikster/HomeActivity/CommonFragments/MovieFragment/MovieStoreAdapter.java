@@ -172,6 +172,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         else if (holder.getItemViewType() == 1) {
             ((ViewHolder1) holder).followbtn.setText("BUY");
             ((ViewHolder1) holder).card_header_container.setVisibility(View.GONE);
+            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
+            {
+                ((ViewHolder1)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-1).get_source().getName() != null) {
                 ((ViewHolder1) holder).card_fashion_details1_txt.setText(hits.getHits().get(position-1).get_source().getName());
             }
@@ -199,6 +203,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).followbtn.setText("BUY");
             ((ViewHolder2) holder).card_header_container.setVisibility(View.GONE);
+            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
+            {
+                ((ViewHolder2)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-1).get_source().getName() != null) {
                 ((ViewHolder2) holder).card_fashion_details2_txt.setText(hits.getHits().get(position-1).get_source().getName());
             }
@@ -228,6 +236,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).followbtn.setText("BUY");
             ((ViewHolder3) holder).card_header_container.setVisibility(View.GONE);
+            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
+            {
+                ((ViewHolder3)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-1).get_source().getName() != null) {
                 ((ViewHolder3) holder).card_fashion_details3_txt.setText(hits.getHits().get(position-1).get_source().getName());
             }
@@ -259,6 +271,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).followbtn.setText("BUY");
             ((ViewHolder4) holder).card_header_container.setVisibility(View.GONE);
+            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
+            {
+                ((ViewHolder4)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-1).get_source().getName() != null) {
                 ((ViewHolder4) holder).card_fashion_details4_txt.setText(hits.getHits().get(position-1).get_source().getName());
             }
@@ -292,6 +308,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (holder.getItemViewType() == 5) {
             ((ViewHolder5) holder).followbtn.setText("BUY");
             ((ViewHolder5) holder).card_header_container.setVisibility(View.GONE);
+            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
+            {
+                ((ViewHolder5)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            }
             if (hits.getHits().get(position-1).get_source().getName() != null) {
                 ((ViewHolder5) holder).card_fashion_details4_plus_txt.setText(hits.getHits().get(position-1).get_source().getName());
             }
@@ -416,7 +436,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_fashion_details1_img = (ImageView) itemView.findViewById(R.id.card_fashion_details1_img);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -447,7 +467,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_fashion_details2_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img2);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -480,7 +500,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_fashion_details3_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img3);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -513,7 +533,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_fashion_details4_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img4);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
@@ -548,7 +568,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_fashion_details4_plus_text = (TextView) itemView.findViewById(R.id.card_fashion_details4_plus_text);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
+            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
