@@ -7,5 +7,5 @@
 
     <include layout="@layout/card_size_and_price" />
 
-    <include layout="@layout/card_product_descrption" />
+    <!--<include layout="@layout/card_product_descrption" />-->
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
@@ -58,6 +59,8 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     String productSlug;
     List<String> imageGallery;
     ApiInterface apiInterface;
+    int sizeOfSize;
+    String chosenSize;
 
     @Nullable
     @Override
@@ -78,12 +81,62 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         productImagesAdapter = new ProductImagesAdapter(getActivity(), fragmentManager,imageGallery);
         fragment_product_details_recyclerview.setAdapter(productImagesAdapter);
         product_title.setText(productTitle);
-        product_price.setText(price);
+        product_price.setText("Rs. "+price+" /-");
+        sizeOfSize=size.size();
+        formatSize();
         toolbar_back_navigation_btn.setOnClickListener(this);
         add.setOnClickListener(this);
         buy.setOnClickListener(this);
         product_quantity_minus_btn.setOnClickListener(this);
         product_quanitity_plus_btn.setOnClickListener(this);
+        product_size_small.setOnClickListener(this);
+        product_size_med.setOnClickListener(this);
+        product_size_large.setOnClickListener(this);
+        product_size_extra.setOnClickListener(this);
+        product_size_extra_extra.setOnClickListener(this);
+    }
+
+    private void formatSize() {
+        if (sizeOfSize==1)
+        {
+            product_size_med.setVisibility(View.GONE);
+            product_size_large.setVisibility(View.GONE);
+            product_size_extra.setVisibility(View.GONE);
+            product_size_extra_extra.setVisibility(View.GONE);
+            product_size_small.setText(size.get(0));
+        }
+        if (sizeOfSize==2)
+        {
+            product_size_large.setVisibility(View.GONE);
+            product_size_extra.setVisibility(View.GONE);
+            product_size_extra_extra.setVisibility(View.GONE);
+            product_size_small.setText(size.get(0));
+            product_size_med.setText(size.get(1));
+        }
+        if (sizeOfSize==3)
+        {
+            product_size_extra.setVisibility(View.GONE);
+            product_size_extra_extra.setVisibility(View.GONE);
+            product_size_small.setText(size.get(0));
+            product_size_med.setText(size.get(1));
+            product_size_large.setText(size.get(2));
+        }
+        if (sizeOfSize==4)
+        {
+            product_size_extra_extra.setVisibility(View.GONE);
+            product_size_small.setText(size.get(0));
+            product_size_med.setText(size.get(1));
+            product_size_large.setText(size.get(2));
+            product_size_extra.setText(size.get(3));
+        }
+        if (sizeOfSize==5)
+        {
+            product_size_small.setText(size.get(0));
+            product_size_med.setText(size.get(1));
+            product_size_large.setText(size.get(2));
+            product_size_extra.setText(size.get(3));
+            product_size_extra_extra.setText(size.get(4));
+        }
     }
 
     private void initializeViews() {
@@ -110,12 +163,16 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buy_now_btn) {
+            if (chosenSize.equals("")||chosenSize.isEmpty())
+            {
+                chosenSize=size.get(0);
+            }
             Intent intent=new Intent(getActivity(),MyBagContinueOnClickActivity.class);
             intent.putExtra("productId",productId);
             intent.putExtra("productSlug",productSlug);
             intent.putExtra("productTitle",productTitle);
             intent.putExtra("userId",userId);
-            intent.putExtra("size",size.get(0));
+            intent.putExtra("size",chosenSize);
             intent.putExtra("color","RED");
             intent.putExtra("profilePic",profilePic);
             intent.putExtra("price",price);
@@ -143,11 +200,61 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
             int i= Integer.parseInt(product_quantity_txt.getText().toString());
             product_quantity_txt.setText(""+(i+1));
         }
+        else if(view.getId()==R.id.buy_click_product_size_small)
+        {
+            product_size_small.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
+            product_size_med.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_large.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_extra_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            chosenSize=size.get(0);
+        }
+        else if(view.getId()==R.id.buy_click_product_size_medium)
+        {
+            product_size_small.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_med.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
+            product_size_large.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_extra_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            this.chosenSize=size.get(1);
+        }
+        else if(view.getId()==R.id.buy_click_product_size_large)
+        {
+            product_size_small.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_med.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_large.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
+            product_size_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_extra_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            chosenSize=size.get(2);
+        }
+        else if(view.getId()==R.id.buy_click_product_size_extra_large)
+        {
+            product_size_small.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_med.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_large.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
+            product_size_extra_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            chosenSize=size.get(3);
+        }
+        else if(view.getId()==R.id.buy_click_product_size_extra_extra_large)
+        {
+            product_size_small.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_med.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_large.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+            product_size_extra_extra.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
+            chosenSize=size.get(4);
+        }
     }
 
     private void postRetrofitAddToCart() {
-        ProductDetailsDataToSend productDetailsDataToSend = new ProductDetailsDataToSend(userId,productId,size.get(0),"RED",new ProductDetailsDataToSend.InnerProductData(price,productId,profilePic,productTitle,productSlug,
-                Integer.parseInt(product_quantity_txt.getText().toString()),"RED","S"));
+        Toast.makeText(getActivity(),"Adding to Cart.....wait",Toast.LENGTH_SHORT).show();
+        if (chosenSize.equals("")||chosenSize.isEmpty())
+        {
+            chosenSize=size.get(0);
+        }
+        ProductDetailsDataToSend productDetailsDataToSend = new ProductDetailsDataToSend(userId,productId,chosenSize,"RED",new ProductDetailsDataToSend.InnerProductData(price,productId,profilePic,productTitle,productSlug,
+                Integer.parseInt(product_quantity_txt.getText().toString()),"RED",chosenSize));
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/cart-ms/createCart").create(ApiInterface.class);
         Call<ProductDetailsDataToSend> call = apiInterface.postSendToCartData(productDetailsDataToSend);
         call.enqueue(new Callback<ProductDetailsDataToSend>() {

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreRecyclerItemAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreTredingCelebFashionRecyclerItemAdapter;
@@ -576,8 +577,13 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
             }
         }
     }
@@ -606,8 +612,13 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
             }
 
         }
@@ -632,13 +643,19 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
             }
         }
     }
@@ -664,13 +681,19 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
             }
         }
     }
@@ -697,13 +720,19 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
             }
         }
     }

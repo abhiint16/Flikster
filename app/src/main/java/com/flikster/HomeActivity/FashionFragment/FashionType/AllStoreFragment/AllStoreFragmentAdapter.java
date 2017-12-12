@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.R;
 
 import java.util.List;
@@ -22,10 +23,12 @@ import java.util.List;
 public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     AllStoreInnerData hits;
+    AllStoreFragment.AllStoreInterafce allStoreInterafce;
 
-    public AllStoreFragmentAdapter(Context context, AllStoreInnerData hits) {
+    public AllStoreFragmentAdapter(Context context, AllStoreInnerData hits, AllStoreFragment.AllStoreInterafce allStoreInterafce) {
         this.context = context;
         this.hits = hits;
+        this.allStoreInterafce=allStoreInterafce;
     }
 
     @Override
@@ -254,8 +257,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
             }
         }
     }
@@ -284,8 +292,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
             }
 
         }
@@ -310,13 +323,19 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
             }
         }
     }
@@ -342,13 +361,19 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
             }
         }
     }
@@ -375,13 +400,19 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            followbtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
             }
         }
     }

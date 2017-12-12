@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.BuyFashionTypeProductFragment.BuyFashionTypeProductFragment;
 import com.flikster.R;
@@ -28,11 +29,14 @@ public class MenFashionHorAdapterViewHolder extends RecyclerView.Adapter<MenFash
     FragmentManager fragmentManager;
     Context context;
     AllStoreInnerData.AllStoreInnerMostData _source;
+    MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce;
 
-    public MenFashionHorAdapterViewHolder(Context context, FragmentManager fragmentManager, AllStoreInnerData.AllStoreInnerMostData _source) {
+    public MenFashionHorAdapterViewHolder(Context context, FragmentManager fragmentManager, AllStoreInnerData.AllStoreInnerMostData _source,
+                                          MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce) {
         this.fragmentManager = fragmentManager;
         this.context = context;
         this._source=_source;
+        this.shopByVideoMenInterafce=shopByVideoMenInterafce;
     }
 
 
@@ -62,21 +66,20 @@ public class MenFashionHorAdapterViewHolder extends RecyclerView.Adapter<MenFash
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_fashion_product_singleimg_img;
         TextView card_fashion_product_singleimg_title,card_fashion_product_singleimg_brandname;
-        Button buybtn;
+        Button buybtn_hor_fashion_men;
         public ViewHolder(View itemView) {
             super(itemView);
             card_fashion_product_singleimg_img = (ImageView) itemView.findViewById(R.id.card_fashion_product_singleimg_img);
             card_fashion_product_singleimg_title=(TextView)itemView.findViewById(R.id.card_fashion_product_singleimg_title);
             card_fashion_product_singleimg_brandname=(TextView)itemView.findViewById(R.id.card_fashion_product_singleimg_brandname);
+            buybtn_hor_fashion_men=(Button)itemView.findViewById(R.id.buybtn_hor_fashion_men);
+            buybtn_hor_fashion_men.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new BuyFashionTypeProductFragment())
-                    .addToBackStack("")
-                    .commit();
+            shopByVideoMenInterafce.onBuyClick(_source.getId(),_source.getSize(),"abhiint",_source.getPrice(),
+                    _source.getProfilePic(),_source.getProductInfo(),_source.getSlug(),_source.getImageGallery(),new ProductOnClick());
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,8 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.R;
 import com.leo.simplearcloader.SimpleArcLoader;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +35,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
     ApiInterface apiInterface;
     AllStoreInnerData hits;
     SimpleArcLoader simpleArcLoader;
+    AllStoreInterafce allStoreInterafce;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,7 +56,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
-                allStoreFragmentAdapter = new AllStoreFragmentAdapter(getActivity(),hits);
+                allStoreFragmentAdapter = new AllStoreFragmentAdapter(getActivity(),hits,allStoreInterafce);
                 simpleArcLoader.setVisibility(View.GONE);
                 simpleArcLoader.stop();
                 fragment_common_recyclerview_recycler.setAdapter(allStoreFragmentAdapter);
@@ -98,5 +102,16 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent(getActivity(), MyBagActivity.class);
             startActivity(intent);
         }*/
+    }
+
+    public interface AllStoreInterafce {
+        void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
+                        String productSlug, List<String> imageGallery, Fragment fragment);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        allStoreInterafce = (AllStoreInterafce) activity;
     }
 }
