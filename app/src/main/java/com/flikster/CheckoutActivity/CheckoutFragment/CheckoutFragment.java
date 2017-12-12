@@ -80,18 +80,10 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.toolbar_frag_multiicons_back_navigation)
-        {
-            getFragmentManager().popBackStackImmediate();
-        }
-        else if(view.getId()==R.id.fragment_checkout_bottom_btn)
-        {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
-                    .addToBackStack("")
-                    .commit();
-        }
+
+    }
+
+    private void hitCreateUserApi() {
     }
 
     public void userData(String name,String mobile,String address,String city,String pin,String state,String landmark,

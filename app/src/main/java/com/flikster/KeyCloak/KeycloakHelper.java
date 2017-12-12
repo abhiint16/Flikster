@@ -3,6 +3,7 @@ package com.flikster.KeyCloak;
 import android.app.Activity;
 import android.util.Log;
 
+import org.jboss.aerogear.android.authorization.AuthorizationConfiguration;
 import org.jboss.aerogear.android.authorization.AuthorizationManager;
 import org.jboss.aerogear.android.authorization.AuthzModule;
 import org.jboss.aerogear.android.authorization.oauth2.OAuth2AuthorizationConfiguration;

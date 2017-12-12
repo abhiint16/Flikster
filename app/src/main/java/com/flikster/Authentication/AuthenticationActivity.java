@@ -67,7 +67,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                 KeycloakHelper.connect(AuthenticationActivity.this, new Callback<String>() {
                     @Override
                     public void onSuccess(String data) {
-                        Log.e("inside inSuccess","insde onsuccess");
+                        Log.e("inside inSuccess","insde onsuccess"+data);
                         Toast.makeText(getApplicationContext(), "heaven begins here", Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
                         startActivity(intent);
