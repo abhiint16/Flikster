@@ -4,7 +4,7 @@
     android:id="@+id/card_header_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="12dp">
+    android:padding="10dp">
 
 
     <com.flikster.Util.RoundedImageView
@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:textSize="14sp" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="#Type"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
 
     </LinearLayout>

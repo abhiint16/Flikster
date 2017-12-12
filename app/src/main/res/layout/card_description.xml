@@ -18,7 +18,7 @@
         android:textColor="@android:color/black"
         android:clickable="false"
         android:text="no data"
-        android:textSize="16sp"/>
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/tv_description"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="no data"
         android:textStyle="normal"
-        android:textColor="@android:color/secondary_text_light"
-        android:textSize="12sp"/>
+        android:textColor="@android:color/darker_gray"
+        android:textSize="10sp"/>
 
 </LinearLayout>

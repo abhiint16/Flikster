@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        android:id="@+id/card_audio_jukebox_imageview"/>
+        android:id="@+id/card_audio_jukebox_imageview"
+        android:src="@drawable/placeholdergaller"/>
 
     <include layout="@layout/card_footer" />
 
