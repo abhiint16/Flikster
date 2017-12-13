@@ -27,6 +27,7 @@ import com.instamojo.android.helpers.Constants;
 import com.instamojo.android.models.Errors;
 import com.instamojo.android.models.Order;
 import com.instamojo.android.network.Request;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,6 +61,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     String productId;String productSlug;String productTitle;String userId;String size;
     String color;String profilePic;String price;
     String quantity;
+    SimpleArcLoader simpleArcLoader;
     ApiInterface apiInterface;
     private String accessToken = null;
     String instaMojoURL="https://test.instamojo.com/";
@@ -127,6 +129,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void hitCreateUserApi() {
+        simpleArcLoader.start();
         Log.e("inside onclick bototbtn","inside hitcreateuserapi");
         List<CreateUserApiPostData.ProductData> productDatas=new ArrayList<CreateUserApiPostData.ProductData>();
         productDatas.add(new CreateUserApiPostData.ProductData(productId,productTitle,productSlug,profilePic,color,
@@ -142,6 +145,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<CreateUserApiPostData> call, Response<CreateUserApiPostData> response) {
                 Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
                 Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
+                simpleArcLoader.stop();
                 Toast.makeText(getActivity(),"Order has been created",Toast.LENGTH_SHORT).show();
                 instaMojoInit();
             }
@@ -160,6 +164,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
     private void fetchTokenAndTransactionID() {
 
+        simpleArcLoader.start();
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = getHttpURLBuilder()
                 .addPathSegment("create")
@@ -180,6 +185,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        simpleArcLoader.stop();
                         Toast.makeText(getActivity(),"Failed to fetch the Order Tokens",Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -201,6 +207,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                         transactionID = responseObject.getString("transaction_id");
                     }
                 } catch (JSONException e) {
+                    simpleArcLoader.stop();
                     errorMessage = "Failed to fetch Order tokens";
                 }
 
@@ -288,50 +295,61 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                         //dialog.dismiss();
                         if (error != null) {
                             if (error instanceof Errors.ConnectionError) {
+                                simpleArcLoader.stop();
                                 Toast.makeText(getActivity(),"No Internet Connection",Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.ServerError) {
+                                simpleArcLoader.stop();
                                 Toast.makeText(getActivity(),"Server Error. Try again",Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.AuthenticationError) {
+                                simpleArcLoader.stop();
                                 Toast.makeText(getActivity(),"Access token is invalid or expired. Please Update the token!!",Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.ValidationError) {
                                 // Cast object to validation to pinpoint the issue
                                 Errors.ValidationError validationError = (Errors.ValidationError) error;
 
                                 if (!validationError.isValidTransactionID()) {
+                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Transaction ID is not Unique",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidRedirectURL()) {
+                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Redirect url is invalid",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidWebhook()) {
+                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Webhook url is invalid",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidPhone()) {
+                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Buyer's Phone Number is invalid/empty",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidEmail()) {
+                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Buyer's Email is invalid/empty",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidAmount()) {
+                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Amount is either less than Rs.9 or has more than two decimal places",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidName()) {
+                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Buyer's Name is required",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                             } else {
+                                simpleArcLoader.stop();
                                 Toast.makeText(getActivity(),error.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                             return;
@@ -369,6 +387,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             if (transactionID != null || paymentID != null) {
                 checkPaymentStatus(transactionID, orderID);
             } else {
+                simpleArcLoader.stop();
                 Toast.makeText(getActivity(),"Oops!! Payment was cancelled",Toast.LENGTH_SHORT).show();
             }
         }
@@ -406,6 +425,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        simpleArcLoader.stop();
                         Toast.makeText(getActivity(),"Failed to fetch the Transaction status",Toast.LENGTH_SHORT);
                     }
                 });
@@ -428,6 +448,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                     amount = responseObject.getString("amount");
 
                 } catch (JSONException e) {
+                    simpleArcLoader.stop();
                     errorMessage = "Failed to fetch the Transaction status";
                 }
 

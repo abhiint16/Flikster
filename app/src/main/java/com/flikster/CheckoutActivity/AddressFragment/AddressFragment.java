@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flikster.CheckoutActivity.CheckoutFragment.CheckoutFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
@@ -51,33 +52,9 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     private void initializeView() {
-        try {
-            fragment_address_bottom_btn=(Button)view.findViewById(R.id.fragment_address_bottom_btn);
-            toolbar_frag_multiicons_toolbar=(Toolbar)getActivity().findViewById(R.id.toolbar_frag_multiicons_toolbar);
-            toolbar_frag_multiicons_back_navigation=(ImageButton)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-            toolbar_frag_multiicons_title=(TextView)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_title);
-            addressTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_imgbtn);
-            checkoutTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn);
-            paymentTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_imgbtn);
-            addressTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_name);
-            checkoutTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_name);
-            paymentTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_name);
-            address_fragment_name=(EditText)view.findViewById(R.id.address_fragment_name);
-            address_fragment_mobileno=(EditText)view.findViewById(R.id.address_fragment_mobileno);
-            address_fragment_address=(EditText)view.findViewById(R.id.address_fragment_address);
-            address_fragment_city=(EditText)view.findViewById(R.id.address_fragment_city);
-            address_fragment_pin=(EditText)view.findViewById(R.id.address_fragment_pin);
-            address_fragment_state=(EditText)view.findViewById(R.id.address_fragment_state);
-            address_fragment_landmark=(EditText)view.findViewById(R.id.address_fragment_landmark);
-            address_fragment_additionmobile=(EditText)view.findViewById(R.id.address_fragment_additionmobile);
-        }catch (Exception e){
-            e.printStackTrace();
-//            Log.e("error",e)/
-
-        }
-
+        fragment_address_bottom_btn=(Button)view.findViewById(R.id.fragment_address_bottom_btn);
+        toolbar_frag_multiicons_back_navigation
     }
 
     @Override
@@ -95,15 +72,7 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId()==R.id.fragment_address_bottom_btn)
         {
-            checkoutUserData.userInput(address_fragment_name.getText().toString(),
-                    address_fragment_mobileno.getText().toString(),
-                    address_fragment_address.getText().toString(),
-                    address_fragment_city.getText().toString(),
-                    address_fragment_pin.getText().toString(),
-                    address_fragment_state.getText().toString(),
-                    address_fragment_landmark.getText().toString(),
-                    address_fragment_additionmobile.getText().toString(),
-                    new CheckoutFragment());
+            checkForValidInput();
             /*getFragmentManager().beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new CheckoutFragment())
                     .addToBackStack("")
@@ -114,6 +83,58 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
             Intent intent=new Intent(getActivity(),MyBagActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void checkForValidInput() {
+        if (address_fragment_name.getText().toString().trim().length()==0)
+        {
+            Toast.makeText(getActivity(), "name can't be empty", Toast.LENGTH_LONG).show();
+            address_fragment_name.setError("write something");
+            return;
+        }
+        if (address_fragment_mobileno.getText().toString().trim().length()==0)
+        {
+            Toast.makeText(getActivity(), "mobileNo can't be empty", Toast.LENGTH_LONG).show();
+            address_fragment_mobileno.setError("write something");
+            return;
+        }
+        if (address_fragment_address.getText().toString().trim().length()==0)
+        {
+            Toast.makeText(getActivity(), "address can't be empty", Toast.LENGTH_LONG).show();
+            address_fragment_address.setError("write something");
+            return;
+        }
+        if (address_fragment_city.getText().toString().trim().length()==0)
+        {
+            Toast.makeText(getActivity(), "city can't be empty", Toast.LENGTH_LONG).show();
+            address_fragment_city.setError("write something");
+            return;
+        }
+        if (address_fragment_state.getText().toString().trim().length()==0)
+        {
+            Toast.makeText(getActivity(), "state can't be empty", Toast.LENGTH_LONG).show();
+            address_fragment_state.setError("write something");
+            return;
+        }
+        if (address_fragment_pin.getText().toString().trim().length()==0)
+        {
+            Toast.makeText(getActivity(), "pincode can't be empty", Toast.LENGTH_LONG).show();
+            address_fragment_pin.setError("write something");
+            return;
+        }
+        sendDataToPayment();
+    }
+
+    private void sendDataToPayment() {
+        checkoutUserData.userInput(address_fragment_name.getText().toString(),
+                address_fragment_mobileno.getText().toString(),
+                address_fragment_address.getText().toString(),
+                address_fragment_city.getText().toString(),
+                address_fragment_pin.getText().toString(),
+                address_fragment_state.getText().toString(),
+                address_fragment_landmark.getText().toString(),
+                address_fragment_additionmobile.getText().toString(),
+                new CheckoutFragment());
     }
 
     public interface CheckoutUserData {

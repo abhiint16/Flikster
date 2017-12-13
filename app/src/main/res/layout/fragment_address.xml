@@ -38,7 +38,8 @@
                 android:layout_height="60dp"
                 android:hint="Mobile No"
                 android:layout_margin="10dp"
-                android:id="@+id/address_fragment_mobileno"/>
+                android:id="@+id/address_fragment_mobileno"
+                android:inputType="phone"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -62,6 +63,7 @@
                     android:layout_weight="1"
                     android:hint="Pin Code"
                     android:layout_margin="5dp"
+                    android:inputType="number"
                     android:id="@+id/address_fragment_pin"/>
                 <EditText
                     android:layout_width="0dp"
