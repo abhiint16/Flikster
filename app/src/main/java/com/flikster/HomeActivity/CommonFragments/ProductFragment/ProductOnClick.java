@@ -163,7 +163,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buy_now_btn) {
-            if (chosenSize.equals("")||chosenSize.isEmpty())
+            if ("".equals(chosenSize)||chosenSize==null)
             {
                 chosenSize=size.get(0);
             }
@@ -176,7 +176,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
             intent.putExtra("color","RED");
             intent.putExtra("profilePic",profilePic);
             intent.putExtra("price",price);
-            intent.putExtra("quantity",Integer.parseInt(product_quantity_txt.getText().toString()));
+            intent.putExtra("quantity",product_quantity_txt.getText().toString());
             startActivity(intent);
         }
         else if (view.getId() == R.id.add_to_cart_btn) {

@@ -3,6 +3,8 @@ package com.flikster.CheckoutActivity.CheckoutFragment;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by abhishek on 12-12-2017.
  */
@@ -13,21 +15,49 @@ public class CreateUserApiPostData {
     private String userId;
     @Expose
     @SerializedName("product")
-    private ProductData productData;
+    private List<ProductData> productData;
     @SerializedName("shippingAddress")
     private ShippingAddress shippingAddress;
+    @SerializedName("statusCode")
+    private String statusCode;
+    @SerializedName("message")
+    private String message;
 
-    public CreateUserApiPostData(String userId, ProductData productData, ShippingAddress shippingAddress) {
+    public CreateUserApiPostData(String userId,List<ProductData> productData,ShippingAddress shippingAddress) {
         this.userId = userId;
         this.productData = productData;
         this.shippingAddress = shippingAddress;
     }
 
-    public class ProductData
+    public List<ProductData> getProductData() {
+        return productData;
+    }
+
+    public void setProductData(List<ProductData> productData) {
+        this.productData = productData;
+    }
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public static class ProductData
     {
         @SerializedName("productId")
         private String productId;
-        @SerializedName("ProductTitle")
+        @SerializedName("productTitle")
         private String ProductTitle;
         @SerializedName("productSlug")
         private String productSlug;
@@ -54,7 +84,7 @@ public class CreateUserApiPostData {
         }
     }
 
-    public class ShippingAddress
+    public static class ShippingAddress
     {
         @SerializedName("name")
         private String name;

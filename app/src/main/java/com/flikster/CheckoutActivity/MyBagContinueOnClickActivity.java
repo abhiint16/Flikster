@@ -91,7 +91,7 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
         checkoutFragment.productData(getIntent().getStringExtra("productId"),getIntent().getStringExtra("productSlug")
                 ,getIntent().getStringExtra("productTitle"),getIntent().getStringExtra("userId"),
                 getIntent().getStringExtra("size"),getIntent().getStringExtra("color"),getIntent().getStringExtra("profilePic"),
-                getIntent().getStringExtra("price"),getIntent().getIntExtra("quantity",0));
+                getIntent().getStringExtra("price"),getIntent().getStringExtra("quantity"));
         launchFragment(fragment);
     }
 }

@@ -3,6 +3,7 @@ package com.flikster.HomeActivity;
 import android.util.Log;
 
 import com.flikster.AllCommentActivity.CommentsData;
+import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
@@ -102,4 +103,7 @@ public interface ApiInterface {
 
     @POST("http://apiv3.flikster.com/v3/cart-ms/createCart")
     Call<ProductDetailsDataToSend> postSendToCartData(@Body ProductDetailsDataToSend productDetailsDataToSend);
+
+    @POST("http://apiv3.flikster.com/v3/orders-ms/createOrder")
+    Call<CreateUserApiPostData> postSendToCraeteUser(@Body CreateUserApiPostData createUserApiPostData);
 }

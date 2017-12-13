@@ -36,11 +36,11 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     String additionMobile;
     String productId;String productSlug;String productTitle;String userId;String size;
     String color;String profilePic;String price;
-    int quantity;
+    String quantity;
     public CheckoutAdapter(FragmentManager fragmentManager,Context context,String name,String address,String city,String state,
                            String pin,String mobile,String landmark,String additionMobile,String productId,
                            String productSlug,String productTitle,String userId,String size,String color,String profilePic,
-                           String price,int quantity) {
+                           String price,String quantity) {
         this.fragmentManager=fragmentManager;
         this.context=context;
         this.name=name;
