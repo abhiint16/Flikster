@@ -25,7 +25,7 @@ import retrofit2.Response;
  * Created by abhishek on 12-10-2017.
  */
 
-public class CelebrityFragmentFeed extends Fragment{
+public class CelebrityFragmentFeed extends Fragment {
     View view;
     RecyclerView celebrityFragmentFeedRecycler;
     RecyclerView.LayoutManager celebrityFragmentFeedLayoutManager;
@@ -33,27 +33,34 @@ public class CelebrityFragmentFeed extends Fragment{
     FragmentManager fragmentManager;
     FeedInnerData hits;
     ApiInterface apiInterface;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
+        view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         initializeViews();
         initializeRest();
         retrofitInit();
-        return  view;
+        return view;
     }
 
     private void retrofitInit() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getMovieFeedData(true,100,"slug:\""+getArguments().getString("slug")+"\"");
+        Call<FeedData> call = apiInterface.getMovieFeedData(true, 100, "slug:\"" + getArguments().getString("slug") + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 hits = response.body().getHits();
-                celebrityFeedAdapter = new CelebrityFeedAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
-                        getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
+                celebrityFeedAdapter = new CelebrityFeedAdapter(getActivity(),
+                        fragmentManager, getArguments().getString("coverpic"),
+                        getArguments().getString("biography"),
+                        getArguments().getString("dateOfBirth"),
+                        getArguments().getStringArrayList("role"),
                         getArguments().getString("placeOfBirth"),
-                        getArguments().getString("name"),hits);
+                        getArguments().getString("name"),
+                        hits,
+                        getArguments().getString("userId"),
+                        getArguments().getString("entityId"));
                 celebrityFragmentFeedRecycler.setAdapter(celebrityFeedAdapter);
             }
 
@@ -70,7 +77,7 @@ public class CelebrityFragmentFeed extends Fragment{
     }
 
     private void initializeViews() {
-        celebrityFragmentFeedRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
-        fragmentManager=getActivity().getSupportFragmentManager();
+        celebrityFragmentFeedRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 }

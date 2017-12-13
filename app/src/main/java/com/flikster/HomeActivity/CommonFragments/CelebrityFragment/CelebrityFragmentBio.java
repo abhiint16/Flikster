@@ -28,7 +28,7 @@ import retrofit2.Response;
  * Created by abhishek on 12-10-2017.
  */
 
-public class CelebrityFragmentBio extends Fragment{
+public class CelebrityFragmentBio extends Fragment {
     View view;
     RecyclerView celebrityFragmentBioRecycler;
     RecyclerView.LayoutManager celebrityFragmentBioLayoutManager;
@@ -38,16 +38,17 @@ public class CelebrityFragmentBio extends Fragment{
     ApiInterface apiInterface;
     List<CelebrityData.CelebrityInnerData> items;
     String slug;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
+        view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         initializeViews();
-        bundle=getArguments();
+        bundle = getArguments();
         //this.slug=bundle.getString("slug");
-       // retrofitInit();
+        // retrofitInit();
         initializeRest();
-        return  view;
+        return view;
     }
 
     /*private void retrofitInit() {
@@ -71,15 +72,21 @@ public class CelebrityFragmentBio extends Fragment{
     private void initializeRest() {
         celebrityFragmentBioLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentBioRecycler.setLayoutManager(celebrityFragmentBioLayoutManager);
-        celebrityBioAdapter = new CelebrityBioAdapter(getActivity(), fragmentManager,getArguments().getString("coverpic"),
-                getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
+        celebrityBioAdapter = new CelebrityBioAdapter(getActivity(),
+                fragmentManager,
+                getArguments().getString("coverpic"),
+                getArguments().getString("biography"),
+                getArguments().getString("dateOfBirth"),
+                getArguments().getStringArrayList("role"),
                 getArguments().getString("placeOfBirth"),
-                getArguments().getString("name"));
+                getArguments().getString("name"),
+                getArguments().getString("userId"),
+                getArguments().getString("entityId"));
         celebrityFragmentBioRecycler.setAdapter(celebrityBioAdapter);
     }
 
     private void initializeViews() {
-        celebrityFragmentBioRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
-        fragmentManager=getActivity().getSupportFragmentManager();
+        celebrityFragmentBioRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 }

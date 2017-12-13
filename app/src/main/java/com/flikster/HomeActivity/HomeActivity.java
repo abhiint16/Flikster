@@ -106,10 +106,12 @@ import java.util.Locale;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing,WatchFragment.WatchFragCommInterface
-        ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,
-        NewsOnClickFragment.NewsRecommendedClick,VideoGalleryFragment.VideoRecommendationClick,GalleryCardClick.GalleryRecommendationItemClick
-        ,CelebStoreFirstTypeFragment.ShopByVideoInterafce,MenFashionFirstTypeFragment.ShopByVideoMenInterafce{
+public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface,
+        View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing, WatchFragment.WatchFragCommInterface
+        , MovieSongsListFragment.WatchPlayAudioOrVideoInterafce, MusicGridFragment.WatchAudioVideoSendFromGridFrag,
+        NewsOnClickFragment.NewsRecommendedClick, VideoGalleryFragment.VideoRecommendationClick,
+        GalleryCardClick.GalleryRecommendationItemClick
+        , CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce {
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -247,8 +249,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 //                    beginTransact(new FashionFragment());
                     beginTransact(new FashionLandingFragment());
                 } else if (position == 4) {
-                    Intent intent=new Intent(HomeActivity.this, MyBagActivity.class);
-                    intent.putExtra("userId","abhiint");
+                    Intent intent = new Intent(HomeActivity.this, MyBagActivity.class);
+                    intent.putExtra("userId", "abhiint");
                     startActivity(intent);
                     /*beginTransact(new MyStyleFragment());*/
                 } /*else if (position == 5) {
@@ -352,7 +354,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if (viewId == R.id.plus_button) {
 //            cameraAccessPermission();
         } else if (viewId == R.id.camera_fab) {
-           // openCameraClickDialog();
+            // openCameraClickDialog();
             beginTransact(new MyStyleFragment());
         }
     }
@@ -556,15 +558,15 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
 
     @Override
-    public void test(String name, Fragment fragment, int getClass) {
+    public void test(String name, Fragment fragment, int getClass, String userId, String entityId) {
         if (getClass == 1) {
             MovieFragment movieFragment = (MovieFragment) fragment;
-            movieFragment.updateInfo(name);
+            movieFragment.updateInfo(name, userId, entityId);
             Log.e("inside home movie", "indies home movie" + name);
             firstTimeLaunch(fragment);
         } else if (getClass == 2) {
             CelebrityFragment celebrityFragment = (CelebrityFragment) fragment;
-            celebrityFragment.updateInfo(name);
+            celebrityFragment.updateInfo(name, userId, entityId);
             Log.e("inside home celeb", "indie home celbe");
             firstTimeLaunch(fragment);
         }
@@ -572,32 +574,38 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type,
-                                   String title, Fragment fragment) {
+                                   String title, Fragment fragment, String userId, String entityId) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title);
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType) {
+    public void newsCardOnClick(String profilePic, String title, String type, String bannerImg,
+                                String headertitle, String description, Fragment fragment,
+                                String contentType, String userId, String entityId) {
         NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
-        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType);
+        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId);
         firstTimeLaunch(fragment);
     }
 
+
     @Override
-    public void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, String videolink, Fragment fragment, String contentType) {
+    public void videoCardOnClick(String profilePic, String title, String type, String bannerImg,
+                                 String headertitle,
+                                 String description, String videolink, Fragment fragment,
+                                 String contentType, String userId, String entityId) {
         VideoGalleryFragment videoGalleryFragment = (VideoGalleryFragment) fragment;
-        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink);
+        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void seeMoreComments(String userName,String userId,String entityId) {
-        Intent intent=new Intent(HomeActivity.this, AllCommentActivity.class);
-        intent.putExtra("entityId",entityId);
-        intent.putExtra("userName",userName);
-        intent.putExtra("userId",userId);
+    public void seeMoreComments(String userName, String userId, String entityId) {
+        Intent intent = new Intent(HomeActivity.this, AllCommentActivity.class);
+        intent.putExtra("entityId", entityId);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userId", userId);
         startActivity(intent);
     }
 
@@ -640,87 +648,99 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
 
     @Override
-    public void carouselContainerClick(String toolbarTitle, List<String> img, List<String> title, List<String> audioVideoLink,Fragment fragment) {
-        MusicGridFragment musicGridFragment=(MusicGridFragment)fragment;
-        musicGridFragment.getAllData(toolbarTitle,img,title,audioVideoLink);
+    public void carouselContainerClick(String toolbarTitle,
+                                       List<String> img, List<String> title, List<String> audioVideoLink, Fragment fragment) {
+        MusicGridFragment musicGridFragment = (MusicGridFragment) fragment;
+        musicGridFragment.getAllData(toolbarTitle, img, title, audioVideoLink);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void playAudioOrVideoPage(String audioLink, Fragment fragment,String audioImg,String type) {
-        SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
-        songByMovieFragmentItemClick.getAudioLink(audioLink,audioImg,type);
+    public void playAudioOrVideoPage(String audioLink, Fragment fragment, String audioImg, String type) {
+        SongByMovieFragmentItemClick songByMovieFragmentItemClick = (SongByMovieFragmentItemClick) fragment;
+        songByMovieFragmentItemClick.getAudioLink(audioLink, audioImg, type);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void carouselItemClick(String toolbarTitle, String img, String title, String audio,String type, Fragment fragment) {
-        MovieSongsListFragment movieSongsListFragment=(MovieSongsListFragment)fragment;
-        movieSongsListFragment.getAllData(toolbarTitle,img,title,audio,type);
+    public void carouselItemClick(String toolbarTitle, String img, String title,
+                                  String audio, String type, Fragment fragment) {
+        MovieSongsListFragment movieSongsListFragment = (MovieSongsListFragment) fragment;
+        movieSongsListFragment.getAllData(toolbarTitle, img, title, audio, type);
         firstTimeLaunch(fragment);
     }
 
     @Override
     public void carouselItemToMovie(String slug, Fragment fragment) {
-        MovieFragment movieFragment=(MovieFragment)fragment;
-        movieFragment.updateInfo(slug);
+        MovieFragment movieFragment = (MovieFragment) fragment;
+        movieFragment.updateInfo(slug, "", "");
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void carouselItemToGallery(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment) {
+    public void carouselItemToGallery(List<String> galleryImgLinks, String name,
+                                      String profilePic, String type, String title, Fragment fragment) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title);
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, "", "");
         firstTimeLaunch(fragment);
     }
+
 
     @Override
     public void sendAudioVideoLink(String toolbarTitle, String img, String title, String audioVideoLink, Fragment fragment) {
-        SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
-        songByMovieFragmentItemClick.getAudioLink(audioVideoLink,img,"video");
+        SongByMovieFragmentItemClick songByMovieFragmentItemClick = (SongByMovieFragmentItemClick) fragment;
+        songByMovieFragmentItemClick.getAudioLink(audioVideoLink, img, "video");
         firstTimeLaunch(fragment);
     }
 
-    @Override
-    public void newsRecommendedClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType) {
-        NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
-        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType);
-        firstTimeLaunch(fragment);
-    }
 
     @Override
-    public void videoRecommendationClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description, String videolink, Fragment fragment, String contentType) {
+    public void videoRecommendationClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description, String videolink,
+                                               Fragment fragment, String contentType, String userId, String entityId) {
         VideoGalleryFragment videoGalleryFragment = (VideoGalleryFragment) fragment;
-        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink);
+        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void galleryRecommendationItemClickMethod(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment) {
+    public void galleryRecommendationItemClickMethod(List<String> galleryImgLinks,
+                                                     String name, String profilePic, String type,
+                                                     String title, Fragment fragment, String userId, String entityId) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title);
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId);
         firstTimeLaunch(fragment);
     }
 
     @Override
     public void playShopByVideoMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts) {
-        SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
-        songByMovieFragmentItemClick.getShopByVideo(audioLink,audioImg,type,listOfProducts);
+        SongByMovieFragmentItemClick songByMovieFragmentItemClick = (SongByMovieFragmentItemClick) fragment;
+        songByMovieFragmentItemClick.getShopByVideo(audioLink, audioImg, type, listOfProducts);
         firstTimeLaunch(fragment);
     }
 
     @Override
     public void playShopByVideoMenMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts) {
-        SongByMovieFragmentItemClick songByMovieFragmentItemClick=(SongByMovieFragmentItemClick)fragment;
-        songByMovieFragmentItemClick.getShopByVideo(audioLink,audioImg,type,listOfProducts);
+        SongByMovieFragmentItemClick songByMovieFragmentItemClick = (SongByMovieFragmentItemClick) fragment;
+        songByMovieFragmentItemClick.getShopByVideo(audioLink, audioImg, type, listOfProducts);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle, String productSlug,List<String> imageGallery, Fragment fragment) {
-        ProductOnClick productOnClick=(ProductOnClick)fragment;
-        productOnClick.getProductData(productId,size,userId,price,profilePic,productTitle,productSlug,imageGallery);
+    public void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle, String productSlug, List<String> imageGallery, Fragment fragment) {
+        ProductOnClick productOnClick = (ProductOnClick) fragment;
+        productOnClick.getProductData(productId, size, userId, price, profilePic, productTitle, productSlug, imageGallery);
         firstTimeLaunch(fragment);
     }
 
+
+    @Override
+    public void newsRecommendedClickMethod(String profilePic, String title,
+                                           String type, String bannerImg, String headertitle,
+                                           String description, Fragment fragment, String contentType,
+                                           String useriId, String entityId) {
+        NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
+        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle,
+                description, contentType, useriId, entityId);
+        firstTimeLaunch(fragment);
+    }
 }

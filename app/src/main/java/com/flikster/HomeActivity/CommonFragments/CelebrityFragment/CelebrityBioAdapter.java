@@ -12,12 +12,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieInfoAdapter;
+import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
+import com.flikster.Util.Common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +47,15 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     ArrayList<String> role = new ArrayList<>();
     String dateOfBirth;
     String placeOfBirth;
+    String userId;
+    String entityId;
 
 
     public CelebrityBioAdapter(Context context, FragmentManager fragmentManager, String coverpic, String biography,
-                               String dateOfBirth, ArrayList<String> role,String placeOfBirth,String name) {
+                               String dateOfBirth, ArrayList<String> role, String placeOfBirth,
+                               String name, String userId, String entityId) {
+        this.userId = userId;
+        this.entityId = entityId;
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -68,8 +76,8 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.coverpic = coverpic;
         this.name = name;
         this.role = role;
-        this.biography=biography;
-        this.dateOfBirth=dateOfBirth;
+        this.biography = biography;
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -112,12 +120,17 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public String formatRole() {
         String roleString = "";
-        for (int i = 0; i < role.size(); i++) {
-            if (i < role.size() - 1)
-                roleString = roleString + role.get(i) + " , ";
-            else
-                roleString = roleString + role.get(i);
+        try {
+            for (int i = 0; i < role.size(); i++) {
+                if (i < role.size() - 1)
+                    roleString = roleString + role.get(i) + " , ";
+                else
+                    roleString = roleString + role.get(i);
+            }
+        } catch (Exception e) {
+
         }
+
         return roleString;
     }
 
@@ -180,6 +193,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder1) holder).card_celebrity_bio_profile_dob.setText(formatDOB(dateOfBirth));
             ((ViewHolder1) holder).card_celebrity_bio_profile_role.setText(formatRole());
             Glide.with(context).load(coverpic).into(((ViewHolder1) holder).card_celebrity_bio_profile_coverpic);
+            new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder1) holder).followbtn, context);
 
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Videos");
@@ -227,6 +241,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
         ImageView card_celebrity_bio_profile_coverpic;
+        Button followbtn;
         TextView card_celebrity_bio_profile_pob, card_celebrity_bio_profile_dob, card_celebrity_bio_profile_role, card_celebrity_bio_profile_biography, card_celebrity_bio_profile_name;
 
         public ViewHolder1(View itemView) {
@@ -238,6 +253,13 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_celebrity_bio_profile_role = (TextView) itemView.findViewById(R.id.card_celeb_bio_role);
             card_celebrity_bio_profile_biography = (TextView) itemView.findViewById(R.id.card_celeb_bio_profile_biography);
             card_celebrity_bio_profile_name = (TextView) itemView.findViewById(R.id.card_celeb_bio_profile_name);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Common.followOrUnFollow(context, followbtn, userId, entityId);
+                }
+            });
         }
     }
 

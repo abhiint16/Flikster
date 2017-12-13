@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +22,8 @@ import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsBottomHorRecyc
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
+import com.flikster.HomeActivity.PostRetrofit;
+import com.flikster.Util.Common;
 import com.flikster.Util.GlobalData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.R;
@@ -44,15 +49,17 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     ApiInterface apiInterface;
     FeedInnerData hits;
     Integer Count;
+    String userId;
     GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick;
 
     public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks,
-                                   GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick) {
+                                   GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick, String userId) {
         this.context = context;
+        this.userId = userId;
         globalData = new GlobalData();
         this.fragmentManager = fragmentManager;
         this.galleryImgLinks = galleryImgLinks;
-        this.galleryRecommendationItemClick=galleryRecommendationItemClick;
+        this.galleryRecommendationItemClick = galleryRecommendationItemClick;
     }
 
     @Override
@@ -70,24 +77,27 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 0) {
             Glide.with(context).load(galleryImgLinks.get(position)).asBitmap().into(((ViewHolder1) holder).gallary_recycler_item_img);
+            new PostRetrofit().checkForLike("like", userId, galleryImgLinks.get(position), ((ViewHolder1) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, galleryImgLinks.get(position), ((ViewHolder1) holder).ib_bookmark, context);
         } else {
             galleryBottomHorRecyclerRetrofitInit(holder);
         }
     }
 
     private void galleryBottomHorRecyclerRetrofitInit(final RecyclerView.ViewHolder viewholder) {
-        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+"gallery"+"\"").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getGalleryData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+"gallery"+"\"");
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + "gallery" + "\"").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getGalleryData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + "gallery" + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 hits = response.body().getHits();
-                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-                galleryBottomHorRecyclerAdapter=new GalleryBottomHorRecyclerAdapter(context,hits,galleryRecommendationItemClick);
-                ((ViewHolder2)viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
+                galleryBottomHorRecyclerAdapter = new GalleryBottomHorRecyclerAdapter(context, hits, galleryRecommendationItemClick, userId);
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
             }
+
             @Override
             public void onFailure(Call<FeedData> call, Throwable t) {
                 Log.e("vvvvvvvvvv", "vv" + call + t);
@@ -97,7 +107,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-            return galleryImgLinks.size() + 1;
+        return galleryImgLinks.size() + 1;
     }
 
     @Override
@@ -110,18 +120,66 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView gallary_recycler_item_img;
+        ImageButton card_footer_share, ib_like, ib_bookmark;
+        Button followbtn;
+        ImageButton card_comment_text_send_btn;
+        EditText card_comment_text_edittxt;
+        TextView card_comment_text_see_more_comments;
 
-        public ViewHolder1(View itemView) {
-            super(itemView);
-            gallary_recycler_item_img = (ImageView) itemView.findViewById(R.id.gallary_recycler_item_img);
-            itemView.setOnClickListener(this);
+        public ViewHolder1(View view) {
+            super(view);
+            gallary_recycler_item_img = (ImageView) view.findViewById(R.id.gallary_recycler_item_img);
+            card_footer_share = (ImageButton) view.findViewById(R.id.card_footer_share);
+            ib_like = (ImageButton) view.findViewById(R.id.ib_like);
+            ib_bookmark = (ImageButton) view.findViewById(R.id.ib_bookmark);
+
+            card_comment_text_send_btn = (ImageButton) view.findViewById(R.id.card_comment_text_send_btn);
+            card_comment_text_send_btn.setOnClickListener(this);
+            card_comment_text_edittxt = (EditText) view.findViewById(R.id.card_comment_text_edittxt);
+            card_comment_text_see_more_comments = (TextView) view.findViewById(R.id.card_comment_text_see_more_comments);
+            card_comment_text_see_more_comments.setOnClickListener(this);
+            card_comment_text_see_more_comments.setVisibility(View.GONE);
+
+            card_footer_share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Common.shareClick(galleryImgLinks.get(getAdapterPosition()) + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                }
+            });
+
+            ib_like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, galleryImgLinks.get(getAdapterPosition()));
+                }
+            });
+            ib_bookmark.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, galleryImgLinks.get(getAdapterPosition()));
+                }
+            });
+
+
+
+            gallary_recycler_item_img.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, GalleryFullScreen.class);
-            intent.putExtra("galleryimglink",galleryImgLinks.get(getAdapterPosition()));
-            context.startActivity(intent);
+            if (view.getId() == R.id.gallary_recycler_item_img) {
+                Intent intent = new Intent(context, GalleryFullScreen.class);
+                intent.putExtra("galleryimglink", galleryImgLinks.get(getAdapterPosition()));
+                intent.putExtra("userId", userId);
+                context.startActivity(intent);
+            } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
+                        userId,
+                        galleryImgLinks.get(getAdapterPosition()),
+                        card_comment_text_edittxt.getText().toString(),
+                        card_comment_text_edittxt, context);
+            }
+
         }
     }
 

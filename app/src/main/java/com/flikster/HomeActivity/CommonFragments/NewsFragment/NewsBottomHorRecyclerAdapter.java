@@ -36,7 +36,7 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
         this.Count = Count;
         this.title = title;
         this.bannerImg = bannerImg;
-        this.newsRecommendedClick=newsRecommendedClick;
+        this.newsRecommendedClick = newsRecommendedClick;
     }
 
     @Override
@@ -81,7 +81,9 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
                         outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
+                        "PAWANKALYAN",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId()
                 );
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                 newsRecommendedClick.newsRecommendedClickMethod(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
@@ -90,7 +92,9 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
                         outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
+                        "PAWANKALYAN",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId()
                 );
             } else {
                 newsRecommendedClick.newsRecommendedClickMethod("",
@@ -99,7 +103,9 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<NewsBotto
                         outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
+                        "PAWANKALYAN",
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }

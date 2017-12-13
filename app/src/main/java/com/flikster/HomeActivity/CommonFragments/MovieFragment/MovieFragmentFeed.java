@@ -25,7 +25,7 @@ import retrofit2.Response;
  * Created by abhishek on 12-10-2017.
  */
 
-public class MovieFragmentFeed extends Fragment{
+public class MovieFragmentFeed extends Fragment {
     View view;
     RecyclerView movieFragmentFeedRecycler;
     RecyclerView.LayoutManager movieFragmentFeedLayoutManager;
@@ -34,27 +34,35 @@ public class MovieFragmentFeed extends Fragment{
     ApiInterface apiInterface;
     FeedInnerData hits;
     String contentType;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
+        view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         initializeViews();
         retrofitInit();
         initializeRest();
-        return  view;
+        return view;
     }
 
     private void retrofitInit() {
-        Log.e("searching for slug",""+getArguments().getString("slug"));
+        Log.e("searching for slug", "" + getArguments().getString("slug"));
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getMovieFeedData(true,100,"slug:\""+getArguments().getString("slug")+"\"");
+        Call<FeedData> call = apiInterface.getMovieFeedData(true, 100, "slug:\"" + getArguments().getString("slug") + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 hits = response.body().getHits();
-                movieFeedAdapter = new MovieFeedAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
-                        getArguments().getString("censor"),getArguments().getString("dor"),getArguments().getStringArrayList("genre"),
-                        getArguments().getString("duration"),getArguments().getString("title"),getArguments().getString("slug"),hits);
+                movieFeedAdapter = new MovieFeedAdapter(getActivity(),
+                        fragmentManager, getArguments().getString("coverpic"),
+                        getArguments().getString("censor"),
+                        getArguments().getString("dor"),
+                        getArguments().getStringArrayList("genre"),
+                        getArguments().getString("duration"),
+                        getArguments().getString("title"),
+                        getArguments().getString("slug"), hits,
+                        getArguments().getString("userId"),
+                        getArguments().getString("entityId"));
                 movieFragmentFeedRecycler.setAdapter(movieFeedAdapter);
             }
 
@@ -71,7 +79,7 @@ public class MovieFragmentFeed extends Fragment{
     }
 
     private void initializeViews() {
-        movieFragmentFeedRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
-        fragmentManager=getActivity().getSupportFragmentManager();
+        movieFragmentFeedRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 }

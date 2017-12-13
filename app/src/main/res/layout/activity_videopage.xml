@@ -13,14 +13,14 @@
 
         <Button
             android:id="@+id/closebtn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:clickable="true"
-            android:layout_marginTop="@dimen/ten"
             android:layout_marginLeft="@dimen/fifteen"
-            android:background="@drawable/closeicon" />
+            android:layout_marginTop="@dimen/ten"
+            android:background="@drawable/closeicon"
+            android:clickable="true" />
 
         <ImageButton
             android:layout_width="15dp"
@@ -38,52 +38,56 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="#000">
-    <VideoView
-        android:id="@+id/playVideo"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_vertical|center" />
-</FrameLayout>
+
+        <VideoView
+            android:id="@+id/playVideo"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical|center" />
+    </FrameLayout>
+
     <ScrollView
+        android:id="@+id/gallary_fullscreen_scrollimg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/headerrllayout"
         android:layout_above="@+id/bottom_layout"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/headerrllayout"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        android:id="@+id/gallary_fullscreen_scrollimg">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/gallary_fullscreen_img"/>
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/gallary_fullscreen_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </ScrollView>
+
     <LinearLayout
+        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:id="@+id/bottom_layout">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <include
             android:id="@+id/bottom_navigation_bar"
-            layout="@layout/share_option_card_video_footer"
-            android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            layout="@layout/card_footer" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/view_comment"
-            android:layout_marginLeft="@dimen/ten"
-            android:layout_marginRight="@dimen/ten"
-            android:background="@null"
-            android:elevation="2dp"
-            android:hint="Write a comment"
-            android:imeOptions="actionDone"
-            android:padding="@dimen/ten"
-            android:textColor="@color/white"
-            android:textColorHint="@color/dark_grey"
-            android:textSize="12sp" />
+        <include layout="@layout/card_comment_text" />
+        <!--<EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_comment"
+        android:layout_marginLeft="@dimen/ten"
+        android:layout_marginRight="@dimen/ten"
+        android:background="@null"
+        android:elevation="2dp"
+        android:hint="Write a comment"
+        android:imeOptions="actionDone"
+        android:padding="@dimen/ten"
+        android:textColor="@color/white"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="12sp" />-->
     </LinearLayout>
 </RelativeLayout>

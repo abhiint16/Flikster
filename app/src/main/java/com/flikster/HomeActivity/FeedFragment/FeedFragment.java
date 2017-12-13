@@ -56,7 +56,7 @@ public class FeedFragment extends Fragment {
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getTopRatedMovies(true,"createdAt:desc",20,"status:Active");
+        Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 20, "status:Active");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
@@ -78,7 +78,7 @@ public class FeedFragment extends Fragment {
     private void initializeRest() {
         feedLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(feedLayoutManager);
-        mDialog=(SimpleArcLoader)view.findViewById(R.id.arc_loader);
+        mDialog = (SimpleArcLoader) view.findViewById(R.id.arc_loader);
         //mDialog = new SimpleArcDialog(getActivity());
         //mDialog.setConfiguration(new ArcConfiguration(MainActivity.this));
         fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.colorImageBackgroundGrey));
@@ -90,15 +90,19 @@ public class FeedFragment extends Fragment {
     }
 
     public interface Testing {
-        void test(String name, Fragment fragment, int getClass);
+        void test(String name, Fragment fragment, int getClass,String userId,String entityId);
 
-        void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment);
+        void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
+                                Fragment fragment,String userId,String entityId);
 
-        void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description, Fragment fragment, String contentType);
+        void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
+                             String description, Fragment fragment, String contentType,String userId, String entityId);
 
-        void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String videolink,Fragment fragment,String contentType);
+        void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
+                              String description, String videolink, Fragment fragment, String contentType,
+                              String userId, String entityId);
 
-        void seeMoreComments(String userName,String userId,String entityId);
+        void seeMoreComments(String userName, String userId, String entityId);
     }
 
     @Override

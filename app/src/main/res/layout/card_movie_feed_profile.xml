@@ -9,156 +9,169 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@color/black"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY" />
 
     <LinearLayout
+        android:id="@+id/card_movie_feed_profile_texts_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="180dp"
         android:background="@drawable/white_solid_round_border"
-        android:orientation="vertical"
-        android:id="@+id/card_movie_feed_profile_texts_container">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_margin="5dp"
             android:gravity="center"
-            android:layout_margin="5dp">
+            android:orientation="horizontal">
+
             <TextView
+                android:id="@+id/card_movie_feed_profile_moviename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Movie Name(No Data)"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_gravity="center"
-                android:id="@+id/card_movie_feed_profile_moviename"
-                />
+                android:textSize="18sp" />
+
             <TextView
+                android:id="@+id/card_movie_feed_profile_censor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="censor certi"
-                android:textSize="14sp"
-                android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
-                android:id="@+id/card_movie_feed_profile_censor"
-                />
+                android:layout_marginLeft="10dp"
+                android:text="censor certi"
+                android:textSize="14sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_margin="5dp"
             android:gravity="center"
-            android:layout_margin="5dp">
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DOR(No)"
-                android:layout_gravity="center"
                 android:id="@+id/card_movie_feed_profile_dor"
-                />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="genre(No)"
-                android:textSize="14sp"
-                android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
+                android:text="DOR(No)" />
+
+            <TextView
                 android:id="@+id/card_movie_feed_profile_genre"
-                />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="duration(No)"
-                android:textSize="14sp"
-                android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="genre(No)"
+                android:textSize="14sp" />
+
+            <TextView
                 android:id="@+id/card_movie_feed_profile_dur"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="duration(No)"
+                android:textSize="14sp" />
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/dark_grey"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/dark_grey" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/likesmallicon"
-                    android:background="@color/transparent"/>
+                    android:background="@color/transparent"
+                    android:src="@drawable/likesmallicon" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="no-of-likes"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"
+                    android:text="no-of-likes" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
-                android:background="@color/dark_grey"
+                android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"/>
+                android:background="@color/dark_grey" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/unlikesmallicon"
-                    android:background="@color/transparent"/>
+                    android:background="@color/transparent"
+                    android:src="@drawable/unlikesmallicon" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="no-of-unlikes"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"
+                    android:text="no-of-unlikes" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
-                android:background="@color/dark_grey"
+                android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"/>
-            <TextView
+                android:background="@color/dark_grey" />
+
+            <Button
+                android:id="@+id/followbtn"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/corner_rounded"
-                android:text="FOLLOW"
-                android:textColor="@color/dark_grey"
-                android:textSize="12sp"
-                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/corner_rounded"
+                android:gravity="center"
+                android:text="FOLLOW"
+                android:textColor="@color/dark_grey"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/card_movie_feed_profile_storyline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Data"
         android:layout_below="@+id/card_movie_feed_profile_texts_container"
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
         android:layout_margin="10dp"
-        android:id="@+id/card_movie_feed_profile_storyline"/>
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:text="No Data" />
 </RelativeLayout>
