@@ -59,6 +59,7 @@ import com.flikster.BuildConfig;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
@@ -107,11 +108,14 @@ import java.util.Locale;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface,
-        View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing, WatchFragment.WatchFragCommInterface
-        , MovieSongsListFragment.WatchPlayAudioOrVideoInterafce, MusicGridFragment.WatchAudioVideoSendFromGridFrag,
+        View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,
+        FeedFragment.Testing, WatchFragment.WatchFragCommInterface
+        , MovieSongsListFragment.WatchPlayAudioOrVideoInterafce,
+        MusicGridFragment.WatchAudioVideoSendFromGridFrag,
         NewsOnClickFragment.NewsRecommendedClick, VideoGalleryFragment.VideoRecommendationClick,
         GalleryCardClick.GalleryRecommendationItemClick
-        , CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce {
+        , CelebStoreFirstTypeFragment.ShopByVideoInterafce,
+        MenFashionFirstTypeFragment.ShopByVideoMenInterafce {
 
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
@@ -144,6 +148,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     static int TAKE_PICTURE = 1;
     final int ACTIVITY_SELECT_IMAGE = 2;
+
+    Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -280,6 +286,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if ("GallaryFullscreen".equals(getIntent().getStringExtra("GallaryFullscreen"))) {
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, new GalleryCardClick())
+                    .commit();
+        } else if ("SEARCH_ITEM_CLICK".equals(getIntent().getStringExtra("SEARCH_ITEM_CLICK"))) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, new MyStyleFragment())
                     .commit();
         } else
             firstTimeLaunch(new FeedFragment());

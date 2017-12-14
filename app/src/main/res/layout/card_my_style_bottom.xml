@@ -11,32 +11,30 @@
         android:id="@+id/datalayot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/desc_padding"
+        android:layout_marginLeft="@dimen/ten"
+        android:layout_marginRight="@dimen/ten"
+        android:layout_marginTop="@dimen/ten"
+        android:background="@color/style_main_background"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:windowSoftInputMode="adjustPan"
-            android:layout_margin="@dimen/ten">
 
-            <EditText
-                android:id="@+id/sayet"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:windowSoftInputMode="adjustPan"
-                android:background="@color/white"
-                android:cursorVisible="true"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:hint="Say Something"
-                android:padding="@dimen/seven"
-                android:textColor="@color/grey_txt_label"
-                android:textColorHint="#F2F2F2" />
-        </FrameLayout>
+        <EditText
+            android:id="@+id/sayet"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:cursorVisible="true"
+            android:hint="Say Something"
+            android:padding="@dimen/seven"
+            android:textColor="@color/grey_txt_label"
+            android:textColorHint="#F2F2F2"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:windowSoftInputMode="adjustPan" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten"
             android:orientation="horizontal">
 
             <TextView
@@ -47,13 +45,15 @@
                 android:padding="10dp"
                 android:text="Share On :"
                 android:textColor="#AAAAAA"
-                android:textSize="@dimen/fifteen" />
+                android:textSize="@dimen/fifteen"
+                android:visibility="gone" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <RadioButton
                     android:id="@+id/radioButton"
@@ -75,24 +75,38 @@
             </RadioGroup>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/ten"
-                android:gravity="right|center_vertical">
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="@dimen/ten"
+                android:background="@color/style_main_background">
 
                 <Button
-                    android:id="@+id/followbtn"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/saveandshare"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:background="@drawable/corner_rounded"
                     android:backgroundTint="@color/red"
-                    android:text="Post"
+                    android:text="Save and Share"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/sharebtn"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="@dimen/ten"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_rounded"
+                    android:backgroundTint="@color/red"
+                    android:text="Share"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/fragment_common_recyclerview" />
+    <include
+        layout="@layout/fragment_common_recyclerview"
+        android:background="@color/style_main_background" />
 </LinearLayout>
