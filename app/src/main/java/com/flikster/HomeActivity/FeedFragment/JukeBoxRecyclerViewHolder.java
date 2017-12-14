@@ -40,7 +40,6 @@ public class JukeBoxRecyclerViewHolder extends RecyclerView.Adapter<JukeBoxRecyc
     @Override
     public void onBindViewHolder(JukeBoxRecyclerViewHolder.ViewHolder holder, int position) {
         Log.e("audiofile","audiofile"+audio+"c  "+audio.get(position));
-        mediaPlayer=MediaPlayer.create(context, Uri.parse(audio.get(position)));
         //mediaPlayer=MediaPlayer.create(context,audio.get(position));
     }
 
@@ -61,17 +60,27 @@ public class JukeBoxRecyclerViewHolder extends RecyclerView.Adapter<JukeBoxRecyc
 
         @Override
         public void onClick(View view) {
-            if(isAudioPlaying==false)
+            if (mediaPlayer==null)
             {
+                mediaPlayer=MediaPlayer.create(context, Uri.parse(audio.get(getAdapterPosition())));
                 mediaPlayer.start();
                 card_audio_clip_play_btn.setImageDrawable(context.getResources().getDrawable(R.drawable.pausebtn));
                 isAudioPlaying=true;
             }
-            else if(isAudioPlaying==true)
+            else
             {
-                mediaPlayer.pause();
-                card_audio_clip_play_btn.setImageDrawable(context.getResources().getDrawable(R.drawable.playicon));
-                isAudioPlaying=false;
+                if(isAudioPlaying==false)
+                {
+                    mediaPlayer.start();
+                    card_audio_clip_play_btn.setImageDrawable(context.getResources().getDrawable(R.drawable.pausebtn));
+                    isAudioPlaying=true;
+                }
+                else if(isAudioPlaying==true)
+                {
+                    mediaPlayer.pause();
+                    card_audio_clip_play_btn.setImageDrawable(context.getResources().getDrawable(R.drawable.playicon));
+                    isAudioPlaying=false;
+                }
             }
 
         }
