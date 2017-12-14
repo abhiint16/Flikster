@@ -47,8 +47,9 @@ public class KeycloakHelper {
     }
 
     public static void connect(final Activity activity, final Callback<String> callback) {
-        Log.i(TAG, "Run Connect ");
+        Log.i(TAG, "Run Connect "+AuthorizationManager.getModule(MODULE_NAME));
         final AuthzModule authzModule = AuthorizationManager.getModule(MODULE_NAME);
+
         authzModule.requestAccess(activity, new Callback<String>() {
             @Override
             public void onSuccess(String data) {

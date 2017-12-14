@@ -34,6 +34,7 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
     ImageButton toolbar_frag_multiicons_back_navigation,addressTabIcon,checkoutTabIcon,paymentTabIcon;
     TextView toolbar_frag_multiicons_title,addressTabText,checkoutTabText,paymentTabText;
     CheckoutUserData checkoutUserData;
+    String name="",mobile="",address="",city="",pin="",state="",landmark="",additionalMobile="";
     EditText address_fragment_name,address_fragment_mobileno,address_fragment_address,address_fragment_city
             ,address_fragment_pin,address_fragment_state,address_fragment_landmark,address_fragment_additionmobile;
     @Nullable
@@ -49,12 +50,40 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
         fragment_address_bottom_btn.setOnClickListener(this);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_title.setText("Enter Address");
+        setTextsinFields();
+    }
+
+    private void setTextsinFields() {
+        address_fragment_name.setText(name);
+        address_fragment_mobileno.setText(mobile);
+        address_fragment_address.setText(address);
+        address_fragment_city.setText(city);
+        address_fragment_pin.setText(pin);
+        address_fragment_state.setText(state);
+        address_fragment_landmark.setText(landmark);
+        address_fragment_additionmobile.setText(additionalMobile);
     }
 
 
     private void initializeView() {
         fragment_address_bottom_btn=(Button)view.findViewById(R.id.fragment_address_bottom_btn);
-        toolbar_frag_multiicons_back_navigation
+        toolbar_frag_multiicons_toolbar=(Toolbar)getActivity().findViewById(R.id.toolbar_frag_multiicons_toolbar);
+        toolbar_frag_multiicons_back_navigation=(ImageButton)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
+        toolbar_frag_multiicons_title=(TextView)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_title);
+        addressTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_imgbtn);
+        checkoutTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn);
+        paymentTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_imgbtn);
+        addressTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_name);
+        checkoutTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_name);
+        paymentTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_name);
+        address_fragment_name=(EditText)view.findViewById(R.id.address_fragment_name);
+        address_fragment_mobileno=(EditText)view.findViewById(R.id.address_fragment_mobileno);
+        address_fragment_address=(EditText)view.findViewById(R.id.address_fragment_address);
+        address_fragment_city=(EditText)view.findViewById(R.id.address_fragment_city);
+        address_fragment_pin=(EditText)view.findViewById(R.id.address_fragment_pin);
+        address_fragment_state=(EditText)view.findViewById(R.id.address_fragment_state);
+        address_fragment_landmark=(EditText)view.findViewById(R.id.address_fragment_landmark);
+        address_fragment_additionmobile=(EditText)view.findViewById(R.id.address_fragment_additionmobile);
     }
 
     @Override
@@ -154,4 +183,18 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
         super.onAttach(activity);
         checkoutUserData = (CheckoutUserData) activity;
     }
+
+    public void checkoutToAddressData(String name, String mobileNo,String address,String city,
+                                      String pinCode,String state,String landmark,String additionMobile)
+    {
+        this.name=name;
+        this.mobile=mobileNo;
+        this.address=address;
+        this.city=city;
+        this.state=state;
+        this.pin=pinCode;
+        this.landmark=landmark;
+        this.additionalMobile=additionMobile;
+    }
+
 }

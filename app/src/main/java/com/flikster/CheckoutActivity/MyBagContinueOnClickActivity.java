@@ -19,7 +19,7 @@ import com.flikster.R;
  * Created by abhishek on 24-10-2017.
  */
 
-public class MyBagContinueOnClickActivity extends AppCompatActivity implements View.OnClickListener ,AddressFragment.CheckoutUserData {
+public class MyBagContinueOnClickActivity extends AppCompatActivity implements View.OnClickListener ,AddressFragment.CheckoutUserData,CheckoutFragment.AddressUserData {
     ImageButton toolbar_frag_multiicons_back_navigation;
     FragmentManager fragmentManager;
     LinearLayout activity_mybag_continue_onclick_tabs_address_linear,activity_mybag_continue_onclick_tabs_checkout_linear
@@ -76,7 +76,7 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
 
     private void launchFragment(Fragment fragment) {
         fragmentManager.beginTransaction()
-                .add(R.id.activity_mybag_continue_onclick_container, fragment)
+                .replace(R.id.activity_mybag_continue_onclick_container, fragment)
                 .commit();
     }
 
@@ -92,6 +92,13 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
                 ,getIntent().getStringExtra("productTitle"),getIntent().getStringExtra("userId"),
                 getIntent().getStringExtra("size"),getIntent().getStringExtra("color"),getIntent().getStringExtra("profilePic"),
                 getIntent().getStringExtra("price"),getIntent().getStringExtra("quantity"));
+        launchFragment(fragment);
+    }
+
+    @Override
+    public void checkoutToAddress(String name, String mobileNo, String address, String city, String pinCode, String state, String landmark, String additionMobile, Fragment fragment) {
+        AddressFragment addressFragment=(AddressFragment)fragment;
+        addressFragment.checkoutToAddressData(name,mobileNo,address,city,pinCode,state,landmark,additionMobile);
         launchFragment(fragment);
     }
 }

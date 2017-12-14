@@ -1,5 +1,6 @@
 package com.flikster.CheckoutActivity.CheckoutFragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
 import com.flikster.CheckoutActivity.PaymentFragment.PaymentFragment;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
@@ -61,7 +63,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     String productId;String productSlug;String productTitle;String userId;String size;
     String color;String profilePic;String price;
     String quantity;
-    SimpleArcLoader simpleArcLoader;
+    AddressUserData addressUserData;
     ApiInterface apiInterface;
     private String accessToken = null;
     String instaMojoURL="https://test.instamojo.com/";
@@ -78,7 +80,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         checkoutAdapter=new  CheckoutAdapter(getFragmentManager(),getActivity(),name,address,city,state,pin,mobile,landmark,additionalMobile,
-                productId,productSlug,productTitle,userId,size,color,profilePic,price,quantity);
+                productId,productSlug,productTitle,userId,size,color,profilePic,price,quantity,addressUserData);
         fragment_common_recyclerview_recycler.setAdapter(checkoutAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         fragment_checkout_bottom_btn.setOnClickListener(this);
@@ -114,7 +116,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId()==R.id.toolbar_frag_multiicons_back_navigation)
         {
-            getFragmentManager().popBackStackImmediate();
+            addressUserData.checkoutToAddress(name,mobile,address,city,pin,state,landmark,additionalMobile,new AddressFragment());
         }
         else if(view.getId()==R.id.fragment_checkout_bottom_btn)
         {
@@ -129,7 +131,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void hitCreateUserApi() {
-        simpleArcLoader.start();
         Log.e("inside onclick bototbtn","inside hitcreateuserapi");
         List<CreateUserApiPostData.ProductData> productDatas=new ArrayList<CreateUserApiPostData.ProductData>();
         productDatas.add(new CreateUserApiPostData.ProductData(productId,productTitle,productSlug,profilePic,color,
@@ -145,7 +146,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<CreateUserApiPostData> call, Response<CreateUserApiPostData> response) {
                 Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
                 Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
-                simpleArcLoader.stop();
                 Toast.makeText(getActivity(),"Order has been created",Toast.LENGTH_SHORT).show();
                 instaMojoInit();
             }
@@ -164,7 +164,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
     private void fetchTokenAndTransactionID() {
 
-        simpleArcLoader.start();
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = getHttpURLBuilder()
                 .addPathSegment("create")
@@ -185,7 +184,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        simpleArcLoader.stop();
                         Toast.makeText(getActivity(),"Failed to fetch the Order Tokens",Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -207,7 +205,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                         transactionID = responseObject.getString("transaction_id");
                     }
                 } catch (JSONException e) {
-                    simpleArcLoader.stop();
                     errorMessage = "Failed to fetch Order tokens";
                 }
 
@@ -295,61 +292,50 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                         //dialog.dismiss();
                         if (error != null) {
                             if (error instanceof Errors.ConnectionError) {
-                                simpleArcLoader.stop();
                                 Toast.makeText(getActivity(),"No Internet Connection",Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.ServerError) {
-                                simpleArcLoader.stop();
                                 Toast.makeText(getActivity(),"Server Error. Try again",Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.AuthenticationError) {
-                                simpleArcLoader.stop();
                                 Toast.makeText(getActivity(),"Access token is invalid or expired. Please Update the token!!",Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.ValidationError) {
                                 // Cast object to validation to pinpoint the issue
                                 Errors.ValidationError validationError = (Errors.ValidationError) error;
 
                                 if (!validationError.isValidTransactionID()) {
-                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Transaction ID is not Unique",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidRedirectURL()) {
-                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Redirect url is invalid",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidWebhook()) {
-                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Webhook url is invalid",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidPhone()) {
-                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Buyer's Phone Number is invalid/empty",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidEmail()) {
-                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Buyer's Email is invalid/empty",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidAmount()) {
-                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Amount is either less than Rs.9 or has more than two decimal places",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidName()) {
-                                    simpleArcLoader.stop();
                                     Toast.makeText(getActivity(),"Buyer's Name is required",Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                             } else {
-                                simpleArcLoader.stop();
                                 Toast.makeText(getActivity(),error.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                             return;
@@ -387,7 +373,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             if (transactionID != null || paymentID != null) {
                 checkPaymentStatus(transactionID, orderID);
             } else {
-                simpleArcLoader.stop();
                 Toast.makeText(getActivity(),"Oops!! Payment was cancelled",Toast.LENGTH_SHORT).show();
             }
         }
@@ -425,7 +410,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        simpleArcLoader.stop();
                         Toast.makeText(getActivity(),"Failed to fetch the Transaction status",Toast.LENGTH_SHORT);
                     }
                 });
@@ -448,7 +432,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                     amount = responseObject.getString("amount");
 
                 } catch (JSONException e) {
-                    simpleArcLoader.stop();
                     errorMessage = "Failed to fetch the Transaction status";
                 }
 
@@ -503,6 +486,17 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         this.profilePic=profilePic;
         this.price=price;
         this.quantity=quantity;
+    }
+
+    public interface AddressUserData
+    {
+        void checkoutToAddress(String name, String mobileNo,String address,String city,String pinCode,String state,String landmark,String additionMobile,Fragment fragment);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        addressUserData = (AddressUserData) activity;
     }
 
 }

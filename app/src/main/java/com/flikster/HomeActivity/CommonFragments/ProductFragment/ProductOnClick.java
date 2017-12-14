@@ -60,7 +60,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     List<String> imageGallery;
     ApiInterface apiInterface;
     int sizeOfSize;
-    String chosenSize;
+    String chosenSize="";
 
     @Nullable
     @Override
@@ -163,9 +163,17 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buy_now_btn) {
-            if ("".equals(chosenSize)||chosenSize==null)
+            if (chosenSize.trim().length()==0||chosenSize==null)
             {
-                chosenSize=size.get(0);
+                if(size.size()!=1)
+                {
+                    Toast.makeText(getActivity(), "choose size before buying", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (size.size()==1)
+                {
+                    chosenSize=size.get(0);
+                }
             }
             Intent intent=new Intent(getActivity(),MyBagContinueOnClickActivity.class);
             intent.putExtra("productId",productId);
@@ -180,6 +188,18 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
         else if (view.getId() == R.id.add_to_cart_btn) {
+            if (chosenSize.trim().length()==0||chosenSize==null)
+            {
+                if(size.size()!=1)
+                {
+                    Toast.makeText(getActivity(), "choose size before adding to cart", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (size.size()==1)
+                {
+                    chosenSize=size.get(0);
+                }
+            }
             postRetrofitAddToCart();
         }
         else if (view.getId() == R.id.toolbar_back_navigation_btn) {
@@ -249,10 +269,6 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
 
     private void postRetrofitAddToCart() {
         Toast.makeText(getActivity(),"Adding to Cart.....wait",Toast.LENGTH_SHORT).show();
-        if (chosenSize.equals("")||chosenSize.isEmpty())
-        {
-            chosenSize=size.get(0);
-        }
         ProductDetailsDataToSend productDetailsDataToSend = new ProductDetailsDataToSend(userId,productId,chosenSize,"RED",new ProductDetailsDataToSend.InnerProductData(price,productId,profilePic,productTitle,productSlug,
                 Integer.parseInt(product_quantity_txt.getText().toString()),"RED",chosenSize));
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/cart-ms/createCart").create(ApiInterface.class);
