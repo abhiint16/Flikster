@@ -110,6 +110,7 @@ public class AddressFragment extends Fragment implements View.OnClickListener {
         else if(view.getId()==R.id.toolbar_frag_multiicons_back_navigation)
         {
             Intent intent=new Intent(getActivity(),MyBagActivity.class);
+            intent.putExtra("userId",getActivity().getIntent().getStringExtra("userId"));
             startActivity(intent);
         }
     }
