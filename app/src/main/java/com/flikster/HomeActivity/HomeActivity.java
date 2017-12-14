@@ -41,6 +41,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -50,11 +51,15 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.flikster.AllCommentActivity.AllCommentActivity;
+import com.flikster.Authentication.AuthenticationActivity;
+import com.flikster.Authentication.LoginCreateAccountActivity;
 import com.flikster.BuildConfig;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
@@ -122,6 +127,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     NavigationView navigationView;
     Context mContext;
     FloatingActionButton camera_fab;
+    Spinner toolbar_pref_spinner;
+    TextView right_navigation_bar_my_account,right_navigation_bar_orders,right_navigation_bar_wishlist,
+            right_navigation_bar_liked_posts,right_navigation_bar_refer,right_navigation_bar_rewards,
+            right_navigation_bar_logout;
 
     ///Image Capture
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -306,9 +315,30 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_main_notification.setOnClickListener(this);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
+        right_navigation_bar_my_account.setOnClickListener(this);
+        right_navigation_bar_orders.setOnClickListener(this);
+        right_navigation_bar_wishlist.setOnClickListener(this);
+        right_navigation_bar_liked_posts.setOnClickListener(this);
+        right_navigation_bar_refer.setOnClickListener(this);
+        right_navigation_bar_rewards.setOnClickListener(this);
+        right_navigation_bar_logout.setOnClickListener(this);
+        toolbarPrefSpinner();
         /*actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         actionBarDrawerToggle.syncState();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);*/
+    }
+
+    private void toolbarPrefSpinner() {
+        List<String> pref=new ArrayList<>();
+        pref.add("Boolywood");
+        pref.add("Tollywood");
+        pref.add("Tamil");
+        pref.add("Kannada");
+        pref.add("Malayalam");
+        ArrayAdapter<String> prefArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,pref);
+        prefArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toolbar_pref_spinner.setPrompt("");
+        toolbar_pref_spinner.setAdapter(prefArrayAdapter);
     }
 
     private void initializeViews() {
@@ -318,7 +348,15 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar_pref_spinner=(Spinner)findViewById(R.id.toolbar_pref_spinner);
         camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
+        right_navigation_bar_my_account=(TextView)findViewById(R.id.right_navigation_bar_my_account);
+        right_navigation_bar_orders=(TextView)findViewById(R.id.right_navigation_bar_orders);
+        right_navigation_bar_wishlist=(TextView)findViewById(R.id.right_navigation_bar_wish_list);
+        right_navigation_bar_liked_posts=(TextView)findViewById(R.id.right_navigation_bar_liked_posts);
+        right_navigation_bar_refer=(TextView)findViewById(R.id.right_navigation_bar_refer);
+        right_navigation_bar_rewards=(TextView)findViewById(R.id.right_navigation_bar_rewards);
+        right_navigation_bar_logout=(TextView)findViewById(R.id.right_navigation_bar_logout);
         setSupportActionBar(toolbar_main);
         toolbar_main_notification = (ImageButton) toolbar_main.findViewById(R.id.toolbar_main_notification);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -356,6 +394,34 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if (viewId == R.id.camera_fab) {
            // openCameraClickDialog();
             beginTransact(new MyStyleFragment());
+        }else if (viewId==R.id.right_navigation_bar_my_account)
+        {
+            beginTransact(new MyAccountFragment());
+        }
+        else if (viewId==R.id.right_navigation_bar_orders)
+        {
+            beginTransact(new OrdersFragment());
+        }
+        else if (viewId==R.id.right_navigation_bar_wish_list)
+        {
+            beginTransact(new WishListFragment());
+        }
+        else if (viewId==R.id.right_navigation_bar_liked_posts)
+        {
+            beginTransact(new SavedPostsFragment());
+        }
+        else if (viewId==R.id.right_navigation_bar_refer)
+        {
+            beginTransact(new ReferFragment());
+        }
+        else if (viewId==R.id.right_navigation_bar_rewards)
+        {
+            beginTransact(new RewardsFragment());
+        }
+        else if (viewId==R.id.right_navigation_bar_logout)
+        {
+            Intent intent=new Intent(this, AuthenticationActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -426,9 +492,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             case R.id.menu_orders:
                 beginTransact(new OrdersFragment());
                 break;
-            case R.id.menu_credits:
+            /*case R.id.menu_credits:
                 beginTransact(new FliksterCreditFragment());
-                break;
+                break;*/
             case R.id.menu_logout:
                 beginTransact(new LogoutFragment());
                 break;
@@ -438,22 +504,22 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             case R.id.menu_saved_posts:
                 beginTransact(new SavedPostsFragment());
                 break;
-            case R.id.menu_setting:
+            /*case R.id.menu_setting:
                 beginTransact(new SettingsFragment());
-                break;
+                break;*/
             case R.id.menu_wish_list:
                 beginTransact(new WishListFragment());
                 break;
             case R.id.menu_rewards:
                 beginTransact(new RewardsFragment());
                 break;
-            case R.id.menu_rating:
+            /*case R.id.menu_rating:
                 beginTransact(new RatingFragment());
                 break;
             //menu_auction
             case R.id.menu_auction:
                 beginTransact(new AuctionFeedFragment());
-                break;
+                break;*/
 
 
         }

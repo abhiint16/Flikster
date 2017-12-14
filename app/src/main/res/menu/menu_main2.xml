@@ -13,17 +13,14 @@
         android:title="Wish List"></item>
     <item
         android:id="@+id/menu_saved_posts"
-        android:title="Saved Posts"></item>
+        android:title="Liked Posts"></item>
     <item
         android:id="@+id/menu_refer"
         android:title="Refer a Friend"></item>
     <item
-        android:id="@+id/menu_credits"
-        android:title="Flikster Credits"></item>
-    <item
         android:id="@+id/menu_rewards"
         android:title="Rewards"></item>
-    <item
+    <!--<item
         android:id="@+id/menu_setting"
         android:title="Settings"></item>
     <item
@@ -31,7 +28,7 @@
         android:title="Rating"></item>
     <item
         android:id="@+id/menu_auction"
-        android:title="Auction"></item>
+        android:title="Auction"></item>-->
     <item
         android:id="@+id/menu_logout"
         android:title="Logout"></item>

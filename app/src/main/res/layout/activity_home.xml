@@ -49,11 +49,14 @@
     <android.support.design.widget.NavigationView
         android:id="@+id/drawer_navview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:divider="#fff"
-        android:dividerHeight="5dp"
-        app:menu="@menu/menu_main2">
+        android:dividerHeight="5dp">
 
+        <include layout="@layout/right_navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"></include>
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
