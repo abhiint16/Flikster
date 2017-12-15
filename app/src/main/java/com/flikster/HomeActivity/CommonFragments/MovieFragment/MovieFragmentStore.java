@@ -53,7 +53,8 @@ public class MovieFragmentStore extends Fragment{
                 movieStoreAdapter = new MovieStoreAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
                         getArguments().getString("censor"),getArguments().getString("dor"),getArguments().getStringArrayList("genre"),
                         getArguments().getString("duration"),getArguments().getString("title"),getArguments().getString("storyline"),
-                        getArguments().getString("slug"),hits);
+                        getArguments().getString("slug"),hits, getArguments().getString("userId"),
+                        getArguments().getString("entityId"));
                 celebrityFragmentStoreRecycler.setAdapter(movieStoreAdapter);
             }
 

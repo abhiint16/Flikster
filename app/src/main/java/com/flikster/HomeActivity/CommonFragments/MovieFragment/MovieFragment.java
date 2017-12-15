@@ -43,37 +43,40 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     ImageButton toolbar_back_navigation_btn;
     Bundle arguments = new Bundle();
     MovieData.MovieInnerData hits;
-    String slug;
+    String slug, userId, entityId;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_celebrity,container,false);
+        view = inflater.inflate(R.layout.fragment_celebrity, container, false);
         initializeViews();
-        Log.e("slug0101001",""+slug);
+        Log.e("slug0101001", "" + slug);
         tempMethod();
         initializeRest();
         return view;
     }
 
     private void tempMethod() {
-        Log.e("slug1",""+slug);
+        Log.e("slug1", "" + slug);
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:").create(ApiInterface.class);
-        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:" +slug);
+        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:" + slug);
         call.enqueue(new Callback<MovieData>() {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
                 hits = response.body().getHits();
-                arguments.putString("coverpic",hits.getHits().get(0).get_source().getCoverPic());
-                arguments.putString("censor",hits.getHits().get(0).get_source().getCensorCertificate());
-                arguments.putString("dor",hits.getHits().get(0).get_source().getDateOfRelease());
+                arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
+                arguments.putString("censor", hits.getHits().get(0).get_source().getCensorCertificate());
+                arguments.putString("dor", hits.getHits().get(0).get_source().getDateOfRelease());
                 arguments.putStringArrayList("genre", (ArrayList<String>) hits.getHits().get(0).get_source().getGenre());
-                arguments.putString("duration",hits.getHits().get(0).get_source().getDuration());
-                arguments.putString("title",hits.getHits().get(0).get_source().getTitle());
-                arguments.putString("storyline",hits.getHits().get(0).get_source().getStoryLine());
-                arguments.putString("slug",slug);
-                Log.e("slugjsjjsjsj1","ajja"+slug+" "+arguments);
+                arguments.putString("duration", hits.getHits().get(0).get_source().getDuration());
+                arguments.putString("title", hits.getHits().get(0).get_source().getTitle());
+                arguments.putString("storyline", hits.getHits().get(0).get_source().getStoryLine());
+                arguments.putString("slug", slug);
+                arguments.putString("userId", userId);
+                arguments.putString("entityId", entityId);
+                Log.e("moviepage", "access" + slug + " " + arguments);
                 viewPager.setOffscreenPageLimit(2);
-                movieAdapter = new MovieAdapter(getChildFragmentManager(),arguments);
+                movieAdapter = new MovieAdapter(getChildFragmentManager(), arguments);
                 viewPager.setAdapter(movieAdapter);
                 viewPager.setCurrentItem(1);
             }
@@ -88,45 +91,46 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
     private void initializeViews() {
-        viewPager=(ViewPager)view.findViewById(R.id.celebrity_pager);
-        tabLayout=(TabLayout)view.findViewById(R.id.celebrity_tablayout);
-        toolbar_frag_title=(TextView)view.findViewById(R.id.toolbar_frag_title);
-        toolbar_back_navigation_btn=(ImageButton)view.findViewById(R.id.toolbar_back_navigation_btn);
+        viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
+        toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
+        toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.black));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 
     private void initializeRest() {
-        arguments.putString("slug",slug);
-        Log.e("slugjsjjsjsj","ajja"+slug+" "+arguments);
+        arguments.putString("slug", slug);
+        Log.e("slugjsjjsjsj", "ajja" + slug + " " + arguments);
         tabLayout.setupWithViewPager(viewPager);
 //        toolbar_frag_title.setText("Movies");
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
-    public  void updateInfo(String slug)
-    {
-        this.slug=slug;
+    public void updateInfo(String slug, String userId, String entityId) {
+        this.userId = userId;
+        this.entityId = entityId;
+        this.slug = slug;
     }
 
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.toolbar_back_navigation_btn)
-        {
+        if (view.getId() == R.id.toolbar_back_navigation_btn) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container,new FeedFragment())
+                    .replace(R.id.main_container, new FeedFragment())
                     .commit();
         }
     }

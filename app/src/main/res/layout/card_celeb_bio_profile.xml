@@ -202,19 +202,18 @@
                         android:gravity="center_horizontal|center_vertical"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/card_celeb_bio_follow_txt"
+                        <Button
+                            android:id="@+id/followbtn"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/black_round_border"
-                            android:backgroundTint="@color/red"
+                            android:layout_height="30dp"
+                            android:background="@drawable/corner_rounded"
                             android:gravity="center_vertical|center_horizontal"
                             android:paddingBottom="@dimen/five"
                             android:paddingLeft="@dimen/fifteen"
                             android:paddingRight="@dimen/fifteen"
                             android:paddingTop="@dimen/five"
-                            android:text="Following"
-                            android:textColor="@color/white"
+                            android:text="Follow"
+                            android:textColor="@color/black"
                             android:textSize="13sp" />
 
 

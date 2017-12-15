@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -26,8 +28,11 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioA
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
 import com.flikster.HomeActivity.FeedInnerData;
+import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
+import com.flikster.Util.Common;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
@@ -49,17 +54,24 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     TextView toolbar_frag_title, titlehedertxt, fragment_common_recyclerview_with_tv_title, tv_name, tv_description;
     Context mContext;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
-    String profilePic, title, type, bannerImg, headertitle, description,contentType,videolink;
+    String profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
     ApiInterface apiInterface;
     FeedInnerData outerHits;
     VideoGalleryAdapter videoGalleryAdapter;
     Integer Count;
-    TextView tv_tag_desc,tv_tag_name;
+    Button followbtn;
+    TextView tv_tag_desc, tv_tag_name;
     YouTubePlayerSupportFragment youTubePlayerFragment;
     YouTubePlayer yPlayer;
-    final String API_KEY="AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
+    final String API_KEY = "AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
     VideoRecommendationClick videoRecommendationClick;
+    ImageButton card_footer_share, ib_like, ib_bookmark;
+
+    ImageButton card_comment_text_send_btn;
+    EditText card_comment_text_edittxt;
+    TextView card_comment_text_see_more_comments;
+
 
     @Nullable
     @Override
@@ -78,7 +90,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
     private void headerTitlesChange() {
         toolbar_frag_title.setText(contentType);
-        fragment_common_recyclerview_with_tv_title.setText("Recommended "+contentType);
+        fragment_common_recyclerview_with_tv_title.setText("Recommended " + contentType);
     }
 
     private void initializeViews() {
@@ -89,13 +101,69 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         tv_description = (TextView) view.findViewById(R.id.tv_description);
         tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
-        youTubePlayerFragment=YouTubePlayerSupportFragment.newInstance();
-        FragmentTransaction fragmentTransaction=getChildFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_video_gallery_youtube_container,youTubePlayerFragment).commit();
+        followbtn = (Button) view.findViewById(R.id.followbtn);
+        card_footer_share = (ImageButton) view.findViewById(R.id.card_footer_share);
+        ib_like = (ImageButton) view.findViewById(R.id.ib_like);
+        ib_bookmark = (ImageButton) view.findViewById(R.id.ib_bookmark);
+        youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_video_gallery_youtube_container, youTubePlayerFragment).commit();
         fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         //playVideo.setVisibility(View.VISIBLE);
         tv_name.setVisibility(View.GONE);
+        new PostRetrofit().checkForFollow("follow", userId, entityId, followbtn, getContext());
+        new PostRetrofit().checkForLike("like", userId, entityId, ib_like, getContext());
+        new PostRetrofit().checkForBookmark("bookmark", userId, entityId, ib_bookmark, getContext());
+
+        card_comment_text_send_btn = (ImageButton) view.findViewById(R.id.card_comment_text_send_btn);
+        card_comment_text_send_btn.setOnClickListener(this);
+        card_comment_text_edittxt = (EditText) view.findViewById(R.id.card_comment_text_edittxt);
+        card_comment_text_see_more_comments = (TextView) view.findViewById(R.id.card_comment_text_see_more_comments);
+        card_comment_text_see_more_comments.setOnClickListener(this);
+        card_comment_text_see_more_comments.setVisibility(View.GONE);
+
+        followbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.followOrUnFollow(getContext(), followbtn, userId, entityId);
+            }
+        });
+        card_footer_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.shareClick(profilePic + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", getContext());
+            }
+        });
+
+        ib_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.likeAndUnLikeEvent(getContext(), ib_like, userId, entityId);
+            }
+        });
+        ib_bookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.bookmarkAndUnBookmarkeEvent(getContext(), ib_bookmark, userId, entityId);
+            }
+        });
+
+        card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
+                        userId,
+                        entityId,
+                        card_comment_text_edittxt.getText().toString(),
+                        card_comment_text_edittxt, getContext());
+            }
+        });
+
+
+
+        toolbar_back_navigation_btn.setOnClickListener(this);
+
     }
 
 
@@ -107,15 +175,16 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         youTubePlayerFragment.initialize(API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                yPlayer=youTubePlayer;
-                if(videolink.contains("https://www.youtube.com/embed/"))
+                yPlayer = youTubePlayer;
+                if (videolink.contains("https://www.youtube.com/embed/"))
                     yPlayer.loadVideo(videolink.substring(30));
-                else if(videolink.contains("https://youtu.be/"))
+                else if (videolink.contains("https://youtu.be/"))
                     yPlayer.loadVideo(videolink.substring(17));
-                else if(videolink.contains("https://www.youtube.com/"))
+                else if (videolink.contains("https://www.youtube.com/"))
                     yPlayer.loadVideo(videolink.substring(24));
                 yPlayer.play();
             }
+
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
@@ -162,14 +231,14 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
 
     private void bottomHorRecyclerRetrofitInit() {
-        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:"+"\""+contentType+"\"");
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + contentType + "\"").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + contentType + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(),outerHits,Count,title,videoRecommendationClick);
+                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(), outerHits, Count, title, videoRecommendationClick);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(videoGalleryAdapter);
             }
 
@@ -180,21 +249,31 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         });
     }
 
-    public void updateImage(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String contentType,
-                            String videolink) {
+    public void updateImage(String profilePic, String title, String type, String bannerImg,
+                            String headertitle, String description, String contentType,
+                            String videolink, String userId, String entityId) {
         this.profilePic = profilePic;
         this.title = title;
         this.type = type;
         this.bannerImg = bannerImg;
         this.headertitle = headertitle;
         this.description = description;
-        this.contentType=contentType;
-        this.videolink=videolink;
+        this.contentType = contentType;
+        this.videolink = videolink;
+        this.userId = userId;
+        this.entityId = entityId;
+        this.entityId = entityId;
+        Log.e("PROFILE", profilePic + "");
+        Log.e("USERID", userId + "");
+        Log.e("ENTITYID", entityId + "");
+
     }
 
-    public interface VideoRecommendationClick
-    {
-        void videoRecommendationClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description,String videolink,Fragment fragment,String contentType);
+    public interface VideoRecommendationClick {
+        void videoRecommendationClickMethod(String profilePic,
+                                            String title, String type, String bannerImg,
+                                            String headertitle, String description, String videolink,
+                                            Fragment fragment, String contentType, String userId, String entityId);
     }
 
     @Override

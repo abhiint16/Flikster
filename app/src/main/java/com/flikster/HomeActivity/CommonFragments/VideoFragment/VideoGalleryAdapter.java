@@ -28,18 +28,20 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
     String title;
     Integer Count;
     VideoGalleryFragment.VideoRecommendationClick videoRecommendationClick;
+    String userId = "PAWANKALYAN";
+
     public VideoGalleryAdapter(Context context, FeedInnerData outerHits, Integer Count, String title,
                                VideoGalleryFragment.VideoRecommendationClick videoRecommendationClick) {
-        this.context=context;
-        this.title=title;
-        this.outerHits=outerHits;
-        this.Count=Count;
-        this.videoRecommendationClick=videoRecommendationClick;
+        this.context = context;
+        this.title = title;
+        this.outerHits = outerHits;
+        this.Count = Count;
+        this.videoRecommendationClick = videoRecommendationClick;
     }
 
     @Override
     public VideoGalleryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -57,10 +59,11 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView carousel_image;
         TextView carousel_title;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
-            carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
+            carousel_image = (ImageView) itemView.findViewById(R.id.carousel_image);
+            carousel_title = (TextView) itemView.findViewById(R.id.carousel_title);
             itemView.setOnClickListener(this);
         }
 
@@ -75,7 +78,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
                         new VideoGalleryFragment(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
+                        userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId()
                 );
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                 videoRecommendationClick.videoRecommendationClickMethod(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
@@ -86,7 +90,9 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
                         new VideoGalleryFragment(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType()
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
+                        userId,
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId()
                 );
             } else {
                 videoRecommendationClick.videoRecommendationClickMethod("",
@@ -97,7 +103,9 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
                         new VideoGalleryFragment(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType());
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
+                        userId,
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             }
         }
     }

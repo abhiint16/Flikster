@@ -50,7 +50,8 @@ public class PostRetrofit {
         call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
             @Override
             public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
-                Log.e("LikeSTATUS", response.body().getData().getCount() + "SUCCEESS");
+//                Log.e("LikeSTATUS", response.body().getData().getCount() + "SUCCEESS");
+                try {
                     if (response.body().getData().getCount() != null && !response.body().getData().getCount().isEmpty()) {
                         if (response.body().getData().getCount().equals("1")) {
                             ib_like.setImageResource(0);
@@ -61,6 +62,10 @@ public class PostRetrofit {
                             ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
                         }
                     }
+                } catch (Exception e) {
+                    Log.e("like count from sever", "null");
+
+                }
             }
 
             @Override
@@ -102,18 +107,23 @@ public class PostRetrofit {
         call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
             @Override
             public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
-                Log.e("Follow SUCCESS", response.body().getData().getCount() + "SUCCESS");
-                if (response.body().getData().getCount().equals("1")) {
-                    followBtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-                    followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
-                    followBtn.setText("Following");
-                    followBtn.setTextColor(context.getResources().getColor(R.color.white));
-                } else {
-                    followBtn.setBackgroundColor(context.getResources().getColor(R.color.black));
-                    followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded));
-                    followBtn.setText("follow");
-                    followBtn.setTextColor(context.getResources().getColor(R.color.black));
+//                Log.e("Follow SUCCESS", response.body().getData().getCount() + "SUCCESS");
+                try {
+                    if (response.body().getData().getCount().equals("1")) {
+                        followBtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+                        followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
+                        followBtn.setText("Following");
+                        followBtn.setTextColor(context.getResources().getColor(R.color.white));
+                    } else {
+                        followBtn.setBackgroundColor(context.getResources().getColor(R.color.black));
+                        followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded));
+                        followBtn.setText("follow");
+                        followBtn.setTextColor(context.getResources().getColor(R.color.black));
+                    }
+                } catch (Exception e) {
+                    Log.e("follow", "error in follow count");
                 }
+
 
             }
 
@@ -156,12 +166,18 @@ public class PostRetrofit {
         call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
             @Override
             public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
-                if ("1".equals(response.body().getData().getCount().trim())) {
-                    bookmarkBtn.setImageResource(0);
-                    bookmarkBtn.setImageResource(R.drawable.bookmark_yellow);
-                } else if ("0".equals(response.body().getData().getCount().trim())) {
-                    //ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
+                try {
+                    if ("1".equals(response.body().getData().getCount().trim())) {
+                        bookmarkBtn.setImageResource(0);
+                        bookmarkBtn.setImageResource(R.drawable.bookmark_yellow);
+                    } else if ("0".equals(response.body().getData().getCount().trim())) {
+                        //ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
+                    }
+                } catch (Exception e) {
+                    Log.e("bookmark from server", "null");
                 }
+
+
             }
 
             @Override

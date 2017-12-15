@@ -10,6 +10,7 @@ import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommen
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
@@ -106,4 +107,7 @@ public interface ApiInterface {
 
     @POST("http://apiv3.flikster.com/v3/orders-ms/createOrder")
     Call<CreateUserApiPostData> postSendToCraeteUser(@Body CreateUserApiPostData createUserApiPostData);
+
+    @GET
+    Call<StyleSearchData> getStyletypeData(@Url String url);
 }

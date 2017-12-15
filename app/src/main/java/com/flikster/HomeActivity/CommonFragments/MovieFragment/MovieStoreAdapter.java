@@ -19,9 +19,11 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
+import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.HomeActivity.StealStyleViewHolder;
 import com.flikster.R;
+import com.flikster.Util.Common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +56,14 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     String storyline;
     String slug;
     AllStoreInnerData hits;
+    String userId;
+    String entityId;
 
     public MovieStoreAdapter(Context context, FragmentManager fragmentManager, String coverpic, String censor,
-                             String dor, ArrayList<String> genre,String duration,String title,String storyline,String slug,
-                             AllStoreInnerData hits) {
+                             String dor, ArrayList<String> genre, String duration, String title, String storyline, String slug,
+                             AllStoreInnerData hits, String userId, String entityId) {
+        this.userId = userId;
+        this.entityId = entityId;
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -78,11 +84,11 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.coverpic = coverpic;
         this.title = title;
         this.dor = dor;
-        this.censor=censor;
-        this.duration=duration;
-        this.storyline=storyline;
-        this.slug=slug;
-        this.hits=hits;
+        this.censor = censor;
+        this.duration = duration;
+        this.storyline = storyline;
+        this.slug = slug;
+        this.hits = hits;
     }
 
     @Override
@@ -90,8 +96,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (viewType == 0) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_feed_profile, parent, false);
             return new ViewHolder0(view);
-        }
-        else if (viewType == 1) {
+        } else if (viewType == 1) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details1, parent, false);
             return new ViewHolder1(view);
         } else if (viewType == 2) {
@@ -106,21 +111,18 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (viewType == 5) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_details4_plus, parent, false);
             return new ViewHolder5(view);
-        }
-        else if(viewType==100)
-        {
-            View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_no_comments,parent,false);
+        } else if (viewType == 100) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_no_comments, parent, false);
             return new ViewHolder100(view);
-        }
-        else
+        } else
             return null;
     }
 
-    public  String formatDate(String dateOfRelease)
-    {
-        String subString=dateOfRelease.substring(3,dateOfRelease.indexOf("GMT")-9);
+    public String formatDate(String dateOfRelease) {
+        String subString = dateOfRelease.substring(3, dateOfRelease.indexOf("GMT") - 9);
         return subString;
     }
+
     public String formatRole(List<String> role) {
         String roleString = "";
         for (int i = 0; i < role.size(); i++) {
@@ -129,25 +131,23 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return roleString;
     }
 
-    public String formatGenre()
-    {
-        String genre="";
-        for(int i=0;i<this.genre.size();i++)
-        {
-            if(i<genre.length()-1)
-                genre=genre+this.genre.get(i)+" | ";
+    public String formatGenre() {
+        String genre = "";
+        for (int i = 0; i < this.genre.size(); i++) {
+            if (i < genre.length() - 1)
+                genre = genre + this.genre.get(i) + " | ";
             else
-                genre=genre+this.genre.get(i);
+                genre = genre + this.genre.get(i);
         }
         return genre;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder.getItemViewType()==0)
-        {
+        if (holder.getItemViewType() == 0) {
             if (title != null && !title.isEmpty()) {
                 ((ViewHolder0) holder).card_movie_feed_profile_moviename.setText(title);
+                new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder0) holder).followbtn, context);
             }
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
@@ -156,196 +156,182 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (censor != null && !censor.isEmpty()) {
                 ((ViewHolder0) holder).card_movie_feed_profile_censor.setText(censor);
             }
-            if(dor != null && !dor.isEmpty()){
+            if (dor != null && !dor.isEmpty()) {
                 ((ViewHolder0) holder).card_movie_feed_profile_dor.setText(dor);
             }
-            if(duration != null && !duration.isEmpty()){
+            if (duration != null && !duration.isEmpty()) {
                 ((ViewHolder0) holder).card_movie_feed_profile_dur.setText(duration);
             }
-            if(genre != null && !genre.isEmpty())
-            {
+            if (genre != null && !genre.isEmpty()) {
                 ((ViewHolder0) holder).card_movie_feed_profile_genre.setText(formatGenre());
             }
-            ((ViewHolder0)holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
-        }
-
-        else if (holder.getItemViewType() == 1) {
+            ((ViewHolder0) holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
+        } else if (holder.getItemViewType() == 1) {
             ((ViewHolder1) holder).followbtn.setText("BUY");
             ((ViewHolder1) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
-            {
-                ((ViewHolder1)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder1) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getName() != null) {
-                ((ViewHolder1) holder).card_fashion_details1_txt.setText(hits.getHits().get(position-1).get_source().getName());
+            if (hits.getHits().get(position - 1).get_source().getName() != null) {
+                ((ViewHolder1) holder).card_fashion_details1_txt.setText(hits.getHits().get(position - 1).get_source().getName());
             }
-            if(hits.getHits().get(position-1).get_source().getPrice() != null)
-            {
-                ((ViewHolder1) holder).card_description_with_price_price.setText(hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder1) holder).card_description_with_price_price.setText(hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getProductDescription() != null) {
-                ((ViewHolder1) holder).card_description_with_price_title.setText(hits.getHits().get(position-1).get_source().getProductDescription());
+            if (hits.getHits().get(position - 1).get_source().getProductDescription() != null) {
+                ((ViewHolder1) holder).card_description_with_price_title.setText(hits.getHits().get(position - 1).get_source().getProductDescription());
             }
-            if (hits.getHits().get(position-1).get_source().getCeleb() != null&&hits.getHits().get(position-1).get_source().getCeleb().size()!=0) {
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getName() != null)
-                    ((ViewHolder1) holder).tv_tag_name.setText(hits.getHits().get(position-1).get_source().getCeleb().get(0).getName());
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic() != null)
-                    Glide.with(context).load(hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic())
+            if (hits.getHits().get(position - 1).get_source().getCeleb() != null && hits.getHits().get(position - 1).get_source().getCeleb().size() != 0) {
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder1) holder).tv_tag_name.setText(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic())
                             .asBitmap().into(((ViewHolder1) holder).profile_image);
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole() != null &&
-                        hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole().size() != 0)
-                    ((ViewHolder1) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole()));
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder1) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole()));
             }
-            if (hits.getHits().get(position-1).get_source().getImageGallery() != null) {
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(0).trim())
+            if (hits.getHits().get(position - 1).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(0).trim())
                         .into(((ViewHolder1) holder).card_fashion_details1_img);
             }
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).followbtn.setText("BUY");
             ((ViewHolder2) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
-            {
-                ((ViewHolder2)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder2) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getName() != null) {
-                ((ViewHolder2) holder).card_fashion_details2_txt.setText(hits.getHits().get(position-1).get_source().getName());
+            if (hits.getHits().get(position - 1).get_source().getName() != null) {
+                ((ViewHolder2) holder).card_fashion_details2_txt.setText(hits.getHits().get(position - 1).get_source().getName());
             }
-            if(hits.getHits().get(position-1).get_source().getPrice() != null)
-            {
-                ((ViewHolder2) holder).card_description_with_price_price.setText(hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder2) holder).card_description_with_price_price.setText(hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getProductDescription() != null) {
-                ((ViewHolder2) holder).card_description_with_price_title.setText(hits.getHits().get(position-1).get_source().getProductDescription());
+            if (hits.getHits().get(position - 1).get_source().getProductDescription() != null) {
+                ((ViewHolder2) holder).card_description_with_price_title.setText(hits.getHits().get(position - 1).get_source().getProductDescription());
             }
-            if (hits.getHits().get(position-1).get_source().getCeleb() != null&&hits.getHits().get(position-1).get_source().getCeleb().size()!=0) {
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getName() != null)
-                    ((ViewHolder2) holder).tv_tag_name.setText(hits.getHits().get(position-1).get_source().getCeleb().get(0).getName());
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic() != null)
-                    Glide.with(context).load(hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic())
+            if (hits.getHits().get(position - 1).get_source().getCeleb() != null && hits.getHits().get(position - 1).get_source().getCeleb().size() != 0) {
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder2) holder).tv_tag_name.setText(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic())
                             .asBitmap().into(((ViewHolder2) holder).profile_image);
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole() != null &&
-                        hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole().size() != 0)
-                    ((ViewHolder2) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole()));
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder2) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole()));
             }
-            if (hits.getHits().get(position-1).get_source().getImageGallery() != null) {
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(0).trim())
+            if (hits.getHits().get(position - 1).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(0).trim())
                         .into(((ViewHolder2) holder).card_fashion_details2_img1);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(1).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(1).trim())
                         .into(((ViewHolder2) holder).card_fashion_details2_img2);
             }
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).followbtn.setText("BUY");
             ((ViewHolder3) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
-            {
-                ((ViewHolder3)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder3) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getName() != null) {
-                ((ViewHolder3) holder).card_fashion_details3_txt.setText(hits.getHits().get(position-1).get_source().getName());
+            if (hits.getHits().get(position - 1).get_source().getName() != null) {
+                ((ViewHolder3) holder).card_fashion_details3_txt.setText(hits.getHits().get(position - 1).get_source().getName());
             }
-            if(hits.getHits().get(position-1).get_source().getPrice() != null)
-            {
-                ((ViewHolder3) holder).card_description_with_price_price.setText(hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder3) holder).card_description_with_price_price.setText(hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getProductDescription() != null) {
-                ((ViewHolder3) holder).card_description_with_price_title.setText(hits.getHits().get(position-1).get_source().getProductDescription());
+            if (hits.getHits().get(position - 1).get_source().getProductDescription() != null) {
+                ((ViewHolder3) holder).card_description_with_price_title.setText(hits.getHits().get(position - 1).get_source().getProductDescription());
             }
-            if (hits.getHits().get(position-1).get_source().getCeleb() != null &&hits.getHits().get(position-1).get_source().getCeleb().size()!=0) {
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getName() != null)
-                    ((ViewHolder3) holder).tv_tag_name.setText(hits.getHits().get(position-1).get_source().getCeleb().get(0).getName());
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic() != null)
-                    Glide.with(context).load(hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic())
+            if (hits.getHits().get(position - 1).get_source().getCeleb() != null && hits.getHits().get(position - 1).get_source().getCeleb().size() != 0) {
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder3) holder).tv_tag_name.setText(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic())
                             .asBitmap().into(((ViewHolder3) holder).profile_image);
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole() != null &&
-                        hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole().size() != 0)
-                    ((ViewHolder3) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole()));
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder3) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole()));
             }
-            if (hits.getHits().get(position-1).get_source().getImageGallery() != null) {
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(0).trim())
+            if (hits.getHits().get(position - 1).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(0).trim())
                         .into(((ViewHolder3) holder).card_fashion_details3_img1);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(1).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(1).trim())
                         .into(((ViewHolder3) holder).card_fashion_details3_img2);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(2).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(2).trim())
                         .into(((ViewHolder3) holder).card_fashion_details3_img3);
             }
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).followbtn.setText("BUY");
             ((ViewHolder4) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
-            {
-                ((ViewHolder4)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder4) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getName() != null) {
-                ((ViewHolder4) holder).card_fashion_details4_txt.setText(hits.getHits().get(position-1).get_source().getName());
+            if (hits.getHits().get(position - 1).get_source().getName() != null) {
+                ((ViewHolder4) holder).card_fashion_details4_txt.setText(hits.getHits().get(position - 1).get_source().getName());
             }
-            if(hits.getHits().get(position-1).get_source().getPrice() != null)
-            {
-                ((ViewHolder4) holder).card_description_with_price_price.setText(hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder4) holder).card_description_with_price_price.setText(hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getProductDescription() != null) {
-                ((ViewHolder4) holder).card_description_with_price_title.setText(hits.getHits().get(position-1).get_source().getProductDescription());
+            if (hits.getHits().get(position - 1).get_source().getProductDescription() != null) {
+                ((ViewHolder4) holder).card_description_with_price_title.setText(hits.getHits().get(position - 1).get_source().getProductDescription());
             }
-            if (hits.getHits().get(position-1).get_source().getCeleb() != null&&hits.getHits().get(position-1).get_source().getCeleb().size()!=0) {
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getName() != null)
-                    ((ViewHolder4) holder).tv_tag_name.setText(hits.getHits().get(position-1).get_source().getCeleb().get(0).getName());
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic() != null)
-                    Glide.with(context).load(hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic())
+            if (hits.getHits().get(position - 1).get_source().getCeleb() != null && hits.getHits().get(position - 1).get_source().getCeleb().size() != 0) {
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder4) holder).tv_tag_name.setText(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic())
                             .asBitmap().into(((ViewHolder4) holder).profile_image);
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole() != null &&
-                        hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole().size() != 0)
-                    ((ViewHolder4) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole()));
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder4) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole()));
             }
-            if (hits.getHits().get(position-1).get_source().getImageGallery() != null) {
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(0).trim())
+            if (hits.getHits().get(position - 1).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(0).trim())
                         .into(((ViewHolder4) holder).card_fashion_details4_img1);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(1).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(1).trim())
                         .into(((ViewHolder4) holder).card_fashion_details4_img2);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(2).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(2).trim())
                         .into(((ViewHolder4) holder).card_fashion_details4_img3);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(3).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(3).trim())
                         .into(((ViewHolder4) holder).card_fashion_details4_img4);
             }
         } else if (holder.getItemViewType() == 5) {
             ((ViewHolder5) holder).followbtn.setText("BUY");
             ((ViewHolder5) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position-1).get_source().getPrice()!=null)
-            {
-                ((ViewHolder5)holder).card_description_with_price_price.setText("Rs. "+hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder5) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getName() != null) {
-                ((ViewHolder5) holder).card_fashion_details4_plus_txt.setText(hits.getHits().get(position-1).get_source().getName());
+            if (hits.getHits().get(position - 1).get_source().getName() != null) {
+                ((ViewHolder5) holder).card_fashion_details4_plus_txt.setText(hits.getHits().get(position - 1).get_source().getName());
             }
-            if(hits.getHits().get(position-1).get_source().getPrice() != null)
-            {
-                ((ViewHolder5) holder).card_description_with_price_price.setText(hits.getHits().get(position-1).get_source().getPrice()+" /-");
+            if (hits.getHits().get(position - 1).get_source().getPrice() != null) {
+                ((ViewHolder5) holder).card_description_with_price_price.setText(hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
-            if (hits.getHits().get(position-1).get_source().getProductDescription() != null) {
-                ((ViewHolder5) holder).card_description_with_price_title.setText(hits.getHits().get(position-1).get_source().getProductDescription());
+            if (hits.getHits().get(position - 1).get_source().getProductDescription() != null) {
+                ((ViewHolder5) holder).card_description_with_price_title.setText(hits.getHits().get(position - 1).get_source().getProductDescription());
             }
-            if (hits.getHits().get(position-1).get_source().getCeleb() != null&&hits.getHits().get(position-1).get_source().getCeleb().size()!=0) {
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getName() != null)
-                    ((ViewHolder5) holder).tv_tag_name.setText(hits.getHits().get(position-1).get_source().getCeleb().get(0).getName());
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic() != null)
-                    Glide.with(context).load(hits.getHits().get(position-1).get_source().getCeleb().get(0).getProfilePic())
+            if (hits.getHits().get(position - 1).get_source().getCeleb() != null && hits.getHits().get(position - 1).get_source().getCeleb().size() != 0) {
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName() != null)
+                    ((ViewHolder5) holder).tv_tag_name.setText(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName());
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic() != null)
+                    Glide.with(context).load(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic())
                             .asBitmap()
                             .into(((ViewHolder5) holder).profile_image);
-                if (hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole() != null &&
-                        hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole().size() != 0)
-                    ((ViewHolder5) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position-1).get_source().getCeleb().get(0).getRole()));
+                if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole() != null &&
+                        hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole().size() != 0)
+                    ((ViewHolder5) holder).tv_tag_desc.setText(formatRole(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getRole()));
             }
-            if (hits.getHits().get(position-1).get_source().getImageGallery() != null) {
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(0).trim())
+            if (hits.getHits().get(position - 1).get_source().getImageGallery() != null) {
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(0).trim())
                         .into(((ViewHolder5) holder).card_fashion_details4_plus_img1);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(1).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(1).trim())
                         .into(((ViewHolder5) holder).card_fashion_details4_plus_img2);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(2).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(2).trim())
                         .into(((ViewHolder5) holder).card_fashion_details4_plus_img3);
-                Glide.with(context).load(hits.getHits().get(position-1).get_source().getImageGallery().get(3).trim())
+                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(3).trim())
                         .into(((ViewHolder5) holder).card_fashion_details4_plus_img4);
             }
-            ((ViewHolder5) holder).card_fashion_details4_plus_text.setText("+ " + (hits.getHits().get(position-1).get_source().getImageGallery().size() - 4));
-        }
-        else if (holder.getItemViewType() == 100) {
+            ((ViewHolder5) holder).card_fashion_details4_plus_text.setText("+ " + (hits.getHits().get(position - 1).get_source().getImageGallery().size() - 4));
+        } else if (holder.getItemViewType() == 100) {
             ((ViewHolder100) holder).activity_no_comments_tv.setText("No Contents Available!");
         }
     }
@@ -386,8 +372,8 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return 0;
         else {
             if (hits.getHits().size() != 0 && hits.getHits() != null) {
-                if (hits.getHits().get(position-1).get_source().getImageGallery() != null && hits.getHits().get(position-1).get_source().getImageGallery().size() != 0) {
-                    switch (hits.getHits().get(position-1).get_source().getImageGallery().size()) {
+                if (hits.getHits().get(position - 1).get_source().getImageGallery() != null && hits.getHits().get(position - 1).get_source().getImageGallery().size() != 0) {
+                    switch (hits.getHits().get(position - 1).get_source().getImageGallery().size()) {
                         case 1:
                             return 1;
                         case 2:
@@ -406,9 +392,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class ViewHolder0 extends RecyclerView.ViewHolder {
-        TextView card_movie_feed_profile_moviename, card_movie_feed_profile_censor,card_movie_feed_profile_dor,
-                card_movie_feed_profile_dur,card_movie_feed_profile_genre,card_movie_feed_profile_storyline;
+        TextView card_movie_feed_profile_moviename, card_movie_feed_profile_censor, card_movie_feed_profile_dor,
+                card_movie_feed_profile_dur, card_movie_feed_profile_genre, card_movie_feed_profile_storyline;
         ImageView card_movie_feed_profile_image;
+        Button followbtn;
 
         public ViewHolder0(View itemView) {
             super(itemView);
@@ -419,6 +406,13 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_movie_feed_profile_dur = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dur);
             card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
             card_movie_feed_profile_storyline = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_storyline);
+            followbtn = (Button) itemView.findViewById(R.id.followbtn);
+            followbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Common.followOrUnFollow(context, followbtn, userId, entityId);
+                }
+            });
         }
     }
 
@@ -428,11 +422,12 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details1_txt;
         RelativeLayout card_header_container;
+
         public ViewHolder1(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
-            card_header_container=(RelativeLayout)itemView.findViewById(R.id.card_header_container);
-            card_fashion_details1_txt=(TextView)itemView.findViewById(R.id.card_fashion_details1_txt);
+            card_header_container = (RelativeLayout) itemView.findViewById(R.id.card_header_container);
+            card_fashion_details1_txt = (TextView) itemView.findViewById(R.id.card_fashion_details1_txt);
             card_fashion_details1_img = (ImageView) itemView.findViewById(R.id.card_fashion_details1_img);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
@@ -458,11 +453,12 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details2_txt;
         RelativeLayout card_header_container;
+
         public ViewHolder2(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
-            card_header_container=(RelativeLayout)itemView.findViewById(R.id.card_header_container);
-            card_fashion_details2_txt=(TextView)itemView.findViewById(R.id.card_fashion_details2_txt);
+            card_header_container = (RelativeLayout) itemView.findViewById(R.id.card_header_container);
+            card_fashion_details2_txt = (TextView) itemView.findViewById(R.id.card_fashion_details2_txt);
             card_fashion_details2_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img1);
             card_fashion_details2_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img2);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
@@ -490,11 +486,12 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details3_txt;
         RelativeLayout card_header_container;
+
         public ViewHolder3(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
-            card_header_container=(RelativeLayout)itemView.findViewById(R.id.card_header_container);
-            card_fashion_details3_txt=(TextView)itemView.findViewById(R.id.card_fashion_details3_txt);
+            card_header_container = (RelativeLayout) itemView.findViewById(R.id.card_header_container);
+            card_fashion_details3_txt = (TextView) itemView.findViewById(R.id.card_fashion_details3_txt);
             card_fashion_details3_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img1);
             card_fashion_details3_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img2);
             card_fashion_details3_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img3);
@@ -522,11 +519,12 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details4_txt;
         RelativeLayout card_header_container;
+
         public ViewHolder4(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
-            card_header_container=(RelativeLayout)itemView.findViewById(R.id.card_header_container);
-            card_fashion_details4_txt=(TextView)itemView.findViewById(R.id.card_fashion_details4_txt);
+            card_header_container = (RelativeLayout) itemView.findViewById(R.id.card_header_container);
+            card_fashion_details4_txt = (TextView) itemView.findViewById(R.id.card_fashion_details4_txt);
             card_fashion_details4_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img1);
             card_fashion_details4_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img2);
             card_fashion_details4_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img3);
@@ -559,8 +557,8 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public ViewHolder5(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
-            card_header_container=(RelativeLayout)itemView.findViewById(R.id.card_header_container);
-            card_fashion_details4_plus_txt=(TextView)itemView.findViewById(R.id.card_fashion_details4_plus_txt);
+            card_header_container = (RelativeLayout) itemView.findViewById(R.id.card_header_container);
+            card_fashion_details4_plus_txt = (TextView) itemView.findViewById(R.id.card_fashion_details4_plus_txt);
             card_fashion_details4_plus_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img1);
             card_fashion_details4_plus_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img2);
             card_fashion_details4_plus_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img3);
@@ -583,12 +581,12 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public  class ViewHolder100 extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder100 extends RecyclerView.ViewHolder {
         TextView activity_no_comments_tv;
+
         public ViewHolder100(View itemView) {
             super(itemView);
-            activity_no_comments_tv=(TextView)itemView.findViewById(R.id.activity_no_comments_tv);
+            activity_no_comments_tv = (TextView) itemView.findViewById(R.id.activity_no_comments_tv);
         }
     }
 

@@ -41,9 +41,10 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     TextView toolbar_frag_title;
     ApiInterface apiInterface;
     ImageButton toolbar_back_navigation_btn;
-    String slug;
+    String slug, userId, entityId;
     CelebrityData.CelebrityInnerData hits;
     Bundle arguments = new Bundle();
+
 
     @Nullable
     @Override
@@ -62,26 +63,33 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onResponse(Call<CelebrityData> call, Response<CelebrityData> response) {
                 hits = response.body().getHits();
-                if (hits.getHits().size() != 0){
+                if (hits.getHits().size() != 0) {
                     arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
                     arguments.putString("biography", hits.getHits().get(0).get_source().getBiography());
                     arguments.putString("dateOfBirth", hits.getHits().get(0).get_source().getDateOfBirth());
                     arguments.putStringArrayList("role", (ArrayList<String>) hits.getHits().get(0).get_source().getRole());
-                    arguments.putString("placeOfBirth",hits.getHits().get(0).get_source().getPlaceOfBirth());
-                    arguments.putString("name",hits.getHits().get(0).get_source().getName());
-                    arguments.putString("slug",slug);
+                    arguments.putString("placeOfBirth", hits.getHits().get(0).get_source().getPlaceOfBirth());
+                    arguments.putString("name", hits.getHits().get(0).get_source().getName());
+                    arguments.putString("slug", slug);
+                    arguments.putString("userId", userId);
+                    arguments.putString("entityId", entityId);
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setOffscreenPageLimit(2);
                     viewPager.setAdapter(celebrityAdapter);
                     viewPager.setCurrentItem(1);
-                }else {
+                } else {
                     arguments.putString("coverpic", "");
                     arguments.putString("biography", "");
                     arguments.putString("dateOfBirth", "");
-                    arguments.putStringArrayList("role", new  ArrayList<String>(){{add("");add("");}});
+                    arguments.putStringArrayList("role", new ArrayList<String>() {{
+                        add("");
+                        add("");
+                    }});
                     arguments.putString("placeOfBirth", "");
                     arguments.putString("name", "");
-                    arguments.putString("slug",slug);
+                    arguments.putString("slug", slug);
+                    arguments.putString("userId", userId);
+                    arguments.putString("entityId", entityId);
                     celebrityAdapter = new CelebrityAdapter(getChildFragmentManager(), arguments);
                     viewPager.setAdapter(celebrityAdapter);
                     viewPager.setOffscreenPageLimit(2);
@@ -124,18 +132,21 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.black));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_back_navigation_btn) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container,new FeedFragment())
+                    .replace(R.id.main_container, new FeedFragment())
                     .commit();
         }
     }
 
-    public void updateInfo(String slug) {
+    public void updateInfo(String slug, String userId, String entityId) {
+        this.userId = userId;
+        this.entityId = entityId;
         this.slug = slug;
     }
 }

@@ -11,13 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
+import com.flikster.Util.Common;
 
 import java.util.List;
 
@@ -34,9 +37,10 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
     TextView fragment_common_recyclerview_with_tv_title, tv_tag_name, tv_tag_desc;
     ImageView profile_image;
     List<String> galleryImgLinks;
-    String name,profilepic,type,title;
+    String name, profilepic, type, title, userId, entityId;
     GalleryRecommendationItemClick galleryRecommendationItemClick;
     ImageButton toolbar_back_navigation_btn;
+    Button followbtn;
 
     @Nullable
     @Override
@@ -67,9 +71,17 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
         tv_tag_desc.setText(type);
         gallaryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(gallaryLayoutManager);
-        galleryCardClickAdapter = new GalleryCardClickAdapter(getActivity(), fragmentManager,galleryImgLinks,galleryRecommendationItemClick);
+        galleryCardClickAdapter = new GalleryCardClickAdapter(getActivity(), fragmentManager,
+                galleryImgLinks, galleryRecommendationItemClick, userId);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryCardClickAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
+        new PostRetrofit().checkForFollow("follow", userId, entityId, followbtn, getContext());
+        followbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.followOrUnFollow(getContext(), followbtn, userId, entityId);
+            }
+        });
     }
 
     private void initializeViews() {
@@ -78,32 +90,36 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
         profile_image = (ImageView) view.findViewById(R.id.profile_image);
         tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
-        toolbar_back_navigation_btn=(ImageButton)view.findViewById(R.id.toolbar_back_navigation_btn);
+        toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         fragmentManager = getActivity().getSupportFragmentManager();
+        followbtn = (Button) view.findViewById(R.id.followbtn);
+
     }
 
-    public void updateImage(List<String> galleryImgLinks,String name,String profilePic,String type,String title)
-    {
-        this.galleryImgLinks=galleryImgLinks;
-        this.name=name;
-        this.profilepic=profilePic;
-        this.type=type;
-        this.title=title;
+    public void updateImage(List<String> galleryImgLinks, String name,
+                            String profilePic, String type, String title, String userId, String entityId) {
+        this.galleryImgLinks = galleryImgLinks;
+        this.name = name;
+        this.profilepic = profilePic;
+        this.type = type;
+        this.title = title;
+        this.userId = userId;
+        this.entityId = entityId;
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId()==R.id.toolbar_back_navigation_btn)
-        {
+        if (view.getId() == R.id.toolbar_back_navigation_btn) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container,new FeedFragment())
+                    .replace(R.id.main_container, new FeedFragment())
                     .commit();
         }
     }
 
-    public interface GalleryRecommendationItemClick
-    {
-        void galleryRecommendationItemClickMethod(List<String> galleryImgLinks, String name, String profilePic, String type, String title, Fragment fragment);
+    public interface GalleryRecommendationItemClick {
+        void galleryRecommendationItemClickMethod(List<String> galleryImgLinks,
+                                                  String name, String profilePic, String type,
+                                                  String title, Fragment fragment, String userId, String entityId);
     }
 
     @Override
@@ -111,5 +127,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
         super.onAttach(activity);
         galleryRecommendationItemClick = (GalleryRecommendationItemClick) activity;
     }
+
+
 
 }

@@ -25,7 +25,7 @@ import retrofit2.Response;
  * Created by abhishek on 12-10-2017.
  */
 
-public class CelebrityFragmentStore extends Fragment{
+public class CelebrityFragmentStore extends Fragment {
     View view;
     RecyclerView celebrityFragmentStoreRecycler;
     RecyclerView.LayoutManager celebrityFragmentStoreLayoutManager;
@@ -33,30 +33,35 @@ public class CelebrityFragmentStore extends Fragment{
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
     AllStoreInnerData hits;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_common_recyclerview,container,false);
-        Log.e("insdei createview",""+getArguments().getString("slug"));
+        view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
+        Log.e("insdei createview", "" + getArguments().getString("slug"));
         initializeViews();
         initializeRest();
         retrofitInit();
-        return  view;
+        return view;
     }
 
     private void retrofitInit() {
-        Log.e("check slug store",""+getArguments().getString("slug"));
+        Log.e("check slug store", "" + getArguments().getString("slug"));
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search?pretty=true&size=100&q=*").create(ApiInterface.class);
-        Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true,100,"tags:\""+getArguments().getString("slug")+"\"");
+        Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true, 100, "tags:\"" + getArguments().getString("slug") + "\"");
         call.enqueue(new Callback<AllStoreData>() {
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
-                Log.e("check slug store",""+getArguments().getString("slug")+hits.getHits().size());
-                celebrityStoreAdapter = new CelebrityStoreAdapter(getActivity(),fragmentManager,getArguments().getString("coverpic"),
-                        getArguments().getString("biography"),getArguments().getString("dateOfBirth"),getArguments().getStringArrayList("role"),
+                Log.e("check slug store", "" + getArguments().getString("slug") + hits.getHits().size());
+                celebrityStoreAdapter = new CelebrityStoreAdapter(getActivity(), fragmentManager, getArguments().getString("coverpic"),
+                        getArguments().getString("biography"),
+                        getArguments().getString("dateOfBirth"),
+                        getArguments().getStringArrayList("role"),
                         getArguments().getString("placeOfBirth"),
-                        getArguments().getString("name"),hits);
+                        getArguments().getString("name"), hits,
+                        getArguments().getString("userId"),
+                        getArguments().getString("entityId"));
                 celebrityFragmentStoreRecycler.setAdapter(celebrityStoreAdapter);
             }
 
@@ -73,7 +78,7 @@ public class CelebrityFragmentStore extends Fragment{
     }
 
     private void initializeViews() {
-        celebrityFragmentStoreRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
-        fragmentManager=getActivity().getSupportFragmentManager();
+        celebrityFragmentStoreRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 }

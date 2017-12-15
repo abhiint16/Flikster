@@ -43,8 +43,8 @@ public class MovieFragmentInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         initializeViews();
-        bundle=getArguments();
-        this.slug=bundle.getString("slug");
+        bundle = getArguments();
+        this.slug = bundle.getString("slug");
         Log.e("slugMovieInfo1", "SSS");
         Log.e("slugMovieInfo1", slug + "Shiva");
         initializeRest();
@@ -54,21 +54,30 @@ public class MovieFragmentInfo extends Fragment {
 
     private void retrofitInit() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:").create(ApiInterface.class);
-        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:\""+slug+"\"");
+        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:\"" + slug + "\"");
         call.enqueue(new Callback<MovieData>() {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
                 hits = response.body().getHits();
-                movieInfoAdapter = new MovieInfoAdapter(getActivity(), fragmentManager,getArguments().getString("coverpic"),
-                        getArguments().getString("censor"),getArguments().getString("dor"),getArguments().getStringArrayList("genre"),
-                        getArguments().getString("duration"),getArguments().getString("title"),getArguments().getString("storyline"),
-                        getArguments().getString("slug"),hits);
+                movieInfoAdapter = new MovieInfoAdapter(getActivity(),
+                        fragmentManager, getArguments().getString("coverpic"),
+                        getArguments().getString("censor"),
+                        getArguments().getString("dor"),
+                        getArguments().getStringArrayList("genre"),
+                        getArguments().getString("duration"),
+                        getArguments().getString("title"),
+                        getArguments().getString("storyline"),
+                        getArguments().getString("slug"),
+                        hits, getArguments().getString("userId"),
+                        getArguments().getString("entityId"));
                 movieFragmentInfoRecycler.setAdapter(movieInfoAdapter);
+            /*getArguments().getString("userId"),
+                        getArguments().getString("entityId"));*/
             }
 
             @Override
             public void onFailure(Call<MovieData> call, Throwable t) {
-                Log.e("vvvvvvvvvv","vv"+call+t);
+                Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
     }
