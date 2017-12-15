@@ -107,6 +107,10 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
     public interface AllStoreInterafce {
         void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
                         String productSlug, List<String> imageGallery, Fragment fragment);
+        void onGalleryContainerClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
+                        String productSlug, List<String> imageGallery,
+                                     String profilepic,List<String> role,String name,String title,
+                                     Fragment fragment);
     }
 
     @Override

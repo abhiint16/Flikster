@@ -71,6 +71,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreFirstTypeFragment;
+import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFirstTypeFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
@@ -788,6 +789,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle, String productSlug,List<String> imageGallery, Fragment fragment) {
         ProductOnClick productOnClick=(ProductOnClick)fragment;
         productOnClick.getProductData(productId,size,userId,price,profilePic,productTitle,productSlug,imageGallery);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void onGalleryContainerClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle, String productSlug, List<String> imageGallery, String profilepic, List<String> role, String name, String title, Fragment fragment) {
+        CommonAllProductPage commonAllProductPage=(CommonAllProductPage)fragment;
+        commonAllProductPage.getProductData(productId,size,userId,price,profilePic,productTitle,productSlug,imageGallery,
+                profilePic,role,name,title);
         firstTimeLaunch(fragment);
     }
 

@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/card_fashion_details2_img_container">
 
         <ImageView
             android:layout_width="0dp"

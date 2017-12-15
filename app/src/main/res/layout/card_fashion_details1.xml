@@ -17,14 +17,19 @@
         android:textColor="@color/black"
         android:textSize="14sp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/card_fashion_details1_img_container">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/card_fashion_details1_img"
         android:scaleType="fitXY"/>
+    </LinearLayout>
+    <include layout="@layout/card_footer"/>
 
-    <include layout="@layout/card_footer" />
-
-    <include layout="@layout/card_description_with_price" />
+    <include layout="@layout/card_description_with_price"/>
 
 </LinearLayout>
