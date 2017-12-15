@@ -337,7 +337,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void toolbarPrefSpinner() {
         List<String> pref=new ArrayList<>();
-        pref.add("Boolywood");
+        pref.add("Bollywood");
         pref.add("Tollywood");
         pref.add("Tamil");
         pref.add("Kannada");

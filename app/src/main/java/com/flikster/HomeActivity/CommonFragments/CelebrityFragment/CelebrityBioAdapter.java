@@ -190,7 +190,8 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder1) holder).card_celebrity_bio_profile_biography.setText(biography);
             ((ViewHolder1) holder).card_celebrity_bio_profile_name.setText(name);
             ((ViewHolder1) holder).card_celebrity_bio_profile_pob.setText(placeOfBirth);
-            ((ViewHolder1) holder).card_celebrity_bio_profile_dob.setText(formatDOB(dateOfBirth));
+            if (dateOfBirth!=null)
+            ((ViewHolder1) holder).card_celebrity_bio_profile_dob.setText(dateOfBirth);
             ((ViewHolder1) holder).card_celebrity_bio_profile_role.setText(formatRole());
             Glide.with(context).load(coverpic).into(((ViewHolder1) holder).card_celebrity_bio_profile_coverpic);
             new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder1) holder).followbtn, context);

@@ -64,12 +64,28 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
             public void onResponse(Call<CelebrityData> call, Response<CelebrityData> response) {
                 hits = response.body().getHits();
                 if (hits.getHits().size() != 0) {
+                    if (hits.getHits().get(0).get_source().getCoverPic()!=null)
                     arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
+                    else
+                    arguments.putString("coverpic", "");
+                    if (hits.getHits().get(0).get_source().getBiography()!=null)
                     arguments.putString("biography", hits.getHits().get(0).get_source().getBiography());
+                    else
+                        arguments.putString("biography","");
+                    if (hits.getHits().get(0).get_source().getDateOfBirth()!=null)
                     arguments.putString("dateOfBirth", hits.getHits().get(0).get_source().getDateOfBirth());
+                    else
+                        arguments.putString("dateOfBirth", "");
+                    if (hits.getHits().get(0).get_source().getRole()!=null&&hits.getHits().get(0).get_source().getRole().size()!=0)
                     arguments.putStringArrayList("role", (ArrayList<String>) hits.getHits().get(0).get_source().getRole());
+                    if (hits.getHits().get(0).get_source().getPlaceOfBirth()!=null)
                     arguments.putString("placeOfBirth", hits.getHits().get(0).get_source().getPlaceOfBirth());
+                    else
+                        arguments.putString("placeOfBirth", "");
+                    if (hits.getHits().get(0).get_source().getName()!=null)
                     arguments.putString("name", hits.getHits().get(0).get_source().getName());
+                    else
+                        arguments.putString("name", "");
                     arguments.putString("slug", slug);
                     arguments.putString("userId", userId);
                     arguments.putString("entityId", entityId);
