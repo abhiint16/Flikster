@@ -128,6 +128,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     NavigationView navigationView;
     Context mContext;
     FloatingActionButton camera_fab;
+    SharedPref sharedPref;
     Spinner toolbar_pref_spinner;
     TextView right_navigation_bar_my_account,right_navigation_bar_orders,right_navigation_bar_wishlist,
             right_navigation_bar_liked_posts,right_navigation_bar_refer,right_navigation_bar_rewards,
@@ -167,9 +168,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         checkForLaunch();
         bottomnavigationBar();
 
-        Log.e("Currentdate", DateUtil.currentDate());
-        Log.e("MinutesToHr", String.format("%.2f", DateUtil.mintsTohoursCovert("165")));
-        Log.e("Movietime", DateUtil.mintsToCoverthoursMin("125"));
+        String data = SharedPrefsUtil.getStringPreference(HomeActivity.this,"IS_LOGGED_IN");
+        if (data !=null && !data.isEmpty()){
+            Log.e("whthercheckedin", ""+SharedPrefsUtil.getStringPreference(HomeActivity.this,"IS_LOGGED_IN"));
+        }
     }
 
     private void bottomnavigationBar() {
@@ -349,6 +351,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     private void initializeViews() {
+        sharedPref=new SharedPref(getApplicationContext());
         feed = (LinearLayout) findViewById(R.id.feed_button);
         fashion = (LinearLayout) findViewById(R.id.fashion_button);
         rating = (LinearLayout) findViewById(R.id.rating_button);

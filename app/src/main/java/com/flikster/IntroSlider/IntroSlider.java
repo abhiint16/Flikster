@@ -74,7 +74,7 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
     }
 
     private void initSharedPred() {
-        sharedPref = new SharedPref(this);
+        sharedPref = new SharedPref(getApplicationContext());
     }
 
     @Override

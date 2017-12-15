@@ -12,6 +12,7 @@ import com.flikster.Authentication.AuthenticationActivity;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 import com.flikster.SharedPref.SharedPref;
+import com.flikster.Util.SharedPrefsUtil;
 
 /**
  * author Bheema 18-10-2017
@@ -36,7 +37,7 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initSharedPred() {
-        sharedPref = new SharedPref(this);
+        sharedPref = new SharedPref(getApplicationContext());
     }
 
     private void initializeRest() {
@@ -52,7 +53,7 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initializeView() {
-        btnPreferencesNext = (Button) findViewById(R.id.goto_home);
+        btnPreferencesNext = (Button) findViewById(R.id.preference_next_btn);
         btnSignup=(Button) findViewById(R.id.goto_signup);
         radioBollywood=(RadioButton)findViewById(R.id.ind_bollywood);
         radioTollywood=(RadioButton)findViewById(R.id.ind_tollywood);
@@ -65,8 +66,8 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        if(view.getId()== R.id.goto_home)
-            launchHomeScreen();
+        if(view.getId()== R.id.preference_next_btn)
+            nextButtonClick();
         else if(view.getId()== R.id.goto_signup)
             goToSignUp();
         else if(view.getId()== R.id.ind_bollywood){
@@ -120,6 +121,13 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
 
     private void launchHomeScreen() {
         sharedPref.setFirstTimeLaunch2(false);
+        startActivity(new Intent(PreferencesView.this, HomeActivity.class));
+        finish();
+    }
+
+    private void nextButtonClick() {
+        sharedPref.setFirstTimeLaunch2(false);
+        SharedPrefsUtil.setStringPreference(PreferencesView.this,"IS_LOGGED_IN","NOT_LOGGED_IN");
         startActivity(new Intent(PreferencesView.this, HomeActivity.class));
         finish();
     }

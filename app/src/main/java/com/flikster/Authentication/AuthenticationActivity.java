@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.KeyCloak.KeycloakHelper;
 import com.flikster.R;
+import com.flikster.SharedPref.SharedPref;
+import com.flikster.Util.SharedPrefsUtil;
 
 import org.jboss.aerogear.android.core.Callback;
 
@@ -20,6 +22,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private Button btnLoginPhone, btnLoginEmail;
     private Button btnLoginGoogle, btnLoginFacebook,keycloak;
     private TextView tvLoginTermsCond;
+    SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void initializeView() {
+        sharedPref=new SharedPref(getApplicationContext());
         btnLoginPhone = (Button)findViewById(R.id.btn_login_phone);
         btnLoginEmail = (Button)findViewById(R.id.btn_login_mail);
         btnLoginGoogle = (Button)findViewById(R.id.btn_login_google);
@@ -68,6 +72,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onSuccess(String data) {
                         Log.e("inside inSuccess","insde onsuccess"+data);
+                        SharedPrefsUtil.setStringPreference(AuthenticationActivity.this,"IS_LOGGED_IN","LOGGED_IN");
+                        Log.e("ckeckforsharedinif",""+sharedPref.isLoggedIn());
                         Toast.makeText(getApplicationContext(), "heaven begins here", Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
                         startActivity(intent);
@@ -76,6 +82,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onFailure(Exception e) {
                         Log.e("insde onFailure","insied onfilaure"+e);
+                        SharedPrefsUtil.setStringPreference(AuthenticationActivity.this,"IS_LOGGED_IN","NOT_LOGGED_IN");
                         Toast.makeText(getApplicationContext(), "hell begins here! Couldn't connect. Try again", Toast.LENGTH_LONG).show();
                         /*Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
                         startActivity(intent);*/
