@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,11 +12,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
+import com.flikster.HomeActivity.FashionFragment.FashionFragment;
+import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.R;
 
 import java.util.List;
@@ -24,7 +29,7 @@ import java.util.List;
  * Created by abhishek on 14-12-2017.
  */
 
-public class CommonAllProductPage extends Fragment {
+public class CommonAllProductPage extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
     RecyclerView.LayoutManager gallaryLayoutManager;
@@ -33,8 +38,10 @@ public class CommonAllProductPage extends Fragment {
     ImageView profile_image;
     ImageButton toolbar_back_navigation_btn;
     CommonAllProductPageAdapter commonAllProductPageAdapter;
+    CommonAllProductPageBuyClick commonAllProductPageBuyClick;
     String productId;
     List<String> size;
+    Button followbtn;
     String userId;
     String price;
     String profilePic;
@@ -50,6 +57,7 @@ public class CommonAllProductPage extends Fragment {
     }
 
     private void initializeRest() {
+        followbtn.setText("BUY");
         Glide.with(getActivity()).load(celebProfilePic).asBitmap().into(profile_image);
         fragment_common_recyclerview_with_tv_title.setText(celebTitle);
         fragment_common_recyclerview_with_tv_title.setBackgroundColor(getActivity().getResources().getColor(R.color.dark_grey));
@@ -61,7 +69,8 @@ public class CommonAllProductPage extends Fragment {
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(gallaryLayoutManager);
         commonAllProductPageAdapter = new CommonAllProductPageAdapter(getActivity(), fragmentManager,imageGallery);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(commonAllProductPageAdapter);
-        //toolbar_back_navigation_btn.setOnClickListener(this);
+        toolbar_back_navigation_btn.setOnClickListener(this);
+        followbtn.setOnClickListener(this);
     }
 
     private void initializeViews() {
@@ -71,6 +80,7 @@ public class CommonAllProductPage extends Fragment {
         tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
         toolbar_back_navigation_btn=(ImageButton)view.findViewById(R.id.toolbar_back_navigation_btn);
+        followbtn=(Button)view.findViewById(R.id.followbtn);
         fragmentManager = getActivity().getSupportFragmentManager();
     }
 
@@ -103,5 +113,32 @@ public class CommonAllProductPage extends Fragment {
         this.celebRole=celebRole;
         this.celebName=celebName;
         this.celebTitle=celebTitle;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.toolbar_back_navigation_btn)
+        {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.main_container,new FashionLandingFragment())
+                    .commit();
+        }
+        else if (view.getId()==R.id.followbtn)
+        {
+            commonAllProductPageBuyClick.onBuyClick(productId,size,userId,price,profilePic,productTitle,productSlug,
+                    imageGallery,new ProductOnClick());
+        }
+    }
+
+    public interface CommonAllProductPageBuyClick
+    {
+        void onBuyClick(String productId,List<String> size,String userId,String price,String profilePic,String productTitle,
+                        String productSlug,List<String> imageGallery,Fragment fragment);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        commonAllProductPageBuyClick = (CommonAllProductPageBuyClick) activity;
     }
 }

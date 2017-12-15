@@ -138,6 +138,10 @@ public class MenFashionFirstTypeFragment extends Fragment  {
         void playShopByVideoMenMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
         void onBuyClick(String productId,List<String> size,String userId,String price,String profilePic,String productTitle,
                         String productSlug,List<String> imageGallery,Fragment fragment);
+        void onGalleryContainerClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
+                                     String productSlug, List<String> imageGallery,
+                                     String profilepic,List<String> role,String name,String title,
+                                     Fragment fragment);
     }
 
     @Override

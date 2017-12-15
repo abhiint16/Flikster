@@ -26,6 +26,7 @@ import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreRecyclerItemAdapter;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreTredingCelebFashionRecyclerItemAdapter;
+import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.HomeActivity.WidgetData;
 import com.flikster.R;
@@ -61,6 +62,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     ShopByVideoData.ShopByVideoInnerData outerHits;
     WidgetData.WidgetInnerData widgetHits;
     CelebStoreFirstTypeFragment.ShopByVideoInterafce shopByVideoInterafce;
+    String profilePic="";
+    String name="";
+    String title="";
+    List<String> role=new ArrayList<>();
+    String price="";
 
     public CelebStoreFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits,
                                      CelebStoreFirstTypeFragment.ShopByVideoInterafce shopByVideoInterafce) {
@@ -422,14 +428,14 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         return 13;
                     case 4:
                         return 14;
-                    case 5:
+                    default:
                         return 15;
                 }
             }
             else
                 return 20;
         }
-        return 20;
+        //return 20;
     }
 
     /*@Override
@@ -559,6 +565,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         ImageView card_fashion_details1_img, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name,card_fashion_details1_txt;
+        LinearLayout card_fashion_details1_img_container;
 
         public ViewHolder11(View itemView) {
             super(itemView);
@@ -571,6 +578,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_fashion_details1_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_details1_img_container);
+            card_fashion_details1_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
         }
 
@@ -584,6 +593,30 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+            }else if(v.getId()==R.id.card_fashion_details1_img_container)
+            {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
+                    profilePic=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic();
+                if(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName()!=null)
+                    name=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getPrice()!=null)
+                    price=hits.getHits().get(getAdapterPosition()-4).get_source().getPrice();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getName()!=null)
+                    title=hits.getHits().get(getAdapterPosition()-4).get_source().getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole() != null &&
+                            hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                        role.addAll(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole());
+                }
+                shopByVideoInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
+                        profilePic,role,name,title,new CommonAllProductPage());
             }
         }
     }
@@ -593,6 +626,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         ImageView card_fashion_details2_img1, card_fashion_details2_img2, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name,card_fashion_details2_txt;
+        LinearLayout card_fashion_details2_img_container;
 
         public ViewHolder12(View itemView) {
             super(itemView);
@@ -606,6 +640,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_fashion_details2_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_details2_img_container);
+            card_fashion_details2_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
         }
 
@@ -619,7 +655,32 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+            }else if(v.getId()==R.id.card_fashion_details2_img_container)
+            {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
+                    profilePic=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic();
+                if(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName()!=null)
+                    name=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getPrice()!=null)
+                    price=hits.getHits().get(getAdapterPosition()-4).get_source().getPrice();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getName()!=null)
+                    title=hits.getHits().get(getAdapterPosition()-4).get_source().getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole() != null &&
+                            hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                        role.addAll(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole());
+                }
+                shopByVideoInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
+                        profilePic,role,name,title,new CommonAllProductPage());
             }
+
 
         }
     }
@@ -629,6 +690,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         ImageView card_fashion_details3_img1, card_fashion_details3_img2, card_fashion_details3_img3, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name,card_fashion_details3_txt;
+        LinearLayout card_my_style_one_big_img_container;
 
         public ViewHolder13(View itemView) {
             super(itemView);
@@ -643,6 +705,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_my_style_one_big_img_container=(LinearLayout)itemView.findViewById(R.id.card_my_style_one_big_img_container);
+            card_my_style_one_big_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
         }
 
@@ -656,6 +720,30 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+            }else if(v.getId()==R.id.card_my_style_one_big_img_container)
+            {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
+                    profilePic=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic();
+                if(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName()!=null)
+                    name=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getPrice()!=null)
+                    price=hits.getHits().get(getAdapterPosition()-4).get_source().getPrice();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getName()!=null)
+                    title=hits.getHits().get(getAdapterPosition()-4).get_source().getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole() != null &&
+                            hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                        role.addAll(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole());
+                }
+                shopByVideoInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
+                        profilePic,role,name,title,new CommonAllProductPage());
             }
         }
     }
@@ -666,6 +754,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 card_fashion_details4_img4, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name,card_fashion_details4_txt;
+        LinearLayout card_fashion_deatails4_img_container;
 
         public ViewHolder14(View itemView) {
             super(itemView);
@@ -681,6 +770,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_fashion_deatails4_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_deatails4_img_container);
+            card_fashion_deatails4_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
         }
 
@@ -694,6 +785,30 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+            }else if(v.getId()==R.id.card_fashion_deatails4_img_container)
+            {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
+                    profilePic=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic();
+                if(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName()!=null)
+                    name=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getPrice()!=null)
+                    price=hits.getHits().get(getAdapterPosition()-4).get_source().getPrice();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getName()!=null)
+                    title=hits.getHits().get(getAdapterPosition()-4).get_source().getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole() != null &&
+                            hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                        role.addAll(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole());
+                }
+                shopByVideoInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
+                        profilePic,role,name,title,new CommonAllProductPage());
             }
         }
     }
@@ -704,6 +819,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 card_fashion_details4_plus_img4, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name, card_fashion_details4_plus_text,card_fashion_details4_plus_txt;
+        RelativeLayout card_fashion_details4_plus_img_container;
 
         public ViewHolder15(View itemView) {
             super(itemView);
@@ -720,6 +836,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_fashion_details4_plus_img_container=(RelativeLayout)itemView.findViewById(R.id.card_fashion_details4_plus_img_container);
+            card_fashion_details4_plus_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
         }
 
@@ -733,6 +851,30 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+            }else if(v.getId()==R.id.card_fashion_details4_plus_img_container)
+            {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
+                    profilePic=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic();
+                if(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName()!=null)
+                    name=hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getPrice()!=null)
+                    price=hits.getHits().get(getAdapterPosition()-4).get_source().getPrice();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getName()!=null)
+                    title=hits.getHits().get(getAdapterPosition()-4).get_source().getName();
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole() != null &&
+                            hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole().size() != 0)
+                        role.addAll(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getRole());
+                }
+                shopByVideoInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
+                        profilePic,role,name,title,new CommonAllProductPage());
             }
         }
     }

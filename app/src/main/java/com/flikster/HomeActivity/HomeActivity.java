@@ -118,7 +118,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,
         NewsOnClickFragment.NewsRecommendedClick,VideoGalleryFragment.VideoRecommendationClick,GalleryCardClick.GalleryRecommendationItemClick
         ,CelebStoreFirstTypeFragment.ShopByVideoInterafce,MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
-        AllStoreFragment.AllStoreInterafce{
+        AllStoreFragment.AllStoreInterafce,CommonAllProductPage.CommonAllProductPageBuyClick{
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
     ImageButton toolbar_main_notification;

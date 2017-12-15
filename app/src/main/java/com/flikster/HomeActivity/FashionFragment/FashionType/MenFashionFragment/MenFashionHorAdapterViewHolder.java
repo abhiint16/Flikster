@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.BuyFashionTypeProductFragment.BuyFashionTypeProductFragment;
+import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
 import com.flikster.R;
 
 import java.util.ArrayList;
@@ -30,6 +31,11 @@ public class MenFashionHorAdapterViewHolder extends RecyclerView.Adapter<MenFash
     Context context;
     AllStoreInnerData.AllStoreInnerMostData _source;
     MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce;
+    String profilePic="";
+    String name="";
+    String title="";
+    List<String> role=new ArrayList<>();
+    String price="";
 
     public MenFashionHorAdapterViewHolder(Context context, FragmentManager fragmentManager, AllStoreInnerData.AllStoreInnerMostData _source,
                                           MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce) {
@@ -74,6 +80,29 @@ public class MenFashionHorAdapterViewHolder extends RecyclerView.Adapter<MenFash
             card_fashion_product_singleimg_brandname=(TextView)itemView.findViewById(R.id.card_fashion_product_singleimg_brandname);
             buybtn_hor_fashion_men=(Button)itemView.findViewById(R.id.buybtn_hor_fashion_men);
             buybtn_hor_fashion_men.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (_source.getCeleb().get(0).getProfilePic()!=null)
+                        profilePic=_source.getCeleb().get(0).getProfilePic();
+                    if(_source.getCeleb().get(0).getName()!=null)
+                        name=_source.getCeleb().get(0).getName();
+                    if (_source.getPrice()!=null)
+                        price=_source.getPrice();
+                    if (_source.getName()!=null)
+                        title=_source.getName();
+                    if (_source.getCeleb()!=null)
+                    {
+                        if (_source.getCeleb().get(0).getRole() != null &&
+                                _source.getCeleb().get(0).getRole().size() != 0)
+                            role.addAll(_source.getCeleb().get(0).getRole());
+                    }
+                    shopByVideoMenInterafce.onGalleryContainerClick(_source.getId(),_source.getSize(),"abhiint",_source.getPrice(),
+                            _source.getProfilePic(),_source.getProductInfo(),_source.getSlug(),_source.getImageGallery(),
+                            profilePic,role,name,title,
+                            new CommonAllProductPage());
+                }
+            });
         }
 
         @Override
