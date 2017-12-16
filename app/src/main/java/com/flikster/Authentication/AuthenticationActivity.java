@@ -20,7 +20,7 @@ import org.jboss.aerogear.android.core.Callback;
 public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button btnLoginPhone, btnLoginEmail;
-    private Button btnLoginGoogle, btnLoginFacebook,keycloak;
+    private Button btnLoginGoogle, btnLoginFacebook,keycloak,without_keycloak;
     private TextView tvLoginTermsCond;
     SharedPref sharedPref;
 
@@ -39,7 +39,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         btnLoginFacebook = (Button)findViewById(R.id.btn_login_facebook);
         tvLoginTermsCond = (TextView)findViewById(R.id.tv_login_terms);
         keycloak=(Button)findViewById(R.id.keycloak);
-
+        without_keycloak=(Button)findViewById(R.id.without_keycloak);
+        without_keycloak.setOnClickListener(this);
         keycloak.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
         btnLoginEmail.setOnClickListener(this);
@@ -55,7 +56,12 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             Log.e("inside onclick","insidde onclikc");
             gotoPhoneLogin();
         }
-
+        else if (view.getId()==R.id.without_keycloak)
+        {
+            SharedPrefsUtil.setStringPreference(AuthenticationActivity.this,"IS_LOGGED_IN","NOT_LOGGED_IN");
+            Intent intent=new Intent(this,HomeActivity.class);
+            startActivity(intent);
+        }
         else if (view.getId() == R.id.btn_login_mail)
             gotoEmailLogin();
         else if (view.getId() == R.id.btn_login_google)

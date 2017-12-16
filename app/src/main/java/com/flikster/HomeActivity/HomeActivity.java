@@ -42,6 +42,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -51,6 +52,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -130,9 +132,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     FloatingActionButton camera_fab;
     SharedPref sharedPref;
     Spinner toolbar_pref_spinner;
+    Button right_navigation_bar_non_loggedin_login_btn,right_navigation_bar_non_loggedin_create_account_btn;
+    ScrollView right_navigation_bar_logged_in_container,right_navigation_bar_non_logged_in_container;
     TextView right_navigation_bar_my_account,right_navigation_bar_orders,right_navigation_bar_wishlist,
             right_navigation_bar_liked_posts,right_navigation_bar_refer,right_navigation_bar_rewards,
-            right_navigation_bar_logout;
+            right_navigation_bar_logout,right_navigation_bar_non_loggedin_aboutflikster,
+            right_navigation_bar_non_loggedin_careers,right_navigation_bar_non_loggedin_contact,
+            right_navigation_bar_non_loggedin_help,right_navigation_bar_non_loggedin_privacy,
+            right_navigation_bar_non_loggedin_return_policy,right_navigation_bar_non_loggedin_terms;
 
     ///Image Capture
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -164,6 +171,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_home);
         initializeViews();
+        setNavigationBar();
         initializeRest();
         checkForLaunch();
         bottomnavigationBar();
@@ -171,6 +179,18 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         String data = SharedPrefsUtil.getStringPreference(HomeActivity.this,"IS_LOGGED_IN");
         if (data !=null && !data.isEmpty()){
             Log.e("whthercheckedin", ""+SharedPrefsUtil.getStringPreference(HomeActivity.this,"IS_LOGGED_IN"));
+        }
+    }
+
+    private void setNavigationBar() {
+        if (SharedPrefsUtil.getStringPreference(HomeActivity.this,"IS_LOGGED_IN").equals("LOGGED_IN"))
+        {
+            right_navigation_bar_logged_in_container.setVisibility(View.VISIBLE);
+            right_navigation_bar_non_logged_in_container.setVisibility(View.GONE);
+        }else if (SharedPrefsUtil.getStringPreference(HomeActivity.this,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            right_navigation_bar_logged_in_container.setVisibility(View.GONE);
+            right_navigation_bar_non_logged_in_container.setVisibility(View.VISIBLE);
         }
     }
 
@@ -331,6 +351,15 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_refer.setOnClickListener(this);
         right_navigation_bar_rewards.setOnClickListener(this);
         right_navigation_bar_logout.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_aboutflikster.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_careers.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_contact.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_help.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_privacy.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_return_policy.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_terms.setOnClickListener(this);;
+        right_navigation_bar_non_loggedin_login_btn.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_create_account_btn.setOnClickListener(this);
         toolbarPrefSpinner();
         /*actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         actionBarDrawerToggle.syncState();
@@ -360,6 +389,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar_pref_spinner=(Spinner)findViewById(R.id.toolbar_pref_spinner);
         camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
+        right_navigation_bar_logged_in_container=(ScrollView)findViewById(R.id.right_navigation_bar_logged_in_container);
+        right_navigation_bar_non_logged_in_container=(ScrollView)findViewById(R.id.right_navigation_bar_non_logged_in_container);
         right_navigation_bar_my_account=(TextView)findViewById(R.id.right_navigation_bar_my_account);
         right_navigation_bar_orders=(TextView)findViewById(R.id.right_navigation_bar_orders);
         right_navigation_bar_wishlist=(TextView)findViewById(R.id.right_navigation_bar_wish_list);
@@ -367,6 +398,15 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_refer=(TextView)findViewById(R.id.right_navigation_bar_refer);
         right_navigation_bar_rewards=(TextView)findViewById(R.id.right_navigation_bar_rewards);
         right_navigation_bar_logout=(TextView)findViewById(R.id.right_navigation_bar_logout);
+        right_navigation_bar_non_loggedin_aboutflikster=(TextView)findViewById(R.id.right_navigation_bar_non_loggedin_aboutflikster);
+        right_navigation_bar_non_loggedin_careers=(TextView)findViewById(R.id.right_navigation_bar_non_loggedin_careers);
+        right_navigation_bar_non_loggedin_contact=(TextView)findViewById(R.id.right_navigation_bar_non_loggedin_contact);
+        right_navigation_bar_non_loggedin_help=(TextView)findViewById(R.id.right_navigation_bar_non_loggedin_help);
+        right_navigation_bar_non_loggedin_privacy=(TextView)findViewById(R.id.right_navigation_bar_non_loggedin_privacy);
+        right_navigation_bar_non_loggedin_return_policy=(TextView)findViewById(R.id.right_navigation_bar_non_loggedin_return_policy);
+        right_navigation_bar_non_loggedin_terms=(TextView)findViewById(R.id.right_navigation_bar_non_loggedin_terms);
+        right_navigation_bar_non_loggedin_login_btn=(Button)findViewById(R.id.right_navigation_bar_non_loggedin_login_btn);
+        right_navigation_bar_non_loggedin_create_account_btn=(Button)findViewById(R.id.right_navigation_bar_non_loggedin_create_account_btn);
         setSupportActionBar(toolbar_main);
         toolbar_main_notification = (ImageButton) toolbar_main.findViewById(R.id.toolbar_main_notification);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -429,6 +469,45 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             beginTransact(new RewardsFragment());
         }
         else if (viewId==R.id.right_navigation_bar_logout)
+        {
+            SharedPrefsUtil.setStringPreference(HomeActivity.this,"IS_LOGGED_IN","NOT_LOGGED_IN");
+            Intent intent=new Intent(this, AuthenticationActivity.class);
+            startActivity(intent);
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_aboutflikster)
+        {
+            Toast.makeText(this,"Coming soon",Toast.LENGTH_SHORT).show();
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_careers)
+        {
+            Toast.makeText(this,"Coming soon",Toast.LENGTH_SHORT).show();
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_contact)
+        {
+            Toast.makeText(this,"Coming soon",Toast.LENGTH_SHORT).show();
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_help)
+        {
+            Toast.makeText(this,"Coming soon",Toast.LENGTH_SHORT).show();
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_privacy)
+        {
+            Toast.makeText(this,"Coming soon",Toast.LENGTH_SHORT).show();
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_return_policy)
+        {
+            Toast.makeText(this,"Coming soon",Toast.LENGTH_SHORT).show();
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_terms)
+        {
+            Toast.makeText(this,"Coming soon",Toast.LENGTH_SHORT).show();
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_login_btn)
+        {
+            Intent intent=new Intent(this, AuthenticationActivity.class);
+            startActivity(intent);
+        }
+        else if (viewId==R.id.right_navigation_bar_non_loggedin_create_account_btn)
         {
             Intent intent=new Intent(this, AuthenticationActivity.class);
             startActivity(intent);

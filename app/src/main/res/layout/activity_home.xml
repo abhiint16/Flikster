@@ -52,9 +52,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:divider="#fff"
-        android:dividerHeight="5dp">
+        android:dividerHeight="5dp"
+        android:background="@drawable/solid_round_border_with_semitrans_back">
 
-        <include layout="@layout/right_navigation_bar"
+        <include layout="@layout/right_navigation_bar_logged_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"></include>
+        <include layout="@layout/right_navigation_bar_non_logged_in"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"></include>
