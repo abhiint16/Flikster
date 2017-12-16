@@ -378,20 +378,20 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         case "tweet":
                             return 6;
                         case "gallery": {
-                            if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() == 0)
+                            if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() == 0)
                                 return 10;
-                            else if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() == 1)
+                            else if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() == 1)
                                 return 11;
-                            else if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() == 2)
+                            else if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() == 2)
                                 return 12;
-                            else if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() == 3)
+                            else if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() == 3)
                                 return 13;
-                            else if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() >= 4)
+                            else if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() >= 4)
                                 return 14;
                         }
                         case "movie-making":
