@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreInnerItems.CeleStoreRecyclerItemAdapter;
@@ -67,6 +68,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     String title="";
     List<String> role=new ArrayList<>();
     String price="";
+    String userId="";
 
     public CelebStoreFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits,
                                      CelebStoreFirstTypeFragment.ShopByVideoInterafce shopByVideoInterafce) {
@@ -565,19 +567,21 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         ImageView card_fashion_details1_img, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name,card_fashion_details1_txt;
-        LinearLayout card_fashion_details1_img_container;
+        LinearLayout card_fashion_details1_img_container,header_linear;
 
         public ViewHolder11(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             card_fashion_details1_img = (ImageView) itemView.findViewById(R.id.card_fashion_details1_img);
             card_fashion_details1_txt=(TextView)itemView.findViewById(R.id.card_fashion_details1_txt);
-            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            header_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
             card_fashion_details1_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_details1_img_container);
             card_fashion_details1_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
@@ -617,6 +621,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
                         profilePic,role,name,title,new CommonAllProductPage());
+            }else if ((v.getId() == R.id.header_linear) || (v.getId() == R.id.profile_image)) {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb() != null && hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().size() != 0) {
+                    shopByVideoInterafce.fromCelebToCelebPage(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getSlug(),
+                            new CelebrityFragment(),userId, hits.getHits().get(getAdapterPosition()-4).get_source().getId());
+                }
             }
         }
     }
@@ -626,7 +635,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         ImageView card_fashion_details2_img1, card_fashion_details2_img2, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name,card_fashion_details2_txt;
-        LinearLayout card_fashion_details2_img_container;
+        LinearLayout card_fashion_details2_img_container,header_linear;
 
         public ViewHolder12(View itemView) {
             super(itemView);
@@ -634,12 +643,14 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details2_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img1);
             card_fashion_details2_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img2);
             card_fashion_details2_txt=(TextView)itemView.findViewById(R.id.card_fashion_details2_txt);
-            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            header_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
             card_fashion_details2_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_details2_img_container);
             card_fashion_details2_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
@@ -679,9 +690,12 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
                         profilePic,role,name,title,new CommonAllProductPage());
+            }else if ((v.getId() == R.id.header_linear) || (v.getId() == R.id.profile_image)) {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb() != null && hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().size() != 0) {
+                    shopByVideoInterafce.fromCelebToCelebPage(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getSlug(),
+                            new CelebrityFragment(),userId, hits.getHits().get(getAdapterPosition()-4).get_source().getId());
+                }
             }
-
-
         }
     }
 
@@ -690,7 +704,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         ImageView card_fashion_details3_img1, card_fashion_details3_img2, card_fashion_details3_img3, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name,card_fashion_details3_txt;
-        LinearLayout card_my_style_one_big_img_container;
+        LinearLayout card_my_style_one_big_img_container,header_linear;
 
         public ViewHolder13(View itemView) {
             super(itemView);
@@ -699,12 +713,14 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details3_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img2);
             card_fashion_details3_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img3);
             card_fashion_details3_txt=(TextView)itemView.findViewById(R.id.card_fashion_details3_txt);
-            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-            //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            header_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
             card_my_style_one_big_img_container=(LinearLayout)itemView.findViewById(R.id.card_my_style_one_big_img_container);
             card_my_style_one_big_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
@@ -744,6 +760,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
                         profilePic,role,name,title,new CommonAllProductPage());
+            }else if ((v.getId() == R.id.header_linear) || (v.getId() == R.id.profile_image)) {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb() != null && hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().size() != 0) {
+                    shopByVideoInterafce.fromCelebToCelebPage(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getSlug(),
+                            new CelebrityFragment(),userId, hits.getHits().get(getAdapterPosition()-4).get_source().getId());
+                }
             }
         }
     }
@@ -754,7 +775,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 card_fashion_details4_img4, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name,card_fashion_details4_txt;
-        LinearLayout card_fashion_deatails4_img_container;
+        LinearLayout card_fashion_deatails4_img_container,header_linear;
 
         public ViewHolder14(View itemView) {
             super(itemView);
@@ -764,12 +785,14 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details4_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img3);
             card_fashion_details4_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img4);
             card_fashion_details4_txt=(TextView)itemView.findViewById(R.id.card_fashion_details4_txt);
-            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-           // card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            header_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
             card_fashion_deatails4_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_deatails4_img_container);
             card_fashion_deatails4_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
@@ -809,6 +832,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
                         profilePic,role,name,title,new CommonAllProductPage());
+            }else if ((v.getId() == R.id.header_linear) || (v.getId() == R.id.profile_image)) {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb() != null && hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().size() != 0) {
+                    shopByVideoInterafce.fromCelebToCelebPage(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getSlug(),
+                            new CelebrityFragment(),userId, hits.getHits().get(getAdapterPosition()-4).get_source().getId());
+                }
             }
         }
     }
@@ -820,6 +848,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price,
                 tv_tag_desc, tv_tag_name, card_fashion_details4_plus_text,card_fashion_details4_plus_txt;
         RelativeLayout card_fashion_details4_plus_img_container;
+        LinearLayout header_linear;
 
         public ViewHolder15(View itemView) {
             super(itemView);
@@ -829,13 +858,15 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_fashion_details4_plus_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img3);
             card_fashion_details4_plus_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img4);
             card_fashion_details4_plus_txt=(TextView)itemView.findViewById(R.id.card_fashion_details4_plus_txt);
-            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_fashion_details4_plus_text = (TextView) itemView.findViewById(R.id.card_fashion_details4_plus_text);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
-           // card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
+            header_linear.setOnClickListener(this);
+            profile_image.setOnClickListener(this);
             card_fashion_details4_plus_img_container=(RelativeLayout)itemView.findViewById(R.id.card_fashion_details4_plus_img_container);
             card_fashion_details4_plus_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
@@ -875,6 +906,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                         hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
                         hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),
                         profilePic,role,name,title,new CommonAllProductPage());
+            }else if ((v.getId() == R.id.header_linear) || (v.getId() == R.id.profile_image)) {
+                if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb() != null && hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().size() != 0) {
+                    shopByVideoInterafce.fromCelebToCelebPage(hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getSlug(),
+                            new CelebrityFragment(),userId, hits.getHits().get(getAdapterPosition()-4).get_source().getId());
+                }
             }
         }
     }

@@ -111,6 +111,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
                         String productSlug, List<String> imageGallery,
                                      String profilepic,List<String> role,String name,String title,
                                      Fragment fragment);
+        void toCelebPage(String name, Fragment fragment,String userId,String entityId);
     }
 
     @Override

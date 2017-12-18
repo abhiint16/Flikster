@@ -80,10 +80,6 @@ public class PostRetrofit {
     }
 
     public void postRetrofitFollowMethod(String type, String userId, String entityId, final Button followBtn, final Context context) {
-        Log.e("type", type);
-        Log.e("entityId", entityId);
-        Log.e("type", userId);
-
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus").create(ApiInterface.class);
         Call<ModelForPostRequest> call = apiInterface.likeItem(modelForPostRequest);

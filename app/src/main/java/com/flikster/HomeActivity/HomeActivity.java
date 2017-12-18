@@ -896,6 +896,20 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
+    public void fromCelebToCelebPage(String name, Fragment fragment, String userId, String entityId) {
+        CelebrityFragment celebrityFragment = (CelebrityFragment) fragment;
+        celebrityFragment.updateInfo(name, userId, entityId);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void toCelebPage(String name, Fragment fragment, String userId, String entityId) {
+        CelebrityFragment celebrityFragment = (CelebrityFragment) fragment;
+        celebrityFragment.updateInfo(name, userId, entityId);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
     public void newsRecommendedClickMethod(String profilePic, String title,
                                            String type, String bannerImg, String headertitle,
                                            String description, Fragment fragment, String contentType,
