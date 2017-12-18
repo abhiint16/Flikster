@@ -2,7 +2,6 @@ package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,7 +34,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     List<Integer> type = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
     ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
-    CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
+    CelebrityBioShopByVideoViewHolder celebrityBioShopByVideoViewHolder;
     StealStyleViewHolder stealStyleViewHolder;
     RecyclerView.LayoutManager layoutManager2;
     String biography;

@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieInfoAdapter;
 import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 
 import java.util.List;
@@ -37,6 +39,7 @@ public class MovieFragmentInfo extends Fragment {
     ApiInterface apiInterface;
     String slug;
     MovieData.MovieInnerData hits;
+    MovieToShopByVideoInterface movieToShopByVideoInterface;
 
     @Nullable
     @Override
@@ -69,7 +72,7 @@ public class MovieFragmentInfo extends Fragment {
                         getArguments().getString("storyline"),
                         getArguments().getString("slug"),
                         hits, getArguments().getString("userId"),
-                        getArguments().getString("entityId"));
+                        getArguments().getString("entityId"),movieToShopByVideoInterface);
                 movieFragmentInfoRecycler.setAdapter(movieInfoAdapter);
             /*getArguments().getString("userId"),
                         getArguments().getString("entityId"));*/
@@ -90,5 +93,15 @@ public class MovieFragmentInfo extends Fragment {
     private void initializeViews() {
         movieFragmentInfoRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager = getActivity().getSupportFragmentManager();
+    }
+
+    public interface MovieToShopByVideoInterface {
+        void playShopByVideoMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        movieToShopByVideoInterface = (MovieToShopByVideoInterface) activity;
     }
 }

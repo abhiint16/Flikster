@@ -1,13 +1,9 @@
 package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +13,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieInfoAdapter;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.PostRetrofit;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.Common;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -34,12 +36,13 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
-    CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
+    CelebrityBioShopByVideoViewHolder celebrityBioShopByVideoViewHolder;
     CelebrityBioAdapterFamilyViewHolder celebrityBioAdapterFamilyViewHolder;
     CelebrityBioAdapterFilmographyViewHolder celebrityBioAdapterFilmographyViewHolder;
     CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
     CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
-    List<CelebrityData.CelebrityInnerData> items;
+    ApiInterface apiInterface;
+    ShopByVideoData.ShopByVideoInnerData shopByVideoInnerData;
     Boolean biographyBoolean = true;
     String biography;
     String coverpic;
@@ -49,11 +52,13 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     String placeOfBirth;
     String userId;
     String entityId;
+    String slug;
+    CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface;
 
 
     public CelebrityBioAdapter(Context context, FragmentManager fragmentManager, String coverpic, String biography,
                                String dateOfBirth, ArrayList<String> role, String placeOfBirth,
-                               String name, String userId, String entityId) {
+                               String name, String userId, String entityId, String slug, CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface) {
         this.userId = userId;
         this.entityId = entityId;
         this.context = context;
@@ -61,29 +66,24 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         type.add(1);
         type.add(2);
         type.add(3);
-        type.add(4);
         type.add(5);
         type.add(6);
         type.add(7);
         type.add(8);
         type.add(9);
-        type.add(3);
-        type.add(4);
-        type.add(3);
-        type.add(4);
-        type.add(7);
         this.placeOfBirth = placeOfBirth;
         this.coverpic = coverpic;
         this.name = name;
         this.role = role;
         this.biography = biography;
         this.dateOfBirth = dateOfBirth;
+        this.slug=slug;
+        this.celebToShopByVideoInterface=celebToShopByVideoInterface;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_profile, parent, false);
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celeb_bio_profile, parent, false);
             return new CelebrityBioAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
@@ -200,8 +200,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterVideoViewHolder = new CelebrityBioAdapterVideoViewHolder(fragmentManager);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterVideoViewHolder);
+            initShopByVideoRetrofit(((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler);
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Images");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -230,9 +229,27 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    private void initShopByVideoRetrofit(final RecyclerView recyclerView) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/shopbyvideos/").create(ApiInterface.class);
+        Call<ShopByVideoData> call = apiInterface.getShopByVideo("http://apiservice-ec.flikster.com/shopbyvideos/_search?pretty=true&q=\""+slug+"\"");
+        call.enqueue(new Callback<ShopByVideoData>() {
+            @Override
+            public void onResponse(Call<ShopByVideoData> call, Response<ShopByVideoData> response) {
+                shopByVideoInnerData=response.body().getHits();
+                celebrityBioShopByVideoViewHolder = new CelebrityBioShopByVideoViewHolder(context,fragmentManager,shopByVideoInnerData,celebToShopByVideoInterface);
+                recyclerView.setAdapter(celebrityBioShopByVideoViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<ShopByVideoData> call, Throwable t) {
+                Log.e("vvvvvvvvvv","vv"+call+t);
+            }
+        });
+    }
+
     @Override
     public int getItemCount() {
-        return 9;
+        return 8;
     }
 
     @Override

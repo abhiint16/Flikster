@@ -2,9 +2,7 @@ package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,22 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioShopByVideoViewHolder;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
-import com.flikster.HomeActivity.StealStyleViewHolder;
 import com.flikster.R;
 import com.flikster.Util.Common;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -42,7 +34,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     List<Integer> type = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
     ProfileCollectionRecyclerItemAdapter profileCollectionRecyclerItemAdapter;
-    CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
+    CelebrityBioShopByVideoViewHolder celebrityBioAdapterVideoViewHolder;
     MovieFeedRecommendedProductViewHolder movieFeedRecommendedProductViewHolder;
     RecyclerView.LayoutManager layoutManager2;
     ApiInterface apiInterface;

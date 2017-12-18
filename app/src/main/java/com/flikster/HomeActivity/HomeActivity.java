@@ -65,7 +65,9 @@ import com.flikster.Authentication.LoginCreateAccountActivity;
 import com.flikster.BuildConfig;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentBio;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragmentInfo;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
@@ -120,7 +122,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         ,MovieSongsListFragment.WatchPlayAudioOrVideoInterafce ,MusicGridFragment.WatchAudioVideoSendFromGridFrag,
         NewsOnClickFragment.NewsRecommendedClick,VideoGalleryFragment.VideoRecommendationClick,GalleryCardClick.GalleryRecommendationItemClick
         ,CelebStoreFirstTypeFragment.ShopByVideoInterafce,MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
-        AllStoreFragment.AllStoreInterafce,CommonAllProductPage.CommonAllProductPageBuyClick{
+        AllStoreFragment.AllStoreInterafce,CommonAllProductPage.CommonAllProductPageBuyClick,
+        CelebrityFragmentBio.CelebToShopByVideoInterface,MovieFragmentInfo.MovieToShopByVideoInterface{
     LinearLayout feed, rating, plus, fashion, store;
     FragmentManager fragmentManager;
     ImageButton toolbar_main_notification;

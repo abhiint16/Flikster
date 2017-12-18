@@ -594,7 +594,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
-
+            card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

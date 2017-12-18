@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieInfoAdapter;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 
 import java.util.List;
@@ -38,6 +40,7 @@ public class CelebrityFragmentBio extends Fragment {
     ApiInterface apiInterface;
     List<CelebrityData.CelebrityInnerData> items;
     String slug;
+    CelebToShopByVideoInterface celebToShopByVideoInterface;
 
     @Nullable
     @Override
@@ -81,12 +84,22 @@ public class CelebrityFragmentBio extends Fragment {
                 getArguments().getString("placeOfBirth"),
                 getArguments().getString("name"),
                 getArguments().getString("userId"),
-                getArguments().getString("entityId"));
+                getArguments().getString("entityId"),slug,celebToShopByVideoInterface);
         celebrityFragmentBioRecycler.setAdapter(celebrityBioAdapter);
     }
 
     private void initializeViews() {
         celebrityFragmentBioRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager = getActivity().getSupportFragmentManager();
+    }
+
+    public interface CelebToShopByVideoInterface {
+        void playShopByVideoMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        celebToShopByVideoInterface = (CelebToShopByVideoInterface) activity;
     }
 }

@@ -1,15 +1,9 @@
 package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.media.Image;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +13,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFilmographyViewHolder;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterPeersViewHolder;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterVideoViewHolder;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioShopByVideoViewHolder;
 import com.flikster.HomeActivity.PostRetrofit;
+import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.Common;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -40,12 +39,14 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
-    CelebrityBioAdapterVideoViewHolder celebrityBioAdapterVideoViewHolder;
+    MovieBioShopByVideoViewHolder movieBioAdapterVideoViewHolder;
     CelebrityBioAdapterFamilyViewHolder celebrityBioAdapterFamilyViewHolder;
     MovieInfoAdapterCrewViewHolder movieInfoAdapterCrewViewHolder;
     CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
     MovieInfoAdapterCastViewHolder movieInfoAdapterCastViewHolder;
     List<MovieData.MovieInnerData> items;
+    ApiInterface apiInterface;
+    ShopByVideoData.ShopByVideoInnerData shopByVideoInnerData;
     Boolean storyLineBoolean = true;
     String censor;
     String coverpic;
@@ -58,11 +59,13 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     MovieData.MovieInnerData hits;
     String userId;
     String entityId;
+    MovieFragmentInfo.MovieToShopByVideoInterface movieToShopByVideoInterface;
 
 
     public MovieInfoAdapter(Context context, FragmentManager fragmentManager, String coverpic, String censor,
                             String dor, ArrayList<String> genre, String duration, String title, String storyline, String slug,
-                            MovieData.MovieInnerData hits, String userId, String entityId) {
+                            MovieData.MovieInnerData hits, String userId, String entityId,
+                            MovieFragmentInfo.MovieToShopByVideoInterface movieToShopByVideoInterface) {
         this.userId = userId;
         this.entityId = entityId;
         this.context = context;
@@ -91,6 +94,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.storyline = storyline;
         this.slug = slug;
         this.hits = hits;
+        this.movieToShopByVideoInterface=movieToShopByVideoInterface;
     }
 
     @Override
@@ -220,11 +224,9 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder1) holder).card_movie_feed_profile_storyline.setText(storyline);
             }
         } else if (holder.getItemViewType() == 2) {
-//            ((ViewHolder2) holder).textView.setText("Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterVideoViewHolder = new CelebrityBioAdapterVideoViewHolder(fragmentManager);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterVideoViewHolder);
+            initShopByVideoRetrofit(((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler);
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -250,6 +252,24 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context,items.get(0).getCast().size(),items);
             ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCastViewHolder);
         }*/
+    }
+
+    private void initShopByVideoRetrofit(final RecyclerView recyclerView) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/shopbyvideos/").create(ApiInterface.class);
+        Call<ShopByVideoData> call = apiInterface.getShopByVideo("http://apiservice-ec.flikster.com/shopbyvideos/_search?pretty=true&q=\""+slug+"\"");
+        call.enqueue(new Callback<ShopByVideoData>() {
+            @Override
+            public void onResponse(Call<ShopByVideoData> call, Response<ShopByVideoData> response) {
+                shopByVideoInnerData=response.body().getHits();
+                movieBioAdapterVideoViewHolder = new MovieBioShopByVideoViewHolder(context,fragmentManager,shopByVideoInnerData,movieToShopByVideoInterface);
+                recyclerView.setAdapter(movieBioAdapterVideoViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<ShopByVideoData> call, Throwable t) {
+                Log.e("vvvvvvvvvv","vv"+call+t);
+            }
+        });
     }
 
     @Override
