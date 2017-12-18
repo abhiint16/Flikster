@@ -35,7 +35,7 @@ public class PostRetrofit {
 
     public void postRetrofitMethod(String type, String userId, String entityId, final ImageButton ib_like, final Context context) {
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus/").create(ApiInterface.class);
         Call<ModelForPostRequest> call = apiInterface.likeItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForPostRequest>() {
             @Override
@@ -59,7 +59,7 @@ public class PostRetrofit {
             return;
         }
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus/").create(ApiInterface.class);
         Call<ModelForIsLikedPostRequest> call = apiInterface.isLikedItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
             @Override
@@ -95,7 +95,7 @@ public class PostRetrofit {
 
     public void postRetrofitFollowMethod(String type, String userId, String entityId, final Button followBtn, final Context context) {
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus/").create(ApiInterface.class);
         Call<ModelForPostRequest> call = apiInterface.likeItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForPostRequest>() {
             @Override
@@ -116,7 +116,7 @@ public class PostRetrofit {
             return;
         }
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus/").create(ApiInterface.class);
         Call<ModelForIsLikedPostRequest> call = apiInterface.isLikedItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
             @Override
@@ -156,7 +156,7 @@ public class PostRetrofit {
 
     public void postRetrofitBookmarkMethod(String type, String userId, String entityId, final ImageButton bookmarkBtn, final Context context) {
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/postCardStatus/").create(ApiInterface.class);
         Call<ModelForPostRequest> call = apiInterface.likeItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForPostRequest>() {
             @Override
@@ -179,7 +179,7 @@ public class PostRetrofit {
             return;
         }
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus/").create(ApiInterface.class);
         Call<ModelForIsLikedPostRequest> call = apiInterface.isLikedItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
             @Override
@@ -214,7 +214,7 @@ public class PostRetrofit {
             return;
         }
         ModelForPostCommentRequest modelForPostRequest = new ModelForPostCommentRequest(userName, userId, entityId, commentText);
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/comments-ms/postComment").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/comments-ms/postComment/").create(ApiInterface.class);
         Call<ModelForPostCommentRequest> call = apiInterface.commentItem(modelForPostRequest);
         call.enqueue(new Callback<ModelForPostCommentRequest>() {
             @Override
@@ -234,7 +234,7 @@ public class PostRetrofit {
     public void saveYourStyleAPI(CreateShareYourStyleData allImagesdata,
                                  final String completeProfileStyle,
                                  final Context context) {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/share-your-style-ms/createShareYourStyle")
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/share-your-style-ms/createShareYourStyle/")
                 .create(ApiInterface.class);
         Call<CreateShareYourStyleData> call = apiInterface.postStyleSave(allImagesdata);
         call.enqueue(new Callback<CreateShareYourStyleData>() {

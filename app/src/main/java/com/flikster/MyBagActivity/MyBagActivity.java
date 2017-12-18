@@ -56,7 +56,7 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void getCartData() {
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/cart/_search?pretty=true&sort=createdAt:desc&q=userId:"+getIntent().getStringExtra("userId")).create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/cart/_search/").create(ApiInterface.class);
         Call<MyBagData> call = apiInterface.getMyBagData("http://apiv3-es.flikster.com/cart/_search?pretty=true&sort=createdAt:desc&q=userId:"+getIntent().getStringExtra("userId"));
         call.enqueue(new Callback<MyBagData>() {
             @Override

@@ -39,14 +39,14 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
         fragmentManager=getSupportFragmentManager();
         activity_mybag_continue_onclick_tabs_address_linear.setOnClickListener(this);
         activity_mybag_continue_onclick_tabs_checkout_linear.setOnClickListener(this);
-        activity_mybag_continue_onclick_tabs_payment_linear.setOnClickListener(this);
+        //activity_mybag_continue_onclick_tabs_payment_linear.setOnClickListener(this);
     }
 
     private void initializeView() {
         activity_mybag_continue_onclick_tabs_address_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear);
         toolbar_frag_multiicons_back_navigation = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         activity_mybag_continue_onclick_tabs_checkout_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear);
-        activity_mybag_continue_onclick_tabs_payment_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear);
+        //activity_mybag_continue_onclick_tabs_payment_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear);
     }
 
     @Override

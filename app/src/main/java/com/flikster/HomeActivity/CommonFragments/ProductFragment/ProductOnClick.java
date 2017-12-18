@@ -271,7 +271,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         Toast.makeText(getActivity(),"Adding to Cart.....wait",Toast.LENGTH_SHORT).show();
         ProductDetailsDataToSend productDetailsDataToSend = new ProductDetailsDataToSend(userId,productId,chosenSize,"RED",new ProductDetailsDataToSend.InnerProductData(price,productId,profilePic,productTitle,productSlug,
                 Integer.parseInt(product_quantity_txt.getText().toString()),"RED",chosenSize));
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/cart-ms/createCart").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/cart-ms/createCart/").create(ApiInterface.class);
         Call<ProductDetailsDataToSend> call = apiInterface.postSendToCartData(productDetailsDataToSend);
         call.enqueue(new Callback<ProductDetailsDataToSend>() {
             @Override

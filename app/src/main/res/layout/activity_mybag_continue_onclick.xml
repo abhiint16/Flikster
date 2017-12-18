@@ -89,7 +89,7 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:clickable="false"
-                android:src="@drawable/checkout" />
+                android:src="@drawable/payment" />
 
             <TextView
                 android:id="@+id/activity_mybag_continue_onclick_tabs_checkout_linear_name"
@@ -98,9 +98,9 @@
                 android:layout_weight="1"
                 android:clickable="false"
                 android:gravity="center"
-                android:text="Checkout" />
+                android:text="Payment" />
         </LinearLayout>
-
+<!--
         <LinearLayout
             android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear"
             android:layout_width="0dp"
@@ -117,7 +117,7 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:clickable="false"
-                android:src="@drawable/payment" />
+                android:src="@drawable/checkout" />
 
             <TextView
                 android:id="@+id/activity_mybag_continue_onclick_tabs_payment_linear_name"
@@ -126,8 +126,8 @@
                 android:layout_weight="1"
                 android:clickable="false"
                 android:gravity="center"
-                android:text="Payment" />
-        </LinearLayout>
+                android:text="checkout" />
+        </LinearLayout>-->
     </LinearLayout>
 
     <FrameLayout

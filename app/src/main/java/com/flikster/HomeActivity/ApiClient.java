@@ -1,5 +1,11 @@
 package com.flikster.HomeActivity;
 
+import android.content.Context;
+import android.util.Log;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -22,12 +28,20 @@ public class ApiClient {
 
 
     public static Retrofit getClient(String baseURL) {
+        retrofit=null;
         if (retrofit == null) {
+            Log.e("insdei retrfoit","inside retroft");
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseURL)
+                    .client(new OkHttpClient.Builder()
+                            .connectTimeout(30L, TimeUnit.SECONDS)
+                            .readTimeout(30L,TimeUnit.SECONDS)
+                            .retryOnConnectionFailure(true)
+                            .build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
+        Log.e("lewaving retrfoit","leaving retroft");
         return retrofit;
     }
 

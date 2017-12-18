@@ -29,6 +29,8 @@ import com.instamojo.android.helpers.Constants;
 import com.instamojo.android.models.Errors;
 import com.instamojo.android.models.Order;
 import com.instamojo.android.network.Request;
+import com.leo.simplearcloader.ArcConfiguration;
+import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
 
 import org.json.JSONException;
@@ -56,8 +58,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     RecyclerView.LayoutManager layoutManager;
     CheckoutAdapter checkoutAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
-    ImageButton toolbar_frag_multiicons_back_navigation,addressTabIcon,checkoutTabIcon,paymentTabIcon;
-    TextView toolbar_frag_multiicons_title,addressTabText,checkoutTabText,paymentTabText;
+    ImageButton toolbar_frag_multiicons_back_navigation,addressTabIcon,checkoutTabIcon/*,paymentTabIcon*/;
+    TextView toolbar_frag_multiicons_title,addressTabText,checkoutTabText/*,paymentTabText*/;
     Button fragment_checkout_bottom_btn;
     String name,mobile,address,city,pin,state,landmark,additionalMobile;
     String productId;String productSlug;String productTitle;String userId;String size;
@@ -95,10 +97,10 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         fragment_checkout_bottom_btn=(Button)view.findViewById(R.id.fragment_checkout_bottom_btn);
         addressTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_imgbtn);
         checkoutTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn);
-        paymentTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_imgbtn);
+       // paymentTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_imgbtn);
         addressTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_name);
         checkoutTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_name);
-        paymentTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_name);
+        //paymentTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_name);
     }
 
     @Override
@@ -108,8 +110,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         addressTabText.setTextColor(getActivity().getResources().getColor(R.color.black));
         checkoutTabIcon.setImageResource(R.drawable.checkout_pink);
         checkoutTabText.setTextColor(getActivity().getResources().getColor(R.color.colorAccent));
-        paymentTabIcon.setImageResource(R.drawable.payment);
-        paymentTabText.setTextColor(getActivity().getResources().getColor(R.color.black));
+        /*paymentTabIcon.setImageResource(R.drawable.payment);
+        paymentTabText.setTextColor(getActivity().getResources().getColor(R.color.black));*/
     }
 
     @Override
@@ -121,7 +123,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         else if(view.getId()==R.id.fragment_checkout_bottom_btn)
         {
             Log.e("inside onclick bototbtn","inside bototn ctn clk");
-            hitCreateUserApi();
+            //hitCreateUserApi();
+            instaMojoInit();
             /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
@@ -154,7 +157,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(Call<CreateUserApiPostData> call, Throwable t) {
                 Toast.makeText(getActivity(),"Error creating Order!",Toast.LENGTH_SHORT).show();
-                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t.getCause()+""+t.getMessage()+""+t.getLocalizedMessage());
             }
         });
     }
@@ -164,7 +167,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void fetchTokenAndTransactionID() {
-
+        Toast.makeText(getActivity(),"Wait....fetching for you",Toast.LENGTH_LONG).show();
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = getHttpURLBuilder()
                 .addPathSegment("create")
@@ -284,6 +287,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
         //Validation is successful. Proceed
         //dialog.show();
+        Toast.makeText(getActivity(),"creating order...wait",Toast.LENGTH_SHORT).show();
         Request request = new Request(order, new OrderRequestCallBack() {
             @Override
             public void onFinish(final Order order, final Exception error) {

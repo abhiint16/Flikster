@@ -22,7 +22,8 @@
             android:paddingLeft="50dp"
             android:text="Use My Current Location"
             android:background="@color/white"
-            android:elevation="5dp"/>
+            android:elevation="5dp"
+            android:id="@+id/address_gps_btn"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

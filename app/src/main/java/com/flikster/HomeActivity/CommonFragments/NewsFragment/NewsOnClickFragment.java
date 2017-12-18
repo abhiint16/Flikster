@@ -88,8 +88,8 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     }
 
     private void bottomHorRecyclerRetrofitInit() {
-        Log.e("check poster", "" + "http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + contentType + "\"");
-        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + contentType + "\"").create(ApiInterface.class);
+        Log.e("check poster", "" + "http://apiservice-ec.flikster.com/contents/_search/");
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + contentType + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override

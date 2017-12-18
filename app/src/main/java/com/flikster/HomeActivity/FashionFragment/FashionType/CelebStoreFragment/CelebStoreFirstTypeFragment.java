@@ -88,7 +88,7 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     }*/
 
     private void retrofitInit() {
-        apiInterface = ApiClient.getClient(this.URL).create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search/").create(ApiInterface.class);
         Call<AllStoreData> call = apiInterface.getAllStore(this.URL);
         call.enqueue(new Callback<AllStoreData>() {
             @Override
