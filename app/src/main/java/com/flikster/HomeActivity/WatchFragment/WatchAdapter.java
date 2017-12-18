@@ -192,7 +192,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             for (int i=0;i<outerHits.getHits().size();i++)
             {
                 Log.e("check count",""+Count);
-                if("audio-song".equals(outerHits.getHits().get(i).get_source().getContentType()))
+                if("audio-song".equals(outerHits.getHits().get(i).get_source().getContentType())||"dialouge".equals(outerHits.getHits().get(i).get_source().getContentType()))
                 {
                     Log.e("chck music size",""+musicImg.size());
                     musicImg.add(outerHits.getHits().get(i).get_source().getProfilePic());

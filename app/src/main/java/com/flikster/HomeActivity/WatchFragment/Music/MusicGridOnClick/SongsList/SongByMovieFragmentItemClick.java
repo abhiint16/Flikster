@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,6 +58,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     YouTubePlayerSupportFragment youTubePlayerFragment;
     List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts;
     YouTubePlayer yPlayer;
+    FrameLayout youtube_container;
     final String API_KEY="AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
 
     @Nullable
@@ -66,7 +68,6 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         initializeViews();
         hideAudioOrVideo();
         initializeRest();
-//        playLocalVideo();
         musicplay = MediaPlayer.create(getContext(), R.raw.ringtone);
         seekBar.setMax(musicplay.getDuration());
         SeekUpdation();
@@ -77,6 +78,11 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     private void hideAudioOrVideo() {
         if (type=="video")
             audio_frame.setVisibility(View.GONE);
+        else if (type=="audio")
+        {
+            youtube_container.setVisibility(View.GONE);
+            audio_frame.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initializeRest() {
@@ -128,6 +134,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
         toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         audio_frame_image=(ImageView)view.findViewById(R.id.audio_frame_image);
+        youtube_container=(FrameLayout)view.findViewById(R.id.youtube_fragment);
 
         youTubePlayerFragment=YouTubePlayerSupportFragment.newInstance();
         FragmentTransaction fragmentTransaction=getChildFragmentManager().beginTransaction();
