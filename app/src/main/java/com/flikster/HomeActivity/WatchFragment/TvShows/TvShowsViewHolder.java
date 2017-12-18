@@ -112,13 +112,16 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         @Override
         public void onClick(View view) {
+            Log.e("check adapter pos","check adapter pos"+getAdapterPosition());
+            Log.e("check adapter pos","check adapter pos"+outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery());
+            Log.e("check adapter pos","check adapter pos"+tvShowsVideo.get(getAdapterPosition()));
             if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
-                watchFragCommInterface.carouselItemToGallery(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
+                watchFragCommInterface.carouselItemToGallery(tvShowsVideo.get(getAdapterPosition()),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
-                watchFragCommInterface.carouselItemToGallery(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
+                watchFragCommInterface.carouselItemToGallery(tvShowsVideo.get(getAdapterPosition()),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());

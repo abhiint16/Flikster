@@ -47,7 +47,7 @@ public class KeycloakHelper {
     }
 
     public static void connect(final Activity activity, final Callback<String> callback) {
-        Log.i(TAG, "Run Connect "+AuthorizationManager.getModule(MODULE_NAME));
+        Log.e("inside connect method","inside connect method");
         final AuthzModule authzModule = AuthorizationManager.getModule(MODULE_NAME);
 
         authzModule.requestAccess(activity, new Callback<String>() {
