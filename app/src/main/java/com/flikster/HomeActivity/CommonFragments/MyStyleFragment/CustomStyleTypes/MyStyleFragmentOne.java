@@ -30,12 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleAdapter;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
-import com.flikster.HomeActivity.FeedFragment.FeedFragment;
-import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
 import com.flikster.HomeActivity.SearchActivity;
-import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.R;
 import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.Common;
@@ -63,6 +58,7 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     boolean cameracaptured = false;
     final int ACTIVITY_SELECT_IMAGE = 2;
     Activity activity;
+    String categoryNo = "";
 
     @Nullable
     @Override
@@ -87,10 +83,7 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
             initializeRest();
         } catch (Exception e) {
             Log.e("Error", "Mystle");
-
         }
-
-
         return view;
     }
 
@@ -104,15 +97,43 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
-                SharedPrefsUtil.setStringPreference(getContext(), "ImageString", Common.BitMapToString(bitmap));
-
-                captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
-                captureimg.setImageBitmap(bitmap);
+                String styleimgaccess = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMAGE_CAPTURE_ACCESS");
+                if (styleimgaccess != null && !styleimgaccess.isEmpty()) {
+                    if (styleimgaccess.equals("ENABLE")) {
+                        String styleObjNo = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_OBJECT_NUMBER");
+                        if (styleObjNo != null && !styleObjNo.isEmpty()) {
+                            if (styleObjNo.equals("1")) {
+                                productimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                                productimg.setImageBitmap(bitmap);
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG", "");
+                            } else if (styleObjNo.equals("2")) {
+                                productthingimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                                productthingimg.setImageBitmap(bitmap);
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_TWO", "");
+                            } else if (styleObjNo.equals("3")) {
+                                productthingextraimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                                productthingextraimg.setImageBitmap(bitmap);
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_THREE", "");
+                            }
+                        }
+                    } else {
+                        profileImageSet(bitmap);
+                    }
+                }
+//                profileImageSet(bitmap);
             } else {
                 Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void profileImageSet(Bitmap bitmap) {
+        SharedPrefsUtil.setStringPreference(getContext(), "ImageString", Common.BitMapToString(bitmap));
+        captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
+        captureimg.setImageBitmap(bitmap);
     }
 
     private void initializeRest() {
@@ -122,22 +143,27 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
             captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
             captureimg.setImageBitmap(image);
         }
-        /*SharedPrefsUtil.setStringPreference(getApplicationContext(), "NAME", itemname);
-        SharedPrefsUtil.setStringPreference(getApplicationContext(), "SLUG", slug);
-        SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG", profilePic);*/
-
+        String styleimgaccess = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMAGE_CAPTURE_ACCESS");
+        if (styleimgaccess != null && !styleimgaccess.isEmpty()) {
+            if (styleimgaccess.equals("ENABLE")) {
+                String stylecaptureStr = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR");
+                if (stylecaptureStr != null && !stylecaptureStr.isEmpty()) {
+                    Bitmap styleCaptureStr = Common.StringToBitMap(stylecaptureStr);
+                    productimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                    productimg.setImageBitmap(styleCaptureStr);
+                }
+            }
+        }
         String productpicUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG");
         if (productpicUrl != null && !productpicUrl.isEmpty()) {
             productimg.setScaleType(ImageView.ScaleType.FIT_XY);
             Glide.with(getContext()).load(productpicUrl).asBitmap().into(productimg);
         }
-
         String otherimageUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG_TWO");
-        if (productpicUrl != null && !productpicUrl.isEmpty()) {
+        if (otherimageUrl != null && !otherimageUrl.isEmpty()) {
             productthingimg.setScaleType(ImageView.ScaleType.FIT_XY);
             Glide.with(getContext()).load(otherimageUrl).asBitmap().into(productthingimg);
         }
-
         if (styletype.equals("THIRD_STYLE") || styletype.equals("FOURTH_STYLE") || styletype.equals("FIFTH_STYLE")) {
             productthingextraimg.setOnClickListener(this);
             String otherimagetwoUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG_THREE");
@@ -146,7 +172,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                 Glide.with(getContext()).load(otherimagetwoUrl).asBitmap().into(productthingextraimg);
             }
         }
-
         captureimg.setOnClickListener(this);
         productimg.setOnClickListener(this);
         productthingimg.setOnClickListener(this);
@@ -156,7 +181,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         captureimg = (ImageView) view.findViewById(R.id.captureimg);
         productimg = (ImageView) view.findViewById(R.id.productimg);
         productthingimg = (ImageView) view.findViewById(R.id.productthingimg);
-
         if (styletype.equals("THIRD_STYLE") || styletype.equals("FOURTH_STYLE") || styletype.equals("FIFTH_STYLE")) {
             productthingextraimg = (ImageView) view.findViewById(R.id.productthingextraimg);
         }
@@ -177,19 +201,24 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.captureimg) {
+            SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMAGE_CAPTURE_ACCESS", "DISABLE");
             openCameraClickDialog();
         } else if (v.getId() == R.id.productimg) {
-            searchActivity("1");
+            SharedPrefsUtil.setStringPreference(getContext(), "STYLE_OBJECT_NUMBER", "1");
+            openUploadOrtagDialog("1");
         } else if (v.getId() == R.id.productthingimg) {
-            searchActivity("2");
+            SharedPrefsUtil.setStringPreference(getContext(), "STYLE_OBJECT_NUMBER", "2");
+            openUploadOrtagDialog("2");
         } else if (v.getId() == R.id.productthingextraimg) {
-            searchActivity("3");
+            SharedPrefsUtil.setStringPreference(getContext(), "STYLE_OBJECT_NUMBER", "3");
+            openUploadOrtagDialog("3");
         }
     }
 
-    private void searchActivity(String styletype) {
+    private void searchActivity(String styletype, String categoryNo) {
         Intent i = new Intent(getContext(), SearchActivity.class);
         i.putExtra("IMAGE_ITEM_CLICK_NO", styletype);
+        i.putExtra("CATEGORY_NO", categoryNo);
         startActivity(i);
     }
 
@@ -254,4 +283,83 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     }
 
 
+    private void openCategoriesDialog(final String styletype) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_style_categories_click);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        LinearLayout dialog_product_style_layout = (LinearLayout) dialog.findViewById(R.id.dialog_product_style_layout);
+        LinearLayout dialog_movie_style_layout = (LinearLayout) dialog.findViewById(R.id.dialog_movie_style_layout);
+        LinearLayout dialog_celeb_style_layout = (LinearLayout) dialog.findViewById(R.id.dialog_celeb_style_layout);
+        LinearLayout dialog_design_style_layout = (LinearLayout) dialog.findViewById(R.id.dialog_design_style_layout);
+        LinearLayout dialog_brand_style_layout = (LinearLayout) dialog.findViewById(R.id.dialog_brand_style_layout);
+        dialog_product_style_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchActivity(styletype, "1");
+                dialog.dismiss();
+            }
+        });
+        dialog_movie_style_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchActivity(styletype, "2");
+                dialog.dismiss();
+            }
+        });
+        dialog_celeb_style_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchActivity(styletype, "3");
+                dialog.dismiss();
+            }
+        });
+        dialog_design_style_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchActivity(styletype, "4");
+                dialog.dismiss();
+            }
+        });
+        dialog_brand_style_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchActivity(styletype, "5");
+                dialog.dismiss();
+            }
+        });
+        window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.translucent)));
+        dialog.show();
+    }
+
+    private void openUploadOrtagDialog(final String styletype) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_style_upload_or_tagstyleclick);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        LinearLayout dialog_upload_layout = (LinearLayout) dialog.findViewById(R.id.dialog_upload_layout);
+        LinearLayout dialog_tag_style_layout = (LinearLayout) dialog.findViewById(R.id.dialog_tag_style_layout);
+        dialog_upload_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMAGE_CAPTURE_ACCESS", "ENABLE");
+                openCameraClickDialog();
+                dialog.dismiss();
+            }
+        });
+        dialog_tag_style_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCategoriesDialog(styletype);
+                dialog.dismiss();
+            }
+        });
+
+        window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.translucent)));
+        dialog.show();
+    }
 }

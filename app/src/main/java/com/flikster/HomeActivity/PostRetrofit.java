@@ -1,6 +1,7 @@
 package com.flikster.HomeActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,8 +9,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CreateShareYourStyleData;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SavestyleData;
 import com.flikster.R;
+import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -195,7 +205,9 @@ public class PostRetrofit {
         });
     }
 
-    public void postRetrofitCommentMethod(String userName, String userId, String entityId, String commentText, final EditText editText, final Context context) {
+    public void postRetrofitCommentMethod(String userName, String userId,
+                                          String entityId, String commentText, final EditText editText,
+                                          final Context context) {
         if (commentText.trim().length() == 0 || commentText == null) {
             Toast.makeText(context, "First Write Something!", Toast.LENGTH_LONG).show();
             editText.setError("write something");
@@ -217,5 +229,40 @@ public class PostRetrofit {
             }
         });
     }
+
+
+    public void saveYourStyleAPI(CreateShareYourStyleData allImagesdata,
+                                 final String completeProfileStyle,
+                                 final Context context) {
+        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/share-your-style-ms/createShareYourStyle")
+                .create(ApiInterface.class);
+        Call<CreateShareYourStyleData> call = apiInterface.postStyleSave(allImagesdata);
+        call.enqueue(new Callback<CreateShareYourStyleData>() {
+            @Override
+            public void onResponse(Call<CreateShareYourStyleData> call,
+                                   Response<CreateShareYourStyleData> response) {
+                String responsedata = response.body().getMessage();
+                Log.e("SAVED", responsedata + "");
+                SharedPrefsUtil.setStringPreference(context, "ImageString", "");
+                SharedPrefsUtil.setStringPreference(context, "PRODUCT_IMG", "");
+                SharedPrefsUtil.setStringPreference(context, "PRODUCT_IMG_TWO", "");
+                SharedPrefsUtil.setStringPreference(context, "PRODUCT_IMG_THREE", "");
+                Toast.makeText(context, "Saved Successful", Toast.LENGTH_SHORT).show();
+                Common.shareClick(completeProfileStyle + "\n\n\n" +
+                        "Download **Flikster** and don't miss anything from movie industry." +
+                        " Stay connected to the world of Illusion.\n", context);
+
+            }
+
+            @Override
+            public void onFailure(Call<CreateShareYourStyleData> call, Throwable t) {
+                Toast.makeText(context, "Save Failed", Toast.LENGTH_SHORT).show();
+                Common.shareClick(completeProfileStyle + "\n\n\n" +
+                        "Download **Flikster** and don't miss anything from movie industry." +
+                        " Stay connected to the world of Illusion.\n", context);
+            }
+        });
+    }
+
 
 }

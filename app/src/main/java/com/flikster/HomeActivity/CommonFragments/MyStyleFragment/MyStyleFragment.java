@@ -62,9 +62,7 @@ public class MyStyleFragment extends Fragment implements View.OnClickListener {
         toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
         toolbar_frag_multiicons_cart.setVisibility(View.GONE);
         toolbar_frag_multiicons_notification.setVisibility(View.GONE);
-
 //        searchTActivityToMyStyleFragment = new SearchTActivityToMyStyleFragment();
-
 //        searchTActivityToMyStyleFragment.userChoice();
 
     }
