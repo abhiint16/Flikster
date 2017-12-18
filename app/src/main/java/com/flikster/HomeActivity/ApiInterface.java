@@ -10,11 +10,18 @@ import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommen
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CreateShareYourStyleData;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleAdapter;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SavestyleData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 import com.flikster.MyBagActivity.MyBagData;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -110,4 +117,7 @@ public interface ApiInterface {
 
     @GET
     Call<StyleSearchData> getStyletypeData(@Url String url);
+
+    @POST("http://apiv3.flikster.com/v3/share-your-style-ms/createShareYourStyle")
+    Call<CreateShareYourStyleData> postStyleSave(@Body CreateShareYourStyleData savestyledata);
 }

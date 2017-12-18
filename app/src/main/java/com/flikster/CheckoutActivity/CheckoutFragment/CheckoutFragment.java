@@ -133,7 +133,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     private void hitCreateUserApi() {
         Log.e("inside onclick bototbtn","inside hitcreateuserapi");
         List<CreateUserApiPostData.ProductData> productDatas=new ArrayList<CreateUserApiPostData.ProductData>();
-        productDatas.add(new CreateUserApiPostData.ProductData(productId,productTitle,productSlug,profilePic,color,
+        productDatas.add(new CreateUserApiPostData.ProductData(productId,productTitle,productSlug,
+                profilePic,color,
                 price,size,quantity));
         CreateUserApiPostData createUserApiPostData=new CreateUserApiPostData(userId,productDatas,
                 new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));

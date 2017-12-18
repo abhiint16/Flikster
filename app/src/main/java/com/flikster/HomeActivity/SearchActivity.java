@@ -49,7 +49,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_style_layout);
-        retrofitInit();
+        retrofitInit(getIntent().getStringExtra("CATEGORY_NO").toString());
         search = (SearchView) findViewById(R.id.search);
         listView = (ListView) findViewById(R.id.list_view);
         myStyleFragmentOne = new MyStyleFragment();
@@ -63,15 +63,18 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 String itemname = itemsdata.get(position).getName();
                 String profilePic = itemsdata.get(position).getProfilePic();
                 String slug = itemsdata.get(position).getSlug();
-
-                SharedPrefsUtil.setStringPreference(getApplicationContext(), "NAME", itemname);
-                SharedPrefsUtil.setStringPreference(getApplicationContext(), "SLUG", slug);
                 if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("1")) {
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG", profilePic);
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_NAME", itemname);
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_SLUG", slug);
                 } else if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("2")) {
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO", profilePic);
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO_NAME", itemname);
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO_PRODUCT_IMG_SLUG", slug);
                 } else if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("3")) {
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE", profilePic);
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE_NAME", itemname);
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE__SLUG", slug);
                 }
 
 
@@ -83,9 +86,28 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     }
 
-    private void retrofitInit() {
+    private void retrofitInit(String categoryno) {
+        if (categoryno.equals("1")) {
+            Toast.makeText(getApplicationContext(), "Product data", Toast.LENGTH_SHORT).show();
+            categorynodataRequestFromServer(ApiClient.PRODUCT_DATA_URL);
+        } else if (categoryno.equals("2")) {
+            Toast.makeText(getApplicationContext(), "Movie store data", Toast.LENGTH_SHORT).show();
+            categorynodataRequestFromServer(ApiClient.MOVIE_STORE_DATA_URL);
+        } else if (categoryno.equals("3")) {
+            Toast.makeText(getApplicationContext(), "Celeb store data", Toast.LENGTH_SHORT).show();
+            categorynodataRequestFromServer(ApiClient.CELEB_STORE_DATA_URL);
+        } else if (categoryno.equals("4")) {
+            Toast.makeText(getApplicationContext(), "Design data", Toast.LENGTH_SHORT).show();
+            categorynodataRequestFromServer(ApiClient.DESIGN_DATA_URL);
+        } else if (categoryno.equals("5")) {
+            Toast.makeText(getApplicationContext(), "Brand data", Toast.LENGTH_SHORT).show();
+            categorynodataRequestFromServer(ApiClient.BRAND_DATA_URL);
+        }
+    }
+
+    private void categorynodataRequestFromServer(String STYLE_REQ_URL) {
         ApiInterface apiService = ApiClient.getClientData().create(ApiInterface.class);
-        Call<StyleSearchData> call = apiService.getStyletypeData("http://apiservice.flikster.com/v3/product-ms/products");//apiInterface.getStyletypeData("http://apiservice.flikster.com/v3/product-ms/products");
+        Call<StyleSearchData> call = apiService.getStyletypeData(STYLE_REQ_URL);
         call.enqueue(new Callback<StyleSearchData>() {
             @Override
             public void onResponse(Call<StyleSearchData> call,
