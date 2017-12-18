@@ -19,9 +19,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
         android:id="@+id/card_audio_jukebox_imageview"
-        android:src="@drawable/placeholdergaller"/>
+        android:src="@drawable/no_image"/>
 
     <include layout="@layout/card_footer" />
 

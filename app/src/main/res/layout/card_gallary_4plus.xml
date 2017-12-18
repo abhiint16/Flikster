@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:background="@color/white"
+        android:background="@color/colorImageBackgroundGrey"
         android:clickable="false">
 
         <LinearLayout
@@ -41,8 +41,8 @@
                 android:layout_margin="5dp"
                 android:layout_weight="2"
                 android:id="@+id/card_gallary5_img1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholdergaller"
+                android:src="@drawable/no_image"
+                android:background="@color/white"
                 android:clickable="false"/>
 
             <ImageView
@@ -53,8 +53,8 @@
                 android:id="@+id/card_gallary5_img2"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/five"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholdergaller"
+                android:src="@drawable/no_image"
+                android:background="@color/white"
                 android:clickable="false"/>
         </LinearLayout>
 
@@ -73,8 +73,8 @@
                 android:layout_marginBottom="@dimen/five"
                 android:id="@+id/card_gallary5_img3"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholdergaller"
+                android:src="@drawable/no_image"
+                android:background="@color/white"
                 android:clickable="false"/>
 
             <ImageView
@@ -84,8 +84,8 @@
                 android:layout_marginRight="@dimen/five"
                 android:id="@+id/card_gallary5_img4"
                 android:layout_weight="2"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholdergaller"
+                android:src="@drawable/no_image"
+                android:background="@color/white"
                 android:clickable="false"/>
         </LinearLayout>
     </LinearLayout>

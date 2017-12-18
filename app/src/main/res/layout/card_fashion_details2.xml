@@ -27,18 +27,18 @@
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:background="#696969"
+            android:background="@color/white"
             android:id="@+id/card_fashion_details2_img1"
-            android:scaleType="fitXY"/>
+            android:src="@drawable/no_image"/>
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
-            android:background="#484848"
+            android:background="@color/white"
             android:id="@+id/card_fashion_details2_img2"
             android:layout_weight="1"
-            android:scaleType="fitXY"/>
+            android:src="@drawable/no_image"/>
     </LinearLayout>
 
 

@@ -19,8 +19,8 @@
         android:id="@+id/card_gallary1_img1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/style_background"
-        android:src="@drawable/placeholdergaller" />
+        android:background="@color/white"
+        android:src="@drawable/no_image" />
 
     <include layout="@layout/card_footer"></include>
 

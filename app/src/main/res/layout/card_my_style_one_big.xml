@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:background="@color/colorImageBackgroundGrey"
         android:id="@+id/card_my_style_one_big_img_container">
 
         <ImageView
@@ -18,8 +19,8 @@
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="1.5"
-            android:background="@color/colorImageBackgroundGrey"
-            android:scaleType="fitXY" />
+            android:background="@color/white"
+            android:src="@drawable/no_image" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -35,8 +36,8 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/five"
                 android:layout_weight="1"
-                android:background="@drawable/black_box"
-                android:scaleType="fitXY" />
+                android:background="@color/white"
+                android:src="@drawable/no_image" />
 
             <ImageView
                 android:id="@+id/card_fashion_details3_img3"
@@ -44,8 +45,8 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/five"
                 android:layout_weight="1"
-                android:background="@color/dark_grey"
-                android:scaleType="fitXY" />
+                android:background="@color/white"
+                android:src="@drawable/no_image" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

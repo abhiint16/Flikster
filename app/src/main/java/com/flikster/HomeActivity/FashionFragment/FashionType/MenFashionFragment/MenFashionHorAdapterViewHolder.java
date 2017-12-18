@@ -18,6 +18,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.Al
 import com.flikster.HomeActivity.FashionFragment.FashionType.BuyFashionTypeProductFragment.BuyFashionTypeProductFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,8 +108,18 @@ public class MenFashionHorAdapterViewHolder extends RecyclerView.Adapter<MenFash
 
         @Override
         public void onClick(View view) {
-            shopByVideoMenInterafce.onBuyClick(_source.getId(),_source.getSize(),"abhiint",_source.getPrice(),
-                    _source.getProfilePic(),_source.getProductInfo(),_source.getSlug(),_source.getImageGallery(),new ProductOnClick());
+            checkForLoggedIn();
         }
+    }
+
+    public void checkForLoggedIn()
+    {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(context, "You need to first Login", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        shopByVideoMenInterafce.onBuyClick(_source.getId(),_source.getSize(),"abhiint",_source.getPrice(),
+                _source.getProfilePic(),_source.getProductInfo(),_source.getSlug(),_source.getImageGallery(),new ProductOnClick());
     }
 }

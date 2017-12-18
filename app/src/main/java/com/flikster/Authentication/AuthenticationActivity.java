@@ -72,7 +72,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             showTermsConditions();
         else if(view.getId()==R.id.keycloak)
         {
-            if (!KeycloakHelper.isConnected()) {
+            SharedPrefsUtil.setStringPreference(AuthenticationActivity.this,"IS_LOGGED_IN","LOGGED_IN");
+            Toast.makeText(getApplicationContext(), "You're now LoggedIn.", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
+            startActivity(intent);
+            /*if (!KeycloakHelper.isConnected()) {
                 Log.e("inside if not cnnect","inside if not cnnect");
                 KeycloakHelper.connect(AuthenticationActivity.this, new Callback<String>() {
                     @Override
@@ -90,8 +94,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                         Log.e("insde onFailure","insied onfilaure"+e);
                         SharedPrefsUtil.setStringPreference(AuthenticationActivity.this,"IS_LOGGED_IN","NOT_LOGGED_IN");
                         Toast.makeText(getApplicationContext(), "hell begins here! Couldn't connect. Try again", Toast.LENGTH_LONG).show();
-                        /*Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
-                        startActivity(intent);*/
+                        *//*Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
+                        startActivity(intent);*//*
                     }
                 });
             }
@@ -99,7 +103,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             {
                 Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
                 startActivity(intent);
-            }
+            }*/
         }
     }
 

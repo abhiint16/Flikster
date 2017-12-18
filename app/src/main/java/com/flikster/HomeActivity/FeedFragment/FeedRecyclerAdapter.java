@@ -43,6 +43,7 @@ import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragmen
 import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
 import com.flikster.HomeActivity.StealStyleViewHolder;
+import com.flikster.Util.SharedPrefsUtil;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 
 import java.util.ArrayList;
@@ -579,6 +580,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -665,6 +671,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
                         card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
@@ -796,6 +807,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -941,6 +957,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
                         card_comment_text_edittxt.getText().toString(),
@@ -1070,6 +1091,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -1193,6 +1219,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -1314,6 +1345,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
                         card_comment_text_edittxt.getText().toString(),
@@ -1403,6 +1439,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -1543,6 +1584,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -1665,6 +1711,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -1785,6 +1836,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -1908,6 +1964,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
+                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+                {
+                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
@@ -1927,6 +1988,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     //Like or UnLike Action
     private void likeAndUnLikeEvent(final ImageButton ib_like, final int getAdapterPositionValue, boolean actionLikee) {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (ib_like.getDrawable().getConstantState().equals
                 (context.getResources().getDrawable(R.drawable.like_pink).getConstantState())) {
             Log.e("LikeEvent", "PINK_COLOR");
@@ -1956,6 +2022,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     //Follow or UnFollow action
     private void followOrUnFollow(boolean actionFollow, final Button followbtn, int adapterPositionValue) {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+            return;
+        }
         Log.e("TextData", followbtn.getText().toString() + "");
         if (followbtn.getText().toString().equals("follow")) {
             if (outerHits.getHits().get(adapterPositionValue).get_source().getMovie() != null && outerHits.getHits().get(adapterPositionValue).get_source().getMovie().size() != 0) {
@@ -1997,6 +2068,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     //Book mark in Action Event
     private void bookmarkAndUnBookmarkeEvent(final ImageButton bookmark, final int getAdapterPositionValue, boolean bookmarkAction) {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (bookmark.getDrawable().getConstantState().equals
                 (context.getResources().getDrawable(R.drawable.bookmark_yellow).getConstantState())) {
             Log.e("BookmarkEvent", "YELLOW_COLOR");
@@ -2030,6 +2106,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink);
         shareIntent.setType("text/plain");
         context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));
+    }
+
+    private void checkForLoggedIn()
+    {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+            return;
+        }
     }
 
 }

@@ -16,12 +16,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.List;
 
@@ -125,8 +127,7 @@ public class CommonAllProductPage extends Fragment implements View.OnClickListen
         }
         else if (view.getId()==R.id.followbtn)
         {
-            commonAllProductPageBuyClick.onBuyClick(productId,size,userId,price,profilePic,productTitle,productSlug,
-                    imageGallery,new ProductOnClick());
+         checkForLoggedIn();
         }
     }
 
@@ -140,5 +141,16 @@ public class CommonAllProductPage extends Fragment implements View.OnClickListen
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         commonAllProductPageBuyClick = (CommonAllProductPageBuyClick) activity;
+    }
+
+    public void checkForLoggedIn()
+    {
+        if (SharedPrefsUtil.getStringPreference(getActivity(),"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(getActivity(), "You need to first Login", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        commonAllProductPageBuyClick.onBuyClick(productId,size,userId,price,profilePic,productTitle,productSlug,
+                imageGallery,new ProductOnClick());
     }
 }

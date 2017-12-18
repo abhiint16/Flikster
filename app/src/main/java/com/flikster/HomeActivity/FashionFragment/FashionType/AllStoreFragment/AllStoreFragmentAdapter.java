@@ -17,6 +17,7 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFrag
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -276,13 +277,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_details1_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -348,13 +343,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_details2_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -422,13 +411,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_my_style_one_big_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -498,13 +481,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_deatails4_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -575,13 +552,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                allStoreInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(),new ProductOnClick());
+                    checkForLoggedIn(getAdapterPosition());
             }
             else if ((v.getId() == R.id.header_linear) || (v.getId() == R.id.profile_image)) {
                  if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
@@ -635,4 +606,21 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
         }
     }
+
+    public void checkForLoggedIn(int pos)
+    {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(context, "You need to first Login", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        allStoreInterafce.onBuyClick(hits.getHits().get(pos).get_source().getId(),
+                hits.getHits().get(pos).get_source().getSize(),"abhiint",
+                hits.getHits().get(pos).get_source().getPrice(),
+                hits.getHits().get(pos).get_source().getProfilePic(),
+                hits.getHits().get(pos).get_source().getProductInfo(),
+                hits.getHits().get(pos).get_source().getSlug(),
+                hits.getHits().get(pos).get_source().getImageGallery(),new ProductOnClick());
+    }
+
 }

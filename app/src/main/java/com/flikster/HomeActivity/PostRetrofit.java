@@ -44,6 +44,10 @@ public class PostRetrofit {
     }
 
     public void checkForLike(String type, final String userId, String entityId, final ImageButton ib_like, final Context context) {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            return;
+        }
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus").create(ApiInterface.class);
         Call<ModelForIsLikedPostRequest> call = apiInterface.isLikedItem(modelForPostRequest);
@@ -97,6 +101,10 @@ public class PostRetrofit {
     }
 
     public void checkForFollow(String type, String userId, String entityId, final Button followBtn, final Context context) {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            return;
+        }
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus").create(ApiInterface.class);
         Call<ModelForIsLikedPostRequest> call = apiInterface.isLikedItem(modelForPostRequest);
@@ -156,6 +164,10 @@ public class PostRetrofit {
 
 
     public void checkForBookmark(String type, String userId, String entityId, final ImageButton bookmarkBtn, final Context context) {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            return;
+        }
         ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
         apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/likes-ms/isPostStatus").create(ApiInterface.class);
         Call<ModelForIsLikedPostRequest> call = apiInterface.isLikedItem(modelForPostRequest);

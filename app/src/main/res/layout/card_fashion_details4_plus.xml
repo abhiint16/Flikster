@@ -41,7 +41,8 @@
                     android:layout_margin="5dp"
                     android:layout_weight="2"
                     android:id="@+id/card_fashion_details4_plus_img1"
-                    android:scaleType="fitXY"
+                    android:src="@drawable/no_image"
+                    android:background="@color/white"
                     android:clickable="false"/>
 
                 <ImageView
@@ -50,7 +51,8 @@
                     android:layout_margin="5dp"
                     android:id="@+id/card_fashion_details4_plus_img2"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
+                    android:src="@drawable/no_image"
+                    android:background="@color/white"
                     android:clickable="false"/>
             </LinearLayout>
 
@@ -67,7 +69,8 @@
                     android:layout_margin="5dp"
                     android:id="@+id/card_fashion_details4_plus_img3"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
+                    android:src="@drawable/no_image"
+                    android:background="@color/white"
                     android:clickable="false"/>
 
                 <ImageView
@@ -76,7 +79,8 @@
                     android:layout_margin="5dp"
                     android:id="@+id/card_fashion_details4_plus_img4"
                     android:layout_weight="2"
-                    android:scaleType="fitXY"
+                    android:src="@drawable/no_image"
+                    android:background="@color/white"
                     android:clickable="false"/>
             </LinearLayout>
         </LinearLayout>

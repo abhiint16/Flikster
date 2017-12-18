@@ -19,8 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/card_celebrity_feed_video_image"
-        android:scaleType="fitXY"
-        android:src="@drawable/pooja5" />
+        android:background="@color/white"
+        android:src="@drawable/no_image" />
         <ImageButton
             android:layout_width="50dp"
             android:layout_height="50dp"

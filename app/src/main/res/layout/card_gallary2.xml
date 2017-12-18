@@ -31,6 +31,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:clickable="false"
+            android:background="@color/white"
             android:src="@drawable/no_image" />
 
         <ImageView
@@ -40,9 +41,9 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:layout_marginTop="@dimen/five"
-
             android:clickable="false"
             android:layout_marginBottom="@dimen/five"
+            android:background="@color/white"
             android:src="@drawable/no_image" />
     </LinearLayout>
 

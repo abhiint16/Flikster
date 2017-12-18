@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/card_celebrity_feed_news_image"
-        android:src="@drawable/pooja6"
-        android:scaleType="fitXY"/>
+        android:background="@color/white"
+        android:src="@drawable/no_image" />
     <include layout="@layout/card_footer"></include>
     <include layout="@layout/card_description"></include>
     <include layout="@layout/card_comment_text"></include>

@@ -590,13 +590,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_details1_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -659,13 +653,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_details2_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -729,13 +717,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_my_style_one_big_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -801,13 +783,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_deatails4_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -875,13 +851,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
-                shopByVideoInterafce.onBuyClick(hits.getHits().get(getAdapterPosition()-4).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSize(),"abhiint",
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getPrice(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getProductInfo(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()-4).get_source().getImageGallery(),new ProductOnClick());
+                checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_details4_plus_img_container)
             {
                 if (hits.getHits().get(getAdapterPosition()-4).get_source().getCeleb().get(0).getProfilePic()!=null)
@@ -951,4 +921,20 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             //imageView.setImageURI(Uri.parse(carouselImg.get(position)));
         }
     };
+
+    public void checkForLoggedIn(int pos)
+    {
+        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(context, "You need to first Login", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        shopByVideoInterafce.onBuyClick(hits.getHits().get(pos-4).get_source().getId(),
+                hits.getHits().get(pos-4).get_source().getSize(),"abhiint",
+                hits.getHits().get(pos-4).get_source().getPrice(),
+                hits.getHits().get(pos-4).get_source().getProfilePic(),
+                hits.getHits().get(pos-4).get_source().getProductInfo(),
+                hits.getHits().get(pos-4).get_source().getSlug(),
+                hits.getHits().get(pos-4).get_source().getImageGallery(),new ProductOnClick());
+    }
 }

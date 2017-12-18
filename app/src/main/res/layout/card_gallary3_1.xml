@@ -29,8 +29,8 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1.5"
-            android:scaleType="centerCrop"
-            android:src="@drawable/placeholdergaller"
+            android:src="@drawable/no_image"
+            android:background="@color/white"
             android:clickable="false"/>
 
         <LinearLayout
@@ -48,8 +48,8 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="@dimen/five"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholdergaller" />
+                android:src="@drawable/no_image"
+                android:background="@color/white"/>
 
             <ImageView
                 android:id="@+id/card_gallary3_img3"
@@ -57,8 +57,8 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="@dimen/five"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholdergaller" />
+                android:src="@drawable/no_image"
+                android:background="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 

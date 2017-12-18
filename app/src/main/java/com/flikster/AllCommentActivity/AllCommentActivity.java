@@ -11,11 +11,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,6 +81,11 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
+        if (SharedPrefsUtil.getStringPreference(this,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
+        {
+            Toast.makeText(this,"You need to first Login.",Toast.LENGTH_SHORT).show();
+            return;
+        }
         new PostRetrofit().postRetrofitCommentMethod(getIntent().getStringExtra("userName"),getIntent().getStringExtra("userId"),
                 getIntent().getStringExtra("entityId"),editText.getText().toString(),editText,this);
     }
