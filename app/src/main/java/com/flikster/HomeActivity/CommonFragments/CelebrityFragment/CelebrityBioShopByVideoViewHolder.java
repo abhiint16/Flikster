@@ -91,7 +91,7 @@ public class CelebrityBioShopByVideoViewHolder extends RecyclerView.Adapter<Recy
         ImageView imageView;
         public ViewHolder2(View itemView) {
             super(itemView);
-            imageView=(ImageView)itemView.findViewById(R.id.celebrity_bio_hor_recycler_image);
+            imageView=(ImageView)itemView.findViewById(R.id.celeb_shopbyvideo_img);
             itemView.setOnClickListener(this);
         }
 
