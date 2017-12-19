@@ -22,6 +22,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.Al
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class MenFashionFirstTypeFragment extends Fragment  {
     ApiInterface apiInterface;
     AllStoreInnerData hits;
     ShopByVideoMenInterafce shopByVideoMenInterafce;
+    SimpleArcLoader simpleArcLoader;
 
     @Nullable
     @Override
@@ -58,6 +60,8 @@ public class MenFashionFirstTypeFragment extends Fragment  {
     }
 
     private void retrofitInit() {
+        simpleArcLoader.setVisibility(View.VISIBLE);
+        simpleArcLoader.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search/").create(ApiInterface.class);
         Call<AllStoreData> call = apiInterface.getAllStore(this.URL);
         call.enqueue(new Callback<AllStoreData>() {
@@ -65,6 +69,8 @@ public class MenFashionFirstTypeFragment extends Fragment  {
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
                 menFashionFragmentAdapter = new MenFashionFragmentAdapter(getContext(), fragmentManager,hits,shopByVideoMenInterafce);
+                simpleArcLoader.setVisibility(View.GONE);
+                simpleArcLoader.stop();
                 fragment_common_recyclerview_recycler.setAdapter(menFashionFragmentAdapter);
             }
 
@@ -83,6 +89,7 @@ public class MenFashionFirstTypeFragment extends Fragment  {
     private void initializeViews() {
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager =  getActivity().getSupportFragmentManager();
+        simpleArcLoader=(SimpleArcLoader)view.findViewById(R.id.arc_loader);
     }
 
     private void initURL() {

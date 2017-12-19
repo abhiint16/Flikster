@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,7 @@ import java.util.List;
  */
 
 public class MenFashionFragmentAdapterVideosViewHolder extends RecyclerView.Adapter<MenFashionFragmentAdapterVideosViewHolder.ViewHolder> {
-    List<String> imag = new ArrayList<>();
     FragmentManager fragmentManager;
-    int a;
     Context context;
     ShopByVideoData.ShopByVideoInnerData outerHits;
     MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce;
@@ -33,12 +32,6 @@ public class MenFashionFragmentAdapterVideosViewHolder extends RecyclerView.Adap
     public MenFashionFragmentAdapterVideosViewHolder(Context context, FragmentManager fragmentManager,
                                                      ShopByVideoData.ShopByVideoInnerData outerHits,
                                                      MenFashionFirstTypeFragment.ShopByVideoMenInterafce shopByVideoMenInterafce) {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
-        imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
-        imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
         this.fragmentManager = fragmentManager;
         this.context = context;
         this.shopByVideoMenInterafce=shopByVideoMenInterafce;

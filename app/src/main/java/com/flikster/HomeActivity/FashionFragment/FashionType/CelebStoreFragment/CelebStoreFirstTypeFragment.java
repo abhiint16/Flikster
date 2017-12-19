@@ -23,6 +23,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     private boolean isViewShown = false;
     private Boolean isStarted = false;
     private Boolean isVisible = false;
+    SimpleArcLoader simpleArcLoader;
 
     @Nullable
     @Override
@@ -88,6 +90,8 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     }*/
 
     private void retrofitInit() {
+        simpleArcLoader.setVisibility(View.VISIBLE);
+        simpleArcLoader.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search/").create(ApiInterface.class);
         Call<AllStoreData> call = apiInterface.getAllStore(this.URL);
         call.enqueue(new Callback<AllStoreData>() {
@@ -95,6 +99,8 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
                 celebStoreFragmentAdapter = new CelebStoreFragmentAdapter(getContext(), fragmentManager,hits,shopByVideoInterafce);
+                simpleArcLoader.setVisibility(View.GONE);
+                simpleArcLoader.stop();
                 fragment_common_recyclerview_recycler.setAdapter(celebStoreFragmentAdapter);
             }
 
@@ -162,6 +168,7 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     private void initializeViews() {
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager =  getActivity().getSupportFragmentManager();
+        simpleArcLoader=(SimpleArcLoader)view.findViewById(R.id.arc_loader);
     }
 
     @Override

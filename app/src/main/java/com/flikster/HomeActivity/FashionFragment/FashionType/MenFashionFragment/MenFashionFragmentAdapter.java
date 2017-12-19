@@ -129,7 +129,7 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
     private void initRetrofit(final RecyclerView recyclerView, String url) {
 
-        apiInterface = ApiClient.getClient(url).create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/shopbyvideos/_search/").create(ApiInterface.class);
         Call<ShopByVideoData> call = apiInterface.getShopByVideo(url);
         call.enqueue(new Callback<ShopByVideoData>() {
             @Override
