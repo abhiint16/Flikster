@@ -1,27 +1,43 @@
 package com.flikster.HomeActivity.CommonFragments.MyStyleFragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
 import com.flikster.HomeActivity.PostRetrofit;
+import com.flikster.HomeActivity.SearchActivity;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.flikster.permission.DangerousPermResponseCallBack;
+import com.flikster.permission.DangerousPermissionResponse;
+import com.flikster.permission.DangerousPermissionUtils;
 
 import org.json.JSONArray;
 
@@ -53,21 +69,8 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            /*try {
-                fragment = new MyStyleFragmentOne();
-                bundle = new Bundle();
-                bundle.putString("MY_STYLE_TYPE", "FIRST_STYLE"); //"FIRST_STYLE"
-                fragment.setArguments(bundle);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.mystyle_container, fragment)
-                        .addToBackStack("")
-                        .commit();
-            } catch (Exception e) {
-            }*/
-
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_custom_style, parent, false);
             return new MyStyleAdapter.ViewHolder1(view);
-
         } else if (viewType == 2) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_my_style_bottom, parent, false);
             return new MyStyleAdapter.ViewHolder2(view);
@@ -80,22 +83,6 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            String imgStr = SharedPrefsUtil.getStringPreference(context, "ImageString");
-            if (imgStr != null && !imgStr.isEmpty()) {
-                Bitmap image = Common.StringToBitMap(imgStr);
-                ((ViewHolder1) holder).captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
-                ((ViewHolder1) holder).captureimg.setImageBitmap(image);
-                String productpicUrl = SharedPrefsUtil.getStringPreference(context, "PRODUCT_IMG");
-                if (productpicUrl != null && !productpicUrl.isEmpty()) {
-                    ((ViewHolder1) holder).card_gallary3_img2.setScaleType(ImageView.ScaleType.FIT_XY);
-                    Glide.with(context).load(productpicUrl).asBitmap().into(((ViewHolder1) holder).card_gallary3_img2);
-                }
-                String productpicUrl2 = SharedPrefsUtil.getStringPreference(context, "PRODUCT_IMG_TWO");
-                if (productpicUrl != null && !productpicUrl.isEmpty()) {
-                    ((ViewHolder1) holder).card_gallary3_img3.setScaleType(ImageView.ScaleType.FIT_XY);
-                    Glide.with(context).load(productpicUrl2).asBitmap().into(((ViewHolder1) holder).card_gallary3_img3);
-                }
-            }
         } else if (holder.getItemViewType() == 2) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
@@ -116,19 +103,29 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
-        ImageView captureimg, card_gallary3_img2, card_gallary3_img3;
 
         public ViewHolder1(View itemView) {
             super(itemView);
-            captureimg = (ImageView) itemView.findViewById(R.id.captureimg);
-            card_gallary3_img2 = (ImageView) itemView.findViewById(R.id.card_gallary3_img2);
-            card_gallary3_img3 = (ImageView) itemView.findViewById(R.id.card_gallary3_img3);
+            customizingStyle("FIRST_STYLE");
+        }
+
+        private void customizingStyle(String type) {
+            fragment = new MyStyleFragmentOne();
+            bundle = new Bundle();
+            bundle.putString("MY_STYLE_TYPE", type);
+            fragment.setArguments(bundle);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.mystyle_container, fragment)
+                    .addToBackStack("")
+                    .commit();
         }
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         RecyclerView fragment_common_recyclerview_recycler;
         Button saveandshare, sharebtn;
+        EditText sayet;
+        String sayetStr;
 
         public ViewHolder2(View itemView) {
             super(itemView);
@@ -136,6 +133,7 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             fragment_common_recyclerview_recycler.setBackgroundColor(context.getResources().getColor(R.color.white));
             saveandshare = (Button) itemView.findViewById(R.id.saveandshare);
             sharebtn = (Button) itemView.findViewById(R.id.sharebtn);
+            sayet = (EditText) itemView.findViewById(R.id.sayet);
             saveandshare.setOnClickListener(this);
             sharebtn.setOnClickListener(this);
         }
@@ -143,9 +141,10 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.saveandshare) {
-                shareImages();
+                sayetStr = sayet.getText().toString();
+                shareImages(sayetStr);
             } else if (v.getId() == R.id.sharebtn) {
-                shareImages();
+                shareImages(sayetStr);
                 SharedPrefsUtil.setStringPreference(context, "ImageString", "");
                 SharedPrefsUtil.setStringPreference(context, "PRODUCT_IMG", "");
                 SharedPrefsUtil.setStringPreference(context, "PRODUCT_IMG_TWO", "");
@@ -154,7 +153,11 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    private void shareImages() {
+    private void shareImages(String sayetStr) {
+        sayetStr = "Shiva style";
+        String sayetStrslug = sayetStr.replaceAll(" ", "-");
+        Log.e("sayetStrslug", sayetStrslug);
+
         ArrayList<String> availableImages = new ArrayList<String>();
         ArrayList<CreateShareYourStyleData.Product> productdata = new ArrayList<CreateShareYourStyleData.Product>();
         ArrayList<CreateShareYourStyleData.UserObject> userObject = new ArrayList<CreateShareYourStyleData.UserObject>();
@@ -189,21 +192,26 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             product_img_three_url = "";
         }
+
         if (profile_image != null && !profile_image.isEmpty()) {
-            boolean noproductImaavailable = validateProductImageAvailable(product_img_url, product_img_two_url, product_img_three_url);
-            if (noproductImaavailable) {
+            boolean noproductImgavailable = validateProductImageAvailable(product_img_url, product_img_two_url, product_img_three_url);
+
+            if (noproductImgavailable) {
                 userObject.add(new CreateShareYourStyleData.UserObject(
                         "https://officechai.com/wp-content/uploads/2015/12/deepika-padukone.png",
                         "Shiva"));
                 CreateShareYourStyleData createShareData = new CreateShareYourStyleData(
                         "PAWAN_KALYAN",
                         availableImages,
-                        productdata, "Shiva Style",
-                        "Shiva-Style", "1", userObject);
+                        productdata, sayetStr,
+                        sayetStrslug,
+                        SharedPrefsUtil.getStringPreference(context, "CONTAINER_TYPE").toString(),
+                        userObject);
                 new PostRetrofit().saveYourStyleAPI(createShareData, completeProfileStyle, context);
             } else {
                 Toast.makeText(context, "At least one image must be Product Image", Toast.LENGTH_SHORT).show();
             }
+
         } else {
             Toast.makeText(context, "Please Upload Profile Pic", Toast.LENGTH_SHORT).show();
         }
@@ -225,6 +233,5 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         return productImagavailble;
     }
-
 
 }

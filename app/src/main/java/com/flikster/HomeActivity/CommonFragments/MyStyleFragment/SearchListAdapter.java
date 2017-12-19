@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.R;
+import com.flikster.Util.SquareImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +39,7 @@ public class SearchListAdapter extends BaseAdapter implements Filterable {
 
     public class SearchListHolder {
         TextView name;
-//        TextView age;
+        SquareImageView productimg;
     }
 
     public Filter getFilter() {
@@ -102,15 +105,15 @@ public class SearchListAdapter extends BaseAdapter implements Filterable {
                     false);
             holder = new SearchListHolder();
             holder.name = (TextView) convertView.findViewById(R.id.product_name);
+            holder.productimg = (SquareImageView) convertView.findViewById(R.id.picture);
+//            Glide.with(context).load(R.drawable.loadinggif).into(holder.productimg);
 //            holder.age = (TextView) convertView.findViewById(R.id.txtAge);
             convertView.setTag(holder);
         } else {
             holder = (SearchListHolder) convertView.getTag();
         }
         holder.name.setText(employeeArrayList.get(position).getName());
-//        holder.age.setText(String.valueOf(employeeArrayList.get(position).getAge()));
-
-
+        Glide.with(context).load(employeeArrayList.get(position).getProfilePic()).into(holder.productimg);
         return convertView;
 
     }

@@ -58,7 +58,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     boolean cameracaptured = false;
     final int ACTIVITY_SELECT_IMAGE = 2;
     Activity activity;
-    String categoryNo = "";
 
     @Nullable
     @Override
@@ -69,14 +68,19 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
             styletype = bundle.getString("MY_STYLE_TYPE");
             Log.e("type_style", styletype + "Style");
             if (styletype.equals("FIRST_STYLE")) {
+                SharedPrefsUtil.setIntegerPreference(getContext(), "CONTAINER_TYPE", 1);
                 view = inflater.inflate(R.layout.forgment_my_style_one, container, false);
             } else if (styletype.equals("SECOND_STYLE")) {
+                SharedPrefsUtil.setIntegerPreference(getContext(), "CONTAINER_TYPE", 2);
                 view = inflater.inflate(R.layout.fragment_my_style_two, container, false);
             } else if (styletype.equals("THIRD_STYLE")) {
+                SharedPrefsUtil.setIntegerPreference(getContext(), "CONTAINER_TYPE", 3);
                 view = inflater.inflate(R.layout.fragment_my_style_three, container, false);
             } else if (styletype.equals("FOURTH_STYLE")) {
+                SharedPrefsUtil.setIntegerPreference(getContext(), "CONTAINER_TYPE", 4);
                 view = inflater.inflate(R.layout.fragment_my_style_four, container, false);
             } else if (styletype.equals("FIFTH_STYLE")) {
+                SharedPrefsUtil.setIntegerPreference(getContext(), "CONTAINER_TYPE", 5);
                 view = inflater.inflate(R.layout.fragment_my_style_five, container, false);
             }
             initializeViews();
@@ -223,7 +227,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     }
 
     //Camera Access
-
     private void cameraAccessPermission(int requestCode) {
         DangerousPermissionUtils.getPermission(getContext(), new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, requestCode)
                 .enqueue(new DangerousPermResponseCallBack() {
@@ -276,12 +279,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 1234);
     }
-
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-    }
-
 
     private void openCategoriesDialog(final String styletype) {
         final Dialog dialog = new Dialog(getContext());
@@ -361,5 +358,10 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
 
         window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.translucent)));
         dialog.show();
+    }
+
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
     }
 }
