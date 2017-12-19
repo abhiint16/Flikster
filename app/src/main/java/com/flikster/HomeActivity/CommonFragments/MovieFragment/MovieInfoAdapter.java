@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterPeersViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioShopByVideoViewHolder;
@@ -42,12 +43,13 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     MovieBioShopByVideoViewHolder movieBioAdapterVideoViewHolder;
     CelebrityBioAdapterFamilyViewHolder celebrityBioAdapterFamilyViewHolder;
     MovieInfoAdapterCrewViewHolder movieInfoAdapterCrewViewHolder;
-    CelebrityBioAdapterPeersViewHolder celebrityBioAdapterPeersViewHolder;
+    MovieInfoImagesViewHolder movieInfoImagesViewHolder;
     MovieInfoAdapterCastViewHolder movieInfoAdapterCastViewHolder;
     List<MovieData.MovieInnerData> items;
     ApiInterface apiInterface;
     ShopByVideoData.ShopByVideoInnerData shopByVideoInnerData;
     Boolean storyLineBoolean = true;
+    List<String> movieAllImages=new ArrayList<>();
     String censor;
     String coverpic;
     String dor;
@@ -70,21 +72,13 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.entityId = entityId;
         this.context = context;
         this.fragmentManager = fragmentManager;
-        this.items = items;
         type.add(1);
         type.add(2);
         type.add(3);
         type.add(4);
-        type.add(5);
         type.add(6);
         type.add(7);
         type.add(8);
-        type.add(9);
-        type.add(3);
-        type.add(4);
-        type.add(3);
-        type.add(4);
-        type.add(7);
         this.genre = genre;
         this.coverpic = coverpic;
         this.title = title;
@@ -123,10 +117,10 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (viewType == 8) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_user_movie_review, parent, false);
             return new MovieInfoAdapter.ViewHolder8(view);
-        } else if (viewType == 9) {
+        } /*else if (viewType == 9) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
             return new MovieInfoAdapter.ViewHolder9(view);
-        } else {
+        }*/ else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_news, parent, false);
             return new MovieInfoAdapter.ViewHolder9(view);
         }
@@ -243,8 +237,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             //((ViewHolder6)holder).textView.setText("videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder();
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterPeersViewHolder);
+            initImagesRetrofit(((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler);
         } /*else if (holder.getItemViewType() == 9) {
 //            ((ViewHolder3) holder).textView.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -252,6 +245,26 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context,items.get(0).getCast().size(),items);
             ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCastViewHolder);
         }*/
+    }
+    private void initImagesRetrofit(final RecyclerView fragment_common_recyclerview_with_tv_recycler) {
+        CelebBioImagesData celebBioImagesData=new CelebBioImagesData(slug);
+        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/search-ms/collectionsByCeleb/").create(ApiInterface.class);
+        Call<CelebBioImagesData> call = apiInterface.postForCelebImageBySlug(celebBioImagesData);
+        call.enqueue(new Callback<CelebBioImagesData>() {
+            @Override
+            public void onResponse(Call<CelebBioImagesData> call, Response<CelebBioImagesData> response) {
+                Log.e("check msg",""+response.body().getStatusCode());
+                Log.e("check msg",""+response.body().getData());
+                movieAllImages=response.body().getData();
+                movieInfoImagesViewHolder = new MovieInfoImagesViewHolder(context,movieAllImages);
+                fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoImagesViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<CelebBioImagesData> call, Throwable t) {
+                Log.e("vvvvvvvvvv","vv"+call+t);
+            }
+        });
     }
 
     private void initShopByVideoRetrofit(final RecyclerView recyclerView) {
@@ -274,7 +287,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return 9;
+        return 7;
     }
 
     @Override

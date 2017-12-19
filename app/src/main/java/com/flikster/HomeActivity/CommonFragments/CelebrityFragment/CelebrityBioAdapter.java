@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
@@ -43,6 +44,8 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     CelebrityBioAdapterImagesViewHolder celebrityBioAdapterImagesViewHolder;
     ApiInterface apiInterface;
     ShopByVideoData.ShopByVideoInnerData shopByVideoInnerData;
+    MovieData.MovieInnerData movieInnerData;
+    List<String> celebAllImages=new ArrayList<>();
     Boolean biographyBoolean = true;
     String biography;
     String coverpic;
@@ -68,7 +71,6 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         type.add(3);
         type.add(5);
         type.add(6);
-        type.add(7);
         type.add(8);
         type.add(9);
         this.placeOfBirth = placeOfBirth;
@@ -205,28 +207,72 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Images");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context);
-            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
+            initImagesRetrofit(((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler);
         } else if (holder.getItemViewType() == 5) {
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_title.setText("Filmography");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder();
-            ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFilmographyViewHolder);
+            initPeersRetrofit(((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler,"filmography");
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Peers");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder();
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterPeersViewHolder);
-        } else if (holder.getItemViewType() == 7) {
+            initPeersRetrofit(((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler,"peers");
+        } /*else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.VISIBLE);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Family");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celebrityBioAdapterFamilyViewHolder = new CelebrityBioAdapterFamilyViewHolder();
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterFamilyViewHolder);
-        }
+        }*/
+    }
+
+    private void initImagesRetrofit(final RecyclerView fragment_common_recyclerview_with_tv_recycler) {
+        CelebBioImagesData celebBioImagesData=new CelebBioImagesData(slug);
+        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/search-ms/collectionsByCeleb/").create(ApiInterface.class);
+        Call<CelebBioImagesData> call = apiInterface.postForCelebImageBySlug(celebBioImagesData);
+        call.enqueue(new Callback<CelebBioImagesData>() {
+            @Override
+            public void onResponse(Call<CelebBioImagesData> call, Response<CelebBioImagesData> response) {
+                Log.e("check msg",""+response.body().getStatusCode());
+                Log.e("check msg",""+response.body().getData());
+                celebAllImages=response.body().getData();
+                celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context,celebAllImages);
+                fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<CelebBioImagesData> call, Throwable t) {
+                Log.e("vvvvvvvvvv","vv"+call+t);
+            }
+        });
+    }
+
+    private void initPeersRetrofit(final RecyclerView recyclerView, final String type) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/movies/_search/").create(ApiInterface.class);
+        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=tags:\"" + slug + "\"");
+        call.enqueue(new Callback<MovieData>() {
+            @Override
+            public void onResponse(Call<MovieData> call, Response<MovieData> response) {
+                movieInnerData = response.body().getHits();
+                if ("peers".equals(type))
+                {
+                    celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder(context,movieInnerData,celebToShopByVideoInterface);
+                    recyclerView.setAdapter(celebrityBioAdapterPeersViewHolder);
+                }
+                else if ("filmography".equals(type))
+                {
+                    celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder(context,movieInnerData,celebToShopByVideoInterface);
+                    recyclerView.setAdapter(celebrityBioAdapterFilmographyViewHolder);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieData> call, Throwable t) {
+                Log.e("vvvvvvvvvv","vv"+call+t);
+            }
+        });
     }
 
     private void initShopByVideoRetrofit(final RecyclerView recyclerView) {
@@ -249,7 +295,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return 8;
+        return 7;
     }
 
     @Override

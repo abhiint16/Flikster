@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
+package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,12 +20,13 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> celebALlImages=new ArrayList<>();
+public class MovieInfoImagesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    List<String> movieAllImages=new ArrayList<>();
     Context context;
-    public CelebrityBioAdapterImagesViewHolder(Context context,List<String> celebALlImages) {
+
+    public MovieInfoImagesViewHolder(Context context,List<String> movieAllImages) {
         this.context=context;
-        this.celebALlImages=celebALlImages;
+        this.movieAllImages=movieAllImages;
     }
 
     @Override
@@ -50,8 +51,8 @@ public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<Re
         }
         else if (holder.getItemViewType()==2)
         {
-                Glide.with(context).load(celebALlImages.get(position))
-                        .into(((ViewHolder2)holder).carousel_image);
+            Glide.with(context).load(movieAllImages.get(position))
+                    .into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setVisibility(View.GONE);
         }
     }
@@ -59,15 +60,15 @@ public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<Re
     @Override
     public int getItemCount()
     {
-        if (celebALlImages==null||celebALlImages.size()==0)
+        if (movieAllImages==null||movieAllImages.size()==0)
             return 1;
         else
-            return celebALlImages.size();
+            return movieAllImages.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (celebALlImages==null||celebALlImages.size()==0)
+        if (movieAllImages==null||movieAllImages.size()==0)
             return 1;
         else
             return 2;

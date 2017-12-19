@@ -18,7 +18,7 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<MovieInfoAdapterCrewViewHolder.ViewHolder> {
+public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     int size;
     MovieData.MovieInnerData hits;
@@ -29,33 +29,60 @@ public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<MovieIn
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_info_cast_recycler_item,parent,false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType==1)
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_not_available_layout,parent,false);
+            return new ViewHolder1(view);
+        }
+        else
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_info_cast_recycler_item,parent,false);
+            return new ViewHolder2(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        if(this.hits.getHits().get(0).get_source().getCrew()!=null)
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder.getItemViewType()==1)
         {
-            holder.card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(0).get_source().getCrew().get(position).getName());
-            Glide.with(context).load(hits.getHits().get(0).get_source().getCrew().get(position).getProfilePic()).asBitmap()
-                    .into(holder.card_movie_info_cast_recycler_item_image);
+
+        }
+        else if (holder.getItemViewType()==2)
+        {
+            if (hits.getHits().get(position).get_source().getCoverPic()!=null)
+                Glide.with(context).load(hits.getHits().get(position).get_source().getCoverPic())
+                        .into(((ViewHolder2)holder).card_movie_info_cast_recycler_item_image);
+            if (hits.getHits().get(position).get_source().getTitle()!=null)
+                ((ViewHolder2)holder).card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(position).get_source().getTitle());
         }
     }
 
     @Override
     public int getItemCount() {
-        if(this.hits.getHits().get(0).get_source().getCrew()!=null)
+        if(hits.getHits().get(0).get_source().getCrew()!=null&&hits.getHits().get(0).get_source().getCrew().size()!=0)
         return this.hits.getHits().get(0).get_source().getCrew().size();
         else
-            return 0;
+            return 1;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemViewType(int position) {
+        if(hits.getHits().get(0).get_source().getCrew()!=null&&hits.getHits().get(0).get_source().getCrew().size()!=0)
+            return 2;
+        else
+            return 1;
+    }
+    public class ViewHolder1 extends RecyclerView.ViewHolder {
+        public ViewHolder1(View itemView) {
+            super(itemView);
+        }
+    }
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder {
         ImageView card_movie_info_cast_recycler_item_image;
         TextView card_movie_info_cast_recycler_item_name;
-        public ViewHolder(View itemView) {
+        public ViewHolder2(View itemView) {
             super(itemView);
             card_movie_info_cast_recycler_item_image=(ImageView)itemView.findViewById(R.id.card_movie_info_cast_recycler_item_image);
             card_movie_info_cast_recycler_item_name=(TextView)itemView.findViewById(R.id.card_movie_info_cast_recycler_item_name);

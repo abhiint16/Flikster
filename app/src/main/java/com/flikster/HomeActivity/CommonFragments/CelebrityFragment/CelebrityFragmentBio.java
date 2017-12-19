@@ -48,7 +48,7 @@ public class CelebrityFragmentBio extends Fragment {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         initializeViews();
         bundle = getArguments();
-        //this.slug=bundle.getString("slug");
+        this.slug=bundle.getString("slug");
         // retrofitInit();
         initializeRest();
         return view;

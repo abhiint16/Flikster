@@ -79,7 +79,7 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
         layoutManagers.setOrientation(LinearLayoutManager.HORIZONTAL);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManagers);
         //myPrductImgAdapter = new ProductImagesAdapter((AppCompatActivity) getContext(), fragmentManager);
-        myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
+        //myCeleAdapter = new CelebrityBioAdapterImagesViewHolder(getActivity());
         fragment_common_recyclerview_with_tv_recycler.setAdapter(myCeleAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
         placebidbtn.setOnClickListener(this);

@@ -19,50 +19,79 @@ import java.util.List;
  * Created by abhishek on 13-10-2017.
  */
 
-public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<MovieInfoAdapterCastViewHolder.ViewHolder> {
+public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     int size;
     MovieData.MovieInnerData hits;
+
     public MovieInfoAdapterCastViewHolder(Context context, MovieData.MovieInnerData hits) {
-        this.context=context;
-        this.size=size;
-        this.hits=hits;
+        this.context = context;
+        this.hits = hits;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_info_cast_recycler_item,parent,false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == 1) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_not_available_layout, parent, false);
+            return new ViewHolder1(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_info_cast_recycler_item, parent, false);
+            return new ViewHolder2(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        if(this.hits.getHits().get(0).get_source().getCast()!=null)
-        holder.card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(0).get_source().getCast().get(position).getName());
-        Glide.with(context).load(hits.getHits().get(0).get_source().getCast().get(position).getProfilePic()).asBitmap().into(holder.card_movie_info_cast_recycler_item_image);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder.getItemViewType() == 1) {
+
+        } else if (holder.getItemViewType() == 2) {
+            if (hits.getHits().get(0).get_source().getCast().get(position).getName()!=null)
+            ((ViewHolder2) holder).card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(0).get_source().getCast().get(position).getName());
+            if (hits.getHits().get(0).get_source().getCast().get(position).getProfilePic()!=null)
+            Glide.with(context).load(hits.getHits().get(0).get_source().getCast().get(position).getProfilePic()).asBitmap().into(((ViewHolder2) holder).card_movie_info_cast_recycler_item_image);
+        }
     }
 
     @Override
     public int getItemCount() {
-        if(this.hits.getHits().get(0).get_source().getCast()!=null)
-        return this.hits.getHits().get(0).get_source().getCast().size();
+        if (hits.getHits() == null || hits.getHits().size() == 0)
+            return 1;
+        else if (hits.getHits().get(0).get_source().getCast() == null || hits.getHits().get(0).get_source().getCast().size() == 0)
+            return 1;
         else
-            return 0;
+            return hits.getHits().get(0).get_source().getCast().size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    @Override
+    public int getItemViewType(int position) {
+        if (hits.getHits() == null || hits.getHits().size() == 0)
+            return 1;
+        else if (hits.getHits().get(0).get_source().getCast() == null || hits.getHits().get(0).get_source().getCast().size() == 0)
+            return 1;
+        else
+            return 2;
+    }
+
+    public class ViewHolder1 extends RecyclerView.ViewHolder {
+        public ViewHolder1(View itemView) {
+            super(itemView);
+        }
+    }
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_movie_info_cast_recycler_item_image;
         TextView card_movie_info_cast_recycler_item_name;
-        public ViewHolder(View itemView) {
+
+        public ViewHolder2(View itemView) {
             super(itemView);
-            card_movie_info_cast_recycler_item_image=(ImageView)itemView.findViewById(R.id.card_movie_info_cast_recycler_item_image);
-            card_movie_info_cast_recycler_item_name=(TextView)itemView.findViewById(R.id.card_movie_info_cast_recycler_item_name);
+            card_movie_info_cast_recycler_item_image = (ImageView) itemView.findViewById(R.id.card_movie_info_cast_recycler_item_image);
+            card_movie_info_cast_recycler_item_name = (TextView) itemView.findViewById(R.id.card_movie_info_cast_recycler_item_name);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(context,GalleryFullScreen.class);
+            Intent intent = new Intent(context, GalleryFullScreen.class);
             context.startActivity(intent);
         }
     }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.flikster.AllCommentActivity.CommentsData;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
@@ -120,4 +121,7 @@ public interface ApiInterface {
 
     @POST("http://apiv3.flikster.com/v3/share-your-style-ms/createShareYourStyle")
     Call<CreateShareYourStyleData> postStyleSave(@Body CreateShareYourStyleData savestyledata);
+
+    @POST("http://apiservice.flikster.com/v3/search-ms/collectionsByCeleb")
+    Call<CelebBioImagesData> postForCelebImageBySlug(@Body CelebBioImagesData celebBioImagesData);
 }
