@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioShopByVideoViewHolder;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
+import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
@@ -39,17 +41,22 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     RecyclerView.LayoutManager layoutManager2;
     ApiInterface apiInterface;
     List<RecommendedProductData.RecommendedProductInnerData> items;
+    MovieFragment.MovieItemClickInterface movieItemClickInterface;
     String censor;
     String coverpic;
     String dor;
     String duration;
-    String title;
     ArrayList<String> genre = new ArrayList<>();
     String storyline;
     String slug;
     AllStoreInnerData hits;
-    String userId;
     String entityId;
+    String profilePic="";
+    String name="";
+    String title="";
+    List<String> role=new ArrayList<>();
+    String price="";
+    String userId;
 
     public MovieStoreAdapter(Context context, FragmentManager fragmentManager, String coverpic, String censor,
                              String dor, ArrayList<String> genre, String duration, String title, String storyline, String slug,
@@ -57,6 +64,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.userId = userId;
         this.entityId = entityId;
         this.context = context;
+        movieItemClickInterface=(MovieFragment.MovieItemClickInterface)context;
         this.fragmentManager = fragmentManager;
         type.add(1);
         type.add(2);
@@ -414,7 +422,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details1_txt;
         RelativeLayout card_header_container;
-
+        LinearLayout card_fashion_details1_img_container;
         public ViewHolder1(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
@@ -427,6 +435,8 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_fashion_details1_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_details1_img_container);
+            card_fashion_details1_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
         }
 
@@ -435,6 +445,9 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (v.getId() == R.id.followbtn) {
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
 
+            }else if (v.getId()==R.id.card_fashion_details1_img_container)
+            {
+                cardContainerClick(getAdapterPosition()-1);
             }
         }
     }
@@ -445,6 +458,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details2_txt;
         RelativeLayout card_header_container;
+        LinearLayout card_fashion_details2_img_container;
 
         public ViewHolder2(View itemView) {
             super(itemView);
@@ -459,6 +473,8 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_fashion_details2_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_details2_img_container);
+            card_fashion_details2_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
         }
 
@@ -468,7 +484,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
 
             }
-
+            else if (v.getId()==R.id.card_fashion_details2_img_container)
+            {
+                cardContainerClick(getAdapterPosition()-1);
+            }
         }
     }
 
@@ -478,6 +497,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details3_txt;
         RelativeLayout card_header_container;
+        LinearLayout card_my_style_one_big_img_container;
 
         public ViewHolder3(View itemView) {
             super(itemView);
@@ -493,13 +513,17 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_my_style_one_big_img_container=(LinearLayout)itemView.findViewById(R.id.card_my_style_one_big_img_container);
+            card_my_style_one_big_img_container.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+            }else if (v.getId()==R.id.card_my_style_one_big_img_container)
+            {
+                cardContainerClick(getAdapterPosition()-1);
             }
         }
     }
@@ -511,6 +535,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details4_txt;
         RelativeLayout card_header_container;
+        LinearLayout card_fashion_deatails4_img_container;
 
         public ViewHolder4(View itemView) {
             super(itemView);
@@ -527,13 +552,18 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_fashion_deatails4_img_container=(LinearLayout)itemView.findViewById(R.id.card_fashion_deatails4_img_container);
+            card_fashion_deatails4_img_container.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+            }
+            else if (v.getId()==R.id.card_fashion_deatails4_img_container)
+            {
+                cardContainerClick(getAdapterPosition()-1);
             }
         }
     }
@@ -544,7 +574,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 card_fashion_details4_plus_img4, profile_image;
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name, card_fashion_details4_plus_text,
                 card_fashion_details4_plus_txt;
-        RelativeLayout card_header_container;
+        RelativeLayout card_header_container,card_fashion_details4_plus_img_container;
 
         public ViewHolder5(View itemView) {
             super(itemView);
@@ -562,13 +592,18 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            card_fashion_details4_plus_img_container=(RelativeLayout)itemView.findViewById(R.id.card_fashion_details4_plus_img_container);
+            card_fashion_details4_plus_img_container.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-
+            }
+            else if (v.getId()==R.id.card_fashion_details4_plus_img_container)
+            {
+                cardContainerClick(getAdapterPosition()-1);
             }
         }
     }
@@ -582,4 +617,29 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    public void cardContainerClick(int pos)
+    {
+        if (hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic()!=null)
+            profilePic=hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic();
+        if(hits.getHits().get(pos).get_source().getCeleb().get(0).getName()!=null)
+            name=hits.getHits().get(pos).get_source().getCeleb().get(0).getName();
+        if (hits.getHits().get(pos).get_source().getPrice()!=null)
+            price=hits.getHits().get(pos).get_source().getPrice();
+        if (hits.getHits().get(pos).get_source().getName()!=null)
+            title=hits.getHits().get(pos).get_source().getName();
+        if (hits.getHits().get(pos).get_source().getCeleb()!=null)
+        {
+            if (hits.getHits().get(pos).get_source().getCeleb().get(0).getRole() != null &&
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getRole().size() != 0)
+                role.addAll(hits.getHits().get(pos).get_source().getCeleb().get(0).getRole());
+        }
+        movieItemClickInterface.onGalleryContainerClick(hits.getHits().get(pos).get_source().getId(),
+                hits.getHits().get(pos).get_source().getSize(),"abhiint",
+                hits.getHits().get(pos).get_source().getPrice(),
+                hits.getHits().get(pos).get_source().getProfilePic(),
+                hits.getHits().get(pos).get_source().getProductInfo(),
+                hits.getHits().get(pos).get_source().getSlug(),
+                hits.getHits().get(pos).get_source().getImageGallery(),
+                profilePic,role,name,title,new CommonAllProductPage());
+    }
 }

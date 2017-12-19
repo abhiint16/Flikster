@@ -56,7 +56,7 @@ public class FeedFragment extends Fragment {
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 20, "status:Active");
+        Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 50, "status:Active");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {

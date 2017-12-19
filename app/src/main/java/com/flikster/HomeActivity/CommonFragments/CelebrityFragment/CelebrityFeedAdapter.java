@@ -1,6 +1,7 @@
 package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.FullScreenYoutubeView.FullScreenYoutubeView;
 import com.flikster.GlobalDataStorage;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFeedAdapter;
@@ -47,6 +49,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     FeedInnerData hits;
     String userId;
     String entityId;
+    CelebrityFragment.CelebItemClickInterface celebItemClickInterface;
 
     public CelebrityFeedAdapter(Context context, FragmentManager fragmentManager,
                                 String coverpic, String biography,
@@ -57,6 +60,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.fragmentManager = fragmentManager;
         this.userId = userId;
         this.entityId = entityId;
+        this.celebItemClickInterface=(CelebrityFragment.CelebItemClickInterface)context;
         type.add(1);
         type.add(2);
         type.add(3);
@@ -455,7 +459,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    public class ViewHolder2 extends RecyclerView.ViewHolder {
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_quote_tv, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
@@ -484,6 +488,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_description_linear.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -513,9 +518,17 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_description_linear)
+            {
+                cardDescLinearClick(getAdapterPosition()-1);
+            }
+        }
     }
 
-    public class ViewHolder3 extends RecyclerView.ViewHolder {
+    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         ImageButton ib_like, ib_bookmark, card_footer_share;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
@@ -544,7 +557,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
-
+            card_description_linear.setOnClickListener(this);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
 
             card_footer_share.setOnClickListener(new View.OnClickListener() {
@@ -576,16 +589,24 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_description_linear)
+            {
+                cardDescLinearClick(getAdapterPosition()-1);
+            }
+        }
     }
 
-    public class ViewHolder4 extends RecyclerView.ViewHolder {
+    public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView news_img, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
         EditText card_comment_text_edittxt;
         RelativeLayout card_header_container;
         LinearLayout header_linear, card_description_linear;
-        ImageButton card_footer_share, ib_like, ib_bookmark, card_comment_text_send_btn;
+        ImageButton card_footer_share, ib_like, ib_bookmark, card_comment_text_send_btn,video_btn;
 
         public ViewHolder4(View itemView) {
             super(itemView);
@@ -593,6 +614,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             news_img = (ImageView) itemView.findViewById(R.id.news_img);
             tv_tag_desc = (TextView) itemView.findViewById(R.id.tv_tag_desc);
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
+            video_btn=(ImageButton)itemView.findViewById(R.id.video_btn);
             card_header_container = (RelativeLayout) itemView.findViewById(R.id.card_header_container);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
@@ -606,6 +628,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
+            card_description_linear.setOnClickListener(this);
+            video_btn.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -636,9 +660,21 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_description_linear)
+            {
+                cardVideoCardDescClick(getAdapterPosition()-1);
+            }
+            else if (view.getId()==R.id.video_btn)
+            {
+                cardVideoButtonClick(getAdapterPosition()-1);
+            }
+        }
     }
 
-    public class ViewHolder5 extends RecyclerView.ViewHolder {
+    public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
@@ -669,6 +705,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_description_linear.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -699,9 +736,17 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_description_linear)
+            {
+                cardDescLinearClick(getAdapterPosition()-1);
+            }
+        }
     }
 
-    public class ViewHolder6 extends RecyclerView.ViewHolder {
+    public class ViewHolder6 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
@@ -729,6 +774,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_description_linear.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -758,10 +804,18 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if(view.getId()==R.id.card_description_linear)
+            {
+                cardDescLinearClick(getAdapterPosition()-1);
+            }
+        }
     }
 
 
-    public class ViewHolder7 extends RecyclerView.ViewHolder {
+    public class ViewHolder7 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary1_img1, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
@@ -794,6 +848,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
 //            card_comment_text_see_more_comments.setOnClickListener(this);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_description_linear.setOnClickListener(this);
+            card_gallary1_img1.setOnClickListener(this);
 
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -824,6 +880,18 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                             card_comment_text_edittxt, context);
                 }
             });
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_description_linear)
+            {
+                //cardDescLinearClick(getAdapterPosition()-1);
+            }
+            else if (view.getId()==R.id.card_gallary1_img1)
+            {
+                cardGalleryContainerClick(getAdapterPosition()-1);
+            }
         }
     }
 
@@ -893,7 +961,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    public class ViewHolder11 extends RecyclerView.ViewHolder {
+    public class ViewHolder11 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary2_img1, card_gallary2_img2, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
@@ -924,6 +992,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_gallery2_img_container.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -953,10 +1022,18 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_gallery2_img_container)
+            {
+                cardGalleryContainerClick(getAdapterPosition()-1);
+            }
+        }
     }
 
 
-    public class ViewHolder12 extends RecyclerView.ViewHolder {
+    public class ViewHolder12 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary3_img1, card_gallary3_img2, card_gallary3_img3, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
@@ -988,6 +1065,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_gallery3_1_img_container.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1017,10 +1095,18 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_gallery3_1_img_container)
+            {
+                cardGalleryContainerClick(getAdapterPosition()-1);
+            }
+        }
     }
 
 
-    public class ViewHolder13 extends RecyclerView.ViewHolder {
+    public class ViewHolder13 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary4_img1, card_gallary4_img2, card_gallary4_img3, card_gallary4_img4, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
@@ -1053,6 +1139,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_gallery4_img_container.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1082,10 +1169,18 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_gallery4_img_container)
+            {
+                cardGalleryContainerClick(getAdapterPosition()-1);
+            }
+        }
     }
 
 
-    public class ViewHolder14 extends RecyclerView.ViewHolder {
+    public class ViewHolder14 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView card_gallary5_img1, card_gallary5_img2, card_gallary5_img3, card_gallary5_img4, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title, card_gallary5_text;
@@ -1117,6 +1212,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_gallery5_img_container.setOnClickListener(this);
 
 
             card_footer_share.setOnClickListener(new View.OnClickListener() {
@@ -1148,6 +1244,14 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.card_gallery5_img_container)
+            {
+                cardGalleryContainerClick(getAdapterPosition()-1);
+            }
+        }
     }
 
     public class ViewHolder100 extends RecyclerView.ViewHolder {
@@ -1158,4 +1262,129 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             activity_no_comments_tv = (TextView) itemView.findViewById(R.id.activity_no_comments_tv);
         }
     }
+
+    public void cardDescLinearClick(int pos)
+    {
+        if (hits.getHits().get(pos).get_source().getMovie() != null && hits.getHits().get(pos).get_source().getMovie().size() != 0) {
+            celebItemClickInterface.newsCardOnClick(hits.getHits().get(pos).get_source().getMovie().get(0).getProfilePic(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getName(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getType(),
+                    hits.getHits().get(pos).get_source().getProfilePic(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getTitle(), new NewsOnClickFragment(),
+                    hits.getHits().get(pos).get_source().getContentType(),
+                    userId,
+                    hits.getHits().get(pos).get_source().getId()
+            );
+        } else if (hits.getHits().get(pos).get_source().getCeleb() != null && hits.getHits().get(pos).get_source().getCeleb().size() != 0) {
+            celebItemClickInterface.newsCardOnClick(hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getName(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getType(),
+                    hits.getHits().get(pos).get_source().getProfilePic(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    new NewsOnClickFragment(),
+                    hits.getHits().get(pos).get_source().getContentType(),
+                    userId,
+                    hits.getHits().get(pos).get_source().getId()
+            );
+        } else {
+            celebItemClickInterface.newsCardOnClick("",
+                    "",
+                    "",
+                    hits.getHits().get(pos).get_source().getProfilePic(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    new NewsOnClickFragment(),
+                    hits.getHits().get(pos).get_source().getContentType(),
+                    userId,
+                    hits.getHits().get(pos).get_source().getId());
+        }
+    }
+
+    public void cardGalleryContainerClick(int pos)
+    {
+        if (hits.getHits().get(pos).get_source().getMovie() != null) {
+            celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getName(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getProfilePic(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getType(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    new GalleryCardClick(), userId,
+                    hits.getHits().get(pos).get_source().getId());
+        } else if (hits.getHits().get(pos).get_source().getCeleb() != null) {
+            celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getName(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getType(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    new GalleryCardClick(), userId,
+                    hits.getHits().get(pos).get_source().getId());
+        } else {
+            celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
+                    "",
+                    "", "", hits.getHits().get(pos).get_source().getTitle(),
+                    new GalleryCardClick(), userId,
+                    hits.getHits().get(pos).get_source().getId());
+
+        }
+    }
+
+    public void cardVideoButtonClick(int pos)
+    {
+        Intent intent = new Intent(context, FullScreenYoutubeView.class);
+        if (hits.getHits().get(pos).get_source().getMedia().getVideo() != null &&
+                hits.getHits().get(pos).get_source().getMedia().getVideo().size() != 0) {
+            intent.putExtra("video_link",
+                    hits.getHits().get(pos).get_source().getMedia().getVideo().get(0));
+        } else {
+            intent.putExtra("video_link", " ");
+        }
+        context.startActivity(intent);
+    }
+
+    public void cardVideoCardDescClick(int pos)
+    {
+        if (hits.getHits().get(pos).get_source().getMovie() != null && hits.getHits().get(pos).get_source().getMovie().size() != 0) {
+            celebItemClickInterface.videoCardOnClick(hits.getHits().get(pos).get_source().getMovie().get(0).getProfilePic(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getName(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getType(),
+                    hits.getHits().get(pos).get_source().getProfilePic(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getMedia().getVideo().get(0),
+                    new VideoGalleryFragment(),
+                    hits.getHits().get(pos).get_source().getContentType(),
+                    userId,
+                    hits.getHits().get(pos).get_source().getId()
+
+            );
+        } else if (hits.getHits().get(pos).get_source().getCeleb() != null && hits.getHits().get(pos).get_source().getCeleb().size() != 0) {
+            celebItemClickInterface.videoCardOnClick(hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getName(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getType(),
+                    hits.getHits().get(pos).get_source().getProfilePic(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getMedia().getVideo().get(0),
+                    new VideoGalleryFragment(),
+                    hits.getHits().get(pos).get_source().getContentType(),
+                    userId,
+                    hits.getHits().get(pos).get_source().getId()
+            );
+        } else {
+            celebItemClickInterface.videoCardOnClick("",
+                    "",
+                    "",
+                    hits.getHits().get(pos).get_source().getProfilePic(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getTitle(),
+                    hits.getHits().get(pos).get_source().getMedia().getVideo().get(0),
+                    new VideoGalleryFragment(),
+                    hits.getHits().get(pos).get_source().getContentType(),
+                    userId,
+                    hits.getHits().get(pos).get_source().getId());
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -44,6 +45,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     Bundle arguments = new Bundle();
     MovieData.MovieInnerData hits;
     String slug, userId, entityId;
+    MovieItemClickInterface movieItemClickInterface;
 
     @Nullable
     @Override
@@ -133,5 +135,28 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                     .replace(R.id.main_container, new FeedFragment())
                     .commit();
         }
+    }
+
+    public interface MovieItemClickInterface {
+        void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
+                                Fragment fragment,String userId,String entityId);
+
+        void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
+                             String description, Fragment fragment, String contentType,String userId, String entityId);
+
+        void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
+                              String description, String videolink, Fragment fragment, String contentType,
+                              String userId, String entityId);
+        void onGalleryContainerClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
+                                     String productSlug, List<String> imageGallery,
+                                     String profilepic,List<String> role,String name,String title,
+                                     Fragment fragment);
+        void seeMoreComments(String userName, String userId, String entityId);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        movieItemClickInterface = (MovieItemClickInterface) activity;
     }
 }
