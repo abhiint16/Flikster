@@ -3,6 +3,8 @@ package com.flikster.HomeActivity;
 import android.util.Log;
 
 import com.flikster.AllCommentActivity.CommentsData;
+import com.flikster.Authentication.EmailRegisterPostData;
+import com.flikster.Authentication.MobileOrEmailRegisterCheckData;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
@@ -105,6 +107,8 @@ public interface ApiInterface {
                                         @Query("size") Integer i,
                                         @Query("q") String c);
 
+    @GET
+    Call<MobileOrEmailRegisterCheckData> checkForMobileOrEmailAlreadyThere(@Url String url);
     /*@Multipart
     @POST("http://apiv3.flikster.com/v3/cart-ms/createCart")
     Call<ProductDetailsDataToSend> postSendToCartData(@Part("productId") String productId,
@@ -124,4 +128,7 @@ public interface ApiInterface {
 
     @POST("http://apiservice.flikster.com/v3/search-ms/collectionsByCeleb")
     Call<CelebBioImagesData> postForCelebImageBySlug(@Body CelebBioImagesData celebBioImagesData);
+
+    @POST("http://apiservice.flikster.com/v3/user-ms/registration")
+    Call<MobileOrEmailRegisterCheckData> emailRegisterUserData(@Body EmailRegisterPostData emailRegisterPostData);
 }

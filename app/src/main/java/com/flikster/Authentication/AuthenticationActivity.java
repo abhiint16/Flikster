@@ -33,48 +33,43 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
     private void initializeView() {
         sharedPref=new SharedPref(getApplicationContext());
-        /*btnLoginPhone = (Button)findViewById(R.id.btn_login_phone);
+        btnLoginPhone = (Button)findViewById(R.id.btn_login_phone);
         btnLoginEmail = (Button)findViewById(R.id.btn_login_mail);
         btnLoginGoogle = (Button)findViewById(R.id.btn_login_google);
         btnLoginFacebook = (Button)findViewById(R.id.btn_login_facebook);
-        */tvLoginTermsCond = (TextView)findViewById(R.id.tv_login_terms);
+        tvLoginTermsCond = (TextView)findViewById(R.id.tv_login_terms);
         keycloak=(Button)findViewById(R.id.keycloak);
         without_keycloak=(Button)findViewById(R.id.without_keycloak);
         without_keycloak.setOnClickListener(this);
         keycloak.setOnClickListener(this);
-        /*btnLoginPhone.setOnClickListener(this);
+        btnLoginPhone.setOnClickListener(this);
         btnLoginEmail.setOnClickListener(this);
         btnLoginGoogle.setOnClickListener(this);
         btnLoginFacebook.setOnClickListener(this);
-        */tvLoginTermsCond.setOnClickListener(this);
+        tvLoginTermsCond.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        /*if (view.getId() == R.id.btn_login_phone)
-        {
-            Log.e("inside onclick","insidde onclikc");
+        if (view.getId() == R.id.btn_login_phone) {
+            Log.e("inside onclick", "insidde onclikc");
             gotoPhoneLogin();
-        }
-        else*/ if (view.getId()==R.id.without_keycloak)
-        {
-            SharedPrefsUtil.setStringPreference(AuthenticationActivity.this,"IS_LOGGED_IN","NOT_LOGGED_IN");
-            Intent intent=new Intent(this,HomeActivity.class);
+        } else if (view.getId() == R.id.without_keycloak) {
+            SharedPrefsUtil.setStringPreference(AuthenticationActivity.this, "IS_LOGGED_IN", "NOT_LOGGED_IN");
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
-        }
-        /*else if (view.getId() == R.id.btn_login_mail)
+        } else if (view.getId() == R.id.btn_login_mail)
             gotoEmailLogin();
         else if (view.getId() == R.id.btn_login_google)
             gotoGoogleLogin();
         else if (view.getId() == R.id.btn_login_facebook)
             gotoFacebookLogin();
-        */else if (view.getId() == R.id.tv_login_terms)
+        else if (view.getId() == R.id.tv_login_terms)
             showTermsConditions();
-        else if(view.getId()==R.id.keycloak)
-        {
-            SharedPrefsUtil.setStringPreference(AuthenticationActivity.this,"IS_LOGGED_IN","LOGGED_IN");
+        else if (view.getId() == R.id.keycloak) {
+            SharedPrefsUtil.setStringPreference(AuthenticationActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
             Toast.makeText(getApplicationContext(), "You're now LoggedIn.", Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
+            Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
             startActivity(intent);
             /*if (!KeycloakHelper.isConnected()) {
                 Log.e("inside if not cnnect","inside if not cnnect");
@@ -94,8 +89,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                         Log.e("insde onFailure","insied onfilaure"+e);
                         SharedPrefsUtil.setStringPreference(AuthenticationActivity.this,"IS_LOGGED_IN","NOT_LOGGED_IN");
                         Toast.makeText(getApplicationContext(), "hell begins here! Couldn't connect. Try again", Toast.LENGTH_LONG).show();
-                        *//*Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
-                        startActivity(intent);*//*
+                        Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
+                        startActivity(intent);
                     }
                 });
             }
@@ -103,7 +98,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             {
                 Intent intent=new Intent(AuthenticationActivity.this,HomeActivity.class);
                 startActivity(intent);
-            }*/
+            }
+        }*/
         }
     }
 
@@ -116,11 +112,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void gotoGoogleLogin() {
-        Toast.makeText(AuthenticationActivity.this, "Google login authentication", Toast.LENGTH_LONG).show();
+        Toast.makeText(AuthenticationActivity.this, "Coming Soon", Toast.LENGTH_LONG).show();
     }
 
     private void gotoFacebookLogin() {
-        Toast.makeText(AuthenticationActivity.this, "Facebook login authentication", Toast.LENGTH_LONG).show();
+        Toast.makeText(AuthenticationActivity.this, "Coming Soon", Toast.LENGTH_LONG).show();
     }
 
     private void showTermsConditions() {

@@ -175,14 +175,18 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_home);
         initializeViews();
+        setPrefIfNull();
         setNavigationBar();
         initializeRest();
         checkForLaunch();
         bottomnavigationBar();
+    }
 
+    private void setPrefIfNull() {
         String data = SharedPrefsUtil.getStringPreference(HomeActivity.this,"IS_LOGGED_IN");
-        if (data !=null && !data.isEmpty()){
-            Log.e("whthercheckedin", ""+SharedPrefsUtil.getStringPreference(HomeActivity.this,"IS_LOGGED_IN"));
+        if (data ==null){
+            Log.e("inside homesetpref","inside homesetpref");
+            SharedPrefsUtil.setStringPreference(HomeActivity.this,"IS_LOGGED_IN","NOT_LOGGED_IN");
         }
     }
 
