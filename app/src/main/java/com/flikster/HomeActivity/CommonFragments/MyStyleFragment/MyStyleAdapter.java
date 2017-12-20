@@ -205,7 +205,7 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         availableImages,
                         productdata, sayetStr,
                         sayetStrslug,
-                        SharedPrefsUtil.getStringPreference(context, "CONTAINER_TYPE").toString(),
+                        SharedPrefsUtil.getStringPreference(context, "CONTAINER_TYPE"),
                         userObject);
                 new PostRetrofit().saveYourStyleAPI(createShareData, completeProfileStyle, context);
             } else {

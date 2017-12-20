@@ -112,6 +112,7 @@ public class SearchListAdapter extends BaseAdapter implements Filterable {
         } else {
             holder = (SearchListHolder) convertView.getTag();
         }
+        Log.e("profileimageurl", employeeArrayList.get(position).getProfilePic());
         holder.name.setText(employeeArrayList.get(position).getName());
         Glide.with(context).load(employeeArrayList.get(position).getProfilePic()).into(holder.productimg);
         return convertView;
