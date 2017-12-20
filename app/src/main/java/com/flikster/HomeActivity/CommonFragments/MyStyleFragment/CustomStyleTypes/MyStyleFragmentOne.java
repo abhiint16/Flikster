@@ -30,16 +30,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.stream.MediaStoreStreamLoader;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.SearchActivity;
 import com.flikster.R;
 import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.Common;
+import com.flikster.Util.FileUtils;
 import com.flikster.Util.SharedPrefsUtil;
 import com.flikster.permission.DangerousPermResponseCallBack;
 import com.flikster.permission.DangerousPermissionResponse;
 import com.flikster.permission.DangerousPermissionUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+
+import in.juspay.godel.util.FileUtil;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -57,8 +68,8 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     private static int CAMERA_REQUES_CODEE = 101;
     boolean cameracaptured = false;
     final int ACTIVITY_SELECT_IMAGE = 2;
+    private static final int IMG_SELECT = 777;
     Activity activity;
-    String categoryNo = "";
 
     @Nullable
     @Override
@@ -69,14 +80,19 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
             styletype = bundle.getString("MY_STYLE_TYPE");
             Log.e("type_style", styletype + "Style");
             if (styletype.equals("FIRST_STYLE")) {
+                SharedPrefsUtil.setStringPreference(getContext(), "CONTAINER_TYPE", "1");
                 view = inflater.inflate(R.layout.forgment_my_style_one, container, false);
             } else if (styletype.equals("SECOND_STYLE")) {
+                SharedPrefsUtil.setStringPreference(getContext(), "CONTAINER_TYPE", "2");
                 view = inflater.inflate(R.layout.fragment_my_style_two, container, false);
             } else if (styletype.equals("THIRD_STYLE")) {
+                SharedPrefsUtil.setStringPreference(getContext(), "CONTAINER_TYPE", "3");
                 view = inflater.inflate(R.layout.fragment_my_style_three, container, false);
             } else if (styletype.equals("FOURTH_STYLE")) {
+                SharedPrefsUtil.setStringPreference(getContext(), "CONTAINER_TYPE", "4");
                 view = inflater.inflate(R.layout.fragment_my_style_four, container, false);
             } else if (styletype.equals("FIFTH_STYLE")) {
+                SharedPrefsUtil.setStringPreference(getContext(), "CONTAINER_TYPE", "5");
                 view = inflater.inflate(R.layout.fragment_my_style_five, container, false);
             }
             initializeViews();
@@ -127,6 +143,42 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
             } else {
                 Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
             }
+        } else if (requestCode == IMG_SELECT && resultCode == RESULT_OK && data != null) {
+            try {
+                Uri path = data.getData();
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
+                String styleimgaccess = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMAGE_CAPTURE_ACCESS");
+                if (styleimgaccess != null && !styleimgaccess.isEmpty()) {
+                    if (styleimgaccess.equals("ENABLE")) {
+                        String styleObjNo = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_OBJECT_NUMBER");
+                        if (styleObjNo != null && !styleObjNo.isEmpty()) {
+                            if (styleObjNo.equals("1")) {
+                                productimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                                productimg.setImageBitmap(bitmap);
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG", "");
+
+                            } else if (styleObjNo.equals("2")) {
+                                productthingimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                                productthingimg.setImageBitmap(bitmap);
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_TWO", "");
+                            } else if (styleObjNo.equals("3")) {
+                                productthingextraimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                                productthingextraimg.setImageBitmap(bitmap);
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_THREE", "");
+                            }
+                           // uploadPhoto(path);
+                        }
+                    } else {
+//                        uploadPhoto(path);
+                        profileImageSet(bitmap);
+                    }
+                }
+                // profileImageSet(bitmap);
+            } catch (Exception e) {
+            }
         }
     }
 
@@ -134,6 +186,21 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         SharedPrefsUtil.setStringPreference(getContext(), "ImageString", Common.BitMapToString(bitmap));
         captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
         captureimg.setImageBitmap(bitmap);
+
+
+    }
+
+    private void uploadPhoto(Uri fileUri) {
+        RequestBody descritption = RequestBody.create(MultipartBody.FORM, "image from camera");
+        try {
+            File originalFile = FileUtils.getFile(getContext(), fileUri);
+            RequestBody filepart = RequestBody.create(MediaType.parse(getActivity().getContentResolver().getType(fileUri)),
+                    originalFile);
+            MultipartBody.Part file = MultipartBody.Part.createFormData("photo", originalFile.getName(),
+                    filepart);
+            new PostRetrofit().uploadImageToServer(descritption, file, getContext());
+        } catch (Exception e) {
+        }
     }
 
     private void initializeRest() {
@@ -223,7 +290,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     }
 
     //Camera Access
-
     private void cameraAccessPermission(int requestCode) {
         DangerousPermissionUtils.getPermission(getContext(), new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, requestCode)
                 .enqueue(new DangerousPermResponseCallBack() {
@@ -255,8 +321,15 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         dialog_camera_click_select_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, ACTIVITY_SELECT_IMAGE);
+                /*Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, ACTIVITY_SELECT_IMAGE);*/
+
+                Intent i = new Intent();
+                i.setType("image/*");
+                i.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(i, IMG_SELECT);
+
                 dialog.dismiss();
             }
         });
@@ -276,12 +349,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 1234);
     }
-
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-    }
-
 
     private void openCategoriesDialog(final String styletype) {
         final Dialog dialog = new Dialog(getContext());
@@ -361,5 +428,10 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
 
         window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.translucent)));
         dialog.show();
+    }
+
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
     }
 }

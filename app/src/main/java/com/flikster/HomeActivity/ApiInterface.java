@@ -26,6 +26,9 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -131,4 +134,11 @@ public interface ApiInterface {
 
     @POST("http://apiservice.flikster.com/v3/user-ms/registration")
     Call<MobileOrEmailRegisterCheckData> emailRegisterUserData(@Body EmailRegisterPostData emailRegisterPostData);
+
+    @Multipart
+    @POST("upload")
+    Call<ResponseBody> uploadPhoto(
+            @Part("description") RequestBody description,
+            @Part MultipartBody.Part photo);
+
 }
