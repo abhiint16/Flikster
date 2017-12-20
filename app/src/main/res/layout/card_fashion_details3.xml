@@ -15,6 +15,7 @@
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="14sp" />
+
     <include layout="@layout/card_my_style_one_big" />
 
     <include layout="@layout/card_footer" />

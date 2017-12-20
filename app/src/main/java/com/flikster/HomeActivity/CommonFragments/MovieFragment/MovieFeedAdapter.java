@@ -222,7 +222,9 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder3) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder3) holder).tv_description.setText(Html.fromHtml(Common.formatString(hits.getHits().get(position - 1).get_source().getText())));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic()).into(((ViewHolder3) holder).card_gallary1_img1);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic())
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder3) holder).card_gallary1_img1);
             ((ViewHolder3) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder3) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
             new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder3) holder).ib_like, context);
@@ -235,7 +237,9 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder4) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder4) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic()).into(((ViewHolder4) holder).news_img);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic())
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder4) holder).news_img);
             ((ViewHolder4) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder4) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
         } else if (holder.getItemViewType() == 5) {
@@ -244,7 +248,9 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder5) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder5) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic()).into(((ViewHolder5) holder).card_gallary1_img1);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic())
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder5) holder).card_gallary1_img1);
             ((ViewHolder5) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder5) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
             new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder5) holder).ib_like, context);
@@ -255,7 +261,9 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder6) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder6) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic()).into(((ViewHolder6) holder).card_gallary1_img1);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic())
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder6) holder).card_gallary1_img1);
             ((ViewHolder6) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder6) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
             new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder6) holder).ib_like, context);
@@ -266,7 +274,9 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0)).into(((ViewHolder7) holder).card_gallary1_img1);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder7) holder).card_gallary1_img1);
             ((ViewHolder7) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
             new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder7) holder).ib_like, context);
@@ -281,8 +291,12 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder11) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder11) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0)).into(((ViewHolder11) holder).card_gallary2_img1);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1)).into(((ViewHolder11) holder).card_gallary2_img2);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder11) holder).card_gallary2_img1);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder11) holder).card_gallary2_img2);
             ((ViewHolder11) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder11) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
             new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder11) holder).ib_like, context);
@@ -293,9 +307,15 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder12) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder12) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0)).into(((ViewHolder12) holder).card_gallary3_img1);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1)).into(((ViewHolder12) holder).card_gallary3_img2);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2)).into(((ViewHolder12) holder).card_gallary3_img3);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder12) holder).card_gallary3_img1);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder12) holder).card_gallary3_img2);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder12) holder).card_gallary3_img3);
             ((ViewHolder12) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder12) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
             new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder12) holder).ib_like, context);
@@ -306,10 +326,18 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder13) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder13) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0)).into(((ViewHolder13) holder).card_gallary4_img1);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1)).into(((ViewHolder13) holder).card_gallary4_img2);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2)).into(((ViewHolder13) holder).card_gallary4_img3);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(3)).into(((ViewHolder13) holder).card_gallary4_img4);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder13) holder).card_gallary4_img1);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder13) holder).card_gallary4_img2);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder13) holder).card_gallary4_img3);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(3))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder13) holder).card_gallary4_img4);
             ((ViewHolder13) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder13) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
             new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder13) holder).ib_like, context);
@@ -320,10 +348,18 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder14) holder).tv_description.setVisibility(View.GONE);
             else if (hits.getHits().get(position - 1).get_source().getText() != null)
                 ((ViewHolder14) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0)).into(((ViewHolder14) holder).card_gallary5_img1);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1)).into(((ViewHolder14) holder).card_gallary5_img2);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2)).into(((ViewHolder14) holder).card_gallary5_img3);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(3)).into(((ViewHolder14) holder).card_gallary5_img4);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder14) holder).card_gallary5_img1);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder14) holder).card_gallary5_img2);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder14) holder).card_gallary5_img3);
+            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(3))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder14) holder).card_gallary5_img4);
             ((ViewHolder14) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder14) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder14) holder).card_gallary5_text.setText("+" + ((hits.getHits().get(position - 1).get_source().getMedia().getGallery().size()) - 4));

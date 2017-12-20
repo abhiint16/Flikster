@@ -36,7 +36,9 @@ public class CommonAllProductPageAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Glide.with(context).load(imageGallery.get(position)).into(((ViewHolder)holder).card_common_all_product_item_imgview);
+        Glide.with(context).load(imageGallery.get(position))
+                .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                .into(((ViewHolder)holder).card_common_all_product_item_imgview);
     }
 
     @Override

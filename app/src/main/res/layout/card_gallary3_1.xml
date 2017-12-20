@@ -21,14 +21,17 @@
         android:layout_height="300dp"
         android:orientation="horizontal"
         android:clickable="true"
-        android:id="@+id/card_gallery3_1_img_container">
+        android:id="@+id/card_gallery3_1_img_container"
+        android:background="@color/colorImageBackgroundGrey">
 
         <ImageView
             android:id="@+id/card_gallary3_img1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_marginRight="3dp"
             android:layout_weight="1.5"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
             android:src="@drawable/no_image"
             android:background="@color/white"
             android:clickable="false"/>
@@ -36,8 +39,6 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/five"
-            android:layout_marginTop="@dimen/five"
             android:layout_weight="1"
             android:orientation="vertical"
             android:clickable="false">
@@ -46,8 +47,9 @@
                 android:id="@+id/card_gallary3_img2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="@dimen/five"
+                android:layout_marginBottom="3dp"
                 android:layout_weight="1"
+                android:layout_marginTop="1dp"
                 android:src="@drawable/no_image"
                 android:background="@color/white"/>
 
@@ -55,8 +57,8 @@
                 android:id="@+id/card_gallary3_img3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="@dimen/five"
                 android:layout_weight="1"
+                android:layout_marginBottom="1dp"
                 android:src="@drawable/no_image"
                 android:background="@color/white"/>
         </LinearLayout>

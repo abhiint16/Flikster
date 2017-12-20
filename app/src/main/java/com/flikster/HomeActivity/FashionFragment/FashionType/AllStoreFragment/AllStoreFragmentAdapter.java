@@ -99,6 +99,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
             if (hits.getHits().get(position).get_source().getImageGallery() != null) {
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(0).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder1) holder).card_fashion_details1_img);
             }
         } else if (holder.getItemViewType() == 2) {
@@ -123,8 +124,10 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
             if (hits.getHits().get(position).get_source().getImageGallery() != null) {
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(0).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder2) holder).card_fashion_details2_img1);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(1).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder2) holder).card_fashion_details2_img2);
             }
         } else if (holder.getItemViewType() == 3) {
@@ -149,10 +152,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
             if (hits.getHits().get(position).get_source().getImageGallery() != null) {
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(0).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder3) holder).card_fashion_details3_img1);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(1).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder3) holder).card_fashion_details3_img2);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(2).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder3) holder).card_fashion_details3_img3);
             }
         } else if (holder.getItemViewType() == 4) {
@@ -177,12 +183,16 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
             if (hits.getHits().get(position).get_source().getImageGallery() != null) {
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(0).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder4) holder).card_fashion_details4_img1);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(1).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder4) holder).card_fashion_details4_img2);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(2).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder4) holder).card_fashion_details4_img3);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(3).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder4) holder).card_fashion_details4_img4);
             }
         } else if (holder.getItemViewType() == 5) {
@@ -208,12 +218,16 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
             if (hits.getHits().get(position).get_source().getImageGallery() != null) {
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(0).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder5) holder).card_fashion_details4_plus_img1);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(1).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder5) holder).card_fashion_details4_plus_img2);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(2).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder5) holder).card_fashion_details4_plus_img3);
                 Glide.with(context).load(hits.getHits().get(position).get_source().getImageGallery().get(3).trim())
+                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder5) holder).card_fashion_details4_plus_img4);
             }
             ((ViewHolder5) holder).card_fashion_details4_plus_text.setText("+ " + (hits.getHits().get(position).get_source().getImageGallery().size() - 4));

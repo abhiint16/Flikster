@@ -76,7 +76,9 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 0) {
-            Glide.with(context).load(galleryImgLinks.get(position)).asBitmap().into(((ViewHolder1) holder).gallary_recycler_item_img);
+            Glide.with(context).load(galleryImgLinks.get(position))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder1) holder).gallary_recycler_item_img);
             new PostRetrofit().checkForLike("like", userId, galleryImgLinks.get(position), ((ViewHolder1) holder).ib_like, context);
             new PostRetrofit().checkForBookmark("bookmark", userId, galleryImgLinks.get(position), ((ViewHolder1) holder).ib_bookmark, context);
         } else {
