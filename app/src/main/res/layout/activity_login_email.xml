@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/login_email_title"
         style="@style/headers"
-        />
+        android:id="@+id/register_main_title"/>
     <TextView
         android:layout_width="60dp"
         android:layout_gravity="center"

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.HomeActivity.ApiClient;
@@ -24,6 +25,7 @@ public class LoginEmailActivity extends AppCompatActivity implements View.OnClic
     private Button register_btn;
     EditText register_first_name,register_last_name,register_mobile_no,register_password,register_confirm_password;
     ApiInterface apiInterface;
+    TextView register_main_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,8 @@ public class LoginEmailActivity extends AppCompatActivity implements View.OnClic
         register_mobile_no.setInputType(View.AUTOFILL_TYPE_TEXT);
         register_mobile_no.setOnFocusChangeListener(this);
         register_password=(EditText)findViewById(R.id.register_password);
+        register_main_title=(TextView)findViewById(R.id.register_main_title);
+        register_main_title.setText("Register");
         register_confirm_password=(EditText)findViewById(R.id.register_confirm_password);
         register_btn.setOnClickListener(this);
     }
@@ -60,7 +64,7 @@ public class LoginEmailActivity extends AppCompatActivity implements View.OnClic
             }
             else if (register_mobile_no.getText().toString()==null||"".equals(register_mobile_no.getText().toString()))
             {
-                register_mobile_no.setError("Mobile Can't be empty");
+                register_mobile_no.setError("Email Can't be empty");
                 return;
             }
             else if (register_password.getText().toString()==null||"".equals(register_password.getText().toString()))
@@ -119,12 +123,13 @@ public class LoginEmailActivity extends AppCompatActivity implements View.OnClic
                     public void onResponse(Call<MobileOrEmailRegisterCheckData> call, Response<MobileOrEmailRegisterCheckData> response) {
                        if (response.body().getCount()!=0)
                        {
-                           register_mobile_no.setError("This Email is already present in the Database. Please Login.");
-                           register_btn.setActivated(false);
+                           register_mobile_no.setError("Email Id already present. Either login or change EmailId");
+                           Toast.makeText(LoginEmailActivity.this,"Email Id already present. Either login or change EmailId",Toast.LENGTH_SHORT).show();
+                           register_btn.setEnabled(false);
                        }
                        else if (response.body().getCount()==0)
                        {
-                           Toast.makeText(LoginEmailActivity.this,"Email not there.Register",Toast.LENGTH_LONG).show();
+                           Toast.makeText(LoginEmailActivity.this,"New Email Found.Carry on.",Toast.LENGTH_LONG).show();
                        }
                     }
 

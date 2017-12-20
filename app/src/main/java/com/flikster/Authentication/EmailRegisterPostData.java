@@ -13,6 +13,8 @@ public class EmailRegisterPostData {
     private String lastname;
     @SerializedName("email")
     private String email;
+    @SerializedName("mobile")
+    private String mobile;
     @SerializedName("pwd")
     private String pwd;
 
@@ -20,6 +22,13 @@ public class EmailRegisterPostData {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.pwd = pwd;
+    }
+
+    public EmailRegisterPostData(String firstname, String lastname, String email,int a, String pwd) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.mobile = email;
         this.pwd = pwd;
     }
 }
