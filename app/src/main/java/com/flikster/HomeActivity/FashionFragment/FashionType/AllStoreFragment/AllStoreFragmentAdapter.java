@@ -294,10 +294,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_details1_img_container)
             {
-                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
-                    profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
-                if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
-                    name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
+                        profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
+                    if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
+                        name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                }
                 if (hits.getHits().get(getAdapterPosition()).get_source().getPrice()!=null)
                     price=hits.getHits().get(getAdapterPosition()).get_source().getPrice();
                 if (hits.getHits().get(getAdapterPosition()).get_source().getName()!=null)
@@ -360,10 +363,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_details2_img_container)
             {
-                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
-                    profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
-                if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
-                    name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
+                        profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
+                    if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
+                        name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                }
                 if (hits.getHits().get(getAdapterPosition()).get_source().getPrice()!=null)
                     price=hits.getHits().get(getAdapterPosition()).get_source().getPrice();
                 if (hits.getHits().get(getAdapterPosition()).get_source().getName()!=null)
@@ -428,10 +434,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_my_style_one_big_img_container)
             {
-                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
-                    profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
-                if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
-                    name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
+                        profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
+                    if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
+                        name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                }
                 if (hits.getHits().get(getAdapterPosition()).get_source().getPrice()!=null)
                     price=hits.getHits().get(getAdapterPosition()).get_source().getPrice();
                 if (hits.getHits().get(getAdapterPosition()).get_source().getName()!=null)
@@ -498,10 +507,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 checkForLoggedIn(getAdapterPosition());
             }else if(v.getId()==R.id.card_fashion_deatails4_img_container)
             {
-                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
-                    profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
-                if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
-                    name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
+                        profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
+                    if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
+                        name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                }
                 if (hits.getHits().get(getAdapterPosition()).get_source().getPrice()!=null)
                     price=hits.getHits().get(getAdapterPosition()).get_source().getPrice();
                 if (hits.getHits().get(getAdapterPosition()).get_source().getName()!=null)
@@ -576,10 +588,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
             else if(v.getId()==R.id.card_fashion_details4_plus_img_container)
             {
-                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
-                    profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
-                if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
-                    name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb()!=null)
+                {
+                    if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic()!=null)
+                        profilePic=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic();
+                    if(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName()!=null)
+                        name=hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName();
+                }
                 if (hits.getHits().get(getAdapterPosition()).get_source().getPrice()!=null)
                     price=hits.getHits().get(getAdapterPosition()).get_source().getPrice();
                 if (hits.getHits().get(getAdapterPosition()).get_source().getName()!=null)
