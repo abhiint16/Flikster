@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.flikster.R;
 
-public class LoginCreateAccountActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginCreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnSignup;
     private ImageView ivOpenCamera;
@@ -23,9 +23,9 @@ public class LoginCreateAccountActivity extends AppCompatActivity implements Vie
     }
 
     private void initializeView() {
-        btnSignup = (Button)findViewById(R.id.btn_createac_signup);
+        btnSignup = (Button) findViewById(R.id.btn_createac_signup);
         btnSignup.setOnClickListener(this);
-        ivOpenCamera = (ImageView)findViewById(R.id.iv_user_pic);
+        ivOpenCamera = (ImageView) findViewById(R.id.iv_user_pic);
         ivOpenCamera.setOnClickListener(this);
     }
 

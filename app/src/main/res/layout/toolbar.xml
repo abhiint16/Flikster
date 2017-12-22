@@ -34,7 +34,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/filter" />
+            android:background="@drawable/filter"
+            android:visibility="gone" />
     </LinearLayout>
 
 
@@ -61,18 +62,20 @@
 
             <TextView
                 android:id="@+id/toolbar_main_title"
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/logotext"
-                android:gravity="center"
-                android:textSize="20sp" />
+                android:gravity="center" />
 
             <Spinner
                 android:id="@+id/toolbar_pref_spinner"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@color/transparent"
                 android:spinnerMode="dropdown"
-                android:visibility="gone"></Spinner>
+                android:layout_marginTop="@dimen/five"
+                android:visibility="visible" />
 
             <TextView
                 android:layout_width="match_parent"

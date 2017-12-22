@@ -1995,8 +1995,24 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null &&
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
+                    shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic()
+                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
+                            "Stay connected to the world of Illusion.\n");
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+                    shareClick(outerHits.getHits().get(getAdapterPosition())
+                            .get_source().getCeleb().get(0).getProfilePic()
+                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
+                            "Stay connected to the world of Illusion.\n");
+                }else {
+                    shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
+                            .getProfilePic()
+                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
+                            "Stay connected to the world of Illusion.\n");
+                }
+
+
             }
         }
     }

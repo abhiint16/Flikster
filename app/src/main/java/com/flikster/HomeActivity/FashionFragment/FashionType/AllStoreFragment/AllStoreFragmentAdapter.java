@@ -495,7 +495,17 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+
+                    if (hits.getHits().get(getAdapterPosition()).get_source()
+                            .getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source()
+                            .getCeleb().size() != 0) {
+                        Common.shareClick(hits.getHits().get(getAdapterPosition())
+                                .get_source().getCeleb().get(0).getProfilePic(), context);
+                    } else {
+                        Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    }
+
+                    //Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -589,7 +599,14 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    if (hits.getHits().get(getAdapterPosition()).get_source()
+                            .getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source()
+                            .getCeleb().size() != 0) {
+                        Common.shareClick(hits.getHits().get(getAdapterPosition())
+                                .get_source().getCeleb().get(0).getProfilePic(), context);
+                    } else {
+                    }
+
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -684,7 +701,15 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getId() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    if (hits.getHits().get(getAdapterPosition()).get_source()
+                            .getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source()
+                            .getCeleb().size() != 0) {
+                        Common.shareClick(hits.getHits().get(getAdapterPosition())
+                                .get_source().getCeleb().get(0).getProfilePic(), context);
+                    } else {
+                    }
+
+
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
