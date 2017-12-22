@@ -17,6 +17,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
 
@@ -41,6 +42,7 @@ public class FeedFragment extends Fragment {
     Integer Count;
     Testing testing;
     SimpleArcLoader mDialog;
+    String industryname = "";
 
     @Nullable
     @Override
@@ -53,19 +55,39 @@ public class FeedFragment extends Fragment {
     }
 
     private void retrofitInit() {
+        industryname = SharedPrefsUtil.getStringPreference(getContext(), "INDUSTRY_TYPE");
+        String industryCompletedata;
+        if (industryname != null && !industryname.isEmpty()) {
+            Log.e("industryname", industryname + "\"" + "\"");
+            industryCompletedata = "industry:" + "\"" + industryname + "\"" + "%20AND%20contentType:" + "*";
+            Log.e("industryCompletedata", industryCompletedata);
+        } else {
+            industryCompletedata = "industry:" + "\"" + "Tollywood" + "\"" + "%20AND%20contentType:" + "*";
+        }
+
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
-        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 50, "status:Active");
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/")
+                .create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(
+                true,
+                "createdAt:desc",
+                50, industryCompletedata);
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
-                outerHits = response.body().getHits();
-                Count = outerHits.getTotal();
-                feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
-                mDialog.setVisibility(View.GONE);
-                mDialog.stop();
-                fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
+                try {
+                    outerHits = response.body().getHits();
+                    Count = outerHits.getTotal();
+                    feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
+                    mDialog.setVisibility(View.GONE);
+                    mDialog.stop();
+                    fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
+                } catch (Exception e) {
+//                    SharedPrefsUtil.setStringPreference(getContext(), "INDUSTRY_TYPE");
+                    Log.e("errorhits", "null");
+                }
+
             }
 
             @Override
@@ -90,13 +112,13 @@ public class FeedFragment extends Fragment {
     }
 
     public interface Testing {
-        void test(String name, Fragment fragment, int getClass,String userId,String entityId);
+        void test(String name, Fragment fragment, int getClass, String userId, String entityId);
 
         void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
-                                Fragment fragment,String userId,String entityId);
+                                Fragment fragment, String userId, String entityId);
 
         void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
-                             String description, Fragment fragment, String contentType,String userId, String entityId);
+                             String description, Fragment fragment, String contentType, String userId, String entityId);
 
         void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                               String description, String videolink, Fragment fragment, String contentType,

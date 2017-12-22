@@ -45,10 +45,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginRight="5dp"
                 android:layout_marginBottom="1dp"
                 android:id="@+id/card_fashion_details4_img2"
                 android:layout_weight="1"
+                android:layout_marginRight="3dp"
                 android:background="@color/white"
                 android:src="@drawable/no_image"
                 android:clickable="false"/>

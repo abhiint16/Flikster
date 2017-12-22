@@ -365,7 +365,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_help.setOnClickListener(this);
         right_navigation_bar_non_loggedin_privacy.setOnClickListener(this);
         right_navigation_bar_non_loggedin_return_policy.setOnClickListener(this);
-        right_navigation_bar_non_loggedin_terms.setOnClickListener(this);;
+        right_navigation_bar_non_loggedin_terms.setOnClickListener(this);
         right_navigation_bar_non_loggedin_login_btn.setOnClickListener(this);
         right_navigation_bar_non_loggedin_create_account_btn.setOnClickListener(this);
         toolbarPrefSpinner();

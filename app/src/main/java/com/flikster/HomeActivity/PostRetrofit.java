@@ -91,7 +91,7 @@ public class PostRetrofit {
                 Log.e("LikeSTATUS", "Like Screen Failed" + call + "bcbbc" + t);
                 access = false;
                 ib_like.setImageResource(0);
-                ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.warning));
+                ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
 
             }
         });
@@ -250,18 +250,14 @@ public class PostRetrofit {
                 SharedPrefsUtil.setStringPreference(context, "PRODUCT_IMG_TWO", "");
                 SharedPrefsUtil.setStringPreference(context, "PRODUCT_IMG_THREE", "");
                 Toast.makeText(context, "Saved Successful", Toast.LENGTH_SHORT).show();
-                Common.shareClick(completeProfileStyle + "\n\n\n" +
-                        "Download **Flikster** and don't miss anything from movie industry." +
-                        " Stay connected to the world of Illusion.\n", context);
+                Common.shareClick(completeProfileStyle,context);
 
             }
 
             @Override
             public void onFailure(Call<CreateShareYourStyleData> call, Throwable t) {
                 Toast.makeText(context, "Save Failed", Toast.LENGTH_SHORT).show();
-                Common.shareClick(completeProfileStyle + "\n\n\n" +
-                        "Download **Flikster** and don't miss anything from movie industry." +
-                        " Stay connected to the world of Illusion.\n", context);
+                Common.shareClick(completeProfileStyle, context);
             }
         });
     }

@@ -204,7 +204,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder3) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
-                ((ViewHolder3) holder).tv_description.setText(Html.fromHtml(Common.formatString(outerHits.getHits().get(position).get_source().getText())));
+                ((ViewHolder3) holder).tv_description.setText(Html.fromHtml(Common.formatString
+                        (outerHits.getHits().get(position).get_source().getText())));
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder3) holder).card_gallary1_img1);
@@ -313,7 +314,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-            if (outerHits.getHits().get(position).get_source().getMedia().getGallery() != null&&outerHits.getHits().get(position).get_source().getMedia().getGallery().size()!=0)
+            if (outerHits.getHits().get(position).get_source().getMedia().getGallery() != null && outerHits.getHits().get(position).get_source().getMedia().getGallery().size() != 0)
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                         .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                         .into(((ViewHolder7) holder).card_gallary1_img1);
@@ -362,9 +363,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder11) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder11) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
-                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
-                        .into(((ViewHolder11) holder).card_gallary2_img1);
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder11) holder).card_gallary2_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder11) holder).card_gallary2_img2);
@@ -390,9 +391,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder12) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder12) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
-                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
-                        .into(((ViewHolder12) holder).card_gallary3_img1);
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder12) holder).card_gallary3_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder12) holder).card_gallary3_img2);
@@ -421,9 +422,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder13) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder13) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
-                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
-                        .into(((ViewHolder13) holder).card_gallary4_img1);
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder13) holder).card_gallary4_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder13) holder).card_gallary4_img2);
@@ -455,9 +456,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder14) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
                 ((ViewHolder14) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
-                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
-                        .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
-                        .into(((ViewHolder14) holder).card_gallary5_img1);
+            Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
+                    .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .into(((ViewHolder14) holder).card_gallary5_img1);
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder14) holder).card_gallary5_img2);
@@ -612,9 +613,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -622,7 +622,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic() + "\n\n\n"
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic()
+                        + "https://play.google.com/store/apps/details?id=com.flikster&hl=en" + "\n\n\n"
                         + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
             }
         }
@@ -703,9 +704,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -839,9 +839,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -989,9 +988,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -1123,9 +1121,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -1251,9 +1248,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -1377,9 +1373,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -1471,9 +1466,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -1616,9 +1610,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -1626,8 +1619,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0) + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
             }
         }
     }
@@ -1743,9 +1735,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -1753,8 +1744,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0)
+                                + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
             }
         }
     }
@@ -1868,9 +1860,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -1878,8 +1869,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0) + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
             }
         }
     }
@@ -1974,14 +1964,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                        .addToBackStack("")
 //                        .commit();
             } else if (view.getId() == R.id.card_gallery5_img_container) {
-                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null&&outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size()!=0) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
-                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null&&outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size()!=0) {
+                } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
@@ -1996,9 +1986,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
-                if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-                {
-                    Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+                if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                    Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
@@ -2020,9 +2009,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     //Like or UnLike Action
     private void likeAndUnLikeEvent(final ImageButton ib_like, final int getAdapterPositionValue, boolean actionLikee) {
-        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-        {
-            Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
             return;
         }
         if (ib_like.getDrawable().getConstantState().equals
@@ -2054,9 +2042,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     //Follow or UnFollow action
     private void followOrUnFollow(boolean actionFollow, final Button followbtn, int adapterPositionValue) {
-        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-        {
-            Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
             return;
         }
         Log.e("TextData", followbtn.getText().toString() + "");
@@ -2100,9 +2087,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     //Book mark in Action Event
     private void bookmarkAndUnBookmarkeEvent(final ImageButton bookmark, final int getAdapterPositionValue, boolean bookmarkAction) {
-        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-        {
-            Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
             return;
         }
         if (bookmark.getDrawable().getConstantState().equals
@@ -2140,11 +2126,9 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));
     }
 
-    private void checkForLoggedIn()
-    {
-        if (SharedPrefsUtil.getStringPreference(context,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-        {
-            Toast.makeText(context,"You need to first Login.",Toast.LENGTH_SHORT).show();
+    private void checkForLoggedIn() {
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
             return;
         }
     }

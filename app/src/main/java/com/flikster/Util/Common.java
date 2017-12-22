@@ -193,42 +193,57 @@ public class Common {
     //Like Event
     public static void likeAndUnLikeEvent(Context context, final ImageButton ib_like,
                                           final String userId, String entityId) {
-        if (ib_like.getDrawable().getConstantState().equals
-                (context.getResources().getDrawable(R.drawable.like_pink).getConstantState())) {
-            Log.e("LikeEvent", "PINK_COLOR");
-            likeImageChangeAndpostRequest(ib_like, "LIKED", userId, entityId, context);
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
+            return;
         } else {
-            Log.e("LikeEvent", "NORMAL_COLOR");
-            likeImageChangeAndpostRequest(ib_like, "UNLIKED", userId, entityId, context);
+            if (ib_like.getDrawable().getConstantState().equals
+                    (context.getResources().getDrawable(R.drawable.like_pink).getConstantState())) {
+                Log.e("LikeEvent", "PINK_COLOR");
+                likeImageChangeAndpostRequest(ib_like, "LIKED", userId, entityId, context);
+            } else {
+                Log.e("LikeEvent", "NORMAL_COLOR");
+                likeImageChangeAndpostRequest(ib_like, "UNLIKED", userId, entityId, context);
+            }
         }
     }
 
     private static void likeImageChangeAndpostRequest(ImageButton ib_like,
                                                       String likeStr, String userId,
                                                       String entityId, Context context) {
-        ib_like.setImageResource(0);
-        if (likeStr.equals("LIKED")) {
-            ib_like.setImageResource(R.drawable.like_icon);
-            Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
+            return;
         } else {
-            Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
-            ib_like.setImageResource(R.drawable.like_pink);
+            ib_like.setImageResource(0);
+            if (likeStr.equals("LIKED")) {
+                ib_like.setImageResource(R.drawable.like_icon);
+                Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
+                ib_like.setImageResource(R.drawable.like_pink);
+            }
+            new PostRetrofit().postRetrofitMethod("like", userId,
+                    entityId, ib_like, context);
         }
-        new PostRetrofit().postRetrofitMethod("like", userId,
-                entityId, ib_like, context);
 
     }
 
     //Book mark in Action Event
     public static void bookmarkAndUnBookmarkeEvent(Context context, final ImageButton bookmark,
                                                    final String userId, String entityId) {
-        if (bookmark.getDrawable().getConstantState().equals
-                (context.getResources().getDrawable(R.drawable.bookmark_yellow).getConstantState())) {
-            Log.e("BookEvent", "YELLOW_COLOR");
-            bookImageChangeAndpostRequest(bookmark, "UNBOOKMARKED", userId, entityId, context);
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
+            return;
         } else {
-            Log.e("BookEvent", "NORMAL_COLOR");
-            bookImageChangeAndpostRequest(bookmark, "BOOKMARKED", userId, entityId, context);
+            if (bookmark.getDrawable().getConstantState().equals
+                    (context.getResources().getDrawable(R.drawable.bookmark_yellow).getConstantState())) {
+                Log.e("BookEvent", "YELLOW_COLOR");
+                bookImageChangeAndpostRequest(bookmark, "UNBOOKMARKED", userId, entityId, context);
+            } else {
+                Log.e("BookEvent", "NORMAL_COLOR");
+                bookImageChangeAndpostRequest(bookmark, "BOOKMARKED", userId, entityId, context);
+            }
         }
     }
 
@@ -252,7 +267,9 @@ public class Common {
     public static void shareClick(String shareableLink, Context context) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink + "\n\n\n" + "Download **Flikster**"
+                + "https://play.google.com/store/apps/details?id=com.flikster&hl=en" +
+                " and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
         shareIntent.setType("text/plain");
         context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));
     }

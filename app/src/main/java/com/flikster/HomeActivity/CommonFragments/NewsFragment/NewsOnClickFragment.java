@@ -151,7 +151,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         card_footer_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Common.shareClick(profilePic + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", getContext());
+                Common.shareClick(profilePic, getContext());
             }
         });
 
