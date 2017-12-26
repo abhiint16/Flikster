@@ -30,6 +30,8 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/gray_rectange_border"
             android:gravity="center"
+            android:id="@+id/moblienolayout"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <Spinner
@@ -38,7 +40,6 @@
                 android:entries="@array/login_country_codes"
                 android:paddingBottom="16dp"
                 android:paddingLeft="20dp"
-                android:visibility="gone"
                 android:paddingTop="16dp"
                 android:spinnerMode="dropdown"></Spinner>
 
@@ -64,17 +65,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:id="@+id/emaillayout"
             android:background="@drawable/gray_rectange_border"
             android:gravity="center"
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/passwordEt"
+                android:id="@+id/et_emailid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
-                android:hint="Enter Password"
-                android:inputType="textPassword"
+                android:hint="Enter Emailid"
+
                 android:paddingBottom="16dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="16dp" />
@@ -109,27 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/login_mobile_title" />
+        android:text="@string/login_email_send" />
 
-    <LinearLayout
-        android:id="@+id/forgot_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/ten"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/forgot_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableBottom="@drawable/gray_rectange_border"
-            android:gravity="center_horizontal"
-            android:text="@string/forgot_password" />
-
-
-    </LinearLayout>
 
 </LinearLayout>

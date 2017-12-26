@@ -1,4 +1,4 @@
-package com.flikster.Authentication;
+package com.flikster.Authentication.SignUpActivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flikster.Authentication.AuthenticationActivity;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
@@ -26,6 +28,8 @@ public class LoginMobileActivity extends AppCompatActivity implements View.OnCli
     EditText register_first_name, register_last_name, register_mobile_no, register_password, register_confirm_password;
     ApiInterface apiInterface;
     TextView register_main_title;
+    Button btn_account_male, btn_account_female;
+    ImageButton back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,11 @@ public class LoginMobileActivity extends AppCompatActivity implements View.OnCli
         register_main_title.setText("Register");
         register_confirm_password = (EditText) findViewById(R.id.register_confirm_password);
         register_btn.setOnClickListener(this);
+        back_btn = (ImageButton)findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(this);
+
+        btn_account_male = (Button) findViewById(R.id.btn_account_male);
+        btn_account_female = (Button) findViewById(R.id.btn_account_female);
     }
 
     @Override
@@ -74,6 +83,17 @@ public class LoginMobileActivity extends AppCompatActivity implements View.OnCli
             }*/
 
             postUserDataRetrofitInit();
+        } else if (view.getId() == R.id.btn_account_male) {
+            btn_account_male.setTextColor(getResources().getColor(R.color.white));
+            btn_account_male.setBackgroundColor(getResources().getColor(R.color.colorCreateAccountSelected));
+        } else if (view.getId() == R.id.btn_account_female) {
+            btn_account_female.setTextColor(getResources().getColor(R.color.white));
+            btn_account_female.setBackgroundColor(getResources().getColor(R.color.colorCreateAccountSelected));
+        }
+        else if (view.getId() == R.id.back_btn){
+            Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginMobileActivity.this, AuthenticationActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "807897414118",
+    "project_id": "fliksterapp-190220"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807897414118:android:8054788f5459b89f",
+        "android_client_info": {
+          "package_name": "com.flikster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807897414118-gu0gh5bnd54pp7ersh8scf6gsicee39o.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "807897414118-2uaedu16t08kau17e63cj2f7a7jth3pn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flikster",
+            "certificate_hash": "cba9c1a569a0fac2ddb72bb38d416e38b1343354"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTLYThVAQ9TcQofJic63Op5QJp-TzH1H8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

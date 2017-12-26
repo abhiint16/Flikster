@@ -1,4 +1,4 @@
-package com.flikster.Authentication;
+package com.flikster.Authentication.SignUpActivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +40,6 @@ public class LoginEmailActivity extends AppCompatActivity implements View.OnClic
         register_last_name = (EditText) findViewById(R.id.register_last_name);
         register_mobile_no = (EditText) findViewById(R.id.register_mobile_no);
         register_mobile_no.setInputType(View.AUTOFILL_TYPE_TEXT);
-//        register_mobile_no.setOnFocusChangeListener(this);
         register_password = (EditText) findViewById(R.id.register_password);
         register_main_title = (TextView) findViewById(R.id.register_main_title);
         register_main_title.setText("Register");
@@ -66,12 +65,51 @@ public class LoginEmailActivity extends AppCompatActivity implements View.OnClic
             } else if (register_confirm_password.getText().toString() == null || "".equals(register_confirm_password.getText().toString())) {
                 register_confirm_password.setError("Confirm Password Can't be empty");
                 return;
-            } else if (!register_password.equals(register_confirm_password)) {
+            } else if (!register_password.getText().toString().equals(register_confirm_password.getText().toString())) {
                 register_confirm_password.setError("Confirm Password is not same is password");
                 return;
             }
-            postUserDataRetrofitInit();
+//            postUserDataRetrofitInit();
+            postUserDataServerInit();
         }
+    }
+
+    private void postUserDataServerInit() {
+        Log.e("inside lognemail", "inside logingemaig");
+        PhoneRegisterPostData emailRegisterPostData =
+                new PhoneRegisterPostData(
+                        register_first_name.getText().toString(),
+                        register_last_name.getText().toString(),
+                        "undefined",
+                        register_mobile_no.getText().toString(),
+                        register_password.getText().toString(),
+                        "user", "");
+        apiInterface = ApiClient.getClient(ApiClient.SIGNUP_URL)
+                .create(ApiInterface.class);
+        Call<RegisterPostStatus> call = apiInterface.emailOrPhoneRegisterUserData(emailRegisterPostData);
+        call.enqueue(new Callback<RegisterPostStatus>() {
+            @Override
+            public void onResponse(Call<RegisterPostStatus> call,
+                                   Response<RegisterPostStatus> response) {
+                if (response.body().getStatusCode() == 200) {
+                    Toast.makeText(LoginEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginEmailActivity.this, "OTP sent to register mobile no", Toast.LENGTH_LONG).show();
+                    SharedPrefsUtil.setStringPreference(LoginEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
+                    Intent intent = new Intent(LoginEmailActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    //Mobile number already exists
+                    Toast.makeText(LoginEmailActivity.this, "Mobile number already exists", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<RegisterPostStatus> call, Throwable t) {
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+            }
+        });
     }
 
     private void postUserDataRetrofitInit() {
@@ -83,7 +121,8 @@ public class LoginEmailActivity extends AppCompatActivity implements View.OnClic
         Call<MobileOrEmailRegisterCheckData> call = apiInterface.emailRegisterUserData(emailRegisterPostData);
         call.enqueue(new Callback<MobileOrEmailRegisterCheckData>() {
             @Override
-            public void onResponse(Call<MobileOrEmailRegisterCheckData> call, Response<MobileOrEmailRegisterCheckData> response) {
+            public void onResponse(Call<MobileOrEmailRegisterCheckData> call,
+                                   Response<MobileOrEmailRegisterCheckData> response) {
                 Toast.makeText(LoginEmailActivity.this, "Login Completed", Toast.LENGTH_LONG).show();
                 SharedPrefsUtil.setStringPreference(LoginEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
                 Intent intent = new Intent(LoginEmailActivity.this, HomeActivity.class);

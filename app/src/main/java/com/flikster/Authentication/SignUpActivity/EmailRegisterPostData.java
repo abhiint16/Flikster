@@ -1,4 +1,4 @@
-package com.flikster.Authentication;
+package com.flikster.Authentication.SignUpActivity;
 
 import com.google.gson.annotations.SerializedName;
 

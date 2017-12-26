@@ -2,125 +2,171 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/activity_authentication_margin">
+    android:layout_gravity="center_vertical"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_verify_mobile_info"
-        android:textSize="16sp"
-        android:textColor="@color/black"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/activity_authentication_margin"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/tv_verify_mobile"
-            android:layout_width="0dp"
-            android:layout_weight="0.7"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+91 7207278209"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            android:enabled="false"
-            android:padding="10dp"
-            android:background="#00000000"
-            />
+            android:text="@string/login_verify_mobile_info"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/tv_verify_mobile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:background="#00000000"
+                android:enabled="false"
+                android:padding="10dp"
+                android:text="+91 "
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_verify_mobileno_edit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:background="@drawable/gray_rectange_border"
+                android:text="@string/login_verify_mobileno_edit"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/otp_no1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/gray_rectange_border"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
+                android:inputType="number"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/otp_no2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/gray_rectange_border"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
+                android:inputType="number"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/otp_no3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/gray_rectange_border"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
+                android:inputType="number"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/otp_no4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/gray_rectange_border"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
+                android:inputType="number"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/otp_no5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:layout_weight="0.1"
+                android:inputType="number"
+                android:background="@drawable/gray_rectange_border"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/otp_no6"
+                android:layout_width="0dp"
+                android:inputType="number"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/gray_rectange_border"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
+                android:padding="8dp" />
+
+            <TextView
+                android:id="@+id/tv_otp_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:gravity="right"
+                android:text="00:45" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_verify_mobile_code_receive" />
+
+            <TextView
+                android:id="@+id/tv_new_otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/five"
+                android:autoLink="none"
+                android:text="@string/login_verify_mobile_resend_code"
+                android:textColor="@color/colorCreateAccountSelected" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btn_verify_mobileno_edit"
-            android:layout_width="0dp"
-            android:layout_weight="0.3"
+            android:id="@+id/btn_mob_verify"
+            style="@style/login_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login_verify_mobileno_edit"
-            android:textAllCaps="false"
-            android:background="@drawable/gray_rectange_border"
-
-            />
+            android:layout_marginTop="30dp"
+            android:text="@string/login_verify_mobile_verify" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
-
-        <EditText
-            android:id="@+id/otp_no1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:maxLength="1"
-            android:background="@drawable/gray_rectange_border"
-            android:layout_marginRight="7dp"
-            android:padding="8dp"/>
-
-        <EditText
-            android:id="@+id/otp_no2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:maxLength="1"
-            android:background="@drawable/gray_rectange_border"
-            android:layout_marginRight="7dp"
-            android:padding="8dp"/>
-
-        <EditText
-            android:id="@+id/otp_no3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:maxLength="1"
-            android:background="@drawable/gray_rectange_border"
-            android:layout_marginRight="7dp"
-            android:padding="8dp"/>
-
-        <EditText
-            android:id="@+id/otp_no4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:maxLength="1"
-            android:background="@drawable/gray_rectange_border"
-            android:layout_marginRight="7dp"
-            android:padding="8dp"/>
-
-        <TextView
-            android:id="@+id/tv_otp_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:text="00:45"
-            android:gravity="right"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_verify_mobile_code_receive"/>
-        <TextView
-            android:id="@+id/tv_new_otp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoLink="none"
-            android:text="@string/login_verify_mobile_resend_code"
-            android:textColor="@color/colorCreateAccountSelected"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_mob_verify"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_verify_mobile_verify"
-        style="@style/login_btn"
-        android:layout_marginTop="30dp"/>
 
 </LinearLayout>

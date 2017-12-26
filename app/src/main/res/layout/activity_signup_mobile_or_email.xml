@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/register_main_title"
+                style="@style/headers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_email_title" />
+
+            <ImageView
+                android:id="@+id/iv_user_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:background="@drawable/gray_rectange_border"
+                android:src="@drawable/user" />
+
+            <TextView
+                style="@style/login_horizontal_line"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/activity_authentication_margin"
+                android:layout_marginRight="@dimen/activity_authentication_margin"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/register_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/ten"
+                        android:background="@drawable/gray_rectange_border"
+                        android:hint="@string/login_createaccount_fullname"
+                        android:padding="15dp" />
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/register_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Last Name"
+                            android:singleLine="true"
+                            android:textColor="@color/black" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/ten"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_account_male"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.4"
+                            android:background="@color/colorCreateAccountSelected"
+                            android:drawableLeft="@drawable/man"
+                            android:text="@string/login_createaccount_male"
+                            android:textColor="@color/white" />
+
+                        <Button
+                            android:id="@+id/btn_account_female"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.4"
+                            android:background="@color/colorImageBackgroundGrey"
+                            android:drawableLeft="@drawable/woman"
+                            android:text="@string/login_createaccount_female" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/register_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/ten"
+                        android:background="@drawable/gray_rectange_border"
+                        android:hint="Phone Number"
+                        android:inputType="number"
+                        android:padding="15dp" />
+
+                    <EditText
+                        android:id="@+id/register_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/ten"
+                        android:background="@drawable/gray_rectange_border"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black" />
+
+
+                    <EditText
+                        android:id="@+id/register_confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/ten"
+                        android:background="@drawable/gray_rectange_border"
+                        android:hint="Confirm Password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black" />
+
+
+                    <Button
+                        android:id="@+id/register_btn"
+                        style="@style/login_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="SUBMIT" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

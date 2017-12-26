@@ -1,30 +1,25 @@
 package com.flikster.HomeActivity;
 
-import android.util.Log;
-
 import com.flikster.AllCommentActivity.CommentsData;
-import com.flikster.Authentication.EmailRegisterPostData;
-import com.flikster.Authentication.MobileOrEmailRegisterCheckData;
+import com.flikster.Authentication.ResendOtpActivity.SendOTPData;
+import com.flikster.Authentication.ResendOtpActivity.VerifyOTPData;
+import com.flikster.Authentication.SignUpActivity.EmailRegisterPostData;
+import com.flikster.Authentication.LoginActivity.LoginData;
+import com.flikster.Authentication.SignUpActivity.MobileOrEmailRegisterCheckData;
+import com.flikster.Authentication.SignUpActivity.PhoneRegisterPostData;
+import com.flikster.Authentication.SignUpActivity.RegisterPostStatus;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryData;
-import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryRecommendedRecyclerData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CreateShareYourStyleData;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleAdapter;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SavestyleData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
-import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 import com.flikster.MyBagActivity.MyBagData;
-
-import org.json.JSONArray;
-
-import java.util.ArrayList;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -134,6 +129,23 @@ public interface ApiInterface {
 
     @POST("http://apiservice.flikster.com/v3/user-ms/registration")
     Call<MobileOrEmailRegisterCheckData> emailRegisterUserData(@Body EmailRegisterPostData emailRegisterPostData);
+
+
+    //user register
+    @POST("http://apiservice.flikster.com/v3/user-ms/userReg")
+    Call<RegisterPostStatus> emailOrPhoneRegisterUserData(@Body PhoneRegisterPostData emailRegisterPostData);
+
+
+    @POST(ApiClient.LOGIN_URL)
+    Call<LoginData> loginUserData(@Body LoginData emailRegisterPostData);
+
+    //Send OTP
+    @POST(ApiClient.SEND_OTP_URL)
+    Call<SendOTPData> sendOtpData(@Body SendOTPData emailRegisterPostData);
+
+    //Check otp
+    @POST(ApiClient.VERIFY_OTP_URL)
+    Call<VerifyOTPData> verifyOtpData(@Body VerifyOTPData emailRegisterPostData);
 
     @Multipart
     @POST("upload")

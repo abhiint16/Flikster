@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
@@ -40,6 +41,8 @@ import com.flikster.permission.DangerousPermissionUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Logins on 10-11-2017.
@@ -272,6 +275,18 @@ public class Common {
                 " and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
         shareIntent.setType("text/plain");
         context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));
+    }
+
+
+
+    public static boolean emailValidator(String email)
+    {
+        Pattern pattern;
+        Matcher matcher;
+        final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        pattern = Pattern.compile(EMAIL_PATTERN);
+        matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
 }

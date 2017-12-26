@@ -376,6 +376,17 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
         toolbar_main_title.setOnClickListener(this);
         toolbar_pref_spinner.setVisibility(View.GONE);
+
+        try {
+            if (getIntent().getStringArrayExtra("GAMIL_ID").toString() != null && !getIntent().getStringArrayExtra("GAMIL_ID").toString().isEmpty()) {
+                Toast.makeText(getApplicationContext(), getIntent().getStringArrayExtra("GAMIL_ID").toString()
+                        + "Success", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+
+        }
+
+
         /*actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         actionBarDrawerToggle.syncState();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);*/
@@ -450,6 +461,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                     }
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -554,9 +566,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_terms) {
             Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_login_btn) {
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_create_account_btn) {
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "SIGNUP");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
         } else if (viewId == R.id.toolbar_main_title) {
