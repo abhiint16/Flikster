@@ -173,6 +173,7 @@
                                 android:entries="@array/login_country_codes"
                                 android:paddingBottom="16dp"
                                 android:paddingLeft="20dp"
+                                android:visibility="gone"
                                 android:paddingTop="16dp"
                                 android:spinnerMode="dropdown"></Spinner>
 

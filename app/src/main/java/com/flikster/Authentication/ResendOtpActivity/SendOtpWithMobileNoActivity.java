@@ -78,12 +78,19 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
                     }
                 }
             }
-            if (passwordEt.getText().toString() == null || "".equals(et_emailid.getText().toString())) {
-                passwordEt.setError("Password Can't be empty");
-                return;
-            } else {
-                postUserDataRetrofitInit();
+            try {
+                /*if (passwordEt.getText().toString() != null || "".equals(passwordEt.getText().toString())) {
+                    passwordEt.setError("Password Can't be empty");
+                    return;
+                } else {
+
+                }*/
+
+
+            } catch (Exception e) {
+
             }
+            postUserDataRetrofitInit();
 
 
         }
@@ -107,6 +114,11 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
         call.enqueue(new Callback<SendOTPData>() {
             @Override
             public void onResponse(Call<SendOTPData> call, Response<SendOTPData> response) {
+                try {
+
+                }catch (Exception e){
+
+                }
                 Log.e("StatusCode:", response.body().getStatusCode() + "");
 //                Log.e("")
                 if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {

@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.Authentication.AuthenticationActivity;
+import com.flikster.Authentication.LoginActivity.LoginWithEmailActivity;
+import com.flikster.Authentication.ResendOtpActivity.LoginMobileOtpActivity;
+import com.flikster.Authentication.ResendOtpActivity.SendOtpWithMobileNoActivity;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
@@ -175,9 +178,12 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
                 if (CLICK_EVENT.equals("email")) {
                     if (response.body().getStatusCode() == 200) {
                         Toast.makeText(SignUpWithEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
-                        Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register mobile no", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register email", Toast.LENGTH_LONG).show();
                         SharedPrefsUtil.setStringPreference(SignUpWithEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
-                        Intent intent = new Intent(SignUpWithEmailActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(SignUpWithEmailActivity.this, LoginMobileOtpActivity.class);
+                        intent.putExtra("TYPE", "email");
+                        intent.putExtra("TYPE_DATA", et_emailid.getText().toString());
+                        intent.putExtra("OTP_ID", response.body().getId().toString());
                         startActivity(intent);
                     } else {
                         Toast.makeText(SignUpWithEmailActivity.this, "Email already exists", Toast.LENGTH_LONG).show();
@@ -185,15 +191,18 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
                 } else {
                     if (response.body().getStatusCode() == 200) {
                         Toast.makeText(SignUpWithEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
-                        Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register mobile no", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register mobile", Toast.LENGTH_LONG).show();
                         SharedPrefsUtil.setStringPreference(SignUpWithEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
-                        Intent intent = new Intent(SignUpWithEmailActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(SignUpWithEmailActivity.this,
+                                LoginMobileOtpActivity.class);
+                        intent.putExtra("TYPE", "mobile");
+                        intent.putExtra("TYPE_DATA", et_mobile_no.getText().toString());
+                        intent.putExtra("OTP_ID", response.body().getId());
                         startActivity(intent);
                     } else {
                         Toast.makeText(SignUpWithEmailActivity.this, "Mobile Number already exists", Toast.LENGTH_LONG).show();
                     }
                 }
-
 
             }
 

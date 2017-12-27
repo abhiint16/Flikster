@@ -44,16 +44,21 @@ public class LoginMobileOtpActivity extends AppCompatActivity implements View.On
     }
 
     private void initializeRest() {
-        Log.e("TYPE_DATA", getIntent().getStringExtra("TYPE_DATA").toString());
-        if (getIntent().getStringExtra("TYPE_DATA").toString() != null && !getIntent().getStringExtra("TYPE_DATA").toString().isEmpty()) {
-            typeStr = getIntent().getStringExtra("TYPE").toString();
-            btnMobileNoEdit.setText("Edit Number");
-            etMobileNo.setText("+91 " + getIntent().getStringExtra("TYPE_DATA").toString());
-        } else {
-            typeStr = getIntent().getStringExtra("TYPE").toString();
-            btnMobileNoEdit.setText("Edit Number");
-            etMobileNo.setText("" + getIntent().getStringExtra("TYPE_DATA").toString());
+        try {
+            Log.e("TYPE_DATA", getIntent().getStringExtra("TYPE_DATA").toString());
+            if (getIntent().getStringExtra("TYPE_DATA").toString() != null && !getIntent().getStringExtra("TYPE_DATA").toString().isEmpty()) {
+                typeStr = getIntent().getStringExtra("TYPE").toString();
+                btnMobileNoEdit.setText("Edit Number");
+                etMobileNo.setText("+91 " + getIntent().getStringExtra("TYPE_DATA").toString());
+            } else {
+                typeStr = getIntent().getStringExtra("TYPE").toString();
+                btnMobileNoEdit.setText("Edit Number");
+                etMobileNo.setText("" + getIntent().getStringExtra("TYPE_DATA").toString());
+            }
+        }catch (Exception e){
+
         }
+
     }
 
     private void initializeView() {
@@ -280,7 +285,6 @@ public class LoginMobileOtpActivity extends AppCompatActivity implements View.On
         call.enqueue(new Callback<VerifyOTPData>() {
             @Override
             public void onResponse(Call<VerifyOTPData> call, Response<VerifyOTPData> response) {
-
                 if (response.body().getFirstname().toString() != null && !response.body().getFirstname().toString().isEmpty()) {
                     Log.e("USER_NAME", response.body().getFirstname().toString());
                     Log.e("USER_ID", response.body().getId().toString());
@@ -292,6 +296,7 @@ public class LoginMobileOtpActivity extends AppCompatActivity implements View.On
                             "USER_ID", response.body().getId().toString());
                     SharedPrefsUtil.setStringPreference(LoginMobileOtpActivity.this,
                             "USER_ROLE", response.body().getFirstname().toString());
+                    Toast.makeText(getApplicationContext(), "Verified.",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginMobileOtpActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }

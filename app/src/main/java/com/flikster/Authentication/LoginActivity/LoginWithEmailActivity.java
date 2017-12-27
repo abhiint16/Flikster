@@ -101,16 +101,21 @@ public class LoginWithEmailActivity extends AppCompatActivity implements View.On
                 i.putExtra("MOBILE_NO", et_mobile_no.getText().toString());
             }
             startActivity(i);
-
-
         }
     }
 
     private void postUserDataRetrofitInit() {
+        String nameOrMobile = "";
+        if (CLICK_EVENT.equals("email")) {
+            nameOrMobile = et_emailid.getText().toString();
+        } else {
+            nameOrMobile = et_mobile_no.getText().toString();
+        }
+        Log.e("paramsLogin", nameOrMobile + passwordEt.getText().toString());
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
         LoginData emailRegisterPostData = new LoginData
-                (et_emailid.getText().toString(), passwordEt.getText().toString());
+                (nameOrMobile, passwordEt.getText().toString());
         apiInterface = ApiClient.getClient
                 (ApiClient.LOGIN_URL)
                 .create(ApiInterface.class);
@@ -127,7 +132,7 @@ public class LoginWithEmailActivity extends AppCompatActivity implements View.On
                     Intent intent = new Intent(LoginWithEmailActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(LoginWithEmailActivity.this, "Login failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginWithEmailActivity.this, "Login failed" + response.body().getMessage(), Toast.LENGTH_LONG).show();
                 }
 
 

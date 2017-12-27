@@ -9,6 +9,18 @@ import com.google.gson.annotations.SerializedName;
 public class RegisterPostStatus {
     @SerializedName("statusCode")
     private Integer statusCode;
+
+    @SerializedName("id")
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @SerializedName("otpStatus")
     private Boolean otpStatus;
 

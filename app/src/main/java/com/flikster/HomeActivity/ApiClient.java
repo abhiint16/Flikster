@@ -28,6 +28,7 @@ public class ApiClient {
 
     //Login
     public static final String LOGIN_URL = "http://apiservice.flikster.com/v3/user-ms/login/";
+    //http://apiservice.flikster.com/v3/user-ms/login
 
     //Registe
     public static final String SIGNUP_URL = "http://apiservice.flikster.com/v3/user-ms/userReg/";
