@@ -3,9 +3,13 @@ package com.flikster.Authentication;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.flikster.Authentication.LoginActivity.LoginWithEmailActivity;
 import com.flikster.Authentication.SignUpActivity.SignUpWithEmailActivity;
@@ -38,6 +47,9 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
@@ -48,7 +60,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private ImageButton back_btn;
     SignInButton btnLoginGoogle;
     String comingPage = "";
-    Button btnLoginFacebook;
+//    Button btnLoginFacebook;
+
+    //Facebook Login
+    LoginButton btnLoginFacebook;
+    CallbackManager callbackManager;
 
 
     //Gmail Login
@@ -63,11 +79,30 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private ImageView imgProfilePic;
     private TextView txtName, txtEmail;
     Context mContext;
+    Button custom_facebook, custom_gmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_screen);
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.flikster",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
         initializeView();
         gmailView();
     }
@@ -97,13 +132,17 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         sharedPref = new SharedPref(getApplicationContext());
         btnLoginPhone = (Button) findViewById(R.id.btn_login_phone);
         btnLoginEmail = (Button) findViewById(R.id.btn_login_mail);
-        btnLoginGoogle = (SignInButton) findViewById(R.id.btn_login_google);
-        btnLoginFacebook = (Button) findViewById(R.id.btn_login_facebook);
+        btnLoginGoogle = (SignInButton) findViewById(R.id.btnLoginGoogle);
+        btnLoginFacebook = (LoginButton) findViewById(R.id.btn_login_facebook);
         tvLoginTermsCond = (TextView) findViewById(R.id.tv_login_terms);
         keycloak = (Button) findViewById(R.id.keycloak);
         headertxt = (TextView) findViewById(R.id.headertxt);
         back_btn = (ImageButton) findViewById(R.id.back_btn);
         without_keycloak = (Button) findViewById(R.id.without_keycloak);
+
+        custom_facebook = (Button) findViewById(R.id.custom_facebook);
+        custom_gmail = (Button) findViewById(R.id.custom_gmail);
+
         without_keycloak.setOnClickListener(this);
         keycloak.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
@@ -112,6 +151,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         btnLoginFacebook.setOnClickListener(this);
         tvLoginTermsCond.setOnClickListener(this);
         back_btn.setOnClickListener(this);
+        custom_facebook.setOnClickListener(this);
+        custom_gmail.setOnClickListener(this);
 
         comingPage = SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE");
         if (comingPage != null && !comingPage.isEmpty()) {
@@ -121,6 +162,31 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                 headertxt.setText("LOGIN");
             }
         }
+
+        callbackManager = CallbackManager.Factory.create();
+        btnLoginFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(getApplicationContext(),
+                        loginResult.getAccessToken().getUserId()
+                                + loginResult.getAccessToken().getToken()
+                                + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
+                startActivity(intent);
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
     }
 
     @Override
@@ -146,8 +212,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                     gotoEmailLogin("email");
                 }
             }
-        } else if (view.getId() == R.id.btn_login_google) {
-            gotoGoogleLogin();
         } else if (view.getId() == R.id.btn_login_facebook) {
             gotoFacebookLogin();
         } else if (view.getId() == R.id.tv_login_terms) {
@@ -190,6 +254,12 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
             startActivity(intent);
+        } else if (view.getId() == R.id.custom_gmail) {
+            btnLoginGoogle.performClick();
+        } else if (view.getId() == R.id.custom_facebook) {
+            btnLoginFacebook.performClick();
+        } else if (view.getId() == R.id.btnLoginGoogle) {
+            gotoGoogleLogin();
         }
     }
 
@@ -219,7 +289,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void gotoFacebookLogin() {
-        Toast.makeText(AuthenticationActivity.this, "Coming Soon", Toast.LENGTH_LONG).show();
+        //Toast.makeText(AuthenticationActivity.this, "Coming Soon", Toast.LENGTH_LONG).show();
     }
 
     private void showTermsConditions() {
@@ -248,7 +318,10 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
+
     }
 
     private void handleSignInResult(GoogleSignInResult result) {

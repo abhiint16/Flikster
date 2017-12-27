@@ -93,6 +93,7 @@ public class LoginWithEmailActivity extends AppCompatActivity implements View.On
             postUserDataRetrofitInit();
         } else if (view.getId() == R.id.forgot_txt) {
             Intent i = new Intent(LoginWithEmailActivity.this, SendOtpWithMobileNoActivity.class);
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "PERFORM_FORGOT", "ACCESS");
             if (CLICK_EVENT.equals("email")) {
                 i.putExtra("TYPE", "email");
                 i.putExtra("MOBILE_NO", et_emailid.getText().toString());

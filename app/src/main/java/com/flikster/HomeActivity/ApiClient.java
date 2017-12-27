@@ -40,6 +40,10 @@ public class ApiClient {
     public static final String VERIFY_OTP_URL = "http://apiservice.flikster.com/v3/user-ms/checkOtp/";
 
 
+    //Check Password
+    public static final String CHANGE_PASSWORD_URL = "http://apiservice.flikster.com/v3/user-ms/changePassword/";
+
+
     public static Retrofit getClient(String baseURL) {
         retrofit = null;
         if (retrofit == null) {

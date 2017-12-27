@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flikster.Authentication.ChangePasswordActivity.ChangePasswordActivity;
+import com.flikster.Authentication.ChangePasswordActivity.ChangePasswordData;
 import com.flikster.Authentication.LoginActivity.LoginData;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
@@ -33,6 +35,7 @@ public class LoginMobileOtpActivity extends AppCompatActivity implements View.On
     String otpStr = "";
     ApiInterface apiInterface;
     String typeStr;
+    String PEFORM_FORGET = "";
 
 
     @Override
@@ -55,7 +58,7 @@ public class LoginMobileOtpActivity extends AppCompatActivity implements View.On
                 btnMobileNoEdit.setText("Edit Number");
                 etMobileNo.setText("" + getIntent().getStringExtra("TYPE_DATA").toString());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -296,9 +299,19 @@ public class LoginMobileOtpActivity extends AppCompatActivity implements View.On
                             "USER_ID", response.body().getId().toString());
                     SharedPrefsUtil.setStringPreference(LoginMobileOtpActivity.this,
                             "USER_ROLE", response.body().getFirstname().toString());
-                    Toast.makeText(getApplicationContext(), "Verified.",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginMobileOtpActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Verified.", Toast.LENGTH_SHORT).show();
+
+                    PEFORM_FORGET = SharedPrefsUtil.getStringPreference(getApplicationContext(), "PERFORM_FORGOT");
+                    Log.e("PEFORM_FORGET", PEFORM_FORGET + "");
+                    if (PEFORM_FORGET != null && !PEFORM_FORGET.isEmpty()) {
+                        Intent intent = new Intent(LoginMobileOtpActivity.this, ChangePasswordActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(LoginMobileOtpActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+
+
                 }
 
                /* if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {

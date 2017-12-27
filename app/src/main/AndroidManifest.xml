@@ -13,17 +13,21 @@
         android:allowBackup="true"
         android:icon="@drawable/flikster_icon"
         android:label="@string/app_name"
-        android:vmSafeMode="true"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:vmSafeMode="true">
         <activity
             android:name=".HomeActivity.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
-        <activity
+        <!--<activity
             android:name=".Authentication.AuthenticationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />-->
+        <activity
+            android:name="com.flikster.Authentication.AuthenticationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -39,7 +43,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Authentication.ResendOtpActivity.LoginEmailOtpActivity"
+            android:name="com.flikster.Authentication.ChangePasswordActivity.ChangePasswordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -111,11 +115,22 @@
 
         <activity
             android:name="com.flikster.permission.DangerousPermissionActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity android:name=".AllCommentActivity.AllCommentActivity"></activity>
         <activity android:name=".FullScreenYoutubeView.FullScreenYoutubeView"></activity>
-        <service android:name="org.jboss.aerogear.android.authorization.oauth2.OAuth2AuthzService"/>
+
+        <service android:name="org.jboss.aerogear.android.authorization.oauth2.OAuth2AuthzService" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
 
 </manifest>

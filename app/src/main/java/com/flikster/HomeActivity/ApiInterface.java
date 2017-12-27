@@ -1,6 +1,7 @@
 package com.flikster.HomeActivity;
 
 import com.flikster.AllCommentActivity.CommentsData;
+import com.flikster.Authentication.ChangePasswordActivity.ChangePasswordData;
 import com.flikster.Authentication.ResendOtpActivity.SendOTPData;
 import com.flikster.Authentication.ResendOtpActivity.VerifyOTPData;
 import com.flikster.Authentication.SignUpActivity.EmailRegisterPostData;
@@ -146,6 +147,11 @@ public interface ApiInterface {
     //Check otp
     @POST(ApiClient.VERIFY_OTP_URL)
     Call<VerifyOTPData> verifyOtpData(@Body VerifyOTPData emailRegisterPostData);
+
+
+    //Check otp
+    @POST(ApiClient.CHANGE_PASSWORD_URL)
+    Call<ChangePasswordData> changePasswordData(@Body ChangePasswordData emailRegisterPostData);
 
     @Multipart
     @POST("upload")

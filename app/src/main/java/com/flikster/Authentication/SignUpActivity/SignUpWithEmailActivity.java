@@ -89,6 +89,9 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
         btn_account_female.setOnClickListener(this);
         back_btn = (ImageButton) findViewById(R.id.back_btn);
         back_btn.setOnClickListener(this);
+
+        //SharedPrefsUtil.getStringPreference(getApplicationContext(), "PERFORM_FORGOT");
+        SharedPrefsUtil.setStringPreference(getApplicationContext(), "PERFORM_FORGOT", null);
     }
 
     @Override
@@ -175,8 +178,10 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
             public void onResponse(Call<RegisterPostStatus> call,
                                    Response<RegisterPostStatus> response) {
                 Log.e("StatusCode", response.body().getStatusCode() + "");
+
                 if (CLICK_EVENT.equals("email")) {
                     if (response.body().getStatusCode() == 200) {
+
                         Toast.makeText(SignUpWithEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
                         Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register email", Toast.LENGTH_LONG).show();
                         SharedPrefsUtil.setStringPreference(SignUpWithEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");

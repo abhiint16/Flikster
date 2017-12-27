@@ -114,13 +114,7 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
         call.enqueue(new Callback<SendOTPData>() {
             @Override
             public void onResponse(Call<SendOTPData> call, Response<SendOTPData> response) {
-                try {
-
-                }catch (Exception e){
-
-                }
                 Log.e("StatusCode:", response.body().getStatusCode() + "");
-//                Log.e("")
                 if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
                     if (response.body().isOtpStatus()) {
                         Toast.makeText(SendOtpWithMobileNoActivity.this, "OTP sent..",
