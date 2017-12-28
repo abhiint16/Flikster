@@ -24,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginWithEmailActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button login_btn;
     EditText et_emailid, et_mobile_no, passwordEt, register_mobile_no, register_password, register_confirm_password;
@@ -92,7 +92,7 @@ public class LoginWithEmailActivity extends AppCompatActivity implements View.On
             }
             postUserDataRetrofitInit();
         } else if (view.getId() == R.id.forgot_txt) {
-            Intent i = new Intent(LoginWithEmailActivity.this, SendOtpWithMobileNoActivity.class);
+            Intent i = new Intent(LoginWithEmailOrMobileActivity.this, SendOtpWithMobileNoActivity.class);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PERFORM_FORGOT", "ACCESS");
             if (CLICK_EVENT.equals("email")) {
                 i.putExtra("TYPE", "email");
@@ -120,27 +120,48 @@ public class LoginWithEmailActivity extends AppCompatActivity implements View.On
         apiInterface = ApiClient.getClient
                 (ApiClient.LOGIN_URL)
                 .create(ApiInterface.class);
-        Call<LoginData> call = apiInterface.loginUserData(emailRegisterPostData);
-        call.enqueue(new Callback<LoginData>() {
+        Call<LoginResponseData> call = apiInterface.loginUserData(emailRegisterPostData);
+        call.enqueue(new Callback<LoginResponseData>() {
             @Override
-            public void onResponse(Call<LoginData> call, Response<LoginData> response) {
+            public void onResponse(Call<LoginResponseData> call, Response<LoginResponseData> response) {
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
                 if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
-                    Toast.makeText(LoginWithEmailActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
-                    SharedPrefsUtil.setStringPreference(LoginWithEmailActivity.this,
-                            "IS_LOGGED_IN", "LOGGED_IN");
-                    Intent intent = new Intent(LoginWithEmailActivity.this, HomeActivity.class);
+                    Toast.makeText(LoginWithEmailOrMobileActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_ID",
+                            response.body().getData().getFirstname());
+
+                    if (response.body().getData().getFirstname().toString() != null
+                            && !response.body().getData().getFirstname().toString().isEmpty()) {
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME",
+                                response.body().getData().getFirstname());
+                    }
+                    if (response.body().getData().getLastname().toString() != null
+                            && !response.body().getData().getLastname().toString().isEmpty()) {
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME",
+                                response.body().getData().getFirstname() +
+                                        " " + response.body().getData().getLastname()
+                        );
+                    }
+                    Log.e("FirstName", response.body().getData().getFirstname());
+                    Toast.makeText(LoginWithEmailOrMobileActivity.this, "" +
+                            response.body().getData().getFirstname(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginWithEmailOrMobileActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(LoginWithEmailActivity.this, "Login failed" + response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    if (CLICK_EVENT.equals("email")) {
+                        Toast.makeText(LoginWithEmailOrMobileActivity.this, "Invalid Emaild or Password", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(LoginWithEmailOrMobileActivity.this, "Invalid Mobile No or Password", Toast.LENGTH_LONG).show();
+                    }
+
                 }
 
 
             }
 
             @Override
-            public void onFailure(Call<LoginData> call, Throwable t) {
+            public void onFailure(Call<LoginResponseData> call, Throwable t) {
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
                 Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);

@@ -1,4 +1,4 @@
-package com.flikster.Authentication.SignUpActivity;
+package com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.Authentication.AuthenticationActivity;
-import com.flikster.Authentication.LoginActivity.LoginWithEmailActivity;
+import com.flikster.Authentication.LoginActivity.LoginWithEmailOrMobileActivity;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
@@ -138,7 +138,7 @@ public class SignUpWithPhoneActivity extends AppCompatActivity implements View.O
                     Toast.makeText(SignUpWithPhoneActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
                     Toast.makeText(SignUpWithPhoneActivity.this, "OTP sent to register mobile no", Toast.LENGTH_LONG).show();
                     SharedPrefsUtil.setStringPreference(SignUpWithPhoneActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
-                    Intent intent = new Intent(SignUpWithPhoneActivity.this, LoginWithEmailActivity.class);
+                    Intent intent = new Intent(SignUpWithPhoneActivity.this, LoginWithEmailOrMobileActivity.class);
                     startActivity(intent);
                 } else {
                     //Mobile number already exists

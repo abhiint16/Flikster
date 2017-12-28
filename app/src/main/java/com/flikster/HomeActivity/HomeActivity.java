@@ -63,7 +63,6 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.flikster.AllCommentActivity.AllCommentActivity;
 import com.flikster.Authentication.AuthenticationActivity;
-import com.flikster.Authentication.LoginCreateAccountActivity;
 import com.flikster.BuildConfig;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
@@ -174,6 +173,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     List<String> pref = new ArrayList<>();
     boolean industrySpinnerSelection = false;
     TextView toolbar_main_title;
+    TextView header_drawer_layout_username;
+
+    String UserId = "";
+    String Username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,10 +200,25 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     private void setNavigationBar() {
-        if (SharedPrefsUtil.getStringPreference(HomeActivity.this, "IS_LOGGED_IN").equals("LOGGED_IN")) {
+       /* if (SharedPrefsUtil.getStringPreference(HomeActivity.this, "IS_LOGGED_IN").equals("LOGGED_IN")) {
             right_navigation_bar_logged_in_container.setVisibility(View.VISIBLE);
             right_navigation_bar_non_logged_in_container.setVisibility(View.GONE);
         } else if (SharedPrefsUtil.getStringPreference(HomeActivity.this, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            right_navigation_bar_logged_in_container.setVisibility(View.GONE);
+            right_navigation_bar_non_logged_in_container.setVisibility(View.VISIBLE);
+        }*/
+        UserId = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID");
+        Username = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_NAME");
+        if (UserId != null && !UserId.isEmpty()) {
+            right_navigation_bar_logged_in_container.setVisibility(View.VISIBLE);
+            right_navigation_bar_non_logged_in_container.setVisibility(View.GONE);
+            if (Username != null && !Username.isEmpty()) {
+                header_drawer_layout_username.setText(Username + "");
+            } else {
+
+            }
+
+        } else {
             right_navigation_bar_logged_in_container.setVisibility(View.GONE);
             right_navigation_bar_non_logged_in_container.setVisibility(View.VISIBLE);
         }
@@ -377,6 +395,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_main_title.setOnClickListener(this);
         toolbar_pref_spinner.setVisibility(View.GONE);
 
+
         try {
             if (getIntent().getStringArrayExtra("GAMIL_ID").toString() != null && !getIntent().getStringArrayExtra("GAMIL_ID").toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(), getIntent().getStringArrayExtra("GAMIL_ID").toString()
@@ -480,6 +499,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_main_title = (TextView) findViewById(R.id.toolbar_main_title);
         toolbar_pref_spinner = (Spinner) findViewById(R.id.toolbar_pref_spinner);
         camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
+        header_drawer_layout_username = (TextView) findViewById(R.id.header_drawer_layout_username);
         right_navigation_bar_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_logged_in_container);
         right_navigation_bar_non_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_non_logged_in_container);
         right_navigation_bar_my_account = (TextView) findViewById(R.id.right_navigation_bar_my_account);
@@ -548,6 +568,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if (viewId == R.id.right_navigation_bar_rewards) {
             beginTransact(new RewardsFragment());
         } else if (viewId == R.id.right_navigation_bar_logout) {
+            SharedPrefsUtil.setStringPreference(HomeActivity.this,
+                    "USER_ID", null);
             SharedPrefsUtil.setStringPreference(HomeActivity.this, "IS_LOGGED_IN", "NOT_LOGGED_IN");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);

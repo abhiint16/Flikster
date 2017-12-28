@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -42,6 +43,7 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
 
     private void createDots() {
         dotsLayout=(LinearLayout)findViewById(R.id.layoutDots);
+//        dotsLayout.setVisibility(View.GONE);
         dots=new ImageView[layouts.length];
         introSliderPresenter.dotsCreation(dotsLayout);
 
@@ -57,9 +59,9 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
         viewPager=(ViewPager)findViewById(R.id.view_pager);
         dotsLayout=(LinearLayout)findViewById(R.id.layoutDots);
         layouts=new int[]{
-                R.layout.welcome_slide1,
-                R.layout.welcome_slide2,
-                R.layout.welcome_slide3,};
+                R.layout.slidetwoimage,
+                R.layout.slidethreeimage,
+                R.layout.slidefourimage,};
     }
 
     private void initializeButton() {
@@ -98,9 +100,13 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
         if(view.getId()==R.id.btn_next)
         {
             int current = viewPager.getCurrentItem()+1;
+            Log.e("currentItem", current+"");
             if (current < layouts.length) {
                 viewPager.setCurrentItem(current);
             } else {
+                launchHomeScreen();
+            }
+            if (current == 4){
                 launchHomeScreen();
             }
         }

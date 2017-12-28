@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:alpha=".5"
+        android:visibility="gone"
         android:layout_above="@id/layoutDots"
         android:background="@android:color/white" />
 
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="#d6d6d6"
+        android:background="@color/transparent"
         android:text="next"
         android:textColor="@color/colorPrimary" />
 
@@ -41,8 +42,8 @@
         android:id="@+id/btn_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#d6d6d6"
         android:text="skip"
+        android:background="@color/transparent"
         android:textColor="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

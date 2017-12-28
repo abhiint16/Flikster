@@ -19,33 +19,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingBottom="20dp"
         android:paddingLeft="30dp"
         android:paddingRight="10dp"
-        android:paddingBottom="20dp"
         android:paddingTop="20dp">
 
         <com.flikster.Util.RoundedImageView
+            android:id="@+id/header_drawer_layout_profile_pic"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:id="@+id/header_drawer_layout_profile_pic"/>
+            android:src="@drawable/userprofile" />
 
         <TextView
+            android:id="@+id/header_drawer_layout_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingLeft="20dp"
             android:gravity="start"
+            android:paddingLeft="20dp"
             android:text="User Name"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:id="@+id/header_drawer_layout_username"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:background="@color/colorAccent"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"/>
+        android:background="@color/colorAccent" />
 </LinearLayout>

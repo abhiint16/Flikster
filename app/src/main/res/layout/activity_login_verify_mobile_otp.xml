@@ -1,171 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_common_recycler_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-    android:background="@color/white"
-    android:gravity="center_vertical"
-    android:orientation="vertical">
+    android:focusableInTouchMode="true">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/activity_authentication_margin"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_verify_mobile_info"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/activity_authentication_margin"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/tv_verify_mobile"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
-                android:background="#00000000"
-                android:enabled="false"
-                android:padding="10dp"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:text="@string/login_verify_mobile_info"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/tv_verify_mobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:background="#00000000"
+                    android:enabled="false"
+                    android:padding="10dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_verify_mobileno_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:background="@drawable/gray_rectange_border"
+                    android:text="@string/login_verify_mobileno_edit"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/send_otp"
+                    style="@style/login_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="Send"
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/otp_no1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/gray_rectange_border"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:padding="8dp" />
+
+                <EditText
+                    android:id="@+id/otp_no2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/gray_rectange_border"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:padding="8dp" />
+
+                <EditText
+                    android:id="@+id/otp_no3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/gray_rectange_border"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:padding="8dp" />
+
+                <EditText
+                    android:id="@+id/otp_no4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/gray_rectange_border"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:padding="8dp" />
+
+                <EditText
+                    android:id="@+id/otp_no5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/gray_rectange_border"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:padding="8dp" />
+
+                <EditText
+                    android:id="@+id/otp_no6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/gray_rectange_border"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_otp_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:gravity="right"
+                    android:text="00:45"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_verify_mobile_code_receive" />
+
+                <TextView
+                    android:id="@+id/tv_new_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/five"
+                    android:autoLink="none"
+                    android:text="@string/login_verify_mobile_resend_code"
+                    android:textColor="@color/colorCreateAccountSelected" />
+            </LinearLayout>
 
             <Button
-                android:id="@+id/btn_verify_mobileno_edit"
-                android:layout_width="0dp"
+                android:id="@+id/btn_mob_verify"
+                style="@style/login_btn"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:background="@drawable/gray_rectange_border"
-                android:text="@string/login_verify_mobileno_edit"
-                android:textAllCaps="false" />
-
+                android:layout_marginTop="30dp"
+                android:text="@string/login_verify_mobile_verify" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/otp_no1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
-                android:layout_weight="0.1"
-                android:background="@drawable/gray_rectange_border"
-                android:imeOptions="actionNext"
-                android:maxLength="1"
-                android:inputType="number"
-                android:padding="8dp" />
-
-            <EditText
-                android:id="@+id/otp_no2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
-                android:layout_weight="0.1"
-                android:background="@drawable/gray_rectange_border"
-                android:imeOptions="actionNext"
-                android:maxLength="1"
-                android:inputType="number"
-                android:padding="8dp" />
-
-            <EditText
-                android:id="@+id/otp_no3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
-                android:layout_weight="0.1"
-                android:background="@drawable/gray_rectange_border"
-                android:imeOptions="actionNext"
-                android:maxLength="1"
-                android:inputType="number"
-                android:padding="8dp" />
-
-            <EditText
-                android:id="@+id/otp_no4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
-                android:layout_weight="0.1"
-                android:background="@drawable/gray_rectange_border"
-                android:imeOptions="actionNext"
-                android:maxLength="1"
-                android:inputType="number"
-                android:padding="8dp" />
-
-            <EditText
-                android:id="@+id/otp_no5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
-                android:layout_weight="0.1"
-                android:inputType="number"
-                android:background="@drawable/gray_rectange_border"
-                android:imeOptions="actionNext"
-                android:maxLength="1"
-                android:padding="8dp" />
-
-            <EditText
-                android:id="@+id/otp_no6"
-                android:layout_width="0dp"
-                android:inputType="number"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
-                android:layout_weight="0.1"
-                android:background="@drawable/gray_rectange_border"
-                android:imeOptions="actionNext"
-                android:maxLength="1"
-                android:padding="8dp" />
-
-            <TextView
-                android:id="@+id/tv_otp_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:gravity="right"
-                android:text="00:45" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_verify_mobile_code_receive" />
-
-            <TextView
-                android:id="@+id/tv_new_otp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/five"
-                android:autoLink="none"
-                android:text="@string/login_verify_mobile_resend_code"
-                android:textColor="@color/colorCreateAccountSelected" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_mob_verify"
-            style="@style/login_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/login_verify_mobile_verify" />
     </LinearLayout>
 
-</LinearLayout>
+    <com.leo.simplearcloader.SimpleArcLoader
+        android:id="@+id/arc_loader"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        custom:arc_colors="@color/colorAccent"
+        custom:arc_margin="3dp"
+        custom:arc_speed="medium"
+        custom:arc_style="simple_arc"
+        custom:arc_thickness="3dp"></com.leo.simplearcloader.SimpleArcLoader>
+</RelativeLayout>

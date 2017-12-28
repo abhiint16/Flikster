@@ -19,46 +19,40 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.flikster.Authentication.LoginActivity.LoginWithEmailActivity;
-import com.flikster.Authentication.SignUpActivity.SignUpWithEmailActivity;
-import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneActivity;
+import com.flikster.Authentication.LoginActivity.LoginWithEmailOrMobileActivity;
+import com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.SignUpWithPhoneActivity;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.SharedPrefsUtil;
-import com.google.android.gms.common.SignInButton;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private Button btnLoginPhone, btnLoginEmail;
     private Button keycloak, without_keycloak;
     private TextView tvLoginTermsCond, headertxt;
     SharedPref sharedPref;
     private ImageButton back_btn;
-    SignInButton btnLoginGoogle;
+    Button btnLoginGoogle;
     String comingPage = "";
 //    Button btnLoginFacebook;
 
@@ -122,8 +116,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                 .build();
         btnRevokeAccess.setOnClickListener(this);
         // Customizing G+ button
-        btnLoginGoogle.setSize(SignInButton.SIZE_STANDARD);
-        btnLoginGoogle.setScopes(gso.getScopeArray());
+        /*btnLoginGoogle.setSize(SignInButton.SIZE_STANDARD);
+        btnLoginGoogle.setScopes(gso.getScopeArray());*/
+
 
 
     }
@@ -132,7 +127,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         sharedPref = new SharedPref(getApplicationContext());
         btnLoginPhone = (Button) findViewById(R.id.btn_login_phone);
         btnLoginEmail = (Button) findViewById(R.id.btn_login_mail);
-        btnLoginGoogle = (SignInButton) findViewById(R.id.btnLoginGoogle);
+        btnLoginGoogle = (Button) findViewById(R.id.btnLoginGoogle);
         btnLoginFacebook = (LoginButton) findViewById(R.id.btn_login_facebook);
         tvLoginTermsCond = (TextView) findViewById(R.id.tv_login_terms);
         keycloak = (Button) findViewById(R.id.keycloak);
@@ -272,7 +267,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void gotoEmailLogin(String type) {
-        Intent i = new Intent(AuthenticationActivity.this, LoginWithEmailActivity.class);
+        Intent i = new Intent(AuthenticationActivity.this, LoginWithEmailOrMobileActivity.class);
         i.putExtra("TYPE", type);
         startActivity(i);
     }
@@ -285,7 +280,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
     private void gotoGoogleLogin() {
         signIn();
-//        Toast.makeText(AuthenticationActivity.this, "Coming Soon", Toast.LENGTH_LONG).show();
     }
 
     private void gotoFacebookLogin() {
@@ -405,5 +399,10 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         }
     }*/
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(AuthenticationActivity.this, HomeActivity.class);
+        startActivity(i);
+    }
 }

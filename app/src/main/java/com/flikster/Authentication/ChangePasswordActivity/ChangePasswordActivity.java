@@ -7,17 +7,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.flikster.Authentication.ResendOtpActivity.LoginMobileOtpActivity;
-import com.flikster.Authentication.ResendOtpActivity.SendOTPData;
+import com.flikster.Authentication.AuthenticationActivity;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
-import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +37,10 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     String mobileOrNEmail = "";
     Button conform_btn;
 
+
+    SimpleArcLoader mDialog;
+    ImageButton back_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +52,11 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         passwordEt = (EditText) findViewById(R.id.passwordEt);
         confirm_password = (EditText) findViewById(R.id.confirm_password);
         conform_btn = (Button) findViewById(R.id.conform_btn);
+        mDialog = (SimpleArcLoader) findViewById(R.id.arc_loader);
+        back_btn = (ImageButton) findViewById(R.id.back_btn);
         conform_btn.setOnClickListener(this);
 //        type = getIntent().getStringExtra("TYPE").toString();
+        back_btn.setOnClickListener(this);
     }
 
     @Override
@@ -76,10 +83,18 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
             }
 
 
+        } else if (view.getId() == R.id.back_btn) {
+            Intent i = new Intent(ChangePasswordActivity.this, AuthenticationActivity.class);
+            startActivity(i);
+//            finish();
         }
     }
 
     private void postUserDataRetrofitInit() {
+
+        mDialog.setVisibility(View.VISIBLE);
+        mDialog.start();
+
         Log.e("Params:SEND_OTP", passwordEt.getText().toString()
                 + SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID") + "");
         ChangePasswordData sendotp = new ChangePasswordData(
@@ -90,6 +105,9 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         call.enqueue(new Callback<ChangePasswordData>() {
             @Override
             public void onResponse(Call<ChangePasswordData> call, Response<ChangePasswordData> response) {
+
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
                 Log.e("StatusCode:", response.body().getStatusCode() + "");
                 if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
                     Intent i = new Intent(ChangePasswordActivity.this,
@@ -106,8 +124,17 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
             @Override
             public void onFailure(Call<ChangePasswordData> call, Throwable t) {
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
                 Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(ChangePasswordActivity.this, AuthenticationActivity.class);
+        startActivity(i);
     }
 }

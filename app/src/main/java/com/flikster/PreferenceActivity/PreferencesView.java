@@ -20,7 +20,7 @@ import com.flikster.Util.SharedPrefsUtil;
 public class PreferencesView extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnPreferencesNext, btnSignup;
-    private TextView tvMenFashon, tvWomenFashon;
+    private TextView tvMenFashon, tvWomenFashon, skip_preference_txt;
     RadioButton radioTollywood, radioBollywood, radioTamil, radioKannada, radioMalayalam;
     private SharedPref sharedPref;
 
@@ -50,6 +50,7 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
         btnPreferencesNext.setOnClickListener(this);
         tvMenFashon.setOnClickListener(this);
         tvWomenFashon.setOnClickListener(this);
+        skip_preference_txt.setOnClickListener(this);
     }
 
     private void initializeView() {
@@ -62,15 +63,16 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
         radioTamil = (RadioButton) findViewById(R.id.ind_tamil);
         tvMenFashon = (TextView) findViewById(R.id.tv_menFashion);
         tvWomenFashon = (TextView) findViewById(R.id.tv_womenFashion);
+        skip_preference_txt = (TextView) findViewById(R.id.skip_preference_txt);
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.preference_next_btn)
+        if (view.getId() == R.id.preference_next_btn) {
             nextButtonClick();
-        else if (view.getId() == R.id.goto_signup)
+        } else if (view.getId() == R.id.goto_signup) {
             goToSignUp();
-        else if (view.getId() == R.id.ind_bollywood) {
+        } else if (view.getId() == R.id.ind_bollywood) {
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", "Bollywood");
             radioTollywood.setChecked(false);
             radioKannada.setChecked(false);
@@ -102,16 +104,29 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
             radioBollywood.setChecked(false);
             radioTamil.setChecked(false);
         } else if (view.getId() == R.id.tv_menFashion) {
-            tvMenFashon.setAlpha((float) 0.5);
-            tvWomenFashon.setAlpha((float) 1.0);
+//            tvMenFashon.setAlpha((float) 0.5);
+//            tvWomenFashon.setAlpha((float) 1.0);
+            tvMenFashon.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            tvMenFashon.setTextColor(getResources().getColor(R.color.white));
+            tvWomenFashon.setBackgroundColor(getResources().getColor(R.color.transparent));
+            tvWomenFashon.setBackgroundDrawable(getResources().getDrawable(R.drawable.gray_rectange_border));
+            tvWomenFashon.setTextColor(getResources().getColor(R.color.grey_txt_label));
         } else if (view.getId() == R.id.tv_womenFashion) {
-            tvMenFashon.setAlpha((float) 1.0);
-            tvWomenFashon.setAlpha((float) 0.5);
+//            tvMenFashon.setAlpha((float) 1.0);
+//            tvWomenFashon.setAlpha((float) 0.5);
+            tvWomenFashon.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            tvWomenFashon.setTextColor(getResources().getColor(R.color.white));
+            tvMenFashon.setBackgroundColor(getResources().getColor(R.color.transparent));
+            tvMenFashon.setBackgroundDrawable(getResources().getDrawable(R.drawable.gray_rectange_border));
+            tvMenFashon.setTextColor(getResources().getColor(R.color.grey_txt_label));
+        } else if (view.getId() == R.id.skip_preference_txt) {
+            nextButtonClick();
         }
 
     }
 
     private void goToSignUp() {
+        SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "SIGNUP");
         sharedPref.setFirstTimeLaunch2(false);
         startActivity(new Intent(PreferencesView.this, AuthenticationActivity.class));
         finish();
@@ -125,9 +140,10 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
 
     private void nextButtonClick() {
         if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE") != null
-                && !SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE").isEmpty()) {
+                && !SharedPrefsUtil.getStringPreference(getApplicationContext(),
+                "INDUSTRY_TYPE").isEmpty()) {
             lunchHomeScreen();
-        }else {
+        } else {
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", "Tollywood");
             lunchHomeScreen();
         }

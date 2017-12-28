@@ -2,13 +2,14 @@ package com.flikster.HomeActivity;
 
 import com.flikster.AllCommentActivity.CommentsData;
 import com.flikster.Authentication.ChangePasswordActivity.ChangePasswordData;
+import com.flikster.Authentication.LoginActivity.LoginResponseData;
 import com.flikster.Authentication.ResendOtpActivity.SendOTPData;
 import com.flikster.Authentication.ResendOtpActivity.VerifyOTPData;
-import com.flikster.Authentication.SignUpActivity.EmailRegisterPostData;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.EmailRegisterPostData;
 import com.flikster.Authentication.LoginActivity.LoginData;
-import com.flikster.Authentication.SignUpActivity.MobileOrEmailRegisterCheckData;
-import com.flikster.Authentication.SignUpActivity.PhoneRegisterPostData;
-import com.flikster.Authentication.SignUpActivity.RegisterPostStatus;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.MobileOrEmailRegisterCheckData;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.PhoneRegisterPostData;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.RegisterPostStatus;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
@@ -138,7 +139,7 @@ public interface ApiInterface {
 
 
     @POST(ApiClient.LOGIN_URL)
-    Call<LoginData> loginUserData(@Body LoginData emailRegisterPostData);
+    Call<LoginResponseData> loginUserData(@Body LoginData emailRegisterPostData);
 
     //Send OTP
     @POST(ApiClient.SEND_OTP_URL)

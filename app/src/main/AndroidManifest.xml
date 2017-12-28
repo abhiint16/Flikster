@@ -39,7 +39,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Authentication.ResendOtpActivity.LoginMobileOtpActivity"
+            android:name=".Authentication.ResendOtpActivity.OtpActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -68,22 +68,19 @@
             android:name=".MyBagActivity.MyBagActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
-            android:name="com.flikster.Authentication.LoginActivity.LoginWithMobileNoActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="com.flikster.Authentication.LoginActivity.LoginWithEmailActivity"
+            android:name="com.flikster.Authentication.LoginActivity.LoginWithEmailOrMobileActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.flikster.Authentication.SignUpActivity.SignUpWithEmailActivity"
+            android:name="com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.flikster.Authentication.SignUpActivity.SignUpWithPhoneActivity"
+            android:name="com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.SignUpWithPhoneActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

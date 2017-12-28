@@ -13,18 +13,35 @@
         android:layout_marginRight="@dimen/activity_authentication_margin"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten">
+
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:src="@drawable/leftarrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/logotext"
+                android:gravity="center_horizontal" />
+        </RelativeLayout>
+
         <TextView
             style="@style/headers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/twenty"
             android:text="@string/login_mobile_title" />
 
-        <TextView
-            style="@style/login_horizontal_line"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,14 +49,14 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/moblienolayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:id="@+id/moblienolayout"
-                android:visibility="gone"
                 android:background="@drawable/gray_rectange_border"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <Spinner
                     android:layout_width="wrap_content"
@@ -69,12 +86,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/emaillayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:background="@drawable/gray_rectange_border"
                 android:gravity="center"
-                android:id="@+id/emaillayout"
                 android:orientation="horizontal">
 
 

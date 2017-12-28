@@ -2,87 +2,91 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/activity_authentication_login_margin">
+    android:layout_margin="@dimen/activity_authentication_login_margin"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="@string/preference_header"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/logotext"
+        android:gravity="center_horizontal" />
+
+    <TextView
         style="@style/preferences_header_style"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/ten"
+        android:layout_weight="1"
+        android:text="@string/preference_header" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/preference_subheader"
-        />
+        android:text="@string/preference_subheader" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorAccent"
-        />
+        android:background="@color/colorAccent" />
 
     <TextView
+        style="@style/preferences_header_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/preference_industry_type"
-        style="@style/preferences_header_style"/>
+        android:text="@string/preference_industry_type" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
-            <RadioButton
-                android:id="@+id/ind_bollywood"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:text="@string/preference_industry_bollywood"
-                android:layout_height="wrap_content"
-                />
-
-            <RadioButton
-                android:id="@+id/ind_tollywood"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:text="@string/preference_industry_tollywood"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
-            <RadioButton
-                android:id="@+id/ind_tamil"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:text="@string/preference_industry_tamil"
-                android:layout_height="wrap_content"
-                />
-            <RadioButton
-                android:id="@+id/ind_kannada"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:text="@string/preference_industry_kannada"
-                android:layout_height="wrap_content"
-                />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
 
         <RadioButton
-            android:id="@+id/ind_malayalam"
-            android:layout_width="match_parent"
-            android:text="@string/preference_industry_malayalam"
+            android:id="@+id/ind_bollywood"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            />
+            android:layout_weight="0.5"
+            android:text="@string/preference_industry_bollywood" />
+
+        <RadioButton
+            android:id="@+id/ind_tollywood"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:checked="true"
+            android:text="@string/preference_industry_tollywood" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <RadioButton
+            android:id="@+id/ind_tamil"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/preference_industry_tamil" />
+
+        <RadioButton
+            android:id="@+id/ind_kannada"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/preference_industry_kannada" />
+    </LinearLayout>
+
+    <RadioButton
+        android:id="@+id/ind_malayalam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/preference_industry_malayalam" />
 
     <View
         android:layout_width="match_parent"
@@ -90,13 +94,13 @@
         android:background="@color/colorAccent">
 
     </View>
+
     <TextView
+        style="@style/preferences_header_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/preference_fashion_selection"
         android:layout_weight="1"
-        style="@style/preferences_header_style"
-        />
+        android:text="@string/preference_fashion_selection" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,48 +112,61 @@
         <TextView
             android:id="@+id/tv_menFashion"
             android:layout_width="0dp"
-            android:layout_weight="0.4"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:text="@string/preference_men_fashion"
+            android:layout_weight="0.4"
             android:background="@drawable/gray_rectange_border"
             android:gravity="center"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:text="@string/preference_men_fashion" />
 
         <TextView
             android:id="@+id/tv_womenFashion"
             android:layout_width="0dp"
-            android:layout_weight="0.4"
-            android:layout_marginLeft="5dp"
             android:layout_height="wrap_content"
-            android:text="@string/preference_female_fashion"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.4"
             android:background="@drawable/gray_rectange_border"
             android:gravity="center"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:text="@string/preference_female_fashion" />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="0.6"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
+        android:layout_weight="0.6"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/preference_next_btn"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/preferences_next"
             style="@style/preferences_next_button"
-            />
-        <Button
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@string/preferences_next"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/goto_signup"
+            style="@style/preferences_next_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:id="@+id/goto_signup"
-            android:text="Sign Up"
-            style="@style/preferences_next_button"/>
+            android:layout_weight="1"
+            android:text="Sign Up" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/skip_preference_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:layout_marginTop="@dimen/five"
+        android:text="Skip Preference" />
+
 </LinearLayout>

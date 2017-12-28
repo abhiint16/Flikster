@@ -1,4 +1,4 @@
-package com.flikster.Authentication.SignUpActivity;
+package com.flikster.Authentication.SignUpActivity.SignUpWithEmail;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.Authentication.AuthenticationActivity;
-import com.flikster.Authentication.LoginActivity.LoginWithEmailActivity;
-import com.flikster.Authentication.ResendOtpActivity.LoginMobileOtpActivity;
-import com.flikster.Authentication.ResendOtpActivity.SendOtpWithMobileNoActivity;
+import com.flikster.Authentication.ResendOtpActivity.OtpActivity;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.EmailRegisterPostData;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.MobileOrEmailRegisterCheckData;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.PhoneRegisterPostData;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.RegisterPostStatus;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
@@ -185,7 +187,7 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
                         Toast.makeText(SignUpWithEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
                         Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register email", Toast.LENGTH_LONG).show();
                         SharedPrefsUtil.setStringPreference(SignUpWithEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
-                        Intent intent = new Intent(SignUpWithEmailActivity.this, LoginMobileOtpActivity.class);
+                        Intent intent = new Intent(SignUpWithEmailActivity.this, OtpActivity.class);
                         intent.putExtra("TYPE", "email");
                         intent.putExtra("TYPE_DATA", et_emailid.getText().toString());
                         intent.putExtra("OTP_ID", response.body().getId().toString());
@@ -199,7 +201,7 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
                         Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register mobile", Toast.LENGTH_LONG).show();
                         SharedPrefsUtil.setStringPreference(SignUpWithEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
                         Intent intent = new Intent(SignUpWithEmailActivity.this,
-                                LoginMobileOtpActivity.class);
+                                OtpActivity.class);
                         intent.putExtra("TYPE", "mobile");
                         intent.putExtra("TYPE_DATA", et_mobile_no.getText().toString());
                         intent.putExtra("OTP_ID", response.body().getId());

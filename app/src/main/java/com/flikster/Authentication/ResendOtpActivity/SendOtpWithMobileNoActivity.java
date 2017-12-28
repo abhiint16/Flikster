@@ -7,8 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.HomeActivity.ApiClient;
@@ -16,6 +16,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +31,9 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
     LinearLayout moblienolayout, emaillayout;
     String mobileOrNEmail = "";
 
+    SimpleArcLoader mDialog;
+    ImageButton back_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +46,12 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
         passwordEt = (EditText) findViewById(R.id.passwordEt);
         et_emailid = (EditText) findViewById(R.id.et_emailid);
         emaillayout = (LinearLayout) findViewById(R.id.emaillayout);
+
+        back_btn = (ImageButton) findViewById(R.id.back_btn);
+        mDialog = (SimpleArcLoader) findViewById(R.id.arc_loader);
+
         login_btn.setOnClickListener(this);
+        back_btn.setOnClickListener(this);
         type = getIntent().getStringExtra("TYPE").toString();
         if (type.equals("email")) {
             et_emailid.setVisibility(View.VISIBLE);
@@ -78,25 +87,16 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
                     }
                 }
             }
-            try {
-                /*if (passwordEt.getText().toString() != null || "".equals(passwordEt.getText().toString())) {
-                    passwordEt.setError("Password Can't be empty");
-                    return;
-                } else {
-
-                }*/
-
-
-            } catch (Exception e) {
-
-            }
             postUserDataRetrofitInit();
-
-
+        } else if (view.getId() == R.id.back_btn) {
+            finish();
         }
     }
 
     private void postUserDataRetrofitInit() {
+
+        mDialog.setVisibility(View.VISIBLE);
+        mDialog.start();
 
         if (type.equals("email")) {
             mobileOrNEmail = et_emailid.getText().toString();
@@ -114,14 +114,17 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
         call.enqueue(new Callback<SendOTPData>() {
             @Override
             public void onResponse(Call<SendOTPData> call, Response<SendOTPData> response) {
-                Log.e("StatusCode:", response.body().getStatusCode() + "");
+//                Log.e("StatusCode:", response.body().getStatusCode() + "");
+                mDialog.setVisibility(View.GONE);
+                mDialog.start();
                 if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
                     if (response.body().isOtpStatus()) {
                         Toast.makeText(SendOtpWithMobileNoActivity.this, "OTP sent..",
                                 Toast.LENGTH_LONG).show();
                         SharedPrefsUtil.setStringPreference(getApplicationContext(),
                                 "OTP_ID", response.body().getId().toString());
-                        Intent i = new Intent(SendOtpWithMobileNoActivity.this, LoginMobileOtpActivity.class);
+                        Intent i = new Intent(SendOtpWithMobileNoActivity.this,
+                                OtpActivity.class);
                         if (type.equals("email")) {
                             i.putExtra("TYPE", "email");
                             i.putExtra("TYPE_DATA", et_emailid.getText().toString());
@@ -138,12 +141,12 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
                 } else {
                     Toast.makeText(SendOtpWithMobileNoActivity.this, "Invalid details..", Toast.LENGTH_LONG).show();
                 }
-
-
             }
 
             @Override
             public void onFailure(Call<SendOTPData> call, Throwable t) {
+                mDialog.setVisibility(View.GONE);
+                mDialog.start();
                 Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
             }
         });
