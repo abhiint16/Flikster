@@ -44,6 +44,7 @@
                     android:layout_weight="0.7"
                     android:background="#00000000"
                     android:enabled="false"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:padding="10dp"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -84,6 +85,7 @@
                     android:background="@drawable/gray_rectange_border"
                     android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:maxLength="1"
                     android:padding="8dp" />
 
@@ -96,6 +98,7 @@
                     android:background="@drawable/gray_rectange_border"
                     android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:maxLength="1"
                     android:padding="8dp" />
 
@@ -109,6 +112,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="1"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:padding="8dp" />
 
                 <EditText
@@ -120,6 +124,7 @@
                     android:background="@drawable/gray_rectange_border"
                     android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:maxLength="1"
                     android:padding="8dp" />
 
@@ -133,6 +138,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="1"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:padding="8dp" />
 
                 <EditText
@@ -151,6 +157,7 @@
                     android:id="@+id/tv_otp_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:layout_weight="0.2"
                     android:gravity="right"
                     android:text="00:45"

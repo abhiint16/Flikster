@@ -39,7 +39,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Authentication.ResendOtpActivity.OtpActivity"
+            android:name=".Authentication.OtpAndResendOtpActivity.OtpActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -84,7 +84,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.flikster.Authentication.ResendOtpActivity.SendOtpWithMobileNoActivity"
+            android:name="com.flikster.Authentication.OtpAndResendOtpActivity.SendOtpWithMobileNoActivityOrEmail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
@@ -106,7 +106,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.flikster.HomeActivity.SearchActivity"
+            android:name="com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SearchActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 

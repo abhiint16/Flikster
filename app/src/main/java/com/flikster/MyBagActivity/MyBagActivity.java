@@ -51,18 +51,22 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_my_bag);
         initializeViews();
         initializeRest();
-        context=this;
+        context = this;
         getCartData();
     }
 
     private void getCartData() {
         apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/cart/_search/").create(ApiInterface.class);
-        Call<MyBagData> call = apiInterface.getMyBagData("http://apiv3-es.flikster.com/cart/_search?pretty=true&sort=createdAt:desc&q=userId:"+getIntent().getStringExtra("userId"));
+        Call<MyBagData> call = apiInterface.getMyBagData("http://apiv3-es.flikster.com/cart/_search?pretty=true&sort=createdAt:desc&q=userId:" +
+                getIntent().getStringExtra("userId"));
+        //Implementation Pending for New Response
+//        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/").create(ApiInterface.class);
+//        Call<MyBagData> call = apiInterface.getMyBagData("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/Nagarani/");
         call.enqueue(new Callback<MyBagData>() {
             @Override
             public void onResponse(Call<MyBagData> call, Response<MyBagData> response) {
-                myBagInnerData=response.body().getHits();
-                myBagAdapter = new MyBagAdapter(context,myBagInnerData);
+                myBagInnerData = response.body().getHits();
+                myBagAdapter = new MyBagAdapter(context, myBagInnerData);
                 fragment_common_recyclerview_recycler.setAdapter(myBagAdapter);
             }
 

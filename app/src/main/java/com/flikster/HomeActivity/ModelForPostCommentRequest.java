@@ -18,6 +18,17 @@ public class ModelForPostCommentRequest {
     @SerializedName("commentText")
     private String commentText;
 
+    @SerializedName("statusCode")
+    private Integer statusCode;
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
     public ModelForPostCommentRequest(String userName, String userId, String entityId, String commentText) {
         this.userName = userName;
         this.userId = userId;
@@ -55,5 +66,22 @@ public class ModelForPostCommentRequest {
 
     public void setCommentText(String commentText) {
         this.commentText = commentText;
+    }
+
+    @Override
+    public String toString() {
+        Log.e("commentres","ModelForPostCommentRequest{" +
+                "userName='" + userName + '\'' +
+                ", userId='" + userId + '\'' +
+                ", entityId='" + entityId + '\'' +
+                ", commentText='" + commentText + '\'' +
+                '}');
+        return "ModelForPostCommentRequest{" +
+                "userName='" + userName + '\'' +
+                ", userId='" + userId + '\'' +
+                ", entityId='" + entityId + '\'' +
+                ", commentText='" + commentText + '\'' +
+                '}';
+
     }
 }

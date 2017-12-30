@@ -1,19 +1,32 @@
 package com.flikster.Authentication.SignUpActivity.SignUpWithEmail;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.Authentication.AuthenticationActivity;
-import com.flikster.Authentication.ResendOtpActivity.OtpActivity;
+import com.flikster.Authentication.OtpAndResendOtpActivity.OtpActivity;
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.EmailRegisterPostData;
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.MobileOrEmailRegisterCheckData;
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.PhoneRegisterPostData;
@@ -24,6 +37,11 @@ import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.flikster.permission.DangerousPermResponseCallBack;
+import com.flikster.permission.DangerousPermissionResponse;
+import com.flikster.permission.DangerousPermissionUtils;
+
+import java.io.ByteArrayOutputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +62,15 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
     String undefinetext;
     PhoneRegisterPostData emailRegisterPostData;
 
+    //Camera thing
+    private static int CAMERA_REQUES_CODEE = 101;
+    boolean cameracaptured = false;
+    final int ACTIVITY_SELECT_IMAGE = 2;
+    private static final int IMG_SELECT = 777;
+    Activity activity;
+
+    ImageView iv_user_pic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +89,13 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
             moblienolayout.setVisibility(View.VISIBLE);
             et_emailid.setVisibility(View.GONE);
             emaillayout.setVisibility(View.GONE);
+        }
+
+        if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "ProfileImage")
+                != null && !SharedPrefsUtil.getStringPreference(getApplicationContext(), "ProfileImage").isEmpty()) {
+            Bitmap profilebitmap = Common.StringToBitMap(SharedPrefsUtil.getStringPreference(getApplicationContext(), "ProfileImage"));
+            iv_user_pic.setScaleType(ImageView.ScaleType.FIT_XY);
+            iv_user_pic.setImageBitmap(profilebitmap);
         }
     }
 
@@ -84,6 +118,8 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
         register_confirm_password = (EditText) findViewById(R.id.register_confirm_password);
         register_btn.setOnClickListener(this);
 
+        iv_user_pic = (ImageView) findViewById(R.id.iv_user_pic);
+
         btn_account_male = (Button) findViewById(R.id.btn_account_male);
         btn_account_female = (Button) findViewById(R.id.btn_account_female);
 
@@ -91,7 +127,7 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
         btn_account_female.setOnClickListener(this);
         back_btn = (ImageButton) findViewById(R.id.back_btn);
         back_btn.setOnClickListener(this);
-
+        iv_user_pic.setOnClickListener(this);
         //SharedPrefsUtil.getStringPreference(getApplicationContext(), "PERFORM_FORGOT");
         SharedPrefsUtil.setStringPreference(getApplicationContext(), "PERFORM_FORGOT", null);
     }
@@ -103,10 +139,12 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
             if (register_first_name.getText().toString() == null || "".equals(register_first_name.getText().toString())) {
                 register_first_name.setError("First Name Can't be empty");
                 return;
-            } else if (register_last_name.getText().toString() == null || "".equals(register_last_name.getText().toString())) {
-                register_last_name.setError("Last Name Can't be empty");
-                return;
-            } else if (CLICK_EVENT.equals("email")) {
+            }
+//            else if (register_last_name.getText().toString() == null || "".equals(register_last_name.getText().toString())) {
+//                register_last_name.setError("Last Name Can't be empty");
+//                return;
+//            }
+            else if (CLICK_EVENT.equals("email")) {
                 if (et_emailid.getText().toString() == null || "".equals(et_emailid.getText().toString())) {
                     et_emailid.setError("Email Can't be empty");
                     return;
@@ -152,6 +190,8 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
             Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignUpWithEmailActivity.this, AuthenticationActivity.class);
             startActivity(intent);
+        } else if (view.getId() == R.id.iv_user_pic) {
+            openCameraClickDialog();
         }
     }
 
@@ -160,14 +200,14 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
         if (CLICK_EVENT.equals("email")) {
             emailOrMobile = et_emailid.getText().toString();
             emailRegisterPostData = new PhoneRegisterPostData(register_first_name.getText().toString(),
-                    register_last_name.getText().toString(),
+                    "",
                     emailOrMobile, "undefined",
                     register_password.getText().toString(),
                     "user", genderstr);
         } else {
             emailOrMobile = et_mobile_no.getText().toString();
             emailRegisterPostData = new PhoneRegisterPostData(register_first_name.getText().toString(),
-                    register_last_name.getText().toString(),
+                    "",
                     "undefined", emailOrMobile,
                     register_password.getText().toString(),
                     "user", genderstr);
@@ -183,7 +223,6 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
 
                 if (CLICK_EVENT.equals("email")) {
                     if (response.body().getStatusCode() == 200) {
-
                         Toast.makeText(SignUpWithEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
                         Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register email", Toast.LENGTH_LONG).show();
                         SharedPrefsUtil.setStringPreference(SignUpWithEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
@@ -273,5 +312,96 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
                 });
             }
         }
+    }
+
+    private void openCameraClickDialog() {
+        final Dialog dialog = new Dialog(SignUpWithEmailActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_camera_click);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        LinearLayout dialog_camera_click_click_photo = (LinearLayout) dialog.findViewById(R.id.dialog_camera_click_click_photo);
+        LinearLayout dialog_camera_click_select_gallery = (LinearLayout) dialog.findViewById(R.id.dialog_camera_click_select_gallery);
+        dialog_camera_click_select_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, ACTIVITY_SELECT_IMAGE);*/
+                Intent i = new Intent();
+                i.setType("image/*");
+                i.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(i, IMG_SELECT);
+                dialog.dismiss();
+            }
+        });
+        dialog_camera_click_click_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cameraAccessPermission(CAMERA_REQUES_CODEE);
+                dialog.dismiss();
+            }
+        });
+        window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.translucent)));
+        dialog.show();
+    }
+
+    //Camera Access
+    private void cameraAccessPermission(int requestCode) {
+        DangerousPermissionUtils.getPermission(getApplicationContext(), new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, requestCode)
+                .enqueue(new DangerousPermResponseCallBack() {
+                    @Override
+                    public void onComplete(final DangerousPermissionResponse permissionResponse) {
+                        if (permissionResponse.isGranted()) {
+                            if (permissionResponse.getRequestCode() == CAMERA_REQUES_CODEE) {
+                                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED && ActivityCompat
+                                        .checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                                    return;
+                                }
+                                cameracaptured = true;
+                                openCamera();
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void openCamera() {
+        SharedPrefsUtil.setStringPreference(getApplicationContext(), "ACCESS_FRAGMENT_CAPTURE", "ENABLE");
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 1235);
+    }
+
+
+    ///////////Camera related Code
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1235) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bitmap bmp = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                profileImageSet(bitmap);
+            } else {
+                Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == IMG_SELECT && resultCode == RESULT_OK && data != null) {
+            try {
+                Uri path = data.getData();
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
+                profileImageSet(bitmap);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    private void profileImageSet(Bitmap bitmap) {
+        SharedPrefsUtil.setStringPreference(getApplicationContext(), "ProfileImage", Common.BitMapToString(bitmap));
+        iv_user_pic.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_user_pic.setImageBitmap(bitmap);
     }
 }

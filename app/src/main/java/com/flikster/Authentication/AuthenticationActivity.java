@@ -27,10 +27,11 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.flikster.Authentication.LoginActivity.LoginWithEmailOrMobileActivity;
 import com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity;
-import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.SignUpWithPhoneActivity;
+//import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.SignUpWithPhoneActivity;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 import com.flikster.SharedPref.SharedPref;
+import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
 
 import com.google.android.gms.auth.api.Auth;
@@ -120,7 +121,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         btnLoginGoogle.setScopes(gso.getScopeArray());*/
 
 
-
     }
 
     private void initializeView() {
@@ -162,10 +162,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         btnLoginFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(getApplicationContext(),
+                SharedPrefsUtil.setBooleanPreference(getApplicationContext(), "FACEBOOK_LOGIN", true);
+                /*Toast.makeText(getApplicationContext(),
                         loginResult.getAccessToken().getUserId()
                                 + loginResult.getAccessToken().getToken()
-                                + "", Toast.LENGTH_SHORT).show();
+                                + "", Toast.LENGTH_SHORT).show();*/
                 Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
                 startActivity(intent);
@@ -262,9 +263,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         startActivity(new Intent(AuthenticationActivity.this, LoginWithMobileNoActivity.class));
     }*/
 
-    private void gotoPhoneSignup() {
-        startActivity(new Intent(AuthenticationActivity.this, SignUpWithPhoneActivity.class));
-    }
+//    private void gotoPhoneSignup() {
+//        startActivity(new Intent(AuthenticationActivity.this, SignUpWithPhoneActivity.class));
+//    }
 
     private void gotoEmailLogin(String type) {
         Intent i = new Intent(AuthenticationActivity.this, LoginWithEmailOrMobileActivity.class);
@@ -273,6 +274,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void gotoEmailSignUp(String type) {
+        Toast.makeText(getApplicationContext(), "Siging With " + type, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(AuthenticationActivity.this, SignUpWithEmailActivity.class);
         i.putExtra("TYPE", type);
         startActivity(i);
@@ -287,7 +289,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     }
 
     private void showTermsConditions() {
-        Toast.makeText(AuthenticationActivity.this, "Terms and Conditions will apply", Toast.LENGTH_LONG).show();
+//        Toast.makeText(AuthenticationActivity.this, "Terms and Conditions will apply", Toast.LENGTH_LONG).show();
+        Common.openCommonDialog(AuthenticationActivity.this, "Shiva", "Terms and Conditions");
     }
 
 

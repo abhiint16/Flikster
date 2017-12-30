@@ -1,4 +1,4 @@
-package com.flikster.Authentication.ResendOtpActivity;
+package com.flikster.Authentication.OtpAndResendOtpActivity;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -15,7 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String BASE_URL = "http://apiv3.flikster.com/v3/content-ms/";
+    public static final String BASE_URL = "http://apiservice.flikster.com/v3/";
+    public static final String ELASTIC_URL = "http://apiservice-ec.flikster.com/";
     private static Retrofit retrofit = null;
 
     public static final String BASE_URLL = "http://api.themoviedb.org/3/products";
@@ -43,6 +44,18 @@ public class ApiClient {
     //Check Password
     public static final String CHANGE_PASSWORD_URL = "http://apiservice.flikster.com/v3/user-ms/changePassword/";
 
+    public static final String POST_STATUS_URL = BASE_URL + "likes-ms/isPostStatus/";
+    public static final String POST_COMMENT_URL = BASE_URL + "comments-ms/postComment/";
+
+    public static final String CREATE_SHARE_YOUR_STYLE_URL = BASE_URL + "share-your-style-ms/createShareYourStyle/";
+
+
+    public static final String ALL_COMMENTS_URL = ELASTIC_URL + "comments/_search/";
+    //"http://apiv3-es.flikster.com/comments/_search/"
+
+
+    //"http://apiv3.flikster.com/v3/share-your-style-ms/createShareYourStyle/"
+    //"http://apiv3.flikster.com/v3/comments-ms/postComment/"
 
     public static Retrofit getClient(String baseURL) {
         retrofit = null;

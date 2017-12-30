@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.flikster.FullScreenYoutubeView.FullScreenYoutubeView;
@@ -71,7 +72,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.userId = userId;
         this.entityId = entityId;
         this.context = context;
-        this.movieItemClickInterface=(MovieFragment.MovieItemClickInterface)context;
+        this.movieItemClickInterface = (MovieFragment.MovieItemClickInterface) context;
         this.fragmentManager = fragmentManager;
         this.context = context;
         this.fragmentManager = fragmentManager;
@@ -428,20 +429,20 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         case "tweet":
                             return 6;
                         case "gallery": {
-                            if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() == 1)
+                            if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() == 1)
                                 return 10;
-                            else if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() == 2)
+                            else if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() == 2)
                                 return 11;
-                            else if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() == 3)
+                            else if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() == 3)
                                 return 12;
-                            else if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() == 4)
+                            else if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() == 4)
                                 return 13;
-                            else if (hits.getHits().get(position-1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position-1).get_source().getMedia().getGallery().size() > 4)
+                            else if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() > 4)
                                 return 14;
                         }
                         case "movie-making":
@@ -473,6 +474,9 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 card_movie_feed_profile_dur, card_movie_feed_profile_genre, card_movie_feed_profile_storyline;
         ImageView card_movie_feed_profile_image;
         Button followbtn;
+        ImageButton ib_like, unlike;
+        LinearLayout willwatchLayout, wontwatchLayout;
+        TextView likeCounttxt, unlikeCounttxt;
 
         public ViewHolder0(View itemView) {
             super(itemView);
@@ -483,6 +487,36 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_movie_feed_profile_dur = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_dur);
             card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
             card_movie_feed_profile_storyline = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_storyline);
+
+            willwatchLayout = (LinearLayout) itemView.findViewById(R.id.willwatchLayout);
+            wontwatchLayout = (LinearLayout) itemView.findViewById(R.id.wontwatchLayout);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            unlike = (ImageButton) itemView.findViewById(R.id.unlike);
+            likeCounttxt = (TextView) itemView.findViewById(R.id.likeCounttxt);
+            unlikeCounttxt = (TextView) itemView.findViewById(R.id.unlikeCounttxt);
+
+            ib_like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
+                    Common.willWatchOrNot(context, ib_like, userId, entityId);
+                    unlike.setImageResource(R.drawable.unlikesmallicon);
+                    likeCounttxt.setText("1");
+                    unlikeCounttxt.setText("0");
+                }
+            });
+            unlike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
+                    Common.wantWatchHit(context, unlike, userId, entityId);
+                    ib_like.setImageResource(R.drawable.likesmallicon);
+                    likeCounttxt.setText("0");
+                    unlikeCounttxt.setText("1");
+                }
+            });
+
+
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
             followbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -617,9 +651,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_description_linear)
-            {
-                cardDescLinearClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_description_linear) {
+                cardDescLinearClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -687,9 +720,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_description_linear)
-            {
-                cardDescLinearClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_description_linear) {
+                cardDescLinearClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -698,7 +730,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ImageView news_img, profile_image;
         TextView tv_tag_name, tv_tag_desc, tv_name, tv_description, card_comment_text_see_more_comments,
                 card_celebrity_feed_gallery1_title;
-        ImageButton card_footer_share, ib_like, ib_bookmark, card_comment_text_send_btn,video_btn;
+        ImageButton card_footer_share, ib_like, ib_bookmark, card_comment_text_send_btn, video_btn;
         EditText card_comment_text_edittxt;
         RelativeLayout card_header_container;
         LinearLayout header_linear, card_description_linear;
@@ -713,7 +745,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_description = (TextView) itemView.findViewById(R.id.tv_description);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
-            video_btn=(ImageButton)itemView.findViewById(R.id.video_btn);
+            video_btn = (ImageButton) itemView.findViewById(R.id.video_btn);
             header_linear = (LinearLayout) itemView.findViewById(R.id.header_linear);
             card_description_linear = (LinearLayout) itemView.findViewById(R.id.card_description_linear);
             card_comment_text_send_btn = (ImageButton) itemView.findViewById(R.id.card_comment_text_send_btn);
@@ -757,13 +789,10 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_description_linear)
-            {
-                cardVideoCardDescClick(getAdapterPosition()-1);
-            }
-            else if (view.getId()==R.id.video_btn)
-            {
-                cardVideoButtonClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_description_linear) {
+                cardVideoCardDescClick(getAdapterPosition() - 1);
+            } else if (view.getId() == R.id.video_btn) {
+                cardVideoButtonClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -831,9 +860,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_description_linear)
-            {
-                cardDescLinearClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_description_linear) {
+                cardDescLinearClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -900,9 +928,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if(view.getId()==R.id.card_description_linear)
-            {
-                cardDescLinearClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_description_linear) {
+                cardDescLinearClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -972,13 +999,10 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_description_linear)
-            {
+            if (view.getId() == R.id.card_description_linear) {
                 //cardDescLinearClick(getAdapterPosition()-1);
-            }
-            else if (view.getId()==R.id.card_gallary1_img1)
-            {
-                cardGalleryContainerClick(getAdapterPosition()-1);
+            } else if (view.getId() == R.id.card_gallary1_img1) {
+                cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -1115,9 +1139,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_gallery2_img_container)
-            {
-                cardGalleryContainerClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_gallery2_img_container) {
+                cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -1189,9 +1212,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_gallery3_1_img_container)
-            {
-                cardGalleryContainerClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_gallery3_1_img_container) {
+                cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -1264,9 +1286,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_gallery4_img_container)
-            {
-                cardGalleryContainerClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_gallery4_img_container) {
+                cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -1338,9 +1359,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.card_gallery5_img_container)
-            {
-                cardGalleryContainerClick(getAdapterPosition()-1);
+            if (view.getId() == R.id.card_gallery5_img_container) {
+                cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
     }
@@ -1355,8 +1375,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-    public void cardDescLinearClick(int pos)
-    {
+    public void cardDescLinearClick(int pos) {
         if (hits.getHits().get(pos).get_source().getMovie() != null && hits.getHits().get(pos).get_source().getMovie().size() != 0) {
             movieItemClickInterface.newsCardOnClick(hits.getHits().get(pos).get_source().getMovie().get(0).getProfilePic(),
                     hits.getHits().get(pos).get_source().getMovie().get(0).getName(),
@@ -1394,8 +1413,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public void cardGalleryContainerClick(int pos)
-    {
+    public void cardGalleryContainerClick(int pos) {
         if (hits.getHits().get(pos).get_source().getMovie() != null) {
             movieItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
                     hits.getHits().get(pos).get_source().getMovie().get(0).getName(),
@@ -1422,8 +1440,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public void cardVideoButtonClick(int pos)
-    {
+    public void cardVideoButtonClick(int pos) {
         Intent intent = new Intent(context, FullScreenYoutubeView.class);
         if (hits.getHits().get(pos).get_source().getMedia().getVideo() != null &&
                 hits.getHits().get(pos).get_source().getMedia().getVideo().size() != 0) {
@@ -1435,8 +1452,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         context.startActivity(intent);
     }
 
-    public void cardVideoCardDescClick(int pos)
-    {
+    public void cardVideoCardDescClick(int pos) {
         if (hits.getHits().get(pos).get_source().getMovie() != null && hits.getHits().get(pos).get_source().getMovie().size() != 0) {
             movieItemClickInterface.videoCardOnClick(hits.getHits().get(pos).get_source().getMovie().get(0).getProfilePic(),
                     hits.getHits().get(pos).get_source().getMovie().get(0).getName(),

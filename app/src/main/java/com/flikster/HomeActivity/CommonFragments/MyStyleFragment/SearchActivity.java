@@ -1,9 +1,8 @@
-package com.flikster.HomeActivity;
+package com.flikster.HomeActivity.CommonFragments.MyStyleFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,15 +17,10 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flikster.CheckoutActivity.CheckoutFragment.CheckoutFragment;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SearchInnerData;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SearchListAdapter;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
-import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
-import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
@@ -262,5 +256,16 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         adapter.setFilter(newSearchList);
     }*/
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportActionBar().hide();
+    }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getSupportActionBar().show();
+    }
 }

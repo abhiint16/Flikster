@@ -4,7 +4,7 @@
     <string name="facebook_app_id">137668736908426</string>
     <string name="login_creteaccount_title">Create Account</string>
     <string name="login_createaccount_gender">Select Gender</string>
-    <string name="login_createaccount_fullname">First Name</string>
+    <string name="login_createaccount_fullname">Full Name</string>
     <string name="login_createaccount_male">Male</string>
     <string name="login_createaccount_female">Female</string>
     <string name="login_createaccount_signup">SIGNUP</string>

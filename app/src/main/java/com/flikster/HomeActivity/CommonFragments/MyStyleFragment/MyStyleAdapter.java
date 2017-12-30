@@ -1,48 +1,24 @@
 package com.flikster.HomeActivity.CommonFragments.MyStyleFragment;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
 import com.flikster.HomeActivity.PostRetrofit;
-import com.flikster.HomeActivity.SearchActivity;
 import com.flikster.R;
-import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
-import com.flikster.permission.DangerousPermResponseCallBack;
-import com.flikster.permission.DangerousPermissionResponse;
-import com.flikster.permission.DangerousPermissionUtils;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -57,6 +33,8 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     MyStyleAdapterViewHolder myStyleAdapterViewHolder;
     MyStyleFragmentOne fragment;
     Bundle bundle = new Bundle();
+    String userId = "";
+    String userName = "";
 
 
     public MyStyleAdapter(Context context, FragmentManager fragmentManager) {
@@ -68,6 +46,7 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         if (viewType == 1) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_custom_style, parent, false);
             return new MyStyleAdapter.ViewHolder1(view);
@@ -82,6 +61,14 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
+            userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
+            Log.e("LoginUserId", userId);
+        }
+        if (SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null && SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null) {
+            userName = SharedPrefsUtil.getStringPreference(context, "USER_NAME");
+            Log.e("LoginUserName", userName);
+        }
         if (holder.getItemViewType() == 1) {
         } else if (holder.getItemViewType() == 2) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -199,9 +186,9 @@ public class MyStyleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (noproductImgavailable) {
                 userObject.add(new CreateShareYourStyleData.UserObject(
                         "https://officechai.com/wp-content/uploads/2015/12/deepika-padukone.png",
-                        "Shiva"));
+                        userName));
                 CreateShareYourStyleData createShareData = new CreateShareYourStyleData(
-                        "PAWAN_KALYAN",
+                        userId,
                         availableImages,
                         productdata, sayetStr,
                         sayetStrslug,

@@ -1,4 +1,4 @@
-package com.flikster.Authentication.ResendOtpActivity;
+package com.flikster.Authentication.OtpAndResendOtpActivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -317,46 +317,63 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    private void verifyOTPDataRetrofitInit(String otpStr) {
-        Log.e("Params : OTP:DATA", typeStr + OtpId + otpStr + "");
+    private void verifyOTPDataRetrofitInit(String otpno) {
+        Log.e("Params : OTP:DATA", typeStr + OtpId + otpno + "");
 
 
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
 
 
-        VerifyOTPData emailRegisterPostData = new VerifyOTPData(OtpId, typeStr, otpStr);
+        VerifyOTPData emailRegisterPostData = new VerifyOTPData(OtpId, typeStr, otpno);
         apiInterface = ApiClient.getClient(ApiClient.VERIFY_OTP_URL).create(ApiInterface.class);
         Call<VerifyOTPData> call = apiInterface.verifyOtpData(emailRegisterPostData);
         call.enqueue(new Callback<VerifyOTPData>() {
             @Override
             public void onResponse(Call<VerifyOTPData> call, Response<VerifyOTPData> response) {
-
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
-                if (response.body().getFirstname().toString() != null && !response.body().getFirstname().toString().isEmpty()) {
-                    Log.e("USER_NAME", response.body().getFirstname().toString());
-                    Log.e("USER_ID", response.body().getId().toString());
-                    SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_NAME", response.body().getFirstname().toString());
-                    SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_ID", response.body().getId().toString());
-                    SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_ROLE", response.body().getFirstname().toString());
-
-                    Toast.makeText(getApplicationContext(), "Verified.", Toast.LENGTH_SHORT).show();
-
-                    PEFORM_FORGET = SharedPrefsUtil.getStringPreference(getApplicationContext(), "PERFORM_FORGOT");
-                    Log.e("PEFORM_FORGET", PEFORM_FORGET + "");
-                    if (PEFORM_FORGET != null && !PEFORM_FORGET.isEmpty()) {
+                if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
+                    if (response.body().getFirstname().toString() != null && !response.body().getFirstname().toString().isEmpty()) {
+                        Log.e("USER_NAME", response.body().getFirstname().toString());
+                        Log.e("USER_ID", response.body().getId().toString());
+                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_NAME", response.body().getFirstname().toString());
+                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_ID", response.body().getId().toString());
+                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_ROLE", response.body().getFirstname().toString());
+                        Toast.makeText(getApplicationContext(), "Verified.", Toast.LENGTH_SHORT).show();
+                        PEFORM_FORGET = SharedPrefsUtil.getStringPreference(getApplicationContext(), "PERFORM_FORGOT");
+                        Log.e("PEFORM_FORGET", PEFORM_FORGET + "");
+                        if (PEFORM_FORGET != null && !PEFORM_FORGET.isEmpty()) {
 //                        Toast.makeText(OtpActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(OtpActivity.this, ChangePasswordActivity.class);
-                        startActivity(intent);
+                            Intent intent = new Intent(OtpActivity.this, ChangePasswordActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(OtpActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(OtpActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        }
                     } else {
-                        Toast.makeText(OtpActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(OtpActivity.this, HomeActivity.class);
-                        startActivity(intent);
+                        otpStr = "";
+                        otp_no1.setText("");
+                        otp_no2.setText("");
+                        otp_no3.setText("");
+                        otp_no4.setText("");
+                        otp_no5.setText("");
+                        otp_no6.setText("");
+                        Toast.makeText(getApplicationContext(), "Invalid OTP", Toast.LENGTH_SHORT).show();
                     }
-                } else {
+                }
+                {
+                    otpStr = "";
+                    otp_no1.setText("");
+                    otp_no2.setText("");
+                    otp_no3.setText("");
+                    otp_no4.setText("");
+                    otp_no5.setText("");
+                    otp_no6.setText("");
                     Toast.makeText(getApplicationContext(), "Invalid OTP", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
@@ -385,13 +402,12 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
         call.enqueue(new Callback<SendOTPData>() {
             @Override
             public void onResponse(Call<SendOTPData> call, Response<SendOTPData> response) {
-                Log.e("StatusCode:", response.body().getStatusCode() + "");
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
                 if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
-
-                    mDialog.setVisibility(View.GONE);
-                    mDialog.stop();
                     if (response.body().isOtpStatus()) {
                         Toast.makeText(OtpActivity.this, "OTP sent..", Toast.LENGTH_LONG).show();
+                        otpStr = "";
                         otp_no1.setText("");
                         otp_no2.setText("");
                         otp_no3.setText("");
@@ -408,9 +424,9 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onFailure(Call<SendOTPData> call, Throwable t) {
-
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
+                Toast.makeText(OtpActivity.this, "Failed to sent..", Toast.LENGTH_LONG).show();
                 Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
             }
         });

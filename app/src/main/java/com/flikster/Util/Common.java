@@ -2,12 +2,14 @@ package com.flikster.Util;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -25,13 +27,18 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
@@ -211,6 +218,7 @@ public class Common {
         }
     }
 
+
     private static void likeImageChangeAndpostRequest(ImageButton ib_like,
                                                       String likeStr, String userId,
                                                       String entityId, Context context) {
@@ -231,6 +239,7 @@ public class Common {
         }
 
     }
+
 
     //Book mark in Action Event
     public static void bookmarkAndUnBookmarkeEvent(Context context, final ImageButton bookmark,
@@ -267,6 +276,88 @@ public class Common {
     }
 
 
+    ///Will Watch Color Change
+    public static void willWatchOrNot(Context context, final ImageButton ib_like,
+
+                                      final String userId, String entityId) {
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            if (ib_like.getDrawable().getConstantState().equals
+                    (context.getResources().getDrawable(R.drawable.likesmallgreenicon).getConstantState())) {
+                Log.e("LikeEvent", "PINK_COLOR");
+                willWatchRequest(ib_like, "LIKED", userId, entityId, context);
+            } else {
+                Log.e("LikeEvent", "NORMAL_COLOR");
+                willWatchRequest(ib_like, "UNLIKED", userId, entityId, context);
+            }
+        }
+    }
+
+    private static void willWatchRequest(ImageButton ib_like,
+                                              String likeStr, String userId,
+                                              String entityId, Context context) {
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            ib_like.setImageResource(0);
+            if (likeStr.equals("LIKED")) {
+                ib_like.setImageResource(R.drawable.likesmallicon);
+                Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
+                ib_like.setImageResource(R.drawable.likesmallgreenicon);
+            }
+            new PostRetrofit().postRetrofitMethod("1", userId,
+                    entityId, ib_like, context);
+        }
+
+    }
+
+
+    ///////Want Watch
+
+    public static void wantWatchHit(Context context, final ImageButton ib_like,
+                                    final String userId, String entityId) {
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            if (ib_like.getDrawable().getConstantState().equals
+                    (context.getResources().getDrawable(R.drawable.likesmallpinkicon).getConstantState())) {
+                Log.e("LikeEvent", "PINK_COLOR");
+                wantWatchOrNotRequest(ib_like, "LIKED", userId, entityId, context);
+            } else {
+                Log.e("LikeEvent", "NORMAL_COLOR");
+                wantWatchOrNotRequest(ib_like, "UNLIKED", userId, entityId, context);
+            }
+        }
+    }
+
+    private static void wantWatchOrNotRequest(ImageButton ib_like,
+                                              String likeStr, String userId,
+                                              String entityId, Context context) {
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            ib_like.setImageResource(0);
+            if (likeStr.equals("LIKED")) {
+                ib_like.setImageResource(R.drawable.unlikesmallicon);
+                Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
+                ib_like.setImageResource(R.drawable.likesmallpinkicon);
+            }
+            new PostRetrofit().postRetrofitMethod("0", userId,
+                    entityId, ib_like, context);
+        }
+
+    }
+
+
     public static void shareClick(String shareableLink, Context context) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
@@ -278,15 +369,53 @@ public class Common {
     }
 
 
-
-    public static boolean emailValidator(String email)
-    {
+    public static boolean emailValidator(String email) {
         Pattern pattern;
         Matcher matcher;
         final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+
+    public static void openCommonDialog(Context context, String commontxtStr, String headertxtStr) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_common_menuitems);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        WebView commontxt = (WebView) dialog.findViewById(R.id.commontxt);
+        ImageButton closebtn = (ImageButton) dialog.findViewById(R.id.closebtn);
+        TextView headertxt = (TextView) dialog.findViewById(R.id.headertxt);
+        if (headertxtStr != null && !headertxtStr.isEmpty()) {
+            headertxt.setText(headertxtStr);
+        } else {
+            headertxt.setText("Flikster");
+        }
+        String htmlText = " %s ";
+        String myData = "What do we do with your information?\n" +
+                "When you purchase something from our store, as part of the buying and selling process, we collect the personal information you give us such as your name, address and email address.When you browse our store If you would like to: access, correct, amend or delete any personal information we have about you, register a complaint, or simply want more information contact our Privacy Compliance Officer at support@flikster.com";
+        commontxt.loadData(String.format(htmlText, myData), "text/html", "utf-8");
+//        commontxt.setText(String.format(htmlText, myData));
+         /*if (commontxtStr != null && !commontxtStr.isEmpty()) {
+            commontxt.setText(commontxtStr + "");
+            commontxt.setText(Html.fromHtml("first<br><b>second</b>"));
+        } else {
+            commontxt.setText("No Data Available" + "");
+            Html.fromHtml("first<br><b>second</b>");
+        }*/
+
+        closebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        window.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.translucent)));
+        dialog.show();
     }
 
 }

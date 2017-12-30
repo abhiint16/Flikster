@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
@@ -49,7 +52,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     ApiInterface apiInterface;
     ShopByVideoData.ShopByVideoInnerData shopByVideoInnerData;
     Boolean storyLineBoolean = true;
-    List<String> movieAllImages=new ArrayList<>();
+    List<String> movieAllImages = new ArrayList<>();
     String censor;
     String coverpic;
     String dor;
@@ -88,7 +91,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.storyline = storyline;
         this.slug = slug;
         this.hits = hits;
-        this.movieToShopByVideoInterface=movieToShopByVideoInterface;
+        this.movieToShopByVideoInterface = movieToShopByVideoInterface;
     }
 
     @Override
@@ -197,6 +200,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (title != null && !title.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_moviename.setText(title);
                 new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder1) holder).followbtn, context);
+//                new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder1) holder).followbtn, context);
             }
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
@@ -207,16 +211,24 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
             if (dor != null && !dor.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(dor);
+            }else {
+                ((ViewHolder1) holder).card_movie_feed_profile_dor.setVisibility(View.GONE);
             }
             if (duration != null && !duration.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_dur.setText(duration);
+            }else {
+                ((ViewHolder1) holder).card_movie_feed_profile_dur.setVisibility(View.GONE);
             }
             if (genre != null && !genre.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(formatGenre());
             }
             if (storyline != null && !storyline.isEmpty()) {
-                ((ViewHolder1) holder).card_movie_feed_profile_storyline.setText(storyline);
+                ((ViewHolder1) holder).card_movie_feed_profile_storyline.setText(String.format(storyline));
+            }else {
+                ((ViewHolder1) holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
             }
+
+
         } else if (holder.getItemViewType() == 2) {
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
@@ -246,41 +258,42 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((ViewHolder9) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCastViewHolder);
         }*/
     }
+
     private void initImagesRetrofit(final RecyclerView fragment_common_recyclerview_with_tv_recycler) {
-        CelebBioImagesData celebBioImagesData=new CelebBioImagesData(slug);
+        CelebBioImagesData celebBioImagesData = new CelebBioImagesData(slug);
         apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/search-ms/collectionsByCeleb/").create(ApiInterface.class);
         Call<CelebBioImagesData> call = apiInterface.postForCelebImageBySlug(celebBioImagesData);
         call.enqueue(new Callback<CelebBioImagesData>() {
             @Override
             public void onResponse(Call<CelebBioImagesData> call, Response<CelebBioImagesData> response) {
-                Log.e("check msg",""+response.body().getStatusCode());
-                Log.e("check msg",""+response.body().getData());
-                movieAllImages=response.body().getData();
-                movieInfoImagesViewHolder = new MovieInfoImagesViewHolder(context,movieAllImages);
+                Log.e("check msg", "" + response.body().getStatusCode());
+                Log.e("check msg", "" + response.body().getData());
+                movieAllImages = response.body().getData();
+                movieInfoImagesViewHolder = new MovieInfoImagesViewHolder(context, movieAllImages);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoImagesViewHolder);
             }
 
             @Override
             public void onFailure(Call<CelebBioImagesData> call, Throwable t) {
-                Log.e("vvvvvvvvvv","vv"+call+t);
+                Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
     }
 
     private void initShopByVideoRetrofit(final RecyclerView recyclerView) {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/shopbyvideos/").create(ApiInterface.class);
-        Call<ShopByVideoData> call = apiInterface.getShopByVideo("http://apiservice-ec.flikster.com/shopbyvideos/_search?pretty=true&q=\""+slug+"\"");
+        Call<ShopByVideoData> call = apiInterface.getShopByVideo("http://apiservice-ec.flikster.com/shopbyvideos/_search?pretty=true&q=\"" + slug + "\"");
         call.enqueue(new Callback<ShopByVideoData>() {
             @Override
             public void onResponse(Call<ShopByVideoData> call, Response<ShopByVideoData> response) {
-                shopByVideoInnerData=response.body().getHits();
-                movieBioAdapterVideoViewHolder = new MovieBioShopByVideoViewHolder(context,fragmentManager,shopByVideoInnerData,movieToShopByVideoInterface);
+                shopByVideoInnerData = response.body().getHits();
+                movieBioAdapterVideoViewHolder = new MovieBioShopByVideoViewHolder(context, fragmentManager, shopByVideoInnerData, movieToShopByVideoInterface);
                 recyclerView.setAdapter(movieBioAdapterVideoViewHolder);
             }
 
             @Override
             public void onFailure(Call<ShopByVideoData> call, Throwable t) {
-                Log.e("vvvvvvvvvv","vv"+call+t);
+                Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
     }
@@ -301,6 +314,10 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ImageView card_movie_feed_profile_image;
         Button followbtn;
 
+        ImageButton ib_like, unlike;
+        LinearLayout willwatchLayout, wontwatchLayout;
+        TextView likeCounttxt, unlikeCounttxt;
+
         public ViewHolder1(View itemView) {
             super(itemView);
             card_movie_feed_profile_moviename = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_moviename);
@@ -311,6 +328,35 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
             card_movie_feed_profile_storyline = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_storyline);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
+
+            willwatchLayout = (LinearLayout) itemView.findViewById(R.id.willwatchLayout);
+            wontwatchLayout = (LinearLayout) itemView.findViewById(R.id.wontwatchLayout);
+            ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
+            unlike = (ImageButton) itemView.findViewById(R.id.unlike);
+            likeCounttxt = (TextView) itemView.findViewById(R.id.likeCounttxt);
+            unlikeCounttxt = (TextView) itemView.findViewById(R.id.unlikeCounttxt);
+
+            ib_like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
+                    Common.willWatchOrNot(context, ib_like, userId, entityId);
+                    unlike.setImageResource(R.drawable.unlikesmallicon);
+                    likeCounttxt.setText("1");
+                    unlikeCounttxt.setText("0");
+                }
+            });
+            unlike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
+                    Common.wantWatchHit(context, unlike, userId, entityId);
+                    likeCounttxt.setText("0");
+                    ib_like.setImageResource(R.drawable.likesmallicon);
+                    unlikeCounttxt.setText("1");
+                }
+            });
+
             followbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -1,4 +1,4 @@
-package com.flikster.Authentication.ResendOtpActivity;
+package com.flikster.Authentication.OtpAndResendOtpActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SendOtpWithMobileNoActivity extends AppCompatActivity implements View.OnClickListener {
+public class SendOtpWithMobileNoActivityOrEmail extends AppCompatActivity implements View.OnClickListener {
 
     private Button login_btn;
     EditText et_mobile_no, passwordEt, et_emailid, register_mobile_no, register_password, register_confirm_password;
@@ -116,37 +116,42 @@ public class SendOtpWithMobileNoActivity extends AppCompatActivity implements Vi
             public void onResponse(Call<SendOTPData> call, Response<SendOTPData> response) {
 //                Log.e("StatusCode:", response.body().getStatusCode() + "");
                 mDialog.setVisibility(View.GONE);
-                mDialog.start();
-                if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
-                    if (response.body().isOtpStatus()) {
-                        Toast.makeText(SendOtpWithMobileNoActivity.this, "OTP sent..",
-                                Toast.LENGTH_LONG).show();
-                        SharedPrefsUtil.setStringPreference(getApplicationContext(),
-                                "OTP_ID", response.body().getId().toString());
-                        Intent i = new Intent(SendOtpWithMobileNoActivity.this,
-                                OtpActivity.class);
-                        if (type.equals("email")) {
-                            i.putExtra("TYPE", "email");
-                            i.putExtra("TYPE_DATA", et_emailid.getText().toString());
-                            i.putExtra("OTP_ID", response.body().getId().toString());
+                mDialog.stop();
+                try {
+                    if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
+                        if (response.body().isOtpStatus()) {
+                            Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, "OTP sent..",
+                                    Toast.LENGTH_LONG).show();
+                            SharedPrefsUtil.setStringPreference(getApplicationContext(),
+                                    "OTP_ID", response.body().getId().toString());
+                            Intent i = new Intent(SendOtpWithMobileNoActivityOrEmail.this,
+                                    OtpActivity.class);
+                            if (type.equals("email")) {
+                                i.putExtra("TYPE", "email");
+                                i.putExtra("TYPE_DATA", et_emailid.getText().toString());
+                                i.putExtra("OTP_ID", response.body().getId().toString());
+                            } else {
+                                i.putExtra("TYPE", "mobile");
+                                i.putExtra("TYPE_DATA", et_mobile_no.getText().toString());
+                                i.putExtra("OTP_ID", response.body().getId().toString());
+                            }
+                            startActivity(i);
                         } else {
-                            i.putExtra("TYPE", "mobile");
-                            i.putExtra("TYPE_DATA", et_mobile_no.getText().toString());
-                            i.putExtra("OTP_ID", response.body().getId().toString());
+                            Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
-                        startActivity(i);
                     } else {
-                        Toast.makeText(SendOtpWithMobileNoActivity.this, "Invalid details..", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    Toast.makeText(SendOtpWithMobileNoActivity.this, "Invalid details..", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<SendOTPData> call, Throwable t) {
                 mDialog.setVisibility(View.GONE);
-                mDialog.start();
+                mDialog.stop();
+                Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, "Invalid Data", Toast.LENGTH_LONG).show();
                 Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
             }
         });

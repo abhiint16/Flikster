@@ -22,9 +22,11 @@
         android:text="@string/preference_header" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_gravity="center"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="@string/preference_subheader" />
 
     <View
@@ -91,6 +93,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="@dimen/five"
         android:background="@color/colorAccent">
 
     </View>
@@ -165,8 +168,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/seven"
         android:clickable="true"
-        android:layout_marginTop="@dimen/five"
-        android:text="Skip Preference" />
+        android:text="Skip and proceed"
+        android:textSize="13sp" />
 
 </LinearLayout>

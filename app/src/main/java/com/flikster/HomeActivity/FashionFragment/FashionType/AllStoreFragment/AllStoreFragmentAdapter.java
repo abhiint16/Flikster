@@ -2,6 +2,7 @@ package com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     List<String> role = new ArrayList<>();
     String price = "";
     String userId = "PAWAN_KALYAN";
+    String userName = "null";
 
     public AllStoreFragmentAdapter(Context context, AllStoreInnerData hits, AllStoreFragment.AllStoreInterafce allStoreInterafce) {
         this.context = context;
@@ -80,6 +82,16 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
+            userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
+            Log.e("LoginUserId", userId);
+        }
+        if (SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null && SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null) {
+            userName = SharedPrefsUtil.getStringPreference(context, "USER_NAME");
+            Log.e("LoginUserName", userName);
+        }
+
         if (holder.getItemViewType() == 1) {
             ((ViewHolder1) holder).followbtn.setText("BUY");
             ((ViewHolder1) holder).card_fashion_details1_txt.setVisibility(View.GONE);

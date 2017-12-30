@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -23,20 +22,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.stream.MediaStoreStreamLoader;
-import com.flikster.HomeActivity.ApiClient;
-import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.PostRetrofit;
-import com.flikster.HomeActivity.SearchActivity;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SearchActivity;
 import com.flikster.R;
-import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.Common;
 import com.flikster.Util.FileUtils;
 import com.flikster.Util.SharedPrefsUtil;
@@ -47,7 +40,6 @@ import com.flikster.permission.DangerousPermissionUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-import in.juspay.godel.util.FileUtil;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -186,8 +178,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         SharedPrefsUtil.setStringPreference(getContext(), "ImageString", Common.BitMapToString(bitmap));
         captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
         captureimg.setImageBitmap(bitmap);
-
-
     }
 
     private void uploadPhoto(Uri fileUri) {

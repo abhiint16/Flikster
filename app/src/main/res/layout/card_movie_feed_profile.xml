@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp">
@@ -77,6 +78,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:text="duration(No)"
+
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -95,6 +97,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/willwatchLayout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -102,16 +105,22 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/ib_like"
+                    android:clickable="true"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:src="@drawable/likesmallicon" />
 
                 <TextView
+                    android:id="@+id/likeCounttxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
-                    android:text="no-of-likes" />
+                    android:text="0"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <TextView
@@ -119,9 +128,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/dark_grey" />
+                android:background="@color/dark_grey"
+                tools:ignore="Suspicious0dp" />
 
             <LinearLayout
+                android:id="@+id/wontwatchLayout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -129,16 +140,20 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/unlike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
                     android:background="@color/transparent"
                     android:src="@drawable/unlikesmallicon" />
 
                 <TextView
+                    android:id="@+id/unlikeCounttxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="no-of-unlikes" />
+                    android:text="0"
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <TextView
@@ -146,7 +161,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/dark_grey" />
+                android:background="@color/dark_grey"
+                tools:ignore="Suspicious0dp" />
 
             <Button
                 android:id="@+id/followbtn"

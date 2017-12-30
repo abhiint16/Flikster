@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flikster.Authentication.ResendOtpActivity.SendOtpWithMobileNoActivity;
+import com.flikster.Authentication.OtpAndResendOtpActivity.SendOtpWithMobileNoActivityOrEmail;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
@@ -92,7 +92,7 @@ public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements
             }
             postUserDataRetrofitInit();
         } else if (view.getId() == R.id.forgot_txt) {
-            Intent i = new Intent(LoginWithEmailOrMobileActivity.this, SendOtpWithMobileNoActivity.class);
+            Intent i = new Intent(LoginWithEmailOrMobileActivity.this, SendOtpWithMobileNoActivityOrEmail.class);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PERFORM_FORGOT", "ACCESS");
             if (CLICK_EVENT.equals("email")) {
                 i.putExtra("TYPE", "email");
@@ -127,9 +127,14 @@ public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
                 if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
+
                     Toast.makeText(LoginWithEmailOrMobileActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "IS_LOGGED_IN",
+                            "LOGGED_IN");
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_ID",
-                            response.body().getData().getFirstname());
+                            response.body().getData().getId());
+                    Log.e("UserIDformServer", response.body().getData().getId());
+                    Log.e("UserNameformServer", response.body().getData().getFirstname());
 
                     if (response.body().getData().getFirstname().toString() != null
                             && !response.body().getData().getFirstname().toString().isEmpty()) {

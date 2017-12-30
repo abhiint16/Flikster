@@ -3,8 +3,8 @@ package com.flikster.HomeActivity;
 import com.flikster.AllCommentActivity.CommentsData;
 import com.flikster.Authentication.ChangePasswordActivity.ChangePasswordData;
 import com.flikster.Authentication.LoginActivity.LoginResponseData;
-import com.flikster.Authentication.ResendOtpActivity.SendOTPData;
-import com.flikster.Authentication.ResendOtpActivity.VerifyOTPData;
+import com.flikster.Authentication.OtpAndResendOtpActivity.SendOTPData;
+import com.flikster.Authentication.OtpAndResendOtpActivity.VerifyOTPData;
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.EmailRegisterPostData;
 import com.flikster.Authentication.LoginActivity.LoginData;
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.MobileOrEmailRegisterCheckData;
@@ -89,6 +89,7 @@ public interface ApiInterface {
     Call<AllStoreData> getCelebMovieStoreData(@Query("pretty") Boolean s,
                                               @Query("size") Integer d,
                                               @Query("q") String c);
+    //getIntent().getStringExtra("userId")
     ////////////////////////////////////////////////////////////
     //POST Request
 

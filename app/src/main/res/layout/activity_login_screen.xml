@@ -143,6 +143,7 @@
             android:id="@+id/tv_login_terms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
             android:text="@string/login_terms"
             android:textColor="@color/colorCreateAccountSelected"
             android:textSize="11sp" />

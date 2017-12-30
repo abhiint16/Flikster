@@ -39,6 +39,7 @@
 
 
     <LinearLayout
+        android:id="@+id/alldatalayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/activity_my_bag_bottom_continue_btn"

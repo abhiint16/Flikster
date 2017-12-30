@@ -61,6 +61,8 @@ import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.flikster.AllCommentActivity.AllCommentActivity;
 import com.flikster.Authentication.AuthenticationActivity;
 import com.flikster.BuildConfig;
@@ -314,7 +316,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                     beginTransact(new FashionLandingFragment());
                 } else if (position == 4) {
                     Intent intent = new Intent(HomeActivity.this, MyBagActivity.class);
-                    intent.putExtra("userId", "abhiint");
+                    if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID") != null && !SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID").isEmpty()) {
+                        UserId = SharedPrefsUtil.getStringPreference(getApplicationContext(),
+                                "USER_ID");
+                        Log.e("LoginUserId", UserId);
+                        intent.putExtra("userId", "abhiint");
+                    } else {
+                        intent.putExtra("userId", "abhiint");
+                    }
                     startActivity(intent);
                     /*beginTransact(new MyStyleFragment());*/
                 } /*else if (position == 5) {
@@ -570,23 +579,27 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if (viewId == R.id.right_navigation_bar_logout) {
             SharedPrefsUtil.setStringPreference(HomeActivity.this,
                     "USER_ID", null);
+            SharedPrefsUtil.getBooleanPreference(getApplicationContext(), "FACEBOOK_LOGIN", true);
+            if (SharedPrefsUtil.getBooleanPreference(getApplicationContext(), "FACEBOOK_LOGIN", true)) {
+                fbLogout(getApplicationContext());
+            }
             SharedPrefsUtil.setStringPreference(HomeActivity.this, "IS_LOGGED_IN", "NOT_LOGGED_IN");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_aboutflikster) {
-            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+            navigationMenuitemsAction("Flikster", "About");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_careers) {
-            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+            navigationMenuitemsAction("Flikster", "Careers");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_contact) {
-            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+            navigationMenuitemsAction("Flikster", "Contact");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_help) {
-            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+            navigationMenuitemsAction("Flikster", "Help");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_privacy) {
-            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+            navigationMenuitemsAction("Flikster", "Privacy");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_return_policy) {
-            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+            navigationMenuitemsAction("Flikster", "Terms");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_terms) {
-            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+            navigationMenuitemsAction("Flikster", "Terms");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_login_btn) {
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
             Intent intent = new Intent(this, AuthenticationActivity.class);
@@ -603,6 +616,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             industrySpinnerSelection = true;
 //            toolbar_pref_spinner.setSelection(0, false);
         }
+    }
+
+    private void navigationMenuitemsAction(String contentddata, String headerStr) {
+        if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+            drawerLayout.closeDrawer(Gravity.RIGHT);
+        }
+        Common.openCommonDialog(HomeActivity.this, contentddata, headerStr);
     }
 
     private void openCameraClickDialog() {
@@ -1016,5 +1036,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+
+    public static void fbLogout(Context context) {
+        FacebookSdk.sdkInitialize(context);
+        LoginManager.getInstance().logOut();
+
     }
 }

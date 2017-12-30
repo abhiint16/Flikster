@@ -79,6 +79,7 @@
                     android:hint="Enter Mobile No"
                     android:inputType="number"
                     android:maxLength="10"
+                    android:fontFamily="sans-serif-thin"
                     android:paddingBottom="16dp"
                     android:paddingLeft="10dp"
                     android:paddingTop="16dp" />
@@ -97,7 +98,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#00000000"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:hint="Enter Emailid"
+                    android:fontFamily="sans-serif-thin"
 
                     android:paddingBottom="16dp"
                     android:paddingLeft="10dp"

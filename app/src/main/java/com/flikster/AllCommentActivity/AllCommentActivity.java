@@ -33,8 +33,8 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
     AllCommentActivityAdapter allCommentActivityAdapter;
     ApiInterface apiInterface;
     CommentsData.CommentsInnerData hits;
-    TextView textView;
-    ImageButton card_comment_text_send_btn;
+    TextView textView, toolbar_frag_title;
+    ImageButton toolbar_more_icon, card_comment_text_send_btn;
     EditText editText;
 
     @Override
@@ -47,14 +47,18 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void retrofitInit() {
-       // http://apiv3-es.flikster.com/comments/_search?pretty=true&sort=createdAt:desc&size=1000&q=entityId:%22749cb9be-29ba-4d50-ae45-d811b7069961%22
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/comments/_search/").create(ApiInterface.class);
-        Call<CommentsData> call = apiInterface.getAllComments("http://apiv3-es.flikster.com/comments/_search?pretty=true&sort=createdAt:desc&size=1000&q="+"entityId:\""+getIntent().getStringExtra("entityId")+"\"");
+        Log.e("AllCommentEntityId", getIntent().getStringExtra("entityId"));
+        // http://apiv3-es.flikster.com/comments/_search?pretty=true&sort=createdAt:desc&size=1000&q=entityId:%22749cb9be-29ba-4d50-ae45-d811b7069961%22
+        apiInterface = ApiClient.getClient(ApiClient.ELASTIC_URL + "comments/_search/").create(ApiInterface.class);
+        Call<CommentsData> call = apiInterface.getAllComments(ApiClient.ELASTIC_URL +
+                "comments/_search?pretty=true&sort=createdAt:desc&size=1000&q="
+                + "entityId:\"" + getIntent().getStringExtra("entityId") + "\"");
         call.enqueue(new Callback<CommentsData>() {
             @Override
             public void onResponse(Call<CommentsData> call, Response<CommentsData> response) {
-                hits=response.body().getHits();
-                allCommentActivityAdapter=new AllCommentActivityAdapter(hits);
+                hits = response.body().getHits();
+                Log.e("hits", hits.getTotal());
+                allCommentActivityAdapter = new AllCommentActivityAdapter(hits);
                 fragment_common_recyclerview_recycler.setAdapter(allCommentActivityAdapter);
             }
 
@@ -66,27 +70,37 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initializeRest() {
-        layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         textView.setVisibility(View.GONE);
         card_comment_text_send_btn.setOnClickListener(this);
+        toolbar_frag_title.setText("All Comments");
+        toolbar_more_icon.setVisibility(View.GONE);
     }
 
     private void initializeViews() {
-        fragment_common_recyclerview_recycler=(RecyclerView)findViewById(R.id.fragment_common_recyclerview_recycler);
-        textView=(TextView)findViewById(R.id.card_comment_text_see_more_comments);
-        card_comment_text_send_btn=(ImageButton)findViewById(R.id.card_comment_text_send_btn);
-        editText=(EditText)findViewById(R.id.card_comment_text_edittxt);
+        fragment_common_recyclerview_recycler = (RecyclerView) findViewById(R.id.fragment_common_recyclerview_recycler);
+        textView = (TextView) findViewById(R.id.card_comment_text_see_more_comments);
+        card_comment_text_send_btn = (ImageButton) findViewById(R.id.card_comment_text_send_btn);
+        editText = (EditText) findViewById(R.id.card_comment_text_edittxt);
+        toolbar_frag_title = (TextView) findViewById(R.id.toolbar_frag_title);
+        toolbar_more_icon = (ImageButton) findViewById(R.id.toolbar_more_icon);
     }
 
     @Override
     public void onClick(View view) {
-        if (SharedPrefsUtil.getStringPreference(this,"IS_LOGGED_IN").equals("NOT_LOGGED_IN"))
-        {
-            Toast.makeText(this,"You need to first Login.",Toast.LENGTH_SHORT).show();
+        if (SharedPrefsUtil.getStringPreference(this, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            Toast.makeText(this, "You need to first Login.", Toast.LENGTH_SHORT).show();
             return;
         }
-        new PostRetrofit().postRetrofitCommentMethod(getIntent().getStringExtra("userName"),getIntent().getStringExtra("userId"),
-                getIntent().getStringExtra("entityId"),editText.getText().toString(),editText,this);
+        String USERID = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID");
+        if (USERID != null && !USERID.isEmpty()) {
+            new PostRetrofit().postRetrofitCommentMethod(getIntent().getStringExtra("userName"),
+                    USERID,
+                    getIntent().getStringExtra("entityId"),
+                    editText.getText().toString(), editText, this);
+        }
+
+
     }
 }

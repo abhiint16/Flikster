@@ -68,7 +68,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     JukeBoxRecyclerViewHolder jukeBoxRecyclerViewHolder;
     List<String> audio = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
-    String userId = "PAWANKALYAN";
+    String userId = "PAWAN_KALYAN";
+    String userName = "null";
     ApiInterface apiInterface;
     int listSize;
 
@@ -136,6 +137,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+//        holder.itemView.setTag(outerHits.getClass().);
+
+        if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
+            userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
+            Log.e("LoginUserId", userId);
+        }
+        if (SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null && SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null) {
+            userName = SharedPrefsUtil.getStringPreference(context, "USER_NAME");
+            Log.e("LoginUserName", userName);
+        }
+
         if (holder.getItemViewType() == 1) {
             new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder1) holder).ib_like, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null && outerHits.getHits().get(position).get_source().getMovie().size() != 0)
@@ -479,6 +491,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return outerHits.getHits().size();
     }
 
+
     @Override
     public int getItemViewType(int position) {
         if (outerHits.getHits().get(position).get_source().getContentType() != null) {
@@ -617,10 +630,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic()
                         + "https://play.google.com/store/apps/details?id=com.flikster&hl=en" + "\n\n\n"
@@ -708,11 +722,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
                         card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId,
+                testing.seeMoreComments(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
@@ -843,10 +857,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
                         .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
@@ -992,12 +1006,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
                         card_comment_text_edittxt.getText().toString(),
                         card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar",
+                testing.seeMoreComments(userName,
                         userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
@@ -1125,10 +1139,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
                         .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
@@ -1252,10 +1266,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
                         .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
@@ -1377,12 +1391,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
                         card_comment_text_edittxt.getText().toString(),
                         card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar",
+                testing.seeMoreComments(userName,
                         userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
@@ -1470,10 +1484,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
                         .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
@@ -1614,10 +1628,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0) + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
             }
@@ -1739,10 +1753,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0)
@@ -1864,10 +1878,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0) + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
             }
@@ -1990,10 +2004,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar", userId,
+                new PostRetrofit().postRetrofitCommentMethod(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(), card_comment_text_edittxt.getText().toString(), card_comment_text_edittxt, context);
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
-                testing.seeMoreComments("Abhishek Kumar", userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null &&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
@@ -2005,7 +2019,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             .get_source().getCeleb().get(0).getProfilePic()
                             + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
                             "Stay connected to the world of Illusion.\n");
-                }else {
+                } else {
                     shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
                             .getProfilePic()
                             + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
