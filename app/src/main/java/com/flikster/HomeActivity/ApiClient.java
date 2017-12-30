@@ -46,16 +46,23 @@ public class ApiClient {
 
     public static final String POST_STATUS_URL = BASE_URL + "likes-ms/isPostStatus/";
     public static final String POST_COMMENT_URL = BASE_URL + "comments-ms/postComment/";
+    public static final String POST_CARD_STATUS_URL = BASE_URL + "likes-ms/postCardStatus";
 
     public static final String CREATE_SHARE_YOUR_STYLE_URL = BASE_URL + "share-your-style-ms/createShareYourStyle/";
 
+//    public static final String MovieWatchStatus_URL = BASE_URL + "likes-ms/postCardStatus";
 
-    public static final String ALL_COMMENTS_URL = ELASTIC_URL + "comments/_search/";
-    //"http://apiv3-es.flikster.com/comments/_search/"
+    public static final String MOVIE_WATCH_STATUS_URL = BASE_URL+ "likes-ms/isMovieWatchStatus/";
+
+//    public static final String ALL_COMMENTS_URL = ELASTIC_URL + "isMovieWatchStatus/";
+
+    public static final String GET_USER_WATCH_STATUS = BASE_URL + "likes-ms/getUserWatchStatusMobile/";
+    //getUserWatchStatusMobile
+
+    public static final String POST_WATCH_STATUS_URL = BASE_URL + "likes-ms/postCardStatusMobile/";
 
 
-    //"http://apiv3.flikster.com/v3/share-your-style-ms/createShareYourStyle/"
-    //"http://apiv3.flikster.com/v3/comments-ms/postComment/"
+//    likes-ms/postCardStatus
 
     public static Retrofit getClient(String baseURL) {
         retrofit = null;
@@ -78,7 +85,7 @@ public class ApiClient {
     public static Retrofit getClientData() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URLL)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

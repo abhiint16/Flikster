@@ -167,6 +167,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                         loginResult.getAccessToken().getUserId()
                                 + loginResult.getAccessToken().getToken()
                                 + "", Toast.LENGTH_SHORT).show();*/
+                SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_ID", loginResult.getAccessToken().getUserId());
                 Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
                 startActivity(intent);
@@ -335,6 +336,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
             Log.e(TAG, "Name: " + personName + ", email: " + email
                     + ", Image: " + personPhotoUrl);
+
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_ID", email);
 
             /*txtName.setText(personName);
             txtEmail.setText(email);

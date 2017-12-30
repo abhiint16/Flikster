@@ -10,8 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.WatchOrUnWatchCheckData;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.WatchStatusData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CreateShareYourStyleData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SavestyleData;
+import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
@@ -57,6 +60,27 @@ public class PostRetrofit {
             }
         });
     }
+
+    public void postWatchOrUnWatchRetrofitMethod(String type, String userId, String entityId, final ImageButton ib_like, final Context context) {
+        ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
+        apiInterface = ApiClient.getClient(ApiClient.POST_WATCH_STATUS_URL).create(ApiInterface.class);
+        Call<ModelForPostRequest> call = apiInterface.likeItem(modelForPostRequest);
+        call.enqueue(new Callback<ModelForPostRequest>() {
+            @Override
+            public void onResponse(Call<ModelForPostRequest> call, Response<ModelForPostRequest> response) {
+                Log.e("insied onResonse ", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body());
+                Log.e("SUCCESS_LIKE", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ModelForPostRequest> call, Throwable t) {
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+//                ib_like.setImageResource(0);
+//                ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
+            }
+        });
+    }
+
 
     public void checkForLike(String type, final String userId, String entityId, final ImageButton ib_like, final Context context) {
         if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
@@ -222,10 +246,10 @@ public class PostRetrofit {
             @Override
             public void onResponse(Call<ModelForPostCommentRequest> call, Response<ModelForPostCommentRequest> response) {
                 response.body().getStatusCode();
-                if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200){
+                if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
                     Toast.makeText(context, "Comment Successful", Toast.LENGTH_LONG).show();
                     editText.setText("");
-                }else {
+                } else {
                     Toast.makeText(context, "Comment Failed", Toast.LENGTH_LONG).show();
                     editText.setText("");
                 }
@@ -290,5 +314,167 @@ public class PostRetrofit {
         });
     }
 
+
+    /////Likes Count
+    public void checkForLikesCount(String type, String userId, String entityId, final TextView likescounttxt, final Context context) {
+        ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
+        apiInterface = ApiClient.getClient(ApiClient.POST_STATUS_URL).create(ApiInterface.class);
+        Call<ModelForIsLikedPostRequest> call = apiInterface.isLikedItem(modelForPostRequest);
+        call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
+            @Override
+            public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
+                try {
+                    if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
+                        if (response.body().getTotalCount() != null && response.body().getTotalCount() != 0) {
+                            likescounttxt.setText(String.valueOf(response.body().getTotalCount()) + "");
+                        } else {
+                            likescounttxt.setText("0");
+                        }
+                    } else {
+                        Toast.makeText(context, "" + response.body().getStatusCode(), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e) {
+                    Log.e("follow", "error in follow count");
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ModelForIsLikedPostRequest> call, Throwable t) {
+//                Toast.makeText()
+                Log.e("Error Likes Count", "Fail to to retrieve data");
+            }
+        });
+    }
+
+
+    ////Check For Followers Count
+
+    public void checkForFollowersCount(String type, String userId, String entityId, final TextView followercounttxt, final Context context) {
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            return;
+        }
+        ModelForPostRequest modelForPostRequest = new ModelForPostRequest(type, userId, entityId);
+        apiInterface = ApiClient.getClient(ApiClient.POST_STATUS_URL).create(ApiInterface.class);
+        Call<ModelForIsLikedPostRequest> call = apiInterface.isLikedItem(modelForPostRequest);
+        call.enqueue(new Callback<ModelForIsLikedPostRequest>() {
+            @Override
+            public void onResponse(Call<ModelForIsLikedPostRequest> call, Response<ModelForIsLikedPostRequest> response) {
+                try {
+                    if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
+                        if (response.body().getTotalCount() != null && response.body().getTotalCount() != 0) {
+                            followercounttxt.setText(String.valueOf(response.body().getTotalCount()) + "");
+                        } else {
+                            followercounttxt.setText("0");
+                        }
+                    } else {
+                        Toast.makeText(context, "" + response.body().getStatusCode(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Log.e("follow", "error in follow count");
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ModelForIsLikedPostRequest> call, Throwable t) {
+//                Toast.makeText()
+                Log.e("Error Likes Count", "Fail to to retrieve data");
+            }
+        });
+    }
+
+
+    //Chech for All Watchs
+    public void checkForAllWatchStatus(String entityId, final TextView likescounttxt, final TextView unwatchestxt, final Context context) {
+        Log.e("EntityIdMovie", entityId);
+        String url = ApiClient.MOVIE_WATCH_STATUS_URL + entityId + "/";
+        ApiInterface apiService = ApiClient.getClientData().create(ApiInterface.class);
+        Call<WatchStatusData> call = apiService.getWatchStatusdata(url);
+        call.enqueue(new Callback<WatchStatusData>() {
+            @Override
+            public void onResponse(Call<WatchStatusData> call, Response<WatchStatusData> response) {
+                try {
+                    if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
+                        Log.e("Watches Count", response.body().getWatchCount() + "");
+                        if (response.body().getWatchCount() != null && response.body().getWatchCount() != 0) {
+                            likescounttxt.setText(String.valueOf(response.body().getWatchCount()) + "");
+                        } else {
+                            likescounttxt.setText("0");
+                        }
+                        Log.e("Watches Count", response.body().getWontWatchCount() + "");
+                        if (response.body().getWontWatchCount() != null && response.body().getWontWatchCount() != 0) {
+                            unwatchestxt.setText(String.valueOf(response.body().getWontWatchCount()) + "");
+                        } else {
+                            unwatchestxt.setText("0");
+                        }
+                    } else {
+                        Toast.makeText(context, "" + response.body().getStatusCode(), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e) {
+                    Log.e("follow", "error in follow count");
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<WatchStatusData> call, Throwable t) {
+//                Toast.makeText()
+                Log.e("Error Likes Count", "Fail to to retrieve data");
+            }
+        });
+    }
+
+
+    //Is Watch
+    public void checkIsWatchLike(final String userId, String entityId, final ImageButton ib_like,
+                                 final ImageButton unLike, final Context context) {
+        if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+            return;
+        }
+        WatchOrUnWatchCheckData modelForPostRequest = new WatchOrUnWatchCheckData(userId, entityId);
+        apiInterface = ApiClient.getClient(ApiClient.GET_USER_WATCH_STATUS).create(ApiInterface.class);
+        Call<WatchOrUnWatchCheckData> call = apiInterface.isWatchOrNorByUser(modelForPostRequest);
+        call.enqueue(new Callback<WatchOrUnWatchCheckData>() {
+            @Override
+            public void onResponse(Call<WatchOrUnWatchCheckData> call,
+                                   Response<WatchOrUnWatchCheckData> response) {
+                try {
+                    Log.e("ISWATCH_STATUS", response.body().getStatusCode() + "");
+                    Log.e("ISWATCH_STATUS_WATCH", response.body().getWatch() + "");
+                    Log.e("ISWATCH_STATUS_NOTWATCH", response.body().getWatch() + "");
+                    if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
+                        if (response.body().getWatch()) {
+                            ib_like.setImageResource(0);
+                            ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.likegreensmall));
+                        } else {
+                            if (response.body().getNotWatch()) {
+                                unLike.setImageResource(0);
+                                unLike.setImageDrawable(context.getResources().getDrawable(R.drawable.unlikepinksmall));
+                            }
+                        }
+                    }
+
+                } catch (Exception e) {
+                    Log.e("like count from sever", "null");
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WatchOrUnWatchCheckData> call, Throwable t) {
+                Log.e("LikeSTATUS", "Like Screen Failed" + call + "bcbbc" + t);
+                access = false;
+                ib_like.setImageResource(0);
+                ib_like.setImageDrawable(context.getResources().getDrawable(R.drawable.like_icon));
+
+            }
+        });
+    }
 
 }

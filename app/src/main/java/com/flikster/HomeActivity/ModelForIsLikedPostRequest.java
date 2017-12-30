@@ -9,6 +9,30 @@ import java.util.List;
  */
 
 public class ModelForIsLikedPostRequest {
+
+    @SerializedName("statusCode")
+    private Integer statusCode;
+
+
+    @SerializedName("totalCount")
+    private Integer totalCount;
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
     @SerializedName("data")
     private InnerItems data;
 
@@ -20,8 +44,8 @@ public class ModelForIsLikedPostRequest {
         this.data = data;
     }
 
-    public class InnerItems
-    {
+
+    public class InnerItems {
         @SerializedName("Count")
         private String Count;
         @SerializedName("Items")
@@ -44,8 +68,7 @@ public class ModelForIsLikedPostRequest {
         }
     }
 
-    public class InnerMostItems
-    {
+    public class InnerMostItems {
 
         @SerializedName("type")
         private String type;

@@ -1,9 +1,11 @@
 package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapter;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterFamilyViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterPeersViewHolder;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioShopByVideoViewHolder;
@@ -26,6 +29,7 @@ import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.Common;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -196,11 +202,29 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+
+        if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
+            userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
+        } else {
+            userId = "";
+        }
+
+
         if (holder.getItemViewType() == 1) {
             if (title != null && !title.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_moviename.setText(title);
                 new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder1) holder).followbtn, context);
 //                new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder1) holder).followbtn, context);
+            }
+
+            new PostRetrofit().checkForAllWatchStatus(entityId, ((ViewHolder1) holder).likeCounttxt, ((ViewHolder1) holder).unlikeCounttxt, context);
+
+
+            if (userId != null && !userId.isEmpty()) {
+                new PostRetrofit().checkIsWatchLike(userId, entityId,
+                        ((ViewHolder1) holder).ib_like,
+                        ((ViewHolder1) holder).unlike,
+                        context);
             }
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
@@ -211,20 +235,20 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
             if (dor != null && !dor.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_dor.setText(dor);
-            }else {
+            } else {
                 ((ViewHolder1) holder).card_movie_feed_profile_dor.setVisibility(View.GONE);
             }
             if (duration != null && !duration.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_dur.setText(duration);
-            }else {
+            } else {
                 ((ViewHolder1) holder).card_movie_feed_profile_dur.setVisibility(View.GONE);
             }
             if (genre != null && !genre.isEmpty()) {
                 ((ViewHolder1) holder).card_movie_feed_profile_genre.setText(formatGenre());
             }
             if (storyline != null && !storyline.isEmpty()) {
-                ((ViewHolder1) holder).card_movie_feed_profile_storyline.setText(String.format(storyline));
-            }else {
+                ((ViewHolder1) holder).card_movie_feed_profile_storyline.setText(Html.fromHtml(storyline));
+            } else {
                 ((ViewHolder1) holder).card_movie_feed_profile_storyline.setVisibility(View.GONE);
             }
 
@@ -339,21 +363,104 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
-                    Common.willWatchOrNot(context, ib_like, userId, entityId);
-                    unlike.setImageResource(R.drawable.unlikesmallicon);
-                    likeCounttxt.setText("1");
-                    unlikeCounttxt.setText("0");
+                    if (userId != null && !userId.isEmpty()) {
+                        Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
+                        if (ib_like.getDrawable().getConstantState().equals
+                                (context.getResources().getDrawable(R.drawable.likegreensmall)
+                                        .getConstantState())) {
+                            if(!((Activity) context ).isFinishing())
+                            {
+                                Toast.makeText(context, "Already Watch liked", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Common.willWatchOrNot(context, ib_like, userId, entityId);
+                            unlike.setImageResource(R.drawable.unlikesmallicon);
+                            int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
+                            int watchcount_added = watchcount + 1;
+                            likeCounttxt.setText(String.valueOf(watchcount_added));
+                            unlikeCounttxt.setText("0");
+                        }
+                    } else {
+                        Toast.makeText(context, "Please login", Toast.LENGTH_SHORT).show();
+                    }
+
+                   /* if (userId != null && !userId.isEmpty()) {
+                        Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
+                        if (ib_like.getDrawable().getConstantState().equals
+                                (context.getResources().getDrawable(R.drawable.likegreensmall)
+                                        .getConstantState())) {
+                            if(!((Activity) context ).isFinishing())
+                            {
+                                Toast.makeText(context, "Already Watch liked", Toast.LENGTH_SHORT).show();
+                            }else{
+//                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            if (unlike.getDrawable().getConstantState().equals
+                                    (context.getResources().getDrawable(R.drawable.unlikepinksmall).getConstantState())) {
+                                int watchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int watchcount_added = watchcount - 1;
+                                likeCounttxt.setText(String.valueOf(watchcount_added));
+                                int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int wontwatchcount_added = wontwatchcount + 1;
+                                unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                                Common.wantWatchHit(context, unlike, userId, entityId);
+                            } else {
+                                Common.wantWatchHit(context, unlike, userId, entityId);
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                                int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int wontwatchcount_added = wontwatchcount + 1;
+                                unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "Please login", Toast.LENGTH_SHORT).show();
+                    }*/
+
+
                 }
             });
             unlike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
-                    Common.wantWatchHit(context, unlike, userId, entityId);
-                    likeCounttxt.setText("0");
-                    ib_like.setImageResource(R.drawable.likesmallicon);
-                    unlikeCounttxt.setText("1");
+                    if (userId != null && !userId.isEmpty()) {
+                        Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
+                        if (unlike.getDrawable().getConstantState().equals
+                                (context.getResources().getDrawable(R.drawable.unlikepinksmall).getConstantState())) {
+                            if(!((Activity) context ).isFinishing())
+                            {
+                                Toast.makeText(context, "Already Un Watch liked", Toast.LENGTH_SHORT).show();
+                            }else{
+//                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            if (ib_like.getDrawable().getConstantState().equals
+                                    (context.getResources().getDrawable(R.drawable.likegreensmall)
+                                            .getConstantState())) {
+                                int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
+                                int watchcount_added = watchcount - 1;
+                                likeCounttxt.setText(String.valueOf(watchcount_added));
+                                int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int wontwatchcount_added = wontwatchcount + 1;
+                                unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                                Common.wantWatchHit(context, unlike, userId, entityId);
+                            } else {
+                                Common.wantWatchHit(context, unlike, userId, entityId);
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                                int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int wontwatchcount_added = wontwatchcount + 1;
+                                unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "Please login", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

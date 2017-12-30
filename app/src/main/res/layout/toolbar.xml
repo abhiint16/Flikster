@@ -17,17 +17,13 @@
     app:layout_scrollFlags="scroll|enterAlways">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginLeft="2dp"
+        android:visibility="gone"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/toolbar_main_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/ten"
-            android:layout_marginRight="@dimen/ten"
-            android:background="@drawable/notification_icon" />
+
 
         <ImageButton
             android:id="@+id/filter"
@@ -37,6 +33,13 @@
             android:background="@drawable/filter"
             android:visibility="gone" />
     </LinearLayout>
+    <ImageButton
+        android:id="@+id/toolbar_main_notification"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="@dimen/fifteen"
+        android:layout_marginRight="@dimen/ten"
+        android:background="@drawable/notificationtop" />
 
 
     <LinearLayout

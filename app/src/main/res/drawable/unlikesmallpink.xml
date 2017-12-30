@@ -4,6 +4,6 @@
     <item
         android:width="@dimen/twenty"
         android:height="@dimen/twenty"
-        android:drawable="@drawable/likegreen" />
+        android:drawable="@drawable/unlikepink" />
 
 </layer-list>

@@ -17,6 +17,8 @@ import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.WatchOrUnWatchCheckData;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.WatchStatusData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CreateShareYourStyleData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
@@ -77,6 +79,9 @@ public interface ApiInterface {
     Call<AllStoreData> getAllStore(@Url String url);
 
     @GET
+    Call<WatchStatusData> getWatchStatusdata(@Url String url);
+
+    @GET
     Call<ShopByVideoData> getShopByVideo(@Url String url);
 
     @GET
@@ -93,16 +98,19 @@ public interface ApiInterface {
     ////////////////////////////////////////////////////////////
     //POST Request
 
-    @POST("http://apiv3.flikster.com/v3/likes-ms/postCardStatus")
+    @POST(ApiClient.POST_CARD_STATUS_URL)
     Call<ModelForPostRequest> likeItem(@Body ModelForPostRequest modelForPostRequest);
 
-    @POST("http://apiv3.flikster.com/v3/likes-ms/isPostStatus")
+    @POST(ApiClient.POST_STATUS_URL)
     Call<ModelForIsLikedPostRequest> isLikedItem(@Body ModelForPostRequest modelForPostRequest);
 
-    @POST("http://apiv3.flikster.com/v3/comments-ms/postComment")
+    @POST(ApiClient.GET_USER_WATCH_STATUS)
+    Call<WatchOrUnWatchCheckData> isWatchOrNorByUser(@Body WatchOrUnWatchCheckData modelForPostRequest);
+
+    @POST(ApiClient.POST_COMMENT_URL)
     Call<ModelForPostCommentRequest> commentItem(@Body ModelForPostCommentRequest modelForPostRequest);
 
-    @GET("http://apiv3-es.flikster.com/contents/_search")
+    @GET("http://apiservice-es.flikster.com/contents/_search")
     Call<GalleryData> getAllGalleryData(@Query("pretty") Boolean s,
                                         @Query("sort") String sort,
                                         @Query("size") Integer i,
@@ -115,16 +123,16 @@ public interface ApiInterface {
     Call<ProductDetailsDataToSend> postSendToCartData(@Part("productId") String productId,
                                                       @Part("size") String size, @Part("userId") String userId, @Part("productDetails") ProductDetailsDataToSend productDetailsDataToSend);*/
 
-    @POST("http://apiv3.flikster.com/v3/cart-ms/createCart")
+    @POST("http://apiservice.flikster.com/v3/cart-ms/createCart")
     Call<ProductDetailsDataToSend> postSendToCartData(@Body ProductDetailsDataToSend productDetailsDataToSend);
 
-    @POST("http://apiv3.flikster.com/v3/orders-ms/createOrder")
+    @POST("http://apiservice.flikster.com/v3/orders-ms/createOrder")
     Call<CreateUserApiPostData> postSendToCraeteUser(@Body CreateUserApiPostData createUserApiPostData);
 
     @GET
     Call<StyleSearchData> getStyletypeData(@Url String url);
 
-    @POST("http://apiv3.flikster.com/v3/share-your-style-ms/createShareYourStyle")
+    @POST("http://apiservice.flikster.com/v3/share-your-style-ms/createShareYourStyle")
     Call<CreateShareYourStyleData> postStyleSave(@Body CreateShareYourStyleData savestyledata);
 
     @POST("http://apiservice.flikster.com/v3/search-ms/collectionsByCeleb")

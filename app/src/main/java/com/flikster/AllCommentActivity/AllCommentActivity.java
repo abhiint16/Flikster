@@ -34,7 +34,7 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
     ApiInterface apiInterface;
     CommentsData.CommentsInnerData hits;
     TextView textView, toolbar_frag_title;
-    ImageButton toolbar_more_icon, card_comment_text_send_btn;
+    ImageButton toolbar_more_icon, card_comment_text_send_btn, toolbar_back_navigation_btn;
     EditText editText;
 
     @Override
@@ -76,6 +76,7 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
         card_comment_text_send_btn.setOnClickListener(this);
         toolbar_frag_title.setText("All Comments");
         toolbar_more_icon.setVisibility(View.GONE);
+        toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
     private void initializeViews() {
@@ -85,20 +86,25 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
         editText = (EditText) findViewById(R.id.card_comment_text_edittxt);
         toolbar_frag_title = (TextView) findViewById(R.id.toolbar_frag_title);
         toolbar_more_icon = (ImageButton) findViewById(R.id.toolbar_more_icon);
+        toolbar_back_navigation_btn = (ImageButton) findViewById(R.id.toolbar_back_navigation_btn);
     }
 
     @Override
     public void onClick(View view) {
-        if (SharedPrefsUtil.getStringPreference(this, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
-            Toast.makeText(this, "You need to first Login.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String USERID = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID");
-        if (USERID != null && !USERID.isEmpty()) {
-            new PostRetrofit().postRetrofitCommentMethod(getIntent().getStringExtra("userName"),
-                    USERID,
-                    getIntent().getStringExtra("entityId"),
-                    editText.getText().toString(), editText, this);
+        if (view.getId() == R.id.toolbar_back_navigation_btn) {
+            finish();
+        } else {
+            if (SharedPrefsUtil.getStringPreference(this, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
+                Toast.makeText(this, "You need to first Login.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String USERID = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID");
+            if (USERID != null && !USERID.isEmpty()) {
+                new PostRetrofit().postRetrofitCommentMethod(getIntent().getStringExtra("userName"),
+                        USERID,
+                        getIntent().getStringExtra("entityId"),
+                        editText.getText().toString(), editText, this);
+            }
         }
 
 

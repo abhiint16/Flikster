@@ -68,7 +68,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     JukeBoxRecyclerViewHolder jukeBoxRecyclerViewHolder;
     List<String> audio = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
-    String userId = "PAWAN_KALYAN";
+    String userId = "null";
     String userName = "null";
     ApiInterface apiInterface;
     int listSize;

@@ -31,6 +31,7 @@ import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.Util.Common;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,11 +167,28 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
+            userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
+        } else {
+            userId = "";
+        }
+
         if (holder.getItemViewType() == 0) {
             if (title != null && !title.isEmpty()) {
                 ((ViewHolder0) holder).card_movie_feed_profile_moviename.setText(title);
                 new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder0) holder).followbtn, context);
             }
+
+            new PostRetrofit().checkForAllWatchStatus(entityId, ((ViewHolder0) holder).likeCounttxt, ((ViewHolder0) holder).unlikeCounttxt, context);
+
+            if (userId != null && !userId.isEmpty()) {
+                new PostRetrofit().checkIsWatchLike(userId, entityId,
+                        ((ViewHolder0) holder).ib_like,
+                        ((ViewHolder0) holder).unlike,
+                        context);
+            }
+
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
                         .into(((ViewHolder0) holder).card_movie_feed_profile_image);
@@ -501,7 +519,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
                     Common.willWatchOrNot(context, ib_like, userId, entityId);
                     unlike.setImageResource(R.drawable.unlikesmallicon);
-                    likeCounttxt.setText("1");
+//                    int addedWatch = likeCounttxt.getText().toString();
+                    likeCounttxt.setText(String.valueOf(likeCounttxt.getText().toString()) + 1);
                     unlikeCounttxt.setText("0");
                 }
             });
@@ -511,8 +530,9 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
                     Common.wantWatchHit(context, unlike, userId, entityId);
                     ib_like.setImageResource(R.drawable.likesmallicon);
-                    likeCounttxt.setText("0");
-                    unlikeCounttxt.setText("1");
+                    unlikeCounttxt.setText(String.valueOf(unlikeCounttxt.getText().toString()) + 1);
+                    int countdec = Integer.valueOf(unlikeCounttxt.getText().toString())- 1;
+                    likeCounttxt.setText(countdec);
                 }
             });
 

@@ -278,14 +278,13 @@ public class Common {
 
     ///Will Watch Color Change
     public static void willWatchOrNot(Context context, final ImageButton ib_like,
-
                                       final String userId, String entityId) {
         if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
             Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
             return;
         } else {
             if (ib_like.getDrawable().getConstantState().equals
-                    (context.getResources().getDrawable(R.drawable.likesmallgreenicon).getConstantState())) {
+                    (context.getResources().getDrawable(R.drawable.likegreensmall).getConstantState())) {
                 Log.e("LikeEvent", "PINK_COLOR");
                 willWatchRequest(ib_like, "LIKED", userId, entityId, context);
             } else {
@@ -296,8 +295,8 @@ public class Common {
     }
 
     private static void willWatchRequest(ImageButton ib_like,
-                                              String likeStr, String userId,
-                                              String entityId, Context context) {
+                                         String likeStr, String userId,
+                                         String entityId, Context context) {
         if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
             Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
             return;
@@ -308,9 +307,9 @@ public class Common {
                 Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
-                ib_like.setImageResource(R.drawable.likesmallgreenicon);
+                ib_like.setImageResource(R.drawable.likegreensmall);
             }
-            new PostRetrofit().postRetrofitMethod("1", userId,
+            new PostRetrofit().postWatchOrUnWatchRetrofitMethod("1", userId,
                     entityId, ib_like, context);
         }
 
@@ -326,7 +325,7 @@ public class Common {
             return;
         } else {
             if (ib_like.getDrawable().getConstantState().equals
-                    (context.getResources().getDrawable(R.drawable.likesmallpinkicon).getConstantState())) {
+                    (context.getResources().getDrawable(R.drawable.unlikepinksmall).getConstantState())) {
                 Log.e("LikeEvent", "PINK_COLOR");
                 wantWatchOrNotRequest(ib_like, "LIKED", userId, entityId, context);
             } else {
@@ -349,9 +348,9 @@ public class Common {
                 Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
-                ib_like.setImageResource(R.drawable.likesmallpinkicon);
+                ib_like.setImageResource(R.drawable.unlikepinksmall);
             }
-            new PostRetrofit().postRetrofitMethod("0", userId,
+            new PostRetrofit().postWatchOrUnWatchRetrofitMethod("0", userId,
                     entityId, ib_like, context);
         }
 

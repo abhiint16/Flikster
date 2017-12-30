@@ -230,10 +230,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
 // Create items
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed, R.drawable.home, R.color.color_tab_1);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watch, R.color.color_tab_1);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed, R.drawable.homeunselectedbottom, R.color.color_tab_1);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watchunselected, R.color.color_tab_1);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.addsquare, R.color.color_tab_1);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionicon, R.color.color_tab_1);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionunselectedbottom, R.color.color_tab_1);
         AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.store, R.drawable.storeicon, R.color.color_tab_1);
 
 // Add items

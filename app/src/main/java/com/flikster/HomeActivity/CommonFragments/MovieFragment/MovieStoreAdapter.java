@@ -23,6 +23,7 @@ import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
 import com.flikster.Util.Common;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,10 +146,24 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
+            userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
+        } else {
+            userId = "";
+        }
         if (holder.getItemViewType() == 0) {
             if (title != null && !title.isEmpty()) {
                 ((ViewHolder0) holder).card_movie_feed_profile_moviename.setText(title);
                 new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder0) holder).followbtn, context);
+            }
+
+            new PostRetrofit().checkForAllWatchStatus(entityId, ((ViewHolder0) holder).likeCounttxt, ((ViewHolder0) holder).unlikeCounttxt, context);
+
+            if (userId != null && !userId.isEmpty()) {
+                new PostRetrofit().checkIsWatchLike(userId, entityId,
+                        ((ViewHolder0) holder).ib_like,
+                        ((ViewHolder0) holder).unlike,
+                        context);
             }
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
