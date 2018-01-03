@@ -101,22 +101,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder1)holder).recyclerView.setLayoutManager(layoutManager);
             SearchInnerItemMovieRecyclerViewHolder searchInnerItemMovieRecyclerViewHolder =new SearchInnerItemMovieRecyclerViewHolder(context,globalSearchGetData.getMovie());
             ((ViewHolder1)holder).recyclerView.setAdapter(searchInnerItemMovieRecyclerViewHolder);
-            /*if (globalSearchGetData.getMovie().size()==1)
-            {
-                ((ViewHolder1)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getMovie().get(0).getName());
-                ((ViewHolder1)holder).searchview_recycleritem_secitem.setVisibility(View.GONE);
-                ((ViewHolder1)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else if (globalSearchGetData.getMovie().size()==2)
-            {
-                ((ViewHolder1)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getMovie().get(0).getName());
-                ((ViewHolder1)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getMovie().get(1).getName());
-                ((ViewHolder1)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else {
-                ((ViewHolder1)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getMovie().get(0).getName());
-                ((ViewHolder1)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getMovie().get(1).getName());
-            }*/
         }
         else if (holder.getItemViewType()==2)
         {
@@ -125,22 +109,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder2)holder).recyclerView.setLayoutManager(layoutManager);
             SearchInnerItemCelebRecyclerViewHolder searchInnerItemCelebRecyclerViewHolder =new SearchInnerItemCelebRecyclerViewHolder(context,globalSearchGetData.getCeleb());
             ((ViewHolder2)holder).recyclerView.setAdapter(searchInnerItemCelebRecyclerViewHolder);
-            /*if (globalSearchGetData.getCeleb().size()==1)
-            {
-                ((ViewHolder2)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getCeleb().get(0).getName());
-                ((ViewHolder2)holder).searchview_recycleritem_secitem.setVisibility(View.GONE);
-                ((ViewHolder2)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else if (globalSearchGetData.getCeleb().size()==2)
-            {
-                ((ViewHolder2)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getCeleb().get(0).getName());
-                ((ViewHolder2)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getCeleb().get(1).getName());
-                ((ViewHolder2)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else {
-                ((ViewHolder2)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getCeleb().get(0).getName());
-                ((ViewHolder2)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getCeleb().get(1).getName());
-            }*/
         }
         else if (holder.getItemViewType()==3)
         {
@@ -149,22 +117,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder3)holder).recyclerView.setLayoutManager(layoutManager);
             SearchInnerItemContentRecyclerViewHolder searchInnerItemContentRecyclerViewHolder =new SearchInnerItemContentRecyclerViewHolder(context,globalSearchGetData.getContent());
             ((ViewHolder3)holder).recyclerView.setAdapter(searchInnerItemContentRecyclerViewHolder);
-            /*if (globalSearchGetData.getContent().size()==1)
-            {
-                ((ViewHolder3)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getContent().get(0).getName());
-                ((ViewHolder3)holder).searchview_recycleritem_secitem.setVisibility(View.GONE);
-                ((ViewHolder3)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else if (globalSearchGetData.getContent().size()==2)
-            {
-                ((ViewHolder3)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getContent().get(0).getName());
-                ((ViewHolder3)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getContent().get(1).getName());
-                ((ViewHolder3)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else {
-                ((ViewHolder3)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getContent().get(0).getName());
-                ((ViewHolder3)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getContent().get(1).getName());
-            }*/
         }
         else if (holder.getItemViewType()==4)
         {
@@ -173,22 +125,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder4)holder).recyclerView.setLayoutManager(layoutManager);
             SearchInnerItemProductRecyclerViewHolder searchInnerItemProductRecyclerViewHolder =new SearchInnerItemProductRecyclerViewHolder(context,globalSearchGetData.getProducts());
             ((ViewHolder4)holder).recyclerView.setAdapter(searchInnerItemProductRecyclerViewHolder);
-            /*if (globalSearchGetData.getProducts().size()==1)
-            {
-                ((ViewHolder4)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getProducts().get(0).getName());
-                ((ViewHolder4)holder).searchview_recycleritem_secitem.setVisibility(View.GONE);
-                ((ViewHolder4)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else if (globalSearchGetData.getProducts().size()==2)
-            {
-                ((ViewHolder4)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getProducts().get(0).getName());
-                ((ViewHolder4)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getProducts().get(1).getName());
-                ((ViewHolder4)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else {
-                ((ViewHolder4)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getProducts().get(0).getName());
-                ((ViewHolder4)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getProducts().get(1).getName());
-            }*/
         }
         else if (holder.getItemViewType()==5)
         {
@@ -197,22 +133,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder5)holder).recyclerView.setLayoutManager(layoutManager);
             SearchInnerItemDesignerRecyclerViewHolder searchInnerItemDesignerRecyclerViewHolder =new SearchInnerItemDesignerRecyclerViewHolder(context,globalSearchGetData.getDesigner());
             ((ViewHolder5)holder).recyclerView.setAdapter(searchInnerItemDesignerRecyclerViewHolder);
-            /*if (globalSearchGetData.getDesigner().size()==1)
-            {
-                ((ViewHolder5)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getDesigner().get(0).getName());
-                ((ViewHolder5)holder).searchview_recycleritem_secitem.setVisibility(View.GONE);
-                ((ViewHolder5)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else if (globalSearchGetData.getDesigner().size()==2)
-            {
-                ((ViewHolder5)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getDesigner().get(0).getName());
-                ((ViewHolder5)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getDesigner().get(1).getName());
-                ((ViewHolder5)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else {
-                ((ViewHolder5)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getDesigner().get(0).getName());
-                ((ViewHolder5)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getDesigner().get(1).getName());
-            }*/
         }
         else if (holder.getItemViewType()==6)
         {
@@ -221,22 +141,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder6)holder).recyclerView.setLayoutManager(layoutManager);
             SearchInnerItemBrandRecyclerViewHolder searchInnerItemBrandRecyclerViewHolder =new SearchInnerItemBrandRecyclerViewHolder(context,globalSearchGetData.getBrand());
             ((ViewHolder6)holder).recyclerView.setAdapter(searchInnerItemBrandRecyclerViewHolder);
-            /*if (globalSearchGetData.getBrand().size()==1)
-            {
-                ((ViewHolder6)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getBrand().get(0).getName());
-                ((ViewHolder6)holder).searchview_recycleritem_secitem.setVisibility(View.GONE);
-                ((ViewHolder6)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else if (globalSearchGetData.getBrand().size()==2)
-            {
-                ((ViewHolder6)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getBrand().get(0).getName());
-                ((ViewHolder6)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getBrand().get(1).getName());
-                ((ViewHolder6)holder).searchview_recycleritem_seemore.setVisibility(View.GONE);
-            }
-            else {
-                ((ViewHolder6)holder).searchview_recycleritem_firstitem.setText(globalSearchGetData.getBrand().get(0).getName());
-                ((ViewHolder6)holder).searchview_recycleritem_secitem.setText(globalSearchGetData.getBrand().get(1).getName());
-            }*/
         }
         else if(holder.getItemViewType()==0)
         {
