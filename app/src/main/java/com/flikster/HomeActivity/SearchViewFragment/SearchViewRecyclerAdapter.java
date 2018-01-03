@@ -316,75 +316,26 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         }
     }
 
-    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView searchview_recycleritem_topname;/*,searchview_recycleritem_firstitem,
-                searchview_recycleritem_secitem,searchview_recycleritem_seemore;*/
+    public class ViewHolder1 extends RecyclerView.ViewHolder {
+        TextView searchview_recycleritem_topname;
         RecyclerView recyclerView;
         public ViewHolder1(View itemView) {
             super(itemView);
             searchview_recycleritem_topname=(TextView)itemView.findViewById(R.id.searchview_recycleritem_topname);
             recyclerView=(RecyclerView)itemView.findViewById(R.id.searchitem_recyclerview);
-            /*searchview_recycleritem_firstitem=(TextView)itemView.findViewById(R.id.searchview_recycleritem_firstitem);
-            searchview_recycleritem_secitem=(TextView)itemView.findViewById(R.id.searchview_recycleritem_secitem);
-            searchview_recycleritem_seemore=(TextView)itemView.findViewById(R.id.searchview_recycleritem_seemore);
-            searchview_recycleritem_seemore.setOnClickListener(this);
-            searchview_recycleritem_secitem.setOnClickListener(this);
-            searchview_recycleritem_firstitem.setOnClickListener(this);*/
-        }
-
-        @Override
-        public void onClick(View view) {
-            /*if (view.getId()==R.id.searchview_recycleritem_firstitem)
-            {
-                searchViewToFrag.test(globalSearchGetData.getMovie().get(0).getSlug(),new MovieFragment(),1,userId,
-                        globalSearchGetData.getMovie().get(0).getId());
-            }
-            else if (view.getId()==R.id.searchview_recycleritem_secitem)
-            {
-                searchViewToFrag.test(globalSearchGetData.getMovie().get(1).getSlug(),new MovieFragment(),1,userId,
-                        globalSearchGetData.getMovie().get(1).getId());
-            }
-            else if (view.getId()==R.id.searchview_recycleritem_seemore)
-            {
-
-            }*/
         }
     }
 
-    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView searchview_recycleritem_topname,searchview_recycleritem_firstitem,
-                searchview_recycleritem_secitem,searchview_recycleritem_seemore;
+    public class ViewHolder2 extends RecyclerView.ViewHolder{
+        TextView searchview_recycleritem_topname;
         RecyclerView recyclerView;
         public ViewHolder2(View itemView) {
             super(itemView);
             searchview_recycleritem_topname=(TextView)itemView.findViewById(R.id.searchview_recycleritem_topname);
             recyclerView=(RecyclerView)itemView.findViewById(R.id.searchitem_recyclerview);
-            /*searchview_recycleritem_firstitem=(TextView)itemView.findViewById(R.id.searchview_recycleritem_firstitem);
-            searchview_recycleritem_secitem=(TextView)itemView.findViewById(R.id.searchview_recycleritem_secitem);
-            searchview_recycleritem_seemore=(TextView)itemView.findViewById(R.id.searchview_recycleritem_seemore);
-            searchview_recycleritem_seemore.setOnClickListener(this);
-            searchview_recycleritem_secitem.setOnClickListener(this);
-            searchview_recycleritem_firstitem.setOnClickListener(this);*/
-        }
-
-        @Override
-        public void onClick(View view) {
-            /*if (view.getId()==R.id.searchview_recycleritem_firstitem)
-            {
-                searchViewToFrag.test(globalSearchGetData.getCeleb().get(0).getSlug(),new CelebrityFragment(),2,userId,
-                        globalSearchGetData.getCeleb().get(0).getId());
-            }
-            else if (view.getId()==R.id.searchview_recycleritem_secitem)
-            {
-                searchViewToFrag.test(globalSearchGetData.getCeleb().get(1).getSlug(),new CelebrityFragment(),2,userId,
-                        globalSearchGetData.getCeleb().get(1).getId());
-            }
-            else if (view.getId()==R.id.searchview_recycleritem_seemore)
-            {
-
-            }*/
         }
     }
+
 
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView searchview_recycleritem_topname,searchview_recycleritem_firstitem,
