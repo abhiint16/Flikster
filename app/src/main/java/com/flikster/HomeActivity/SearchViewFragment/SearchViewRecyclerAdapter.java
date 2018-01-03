@@ -337,54 +337,13 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
 
-    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView searchview_recycleritem_topname,searchview_recycleritem_firstitem,
-                searchview_recycleritem_secitem,searchview_recycleritem_seemore;
+    public class ViewHolder3 extends RecyclerView.ViewHolder {
+        TextView searchview_recycleritem_topname;
         RecyclerView recyclerView;
         public ViewHolder3(View itemView) {
             super(itemView);
             searchview_recycleritem_topname=(TextView)itemView.findViewById(R.id.searchview_recycleritem_topname);
             recyclerView=(RecyclerView)itemView.findViewById(R.id.searchitem_recyclerview);
-            /*searchview_recycleritem_firstitem=(TextView)itemView.findViewById(R.id.searchview_recycleritem_firstitem);
-            searchview_recycleritem_secitem=(TextView)itemView.findViewById(R.id.searchview_recycleritem_secitem);
-            searchview_recycleritem_seemore=(TextView)itemView.findViewById(R.id.searchview_recycleritem_seemore);
-            searchview_recycleritem_seemore.setOnClickListener(this);
-            searchview_recycleritem_secitem.setOnClickListener(this);
-            searchview_recycleritem_firstitem.setOnClickListener(this);*/
-        }
-
-        @Override
-        public void onClick(View view) {
-            /*if (view.getId()==R.id.searchview_recycleritem_firstitem)
-            {
-                searchViewToFrag.newsCardOnClick("",
-                        "",
-                        "",
-                        globalSearchGetData.getContent().get(0).getProfilePic(),
-                        globalSearchGetData.getContent().get(0).getName(),
-                        globalSearchGetData.getContent().get(0).getName(),
-                        new NewsOnClickFragment(),
-                        globalSearchGetData.getContent().get(0).getContentType(),
-                        userId,
-                        globalSearchGetData.getContent().get(0).getId());
-            }
-            else if (view.getId()==R.id.searchview_recycleritem_secitem)
-            {
-                searchViewToFrag.newsCardOnClick("",
-                        "",
-                        "",
-                        globalSearchGetData.getContent().get(1).getProfilePic(),
-                        globalSearchGetData.getContent().get(1).getName(),
-                        globalSearchGetData.getContent().get(1).getName(),
-                        new NewsOnClickFragment(),
-                        globalSearchGetData.getContent().get(1).getContentType(),
-                        userId,
-                        globalSearchGetData.getContent().get(1).getId());
-            }
-            else if (view.getId()==R.id.searchview_recycleritem_seemore)
-            {
-
-            }*/
         }
     }
 
