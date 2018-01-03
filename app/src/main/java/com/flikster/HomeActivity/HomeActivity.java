@@ -82,6 +82,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.
 import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionFirstTypeFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.SearchViewFragment.SearchViewFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
@@ -120,6 +121,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing, WatchFragment.WatchFragCommInterface
@@ -128,10 +133,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         , CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
-        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface {
-    LinearLayout feed, rating, plus, fashion, store;
+        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface,SearchViewFragment.SearchViewToFrag {
+    LinearLayout feed, rating, plus, fashion, store,toolbar_flikter_text_container;
     FragmentManager fragmentManager;
-    ImageButton toolbar_main_notification;
+    ApiInterface apiInterface;
+    ImageButton toolbar_main_notification,toolbar_navigation_view_open_btn;
+    SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -139,6 +146,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     Context mContext;
     FloatingActionButton camera_fab;
     SharedPref sharedPref;
+    GlobalSearchGetData globalSearchGetData;
     Spinner toolbar_pref_spinner;
     Button right_navigation_bar_non_loggedin_login_btn, right_navigation_bar_non_loggedin_create_account_btn;
     ScrollView right_navigation_bar_logged_in_container, right_navigation_bar_non_logged_in_container;
@@ -399,6 +407,37 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_terms.setOnClickListener(this);
         right_navigation_bar_non_loggedin_login_btn.setOnClickListener(this);
         right_navigation_bar_non_loggedin_create_account_btn.setOnClickListener(this);
+        toolbar_search_btn.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toolbar_flikter_text_container.setVisibility(View.GONE);
+                searchViewFragmentLaunch(new SearchViewFragment(),globalSearchGetData);
+            }
+        });
+        toolbar_search_btn.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length()>=3)
+                {
+                    getSearchedQueryData(newText);
+                }
+                return false;
+            }
+        });
+        toolbar_search_btn.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                toolbar_flikter_text_container.setVisibility(View.VISIBLE);
+                toolbar_search_btn.setIconified(false);
+                return true;
+            }
+        });
+        toolbar_navigation_view_open_btn.setOnClickListener(this);
         toolbarPrefSpinner();
 
         toolbar_main_title.setOnClickListener(this);
@@ -420,6 +459,24 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         drawerLayout.setDrawerListener(actionBarDrawerToggle);*/
 
 
+    }
+
+    private void getSearchedQueryData(String newText) {
+        GlobalSearchPostData globalSearchPostData = new GlobalSearchPostData(newText);
+        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/search-ms/").create(ApiInterface.class);
+        Call<GlobalSearchGetData> call = apiInterface.getGlobalSearchData(globalSearchPostData);
+        call.enqueue(new Callback<GlobalSearchGetData>() {
+            @Override
+            public void onResponse(Call<GlobalSearchGetData> call, Response<GlobalSearchGetData> response) {
+                Log.e("inside onResopbke",""+response.body().getCeleb().size());
+                globalSearchGetData=response.body();
+                searchViewFragmentLaunch(new SearchViewFragment(),globalSearchGetData);
+            }
+
+            @Override
+            public void onFailure(Call<GlobalSearchGetData> call, Throwable t) {
+            }
+        });
     }
 
     private void industrySelectionrefreshActivity(String industrytype) {
@@ -506,6 +563,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar_main_title = (TextView) findViewById(R.id.toolbar_main_title);
+        toolbar_search_btn=(SearchView)findViewById(R.id.toolbar_search_btn);
+        toolbar_navigation_view_open_btn=(ImageButton)findViewById(R.id.toolbar_navigation_view_open_btn);
         toolbar_pref_spinner = (Spinner) findViewById(R.id.toolbar_pref_spinner);
         camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
         header_drawer_layout_username = (TextView) findViewById(R.id.header_drawer_layout_username);
@@ -518,6 +577,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_refer = (TextView) findViewById(R.id.right_navigation_bar_refer);
         right_navigation_bar_rewards = (TextView) findViewById(R.id.right_navigation_bar_rewards);
         right_navigation_bar_logout = (TextView) findViewById(R.id.right_navigation_bar_logout);
+        toolbar_flikter_text_container=(LinearLayout)findViewById(R.id.toolbar_flikter_text_container);
         right_navigation_bar_non_loggedin_aboutflikster = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_aboutflikster);
         right_navigation_bar_non_loggedin_careers = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_careers);
         right_navigation_bar_non_loggedin_contact = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_contact);
@@ -616,6 +676,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             industrySpinnerSelection = true;
 //            toolbar_pref_spinner.setSelection(0, false);
         }
+        else if (viewId==R.id.toolbar_navigation_view_open_btn)
+        {
+            if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            } else if (!drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                drawerLayout.openDrawer(Gravity.RIGHT);
+            }
+        }
     }
 
     private void navigationMenuitemsAction(String contentddata, String headerStr) {
@@ -661,17 +729,17 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
+        /*MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
         MenuItem menuItem = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setOnClickListener(this);
+        searchView.setOnClickListener(this);*/
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        /*switch (item.getItemId()) {
             case R.id.menu_profile: {
                 if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
                     drawerLayout.closeDrawer(Gravity.RIGHT);
@@ -679,7 +747,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                     drawerLayout.openDrawer(Gravity.RIGHT);
                 }
             }
-        }
+            case R.id.menu_search: {
+                firstTimeLaunch(new WatchFragment());
+            }
+        }*/
         return true;
     }
 
@@ -1012,6 +1083,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         celebrityFragment.updateInfo(name, userId, entityId);
         firstTimeLaunch(fragment);
     }
+
+    public void searchViewFragmentLaunch(Fragment fragment,GlobalSearchGetData globalSearchGetData)
+    {
+        SearchViewFragment searchViewFragment=(SearchViewFragment)fragment;
+        searchViewFragment.getSearchQueryData(globalSearchGetData);
+        firstTimeLaunch(fragment);
+    }
+
 
     @Override
     public void toCelebPage(String name, Fragment fragment, String userId, String entityId) {

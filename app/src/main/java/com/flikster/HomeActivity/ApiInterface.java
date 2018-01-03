@@ -169,4 +169,7 @@ public interface ApiInterface {
             @Part("description") RequestBody description,
             @Part MultipartBody.Part photo);
 
+    @POST("http://apiservice.flikster.com/v3/search-ms/globalSearch")
+    Call<GlobalSearchGetData> getGlobalSearchData(@Body GlobalSearchPostData globalSearchPostData);
+
 }
