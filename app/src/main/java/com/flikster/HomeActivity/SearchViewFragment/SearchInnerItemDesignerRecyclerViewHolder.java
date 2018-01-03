@@ -19,10 +19,12 @@ import java.util.List;
 public class SearchInnerItemDesignerRecyclerViewHolder extends RecyclerView.Adapter<SearchInnerItemDesignerRecyclerViewHolder.ViewHolder> {
     Context context;
     List<GlobalSearchGetData.SearchDesignerData> searchDesignerDatas;
-
-    public SearchInnerItemDesignerRecyclerViewHolder(Context context, List<GlobalSearchGetData.SearchDesignerData> searchDesignerDatas) {
+    SearchViewFragment.SearchViewToFrag searchViewToFrag;
+    public SearchInnerItemDesignerRecyclerViewHolder(Context context, List<GlobalSearchGetData.SearchDesignerData> searchDesignerDatas,
+                                                     SearchViewFragment.SearchViewToFrag searchViewToFrag) {
         this.context=context;
         this.searchDesignerDatas=searchDesignerDatas;
+        this.searchViewToFrag=searchViewToFrag;
     }
 
     @Override

@@ -19,10 +19,12 @@ import java.util.List;
 public class SearchInnerItemBrandRecyclerViewHolder extends RecyclerView.Adapter<SearchInnerItemBrandRecyclerViewHolder.ViewHolder> {
     Context context;
     List<GlobalSearchGetData.SearchBrandData> searchBrandDatas;
-
-    public SearchInnerItemBrandRecyclerViewHolder(Context context, List<GlobalSearchGetData.SearchBrandData> searchBrandDatas) {
+    SearchViewFragment.SearchViewToFrag searchViewToFrag;
+    public SearchInnerItemBrandRecyclerViewHolder(Context context, List<GlobalSearchGetData.SearchBrandData> searchBrandDatas,
+                                                  SearchViewFragment.SearchViewToFrag searchViewToFrag) {
         this.context=context;
         this.searchBrandDatas=searchBrandDatas;
+        this.searchViewToFrag=searchViewToFrag;
     }
 
     @Override

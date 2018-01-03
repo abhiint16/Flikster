@@ -24,7 +24,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     GlobalSearchGetData globalSearchGetData;
     SearchViewFragment.SearchViewToFrag searchViewToFrag;
     Context context;
-    Boolean movie=false,celeb=false,content=false,product=false,designer=false,brand=false;
     List<String> type=new ArrayList<>();
     String userId="null";
     RecyclerView.LayoutManager layoutManager;
@@ -99,7 +98,7 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder1)holder).searchview_recycleritem_topname.setText("Movies");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
             ((ViewHolder1)holder).recyclerView.setLayoutManager(layoutManager);
-            SearchInnerItemMovieRecyclerViewHolder searchInnerItemMovieRecyclerViewHolder =new SearchInnerItemMovieRecyclerViewHolder(context,globalSearchGetData.getMovie());
+            SearchInnerItemMovieRecyclerViewHolder searchInnerItemMovieRecyclerViewHolder =new SearchInnerItemMovieRecyclerViewHolder(context,globalSearchGetData.getMovie(),searchViewToFrag);
             ((ViewHolder1)holder).recyclerView.setAdapter(searchInnerItemMovieRecyclerViewHolder);
         }
         else if (holder.getItemViewType()==2)
@@ -107,7 +106,7 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder2)holder).searchview_recycleritem_topname.setText("Celebrity");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
             ((ViewHolder2)holder).recyclerView.setLayoutManager(layoutManager);
-            SearchInnerItemCelebRecyclerViewHolder searchInnerItemCelebRecyclerViewHolder =new SearchInnerItemCelebRecyclerViewHolder(context,globalSearchGetData.getCeleb());
+            SearchInnerItemCelebRecyclerViewHolder searchInnerItemCelebRecyclerViewHolder =new SearchInnerItemCelebRecyclerViewHolder(context,globalSearchGetData.getCeleb(),searchViewToFrag);
             ((ViewHolder2)holder).recyclerView.setAdapter(searchInnerItemCelebRecyclerViewHolder);
         }
         else if (holder.getItemViewType()==3)
@@ -115,7 +114,7 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder3)holder).searchview_recycleritem_topname.setText("Content");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
             ((ViewHolder3)holder).recyclerView.setLayoutManager(layoutManager);
-            SearchInnerItemContentRecyclerViewHolder searchInnerItemContentRecyclerViewHolder =new SearchInnerItemContentRecyclerViewHolder(context,globalSearchGetData.getContent());
+            SearchInnerItemContentRecyclerViewHolder searchInnerItemContentRecyclerViewHolder =new SearchInnerItemContentRecyclerViewHolder(context,globalSearchGetData.getContent(),searchViewToFrag);
             ((ViewHolder3)holder).recyclerView.setAdapter(searchInnerItemContentRecyclerViewHolder);
         }
         else if (holder.getItemViewType()==4)
@@ -123,7 +122,7 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder4)holder).searchview_recycleritem_topname.setText("Products");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
             ((ViewHolder4)holder).recyclerView.setLayoutManager(layoutManager);
-            SearchInnerItemProductRecyclerViewHolder searchInnerItemProductRecyclerViewHolder =new SearchInnerItemProductRecyclerViewHolder(context,globalSearchGetData.getProducts());
+            SearchInnerItemProductRecyclerViewHolder searchInnerItemProductRecyclerViewHolder =new SearchInnerItemProductRecyclerViewHolder(context,globalSearchGetData.getProducts(),searchViewToFrag);
             ((ViewHolder4)holder).recyclerView.setAdapter(searchInnerItemProductRecyclerViewHolder);
         }
         else if (holder.getItemViewType()==5)
@@ -131,7 +130,7 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder5)holder).searchview_recycleritem_topname.setText("Designer");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
             ((ViewHolder5)holder).recyclerView.setLayoutManager(layoutManager);
-            SearchInnerItemDesignerRecyclerViewHolder searchInnerItemDesignerRecyclerViewHolder =new SearchInnerItemDesignerRecyclerViewHolder(context,globalSearchGetData.getDesigner());
+            SearchInnerItemDesignerRecyclerViewHolder searchInnerItemDesignerRecyclerViewHolder =new SearchInnerItemDesignerRecyclerViewHolder(context,globalSearchGetData.getDesigner(),searchViewToFrag);
             ((ViewHolder5)holder).recyclerView.setAdapter(searchInnerItemDesignerRecyclerViewHolder);
         }
         else if (holder.getItemViewType()==6)
@@ -139,7 +138,7 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder6)holder).searchview_recycleritem_topname.setText("Brand");
             layoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
             ((ViewHolder6)holder).recyclerView.setLayoutManager(layoutManager);
-            SearchInnerItemBrandRecyclerViewHolder searchInnerItemBrandRecyclerViewHolder =new SearchInnerItemBrandRecyclerViewHolder(context,globalSearchGetData.getBrand());
+            SearchInnerItemBrandRecyclerViewHolder searchInnerItemBrandRecyclerViewHolder =new SearchInnerItemBrandRecyclerViewHolder(context,globalSearchGetData.getBrand(),searchViewToFrag);
             ((ViewHolder6)holder).recyclerView.setAdapter(searchInnerItemBrandRecyclerViewHolder);
         }
         else if(holder.getItemViewType()==0)
@@ -153,22 +152,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         Log.e("hhhhh",""+type.size()+type);
         if (globalSearchGetData!=null)
         {
-            /*int a=0;
-            if (globalSearchGetData.getMovie()!=null&&globalSearchGetData.getMovie().size()!=0)
-                a=++a;
-            if (globalSearchGetData.getCeleb()!=null&&globalSearchGetData.getCeleb().size()!=0)
-                a=++a;
-            if (globalSearchGetData.getBrand()!=null&&globalSearchGetData.getBrand().size()!=0)
-                a=++a;
-            if (globalSearchGetData.getContent()!=null&&globalSearchGetData.getContent().size()!=0)
-                a=++a;
-            if (globalSearchGetData.getDesigner()!=null&&globalSearchGetData.getDesigner().size()!=0)
-                a=++a;
-            if (globalSearchGetData.getProducts()!=null&&globalSearchGetData.getProducts().size()!=0)
-                a=++a;
-            if (a!=0)
-            return a;
-            return 1;*/
             if (type.size()==0)
                 return 1;
             else return type.size();
