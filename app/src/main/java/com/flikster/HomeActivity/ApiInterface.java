@@ -23,6 +23,7 @@ import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CreateShareYour
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
+import com.flikster.HomeActivity.SearchViewFragment.SearchGalleryData;
 import com.flikster.MyBagActivity.MyBagData;
 
 import okhttp3.MultipartBody;
@@ -54,6 +55,9 @@ public interface ApiInterface {
 
     @GET
     Call<CelebrityData> getCelebrityData(@Url String url);
+
+    @GET
+    Call<SearchGalleryData> getSearchGalleryData(@Url String url);
 
     @GET
     Call<FeedData> getNewsData(@Url String url);

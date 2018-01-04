@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.flikster.HomeActivity.GlobalSearchGetData;
 import com.flikster.R;
 
+import java.util.List;
+
 /**
  * Created by abhishek on 03-01-2018.
  */
@@ -54,6 +56,8 @@ public class SearchViewFragment extends Fragment {
         void test(String name, Fragment fragment, int getClass, String userId, String entityId);
         void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                              String description, Fragment fragment, String contentType, String userId, String entityId);
+        void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
+                                Fragment fragment, String userId, String entityId);
     }
 
     @Override
