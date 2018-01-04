@@ -407,6 +407,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_terms.setOnClickListener(this);
         right_navigation_bar_non_loggedin_login_btn.setOnClickListener(this);
         right_navigation_bar_non_loggedin_create_account_btn.setOnClickListener(this);
+        toolbar_search_btn.setQueryHint("type min 3 characters...");
         toolbar_search_btn.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -433,8 +434,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             @Override
             public boolean onClose() {
                 toolbar_flikter_text_container.setVisibility(View.VISIBLE);
-                toolbar_search_btn.setIconified(false);
-                return true;
+                toolbar_search_btn.setIconifiedByDefault(true);
+                firstTimeLaunch(new FeedFragment());
+                return false;
             }
         });
         toolbar_navigation_view_open_btn.setOnClickListener(this);

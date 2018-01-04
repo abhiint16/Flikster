@@ -149,7 +149,6 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemCount() {
-        Log.e("hhhhh",""+type.size()+type);
         if (globalSearchGetData!=null)
         {
             if (type.size()==0)
@@ -161,7 +160,7 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemViewType(int position) {
-        if (globalSearchGetData!=null)
+        if (globalSearchGetData!=null&&type.size()!=0)
         {
             if (position==0)
             {
