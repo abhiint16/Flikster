@@ -49,6 +49,12 @@ public interface ApiInterface {
                                      @Query("sort") String d,
                                      @Query("size") Integer i,
                                      @Query("q") String c);
+    @GET("http://apiservice-ec.flikster.com/contents/_search")
+    Call<FeedData> getTopRatedMovies(@Query("pretty") Boolean s,
+                                     @Query("sort") String d,
+                                     @Query("size") Integer i,
+                                     @Query("from") Integer m,
+                                     @Query("q") String c);
 
     @GET
     Call<MovieData> getMovieData(@Url String url);

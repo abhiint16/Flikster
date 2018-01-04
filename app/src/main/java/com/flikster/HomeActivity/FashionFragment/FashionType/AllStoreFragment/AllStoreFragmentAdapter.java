@@ -48,6 +48,12 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         this.allStoreInterafce = allStoreInterafce;
     }
 
+    public void updateDataPagination(List<AllStoreInnerData.AllStoreInnerMoreData> a)
+    {
+        this.hits.getHits().addAll(a);
+        notifyDataSetChanged();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {

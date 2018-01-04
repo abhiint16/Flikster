@@ -85,6 +85,13 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         setHasStableIds(true);
     }
 
+    public void updateDataPagination(List<FeedInnerData.FeedInnerMoreData> a)
+    {
+        this.outerHits.getHits().addAll(a);
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
