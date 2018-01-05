@@ -12,6 +12,7 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
+import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.HomeActivity.GlobalSearchGetData;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
@@ -69,66 +70,51 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
 
         @Override
         public void onClick(View view) {
-            Log.e("bbbbb",""+searchContentDatas.get(getAdapterPosition()).getContentType());
             if ("gallery".equals(searchContentDatas.get(getAdapterPosition()).getContentType()))
-            {Log.e("aaaaa",""+searchContentDatas.get(getAdapterPosition()).getContentType());
-                getRetrofitForGallery(searchContentDatas.get(getAdapterPosition()).getSlug());
+            {
+                getRetrofitForGallery(searchContentDatas.get(getAdapterPosition()).getId());
             }
             else if ("comedy-clip".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "video-song".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "movie-making".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "interview".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "trailer".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
+                    "social-buzz".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "teasers-promos".equals(searchContentDatas.get(getAdapterPosition()).getContentType()))
             {
-                Log.e("ggggg",""+searchContentDatas.get(getAdapterPosition()).getContentType());
-                Log.e("ggggg",""+searchContentDatas.get(getAdapterPosition()).getSlug());
-                getRetrofitForVideo(searchContentDatas.get(getAdapterPosition()).getSlug());
+                getRetrofitForVideo(searchContentDatas.get(getAdapterPosition()).getId());
             }
             else if ("news".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "first-look".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "poster".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "write-up".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
-                    "social-buzz".equals(searchContentDatas.get(getAdapterPosition()).getContentType())||
                     "tweet".equals(searchContentDatas.get(getAdapterPosition()).getContentType()))
             {
-                Log.e("ggggg",""+searchContentDatas.get(getAdapterPosition()).getContentType());
-                Log.e("ggggg",""+searchContentDatas.get(getAdapterPosition()).getSlug());
-                getRetrofitForNews(searchContentDatas.get(getAdapterPosition()).getSlug());
+                getRetrofitForNews(searchContentDatas.get(getAdapterPosition()).getId());
             }
-            /*searchViewToFrag.newsCardOnClick("",
-                    "",
-                    "",
-                    searchContentDatas.get(getAdapterPosition()).getProfilePic(),
-                    searchContentDatas.get(getAdapterPosition()).getName(),
-                    searchContentDatas.get(getAdapterPosition()).getName(),
-                    new NewsOnClickFragment(),
-                    searchContentDatas.get(getAdapterPosition()).getContentType(),
-                    userId,
-                    searchContentDatas.get(getAdapterPosition()).getId());*/
         }
 
-        public void getRetrofitForGallery(String slug)
+        public void getRetrofitForGallery(String id)
         {
-            apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/content-ms/getContentBySlug/").create(ApiInterface.class);
-            Call<SearchGalleryData> call = apiInterface.getSearchGalleryData("http://apiservice.flikster.com/v3/content-ms/getContentBySlug/" + slug);
+            apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/content-ms/getContentById/").create(ApiInterface.class);
+            Call<SearchGalleryData> call = apiInterface.getSearchGalleryData("http://apiservice.flikster.com/v3/content-ms/getContentById/" + id);
             call.enqueue(new Callback<SearchGalleryData>() {
                 @Override
                 public void onResponse(Call<SearchGalleryData> call, Response<SearchGalleryData> response) {
-                    if (response.body().getData().getItems().get(0).getCeleb()!= null) {
-                        searchViewToFrag.galleryCardOnClick(response.body().getData().getItems().get(0).getMedia().getGallery(),
-                                response.body().getData().getItems().get(0).getCeleb().get(0).getName(),
-                                response.body().getData().getItems().get(0).getCeleb().get(0).getProfilePic(),
-                                response.body().getData().getItems().get(0).getCeleb().get(0).getType(),
-                                response.body().getData().getItems().get(0).getTitle(),
+                    if (response.body().getCeleb()!= null) {
+                        searchViewToFrag.galleryCardOnClick(response.body().getMedia().getGallery(),
+                                response.body().getCeleb().get(0).getName(),
+                                response.body().getCeleb().get(0).getProfilePic(),
+                                response.body().getCeleb().get(0).getType(),
+                                response.body().getTitle(),
                                 new GalleryCardClick(), userId,
-                                response.body().getData().getItems().get(0).getId());
+                                response.body().getId());
                     } else {
-                        searchViewToFrag.galleryCardOnClick(response.body().getData().getItems().get(0).getMedia().getGallery(),
+                        searchViewToFrag.galleryCardOnClick(response.body().getMedia().getGallery(),
                                 "",
-                                "", "", response.body().getData().getItems().get(0).getTitle(),
+                                "", "", response.body().getTitle(),
                                 new GalleryCardClick(), userId,
-                                response.body().getData().getItems().get(0).getId());
+                                response.body().getId());
 
                     }
                     }
@@ -138,37 +124,37 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                 }
             });
         }
-        public void getRetrofitForNews(String slug)
+        public void getRetrofitForNews(String id)
         {
-            apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/content-ms/getContentBySlug/").create(ApiInterface.class);
-            Call<SearchGalleryData> call = apiInterface.getSearchGalleryData("http://apiservice.flikster.com/v3/content-ms/getContentBySlug/" + slug);
+            apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/content-ms/getContentById/").create(ApiInterface.class);
+            Call<SearchGalleryData> call = apiInterface.getSearchGalleryData("http://apiservice.flikster.com/v3/content-ms/getContentById/" + id);
             call.enqueue(new Callback<SearchGalleryData>() {
                 @Override
                 public void onResponse(Call<SearchGalleryData> call, Response<SearchGalleryData> response) {
-                    /*if (response != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
-                        testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    if (response.body().getCeleb() != null&&response.body().getCeleb().size()!=0) {
+                        searchViewToFrag.newsCardOnClick(response.body().getCeleb().get(0).getProfilePic(),
+                                response.body().getCeleb().get(0).getName(),
+                                response.body().getCeleb().get(0).getType(),
+                                response.body().getProfilePic(),
+                                response.body().getTitle(),
+                                response.body().getTitle(),
                                 new NewsOnClickFragment(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
+                                response.body().getContentType(),
                                 userId,
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getId()
+                                response.body().getId()
                         );
                     } else {
-                        testing.newsCardOnClick("",
+                        searchViewToFrag.newsCardOnClick("",
                                 "",
                                 "",
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                                response.body().getProfilePic(),
+                                response.body().getTitle(),
+                                response.body().getTitle(),
                                 new NewsOnClickFragment(),
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
+                                response.body().getContentType(),
                                 userId,
-                                outerHits.getHits().get(getAdapterPosition()).get_source().getId());
-                    }*/
+                                response.body().getId());
+                    }
                 }
                 @Override
                 public void onFailure(Call<SearchGalleryData> call, Throwable t) {
@@ -176,28 +162,38 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                 }
             });
         }
-        public void getRetrofitForVideo(String slug)
+        public void getRetrofitForVideo(String id)
         {
-            apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/content-ms/getContentBySlug/").create(ApiInterface.class);
-            Call<SearchGalleryData> call = apiInterface.getSearchGalleryData("http://apiservice.flikster.com/v3/content-ms/getContentBySlug/" + slug);
+            apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/content-ms/getContentById/").create(ApiInterface.class);
+            Call<SearchGalleryData> call = apiInterface.getSearchGalleryData("http://apiservice.flikster.com/v3/content-ms/getContentById/" + id);
             call.enqueue(new Callback<SearchGalleryData>() {
                 @Override
                 public void onResponse(Call<SearchGalleryData> call, Response<SearchGalleryData> response) {
-                    if (response.body().getData().getItems().get(0).getCeleb()!= null) {
-                        searchViewToFrag.galleryCardOnClick(response.body().getData().getItems().get(0).getMedia().getGallery(),
-                                response.body().getData().getItems().get(0).getCeleb().get(0).getName(),
-                                response.body().getData().getItems().get(0).getCeleb().get(0).getProfilePic(),
-                                response.body().getData().getItems().get(0).getCeleb().get(0).getType(),
-                                response.body().getData().getItems().get(0).getTitle(),
-                                new GalleryCardClick(), userId,
-                                response.body().getData().getItems().get(0).getId());
+                    if (response.body().getCeleb() != null && response.body().getCeleb().size() != 0) {
+                        searchViewToFrag.videoCardOnClick(response.body().getCeleb().get(0).getProfilePic(),
+                                response.body().getCeleb().get(0).getName(),
+                                response.body().getCeleb().get(0).getType(),
+                                response.body().getProfilePic(),
+                                response.body().getTitle(),
+                                response.body().getTitle(),
+                                response.body().getMedia().getVideo().get(0),
+                                new VideoGalleryFragment(),
+                                response.body().getContentType(),
+                                userId,
+                                response.body().getId()
+                        );
                     } else {
-                        searchViewToFrag.galleryCardOnClick(response.body().getData().getItems().get(0).getMedia().getGallery(),
+                        searchViewToFrag.videoCardOnClick("",
                                 "",
-                                "", "", response.body().getData().getItems().get(0).getTitle(),
-                                new GalleryCardClick(), userId,
-                                response.body().getData().getItems().get(0).getId());
-
+                                "",
+                                response.body().getProfilePic(),
+                                response.body().getTitle(),
+                                response.body().getTitle(),
+                                response.body().getMedia().getVideo().get(0),
+                                new VideoGalleryFragment(),
+                                response.body().getContentType(),
+                                userId,
+                                response.body().getId());
                     }
                 }
                 @Override
@@ -208,26 +204,3 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
         }
     }
 }
-/*
-if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
-        testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
-        outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
-        outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
-        outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-        new GalleryCardClick(), userId,
-        outerHits.getHits().get(getAdapterPosition()).get_source().getId());
-        } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
-        testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
-        outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
-        outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
-        outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-        new GalleryCardClick(), userId,
-        outerHits.getHits().get(getAdapterPosition()).get_source().getId());
-        } else {
-        testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
-        "",
-        "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-        new GalleryCardClick(), userId,
-        outerHits.getHits().get(getAdapterPosition()).get_source().getId());
-
-        }*/

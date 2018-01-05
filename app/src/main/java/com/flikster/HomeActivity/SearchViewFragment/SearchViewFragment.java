@@ -58,6 +58,11 @@ public class SearchViewFragment extends Fragment {
                              String description, Fragment fragment, String contentType, String userId, String entityId);
         void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
                                 Fragment fragment, String userId, String entityId);
+        void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
+                              String description, String videolink, Fragment fragment, String contentType,
+                              String userId, String entityId);
+        void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
+                        String productSlug, List<String> imageGallery, Fragment fragment);
     }
 
     @Override

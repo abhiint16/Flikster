@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public class SearchGalleryData {
-    @SerializedName("data")
+    /*@SerializedName("data")
     private SearchInsideData data;
 
     public SearchInsideData getData() {
@@ -35,134 +35,154 @@ public class SearchGalleryData {
 
         public class SearchInsideItem
         {
-            @SerializedName("media")
-            private SearchInsideMedia media;
-            @SerializedName("slug")
-            private String slug;
-            @SerializedName("id")
-            private String id;
-            @SerializedName("title")
-            private String title;
-            @SerializedName("celeb")
-            private List<SearchInsideCeleb> celeb;
+    */
+    @SerializedName("media")
+    private SearchInsideMedia media;
+    @SerializedName("slug")
+    private String slug;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("celeb")
+    private List<SearchInsideCeleb> celeb;
+    @SerializedName("contentType")
+    private String contentType;
+    @SerializedName("profilePic")
+    private String profilePic;
 
-            public String getId() {
-                return id;
-            }
+    public String getContentType() {
+        return contentType;
+    }
 
-            public void setId(String id) {
-                this.id = id;
-            }
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
 
-            public SearchInsideMedia getMedia() {
-                return media;
-            }
+    public String getProfilePic() {
+        return profilePic;
+    }
 
-            public void setMedia(SearchInsideMedia media) {
-                this.media = media;
-            }
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
 
-            public String getSlug() {
-                return slug;
-            }
+    public String getId() {
+        return id;
+    }
 
-            public void setSlug(String slug) {
-                this.slug = slug;
-            }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-            public String getTitle() {
-                return title;
-            }
+    public SearchInsideMedia getMedia() {
+        return media;
+    }
 
-            public void setTitle(String title) {
-                this.title = title;
-            }
+    public void setMedia(SearchInsideMedia media) {
+        this.media = media;
+    }
 
-            public List<SearchInsideCeleb> getCeleb() {
-                return celeb;
-            }
+    public String getSlug() {
+        return slug;
+    }
 
-            public void setCeleb(List<SearchInsideCeleb> celeb) {
-                this.celeb = celeb;
-            }
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
 
-            public class SearchInsideMedia
-            {
-                @SerializedName("gallery")
-                private List<String> gallery;
-                @SerializedName("audio")
-                private List<String> audio;
-                @SerializedName("video")
-                private List<String> video;
+    public String getTitle() {
+        return title;
+    }
 
-                public List<String> getGallery() {
-                    return gallery;
-                }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-                public void setGallery(List<String> gallery) {
-                    this.gallery = gallery;
-                }
+    public List<SearchInsideCeleb> getCeleb() {
+        return celeb;
+    }
 
-                public List<String> getAudio() {
-                    return audio;
-                }
+    public void setCeleb(List<SearchInsideCeleb> celeb) {
+        this.celeb = celeb;
+    }
 
-                public void setAudio(List<String> audio) {
-                    this.audio = audio;
-                }
+    public class SearchInsideMedia {
+        @SerializedName("gallery")
+        private List<String> gallery;
+        @SerializedName("audio")
+        private List<String> audio;
+        @SerializedName("video")
+        private List<String> video;
 
-                public List<String> getVideo() {
-                    return video;
-                }
+        public List<String> getGallery() {
+            return gallery;
+        }
 
-                public void setVideo(List<String> video) {
-                    this.video = video;
-                }
-            }
-            public class SearchInsideCeleb
-            {
-                @SerializedName("name")
-                private String name;
-                @SerializedName("id")
-                private String id;
-                @SerializedName("type")
-                private String type;
-                @SerializedName("profilePic")
-                private String profilePic;
+        public void setGallery(List<String> gallery) {
+            this.gallery = gallery;
+        }
 
-                public String getName() {
-                    return name;
-                }
+        public List<String> getAudio() {
+            return audio;
+        }
 
-                public void setName(String name) {
-                    this.name = name;
-                }
+        public void setAudio(List<String> audio) {
+            this.audio = audio;
+        }
 
-                public String getId() {
-                    return id;
-                }
+        public List<String> getVideo() {
+            return video;
+        }
 
-                public void setId(String id) {
-                    this.id = id;
-                }
-
-                public String getType() {
-                    return type;
-                }
-
-                public void setType(String type) {
-                    this.type = type;
-                }
-
-                public String getProfilePic() {
-                    return profilePic;
-                }
-
-                public void setProfilePic(String profilePic) {
-                    this.profilePic = profilePic;
-                }
-            }
+        public void setVideo(List<String> video) {
+            this.video = video;
         }
     }
+
+    public class SearchInsideCeleb {
+        @SerializedName("name")
+        private String name;
+        @SerializedName("id")
+        private String id;
+        @SerializedName("type")
+        private String type;
+        @SerializedName("profilePic")
+        private String profilePic;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getProfilePic() {
+            return profilePic;
+        }
+
+        public void setProfilePic(String profilePic) {
+            this.profilePic = profilePic;
+        }
+    }
+        /*}
+    }*/
 
 }

@@ -22,6 +22,7 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
@@ -67,7 +68,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     final String API_KEY = "AIzaSyAB-5qUbSkM629ZcB0jCBK-WGGWPS5zZ90";
     VideoRecommendationClick videoRecommendationClick;
     ImageButton card_footer_share, ib_like, ib_bookmark;
-
+    ImageView profile_image;
     ImageButton card_comment_text_send_btn;
     EditText card_comment_text_edittxt;
     TextView card_comment_text_see_more_comments;
@@ -96,6 +97,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     private void initializeViews() {
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         titlehedertxt = (TextView) view.findViewById(R.id.titlehedertxt);
+        profile_image=(ImageView)view.findViewById(R.id.profile_image);
         fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
@@ -161,6 +163,17 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         });
 
 
+        if (!type.isEmpty()) {
+            tv_tag_desc.setText(type + "");
+        }
+        if (!title.isEmpty()) {
+            tv_tag_name.setText(title + "");
+        }
+
+
+        if (!profilePic.isEmpty()) {
+            Glide.with(getContext()).load(profilePic).asBitmap().into(profile_image);
+        }
 
         toolbar_back_navigation_btn.setOnClickListener(this);
 
@@ -263,10 +276,6 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         this.userId = userId;
         this.entityId = entityId;
         this.entityId = entityId;
-        Log.e("PROFILE", profilePic + "");
-        Log.e("USERID", userId + "");
-        Log.e("ENTITYID", entityId + "");
-
     }
 
     public interface VideoRecommendationClick {

@@ -76,6 +76,7 @@ public class FeedFragment extends Fragment {
         mDialog.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/")
                 .create(ApiInterface.class);
+        Log.e("industryCompletedata",industryCompletedata);
         Call<FeedData> call = apiInterface.getTopRatedMovies(
                 true,
                 "createdAt:desc",
