@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:id="@+id/fragment_my_account_container">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Be the first to comment on this item."
-        android:textColor="@color/translucent"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:id="@+id/activity_no_comments_tv"/>
 </LinearLayout>
