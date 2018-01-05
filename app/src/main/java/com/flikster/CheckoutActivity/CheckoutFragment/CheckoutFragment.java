@@ -128,8 +128,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             addressUserData.checkoutToAddress(name, mobile, address, city, pin, state, landmark, additionalMobile, new AddressFragment());
         } else if (view.getId() == R.id.fragment_checkout_bottom_btn) {
             Log.e("inside onclick bototbtn", "inside bototn ctn clk");
-            hitCreateUserApi();
-//            instaMojoInit();
+            //hitCreateUserApi();
+            instaMojoInit();
             /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
