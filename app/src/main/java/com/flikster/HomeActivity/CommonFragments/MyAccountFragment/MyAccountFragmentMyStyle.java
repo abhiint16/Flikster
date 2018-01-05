@@ -15,7 +15,7 @@ import com.flikster.R;
  * Created by abhishek on 21-10-2017.
  */
 
-public class MyAccountFragmentMyPosts extends Fragment {
+public class MyAccountFragmentMyStyle extends Fragment {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerMyPost;
