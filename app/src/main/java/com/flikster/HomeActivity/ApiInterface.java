@@ -12,6 +12,7 @@ import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.PhoneRegiste
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.RegisterPostStatus;
 import com.flikster.Authentication.SignUpActivity.SignupWithGmailOrFBData;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
+import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionPlaceBidData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.AuctionCurrentOrUpcomingData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.OnGoingBidData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
@@ -181,5 +182,8 @@ public interface ApiInterface {
     Call<ResponseBody> uploadPhoto(
             @Part("description") RequestBody description,
             @Part MultipartBody.Part photo);
+
+    @POST(ApiClient.PLACE_BID_URL)
+    Call<AuctionPlaceBidData> auctionPlaceBidinServer(@Body AuctionPlaceBidData auctionPlaceBidData);
 
 }

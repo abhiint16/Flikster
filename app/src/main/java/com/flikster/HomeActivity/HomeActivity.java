@@ -194,75 +194,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         initializeRest();
         checkForLaunch();
         bottomnavigationBar();
-
-        try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-            Date date = null;//You will get date object relative to server/client timezone wherever it is parsed
-            try {
-                date = dateFormat.parse("2017-12-29T11:12:41.899Z");
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"); //If you need time just put specific format for time like 'HH:mm:ss'
-            String dateStr = formatter.format(date);
-
-//            Toast.makeText(getApplicationContext(), "Days " + dateStr, Toast.LENGTH_SHORT).show();
-
-            String dateserver = DateUtil.serverSentDateChange("2017-12-29T11:12:41.899Z");
-            Toast.makeText(getApplicationContext(), "Server Date" + dateserver, Toast.LENGTH_SHORT).show();
-
-            //serverSentTimeChange
-            String changesTime = DateUtil.serverSentTimeChange("2017-12-29T11:12:41.899Z");
-
-            Log.e("chnagestime", changesTime);
-//            Log.e("currentDateTime", currentDateTime);
-            Toast.makeText(getApplicationContext(), "Server Time" + changesTime, Toast.LENGTH_SHORT).show();
-
-
-            SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            String currentDateTime = DateUtil.currentdateandTime();
-            Date currentDateTimedate = simDf.parse(currentDateTime);
-            long currentmillSec = currentDateTimedate.getTime();
-
-            Date yourDate = simDf.parse(changesTime);
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(yourDate);
-            int month = calendar.get(Calendar.MONTH) + 1;
-            String changeFormatDate = calendar.get(Calendar.DATE)
-                    + "-" + month
-                    + "-" + calendar.get(Calendar.YEAR);
-            Log.e("changedate", changeFormatDate + "");
-
-            Log.e("ChangeTimeCon", calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) + calendar.get(Calendar.SECOND) + "");
-
-
-            long timeInMilliseconds = yourDate.getTime();
-
-            long differenceres = currentmillSec - timeInMilliseconds;
-            Log.e("time in millisecond", "" + timeInMilliseconds);
-            Log.e("currentmillSec", "" + currentmillSec);
-            Log.e("differenceres", "" + differenceres);
-
-            String exactTimeDiffe = DateUtil.getTimeAgo(timeInMilliseconds);
-            Log.e("exactTimeDiffe", exactTimeDiffe + "");
-            Toast.makeText(getApplicationContext(), "time left" + exactTimeDiffe, Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-            /*int dateDifference = (int) DateUtil.getDateDiff(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"),
-                    "2017-12-29T11:12:41.899Z", "2017-12-30T11:12:41.899Z");
-            System.out.println("dateDifference: " + dateDifference);
-            Toast.makeText(getApplicationContext(), "dateDifference" + dateDifference, Toast.LENGTH_SHORT).show();*/
-
-            DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.LONG).format(date);
-
-        } catch (Exception e) {
-
-        }
+//        gettimeinfo();
 
     }
 
@@ -1124,5 +1056,73 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         FacebookSdk.sdkInitialize(context);
         LoginManager.getInstance().logOut();
 
+
     }
+
+    public void gettimeinfo() {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            Date date = null;//You will get date object relative to server/client timezone wherever it is parsed
+            try {
+                date = dateFormat.parse("2017-12-29T11:12:41.899Z");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"); //If you need time just put specific format for time like 'HH:mm:ss'
+            String dateStr = formatter.format(date);
+
+//            Toast.makeText(getApplicationContext(), "Days " + dateStr, Toast.LENGTH_SHORT).show();
+
+            String dateserver = DateUtil.serverSentDateChange("2017-12-29T11:12:41.899Z");
+            Toast.makeText(getApplicationContext(), "Server Date" + dateserver, Toast.LENGTH_SHORT).show();
+
+            //serverSentTimeChange
+            String changesTime = DateUtil.serverSentTimeChange("2017-12-29T11:12:41.899Z");
+
+            Log.e("chnagestime", changesTime);
+//            Log.e("currentDateTime", currentDateTime);
+            Toast.makeText(getApplicationContext(), "Server Time" + changesTime, Toast.LENGTH_SHORT).show();
+
+
+            SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String currentDateTime = DateUtil.currentdateandTime();
+            Date currentDateTimedate = simDf.parse(currentDateTime);
+            long currentmillSec = currentDateTimedate.getTime();
+
+            Date yourDate = simDf.parse(changesTime);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(yourDate);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            String changeFormatDate = calendar.get(Calendar.DATE)
+                    + "-" + month
+                    + "-" + calendar.get(Calendar.YEAR);
+            Log.e("changedate", changeFormatDate + "");
+
+            Log.e("ChangeTimeCon", calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) + calendar.get(Calendar.SECOND) + "");
+
+
+            long timeInMilliseconds = yourDate.getTime();
+
+            long differenceres = currentmillSec - timeInMilliseconds;
+            Log.e("time in millisecond", "" + timeInMilliseconds);
+            Log.e("currentmillSec", "" + currentmillSec);
+            Log.e("differenceres", "" + differenceres);
+
+            String exactTimeDiffe = DateUtil.getTimeAgo(timeInMilliseconds);
+            Log.e("exactTimeDiffe", exactTimeDiffe + "");
+            Toast.makeText(getApplicationContext(), "time left" + exactTimeDiffe, Toast.LENGTH_SHORT).show();
+            /*int dateDifference = (int) DateUtil.getDateDiff(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"),
+                    "2017-12-29T11:12:41.899Z", "2017-12-30T11:12:41.899Z");
+            System.out.println("dateDifference: " + dateDifference);
+            Toast.makeText(getApplicationContext(), "dateDifference" + dateDifference, Toast.LENGTH_SHORT).show();*/
+
+            DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.LONG).format(date);
+
+        } catch (Exception e) {
+
+        }
+    }
+
+
 }

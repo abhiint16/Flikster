@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.Authentication.AuthenticationActivity;
+import com.flikster.Authentication.SignUpActivity.SignupWithGmailOrFBData;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.AuctionCurrentFragment;
@@ -32,8 +34,11 @@ import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Cur
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductImagesAdapter;
 import com.flikster.CheckoutActivity.MyBagContinueOnClickActivity;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
+import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
+import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 import com.leo.simplearcloader.SimpleArcLoader;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -85,6 +90,11 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
     ApiInterface apiInterface;
     TextView ongoingbid;
 
+    int ongoingbidAmount = 0;
+    int ongoingbidAmountIncr = 0;
+
+    AuctionPlaceBidData auctionPlaceBidData;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -111,8 +121,20 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
                     Integer enterbidValue = Integer.valueOf(enterbid);
                     Integer availbleBidvalue = Integer.valueOf(auctionDetails.get(positionvalue).getStartingPrice());
                     if (availbleBidvalue <= enterbidValue) {
-                        placeBidServerData();
-                        Toast.makeText(getActivity(), "Your Bid Placed Successfully..", Toast.LENGTH_SHORT).show();
+                        if (enterbidValue >= ongoingbidAmountIncr) {
+                            if (SharedPrefsUtil.getStringPreference(getContext(), "USER_ID") != null && !SharedPrefsUtil.getStringPreference(getContext(), "USER_ID").isEmpty()) {
+                                placeBidServerData(String.valueOf(enterbidValue),
+                                        auctionDetails.get(positionvalue).getId(),
+                                        SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"));
+                                Toast.makeText(getActivity(), "Your Bid Placed Successfully..", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "please login.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "Entered bid less then On going bid.", Toast.LENGTH_SHORT).show();
+                        }
+
+
                     } else {
                         Toast.makeText(getActivity(), "bid amount is not less then to the enter amount", Toast.LENGTH_SHORT).show();
                     }
@@ -262,9 +284,9 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
 
             }
         }
-        if (auctionDetails.get(positionvalue).getStartingPrice() != null && !auctionDetails.get(positionvalue).getStartingPrice().isEmpty()) {
+        /*if (auctionDetails.get(positionvalue).getStartingPrice() != null && !auctionDetails.get(positionvalue).getStartingPrice().isEmpty()) {
             enterbidtxt.setText("Enter Rs " + Html.fromHtml(auctionDetails.get(positionvalue).getStartingPrice() + " or more"));
-        }
+        }*/
         if (auctionDetails.get(positionvalue).getInfo() != null && !auctionDetails.get(positionvalue).getInfo().isEmpty()) {
             infotxt.setText("Information : " + Html.fromHtml(auctionDetails.get(positionvalue).getInfo()));
         }
@@ -356,7 +378,7 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
     };
 
 
-    private void placeBidServerData() {
+    /*private void placeBidServerData() {
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
         apiInterface = ApiClient.getClient(ApiClient.PLACE_BID_URL).create(ApiInterface.class);
@@ -376,6 +398,47 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
                 Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
+    }*/
+
+
+    private void placeBidServerData(final String bidAmount, final String auctionId, final String userId) {
+        mDialog.setVisibility(View.VISIBLE);
+        mDialog.start();
+        auctionPlaceBidData = new AuctionPlaceBidData(bidAmount, auctionId, userId);
+        apiInterface = ApiClient.getClient(ApiClient.PLACE_BID_URL)
+                .create(ApiInterface.class);
+        Call<AuctionPlaceBidData> call = apiInterface.auctionPlaceBidinServer(auctionPlaceBidData);
+        call.enqueue(new Callback<AuctionPlaceBidData>() {
+            @Override
+            public void onResponse(Call<AuctionPlaceBidData> call,
+                                   Response<AuctionPlaceBidData> response) {
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
+                if (response.body().getStatusCode() == 200) {
+                    Toast.makeText(getContext(), "Congratulations Your Bid Placed Successfully", Toast.LENGTH_LONG).show();
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_container, new FashionLandingFragment())
+                            .addToBackStack("")
+                            .commit();
+                } else {
+                    if (response.body().getMessage() != null) {
+                        Toast.makeText(getContext(), "Failed to Place Bid" + response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), "Failed to Place Bid", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AuctionPlaceBidData> call, Throwable t) {
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
+                Toast.makeText(getContext(), "Failed to Place Bid", Toast.LENGTH_LONG).show();
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+            }
+        });
     }
 
 
@@ -393,7 +456,16 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
                 if (response.body().getStatusCode() == 200) {
+                    ongoingbidAmount = response.body().getHighestBid();
+                    if (auctionDetails.get(positionvalue).getBidIncrement() !=null && !auctionDetails.get(positionvalue).getBidIncrement().isEmpty()){
+                        ongoingbidAmountIncr = ongoingbidAmount + Integer.valueOf(auctionDetails.get(positionvalue).getBidIncrement());
+                        enterbidtxt.setText("Enter Rs " + Html.fromHtml(ongoingbidAmountIncr+ " or more"));
+                    }else {
+                        enterbidtxt.setText("Enter Rs " + Html.fromHtml(response.body().getHighestBid()+ " or more"));
+                    }
+
                     ongoingbid.setText("On going bid Rs " + response.body().getHighestBid() + " /- ");
+
                     ongoingbid.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(getContext(), "There is no going bid", Toast.LENGTH_SHORT).show();
