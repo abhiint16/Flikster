@@ -169,7 +169,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder3) holder).fragment_common_recycler_container.setLayoutParams(layoutParams);
             ((ViewHolder3) holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
             initRetrofitProfileCollection(((ViewHolder3) holder).fragment_common_recyclerview_recycler,
-                    "http://apiv3-es.flikster.com/widgets/_search?pretty=true&size=100&q=*");
+                    "http://apiservice-es.flikster.com/widgets/_search?pretty=true&size=100&q=*");
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Trending Celebrity Fashions");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -181,7 +181,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             initRetrofit(((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler,
-                    "http://apiv3-es.flikster.com/shopbyvideos/_search?size=100&pretty=true&q=category:\"celebrity\"");
+                    "http://apiservice-es.flikster.com/shopbyvideos/_search?size=100&pretty=true&q=category:\"celebrity\"");
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Recommended Products");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -372,7 +372,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     private void initRetrofitProfileCollection(final RecyclerView recyclerView, String url) {
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/widgets/_search/").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiservice-es.flikster.com/widgets/_search/").create(ApiInterface.class);
         Call<WidgetData> call = apiInterface.getWidgetData(url);
         call.enqueue(new Callback<WidgetData>() {
             @Override
@@ -390,7 +390,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
     private void initRetrofit(final RecyclerView recyclerView, String url) {
 
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/shopbyvideos/_search/").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiservice-es.flikster.com/shopbyvideos/_search/").create(ApiInterface.class);
         Call<ShopByVideoData> call = apiInterface.getShopByVideo(url);
         call.enqueue(new Callback<ShopByVideoData>() {
             @Override

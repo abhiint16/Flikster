@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CeleStoreFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.MenFashionFragment.MenFashionLandingFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreFragment;
@@ -31,7 +32,8 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
     Bundle bundle;
     String flagEnable = "";
 
-    int[] tabImages = {R.drawable.allstore, R.drawable.celebritystore, R.drawable.menstoreicon, R.drawable.moviestrore, R.drawable.fashion_womenstore_tab};
+    int[] tabImages = {R.drawable.allstore, R.drawable.celebritystore, R.drawable.menstoreicon, R.drawable.moviestrore,
+            R.drawable.fashion_womenstore_tab,R.drawable.auctionslide};
 
     @Nullable
     @Override
@@ -177,7 +179,12 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
                             .addToBackStack("")
                             .commit();
                 } else if (tab.getPosition() == 5) {
-
+                    SharedPrefsUtil.setStringPreference(getActivity().getApplicationContext(), "HEADER_NAME", "WOMEN");
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_container, new AuctionFeedFragment())
+                            .addToBackStack("")
+                            .commit();
                 }
 
             }
@@ -210,6 +217,7 @@ public class FashionLandingFragment extends Fragment implements View.OnClickList
 
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+        adapter.addFrag(new AllStoreFragment(), null);
         adapter.addFrag(new AllStoreFragment(), null);
         adapter.addFrag(new AllStoreFragment(), null);
         adapter.addFrag(new AllStoreFragment(), null);

@@ -19,15 +19,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.flikster.Authentication.LoginActivity.LoginWithEmailOrMobileActivity;
+import com.flikster.Authentication.OtpAndResendOtpActivity.OtpActivity;
 import com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity;
 //import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.SignUpWithPhoneActivity;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.PhoneRegisterPostData;
+import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.RegisterPostStatus;
+import com.flikster.Authentication.SignUpActivity.SignupWithGmailOrFBData;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 import com.flikster.SharedPref.SharedPref;
@@ -41,8 +52,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener,
@@ -76,22 +95,28 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     Context mContext;
     Button custom_facebook, custom_gmail;
 
+    String CLICK_EVENT;
+    LinearLayout emaillayout, moblienolayout;
+    String emailOrMobile;
+    String undefinetext;
+    SignupWithGmailOrFBData signupWithGmailOrFBData;
+    ApiInterface apiInterface;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_screen);
-
         try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.flikster",
+            PackageInfo info = getPackageManager().getPackageInfo("com.flikster",
                     PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
+            LoginManager.getInstance().logOut();
         } catch (PackageManager.NameNotFoundException e) {
 
         } catch (NoSuchAlgorithmException e) {
@@ -158,6 +183,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             }
         }
 
+        btnLoginFacebook.setReadPermissions(Arrays.asList("email"));
         callbackManager = CallbackManager.Factory.create();
         btnLoginFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -167,12 +193,23 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                         loginResult.getAccessToken().getUserId()
                                 + loginResult.getAccessToken().getToken()
                                 + "", Toast.LENGTH_SHORT).show();*/
-                SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_ID", loginResult.getAccessToken().getUserId());
+//                Profile profile = Profile.getCurrentProfile();
+
+                getFbInfo();
+
+                /*postUserDataServerInit(profile.getFirstName(),
+                        loginResult.getAccessToken().getUserId(),
+                        loginResult.getAccessToken().getUserId());
+
+
+                SharedPrefsUtil.setStringPreference(getApplicationContext(),
+                        "USER_ID", loginResult.getAccessToken().getUserId());
                 Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
 
             }
+
 
             @Override
             public void onCancel() {
@@ -184,6 +221,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
             }
         });
+
+
     }
 
     @Override
@@ -209,9 +248,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                     gotoEmailLogin("email");
                 }
             }
-        } else if (view.getId() == R.id.btn_login_facebook) {
+        }
+        /* else if (view.getId() == R.id.btn_login_facebook) {
             gotoFacebookLogin();
-        } else if (view.getId() == R.id.tv_login_terms) {
+        }*/
+        else if (view.getId() == R.id.tv_login_terms) {
             showTermsConditions();
         } else if (view.getId() == R.id.keycloak) {
             SharedPrefsUtil.setStringPreference(AuthenticationActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
@@ -334,8 +375,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             String personPhotoUrl = acct.getPhotoUrl().toString();
             String email = acct.getEmail();
 
-            Log.e(TAG, "Name: " + personName + ", email: " + email
+            Log.e(TAG, "Name: " + acct.getGivenName() + "Last Name" + acct.getFamilyName() + ", email: " + email
                     + ", Image: " + personPhotoUrl);
+            postUserDataServerInit(acct.getGivenName(), acct.getFamilyName(), email);
 
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_ID", email);
 
@@ -410,5 +452,85 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         super.onBackPressed();
         Intent i = new Intent(AuthenticationActivity.this, HomeActivity.class);
         startActivity(i);
+    }
+
+
+    private void postUserDataServerInit(final String firstName, final String lastName, final String email) {
+//        email = "shivacse121@gmail.com";
+        signupWithGmailOrFBData = new SignupWithGmailOrFBData(firstName, lastName, email);
+        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/user-ms/socialReg/")
+                .create(ApiInterface.class);
+        Call<SignupWithGmailOrFBData> call = apiInterface.signInWithFbOrGmail(signupWithGmailOrFBData);
+        call.enqueue(new Callback<SignupWithGmailOrFBData>() {
+            @Override
+            public void onResponse(Call<SignupWithGmailOrFBData> call,
+                                   Response<SignupWithGmailOrFBData> response) {
+                if (response.body().getStatusCode() == 200) {
+                    Toast.makeText(AuthenticationActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "IS_LOGGED_IN", "LOGGED_IN");
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_ID", response.body().getId());
+                    Log.e("UserIDformServer", response.body().getId());
+                    if (firstName != null && !firstName.isEmpty()) {
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME", firstName);
+                    }
+                    if (lastName != null && !lastName.isEmpty()) {
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME", firstName + lastName);
+                    }
+                    Toast.makeText(AuthenticationActivity.this, firstName, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(AuthenticationActivity.this, "Failed " + response.body().getStatusCode(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SignupWithGmailOrFBData> call, Throwable t) {
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+            }
+        });
+    }
+
+    private void getFbInfo() {
+        GraphRequest request = GraphRequest.newMeRequest(
+                AccessToken.getCurrentAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject object,
+                            GraphResponse response) {
+                        String first_name = "";
+                        String last_name = "";
+                        try {
+                            Log.d("Facebook", "fb json object: " + object);
+                            Log.d("Facebookdat", "fb graph response: " + response);
+
+//                            String id = object.getString("id");
+                            first_name = object.getString("first_name");
+                            last_name = object.getString("last_name");
+//                            String image_url = "http://graph.facebook.com/" + id + "/picture?type=large";
+                            try {
+                                String email;
+                                if (object.has("email")) {
+                                    email = object.getString("email");
+                                    Toast.makeText(getApplicationContext(), "Fb Email " + email, Toast.LENGTH_SHORT).show();
+                                    postUserDataServerInit(first_name, last_name, email);
+                                } else {
+                                    Profile profile = Profile.getCurrentProfile();
+                                    Log.d("ProfileName", "" + profile.getName());
+                                    postUserDataServerInit(first_name, last_name, profile.getName());
+                                }
+                            } catch (Exception e) {
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,first_name,last_name,email,gender,birthday"); // id,first_name,last_name,email,gender,birthday,cover,picture.type(large)
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 }

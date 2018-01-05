@@ -121,7 +121,7 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             initRetrofit(((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler,
-                    "http://apiv3-es.flikster.com/shopbyvideos/_search?size=100&pretty=true&q=category:\"Menfashion\"");
+                    "http://apiservice-es.flikster.com/shopbyvideos/_search?size=100&pretty=true&q=category:\"Menfashion\"");
         }
 
 
@@ -129,7 +129,7 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
     private void initRetrofit(final RecyclerView recyclerView, String url) {
 
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/shopbyvideos/_search/").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiservice-es.flikster.com/shopbyvideos/_search/").create(ApiInterface.class);
         Call<ShopByVideoData> call = apiInterface.getShopByVideo(url);
         call.enqueue(new Callback<ShopByVideoData>() {
             @Override

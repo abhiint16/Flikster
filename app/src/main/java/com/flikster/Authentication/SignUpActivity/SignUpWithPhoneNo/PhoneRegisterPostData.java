@@ -22,9 +22,9 @@ public class PhoneRegisterPostData {
     @SerializedName("gender")
     private String gender;
 
-    public PhoneRegisterPostData(String firstname, String lastname,
+    public PhoneRegisterPostData(String firstname,
                                  String email, String mobile, String pwd,
-                                 String role,String gender) {
+                                 String role, String gender) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -32,5 +32,12 @@ public class PhoneRegisterPostData {
         this.pwd = pwd;
         this.role = role;
         this.gender = gender;
+    }
+
+    public PhoneRegisterPostData(String firstname, String lastname,
+                                 String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
     }
 }

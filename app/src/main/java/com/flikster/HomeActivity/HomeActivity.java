@@ -115,8 +115,11 @@ import com.flikster.permission.DangerousPermissionUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -155,7 +158,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             right_navigation_bar_logout, right_navigation_bar_non_loggedin_aboutflikster,
             right_navigation_bar_non_loggedin_careers, right_navigation_bar_non_loggedin_contact,
             right_navigation_bar_non_loggedin_help, right_navigation_bar_non_loggedin_privacy,
-            right_navigation_bar_non_loggedin_return_policy, right_navigation_bar_non_loggedin_terms;
+            right_navigation_bar_non_loggedin_return_policy, right_navigation_bar_non_loggedin_terms, right_navigation_bar_non_loggedin_auction;
 
     ///Image Capture
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -199,6 +202,76 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         initializeRest();
         checkForLaunch();
         bottomnavigationBar();
+
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            Date date = null;//You will get date object relative to server/client timezone wherever it is parsed
+            try {
+                date = dateFormat.parse("2017-12-29T11:12:41.899Z");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"); //If you need time just put specific format for time like 'HH:mm:ss'
+            String dateStr = formatter.format(date);
+
+//            Toast.makeText(getApplicationContext(), "Days " + dateStr, Toast.LENGTH_SHORT).show();
+
+            String dateserver = DateUtil.serverSentDateChange("2017-12-29T11:12:41.899Z");
+            Toast.makeText(getApplicationContext(), "Server Date" + dateserver, Toast.LENGTH_SHORT).show();
+
+            //serverSentTimeChange
+            String changesTime = DateUtil.serverSentTimeChange("2017-12-29T11:12:41.899Z");
+
+            Log.e("chnagestime", changesTime);
+//            Log.e("currentDateTime", currentDateTime);
+            Toast.makeText(getApplicationContext(), "Server Time" + changesTime, Toast.LENGTH_SHORT).show();
+
+
+            SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String currentDateTime = DateUtil.currentdateandTime();
+            Date currentDateTimedate = simDf.parse(currentDateTime);
+            long currentmillSec = currentDateTimedate.getTime();
+
+            Date yourDate = simDf.parse(changesTime);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(yourDate);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            String changeFormatDate = calendar.get(Calendar.DATE)
+                    + "-" + month
+                    + "-" + calendar.get(Calendar.YEAR);
+            Log.e("changedate", changeFormatDate + "");
+
+            Log.e("ChangeTimeCon", calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) + calendar.get(Calendar.SECOND) + "");
+
+
+            long timeInMilliseconds = yourDate.getTime();
+
+            long differenceres = currentmillSec - timeInMilliseconds;
+            Log.e("time in millisecond", "" + timeInMilliseconds);
+            Log.e("currentmillSec", "" + currentmillSec);
+            Log.e("differenceres", "" + differenceres);
+
+            String exactTimeDiffe = DateUtil.getTimeAgo(timeInMilliseconds);
+            Log.e("exactTimeDiffe", exactTimeDiffe + "");
+            Toast.makeText(getApplicationContext(), "time left" + exactTimeDiffe, Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
+            /*int dateDifference = (int) DateUtil.getDateDiff(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"),
+                    "2017-12-29T11:12:41.899Z", "2017-12-30T11:12:41.899Z");
+            System.out.println("dateDifference: " + dateDifference);
+            Toast.makeText(getApplicationContext(), "dateDifference" + dateDifference, Toast.LENGTH_SHORT).show();*/
+
+            DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.LONG).format(date);
+
+        } catch (Exception e) {
+
+        }
+
     }
 
     private void setPrefIfNull() {
@@ -406,6 +479,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_return_policy.setOnClickListener(this);
         right_navigation_bar_non_loggedin_terms.setOnClickListener(this);
         right_navigation_bar_non_loggedin_login_btn.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_auction.setOnClickListener(this);
         right_navigation_bar_non_loggedin_create_account_btn.setOnClickListener(this);
         toolbar_search_btn.setQueryHint("type min 3 characters...");
         toolbar_search_btn.setOnSearchClickListener(new View.OnClickListener() {
@@ -444,7 +518,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
         toolbar_main_title.setOnClickListener(this);
         toolbar_pref_spinner.setVisibility(View.GONE);
-
 
         try {
             if (getIntent().getStringArrayExtra("GAMIL_ID").toString() != null && !getIntent().getStringArrayExtra("GAMIL_ID").toString().isEmpty()) {
@@ -588,6 +661,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_return_policy = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_return_policy);
         right_navigation_bar_non_loggedin_terms = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_terms);
         right_navigation_bar_non_loggedin_login_btn = (Button) findViewById(R.id.right_navigation_bar_non_loggedin_login_btn);
+        right_navigation_bar_non_loggedin_auction = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_auction);
         right_navigation_bar_non_loggedin_create_account_btn = (Button) findViewById(R.id.right_navigation_bar_non_loggedin_create_account_btn);
         setSupportActionBar(toolbar_main);
         toolbar_main_notification = (ImageButton) toolbar_main.findViewById(R.id.toolbar_main_notification);
@@ -666,6 +740,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
+        } else if (viewId == R.id.right_navigation_bar_non_loggedin_auction) {
+//            SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
+            Toast.makeText(getApplicationContext(), "Auction Click", Toast.LENGTH_SHORT).show();
+            if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+            beginTransact(new AuctionFeedFragment());
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_create_account_btn) {
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "SIGNUP");
             Intent intent = new Intent(this, AuthenticationActivity.class);
@@ -695,7 +776,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         Common.openCommonDialog(HomeActivity.this, contentddata, headerStr);
     }
 
-    private void openCameraClickDialog() {
+   /* private void openCameraClickDialog() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_camera_click);
@@ -707,10 +788,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         dialog_camera_click_select_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Intent intent = new Intent();
-                intent.setType("image*//*");
+               *//* Intent intent = new Intent();
+                intent.setType("image*//**//*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivity(intent);*/
+                startActivity(intent);*//*
 
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, ACTIVITY_SELECT_IMAGE);
@@ -727,7 +808,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         });
         window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.translucent)));
         dialog.show();
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -948,7 +1029,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         startActivity(intent);
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         String enable = SharedPrefsUtil.getStringPreference(getApplicationContext(), "ACCESS_FRAGMENT_CAPTURE");
@@ -976,7 +1057,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             }
         }
 
-    }
+    }*/
 
     public void switchContent(int id, Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

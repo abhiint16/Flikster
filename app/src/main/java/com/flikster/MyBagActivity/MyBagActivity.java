@@ -56,8 +56,8 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void getCartData() {
-        apiInterface = ApiClient.getClient("http://apiv3-es.flikster.com/cart/_search/").create(ApiInterface.class);
-        Call<MyBagData> call = apiInterface.getMyBagData("http://apiv3-es.flikster.com/cart/_search?pretty=true&sort=createdAt:desc&q=userId:" +
+        apiInterface = ApiClient.getClient("http://apiservice-es.flikster.com/cart/_search/").create(ApiInterface.class);
+        Call<MyBagData> call = apiInterface.getMyBagData("http://apiservice-es.flikster.com/cart/_search?pretty=true&sort=createdAt:desc&q=userId:" +
                 getIntent().getStringExtra("userId"));
         //Implementation Pending for New Response
 //        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/").create(ApiInterface.class);
@@ -85,7 +85,6 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
         notifcationimg.setBackgroundDrawable(getResources().getDrawable(R.drawable.store_bag));
-
 
         setAvailableText();
 

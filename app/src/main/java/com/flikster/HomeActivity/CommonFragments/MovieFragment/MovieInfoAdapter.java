@@ -553,7 +553,6 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
 
         public ViewHolder9(View itemView) {
-
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);

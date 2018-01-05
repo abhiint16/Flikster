@@ -58,31 +58,38 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     RecyclerView.LayoutManager layoutManager;
     CheckoutAdapter checkoutAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
-    ImageButton toolbar_frag_multiicons_back_navigation,addressTabIcon,checkoutTabIcon/*,paymentTabIcon*/;
-    TextView toolbar_frag_multiicons_title,addressTabText,checkoutTabText/*,paymentTabText*/;
+    ImageButton toolbar_frag_multiicons_back_navigation, addressTabIcon, checkoutTabIcon/*,paymentTabIcon*/;
+    TextView toolbar_frag_multiicons_title, addressTabText, checkoutTabText/*,paymentTabText*/;
     Button fragment_checkout_bottom_btn;
-    String name,mobile,address,city,pin,state,landmark,additionalMobile;
-    String productId;String productSlug;String productTitle;String userId;String size;
-    String color;String profilePic;String price;
+    String name, mobile, address, city, pin, state, landmark, additionalMobile;
+    String productId;
+    String productSlug;
+    String productTitle;
+    String userId;
+    String size;
+    String color;
+    String profilePic;
+    String price;
     String quantity;
     AddressUserData addressUserData;
     ApiInterface apiInterface;
     private String accessToken = null;
-    String instaMojoURL="https://test.instamojo.com/";
+    String instaMojoURL = "https://test.instamojo.com/";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_checkout,container,false);
+        view = inflater.inflate(R.layout.fragment_checkout, container, false);
         initializeViews();
         initializeRest();
         return view;
     }
 
     private void initializeRest() {
-        layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
-        checkoutAdapter=new  CheckoutAdapter(getFragmentManager(),getActivity(),name,address,city,state,pin,mobile,landmark,additionalMobile,
-                productId,productSlug,productTitle,userId,size,color,profilePic,price,quantity,addressUserData);
+        checkoutAdapter = new CheckoutAdapter(getFragmentManager(), getActivity(), name, address, city, state, pin, mobile, landmark, additionalMobile,
+                productId, productSlug, productTitle, userId, size, color, profilePic, price, quantity, addressUserData);
         fragment_common_recyclerview_recycler.setAdapter(checkoutAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         fragment_checkout_bottom_btn.setOnClickListener(this);
@@ -90,16 +97,16 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initializeViews() {
-        fragment_common_recyclerview_recycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
-        toolbar_frag_multiicons_toolbar=(Toolbar)getActivity().findViewById(R.id.toolbar_frag_multiicons_toolbar);
-        toolbar_frag_multiicons_back_navigation=(ImageButton)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_title=(TextView)toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_title);
-        fragment_checkout_bottom_btn=(Button)view.findViewById(R.id.fragment_checkout_bottom_btn);
-        addressTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_imgbtn);
-        checkoutTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn);
-       // paymentTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_imgbtn);
-        addressTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_name);
-        checkoutTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_name);
+        fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
+        toolbar_frag_multiicons_toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_frag_multiicons_toolbar);
+        toolbar_frag_multiicons_back_navigation = (ImageButton) toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
+        toolbar_frag_multiicons_title = (TextView) toolbar_frag_multiicons_toolbar.findViewById(R.id.toolbar_frag_multiicons_title);
+        fragment_checkout_bottom_btn = (Button) view.findViewById(R.id.fragment_checkout_bottom_btn);
+        addressTabIcon = (ImageButton) getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_imgbtn);
+        checkoutTabIcon = (ImageButton) getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_imgbtn);
+        // paymentTabIcon=(ImageButton)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_imgbtn);
+        addressTabText = (TextView) getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_name);
+        checkoutTabText = (TextView) getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_name);
         //paymentTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_name);
     }
 
@@ -116,13 +123,10 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.toolbar_frag_multiicons_back_navigation)
-        {
-            addressUserData.checkoutToAddress(name,mobile,address,city,pin,state,landmark,additionalMobile,new AddressFragment());
-        }
-        else if(view.getId()==R.id.fragment_checkout_bottom_btn)
-        {
-            Log.e("inside onclick bototbtn","inside bototn ctn clk");
+        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
+            addressUserData.checkoutToAddress(name, mobile, address, city, pin, state, landmark, additionalMobile, new AddressFragment());
+        } else if (view.getId() == R.id.fragment_checkout_bottom_btn) {
+            Log.e("inside onclick bototbtn", "inside bototn ctn clk");
             //hitCreateUserApi();
             instaMojoInit();
             /*getFragmentManager()
@@ -134,15 +138,15 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void hitCreateUserApi() {
-        Log.e("inside onclick bototbtn","inside hitcreateuserapi");
-        List<CreateUserApiPostData.ProductData> productDatas=new ArrayList<CreateUserApiPostData.ProductData>();
-        productDatas.add(new CreateUserApiPostData.ProductData(productId,productTitle,productSlug,
-                profilePic,color,
-                price,size,quantity));
-        CreateUserApiPostData createUserApiPostData=new CreateUserApiPostData(userId,productDatas,
+        Log.e("inside onclick bototbtn", "inside hitcreateuserapi");
+        List<CreateUserApiPostData.ProductData> productDatas = new ArrayList<CreateUserApiPostData.ProductData>();
+        productDatas.add(new CreateUserApiPostData.ProductData(productId, productTitle, productSlug,
+                profilePic, color,
+                price, size, quantity));
+        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(userId, productDatas,
                 new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
 
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/orders-ms/createOrder/")
+        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/orders-ms/createOrder/")
                 .create(ApiInterface.class);
         Call<CreateUserApiPostData> call = apiInterface.postSendToCraeteUser(createUserApiPostData);
         call.enqueue(new Callback<CreateUserApiPostData>() {
@@ -150,14 +154,14 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<CreateUserApiPostData> call, Response<CreateUserApiPostData> response) {
                 Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
                 Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
-                Toast.makeText(getActivity(),"Order has been created",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Order has been created", Toast.LENGTH_SHORT).show();
                 instaMojoInit();
             }
 
             @Override
             public void onFailure(Call<CreateUserApiPostData> call, Throwable t) {
-                Toast.makeText(getActivity(),"Error creating Order!",Toast.LENGTH_SHORT).show();
-                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t.getCause()+""+t.getMessage()+""+t.getLocalizedMessage());
+                Toast.makeText(getActivity(), "Error creating Order!", Toast.LENGTH_SHORT).show();
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t.getCause() + "" + t.getMessage() + "" + t.getLocalizedMessage());
             }
         });
     }
@@ -167,7 +171,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void fetchTokenAndTransactionID() {
-        Toast.makeText(getActivity(),"Wait....fetching for you",Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Wait....fetching for you", Toast.LENGTH_LONG).show();
         OkHttpClient client = new OkHttpClient();
         HttpUrl url = getHttpURLBuilder()
                 .addPathSegment("create")
@@ -176,6 +180,12 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         RequestBody body = new FormBody.Builder()
                 .add("env", instaMojoURL.toLowerCase())
                 .build();
+        /*RequestBody client_id = new FormBody.Builder()
+                .add("client_id", "TIIVMSyhXS6OTc4SQbXRdqeyZZIfTs3FTe5q0ITF")
+                .build();
+        client_id = new FormBody.Builder()
+                .add("client_id", "TIIVMSyhXS6OTc4SQbXRdqeyZZIfTs3FTe5q0ITF")
+                .build();*/
 
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(url)
@@ -188,7 +198,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(),"Failed to fetch the Order Tokens",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Failed to fetch the Order Tokens", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -206,6 +216,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                         errorMessage = responseObject.getString("error");
                     } else {
                         accessToken = responseObject.getString("access_token");
+                        Log.e("AccessToken", accessToken + "");
                         transactionID = responseObject.getString("transaction_id");
                     }
                 } catch (JSONException e) {
@@ -230,7 +241,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         });
 
     }
-
 
 
     private void createOrder(String accessToken, String transactionID) {
@@ -287,7 +297,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
         //Validation is successful. Proceed
         //dialog.show();
-        Toast.makeText(getActivity(),"creating order...wait",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "creating order...wait", Toast.LENGTH_SHORT).show();
         Request request = new Request(order, new OrderRequestCallBack() {
             @Override
             public void onFinish(final Order order, final Exception error) {
@@ -297,51 +307,51 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                         //dialog.dismiss();
                         if (error != null) {
                             if (error instanceof Errors.ConnectionError) {
-                                Toast.makeText(getActivity(),"No Internet Connection",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.ServerError) {
-                                Toast.makeText(getActivity(),"Server Error. Try again",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Server Error. Try again", Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.AuthenticationError) {
-                                Toast.makeText(getActivity(),"Access token is invalid or expired. Please Update the token!!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Access token is invalid or expired. Please Update the token!!", Toast.LENGTH_SHORT).show();
                             } else if (error instanceof Errors.ValidationError) {
                                 // Cast object to validation to pinpoint the issue
                                 Errors.ValidationError validationError = (Errors.ValidationError) error;
 
                                 if (!validationError.isValidTransactionID()) {
-                                    Toast.makeText(getActivity(),"Transaction ID is not Unique",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Transaction ID is not Unique", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidRedirectURL()) {
-                                    Toast.makeText(getActivity(),"Redirect url is invalid",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Redirect url is invalid", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidWebhook()) {
-                                    Toast.makeText(getActivity(),"Webhook url is invalid",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Webhook url is invalid", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidPhone()) {
-                                    Toast.makeText(getActivity(),"Buyer's Phone Number is invalid/empty",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Buyer's Phone Number is invalid/empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidEmail()) {
-                                    Toast.makeText(getActivity(),"Buyer's Email is invalid/empty",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Buyer's Email is invalid/empty", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidAmount()) {
-                                    Toast.makeText(getActivity(),"Amount is either less than Rs.9 or has more than two decimal places",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Amount is either less than Rs.9 or has more than two decimal places", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                                 if (!validationError.isValidName()) {
-                                    Toast.makeText(getActivity(),"Buyer's Name is required",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Buyer's Name is required", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                             } else {
-                                Toast.makeText(getActivity(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                             return;
                         }
@@ -360,6 +370,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         intent.putExtra(Constants.ORDER, order);
         startActivityForResult(intent, Constants.REQUEST_CODE);
     }
+
     private HttpUrl.Builder getHttpURLBuilder() {
         return new HttpUrl.Builder()
                 .scheme("https")
@@ -378,7 +389,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             if (transactionID != null || paymentID != null) {
                 checkPaymentStatus(transactionID, orderID);
             } else {
-                Toast.makeText(getActivity(),"Oops!! Payment was cancelled",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Oops!! Payment was cancelled", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -393,11 +404,11 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             return;
         }
 
-        Toast.makeText(getActivity(),"checking transaction status",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "checking transaction status", Toast.LENGTH_SHORT).show();
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder builder = getHttpURLBuilder();
         builder.addPathSegment("status");
-        if (transactionID != null){
+        if (transactionID != null) {
             builder.addQueryParameter("transaction_id", transactionID);
         } else {
             builder.addQueryParameter("id", orderID);
@@ -415,7 +426,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(),"Failed to fetch the Transaction status",Toast.LENGTH_SHORT);
+                        Toast.makeText(getActivity(), "Failed to fetch the Transaction status", Toast.LENGTH_SHORT);
                     }
                 });
             }
@@ -448,15 +459,15 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void run() {
                         if (finalStatus == null) {
-                            Toast.makeText(getActivity(),finalErrorMessage, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), finalErrorMessage, Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         if (!finalStatus.equalsIgnoreCase("successful")) {
-                            Toast.makeText(getActivity(),"Transaction still pending",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Transaction still pending", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        Toast.makeText(getActivity(),"Transaction Successful for id - " + finalPaymentID,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Transaction Successful for id - " + finalPaymentID, Toast.LENGTH_SHORT).show();
                         //refundTheAmount(transactionID, finalAmount);
                     }
                 });
@@ -466,36 +477,33 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    public void userData(String name,String mobile,String address,String city,String pin,String state,String landmark,
-                         String additionalMobile)
-    {
-        this.name=name;
-        this.mobile=mobile;
-        this.address=address;
-        this.city=city;
-        this.pin=pin;
-        this.state=state;
-        this.landmark=landmark;
-        this.additionalMobile=additionalMobile;
+    public void userData(String name, String mobile, String address, String city, String pin, String state, String landmark,
+                         String additionalMobile) {
+        this.name = name;
+        this.mobile = mobile;
+        this.address = address;
+        this.city = city;
+        this.pin = pin;
+        this.state = state;
+        this.landmark = landmark;
+        this.additionalMobile = additionalMobile;
     }
 
-    public void productData(String productId,String productSlug,String productTitle,String userId,String size,
-                            String color,String profilePic,String price,String quantity)
-    {
-        this.productId=productId;
-        this.productSlug=productSlug;
-        this.productTitle=productTitle;
-        this.userId=userId;
-        this.size=size;
-        this.color=color;
-        this.profilePic=profilePic;
-        this.price=price;
-        this.quantity=quantity;
+    public void productData(String productId, String productSlug, String productTitle, String userId, String size,
+                            String color, String profilePic, String price, String quantity) {
+        this.productId = productId;
+        this.productSlug = productSlug;
+        this.productTitle = productTitle;
+        this.userId = userId;
+        this.size = size;
+        this.color = color;
+        this.profilePic = profilePic;
+        this.price = price;
+        this.quantity = quantity;
     }
 
-    public interface AddressUserData
-    {
-        void checkoutToAddress(String name, String mobileNo,String address,String city,String pinCode,String state,String landmark,String additionMobile,Fragment fragment);
+    public interface AddressUserData {
+        void checkoutToAddress(String name, String mobileNo, String address, String city, String pinCode, String state, String landmark, String additionMobile, Fragment fragment);
     }
 
     @Override

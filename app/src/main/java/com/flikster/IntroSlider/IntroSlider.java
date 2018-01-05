@@ -63,8 +63,8 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
 
             @Override
             public void onPageSelected(int state) {
-                Toast.makeText(getApplicationContext(), "ScrollState" + state, Toast.LENGTH_SHORT).show();
-                if (state == 2) {
+//                Toast.makeText(getApplicationContext(), "ScrollState" + state, Toast.LENGTH_SHORT).show();
+                if (state == 3) {
                     launchHomeScreen();
                 }
             }
@@ -79,9 +79,17 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
     private void initializeViews() {
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+
+
+//        View dataView = R.layout.slidetwoimage;
+//        Glide.with(this).load(R.drawable.loadinggif).into((ImageView) dataView);
+//        View viewdata = getLayoutInflater().inflate(R.layout.slidergifimage, viewPager, false);
+//        ImageView relativeLayoutdata = viewdata.findViewById(R.id.slidergif);
+//        Glide.with(this).load(R.drawable.loadinggif).into(relativeLayoutdata);
         layouts = new int[]{
                 R.layout.slidetwoimage,
                 R.layout.slidethreeimage,
+                R.layout.slidergifimage,
                 R.layout.slidefourimage,};
     }
 
@@ -128,7 +136,7 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
             } else {
                 launchHomeScreen();
             }
-            if (current == 4) {
+            if (current == 5) {
                 launchHomeScreen();
             }
         }
@@ -169,7 +177,7 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
     @Override
     public void onPageSelected(int position) {
         dots[position].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.dots_selected));
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             if (i == position)
                 continue;
             dots[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.dots_unselected));
