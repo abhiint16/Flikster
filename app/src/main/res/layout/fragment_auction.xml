@@ -1,64 +1,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_common_recycler_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusableInTouchMode="true">
+    android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <include layout="@layout/toolbar_frag" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/background_layout"
-        android:elevation="5dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar_frag" />
-
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+
+            <include
+                layout="@layout/fragment_common_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
+                android:layout_below="@+id/toolbar_frag_toolbar"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/ten"
+                android:visibility="gone" />
 
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carouselView"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="3dp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/ten" />
 
-                <include
-                    layout="@layout/fragment_common_recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/activity_my_bag_bottom_continue_btn"
-                    android:layout_below="@+id/toolbar_frag_toolbar"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/ten"
-                    android:visibility="gone" />
+            <include layout="@layout/card_footer" />
 
-                <com.synnapps.carouselview.CarouselView
-                    android:id="@+id/carouselView"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="@dimen/ten"
-                    app:fillColor="#FFFFFFFF"
-                    app:pageColor="#00000000"
-                    app:radius="3dp"
-                    app:slideInterval="3000"
-                    app:strokeColor="#FF777777"
-                    app:strokeWidth="1dp" />
+            <include layout="@layout/card_size_and_price" />
 
-                <include layout="@layout/card_footer" />
+            <include layout="@layout/card_place_bid" />
 
-                <include layout="@layout/card_size_and_price" />
+            <include layout="@layout/card_product_descrption" />
 
-                <include layout="@layout/card_place_bid" />
-
-                <include layout="@layout/card_product_descrption" />
-
-                <include layout="@layout/fragment_common_recyclerview_with_tv_one" />
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+            <include layout="@layout/fragment_common_recyclerview_with_tv_one" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.leo.simplearcloader.SimpleArcLoader
         android:id="@+id/arc_loader"
@@ -71,5 +64,5 @@
         custom:arc_margin="3dp"
         custom:arc_speed="medium"
         custom:arc_style="simple_arc"
-        custom:arc_thickness="3dp"></com.leo.simplearcloader.SimpleArcLoader>
+        custom:arc_thickness="3dp"/>
 </RelativeLayout>

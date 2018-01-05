@@ -85,6 +85,17 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
         @SerializedName("id")
         public String id;
 
+        @SerializedName("bidIncrement")
+        private String bidIncrement;
+
+        public String getBidIncrement() {
+            return bidIncrement;
+        }
+
+        public void setBidIncrement(String bidIncrement) {
+            this.bidIncrement = bidIncrement;
+        }
+
         public String getId() {
             return id;
         }
