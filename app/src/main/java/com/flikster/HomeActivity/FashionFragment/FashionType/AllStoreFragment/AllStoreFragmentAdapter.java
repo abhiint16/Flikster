@@ -814,6 +814,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                     hits.getHits().get(pos).get_source().getSlug(),
                     hits.getHits().get(pos).get_source().getImageGallery(), new ProductOnClick());
         }
+        Toast.makeText(context,"size is null for this item",Toast.LENGTH_SHORT).show();
 
     }
 

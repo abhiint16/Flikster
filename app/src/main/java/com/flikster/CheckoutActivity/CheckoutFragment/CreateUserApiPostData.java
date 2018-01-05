@@ -19,11 +19,19 @@ public class CreateUserApiPostData {
     @SerializedName("shippingAddress")
     private ShippingAddress shippingAddress;
     @SerializedName("statusCode")
-    private String statusCode;
+    private Integer statusCode;
     @SerializedName("message")
     private String message;
 
-    public CreateUserApiPostData(String userId,List<ProductData> productData,ShippingAddress shippingAddress) {
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public CreateUserApiPostData(String userId, List<ProductData> productData, ShippingAddress shippingAddress) {
         this.userId = userId;
         this.productData = productData;
         this.shippingAddress = shippingAddress;
@@ -37,13 +45,7 @@ public class CreateUserApiPostData {
         this.productData = productData;
     }
 
-    public String getStatusCode() {
-        return statusCode;
-    }
 
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
 
     public String getMessage() {
         return message;
@@ -58,7 +60,7 @@ public class CreateUserApiPostData {
         @SerializedName("productId")
         private String productId;
         @SerializedName("productTitle")
-        private String ProductTitle;
+        private String productTitle;
         @SerializedName("productSlug")
         private String productSlug;
         @SerializedName("productPic")
@@ -72,9 +74,10 @@ public class CreateUserApiPostData {
         @SerializedName("quantity")
         private String quantity;
 
-        public ProductData(String productId, String productTitle, String productSlug, String productPic, String color, String price, String size, String quantity) {
+        public ProductData(String productId, String productTitle, String productSlug,
+                           String productPic, String color, String price, String size, String quantity) {
             this.productId = productId;
-            ProductTitle = productTitle;
+            this.productTitle = productTitle;
             this.productSlug = productSlug;
             this.productPic = productPic;
             this.color = color;

@@ -23,6 +23,7 @@ import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 import com.instamojo.android.activities.PaymentDetailsActivity;
 import com.instamojo.android.callbacks.OrderRequestCallBack;
 import com.instamojo.android.helpers.Constants;
@@ -127,8 +128,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             addressUserData.checkoutToAddress(name, mobile, address, city, pin, state, landmark, additionalMobile, new AddressFragment());
         } else if (view.getId() == R.id.fragment_checkout_bottom_btn) {
             Log.e("inside onclick bototbtn", "inside bototn ctn clk");
-            //hitCreateUserApi();
-            instaMojoInit();
+            hitCreateUserApi();
+//            instaMojoInit();
             /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
@@ -143,7 +144,12 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         productDatas.add(new CreateUserApiPostData.ProductData(productId, productTitle, productSlug,
                 profilePic, color,
                 price, size, quantity));
-        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(userId, productDatas,
+
+        //51dd3ee9-7481-477f-adaa-08264d2d3c1e
+//        Log.e("params","productId" + productId, "productTitle"+ productTitle+"productSlug"+ productTitle);
+
+        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(),"USER_ID"),
+                productDatas,
                 new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
 
         apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/orders-ms/createOrder/")
@@ -152,10 +158,15 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         call.enqueue(new Callback<CreateUserApiPostData>() {
             @Override
             public void onResponse(Call<CreateUserApiPostData> call, Response<CreateUserApiPostData> response) {
-                Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
-                Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
-                Toast.makeText(getActivity(), "Order has been created", Toast.LENGTH_SHORT).show();
-                instaMojoInit();
+                if (response.body().getStatusCode() == 200){
+                    Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
+                    Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
+                    Toast.makeText(getActivity(), "Order has been created", Toast.LENGTH_SHORT).show();
+                    instaMojoInit();
+                }else {
+                    Toast.makeText(getActivity(), "Error creating Order!", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override

@@ -149,7 +149,7 @@ public interface ApiInterface {
     @POST("http://apiservice.flikster.com/v3/cart-ms/createCart")
     Call<ProductDetailsDataToSend> postSendToCartData(@Body ProductDetailsDataToSend productDetailsDataToSend);
 
-    @POST("http://apiservice.flikster.com/v3/orders-ms/createOrder")
+    @POST("http://apiservice.flikster.com/v3/orders-ms/createOrder/")
     Call<CreateUserApiPostData> postSendToCraeteUser(@Body CreateUserApiPostData createUserApiPostData);
 
     @GET
