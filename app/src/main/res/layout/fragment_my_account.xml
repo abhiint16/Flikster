@@ -49,8 +49,8 @@
                     android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="100dp"
-                    android:scaleType="center"
-                    android:src="@drawable/neha" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/no_image" />
 
                 <TextView
                     android:id="@+id/fragment_my_account_name"
@@ -59,7 +59,7 @@
                     android:layout_below="@id/fragment_my_account_dp"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="Neha"
+                    android:text="username"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -87,13 +87,13 @@
                         android:text="|"
                         android:textColor="@color/black" />
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/fragment_my_account_no_followers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:text="53 Followers"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black" />-->
                 </LinearLayout>
             </RelativeLayout>
 

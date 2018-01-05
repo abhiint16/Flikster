@@ -129,8 +129,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             addressUserData.checkoutToAddress(name, mobile, address, city, pin, state, landmark, additionalMobile, new AddressFragment());
         } else if (view.getId() == R.id.fragment_checkout_bottom_btn) {
             Log.e("inside onclick bototbtn", "inside bototn ctn clk");
-            hitCreateUserApi();
-//            instaMojoInit();
+           // hitCreateUserApi();
+            instaMojoInit();
             /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
@@ -146,12 +146,18 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
                 profilePic, color,
                 price, size, quantity));
 
+        Gson gson = new Gson();
+        String orderJson = gson.toJson(productDatas);
+
+        Log.e("orderJson", orderJson.toString());
+
         //51dd3ee9-7481-477f-adaa-08264d2d3c1e
 //        Log.e("params","productId" + productId, "productTitle"+ productTitle+"productSlug"+ productTitle);
         Gson gson = new Gson();
         String productorderJson = gson.toJson(productDatas);
         Log.e("Jsondata", productorderJson);
 
+<<<<<<< HEAD
         List<CreateUserApiPostData.ShippingAddress> shippingAddress = new ArrayList<CreateUserApiPostData.ShippingAddress>();
         shippingAddress.add(new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
 
@@ -160,8 +166,14 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
         CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
                 SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
+=======
+        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
+>>>>>>> 8e84be14416b9a1e99fbefe82dff285a0a1ee605
                 productDatas,
                 new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
+//        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
+//                productDatas,
+//                new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
 
         apiInterface = ApiClient.getClient(ApiClient.BASE_URL)
                 .create(ApiInterface.class);

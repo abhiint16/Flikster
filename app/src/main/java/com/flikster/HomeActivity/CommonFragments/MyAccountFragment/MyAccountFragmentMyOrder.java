@@ -19,7 +19,7 @@ public class MyAccountFragmentMyOrder extends Fragment {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerMyPost;
-    MyAccountFragmentMyPostsAdapter myAccountFragmentMyPostsAdapter;
+    MyAccountFragmentMyOrderAdapter myAccountFragmentMyOrderAdapter;
 
     @Nullable
     @Override
@@ -33,8 +33,8 @@ public class MyAccountFragmentMyOrder extends Fragment {
     private void initializeRest() {
         layoutManagerMyPost = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerMyPost);
-        myAccountFragmentMyPostsAdapter = new MyAccountFragmentMyPostsAdapter();
-        fragment_common_recyclerview_recycler.setAdapter(myAccountFragmentMyPostsAdapter);
+        myAccountFragmentMyOrderAdapter = new MyAccountFragmentMyOrderAdapter();
+        fragment_common_recyclerview_recycler.setAdapter(myAccountFragmentMyOrderAdapter);
         fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.colorImageBackgroundGrey));
     }
 

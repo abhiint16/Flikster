@@ -26,6 +26,7 @@ public class CreateUserApiPostData {
     @SerializedName("product")
     private String product;
 
+<<<<<<< HEAD
     @SerializedName("shippingAddress")
     private String shippingAddres;
 
@@ -35,6 +36,14 @@ public class CreateUserApiPostData {
 
     public void setUserId(String userId) {
         this.userId = userId;
+=======
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+>>>>>>> 8e84be14416b9a1e99fbefe82dff285a0a1ee605
     }
 
     public Integer getStatusCode() {

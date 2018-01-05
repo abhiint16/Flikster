@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
+import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
 
@@ -71,7 +73,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
         fragment_my_account_name = (TextView) view.findViewById(R.id.fragment_my_account_name);
         fragment_my_account_location = (TextView) view.findViewById(R.id.fragment_my_account_location);
-        fragment_my_account_no_followers = (TextView) view.findViewById(R.id.fragment_my_account_no_followers);
+        //fragment_my_account_no_followers = (TextView) view.findViewById(R.id.fragment_my_account_no_followers);
     }
 
     @Override
@@ -95,6 +97,11 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                     .beginTransaction()
                     .replace(R.id.main_container, new NotificationFragment())
                     .addToBackStack("")
+                    .commit();
+        }else if (view.getId() ==R.id.myprofile_toolbar_navigation_icon)
+        {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.main_container,new FeedFragment())
                     .commit();
         }
     }
