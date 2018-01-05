@@ -93,10 +93,17 @@
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:src="@drawable/account_icon"
+        android:src="@drawable/hamburger_icon"
         android:background="@color/transparent"
         android:layout_gravity="end"
         android:id="@+id/toolbar_navigation_view_open_btn"/>
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/cart_toolbar"
+        android:background="@color/transparent"
+        android:layout_gravity="end"
+        android:id="@+id/toolbar_cart_btn"/>
     <android.support.v7.widget.SearchView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

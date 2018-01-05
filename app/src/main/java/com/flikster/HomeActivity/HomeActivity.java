@@ -140,7 +140,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     LinearLayout feed, rating, plus, fashion, store,toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    ImageButton toolbar_main_notification,toolbar_navigation_view_open_btn;
+    ImageButton toolbar_main_notification,toolbar_navigation_view_open_btn,toolbar_cart_btn;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
@@ -315,7 +315,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watchunselected, R.color.color_tab_1);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.addsquare, R.color.color_tab_1);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionunselectedbottom, R.color.color_tab_1);
-        AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.store, R.drawable.storeicon, R.color.color_tab_1);
+        AHBottomNavigationItem item5 = new AHBottomNavigationItem("My Account", R.drawable.account_icon, R.color.color_tab_1);
 
 // Add items
         bottomNavigation.addItem(item1);
@@ -396,16 +396,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 //                    beginTransact(new FashionFragment());
                     beginTransact(new FashionLandingFragment());
                 } else if (position == 4) {
-                    Intent intent = new Intent(HomeActivity.this, MyBagActivity.class);
-                    if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID") != null && !SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID").isEmpty()) {
-                        UserId = SharedPrefsUtil.getStringPreference(getApplicationContext(),
-                                "USER_ID");
-                        Log.e("LoginUserId", UserId);
-                        intent.putExtra("userId", "abhiint");
-                    } else {
-                        intent.putExtra("userId", "abhiint");
-                    }
-                    startActivity(intent);
+                    beginTransact(new MyAccountFragment());
                     /*beginTransact(new MyStyleFragment());*/
                 } /*else if (position == 5) {
                     beginTransact(new RatingFragment());
@@ -480,6 +471,21 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_terms.setOnClickListener(this);
         right_navigation_bar_non_loggedin_login_btn.setOnClickListener(this);
         right_navigation_bar_non_loggedin_auction.setOnClickListener(this);
+        toolbar_cart_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MyBagActivity.class);
+                if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID") != null && !SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID").isEmpty()) {
+                    UserId = SharedPrefsUtil.getStringPreference(getApplicationContext(),
+                            "USER_ID");
+                    Log.e("LoginUserId", UserId);
+                    intent.putExtra("userId", "abhiint");
+                } else {
+                    intent.putExtra("userId", "abhiint");
+                }
+                startActivity(intent);
+            }
+        });
         right_navigation_bar_non_loggedin_create_account_btn.setOnClickListener(this);
         toolbar_search_btn.setQueryHint("type min 3 characters...");
         toolbar_search_btn.setOnSearchClickListener(new View.OnClickListener() {
@@ -637,6 +643,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar_cart_btn=(ImageButton)findViewById(R.id.toolbar_cart_btn);
         toolbar_main_title = (TextView) findViewById(R.id.toolbar_main_title);
         toolbar_search_btn=(SearchView)findViewById(R.id.toolbar_search_btn);
         toolbar_navigation_view_open_btn=(ImageButton)findViewById(R.id.toolbar_navigation_view_open_btn);
