@@ -24,6 +24,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
+import com.google.gson.Gson;
 import com.instamojo.android.activities.PaymentDetailsActivity;
 import com.instamojo.android.callbacks.OrderRequestCallBack;
 import com.instamojo.android.helpers.Constants;
@@ -128,8 +129,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             addressUserData.checkoutToAddress(name, mobile, address, city, pin, state, landmark, additionalMobile, new AddressFragment());
         } else if (view.getId() == R.id.fragment_checkout_bottom_btn) {
             Log.e("inside onclick bototbtn", "inside bototn ctn clk");
-            //hitCreateUserApi();
-            instaMojoInit();
+            hitCreateUserApi();
+//            instaMojoInit();
             /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
@@ -147,23 +148,33 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
         //51dd3ee9-7481-477f-adaa-08264d2d3c1e
 //        Log.e("params","productId" + productId, "productTitle"+ productTitle+"productSlug"+ productTitle);
+        Gson gson = new Gson();
+        String productorderJson = gson.toJson(productDatas);
+        Log.e("Jsondata", productorderJson);
 
-        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(),"USER_ID"),
+        List<CreateUserApiPostData.ShippingAddress> shippingAddress = new ArrayList<CreateUserApiPostData.ShippingAddress>();
+        shippingAddress.add(new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
+
+        String postShippingAddrsdata = gson.toJson(productDatas);
+        Log.e("Jsondata", postShippingAddrsdata);
+
+        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
+                SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
                 productDatas,
                 new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
 
-        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/orders-ms/createOrder/")
+        apiInterface = ApiClient.getClient(ApiClient.BASE_URL)
                 .create(ApiInterface.class);
         Call<CreateUserApiPostData> call = apiInterface.postSendToCraeteUser(createUserApiPostData);
         call.enqueue(new Callback<CreateUserApiPostData>() {
             @Override
             public void onResponse(Call<CreateUserApiPostData> call, Response<CreateUserApiPostData> response) {
-                if (response.body().getStatusCode() == 200){
+                if (response.body().getStatusCode() == 200) {
                     Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
                     Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
                     Toast.makeText(getActivity(), "Order has been created", Toast.LENGTH_SHORT).show();
                     instaMojoInit();
-                }else {
+                } else {
                     Toast.makeText(getActivity(), "Error creating Order!", Toast.LENGTH_SHORT).show();
                 }
 
