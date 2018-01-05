@@ -151,24 +151,18 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
         Log.e("orderJson", orderJson.toString());
 
-        //51dd3ee9-7481-477f-adaa-08264d2d3c1e
-//        Log.e("params","productId" + productId, "productTitle"+ productTitle+"productSlug"+ productTitle);
-        Gson gson = new Gson();
         String productorderJson = gson.toJson(productDatas);
         Log.e("Jsondata", productorderJson);
 
-<<<<<<< HEAD
         List<CreateUserApiPostData.ShippingAddress> shippingAddress = new ArrayList<CreateUserApiPostData.ShippingAddress>();
         shippingAddress.add(new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
 
         String postShippingAddrsdata = gson.toJson(productDatas);
         Log.e("Jsondata", postShippingAddrsdata);
 
-        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
-                SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
-=======
+//        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
+//                SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
         CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
->>>>>>> 8e84be14416b9a1e99fbefe82dff285a0a1ee605
                 productDatas,
                 new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
 //        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
