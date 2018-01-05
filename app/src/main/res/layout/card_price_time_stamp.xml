@@ -44,7 +44,7 @@
             android:gravity="right">
 
             <TextView
-                android:id="@+id/tv_description"
+                android:id="@+id/timelefttxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/watch_small_icon"
@@ -65,5 +65,7 @@
         android:text="@string/datestr"
         android:textColor="@android:color/secondary_text_light"
         android:textSize="12sp"
+
+        android:layout_marginBottom="@dimen/ten"
         android:textStyle="normal" />
 </LinearLayout>

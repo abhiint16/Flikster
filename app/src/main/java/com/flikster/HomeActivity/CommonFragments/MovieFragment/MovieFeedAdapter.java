@@ -391,8 +391,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void recommendedMoviesRetrofitInit(final RecyclerView.ViewHolder holder) {
-        apiInterface = ApiClient.getClient("http://apiv3.flikster.com/v3/movie-ms/movies/").create(ApiInterface.class);
-        Call<RecommendedMoviesData> call = apiInterface.getRecommendedMoviesData("http://apiv3.flikster.com/v3/movie-ms/movies");
+        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/movie-ms/movies/").create(ApiInterface.class);
+        Call<RecommendedMoviesData> call = apiInterface.getRecommendedMoviesData("http://apiservice.flikster.com/v3/movie-ms/movies");
         call.enqueue(new Callback<RecommendedMoviesData>() {
             @Override
             public void onResponse(Call<RecommendedMoviesData> call, Response<RecommendedMoviesData> response) {

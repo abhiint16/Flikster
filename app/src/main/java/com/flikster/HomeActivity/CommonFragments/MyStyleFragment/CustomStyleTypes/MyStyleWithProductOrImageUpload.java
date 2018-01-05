@@ -27,11 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.ImageUploadServerRetroFit.Response;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.ImageUploadServerRetroFit.RetrofitInterface;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
-import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SearchActivity;
+import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.FileUtils;
@@ -39,21 +36,13 @@ import com.flikster.Util.SharedPrefsUtil;
 import com.flikster.permission.DangerousPermResponseCallBack;
 import com.flikster.permission.DangerousPermissionResponse;
 import com.flikster.permission.DangerousPermissionUtils;
-import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -61,7 +50,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by abhishek on 12-10-2017.
  */
 
-public class MyStyleFragmentOne extends Fragment implements View.OnClickListener {
+public class MyStyleWithProductOrImageUpload extends Fragment implements View.OnClickListener {
     View view;
     FragmentManager fragmentManager;
     ImageView captureimg, productthingimg, productimg, productthingextraimg;
@@ -73,9 +62,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     final int ACTIVITY_SELECT_IMAGE = 2;
     private static final int IMG_SELECT = 777;
     Activity activity;
-    public static final String URL = "http://10.0.2.2:8080";
-    private String mImageUrl = "";
-
 
     @Nullable
     @Override
@@ -146,12 +132,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                     }
                 }
 //                profileImageSet(bitmap);
-                /*try {
-                    InputStream is = getContext().getContentResolver().openInputStream(data.getData());
-                    uploadImage(getBytes(is));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
             } else {
                 Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
             }
@@ -181,23 +161,10 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                                 SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
                                 SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_THREE", "");
                             }
-//                            uploadPhoto(path);
-                           /* try {
-                                InputStream is = getContext().getContentResolver().openInputStream(path);
-                                uploadImage(getBytes(is));
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }*/
-
+                           // uploadPhoto(path);
                         }
                     } else {
 //                        uploadPhoto(path);
-                       /* try {
-                            InputStream is = getContext().getContentResolver().openInputStream(data.getData());
-                            uploadImage(getBytes(is));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }*/
                         profileImageSet(bitmap);
                     }
                 }
@@ -296,7 +263,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         } else if (v.getId() == R.id.productimg) {
             SharedPrefsUtil.setStringPreference(getContext(), "STYLE_OBJECT_NUMBER", "1");
             openUploadOrtagDialog("1");
-//            productOrImageCapture("1");
         } else if (v.getId() == R.id.productthingimg) {
             SharedPrefsUtil.setStringPreference(getContext(), "STYLE_OBJECT_NUMBER", "2");
             openUploadOrtagDialog("2");
@@ -304,11 +270,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
             SharedPrefsUtil.setStringPreference(getContext(), "STYLE_OBJECT_NUMBER", "3");
             openUploadOrtagDialog("3");
         }
-    }
-
-    private void productOrImageCapture(String s) {
-        Intent i = new Intent(getContext(), MyStyleWithProductOrImageUpload.class);
-        startActivity(i);
     }
 
     private void searchActivity(String styletype, String categoryNo) {
@@ -462,76 +423,5 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = activity;
-    }
-
-
-    public byte[] getBytes(InputStream is) throws IOException {
-        ByteArrayOutputStream byteBuff = new ByteArrayOutputStream();
-
-        int buffSize = 1024;
-        byte[] buff = new byte[buffSize];
-
-        int len = 0;
-        while ((len = is.read(buff)) != -1) {
-            byteBuff.write(buff, 0, len);
-        }
-
-        return byteBuff.toByteArray();
-    }
-
-    private void uploadImage(byte[] imageBytes) {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-
-        RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), imageBytes);
-
-        MultipartBody.Part body = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
-        Call<Response> call = retrofitInterface.uploadImage(body);
-//        mProgressBar.setVisibility(View.VISIBLE);
-        call.enqueue(new Callback<Response>() {
-            @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-
-//                mProgressBar.setVisibility(View.GONE);
-
-                if (response.isSuccessful()) {
-
-                    Response responseBody = response.body();
-//                    mBtImageShow.setVisibility(View.VISIBLE);
-                    mImageUrl = URL + responseBody.getPath();
-                    Toast.makeText(getContext(), " " + responseBody.getMessage(), Toast.LENGTH_SHORT).show();
-//                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(), Snackbar.LENGTH_SHORT).show();
-
-                } else {
-
-                    ResponseBody errorBody = response.errorBody();
-
-                    Gson gson = new Gson();
-
-                    try {
-
-                        Response errorResponse = gson.fromJson(errorBody.string(), Response.class);
-                        Toast.makeText(getContext(), " " + errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                        Snackbar.make(findViewById(R.id.content), errorResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                Toast.makeText(getContext(), " " + "failed to upload", Toast.LENGTH_SHORT).show();
-//                mProgressBar.setVisibility(View.GONE);
-                Log.d("FaliedUpload", "onFailure: " + t.getLocalizedMessage());
-            }
-        });
     }
 }

@@ -61,6 +61,17 @@ public class ApiClient {
 
     public static final String POST_WATCH_STATUS_URL = BASE_URL + "likes-ms/postCardStatusMobile/";
 
+    //Auction Card first one
+    public static final String AUCTION_URL = BASE_URL + "auctions-ms/getAuctions/";
+
+    public static final String ON_GOING_BID_URL = BASE_URL + "auctions-ms/getHighBidAmount/";
+
+    public static final String SIGNIN_FBORGMAIL_URL = "http://apiservice.flikster.com/v3/user-ms/socialReg/";
+    //"http://apiservice.flikster.com/v3/user-ms/socialReg"
+    //http://apiservice.flikster.com/v3/auctions-ms/auctions
+
+    public static final String PLACE_BID_URL = BASE_URL + "auctions-ms/postBidByAuction/";
+    //http://apiservice.flikster.com/v3/auctions-ms/postBidByAuction
 
 //    likes-ms/postCardStatus
 

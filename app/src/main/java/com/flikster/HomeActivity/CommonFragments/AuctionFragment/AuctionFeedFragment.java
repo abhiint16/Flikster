@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.RatingFragment.RatingAdapter;
 import com.flikster.R;
 
@@ -78,7 +79,12 @@ public class AuctionFeedFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
-            getFragmentManager().popBackStackImmediate();
+            // getFragmentManager().popBackStackImmediate();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, new FashionLandingFragment())
+                    .addToBackStack("")
+                    .commit();
         }
     }
 }

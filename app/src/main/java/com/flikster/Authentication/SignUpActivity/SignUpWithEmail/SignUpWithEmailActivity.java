@@ -196,18 +196,16 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
     }
 
     private void postUserDataServerInit() {
-
         if (CLICK_EVENT.equals("email")) {
             emailOrMobile = et_emailid.getText().toString();
             emailRegisterPostData = new PhoneRegisterPostData(register_first_name.getText().toString(),
-                    "",
+
                     emailOrMobile, "undefined",
                     register_password.getText().toString(),
                     "user", genderstr);
         } else {
             emailOrMobile = et_mobile_no.getText().toString();
             emailRegisterPostData = new PhoneRegisterPostData(register_first_name.getText().toString(),
-                    "",
                     "undefined", emailOrMobile,
                     register_password.getText().toString(),
                     "user", genderstr);
@@ -220,7 +218,6 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
             public void onResponse(Call<RegisterPostStatus> call,
                                    Response<RegisterPostStatus> response) {
                 Log.e("StatusCode", response.body().getStatusCode() + "");
-
                 if (CLICK_EVENT.equals("email")) {
                     if (response.body().getStatusCode() == 200) {
                         Toast.makeText(SignUpWithEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();

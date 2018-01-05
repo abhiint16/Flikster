@@ -10,7 +10,10 @@ import com.flikster.Authentication.LoginActivity.LoginData;
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.MobileOrEmailRegisterCheckData;
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.PhoneRegisterPostData;
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.RegisterPostStatus;
+import com.flikster.Authentication.SignUpActivity.SignupWithGmailOrFBData;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
+import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.AuctionCurrentOrUpcomingData;
+import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.OnGoingBidData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryData;
@@ -74,6 +77,12 @@ public interface ApiInterface {
 
     @GET
     Call<CommentsData> getAllComments(@Url String url);
+
+    @GET
+    Call<AuctionCurrentOrUpcomingData> getAuctionData(@Url String url);
+
+    @GET
+    Call<OnGoingBidData> getOngoingBid(@Url String url);
 
     @GET
     Call<AllStoreData> getAllStore(@Url String url);
@@ -146,6 +155,10 @@ public interface ApiInterface {
     @POST("http://apiservice.flikster.com/v3/user-ms/userReg")
     Call<RegisterPostStatus> emailOrPhoneRegisterUserData(@Body PhoneRegisterPostData emailRegisterPostData);
 
+
+
+    @POST(ApiClient.SIGNIN_FBORGMAIL_URL)
+    Call<SignupWithGmailOrFBData> signInWithFbOrGmail(@Body SignupWithGmailOrFBData emailRegisterPostData);
 
     @POST(ApiClient.LOGIN_URL)
     Call<LoginResponseData> loginUserData(@Body LoginData emailRegisterPostData);
