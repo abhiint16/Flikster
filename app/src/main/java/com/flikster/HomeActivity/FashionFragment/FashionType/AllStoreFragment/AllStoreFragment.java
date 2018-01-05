@@ -30,12 +30,13 @@ import retrofit2.Response;
 public class AllStoreFragment extends Fragment implements View.OnClickListener {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
-    RecyclerView.LayoutManager layoutManagerFashionFragment;
+    LinearLayoutManager layoutManagerFashionFragment;
     AllStoreFragmentAdapter allStoreFragmentAdapter;
     ApiInterface apiInterface;
     AllStoreInnerData hits;
     SimpleArcLoader simpleArcLoader;
     AllStoreInterafce allStoreInterafce;
+    int c=0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
         simpleArcLoader.setVisibility(View.VISIBLE);
         simpleArcLoader.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/").create(ApiInterface.class);
-        Call<AllStoreData> call = apiInterface.getAllStore("http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=100&q=*");
+        Call<AllStoreData> call = apiInterface.getAllStore("http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=*");
         call.enqueue(new Callback<AllStoreData>() {
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
@@ -59,6 +60,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
                 allStoreFragmentAdapter = new AllStoreFragmentAdapter(getActivity(),hits,allStoreInterafce);
                 simpleArcLoader.setVisibility(View.GONE);
                 simpleArcLoader.stop();
+                Log.e("gggggg",""+layoutManagerFashionFragment.getChildCount()+"and"+layoutManagerFashionFragment.getItemCount()+"and"+layoutManagerFashionFragment.findFirstVisibleItemPosition());
                 fragment_common_recyclerview_recycler.setAdapter(allStoreFragmentAdapter);
             }
 
@@ -71,6 +73,41 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
     private void initializeRest() {
         layoutManagerFashionFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerFashionFragment);
+        Log.e("gggggg",""+layoutManagerFashionFragment.getChildCount()+"and"+layoutManagerFashionFragment.getItemCount()+"and"+layoutManagerFashionFragment.findFirstVisibleItemPosition());
+        fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Log.e("gggggg",""+layoutManagerFashionFragment.getChildCount()+"and"+layoutManagerFashionFragment.getItemCount()+"and"+layoutManagerFashionFragment.findLastVisibleItemPosition());
+                int visibleItemCount = layoutManagerFashionFragment.getChildCount();
+                int totalItemCount = layoutManagerFashionFragment.getItemCount();
+                int firstVisibleItemPosition = layoutManagerFashionFragment.findFirstVisibleItemPosition();
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                            && firstVisibleItemPosition >= 0) {
+                        c=c+10;
+                        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/").create(ApiInterface.class);
+                        Call<AllStoreData> call = apiInterface.getAllStore("http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=10&from="+c+"&q=*");
+                        call.enqueue(new Callback<AllStoreData>() {
+                            @Override
+                            public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
+                                Log.e("indie onres",""+response.body().getHits().getHits());
+                                //allStoreFragmentAdapter.hits.getHits().addAll(response.body().getHits().getHits());
+                                allStoreFragmentAdapter.updateDataPagination(response.body().getHits().getHits());
+                            }
+
+                            @Override
+                            public void onFailure(Call<AllStoreData> call, Throwable t) {
+                                Log.e("vvvvvvvvvv", "vv" + call + t);
+                            }
+                        });
+                    }
+            }
+        });
     }
 
     private void initializeViews() {

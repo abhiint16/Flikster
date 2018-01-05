@@ -27,6 +27,8 @@ import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CreateShareYour
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
+import com.flikster.HomeActivity.SearchViewFragment.SearchGalleryData;
+import com.flikster.HomeActivity.SearchViewFragment.SearchProductOnClickData;
 import com.flikster.MyBagActivity.MyBagData;
 
 import okhttp3.MultipartBody;
@@ -52,12 +54,24 @@ public interface ApiInterface {
                                      @Query("sort") String d,
                                      @Query("size") Integer i,
                                      @Query("q") String c);
+    @GET("http://apiservice-ec.flikster.com/contents/_search")
+    Call<FeedData> getTopRatedMovies(@Query("pretty") Boolean s,
+                                     @Query("sort") String d,
+                                     @Query("size") Integer i,
+                                     @Query("from") Integer m,
+                                     @Query("q") String c);
 
     @GET
     Call<MovieData> getMovieData(@Url String url);
 
     @GET
     Call<CelebrityData> getCelebrityData(@Url String url);
+
+    @GET
+    Call<SearchGalleryData> getSearchGalleryData(@Url String url);
+
+    @GET
+    Call<SearchProductOnClickData> getProductData(@Url String url);
 
     @GET
     Call<FeedData> getNewsData(@Url String url);
@@ -136,7 +150,7 @@ public interface ApiInterface {
     @POST("http://apiservice.flikster.com/v3/cart-ms/createCart")
     Call<ProductDetailsDataToSend> postSendToCartData(@Body ProductDetailsDataToSend productDetailsDataToSend);
 
-    @POST("http://apiservice.flikster.com/v3/orders-ms/createOrder")
+    @POST("http://apiservice.flikster.com/v3/orders-ms/createOrder/")
     Call<CreateUserApiPostData> postSendToCraeteUser(@Body CreateUserApiPostData createUserApiPostData);
 
     @GET
@@ -183,7 +197,12 @@ public interface ApiInterface {
             @Part("description") RequestBody description,
             @Part MultipartBody.Part photo);
 
+<<<<<<< HEAD
     @POST(ApiClient.PLACE_BID_URL)
     Call<AuctionPlaceBidData> auctionPlaceBidinServer(@Body AuctionPlaceBidData auctionPlaceBidData);
+=======
+    @POST("http://apiservice.flikster.com/v3/search-ms/globalSearch")
+    Call<GlobalSearchGetData> getGlobalSearchData(@Body GlobalSearchPostData globalSearchPostData);
+>>>>>>> 30997fbc27b40fc2cc16246eb7307f1f216c4334
 
 }

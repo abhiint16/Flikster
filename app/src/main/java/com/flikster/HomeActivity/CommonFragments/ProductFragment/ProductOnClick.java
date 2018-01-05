@@ -99,6 +99,14 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     }
 
     private void formatSize() {
+        if (sizeOfSize==0)
+        {
+            product_size_med.setVisibility(View.GONE);
+            product_size_large.setVisibility(View.GONE);
+            product_size_extra.setVisibility(View.GONE);
+            product_size_extra_extra.setVisibility(View.GONE);
+            product_size_small.setVisibility(View.GONE);
+        }
         if (sizeOfSize == 1) {
             product_size_med.setVisibility(View.GONE);
             product_size_large.setVisibility(View.GONE);

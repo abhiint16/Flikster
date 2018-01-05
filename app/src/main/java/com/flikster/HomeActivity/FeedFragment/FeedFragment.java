@@ -37,7 +37,7 @@ public class FeedFragment extends Fragment {
     ApiInterface apiInterface;
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
-    RecyclerView.LayoutManager feedLayoutManager;
+    LinearLayoutManager feedLayoutManager;
     FeedRecyclerAdapter feedAdapter;
     FragmentManager fragmentManager;
     FeedInnerData outerHits;
@@ -45,20 +45,22 @@ public class FeedFragment extends Fragment {
     Testing testing;
     SimpleArcLoader mDialog;
     String industryname = "";
+    String industryCompletedata;
+    int c=0;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         initializeViews();
+        getIndustryType();
         initializeRest();
         retrofitInit();
         return view;
     }
 
-    private void retrofitInit() {
+    private void getIndustryType() {
         industryname = SharedPrefsUtil.getStringPreference(getContext(), "INDUSTRY_TYPE");
-        String industryCompletedata;
         if (industryname != null && !industryname.isEmpty()) {
             Log.e("industryname", industryname + "\"" + "\"");
             industryCompletedata = "industry:" + "\"" + industryname + "\"" + "%20AND%20contentType:" + "*";
@@ -67,14 +69,18 @@ public class FeedFragment extends Fragment {
             industryCompletedata = "industry:" + "\"" + "Tollywood" + "\"" + "%20AND%20contentType:" + "*";
         }
 
+    }
+
+    private void retrofitInit() {
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/")
                 .create(ApiInterface.class);
+        Log.e("industryCompletedata",industryCompletedata);
         Call<FeedData> call = apiInterface.getTopRatedMovies(
                 true,
                 "createdAt:desc",
-                50, industryCompletedata);
+                30,0, industryCompletedata);
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
@@ -106,6 +112,40 @@ public class FeedFragment extends Fragment {
         //mDialog = new SimpleArcDialog(getActivity());
         //mDialog.setConfiguration(new ArcConfiguration(MainActivity.this));
         fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.colorImageBackgroundGrey));
+        fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int visibleItemCount = feedLayoutManager.getChildCount();
+                int totalItemCount = feedLayoutManager.getItemCount();
+                int firstVisibleItemPosition = feedLayoutManager.findFirstVisibleItemPosition();
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    c=c+30;
+                    apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+                    Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 30,c, industryCompletedata);
+                    call.enqueue(new Callback<FeedData>() {
+                        @Override
+                        public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                            Log.e("indie onres",""+response.body().getHits().getHits());
+                            feedAdapter.updateDataPagination(response.body().getHits().getHits());
+                            //feedAdapter.outerHits.getHits().addAll(response.body().getHits().getHits());
+                            //allStoreFragmentAdapter.updateDataPagination(response.body().getHits().getHits());
+                        }
+
+                        @Override
+                        public void onFailure(Call<FeedData> call, Throwable t) {
+                            Log.e("vvvvvvvvvv", "vv" + call + t);
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void initializeViews() {

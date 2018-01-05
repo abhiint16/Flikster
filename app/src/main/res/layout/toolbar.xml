@@ -61,7 +61,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/toolbar_flikter_text_container">
 
             <TextView
                 android:id="@+id/toolbar_main_title"
@@ -89,4 +90,24 @@
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/hamburger_icon"
+        android:background="@color/transparent"
+        android:layout_gravity="end"
+        android:id="@+id/toolbar_navigation_view_open_btn"/>
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/cart_toolbar"
+        android:background="@color/transparent"
+        android:layout_gravity="end"
+        android:id="@+id/toolbar_cart_btn"/>
+    <android.support.v7.widget.SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:id="@+id/toolbar_search_btn">
+    </android.support.v7.widget.SearchView>
 </android.support.v7.widget.Toolbar>
