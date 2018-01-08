@@ -197,12 +197,9 @@ public interface ApiInterface {
             @Part("description") RequestBody description,
             @Part MultipartBody.Part photo);
 
-<<<<<<< HEAD
     @POST(ApiClient.PLACE_BID_URL)
     Call<AuctionPlaceBidData> auctionPlaceBidinServer(@Body AuctionPlaceBidData auctionPlaceBidData);
-=======
     @POST("http://apiservice.flikster.com/v3/search-ms/globalSearch")
     Call<GlobalSearchGetData> getGlobalSearchData(@Body GlobalSearchPostData globalSearchPostData);
->>>>>>> 30997fbc27b40fc2cc16246eb7307f1f216c4334
 
 }

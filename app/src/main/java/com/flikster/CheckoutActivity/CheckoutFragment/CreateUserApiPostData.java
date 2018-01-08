@@ -13,7 +13,6 @@ public class CreateUserApiPostData {
 
     @SerializedName("userId")
     private String userId;
-    @Expose
     @SerializedName("product")
     private List<ProductData> productData;
     @SerializedName("shippingAddress")

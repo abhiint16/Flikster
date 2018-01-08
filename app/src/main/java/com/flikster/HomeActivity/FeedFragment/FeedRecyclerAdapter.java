@@ -292,9 +292,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder6) holder).followbtn, context);
             new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder6) holder).ib_bookmark, context);
             if (outerHits.getHits().get(position).get_source().getMovie() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
-                ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
-                ((ViewHolder6) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+                try{
+                    Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
+                    ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getType());
+                    ((ViewHolder6) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
+                }catch (Exception e)
+                {
+
+                }
             } else if (outerHits.getHits().get(position).get_source().getCeleb() != null) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder6) holder).profile_image));
                 ((ViewHolder6) holder).tv_tag_desc.setText(outerHits.getHits().get(position).get_source().getCeleb().get(0).getType());

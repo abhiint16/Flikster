@@ -1,3 +1,4 @@
+/*
 package com.flikster.KeyCloak;
 
 import android.app.Activity;
@@ -11,9 +12,11 @@ import org.jboss.aerogear.android.core.Callback;
 
 import java.net.URL;
 
+*/
 /**
  * Created by steven on 8/5/16.
- */
+ *//*
+
 public class KeycloakHelper {
     //http://staging-592298326.us-west-2.elb.amazonaws.com
     private static final String AUTH_SERVER_URL = "http://staging-592298326.us-west-2.elb.amazonaws.com";
@@ -70,3 +73,4 @@ public class KeycloakHelper {
         return AuthorizationManager.getModule(MODULE_NAME).isAuthorized();
     }
 }
+*/
