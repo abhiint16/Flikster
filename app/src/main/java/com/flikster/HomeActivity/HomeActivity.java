@@ -66,6 +66,7 @@ import com.facebook.login.LoginManager;
 import com.flikster.AllCommentActivity.AllCommentActivity;
 import com.flikster.Authentication.AuthenticationActivity;
 import com.flikster.BuildConfig;
+import com.flikster.CheckoutActivity.CheckoutFragment.InstamojoData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentBio;
@@ -129,6 +130,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing, WatchFragment.WatchFragCommInterface
         , MovieSongsListFragment.WatchPlayAudioOrVideoInterafce, MusicGridFragment.WatchAudioVideoSendFromGridFrag,
@@ -203,6 +205,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         checkForLaunch();
         bottomnavigationBar();
 //        gettimeinfo();
+//        instamojoProductionUrlAccess();
 
     }
 
@@ -1210,6 +1213,37 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } catch (Exception e) {
 
         }
+    }
+
+
+    private void instamojoProductionUrlAccess() {
+        InstamojoData senddata = new InstamojoData("client_credentials",
+                "TIIVMSyhXS6OTc4SQbXRdqeyZZIfTs3FTe5q0ITF",
+                "lhE3pt2ZDxYqH8OGwa4l1KkRixwSihSpavLKowVux3hJRli7QUYH0MJm86gCWjM0YmwDdenRLQlQRt9Nsn3tdUegQAxAQdx2CZKVr8Rq8aMyKN5IAVFPAUYCrRIfDr2w");
+        apiInterface = ApiClient.getClient("http://api.instamojo.com/").create(ApiInterface.class);
+        Call<InstamojoData> call = apiInterface.instamojoDataCall(senddata);
+        call.enqueue(new Callback<InstamojoData>() {
+            @Override
+            public void onResponse(Call<InstamojoData> call, Response<InstamojoData> response) {
+//                Log.e("StatusCode:", response.body().getStatusCode() + "");
+                if (response.body().getAccess_token() != null) {
+                    Toast.makeText(getApplicationContext(),
+                            response.body().getAccess_token(),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "failed to get token",
+                            Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<InstamojoData> call, Throwable t) {
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+            }
+        });
     }
 
 

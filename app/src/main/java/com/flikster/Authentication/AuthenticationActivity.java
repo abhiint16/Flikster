@@ -91,7 +91,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private Button btnSignOut, btnRevokeAccess, homeacess;
     private LinearLayout llProfileLayout;
     private ImageView imgProfilePic;
-    private TextView txtName, txtEmail;
     Context mContext;
     Button custom_facebook, custom_gmail;
 
@@ -115,6 +114,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+                //For Gmail Login
+                ////https://developers.google.com/identity/sign-in/android/start-integrating
             }
             LoginManager.getInstance().logOut();
         } catch (PackageManager.NameNotFoundException e) {
@@ -308,6 +309,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 //    private void gotoPhoneSignup() {
 //        startActivity(new Intent(AuthenticationActivity.this, SignUpWithPhoneActivity.class));
 //    }
+
+
 
     private void gotoEmailLogin(String type) {
         Intent i = new Intent(AuthenticationActivity.this, LoginWithEmailOrMobileActivity.class);

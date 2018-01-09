@@ -16,6 +16,8 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
     @SerializedName("currentAuctions")
     public List<AuctionInnerData> currentAuctions;
 
+
+
     @SerializedName("upcomingAuctions")
     public List<AuctionInnerData> upcomingAuctions;
 
@@ -215,7 +217,7 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
         }
     }
 
-    public class MovieTypeInnerData {
+    public class MovieTypeInnerData implements  Serializable{
         @SerializedName("role")
         public List<String> role;
 

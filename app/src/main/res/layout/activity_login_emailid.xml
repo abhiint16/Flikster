@@ -83,6 +83,8 @@
                     android:fontFamily="sans-serif-thin"
                     android:paddingBottom="16dp"
                     android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:paddingTop="16dp" />
             </LinearLayout>
 
@@ -104,6 +106,9 @@
                     android:fontFamily="sans-serif-thin"
                     android:paddingBottom="16dp"
                     android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/cursor_color"
+
                     android:paddingTop="16dp" />
             </LinearLayout>
 
@@ -125,6 +130,8 @@
                     android:fontFamily="sans-serif-thin"
                     android:paddingBottom="16dp"
                     android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/cursor_color"
                     android:paddingTop="16dp" />
             </LinearLayout>
         </LinearLayout>

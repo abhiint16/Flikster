@@ -29,7 +29,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.ImageUploadServerRetroFit.Response;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.ImageUploadServerRetroFit.RetrofitInterface;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.SearchActivity;
 import com.flikster.R;
@@ -83,6 +82,8 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         try {
             bundle = getArguments();
             fragmentManager = getActivity().getSupportFragmentManager();
+            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+            activity = getActivity();
             styletype = bundle.getString("MY_STYLE_TYPE");
             Log.e("type_style", styletype + "Style");
             if (styletype.equals("FIRST_STYLE")) {
@@ -132,12 +133,12 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                             } else if (styleObjNo.equals("2")) {
                                 productthingimg.setScaleType(ImageView.ScaleType.FIT_XY);
                                 productthingimg.setImageBitmap(bitmap);
-                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR_TWO", Common.BitMapToString(bitmap));
                                 SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_TWO", "");
                             } else if (styleObjNo.equals("3")) {
                                 productthingextraimg.setScaleType(ImageView.ScaleType.FIT_XY);
                                 productthingextraimg.setImageBitmap(bitmap);
-                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR_THREE", Common.BitMapToString(bitmap));
                                 SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_THREE", "");
                             }
                         }
@@ -169,16 +170,15 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                                 productimg.setImageBitmap(bitmap);
                                 SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
                                 SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG", "");
-
                             } else if (styleObjNo.equals("2")) {
                                 productthingimg.setScaleType(ImageView.ScaleType.FIT_XY);
                                 productthingimg.setImageBitmap(bitmap);
-                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR_TWO", Common.BitMapToString(bitmap));
                                 SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_TWO", "");
                             } else if (styleObjNo.equals("3")) {
                                 productthingextraimg.setScaleType(ImageView.ScaleType.FIT_XY);
                                 productthingextraimg.setImageBitmap(bitmap);
-                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR", Common.BitMapToString(bitmap));
+                                SharedPrefsUtil.setStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR_THREE", Common.BitMapToString(bitmap));
                                 SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_IMG_THREE", "");
                             }
 //                            uploadPhoto(path);
@@ -188,7 +188,6 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }*/
-
                         }
                     } else {
 //                        uploadPhoto(path);
@@ -233,35 +232,53 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
             captureimg.setScaleType(ImageView.ScaleType.FIT_XY);
             captureimg.setImageBitmap(image);
         }
-        String styleimgaccess = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMAGE_CAPTURE_ACCESS");
-        if (styleimgaccess != null && !styleimgaccess.isEmpty()) {
-            if (styleimgaccess.equals("ENABLE")) {
-                String stylecaptureStr = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR");
-                if (stylecaptureStr != null && !stylecaptureStr.isEmpty()) {
-                    Bitmap styleCaptureStr = Common.StringToBitMap(stylecaptureStr);
-                    productimg.setScaleType(ImageView.ScaleType.FIT_XY);
-                    productimg.setImageBitmap(styleCaptureStr);
+
+        ///Product First Image
+        String stylecaptureStr = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR");
+        if (stylecaptureStr != null && !stylecaptureStr.isEmpty()) {
+            Bitmap styleCaptureStr = Common.StringToBitMap(stylecaptureStr);
+            productimg.setScaleType(ImageView.ScaleType.FIT_XY);
+            productimg.setImageBitmap(styleCaptureStr);
+        } else {
+            String productpicUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG");
+            if (productpicUrl != null && !productpicUrl.isEmpty()) {
+                productimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(getContext()).load(productpicUrl).asBitmap().into(productimg);
+            }
+        }
+
+        ///Product Second Image
+        String stylecapturetwoStr = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR_TWO");
+        if (stylecapturetwoStr != null && !stylecapturetwoStr.isEmpty()) {
+            Bitmap styleCaptureStr = Common.StringToBitMap(stylecapturetwoStr);
+            productthingimg.setScaleType(ImageView.ScaleType.FIT_XY);
+            productthingimg.setImageBitmap(styleCaptureStr);
+        } else {
+            String productpicUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG_TWO");
+            if (productpicUrl != null && !productpicUrl.isEmpty()) {
+                productthingimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(getContext()).load(productpicUrl).asBitmap().into(productthingimg);
+            }
+        }
+
+        //Product Third Image
+        if (styletype.equals("THIRD_STYLE") || styletype.equals("FOURTH_STYLE") || styletype.equals("FIFTH_STYLE")) {
+            productthingextraimg.setOnClickListener(this);
+            String stylecapturethreeStr = SharedPrefsUtil.getStringPreference(getContext(), "STYLE_IMG_CAPTURE_STR_THREE");
+            if (stylecapturethreeStr != null && !stylecapturethreeStr.isEmpty()) {
+                Bitmap styleCaptureStr = Common.StringToBitMap(stylecapturethreeStr);
+                productthingextraimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                productthingextraimg.setImageBitmap(styleCaptureStr);
+            } else {
+                String productpicUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG_THREE");
+                if (productpicUrl != null && !productpicUrl.isEmpty()) {
+                    productthingextraimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                    Glide.with(getContext()).load(productpicUrl).asBitmap().into(productthingextraimg);
                 }
             }
         }
-        String productpicUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG");
-        if (productpicUrl != null && !productpicUrl.isEmpty()) {
-            productimg.setScaleType(ImageView.ScaleType.FIT_XY);
-            Glide.with(getContext()).load(productpicUrl).asBitmap().into(productimg);
-        }
-        String otherimageUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG_TWO");
-        if (otherimageUrl != null && !otherimageUrl.isEmpty()) {
-            productthingimg.setScaleType(ImageView.ScaleType.FIT_XY);
-            Glide.with(getContext()).load(otherimageUrl).asBitmap().into(productthingimg);
-        }
-        if (styletype.equals("THIRD_STYLE") || styletype.equals("FOURTH_STYLE") || styletype.equals("FIFTH_STYLE")) {
-            productthingextraimg.setOnClickListener(this);
-            String otherimagetwoUrl = SharedPrefsUtil.getStringPreference(getContext(), "PRODUCT_IMG_THREE");
-            if (otherimagetwoUrl != null && !otherimagetwoUrl.isEmpty()) {
-                productthingextraimg.setScaleType(ImageView.ScaleType.FIT_XY);
-                Glide.with(getContext()).load(otherimagetwoUrl).asBitmap().into(productthingextraimg);
-            }
-        }
+
+
         captureimg.setOnClickListener(this);
         productimg.setOnClickListener(this);
         productthingimg.setOnClickListener(this);
@@ -285,7 +302,7 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
     @Override
@@ -306,13 +323,13 @@ public class MyStyleFragmentOne extends Fragment implements View.OnClickListener
         }
     }
 
-    private void productOrImageCapture(String s) {
+    /*private void productOrImageCapture(String s) {
         Intent i = new Intent(getContext(), MyStyleWithProductOrImageUpload.class);
         startActivity(i);
-    }
+    }*/
 
     private void searchActivity(String styletype, String categoryNo) {
-        Intent i = new Intent(getContext(), SearchActivity.class);
+        Intent i = new Intent(activity, SearchActivity.class);
         i.putExtra("IMAGE_ITEM_CLICK_NO", styletype);
         i.putExtra("CATEGORY_NO", categoryNo);
         startActivity(i);

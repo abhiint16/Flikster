@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_common_recycler_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="true">
+ >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
@@ -207,5 +206,5 @@
         custom:arc_margin="3dp"
         custom:arc_speed="medium"
         custom:arc_style="simple_arc"
-        custom:arc_thickness="3dp"></com.leo.simplearcloader.SimpleArcLoader>
+        custom:arc_thickness="3dp"/>
 </RelativeLayout>

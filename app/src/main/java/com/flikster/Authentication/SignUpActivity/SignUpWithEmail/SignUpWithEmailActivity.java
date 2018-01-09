@@ -2,12 +2,15 @@ package com.flikster.Authentication.SignUpActivity.SignUpWithEmail;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -177,15 +180,31 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
         } else if (view.getId() == R.id.btn_account_male) {
             genderstr = "male";
             btn_account_male.setTextColor(getResources().getColor(R.color.white));
-            btn_account_male.setBackgroundColor(getResources().getColor(R.color.colorCreateAccountSelected));
-            btn_account_female.setTextColor(getResources().getColor(R.color.black));
-            btn_account_female.setBackgroundColor(getResources().getColor(R.color.colorImageBackgroundGrey));
+            btn_account_male.setBackgroundColor(getResources().getColor(R.color.gender_active_color));
+
+            Drawable img = getApplicationContext().getResources().getDrawable( R.drawable.maleactivesmall);
+            Drawable imgWoman = getApplicationContext().getResources().getDrawable( R.drawable.femaleunactivesmall);
+            btn_account_male.setCompoundDrawablesWithIntrinsicBounds( img, null, null, null);
+            btn_account_female.setCompoundDrawablesWithIntrinsicBounds( imgWoman, null, null, null);
+
+            btn_account_female.setTextColor(getResources().getColor(R.color.grey_txt_label));
+
+//            btn_account_female.setBackgroundColor(getResources().getColor(R.color.colorImageBackgroundGrey));
+            btn_account_female.setBackground(getResources().getDrawable(R.drawable.gray_rectange_border));
         } else if (view.getId() == R.id.btn_account_female) {
             genderstr = "female";
-            btn_account_male.setTextColor(getResources().getColor(R.color.black));
-            btn_account_male.setBackgroundColor(getResources().getColor(R.color.colorImageBackgroundGrey));
+            btn_account_male.setTextColor(getResources().getColor(R.color.grey_txt_label));
+//            btn_account_male.setBackgroundColor(getResources().getColor(R.color.colorImageBackgroundGrey));
+            btn_account_male.setBackground(getResources().getDrawable(R.drawable.gray_rectange_border));
             btn_account_female.setTextColor(getResources().getColor(R.color.white));
-            btn_account_female.setBackgroundColor(getResources().getColor(R.color.colorCreateAccountSelected));
+            btn_account_female.setCompoundDrawables(getResources().getDrawable(R.drawable.womanpic), null, null, null);
+            btn_account_female.setBackgroundColor(getResources().getColor(R.color.gender_active_color));
+
+            Drawable img = getApplicationContext().getResources().getDrawable( R.drawable.maleunactivesmall);
+            Drawable imgWoman = getApplicationContext().getResources().getDrawable( R.drawable.femaleactivesmall);
+            btn_account_male.setCompoundDrawablesWithIntrinsicBounds( img, null, null, null);
+            btn_account_female.setCompoundDrawablesWithIntrinsicBounds( imgWoman, null, null, null);
+
         } else if (view.getId() == R.id.back_btn) {
             Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignUpWithEmailActivity.this, AuthenticationActivity.class);
@@ -199,8 +218,8 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
         if (CLICK_EVENT.equals("email")) {
             emailOrMobile = et_emailid.getText().toString();
             emailRegisterPostData = new PhoneRegisterPostData(register_first_name.getText().toString(),
-
-                    emailOrMobile, "undefined",
+                    emailOrMobile,
+                    "undefined",
                     register_password.getText().toString(),
                     "user", genderstr);
         } else {
@@ -218,6 +237,7 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
             public void onResponse(Call<RegisterPostStatus> call,
                                    Response<RegisterPostStatus> response) {
                 Log.e("StatusCode", response.body().getStatusCode() + "");
+                Log.e("otpStatus", response.body().getOtpStatus() + "");
                 if (CLICK_EVENT.equals("email")) {
                     if (response.body().getStatusCode() == 200) {
                         Toast.makeText(SignUpWithEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
@@ -226,7 +246,7 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
                         Intent intent = new Intent(SignUpWithEmailActivity.this, OtpActivity.class);
                         intent.putExtra("TYPE", "email");
                         intent.putExtra("TYPE_DATA", et_emailid.getText().toString());
-                        intent.putExtra("OTP_ID", response.body().getId().toString());
+                        intent.putExtra("OTP_ID", response.body().getId());
                         startActivity(intent);
                     } else {
                         Toast.makeText(SignUpWithEmailActivity.this, "Email already exists", Toast.LENGTH_LONG).show();
@@ -235,7 +255,7 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
                     if (response.body().getStatusCode() == 200) {
                         Toast.makeText(SignUpWithEmailActivity.this, "Register Successfully", Toast.LENGTH_LONG).show();
                         Toast.makeText(SignUpWithEmailActivity.this, "OTP sent to register mobile", Toast.LENGTH_LONG).show();
-                        SharedPrefsUtil.setStringPreference(SignUpWithEmailActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "IS_LOGGED_IN", "LOGGED_IN");
                         Intent intent = new Intent(SignUpWithEmailActivity.this,
                                 OtpActivity.class);
                         intent.putExtra("TYPE", "mobile");
@@ -243,7 +263,7 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
                         intent.putExtra("OTP_ID", response.body().getId());
                         startActivity(intent);
                     } else {
-                        Toast.makeText(SignUpWithEmailActivity.this, "Mobile Number already exists", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpWithEmailActivity.this, "Mobile Number already exists" + "Please login ", Toast.LENGTH_LONG).show();
                     }
                 }
 

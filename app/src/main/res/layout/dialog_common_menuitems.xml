@@ -7,8 +7,8 @@
     android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="299dp"
+        android:layout_height="163dp"
         android:layout_gravity="center"
         android:background="@drawable/solid_round_border"
         android:orientation="vertical">
@@ -18,7 +18,8 @@
             android:id="@+id/headertxt"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@drawable/solid_round_border"
+            android:backgroundTint="@color/colorAccent"
             android:gravity="center_vertical"
             android:padding="20dp"
             android:text="Flikster"
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/black_round_border"
+            android:background="@drawable/gray_rectange_border"
             android:scrollbars="vertical">
 
             <LinearLayout
@@ -46,8 +47,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:textColor="@color/dark_grey"
                     android:gravity="center"
+                    android:textColor="@color/dark_grey"
                     tools:ignore="WebViewLayout" />
             </LinearLayout>
         </ScrollView>

@@ -65,6 +65,7 @@
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     android:layout_marginBottom="10dp" />
 
                 <LinearLayout
@@ -99,9 +100,11 @@
                                 android:hint="@string/login_createaccount_fullname"
                                 android:imeOptions="actionNext"
                                 android:cursorVisible="true"
+
                                 android:maxLines="1"
                                 android:fontFamily="sans-serif-thin"
                                 android:textCursorDrawable="@drawable/cursor_color"
+                                android:textColor="@color/black"
                                 android:padding="15dp"
                                 android:singleLine="true" />
 
@@ -140,11 +143,16 @@
                                 android:id="@+id/btn_account_male"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
+                                android:layout_gravity="center"
                                 android:layout_marginRight="10dp"
                                 android:layout_weight="0.4"
-                                android:background="@color/dark_blue"
-                                android:drawableLeft="@drawable/man"
+                                android:paddingLeft="@dimen/twenty"
+                                android:fontFamily="sans-serif-thin"
+                                android:gravity="center"
+
+                                android:background="@color/gender_active_color"
+                                android:drawablePadding="-60dp"
+                                android:drawableLeft="@drawable/maleactivesmall"
                                 android:text="@string/login_createaccount_male"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white" />
@@ -155,10 +163,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.4"
                                 android:background="@drawable/gray_rectange_border"
-                                android:drawableLeft="@drawable/woman"
+                                android:drawableLeft="@drawable/femaleunactivesmall"
+                                android:drawablePadding="-60dp"
+                                android:paddingLeft="@dimen/twenty"
+                                android:fontFamily="sans-serif-thin"
                                 android:text="@string/login_createaccount_female"
                                 android:textAllCaps="false" />
                         </LinearLayout>
+
+
 
 
                         <LinearLayout
@@ -220,6 +233,7 @@
                                 android:paddingBottom="16dp"
                                 android:fontFamily="sans-serif-thin"
                                 android:paddingLeft="10dp"
+                                android:textColor="@color/black"
                                 android:textCursorDrawable="@drawable/cursor_color"
                                 android:paddingTop="16dp" />
                         </LinearLayout>
@@ -258,7 +272,7 @@
 
                         <Button
                             android:id="@+id/register_btn"
-                            style="@style/login_btn"
+                            style="@style/sign_up"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"

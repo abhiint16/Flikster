@@ -131,8 +131,10 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
                     } catch (Exception e) {
 
                     }
-
                 }
+
+
+
 
                 if (auctionCurrentOrUpcomingData.get(0).getEndDate()
                         != null && !auctionCurrentOrUpcomingData.get(0).getEndDate().isEmpty()) {
@@ -145,7 +147,8 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setVisibility(View.GONE);
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder2) holder).fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
-            auctionRelatedProductsViewHolder = new AuctionRelatedProductsViewHolder(context, fragmentManager, auctionCurrentOrUpcomingData);
+            auctionRelatedProductsViewHolder = new AuctionRelatedProductsViewHolder(context,
+                    fragmentManager, auctionCurrentOrUpcomingData);
             ((ViewHolder2) holder).fragment_common_recyclerview_recycler.setAdapter(auctionRelatedProductsViewHolder);
         } else {
 

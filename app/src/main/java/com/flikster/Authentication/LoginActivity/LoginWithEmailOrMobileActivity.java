@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flikster.Authentication.AuthenticationActivity;
 import com.flikster.Authentication.OtpAndResendOtpActivity.SendOtpWithMobileNoActivityOrEmail;
+import com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
@@ -33,6 +36,7 @@ public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements
     LinearLayout moblienolayout, emaillayout;
     SimpleArcLoader mDialog;
     String CLICK_EVENT = "";
+    ImageButton back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements
         forgot_txt = (TextView) findViewById(R.id.forgot_txt);
         emaillayout = (LinearLayout) findViewById(R.id.emaillayout);
         et_emailid = (EditText) findViewById(R.id.et_emailid);
+        back_btn = (ImageButton) findViewById(R.id.back_btn);
 
         CLICK_EVENT = getIntent().getStringExtra("TYPE");
         Log.e("CLICK_EVENT", CLICK_EVENT + "Data");
@@ -63,6 +68,7 @@ public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements
         login_btn.setOnClickListener(this);
         forgot_txt.setOnClickListener(this);
         mDialog = (SimpleArcLoader) findViewById(R.id.arc_loader);
+        back_btn.setOnClickListener(this);
     }
 
     @Override
@@ -102,6 +108,10 @@ public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements
                 i.putExtra("MOBILE_NO", et_mobile_no.getText().toString());
             }
             startActivity(i);
+        }else if (view.getId() == R.id.back_btn){
+//            Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginWithEmailOrMobileActivity.this, AuthenticationActivity.class);
+            startActivity(intent);
         }
     }
 
