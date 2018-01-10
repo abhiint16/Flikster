@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
@@ -27,25 +28,17 @@ import java.util.List;
  */
 
 public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> imag=new ArrayList<>();
     Context context;
-    List<String> comedyImg=new ArrayList<>();
-    List<String> comedyTitle=new ArrayList<>();
-    List<String> comedyVideo=new ArrayList<>();
     FragmentManager fragmentManager;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-    public ComedyViewHolder(Context context, List<String> comedyTitle, List<String> comedyImg,List<String> comedyVideo, FragmentManager fragmentManager,
+    FeedInnerData feedInnerData;
+    public ComedyViewHolder(Context context,
+                            FeedInnerData feedInnerData, FragmentManager fragmentManager,
                             WatchFragment.WatchFragCommInterface watchFragCommInterface) {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
         this.context=context;
-        this.comedyImg=comedyImg;
-        this.comedyTitle=comedyTitle;
+        this.feedInnerData=feedInnerData;
         this.fragmentManager = fragmentManager;
         this.watchFragCommInterface=watchFragCommInterface;
-        this.comedyVideo=comedyVideo;
     }
 
     @Override
@@ -70,26 +63,25 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         else
         {
-            Glide.with(context).load(comedyImg.get(position)).into(((ViewHolder2)holder).carousel_image);
-            ((ViewHolder2)holder).carousel_title.setText(comedyTitle.get(position));
+            if (feedInnerData.getHits().get(position).get_source().getProfilePic()!=null)
+            Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder2)holder).carousel_image);
+            if (feedInnerData.getHits().get(position).get_source().getTitle()!=null)
+            ((ViewHolder2)holder).carousel_title.setText(feedInnerData.getHits().get(position).get_source().getTitle());
         }
     }
 
     @Override
     public int getItemCount() {
-        Log.e("size check","size check"+comedyImg.size());
-        if(comedyImg.size()==0)
-            return 1;
-        else
-        return comedyImg.size();
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
+            return feedInnerData.getHits().size();
+        else return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(comedyImg.size()==0)
-            return 0;
-        else
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
             return 1;
+        else return 0;
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -104,8 +96,10 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            watchFragCommInterface.carouselItemClick(comedyTitle.get(getAdapterPosition()),comedyImg.get(getAdapterPosition())
-                    ,comedyTitle.get(getAdapterPosition()),comedyVideo.get(getAdapterPosition()),"video",new MovieSongsListFragment());
+            watchFragCommInterface.carouselItemClick(feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),"video",new MovieSongsListFragment());
         }
     }
 

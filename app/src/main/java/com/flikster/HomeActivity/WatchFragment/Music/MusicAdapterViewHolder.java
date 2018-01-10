@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.FeedData;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
@@ -22,21 +24,17 @@ import java.util.List;
  */
 
 public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> musicImg = new ArrayList<>();
-    List<String> musicTitle=new ArrayList<>();
-    List<String> musicAudio=new ArrayList<>();
     FragmentManager fragmentManager;
     Context context;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
+    FeedInnerData feedInnerData;
 
-    public MusicAdapterViewHolder(Context context, List<String> musicTitle, List<String> musicImg,List<String> musicAudio, FragmentManager fragmentManager,
+    public MusicAdapterViewHolder(Context context, FeedInnerData hits, FragmentManager fragmentManager,
                                   WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         this.fragmentManager = fragmentManager;
-        this.musicImg=musicImg;
-        this.musicTitle=musicTitle;
+        this.feedInnerData=hits;
         this.context=context;
         this.watchFragCommInterface=watchFragCommInterface;
-        this.musicAudio=musicAudio;
     }
 
     @Override
@@ -61,25 +59,33 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
         }
         else
         {
-            Glide.with(context).load(musicImg.get(position)).into(((ViewHolder2)holder).carousel_image);
-            ((ViewHolder2)holder).carousel_title.setText(musicTitle.get(position));
+            if (feedInnerData.getHits().get(position).get_source()!=null)
+            {
+                if (feedInnerData.getHits().get(position).get_source().getProfilePic()!=null)
+                    Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder2)holder).carousel_image);
+                if (feedInnerData.getHits().get(position).get_source().getTitle()!=null)
+                    ((ViewHolder2)holder).carousel_title.setText(feedInnerData.getHits().get(position).get_source().getTitle());
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        if(musicImg.size()==0)
+        /*if(musicImg.size()==0)
             return 1;
         else
-            return musicImg.size();
+            return musicImg.size();*/
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
+            return feedInnerData.getHits().size();
+        else return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(musicImg.size()==0)
-            return 0;
-        else
+        if(feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
             return 1;
+        else
+            return 0;
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder{
@@ -100,8 +106,10 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
 
         @Override
         public void onClick(View view) {
-            watchFragCommInterface.carouselItemClick(musicTitle.get(getAdapterPosition()),musicImg.get(getAdapterPosition()),
-                    musicTitle.get(getAdapterPosition()),musicAudio.get(getAdapterPosition()),"audio",new MovieSongsListFragment());
+            watchFragCommInterface.carouselItemClick(feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getAudio().get(0),"audio",new MovieSongsListFragment());
         }
     }
 }

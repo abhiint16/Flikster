@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/ten"
-                android:background="@drawable/formalshirtred" />
+                android:background="@drawable/no_image" />
 
             <Button
                 android:id="@+id/buynowbtn"
@@ -60,7 +60,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/ten"
-                    android:background="@drawable/formalshirt" />
+                    android:background="@drawable/no_image" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -68,7 +68,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginBottom="@dimen/ten"
-                    android:background="@drawable/formalshirtsmall" />
+                    android:background="@drawable/no_image" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -76,7 +76,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_marginBottom="@dimen/ten"
-                    android:background="@drawable/formalshirtsmall" />
+                    android:background="@drawable/no_image" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

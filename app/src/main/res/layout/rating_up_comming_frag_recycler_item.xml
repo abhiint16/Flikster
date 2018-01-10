@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/movie2" />
+            android:src="@drawable/no_image" />
 
         <LinearLayout
             android:layout_width="0dp"

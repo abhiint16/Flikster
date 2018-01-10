@@ -35,7 +35,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="10"
                 android:scaleType="fitXY"
-                android:src="@drawable/pooja" />
+                android:src="@drawable/no_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"

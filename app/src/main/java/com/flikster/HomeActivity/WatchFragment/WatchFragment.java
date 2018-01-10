@@ -95,7 +95,7 @@ public class WatchFragment extends Fragment {
 
 
     public interface WatchFragCommInterface {
-        void carouselContainerClick(String toolbarTitle,List<String> img,List<String> title,List<String> audioVideoLink,Fragment fragment);
+        void carouselContainerClick(String toolbarTitle,String url,Fragment fragment);
         void carouselItemClick(String toolbarTitle,String img,String title,String audio,String type,Fragment fragment);
         void carouselItemToMovie(String slug,Fragment fragment);
         void carouselItemToGallery(List<String> galleryImgLinks,String name,String profilePic,String type,String title,Fragment fragment);

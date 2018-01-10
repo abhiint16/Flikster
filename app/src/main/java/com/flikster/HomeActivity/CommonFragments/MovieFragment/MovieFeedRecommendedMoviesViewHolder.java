@@ -10,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.R;
-import com.flikster.Util.GlobalData;
 
 import java.util.List;
 

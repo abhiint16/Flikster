@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.flikster.Util.GlobalData;
 import com.flikster.R;
 
 /**
@@ -17,7 +15,6 @@ import com.flikster.R;
 
 public class ShopByVideoFragmentAdapter extends RecyclerView.Adapter<ShopByVideoFragmentAdapter.ViewHolder> {
     Context context;
-    GlobalData globalData=new GlobalData();
     FragmentManager fragmentManager;
     public ShopByVideoFragmentAdapter(Context context,FragmentManager fragmentManager) {
         this.context=context;
@@ -32,7 +29,6 @@ public class ShopByVideoFragmentAdapter extends RecyclerView.Adapter<ShopByVideo
 
     @Override
     public void onBindViewHolder(ShopByVideoFragmentAdapter.ViewHolder holder, int position) {
-        holder.card_shopby_video_recycler_image.setImageResource(globalData.style.get(position));
     }
 
     @Override

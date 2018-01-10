@@ -58,10 +58,10 @@ public class ShopByVideoFragmentItemClick extends Fragment implements View.OnCli
         MediaController mediaController = new MediaController(getContext());
         mediaController.setAnchorView(card_shopby_video_recycler_item_onclick_playVideo);
         //specify the location of media file
-        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.demovideo);
+        //Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.demovideo);
         //Setting MediaController and URI, then starting the videoView
         card_shopby_video_recycler_item_onclick_playVideo.setMediaController(mediaController);
-        card_shopby_video_recycler_item_onclick_playVideo.setVideoURI(uri);
+        //card_shopby_video_recycler_item_onclick_playVideo.setVideoURI(uri);
         card_shopby_video_recycler_item_onclick_playVideo.requestFocus();
         card_shopby_video_recycler_item_onclick_playVideo.start();
     }

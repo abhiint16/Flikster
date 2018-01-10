@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.flikster.Util.GlobalData;
 import com.flikster.R;
 
 /**
@@ -13,7 +12,6 @@ import com.flikster.R;
  */
 
 public class ShopByVideoFragmentItemClickAdapter extends RecyclerView.Adapter<ShopByVideoFragmentItemClickAdapter.ViewHolder> {
-    GlobalData globalData=new GlobalData();
     @Override
     public ShopByVideoFragmentItemClickAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_shopby_video_recycler_itemclick_recycler_item,parent,false);
@@ -26,7 +24,7 @@ public class ShopByVideoFragmentItemClickAdapter extends RecyclerView.Adapter<Sh
 
     @Override
     public int getItemCount() {
-        return globalData.style.size();
+        return 1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

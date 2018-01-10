@@ -1,5 +1,6 @@
 package com.flikster.AllCommentActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.ModelForPostCommentRequest;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
@@ -36,11 +38,13 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
     TextView textView, toolbar_frag_title;
     ImageButton toolbar_more_icon, card_comment_text_send_btn, toolbar_back_navigation_btn;
     EditText editText;
+    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_comment);
+        context=this;
         initializeViews();
         initializeRest();
         retrofitInit();
@@ -99,14 +103,55 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
                 return;
             }
             String USERID = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID");
-            if (USERID != null && !USERID.isEmpty()) {
-                new PostRetrofit().postRetrofitCommentMethod(getIntent().getStringExtra("userName"),
-                        USERID,
-                        getIntent().getStringExtra("entityId"),
-                        editText.getText().toString(), editText, this);
+            if (editText.getText().toString().trim().length() == 0 || editText.getText().toString() == null) {
+                    Toast.makeText(this, "First Write Something!", Toast.LENGTH_LONG).show();
+                    editText.setError("write something");
+                    return;
+                }
+                ModelForPostCommentRequest modelForPostRequest = new ModelForPostCommentRequest(getIntent().getStringExtra("userName"),
+                        USERID, getIntent().getStringExtra("entityId"), editText.getText().toString());
+                apiInterface = ApiClient.getClient(ApiClient.POST_COMMENT_URL).create(ApiInterface.class);
+                Call<ModelForPostCommentRequest> call = apiInterface.commentItem(modelForPostRequest);
+                call.enqueue(new Callback<ModelForPostCommentRequest>() {
+                    @Override
+                    public void onResponse(Call<ModelForPostCommentRequest> call, Response<ModelForPostCommentRequest> response) {
+                        response.body().getStatusCode();
+                        if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
+                            Toast.makeText(context, "Comment Successful", Toast.LENGTH_LONG).show();
+                            editText.setText("");
+                            getListOfCommentsAndNotify();
+                        } else {
+                            Toast.makeText(context, "Comment Failed", Toast.LENGTH_LONG).show();
+                            editText.setText("");
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ModelForPostCommentRequest> call, Throwable t) {
+                        Toast.makeText(context, "Comment Unsuccessful! Please try again.", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         }
 
+    private void getListOfCommentsAndNotify() {
+        apiInterface = ApiClient.getClient(ApiClient.ELASTIC_URL + "comments/_search/").create(ApiInterface.class);
+        Call<CommentsData> call = apiInterface.getAllComments(ApiClient.ELASTIC_URL +
+                "comments/_search?pretty=true&sort=createdAt:desc&size=1000&q="
+                + "entityId:\"" + getIntent().getStringExtra("entityId") + "\"");
+        call.enqueue(new Callback<CommentsData>() {
+            @Override
+            public void onResponse(Call<CommentsData> call, Response<CommentsData> response) {
+                hits = response.body().getHits();
+                allCommentActivityAdapter.updateList(hits.getHits());
+            }
 
+            @Override
+            public void onFailure(Call<CommentsData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
+
+
 }
+

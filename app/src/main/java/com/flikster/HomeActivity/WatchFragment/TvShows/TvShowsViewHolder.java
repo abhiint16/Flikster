@@ -29,31 +29,17 @@ import java.util.List;
  */
 
 public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> imag = new ArrayList<>();
     FragmentManager fragmentManager;
-    List<String> tvShowsImg=new ArrayList<>();
-    List<String> tvShowsTitle=new ArrayList<>();
-    List<ArrayList<String>> tvShowsVideo;
     Context context;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
     FeedInnerData outerHits;
 
-    public TvShowsViewHolder(Context context, FragmentManager fragmentManager, List<String> tvShowsImg, List<String> tvShowsTitle,
-                             List<ArrayList<String>> tvShowsVideo, WatchFragment.WatchFragCommInterface watchFragCommInterface,
-                             FeedInnerData outerHits) {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
-        imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
-        imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+    public TvShowsViewHolder(Context context, FragmentManager fragmentManager,
+            FeedInnerData feedInnerData, WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         this.fragmentManager = fragmentManager;
         this.context=context;
-        this.tvShowsImg=tvShowsImg;
-        this.tvShowsTitle=tvShowsTitle;
-        this.tvShowsVideo=tvShowsVideo;
         this.watchFragCommInterface=watchFragCommInterface;
-        this.outerHits=outerHits;
+        this.outerHits=feedInnerData;
     }
 
     @Override
@@ -78,25 +64,32 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
         else
         {
-            Glide.with(context).load(tvShowsVideo.get(position).get(0)).into(((ViewHolder2)holder).carousel_image);
-            ((ViewHolder2)holder).carousel_title.setText(tvShowsTitle.get(position));
+            if (outerHits.getHits().get(position).get_source().getMedia()!=null)
+            {
+                if (outerHits.getHits().get(position).get_source().getMedia().getGallery()!=null&&
+                        outerHits.getHits().get(position).get_source().getMedia().getGallery().size()!=0)
+                {
+                    Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder2)holder).carousel_image);
+                }
+            }
+            if (outerHits.getHits().get(position).get_source().getTitle()!=null)
+            ((ViewHolder2)holder).carousel_title.setText(outerHits.getHits().get(position).get_source().getTitle());
         }
     }
 
     @Override
     public int getItemCount() {
-        if(tvShowsImg.size()==0)
-            return 1;
-        else
-            return tvShowsImg.size();
+        if (outerHits.getHits()!=null&&outerHits.getHits().size()!=0)
+            return outerHits.getHits().size();
+        else return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(tvShowsImg.size()==0)
-            return 0;
-        else
+        if(outerHits.getHits()!=null&&outerHits.getHits().size()!=0)
             return 1;
+        else
+            return 0;
     }
 
 
@@ -112,16 +105,13 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         @Override
         public void onClick(View view) {
-            Log.e("check adapter pos","check adapter pos"+getAdapterPosition());
-            Log.e("check adapter pos","check adapter pos"+outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery());
-            Log.e("check adapter pos","check adapter pos"+tvShowsVideo.get(getAdapterPosition()));
             if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
-                watchFragCommInterface.carouselItemToGallery(tvShowsVideo.get(getAdapterPosition()),
+                watchFragCommInterface.carouselItemToGallery(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
-                watchFragCommInterface.carouselItemToGallery(tvShowsVideo.get(getAdapterPosition()),
+                watchFragCommInterface.carouselItemToGallery(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick());

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.R;
-import com.flikster.Util.GlobalData;
 
 /**
  * Created by abhishek on 11-10-2017.
@@ -18,7 +17,6 @@ import com.flikster.Util.GlobalData;
 
 public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHolder.ViewHolder> {
     Context context;
-    GlobalData globalData = new GlobalData();
     FragmentManager fragmentManager;
     String a;
 
@@ -40,23 +38,24 @@ public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHol
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         /*Glide.with(context).load("http://img.youtube.com/vi/MeH346YHUIE/0.jpg")
-                .into(holder.card_steal_style_recycler_item_imageview);*/
+                .into(holder.card_steal_style_recycler_item_imageview);*//*
         if ("celebrity_store".equals(a)) {
             holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.product.get(position));
         } else if ("movie_feed".equals(a)) {
             holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.movie.get(position));
         } else
-            holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.style.get(position));
+            holder.card_steal_style_recycler_item_imageview.setImageResource(globalData.style.get(position));*/
     }
 
     @Override
     public int getItemCount() {
-        if ("celebrity_store".equals(a))
+        /*if ("celebrity_store".equals(a))
             return globalData.product.size();
         else if ("movie_feed".equals(a)) {
             return globalData.movie.size();
         } else
-            return globalData.style.size();
+            return globalData.style.size();*/
+        return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

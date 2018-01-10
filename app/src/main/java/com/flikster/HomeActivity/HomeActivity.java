@@ -112,6 +112,7 @@ import com.flikster.Util.SharedPrefsUtil;
 import com.flikster.permission.DangerousPermResponseCallBack;
 import com.flikster.permission.DangerousPermissionResponse;
 import com.flikster.permission.DangerousPermissionUtils;
+import com.google.android.gms.vision.text.Line;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -140,7 +141,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     LinearLayout feed, rating, plus, fashion, store,toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    ImageButton toolbar_main_notification,toolbar_navigation_view_open_btn,toolbar_cart_btn;
+    LinearLayout toolbar_cart_btn,toolbar_main_notification,toolbar_navigation_view_open_btn;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
@@ -575,10 +576,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar_cart_btn=(ImageButton)findViewById(R.id.toolbar_cart_btn);
+        toolbar_cart_btn=(LinearLayout)findViewById(R.id.toolbar_cart_btn);
         toolbar_main_title = (TextView) findViewById(R.id.toolbar_main_title);
         toolbar_search_btn=(SearchView)findViewById(R.id.toolbar_search_btn);
-        toolbar_navigation_view_open_btn=(ImageButton)findViewById(R.id.toolbar_navigation_view_open_btn);
+        toolbar_navigation_view_open_btn=(LinearLayout)findViewById(R.id.toolbar_navigation_view_open_btn);
         toolbar_pref_spinner = (Spinner) findViewById(R.id.toolbar_pref_spinner);
         camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
         header_drawer_layout_username = (TextView) findViewById(R.id.header_drawer_layout_username);
@@ -603,7 +604,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_auction = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_auction);
         right_navigation_bar_non_loggedin_create_account_btn = (Button) findViewById(R.id.right_navigation_bar_non_loggedin_create_account_btn);
         setSupportActionBar(toolbar_main);
-        toolbar_main_notification = (ImageButton) toolbar_main.findViewById(R.id.toolbar_main_notification);
+        toolbar_main_notification = (LinearLayout) toolbar_main.findViewById(R.id.toolbar_main_notification);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         navigationView = (NavigationView) findViewById(R.id.drawer_navview);
     }
@@ -1008,9 +1009,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void carouselContainerClick(String toolbarTitle,
-                                       List<String> img, List<String> title, List<String> audioVideoLink, Fragment fragment) {
+                                       String url, Fragment fragment) {
         MusicGridFragment musicGridFragment = (MusicGridFragment) fragment;
-        musicGridFragment.getAllData(toolbarTitle, img, title, audioVideoLink);
+        musicGridFragment.getAllData(toolbarTitle,url);
         firstTimeLaunch(fragment);
     }
 
