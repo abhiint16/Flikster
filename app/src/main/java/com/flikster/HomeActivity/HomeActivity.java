@@ -139,11 +139,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         , CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
-        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface,SearchViewFragment.SearchViewToFrag {
-    LinearLayout feed, rating, plus, fashion, store,toolbar_flikter_text_container;
+        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag {
+    LinearLayout feed, rating, plus, fashion, store, toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    LinearLayout toolbar_cart_btn,toolbar_main_notification,toolbar_navigation_view_open_btn;
+    LinearLayout toolbar_cart_btn, toolbar_main_notification, toolbar_navigation_view_open_btn;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
@@ -245,13 +245,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void bottomnavigationBar() {
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
-
 // Create items
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed, R.drawable.homeunselectedbottom, R.color.color_tab_1);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed,
+                R.drawable.homeunselectedbottom, R.color.color_tab_1);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watchunselected, R.color.color_tab_1);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.addsquare, R.color.color_tab_1);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionunselectedbottom, R.color.color_tab_1);
-        AHBottomNavigationItem item5 = new AHBottomNavigationItem("My Account", R.drawable.account_icon, R.color.color_tab_1);
+        AHBottomNavigationItem item5 = new AHBottomNavigationItem("My Account", R.drawable.profileunactive, R.color.color_tab_1);
 
 // Add items
         bottomNavigation.addItem(item1);
@@ -260,94 +260,66 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         bottomNavigation.addItem(item4);
         bottomNavigation.addItem(item5);
 
-        bottomNavigation.addItems(bottomNavigationItems);
-
-// Set background color
-        bottomNavigation.setDefaultBackgroundColor(Color.parseColor("#FFFFFF"));
-
-// Disable the translation inside the CoordinatorLayout
-        bottomNavigation.setBehaviorTranslationEnabled(false);
-
-// Enable the translation of the FloatingActionButton
-//        bottomNavigation.manageFloatingActionButtonBehavior(floatingActionButton);
-
-// Change colors
-        bottomNavigation.setAccentColor(R.color.black);
-        bottomNavigation.setInactiveColor(R.color.colorPrimary);
-
-// Force to tint the drawable (useful for font with icon for example)
         bottomNavigation.setForceTint(true);
-
-// Display color under navigation bar (API 21+)
-// Don't forget these lines in your style-v21
-// <item name="android:windowTranslucentNavigation">true</item>
-// <item name="android:fitsSystemWindows">true</item>
         bottomNavigation.setTranslucentNavigationEnabled(true);
-
-
-// Manage titles
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE);
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
-
-// Use colored navigation with circle reveal effect
         bottomNavigation.setColored(false);
-
-// Set current item programmatically
-//        bottomNavigation.setCurrentItem(0);
-
-// Customize notification (title, background, typeface)
-//        bottomNavigation.setNotificationBackgroundColor(Color.parseColor("#F63D2B"));
-
-// Add or remove notification for each item
-//        bottomNavigation.setNotification("1", 3);
-// OR
-        /*AHNotification notification = new AHNotification.Builder()
-                .setText("1")
-                .setBackgroundColor(ContextCompat.getColor(HomeActivity.this, R.color.dark_grey))
-                .setTextColor(ContextCompat.getColor(HomeActivity.this, R.color.colorRectangleBorderGrey))
-                .build();
-        bottomNavigation.setNotification(notification, 1);*/
-
-// Enable / disable item & set disable color
-//        bottomNavigation.enableItemAtPosition(0);
-//        bottomNavigation.disableItemAtPosition(0);
         bottomNavigation.setItemDisableColor(Color.parseColor("#949494"));
+
+        bottomNavigation.setCurrentItem(0);
+        bottomNavigation.setAccentColor(Color.parseColor("#FF4081"));
+        bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
+        bottomNavigation.setForceTint(true);
+//        bottomNavigation.setColored(true);
 
 // Set listeners
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(final int position, boolean wasSelected) {
-//                Toast.makeText(getApplicationContext(), )
-                // Do something cool here...
-
+                Toast.makeText(getApplicationContext(), "Pos"+position, Toast.LENGTH_SHORT).show();
                 if (position == 0) {
+                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
+                    settabChangeIconWithPostion(1);
                     beginTransact(new FeedFragment());
                 } else if (position == 1) {
-//                    beginTransact(new RatingFragment());
+                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
+                    settabChangeIconWithPostion(2);
                     beginTransact(new WatchFragment());
-                    //
                 } else if (position == 2) {
-                    //cameraAccessPermission();
+                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
                 } else if (position == 3) {
-//                    beginTransact(new FashionFragment());
+                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
+                    settabChangeIconWithPostion(4);
                     beginTransact(new FashionLandingFragment());
                 } else if (position == 4) {
+                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
+                    settabChangeIconWithPostion(5);
                     beginTransact(new MyAccountFragment());
-                    /*beginTransact(new MyStyleFragment());*/
-                } /*else if (position == 5) {
-                    beginTransact(new RatingFragment());
-                }*/
+                }
 
                 return true;
             }
         });
-        bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
+
+       /* bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
             @Override
             public void onPositionChange(int y) {
                 // Manage the new y position
             }
-        });
+        });*/
+
+
     }
+
+    private void settabChangeIconWithPostion(final int tabPos) {
+        bottomNavigation.setCurrentItem(tabPos);
+        bottomNavigation.setAccentColor(Color.parseColor("#FF4081"));
+        bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
+        bottomNavigation.setForceTint(true);
+    }
+
+
 
     private void checkForLaunch() {
         if ("MyBag".equals(getIntent().getStringExtra("MyBag"))) {
@@ -428,7 +400,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             @Override
             public void onClick(View view) {
                 toolbar_flikter_text_container.setVisibility(View.GONE);
-                searchViewFragmentLaunch(new SearchViewFragment(),globalSearchGetData);
+                searchViewFragmentLaunch(new SearchViewFragment(), globalSearchGetData);
             }
         });
         toolbar_search_btn.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -439,8 +411,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.length()>=3)
-                {
+                if (newText.length() >= 3) {
                     getSearchedQueryData(newText);
                 }
                 return false;
@@ -485,9 +456,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         call.enqueue(new Callback<GlobalSearchGetData>() {
             @Override
             public void onResponse(Call<GlobalSearchGetData> call, Response<GlobalSearchGetData> response) {
-                Log.e("inside onResopbke",""+response.body().getCeleb().size());
-                globalSearchGetData=response.body();
-                searchViewFragmentLaunch(new SearchViewFragment(),globalSearchGetData);
+                Log.e("inside onResopbke", "" + response.body().getCeleb().size());
+                globalSearchGetData = response.body();
+                searchViewFragmentLaunch(new SearchViewFragment(), globalSearchGetData);
             }
 
             @Override
@@ -579,10 +550,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar_cart_btn=(LinearLayout)findViewById(R.id.toolbar_cart_btn);
+        toolbar_cart_btn = (LinearLayout) findViewById(R.id.toolbar_cart_btn);
         toolbar_main_title = (TextView) findViewById(R.id.toolbar_main_title);
-        toolbar_search_btn=(SearchView)findViewById(R.id.toolbar_search_btn);
-        toolbar_navigation_view_open_btn=(LinearLayout)findViewById(R.id.toolbar_navigation_view_open_btn);
+        toolbar_search_btn = (SearchView) findViewById(R.id.toolbar_search_btn);
+        toolbar_navigation_view_open_btn = (LinearLayout) findViewById(R.id.toolbar_navigation_view_open_btn);
         toolbar_pref_spinner = (Spinner) findViewById(R.id.toolbar_pref_spinner);
         camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
         header_drawer_layout_username = (TextView) findViewById(R.id.header_drawer_layout_username);
@@ -595,7 +566,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_refer = (TextView) findViewById(R.id.right_navigation_bar_refer);
         right_navigation_bar_rewards = (TextView) findViewById(R.id.right_navigation_bar_rewards);
         right_navigation_bar_logout = (TextView) findViewById(R.id.right_navigation_bar_logout);
-        toolbar_flikter_text_container=(LinearLayout)findViewById(R.id.toolbar_flikter_text_container);
+        toolbar_flikter_text_container = (LinearLayout) findViewById(R.id.toolbar_flikter_text_container);
         right_navigation_bar_non_loggedin_aboutflikster = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_aboutflikster);
         right_navigation_bar_non_loggedin_careers = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_careers);
         right_navigation_bar_non_loggedin_contact = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_contact);
@@ -701,9 +672,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             toolbar_pref_spinner.performClick();
             industrySpinnerSelection = true;
 //            toolbar_pref_spinner.setSelection(0, false);
-        }
-        else if (viewId==R.id.toolbar_navigation_view_open_btn)
-        {
+        } else if (viewId == R.id.toolbar_navigation_view_open_btn) {
             if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             } else if (!drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
@@ -1014,7 +983,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void carouselContainerClick(String toolbarTitle,
                                        String url, Fragment fragment) {
         MusicGridFragment musicGridFragment = (MusicGridFragment) fragment;
-        musicGridFragment.getAllData(toolbarTitle,url);
+        musicGridFragment.getAllData(toolbarTitle, url);
         firstTimeLaunch(fragment);
     }
 
@@ -1110,9 +1079,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         firstTimeLaunch(fragment);
     }
 
-    public void searchViewFragmentLaunch(Fragment fragment,GlobalSearchGetData globalSearchGetData)
-    {
-        SearchViewFragment searchViewFragment=(SearchViewFragment)fragment;
+    public void searchViewFragmentLaunch(Fragment fragment, GlobalSearchGetData globalSearchGetData) {
+        SearchViewFragment searchViewFragment = (SearchViewFragment) fragment;
         searchViewFragment.getSearchQueryData(globalSearchGetData);
         firstTimeLaunch(fragment);
     }
