@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#414141</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="submitcolor">#FE5A69</color>
+
+
     //Common colors
     <color name="white">#fff</color>
     <color name="black">#000</color>
@@ -41,6 +44,7 @@
     <color name="blue">#99ddff</color>
 
     <color name="dark_blue">#00b3b3</color>
+    <color name="gender_active_color">#5EC7DA</color>
 
     <color name="ligth_blue_grey">#8cb1d9</color>
 

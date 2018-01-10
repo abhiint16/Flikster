@@ -73,6 +73,9 @@ public class ApiClient {
     public static final String PLACE_BID_URL = BASE_URL + "auctions-ms/postBidByAuction/";
     //http://apiservice.flikster.com/v3/auctions-ms/postBidByAuction
 
+    public static final String INSTAMOJO_URL = "http://api.instamojo.com/oauth2/token/";
+    //
+
 //    likes-ms/postCardStatus
 
     public static Retrofit getClient(String baseURL) {

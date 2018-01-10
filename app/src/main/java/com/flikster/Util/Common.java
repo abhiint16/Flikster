@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -358,6 +359,7 @@ public class Common {
 
 
     public static void shareClick(String shareableLink, Context context) {
+
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink + "\n\n\n" + "Download **Flikster**"
@@ -415,6 +417,11 @@ public class Common {
 
         window.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.translucent)));
         dialog.show();
+    }
+
+    public static void popBackStack(FragmentManager manager){
+        FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
+        manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
 }

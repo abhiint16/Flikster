@@ -22,16 +22,17 @@ public class CreateUserApiPostData {
     @SerializedName("message")
     private String message;
 
-    @SerializedName("product")
-    private String product;
 
-    public String getProduct() {
-        return product;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
+
+
 
     public Integer getStatusCode() {
         return statusCode;
@@ -46,6 +47,9 @@ public class CreateUserApiPostData {
         this.productData = productData;
         this.shippingAddress = shippingAddress;
     }
+
+
+
 
     public List<ProductData> getProductData() {
         return productData;

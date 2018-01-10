@@ -26,6 +26,8 @@
             android:cursorVisible="true"
             android:hint="Say Something"
             android:padding="@dimen/seven"
+            android:singleLine="true"
+            android:maxLines="1"
             android:textColor="@color/grey_txt_label"
             android:textColorHint="#F2F2F2"
             android:textCursorDrawable="@drawable/cursor_color"

@@ -12,6 +12,7 @@ import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.PhoneRegiste
 import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.RegisterPostStatus;
 import com.flikster.Authentication.SignUpActivity.SignupWithGmailOrFBData;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
+import com.flikster.CheckoutActivity.CheckoutFragment.InstamojoData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionPlaceBidData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.AuctionCurrentOrUpcomingData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.OnGoingBidData;
@@ -193,6 +194,10 @@ public interface ApiInterface {
     @POST(ApiClient.CHANGE_PASSWORD_URL)
     Call<ChangePasswordData> changePasswordData(@Body ChangePasswordData emailRegisterPostData);
 
+    //Check otp
+    @POST("/oauth2/token/")
+    Call<InstamojoData> instamojoDataCall(@Body InstamojoData emailRegisterPostData);
+
     @Multipart
     @POST("upload")
     Call<ResponseBody> uploadPhoto(
@@ -201,6 +206,7 @@ public interface ApiInterface {
 
     @POST(ApiClient.PLACE_BID_URL)
     Call<AuctionPlaceBidData> auctionPlaceBidinServer(@Body AuctionPlaceBidData auctionPlaceBidData);
+
     @POST("http://apiservice.flikster.com/v3/search-ms/globalSearch")
     Call<GlobalSearchGetData> getGlobalSearchData(@Body GlobalSearchPostData globalSearchPostData);
 

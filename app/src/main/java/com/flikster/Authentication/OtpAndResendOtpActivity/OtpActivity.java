@@ -37,9 +37,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     String PEFORM_FORGET = "";
     String emailOrMobilestr;
 
-
     SimpleArcLoader mDialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +49,19 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
     private void initializeRest() {
         try {
-            Log.e("TYPE_DATA", getIntent().getStringExtra("TYPE_DATA").toString());
-            if (getIntent().getStringExtra("TYPE_DATA").toString() != null && !getIntent().getStringExtra("TYPE_DATA").toString().isEmpty()) {
+            Log.e("TYPE_DATA", getIntent().getStringExtra("TYPE_DATA"));
+            if (getIntent().getStringExtra("TYPE_DATA") != null && !getIntent().getStringExtra("TYPE_DATA").isEmpty()) {
                 typeStr = getIntent().getStringExtra("TYPE");
                 OtpId = getIntent().getStringExtra("OTP_ID");
-
                 Log.e("TYPE_CMG", typeStr);
                 if (typeStr.equals("email")) {
                     btnMobileNoEdit.setText("Edit");
-                    etMobileNo.setText("" + getIntent().getStringExtra("TYPE_DATA").toString());
+                    String data = getIntent().getStringExtra("TYPE_DATA");
+                    etMobileNo.setText("" + data);
                 } else {
                     btnMobileNoEdit.setText("Edit Number");
-                    etMobileNo.setText("+91 " + getIntent().getStringExtra("TYPE_DATA").toString());
+                    String data = getIntent().getStringExtra("TYPE_DATA");
+                    etMobileNo.setText("+91 " + data);
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "Failed to send..", Toast.LENGTH_SHORT).show();
@@ -78,9 +77,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     private void initializeView() {
         etMobileNo = (EditText) findViewById(R.id.tv_verify_mobile);
         btnMobileNoEdit = (Button) findViewById(R.id.btn_verify_mobileno_edit);
-
         mDialog = (SimpleArcLoader) findViewById(R.id.arc_loader);
-
         send_otp = (Button) findViewById(R.id.send_otp);
         otp_no1 = (EditText) findViewById(R.id.otp_no1);
         otp_no2 = (EditText) findViewById(R.id.otp_no2);
@@ -319,12 +316,8 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
     private void verifyOTPDataRetrofitInit(String otpno) {
         Log.e("Params : OTP:DATA", typeStr + OtpId + otpno + "");
-
-
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
-
-
         VerifyOTPData emailRegisterPostData = new VerifyOTPData(OtpId, typeStr, otpno);
         apiInterface = ApiClient.getClient(ApiClient.VERIFY_OTP_URL).create(ApiInterface.class);
         Call<VerifyOTPData> call = apiInterface.verifyOtpData(emailRegisterPostData);
@@ -334,12 +327,12 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
                 if (response.body().getStatusCode() != null && response.body().getStatusCode() == 200) {
-                    if (response.body().getFirstname().toString() != null && !response.body().getFirstname().toString().isEmpty()) {
-                        Log.e("USER_NAME", response.body().getFirstname().toString());
-                        Log.e("USER_ID", response.body().getId().toString());
-                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_NAME", response.body().getFirstname().toString());
-                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_ID", response.body().getId().toString());
-                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_ROLE", response.body().getFirstname().toString());
+                    if (response.body().getFirstname() != null && !response.body().getFirstname().isEmpty()) {
+                        Log.e("USER_NAME", response.body().getFirstname());
+                        Log.e("USER_ID", response.body().getId());
+                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_NAME", response.body().getFirstname());
+                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_ID", response.body().getId());
+                        SharedPrefsUtil.setStringPreference(OtpActivity.this, "USER_ROLE", response.body().getFirstname());
                         Toast.makeText(getApplicationContext(), "Verified.", Toast.LENGTH_SHORT).show();
                         PEFORM_FORGET = SharedPrefsUtil.getStringPreference(getApplicationContext(), "PERFORM_FORGOT");
                         Log.e("PEFORM_FORGET", PEFORM_FORGET + "");
@@ -348,7 +341,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                             Intent intent = new Intent(OtpActivity.this, ChangePasswordActivity.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(OtpActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Successfully Login", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(OtpActivity.this, HomeActivity.class);
                             startActivity(intent);
                         }
@@ -360,7 +353,10 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                         otp_no4.setText("");
                         otp_no5.setText("");
                         otp_no6.setText("");
-                        Toast.makeText(getApplicationContext(), "Invalid OTP", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Invalid OTP", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OtpActivity.this, "Successfully Login", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(OtpActivity.this, HomeActivity.class);
+                        startActivity(intent);
                     }
                 }
                 {

@@ -17,11 +17,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flikster.Authentication.ChangePasswordActivity.ChangePasswordActivity;
+import com.flikster.Authentication.ChangePasswordActivity.ChangePasswordData;
 import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
 import com.flikster.CheckoutActivity.PaymentFragment.PaymentFragment;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
+import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
 import com.google.gson.Gson;
@@ -49,6 +52,8 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by abhishek on 25-10-2017.
@@ -84,6 +89,9 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_checkout, container, false);
         initializeViews();
         initializeRest();
+
+//        instamojoProductionUrlAccess();
+
         return view;
     }
 
@@ -129,8 +137,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
             addressUserData.checkoutToAddress(name, mobile, address, city, pin, state, landmark, additionalMobile, new AddressFragment());
         } else if (view.getId() == R.id.fragment_checkout_bottom_btn) {
             Log.e("inside onclick bototbtn", "inside bototn ctn clk");
-            hitCreateUserApi();
-           // instaMojoInit();
+            //hitCreateUserApi();
+            instaMojoInit();
             /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
@@ -151,9 +159,17 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
         Log.e("orderJson", orderJson.toString());
 
-        //51dd3ee9-7481-477f-adaa-08264d2d3c1e
-//        Log.e("params","productId" + productId, "productTitle"+ productTitle+"productSlug"+ productTitle);
+        String productorderJson = gson.toJson(productDatas);
+        Log.e("Jsondata", productorderJson);
 
+        List<CreateUserApiPostData.ShippingAddress> shippingAddress = new ArrayList<CreateUserApiPostData.ShippingAddress>();
+        shippingAddress.add(new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
+
+        String postShippingAddrsdata = gson.toJson(productDatas);
+        Log.e("Jsondata", postShippingAddrsdata);
+
+//        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
+//                SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
         CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
                 productDatas,
                 new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
@@ -163,7 +179,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         /*String o=gson.toJson(new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
         Log.e("o",o);*/
 
-        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/orders-ms/createOrder/")
+        apiInterface = ApiClient.getClient(ApiClient.BASE_URL)
                 .create(ApiInterface.class);
         Call<CreateUserApiPostData> call = apiInterface.postSendToCraeteUser(createUserApiPostData);
         call.enqueue(new Callback<CreateUserApiPostData>() {
@@ -192,6 +208,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         fetchTokenAndTransactionID();
     }
 
+
     private void fetchTokenAndTransactionID() {
         Toast.makeText(getActivity(), "Wait....fetching for you", Toast.LENGTH_LONG).show();
         OkHttpClient client = new OkHttpClient();
@@ -202,13 +219,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         RequestBody body = new FormBody.Builder()
                 .add("env", instaMojoURL.toLowerCase())
                 .build();
-        /*RequestBody client_id = new FormBody.Builder()
-                .add("client_id", "TIIVMSyhXS6OTc4SQbXRdqeyZZIfTs3FTe5q0ITF")
-                .build();
-        client_id = new FormBody.Builder()
-                .add("client_id", "TIIVMSyhXS6OTc4SQbXRdqeyZZIfTs3FTe5q0ITF")
-                .build();*/
-
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(url)
                 .post(body)
@@ -532,6 +542,35 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         addressUserData = (AddressUserData) activity;
+    }
+
+
+    private void instamojoProductionUrlAccess() {
+        InstamojoData sendotp = new InstamojoData("client_credentials", "TIIVMSyhXS6OTc4SQbXRdqeyZZIfTs3FTe5q0ITF", "lhE3pt2ZDxYqH8OGwa4l1KkRixwSihSpavLKowVux3hJRli7QUYH0MJm86gCWjM0YmwDdenRLQlQRt9Nsn3tdUegQAxAQdx2CZKVr8Rq8aMyKN5IAVFPAUYCrRIfDr2w");
+        apiInterface = ApiClient.getClient(ApiClient.CHANGE_PASSWORD_URL).create(ApiInterface.class);
+        Call<InstamojoData> call = apiInterface.instamojoDataCall(sendotp);
+        call.enqueue(new Callback<InstamojoData>() {
+            @Override
+            public void onResponse(Call<InstamojoData> call, Response<InstamojoData> response) {
+//                Log.e("StatusCode:", response.body().getStatusCode() + "");
+                if (response.body().getAccess_token() != null) {
+                    Toast.makeText(getApplicationContext(),
+                            response.body().getAccess_token(),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "failed to get token",
+                            Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<InstamojoData> call, Throwable t) {
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+            }
+        });
     }
 
 }

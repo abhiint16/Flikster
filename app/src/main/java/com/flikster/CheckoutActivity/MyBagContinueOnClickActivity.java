@@ -14,16 +14,17 @@ import android.widget.TextView;
 import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
 import com.flikster.CheckoutActivity.CheckoutFragment.CheckoutFragment;
 import com.flikster.R;
+import com.flikster.Util.Common;
 
 /**
  * Created by abhishek on 24-10-2017.
  */
 
-public class MyBagContinueOnClickActivity extends AppCompatActivity implements View.OnClickListener ,AddressFragment.CheckoutUserData,CheckoutFragment.AddressUserData {
+public class MyBagContinueOnClickActivity extends AppCompatActivity implements View.OnClickListener, AddressFragment.CheckoutUserData, CheckoutFragment.AddressUserData {
     ImageButton toolbar_frag_multiicons_back_navigation;
     FragmentManager fragmentManager;
-    LinearLayout activity_mybag_continue_onclick_tabs_address_linear,activity_mybag_continue_onclick_tabs_checkout_linear
-            ,activity_mybag_continue_onclick_tabs_payment_linear;
+    LinearLayout activity_mybag_continue_onclick_tabs_address_linear, activity_mybag_continue_onclick_tabs_checkout_linear, activity_mybag_continue_onclick_tabs_payment_linear;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,21 +37,24 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
 
     private void initializeRest() {
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        fragmentManager=getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         activity_mybag_continue_onclick_tabs_address_linear.setOnClickListener(this);
         activity_mybag_continue_onclick_tabs_checkout_linear.setOnClickListener(this);
         //activity_mybag_continue_onclick_tabs_payment_linear.setOnClickListener(this);
     }
 
     private void initializeView() {
-        activity_mybag_continue_onclick_tabs_address_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear);
+        activity_mybag_continue_onclick_tabs_address_linear = (LinearLayout) findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear);
         toolbar_frag_multiicons_back_navigation = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        activity_mybag_continue_onclick_tabs_checkout_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear);
+        activity_mybag_continue_onclick_tabs_checkout_linear = (LinearLayout) findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear);
         //activity_mybag_continue_onclick_tabs_payment_linear=(LinearLayout)findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear);
     }
 
     @Override
     public void onClick(View view) {
+        if (view.getId() == R.id.activity_mybag_continue_onclick_tabs_address_linear) {
+            Common.shareClick(getIntent().getStringExtra("profilePic"), getApplicationContext());
+        }
         /*if (view.getId() == R.id.activity_mybag_continue_onclick_toolbar_back_navigation_btn) {
             getFragmentManager().popBackStackImmediate();
         }
@@ -87,19 +91,19 @@ public class MyBagContinueOnClickActivity extends AppCompatActivity implements V
     @Override
     public void userInput(String name, String mobileNo, String Address, String city, String PinCode, String state, String landmark, String additionMobile, Fragment fragment) {
         CheckoutFragment checkoutFragment = (CheckoutFragment) fragment;
-        checkoutFragment.userData(name,mobileNo,Address,city,PinCode,state,landmark,additionMobile);
+        checkoutFragment.userData(name, mobileNo, Address, city, PinCode, state, landmark, additionMobile);
         checkoutFragment.productData(getIntent().getStringExtra("productId"),
                 getIntent().getStringExtra("productSlug")
-                ,getIntent().getStringExtra("productTitle"),getIntent().getStringExtra("userId"),
-                getIntent().getStringExtra("size"),getIntent().getStringExtra("color"),getIntent().getStringExtra("profilePic"),
-                getIntent().getStringExtra("price"),getIntent().getStringExtra("quantity"));
+                , getIntent().getStringExtra("productTitle"), getIntent().getStringExtra("userId"),
+                getIntent().getStringExtra("size"), getIntent().getStringExtra("color"), getIntent().getStringExtra("profilePic"),
+                getIntent().getStringExtra("price"), getIntent().getStringExtra("quantity"));
         launchFragment(fragment);
     }
 
     @Override
     public void checkoutToAddress(String name, String mobileNo, String address, String city, String pinCode, String state, String landmark, String additionMobile, Fragment fragment) {
-        AddressFragment addressFragment=(AddressFragment)fragment;
-        addressFragment.checkoutToAddressData(name,mobileNo,address,city,pinCode,state,landmark,additionMobile);
+        AddressFragment addressFragment = (AddressFragment) fragment;
+        addressFragment.checkoutToAddressData(name, mobileNo, address, city, pinCode, state, landmark, additionMobile);
         launchFragment(fragment);
     }
 }

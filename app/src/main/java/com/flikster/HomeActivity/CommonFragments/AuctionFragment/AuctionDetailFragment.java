@@ -38,6 +38,7 @@ import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionL
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
+import com.flikster.Util.DateUtil;
 import com.flikster.Util.SharedPrefsUtil;
 import com.leo.simplearcloader.SimpleArcLoader;
 import com.synnapps.carouselview.CarouselView;
@@ -45,7 +46,9 @@ import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -268,7 +271,7 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
             pricebidtxt.setText("Rs " + Html.fromHtml(auctionDetails.get(positionvalue).getStartingPrice() + "/-"));
         }
 
-        if (auctionDetails.get(positionvalue).getEndTime() != null && !auctionDetails.get(positionvalue).getEndTime().isEmpty()) {
+       /* if (auctionDetails.get(positionvalue).getEndTime() != null && !auctionDetails.get(positionvalue).getEndTime().isEmpty()) {
 //            timelefttxt.setText("Rs " + Html.fromHtml(auctionDetails.get(positionvalue).getStartingPrice() + "/"));
 
             try {
@@ -277,16 +280,35 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
                 String minute = objtime.getString("minute");
                 String second = objtime.getString("second");
                 String completeTime = hours + "h " + minute + "m " + second + "s ";
-                timelefttxt.setText(Html.fromHtml(completeTime));//+ auctionDetails.get(positionvalue).getEndDate() + "");
-//                ((AuctionCurrentFragmentAdapter.ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");
+                timelefttxt.setText(Html.fromHtml(completeTime));
+            } catch (Exception e) {
+            }
+        }*/
+
+        if (auctionDetails.get(0).getEndDate()
+                != null && !auctionDetails.get(0).getEndDate().isEmpty()) {
+            try {
+                       /* JSONObject objtime = new JSONObject(auctionCurrentOrUpcomingData.get(0).getEndTime());
+                        String hours = objtime.getString("hour");
+                        String minute = objtime.getString("minute");
+                        String second = objtime.getString("second");
+                        String completeTime = "Time Left: " + hours + "h " + minute + "m " + second + "s ";
+
+                        ((ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");*/
+
+//                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
+                String enddateTime = DateUtil.serverSentTimeChange(auctionDetails.get(0).getEndDate());
+                SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                Date enddate = simDf.parse(enddateTime);
+                long endTimeMillSec = enddate.getTime();
+                timelefttxt.setText(Html.fromHtml(DateUtil.getTimeLeft(endTimeMillSec)) + "");
+
 
             } catch (Exception e) {
 
             }
         }
-        /*if (auctionDetails.get(positionvalue).getStartingPrice() != null && !auctionDetails.get(positionvalue).getStartingPrice().isEmpty()) {
-            enterbidtxt.setText("Enter Rs " + Html.fromHtml(auctionDetails.get(positionvalue).getStartingPrice() + " or more"));
-        }*/
+
         if (auctionDetails.get(positionvalue).getInfo() != null && !auctionDetails.get(positionvalue).getInfo().isEmpty()) {
             infotxt.setText("Information : " + Html.fromHtml(auctionDetails.get(positionvalue).getInfo()));
         }

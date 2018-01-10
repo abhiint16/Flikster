@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -58,7 +59,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         initializeRest();
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("viewitem", view.toString() + "");
@@ -66,14 +67,17 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 String profilePic = itemsdata.get(position).getProfilePic();
                 String slug = itemsdata.get(position).getSlug();
                 if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("1")) {
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "STYLE_IMG_CAPTURE_STR", null);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG", profilePic);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_NAME", itemname);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_SLUG", slug);
                 } else if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("2")) {
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "STYLE_IMG_CAPTURE_STR_TWO", null);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO", profilePic);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO_NAME", itemname);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO_PRODUCT_IMG_SLUG", slug);
                 } else if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("3")) {
+                    SharedPrefsUtil.setStringPreference(getApplicationContext(), "STYLE_IMG_CAPTURE_STR_THREE", null);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE", profilePic);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE_NAME", itemname);
                     SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE__SLUG", slug);
@@ -82,7 +86,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 i.putExtra("SEARCH_ITEM_CLICK", "SEARCH_ITEM_CLICK");
                 startActivity(i);
             }
-        });
+        });*/
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -99,14 +103,17 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         String profilePic = itemsdata.get(position).getProfilePic();
         String slug = itemsdata.get(position).getSlug();
         if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("1")) {
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "STYLE_IMG_CAPTURE_STR", null);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG", profilePic);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_NAME", itemname);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_SLUG", slug);
         } else if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("2")) {
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "STYLE_IMG_CAPTURE_STR_TWO", null);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO", profilePic);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO_NAME", itemname);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_TWO_PRODUCT_IMG_SLUG", slug);
         } else if (getIntent().getStringExtra("IMAGE_ITEM_CLICK_NO").equals("3")) {
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "STYLE_IMG_CAPTURE_STR_THREE", null);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE", profilePic);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE_NAME", itemname);
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "PRODUCT_IMG_THREE__SLUG", slug);
@@ -259,13 +266,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     @Override
     protected void onResume() {
         super.onResume();
-        getSupportActionBar().hide();
+//        ((AppCompatActivity) getBaseContext()).getSupportActionBar().hide();
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getSupportActionBar().show();
+//        ((AppCompatActivity) getBaseContext()).getSupportActionBar().show();
     }
 }
