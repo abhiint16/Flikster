@@ -143,7 +143,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     LinearLayout feed, rating, plus, fashion, store, toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    LinearLayout toolbar_cart_btn, toolbar_main_notification, toolbar_navigation_view_open_btn;
+    LinearLayout toolbar_cart_btn,toolbar_main_notification,toolbar_navigation_view_open_btn;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
@@ -983,7 +983,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void carouselContainerClick(String toolbarTitle,
                                        String url, Fragment fragment) {
         MusicGridFragment musicGridFragment = (MusicGridFragment) fragment;
-        musicGridFragment.getAllData(toolbarTitle, url);
+        musicGridFragment.getAllData(toolbarTitle,url);
         firstTimeLaunch(fragment);
     }
 
