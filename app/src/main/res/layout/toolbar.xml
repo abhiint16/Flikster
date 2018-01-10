@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:src="@drawable/toolbar_notify_icon"
+            android:src="@drawable/toolbar_notify_svg"
             android:clickable="false"/>
     </LinearLayout>
 
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:src="@drawable/toolbar_hamburger_icon"
+            android:src="@drawable/toolbar_hamburger_svg"
             android:clickable="false"/>
     </LinearLayout>
 
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:background="@color/transparent"
-            android:src="@drawable/cart_icon" />
+            android:src="@drawable/toolbar_cart_svg" />
     </LinearLayout>
 
     <android.support.v7.widget.SearchView
@@ -138,5 +138,5 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:searchIcon="@drawable/toolbar_search_icon2"></android.support.v7.widget.SearchView>
+        app:searchIcon="@drawable/toolbar_search_svg"></android.support.v7.widget.SearchView>
 </android.support.v7.widget.Toolbar>

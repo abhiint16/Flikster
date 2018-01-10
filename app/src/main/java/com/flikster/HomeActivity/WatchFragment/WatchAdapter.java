@@ -490,12 +490,17 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 Log.e("inside onresposnes","hit retrofitforcar");
                 if (response.body().getHits().getHits().get(0).get_source().getProfilePic() != null)
+                {
                     carouselImgWatch.add(response.body().getHits().getHits().get(0).get_source().getProfilePic());
+                    i=++i;
+                }
                 else if (response.body().getHits().getHits().get(0).get_source().getMedia().getGallery() != null &&
                         response.body().getHits().getHits().get(0).get_source().getMedia().getGallery().size() != 0)
+                {
                     carouselImgWatch.add(response.body().getHits().getHits().get(0).get_source().getMedia().getGallery().get(0));
+                    i=++i;
+                }
                 Log.e("inside hitRetrofit","hit retrofitforcar"+carouselImgWatch);
-                i=++i;
                 Log.e("inside hitRetrofit","iii"+i);
                 if (i<5)
                     hitRetrofitForCarousel(allUrls.get(i),carouselView);

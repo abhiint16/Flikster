@@ -387,7 +387,8 @@ public class Common {
         final Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        WebView commontxt = (WebView) dialog.findViewById(R.id.commontxt);
+        //WebView commontxt = (WebView) dialog.findViewById(R.id.commontxt);
+        TextView commontxt=(TextView)dialog.findViewById(R.id.commontxt);
         ImageButton closebtn = (ImageButton) dialog.findViewById(R.id.closebtn);
         TextView headertxt = (TextView) dialog.findViewById(R.id.headertxt);
         if (headertxtStr != null && !headertxtStr.isEmpty()) {
@@ -398,7 +399,8 @@ public class Common {
         String htmlText = " %s ";
         String myData = "What do we do with your information?\n" +
                 "When you purchase something from our store, as part of the buying and selling process, we collect the personal information you give us such as your name, address and email address.When you browse our store If you would like to: access, correct, amend or delete any personal information we have about you, register a complaint, or simply want more information contact our Privacy Compliance Officer at support@flikster.com";
-        commontxt.loadData(String.format(htmlText, myData), "text/html", "utf-8");
+        //commontxt.loadData(String.format(htmlText, myData), "text/html", "utf-8");
+        commontxt.setText("\"Flikster - Movies & Fashion\" is extremely useful to get you the most popular and latest news of your favorite celebrities, Bollywood, Fashion trends. Manage your data feed cleaner and stay tuned with every piece of news from different sources in just few seconds under a single umbrella of \"Flikster - Movies & Fashion\". ");
 //        commontxt.setText(String.format(htmlText, myData));
          /*if (commontxtStr != null && !commontxtStr.isEmpty()) {
             commontxt.setText(commontxtStr + "");

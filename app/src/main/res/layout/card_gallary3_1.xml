@@ -35,7 +35,8 @@
             android:layout_marginTop="1dp"
             android:src="@drawable/no_image"
             android:background="@color/white"
-            android:clickable="false"/>
+            android:clickable="false"
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -52,7 +53,8 @@
                 android:layout_weight="1"
                 android:layout_marginTop="1dp"
                 android:src="@drawable/no_image"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:scaleType="centerCrop"/>
 
             <ImageView
                 android:id="@+id/card_gallary3_img3"
@@ -61,7 +63,8 @@
                 android:layout_weight="1"
                 android:layout_marginBottom="1dp"
                 android:src="@drawable/no_image"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:scaleType="centerCrop"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -31,7 +31,8 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:id="@+id/card_fashion_details2_img1"
-            android:src="@drawable/no_image"/>
+            android:src="@drawable/no_image"
+            android:scaleType="centerCrop"/>
 
         <ImageView
             android:layout_width="0dp"
@@ -41,7 +42,8 @@
             android:background="@color/white"
             android:id="@+id/card_fashion_details2_img2"
             android:layout_weight="1"
-            android:src="@drawable/no_image"/>
+            android:src="@drawable/no_image"
+            android:scaleType="centerCrop"/>
     </LinearLayout>
 
 

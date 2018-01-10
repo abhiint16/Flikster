@@ -646,15 +646,15 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if (viewId == R.id.right_navigation_bar_my_account) {
             beginTransact(new MyAccountFragment());
         } else if (viewId == R.id.right_navigation_bar_orders) {
-            beginTransact(new OrdersFragment());
+            navigationMenuitemsAction("Flikster", "Orders");
         } else if (viewId == R.id.right_navigation_bar_wish_list) {
-            beginTransact(new WishListFragment());
+            navigationMenuitemsAction("Flikster", "Wishlist");
         } else if (viewId == R.id.right_navigation_bar_liked_posts) {
-            beginTransact(new SavedPostsFragment());
+            navigationMenuitemsAction("Flikster", "Liked Posts");
         } else if (viewId == R.id.right_navigation_bar_refer) {
-            beginTransact(new ReferFragment());
+            navigationMenuitemsAction("Flikster", "Refer");
         } else if (viewId == R.id.right_navigation_bar_rewards) {
-            beginTransact(new RewardsFragment());
+            navigationMenuitemsAction("Flikster", "Rewards");
         } else if (viewId == R.id.right_navigation_bar_logout) {
             SharedPrefsUtil.setStringPreference(HomeActivity.this,
                     "USER_ID", null);
@@ -676,7 +676,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_privacy) {
             navigationMenuitemsAction("Flikster", "Privacy");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_return_policy) {
-            navigationMenuitemsAction("Flikster", "Terms");
+            navigationMenuitemsAction("Flikster", "Return Policy");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_terms) {
             navigationMenuitemsAction("Flikster", "Terms");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_login_btn) {
