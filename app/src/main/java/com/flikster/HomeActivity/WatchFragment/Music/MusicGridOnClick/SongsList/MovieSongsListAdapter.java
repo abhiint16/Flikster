@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
-import com.flikster.Util.GlobalData;
 
 import java.util.ArrayList;
 import java.util.List;

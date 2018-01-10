@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
@@ -28,25 +29,16 @@ import java.util.List;
  */
 
 public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> imag=new ArrayList<>();
     Context context;
-    List<String> socialInterviewImg=new ArrayList<>();
-    List<String> socialInterviewTitle=new ArrayList<>();
-    List<String> socialInterviewVideo=new ArrayList<>();
     FragmentManager fragmentManager;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-    public SocialBuzzOrInterViewsViewHolder(Context context, List<String> socialInterviewTitle, List<String> socialInterviewImg,List<String> socialImterviewVideo, FragmentManager fragmentManager,
+    FeedInnerData feedInnerData;
+    public SocialBuzzOrInterViewsViewHolder(Context context, FeedInnerData feedInnerData, FragmentManager fragmentManager,
                                             WatchFragment.WatchFragCommInterface watchFragCommInterface) {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
         this.context=context;
-        this.socialInterviewImg=socialInterviewImg;
-        this.socialInterviewTitle=socialInterviewTitle;
-        this.socialInterviewVideo=socialImterviewVideo;
         this.fragmentManager = fragmentManager;
         this.watchFragCommInterface=watchFragCommInterface;
+        this.feedInnerData=feedInnerData;
     }
 
     @Override
@@ -71,25 +63,25 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
         }
         else
         {
-            Glide.with(context).load(socialInterviewImg.get(position)).into(((ViewHolder2)holder).carousel_image);
-            ((ViewHolder2)holder).carousel_title.setText(socialInterviewTitle.get(position));
+            if (feedInnerData.getHits().get(position).get_source().getProfilePic()!=null)
+            Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder2)holder).carousel_image);
+            if (feedInnerData.getHits().get(position).get_source().getTitle()!=null)
+            ((ViewHolder2)holder).carousel_title.setText(feedInnerData.getHits().get(position).get_source().getTitle());
         }
     }
 
     @Override
     public int getItemCount() {
-        if(socialInterviewImg.size()==0)
-            return 1;
-        else
-            return socialInterviewImg.size();
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
+            return feedInnerData.getHits().size();
+        else return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(socialInterviewImg.size()==0)
-            return 0;
-        else
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
             return 1;
+        else return 0;
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -104,7 +96,10 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
 
         @Override
         public void onClick(View view) {
-            watchFragCommInterface.carouselItemClick(socialInterviewTitle.get(getAdapterPosition()),socialInterviewImg.get(getAdapterPosition()),socialInterviewTitle.get(getAdapterPosition()),socialInterviewVideo.get(getAdapterPosition()),"video",new MovieSongsListFragment());
+            watchFragCommInterface.carouselItemClick(feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),"video",new MovieSongsListFragment());
         }
     }
 

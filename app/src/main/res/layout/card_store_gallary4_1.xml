@@ -48,7 +48,7 @@
                 android:background="#696969"
                 android:id="@+id/card_store_gallary4_img1"
                 android:scaleType="fitXY"
-                android:src="@drawable/maxi1" />
+                android:src="@drawable/no_image" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:background="#484848"
                 android:scaleType="fitXY"
-                android:src="@drawable/lipstick" />
+                android:src="@drawable/no_image" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +75,7 @@
                 android:background="#323232"
                 android:id="@+id/card_store_gallary4_img3"
                 android:scaleType="fitXY"
-                android:src="@drawable/maxi2" />
+                android:src="@drawable/no_image" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                 android:background="#808080"
                 android:id="@+id/card_store_gallary4_img4"
                 android:scaleType="fitXY"
-                android:src="@drawable/maxi3" />
+                android:src="@drawable/no_image" />
         </LinearLayout>
     </LinearLayout>
 

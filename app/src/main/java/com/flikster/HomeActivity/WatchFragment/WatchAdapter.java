@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
+import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedFragment.FeedCelebrityRecyclerItemAdapter;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Comedy.ComedyViewHolder;
@@ -45,7 +46,6 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     Context context;
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
-    List<String> imag = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
     MusicAdapterViewHolder musicAdapterViewHolder;
     SocialBuzzOrInterViewsViewHolder msocialBuzzOrInterViewsViewHolder;
@@ -53,7 +53,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     TvShowsViewHolder tvShowsViewHolder;
     MoviesViewHolder moviesViewHolder;
     ComedyViewHolder comedyViewHolder;
-    List<String> socialInterviewImg=new ArrayList<>();
+    int i=0;
+    /*List<String> socialInterviewImg=new ArrayList<>();
     List<String> socialInterviewTitle=new ArrayList<>();
     List<String> socialInterviewVideo=new ArrayList<>();
     List<String> trailerPromoImg=new ArrayList<>();
@@ -68,19 +69,18 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     List<String> tvShowsImg=new ArrayList<>();
     List<String> tvShowsTitle=new ArrayList<>();
     List<ArrayList<String>> tvShowsVideo=new ArrayList<ArrayList<String>>();
-    List<String> moviesImg=new ArrayList<>();
-    List<String> moviesTitle=new ArrayList<>();
-    List<String> moviesSlug=new ArrayList<>();
-    FeedInnerData outerHits;
-    Integer Count;
+    */
+    List<String> moviesImg = new ArrayList<>();
+    List<String> moviesTitle = new ArrayList<>();
+    List<String> moviesSlug = new ArrayList<>();
+    FeedInnerData outerHits, outerHitsMusic, outerHitsGallery, outerHitsSocialBuzz, outerHitsTrailer, outerHitsComedy;
     ApiInterface apiInterface;
-    FeedCelebrityRecyclerItemAdapter feedCelebrityRecyclerItemAdapter;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-    List<String> carouselImgWatch=new ArrayList<>();
+    List<String> carouselImgWatch = new ArrayList<>();
     MovieData.MovieInnerData moviehits;
-    int[] sampleImages = {R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred, R.drawable.prabha, R.drawable.rakulpreetred};
+    List<String> allUrls = new ArrayList<>();
 
-    public WatchAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits,Integer Count, WatchFragment.WatchFragCommInterface watchFragCommInterface) {
+    public WatchAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count, WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         type.add(1);
@@ -90,14 +90,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         type.add(5);
         type.add(6);
         type.add(7);
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
-        imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
-        imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
         this.outerHits = outerHits;
-        this.Count = Count;
         this.watchFragCommInterface = watchFragCommInterface;
     }
 
@@ -114,7 +107,6 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             return new WatchAdapter.ViewHolder3(view);
         } else if (viewType == 4) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
-//            if
             return new WatchAdapter.ViewHolder4(view);
         } else if (viewType == 5) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
@@ -137,13 +129,22 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             Glide.with(context).load(carouselImgWatch.get(position).trim()).into(imageView);
         }
     };
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
-            //final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             carouselImgWatch.clear();
-            Boolean audio=false,tv=false,social=false,movie=false,trailer=false,comedy=false;
-            for (int i=0;i<outerHits.getHits().size();i++)
+            Boolean audio = false, tv = false, social = false, movie = false, trailer = false, comedy = false;
+            allUrls.clear();
+            i=0;
+            allUrls.add("http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=1&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22");
+            allUrls.add("http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=1&from=0&pretty=true&q=contentType:%22gallery%22");
+            allUrls.add("http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=1&from=0&pretty=true&q=contentType:%22social-buzz%22%20OR%20contentType:%22interview%22");
+            allUrls.add("http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=1&from=0&pretty=true&q=contentType:%22trailer%22%20OR%20contentType:%22promo%22");
+            allUrls.add("http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=1&from=0&pretty=true&q=contentType:%22comedy-clip%22");
+            Log.e("check position 0",""+allUrls.size()+"and"+i);
+            hitRetrofitForCarousel(allUrls.get(0),((ViewHolder1) holder).carouselView);
+            /*for (int i=0;i<outerHits.getHits().size();i++)
             {
                 if ("audio-song".equals(outerHits.getHits().get(i).get_source().getContentType())&&audio==false)
                 {
@@ -177,66 +178,16 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
                     comedy=true;
                 }
-            }
-            ((ViewHolder1) holder).carouselView.setPageCount(carouselImgWatch.size());
-            ((ViewHolder1) holder).carouselView.setImageListener(imageListeners);
+            }*/
         } else if (holder.getItemViewType() == 2) {
-            for (int i=0;i<outerHits.getHits().size();i++)
-            {
-                if("audio-song".equals(outerHits.getHits().get(i).get_source().getContentType())||"dialouge".equals(outerHits.getHits().get(i).get_source().getContentType()))
-                {
-                    musicImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    musicTitle.add(outerHits.getHits().get(i).get_source().getTitle());
-                    if(outerHits.getHits().get(i).get_source().getMedia().getAudio()!=null&&outerHits.getHits().get(i).get_source().getMedia().getAudio().size()!=0)
-                        musicAudio.add(outerHits.getHits().get(i).get_source().getMedia().getAudio().get(0));
-                }
-            }
+            fetchRetrofitForMusic(((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22");
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Music");
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            musicAdapterViewHolder = new MusicAdapterViewHolder(context,musicTitle,musicImg,musicAudio,fragmentManager,watchFragCommInterface);
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(musicAdapterViewHolder);
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Gallery");
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-//            tvShowsViewHolder = new TvShowsViewHolder(context);
-            for (int i=0;i<outerHits.getHits().size();i++)
-            {
-                Log.e("cehck gallery",""+tvShowsVideo);
-                if("gallery".equals(outerHits.getHits().get(i).get_source().getContentType()))
-                {
-                    tvShowsImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    tvShowsTitle.add(outerHits.getHits().get(i).get_source().getTitle());
-                    if(outerHits.getHits().get(i).get_source().getMedia().getGallery()!=null&&outerHits.getHits().get(i).get_source().getMedia().getGallery().size()!=0)
-                        Log.e("check pos",""+outerHits.getHits().size()+"nalsl"+i);
-                        Log.e("check gallery inner",""+outerHits.getHits().get(i).get_source().getMedia().getGallery());
-                        tvShowsVideo.add((ArrayList<String>) outerHits.getHits().get(i).get_source().getMedia().getGallery());
-                        //socialInterviewVideo.add(outerHits.getHits().get(i).get_source().getMedia().getVideo().get(0));
-                }
-            }
-            tvShowsViewHolder = new TvShowsViewHolder(context,fragmentManager,tvShowsImg,tvShowsTitle,tvShowsVideo,watchFragCommInterface,
-                    outerHits);
-            ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(tvShowsViewHolder);
+            fetchRetrofitForGallery(((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22gallery%22");
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
-            /*socialInterviewImg.clear();
-            socialInterviewTitle.clear();*/
-            for (int i=0;i<outerHits.getHits().size();i++)
-            {
-                if("social-buzz".equals(outerHits.getHits().get(i).get_source().getContentType()) || "interview".equals(outerHits.getHits().get(i).get_source().getContentType()))
-                {
-                    socialInterviewImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    socialInterviewTitle.add(outerHits.getHits().get(i).get_source().getTitle());
-                    if(outerHits.getHits().get(i).get_source().getMedia().getVideo()!=null&&outerHits.getHits().get(i).get_source().getMedia().getVideo().size()!=0)
-                        socialInterviewVideo.add(outerHits.getHits().get(i).get_source().getMedia().getVideo().get(0));
-                }
-            }
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, socialInterviewTitle, socialInterviewImg,socialInterviewVideo,fragmentManager,watchFragCommInterface);
-            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(msocialBuzzOrInterViewsViewHolder);
-
+            fetchRetrofitForSocialBuzzAndInterview(((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22social-buzz%22%20OR%20contentType:%22interview%22");
         } else if (holder.getItemViewType() == 5) {
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_title.setText("Movies");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -244,40 +195,10 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             initMovieRetrofit(((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler);
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
-            trailerPromoImg.clear();
-            trailerPromoTitle.clear();
-            for (int i=0;i<outerHits.getHits().size();i++)
-            {
-                if("trailer".equals(outerHits.getHits().get(i).get_source().getContentType()) || "promo".equals(outerHits.getHits().get(i).get_source().getContentType()))
-                {
-                    trailerPromoImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    trailerPromoTitle.add(outerHits.getHits().get(i).get_source().getTitle());
-                    if(outerHits.getHits().get(i).get_source().getMedia().getVideo()!=null&&outerHits.getHits().get(i).get_source().getMedia().getVideo().size()!=0)
-                        trailerPromoVideo.add(outerHits.getHits().get(i).get_source().getMedia().getVideo().get(0));
-                }
-            }
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            trailersViewHolder = new TrailersViewHolder(context, trailerPromoTitle,trailerPromoImg,trailerPromoVideo,fragmentManager,watchFragCommInterface);
-            ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(trailersViewHolder);
+            fetchRetrofitForTrailerAndPromo(((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22trailer%22%20OR%20contentType:%22promo%22");
         } else if (holder.getItemViewType() == 7) {
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Comedy");
-            comedyImg.clear();
-            comedyTitle.clear();
-            for (int i=0;i<outerHits.getHits().size();i++)
-            {
-                if("comedy-clip".equals(outerHits.getHits().get(i).get_source().getContentType()))
-                {
-                    comedyImg.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    comedyTitle.add(outerHits.getHits().get(i).get_source().getTitle());
-                    if(outerHits.getHits().get(i).get_source().getMedia().getVideo()!=null&&outerHits.getHits().get(i).get_source().getMedia().getVideo().size()!=0)
-                        comedyVideo.add(outerHits.getHits().get(i).get_source().getMedia().getVideo().get(0));
-                }
-            }
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            comedyViewHolder = new ComedyViewHolder(context, comedyTitle,comedyImg,comedyVideo,fragmentManager,watchFragCommInterface);
-            ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(comedyViewHolder);
+            fetchRetrofitForComedy(((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22comedy-clip%22");
         } else {
         }
     }
@@ -289,15 +210,14 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
                 moviehits = response.body().getHits();
-                for (int i=0;i<moviehits.getHits().size();i++)
-                {
+                for (int i = 0; i < moviehits.getHits().size(); i++) {
                     moviesImg.add(moviehits.getHits().get(i).get_source().getCoverPic());
                     moviesTitle.add(moviehits.getHits().get(i).get_source().getTitle());
                     moviesSlug.add(moviehits.getHits().get(i).get_source().getSlug());
                 }
-                moviesViewHolder = new MoviesViewHolder(context,fragmentManager,moviesImg,moviesTitle,moviesSlug,watchFragCommInterface);
+                moviesViewHolder = new MoviesViewHolder(context, fragmentManager, moviesImg, moviesTitle, moviesSlug, watchFragCommInterface);
                 recyclerView.setAdapter(moviesViewHolder);
-                }
+            }
 
             @Override
             public void onFailure(Call<MovieData> call, Throwable t) {
@@ -308,7 +228,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        Log.e("print hits",""+outerHits.getHits().size());
+        Log.e("print hits", "" + outerHits.getHits().size());
         return 7;
     }
 
@@ -335,9 +255,9 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            if(view.getId()==R.id.carouselView);
+            if (view.getId() == R.id.carouselView) ;
             {
-                Toast.makeText(context,""+carouselView.getCurrentItem(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "" + carouselView.getCurrentItem(), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -355,7 +275,9 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Music",musicImg,musicTitle,musicAudio,new MusicGridFragment());
+            innerTitleClick(v, "Music",
+                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22",
+                    new MusicGridFragment());
         }
         //508001
     }
@@ -392,7 +314,9 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Social Buzz/Interviews",socialInterviewImg,socialInterviewTitle,socialInterviewVideo,new MusicGridFragment());
+            innerTitleClick(v, "Social Buzz/Interviews",
+                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22social-buzz%22%20OR%20contentType:%22interview%22",
+                    new MusicGridFragment());
         }
     }
 
@@ -427,7 +351,9 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Trailer & Promos",trailerPromoImg,trailerPromoTitle,trailerPromoVideo,new MusicGridFragment());
+            innerTitleClick(v, "Trailer & Promos",
+                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22trailer%22%20OR%20contentType:%22promo%22",
+                    new MusicGridFragment());
         }
     }
 
@@ -445,12 +371,144 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            innerTitleClick(v,"Comedy",comedyImg,comedyTitle,comedyVideo,new MusicGridFragment());
+            innerTitleClick(v, "Comedy",
+                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22comedy-clip%22",
+                    new MusicGridFragment());
         }
     }
 
-    private void innerTitleClick(View view,String toolbarTitle,List<String> img,List<String> title,List<String> audioVideoLink,Fragment fragment) {
-        watchFragCommInterface.carouselContainerClick(toolbarTitle,img,title,audioVideoLink,fragment);
-        }
+    private void innerTitleClick(View view, String toolbarTitle, String url, Fragment fragment) {
+        watchFragCommInterface.carouselContainerClick(toolbarTitle, url, fragment);
+    }
+
+    public void fetchRetrofitForMusic(final RecyclerView recyclerView, String url) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(url);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                outerHitsMusic = response.body().getHits();
+                layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(layoutManager);
+                musicAdapterViewHolder = new MusicAdapterViewHolder(context, response.body().getHits(), fragmentManager, watchFragCommInterface);
+                recyclerView.setAdapter(musicAdapterViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
+    public void fetchRetrofitForGallery(final RecyclerView recyclerView, String url) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(url);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                outerHitsGallery = response.body().getHits();
+                layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(layoutManager);
+                tvShowsViewHolder = new TvShowsViewHolder(context, fragmentManager, response.body().getHits(), watchFragCommInterface);
+                recyclerView.setAdapter(tvShowsViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
+    public void fetchRetrofitForSocialBuzzAndInterview(final RecyclerView recyclerView, String url) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(url);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                outerHitsSocialBuzz = response.body().getHits();
+                layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(layoutManager);
+                msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, response.body().getHits(), fragmentManager, watchFragCommInterface);
+                recyclerView.setAdapter(msocialBuzzOrInterViewsViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
+    public void fetchRetrofitForTrailerAndPromo(final RecyclerView recyclerView, String url) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(url);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                outerHitsTrailer = response.body().getHits();
+                layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(layoutManager);
+                trailersViewHolder = new TrailersViewHolder(context, response.body().getHits(), fragmentManager, watchFragCommInterface);
+                recyclerView.setAdapter(trailersViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
+    public void fetchRetrofitForComedy(final RecyclerView recyclerView, String url) {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(url);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                outerHitsComedy = response.body().getHits();
+                layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(layoutManager);
+                comedyViewHolder = new ComedyViewHolder(context, response.body().getHits(), fragmentManager, watchFragCommInterface);
+                recyclerView.setAdapter(comedyViewHolder);
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
+
+    public void hitRetrofitForCarousel(String url, final CarouselView carouselView) {
+        Log.e("inside hitRetrofit","hit retrofitforcar");
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(url);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                Log.e("inside onresposnes","hit retrofitforcar");
+                if (response.body().getHits().getHits().get(0).get_source().getProfilePic() != null)
+                    carouselImgWatch.add(response.body().getHits().getHits().get(0).get_source().getProfilePic());
+                else if (response.body().getHits().getHits().get(0).get_source().getMedia().getGallery() != null &&
+                        response.body().getHits().getHits().get(0).get_source().getMedia().getGallery().size() != 0)
+                    carouselImgWatch.add(response.body().getHits().getHits().get(0).get_source().getMedia().getGallery().get(0));
+                Log.e("inside hitRetrofit","hit retrofitforcar"+carouselImgWatch);
+                i=++i;
+                Log.e("inside hitRetrofit","iii"+i);
+                if (i<5)
+                    hitRetrofitForCarousel(allUrls.get(i),carouselView);
+                else if (i==5)
+                    carouselView.setPageCount(carouselImgWatch.size());
+                carouselView.setImageListener(imageListeners);
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
 }
 

@@ -30,8 +30,8 @@ public class FeedCelebrityRecyclerItemAdapter extends RecyclerView.Adapter<FeedC
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ((ViewHolder) holder).profile_image.setImageResource(R.drawable.ranveer1);
-        ((ViewHolder) holder).card_gallary1_img1.setImageResource(R.drawable.ranveer2);
+        //((ViewHolder) holder).profile_image.setImageResource(R.drawable.ranveer1);
+        //((ViewHolder) holder).card_gallary1_img1.setImageResource(R.drawable.ranveer2);
         ((ViewHolder) holder).tv_tag_desc.setText("#Actor");
         ((ViewHolder) holder).tv_tag_name.setText("Ranveer Singh");
         ((ViewHolder) holder).tv_name.setText("Ranveer Singh at the set of Padmavati");

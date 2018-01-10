@@ -18,7 +18,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/movie"
+        android:src="@drawable/no_image"
         android:scaleType="fitXY"/>
     <TextView
         android:layout_width="match_parent"

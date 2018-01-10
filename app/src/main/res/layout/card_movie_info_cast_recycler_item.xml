@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6"
-        android:src="@drawable/pooja2"
+        android:src="@drawable/no_image"
         android:scaleType="fitXY"
         android:id="@+id/card_movie_info_cast_recycler_item_image"/>
     <TextView

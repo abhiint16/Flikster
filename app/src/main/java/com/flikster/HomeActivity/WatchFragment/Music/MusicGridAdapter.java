@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.R;
-import com.flikster.Util.GlobalData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +25,14 @@ import java.util.List;
 public class MusicGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     FragmentManager fragmentManager;
-    List<String> img=new ArrayList<>();
-    List<String> title=new ArrayList<>();
-    List<String> audioVideoLink=new ArrayList<>();
     MusicGridFragment.WatchAudioVideoSendFromGridFrag watchAudioVideoSendFromGridFrag;
+    FeedInnerData feedInnerData;
+    String audioVideoLink;
 
-    public MusicGridAdapter(Context context, FragmentManager fragmentManager, List<String> img, List<String> title,
-                            List<String> audioVideoLink, MusicGridFragment.WatchAudioVideoSendFromGridFrag watchAudioVideoSendFromGridFrag) {
+    public MusicGridAdapter(Context context, FragmentManager fragmentManager, FeedInnerData feedInnerData, MusicGridFragment.WatchAudioVideoSendFromGridFrag watchAudioVideoSendFromGridFrag) {
         this.context = context;
         this.fragmentManager = fragmentManager;
-        this.img=img;
-        this.title=title;
-        this.audioVideoLink=audioVideoLink;
+        this.feedInnerData=feedInnerData;
         this.watchAudioVideoSendFromGridFrag=watchAudioVideoSendFromGridFrag;
     }
 
@@ -62,25 +58,25 @@ public class MusicGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         else if(holder.getItemViewType()==1)
         {
-            Glide.with(context).load(img.get(position).trim()).into(((ViewHolder2)holder).card_music_recycler_item_img);
-            ((ViewHolder2)holder).card_music_recycler_item_title.setText(title.get(position));
+            if (feedInnerData.getHits().get(position).get_source().getProfilePic()!=null)
+            Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic().trim()).into(((ViewHolder2)holder).card_music_recycler_item_img);
+            if (feedInnerData.getHits().get(position).get_source().getTitle()!=null)
+            ((ViewHolder2)holder).card_music_recycler_item_title.setText(feedInnerData.getHits().get(position).get_source().getTitle());
         }
     }
 
     @Override
     public int getItemCount() {
-        if(img.size()==0)
-            return 1;
-        else
-        return img.size();
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
+            return feedInnerData.getHits().size();
+        else return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(img.size()==0)
-            return 0;
-        else
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
             return 1;
+        else return 0;
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
@@ -105,8 +101,23 @@ public class MusicGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            watchAudioVideoSendFromGridFrag.sendAudioVideoLink(title.get(getAdapterPosition()),img.get(getAdapterPosition()),title.get(getAdapterPosition()),
-                    audioVideoLink.get(getAdapterPosition()),new SongByMovieFragmentItemClick());
+            if (feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia()!=null)
+            {
+                if (feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getAudio()!=null&&
+                        feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getAudio().size()!=0)
+                {
+                    audioVideoLink=feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getAudio().get(0);
+                }
+                else if (feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo()!=null&&
+                        feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().size()!=0)
+                {
+                    audioVideoLink=feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0);
+                }
+            }
+            watchAudioVideoSendFromGridFrag.sendAudioVideoLink(feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    audioVideoLink,new SongByMovieFragmentItemClick());
         }
     }
 }

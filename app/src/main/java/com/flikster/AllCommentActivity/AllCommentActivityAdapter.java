@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.flikster.R;
 
+import java.util.List;
+
 /**
  * Created by abhishek on 25-11-2017.
  */
@@ -19,6 +21,12 @@ public class AllCommentActivityAdapter extends RecyclerView.Adapter<RecyclerView
 
     public AllCommentActivityAdapter(CommentsData.CommentsInnerData hits) {
         this.hits=hits;
+    }
+
+    public void updateList(List<CommentsData.CommentsInnerData.CommentsInnerInnerData> a)
+    {
+        hits.setHits(a);
+        notifyDataSetChanged();
     }
 
     @Override

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
-import com.flikster.Util.GlobalData;
 
 import java.util.List;
 
@@ -21,7 +20,6 @@ import java.util.List;
  */
 
 public class SongByMovieFragmentItemPlayClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    GlobalData globalData = new GlobalData();
     FragmentManager fragmentManager;
     Context context;
     List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts;

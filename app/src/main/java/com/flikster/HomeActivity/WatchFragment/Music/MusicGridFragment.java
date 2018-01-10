@@ -9,17 +9,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 01-11-2017.
@@ -35,10 +43,9 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart, toolbar_frag_multiicons_overflow;
     FragmentManager fragmentManager;
     String tootbarTitle;
-    List<String> img=new ArrayList<>();
-    List<String> title=new ArrayList<>();
-    List<String> audioVideoLink=new ArrayList<>();
     WatchAudioVideoSendFromGridFrag watchAudioVideoSendFromGridFrag;
+    String url;
+    ApiInterface apiInterface;
 
     @Nullable
     @Override
@@ -46,7 +53,26 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
         view = inflater.inflate(R.layout.fragment_music, container, false);
         initializeViews();
         initializeRest();
+        initRetrofit();
         return view;
+    }
+
+    private void initRetrofit() {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(url);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                layoutManagerShopByVideoFragment = new GridLayoutManager(getActivity(), 2);
+                fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerShopByVideoFragment);
+                musicGridAdapter = new MusicGridAdapter(getActivity(), fragmentManager,response.body().getHits(),watchAudioVideoSendFromGridFrag);
+                fragment_common_recyclerview_recycler.setAdapter(musicGridAdapter);
+            }
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
     @Override
@@ -64,10 +90,6 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     private void initializeRest() {
         toolbar_frag_multiicons_title.setText(tootbarTitle);
         fragmentManager = getActivity().getSupportFragmentManager();
-        layoutManagerShopByVideoFragment = new GridLayoutManager(getActivity(), 2);
-        fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerShopByVideoFragment);
-        musicGridAdapter = new MusicGridAdapter(getActivity(), fragmentManager,img,title,audioVideoLink,watchAudioVideoSendFromGridFrag);
-        fragment_common_recyclerview_recycler.setAdapter(musicGridAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         toolbar_frag_multiicons_notification.setVisibility(View.GONE);
         toolbar_frag_multiicons_cart.setVisibility(View.GONE);
@@ -93,12 +115,10 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
 //        }
     }
 
-    public void getAllData(String tootbarTitle, List<String> img,List<String> title,List<String> audioVideoLink)
+    public void getAllData(String tootbarTitle,String url)
     {
         this.tootbarTitle=tootbarTitle;
-        this.img=img;
-        this.title=title;
-        this.audioVideoLink=audioVideoLink;
+        this.url=url;
     }
 
     public interface WatchAudioVideoSendFromGridFrag {

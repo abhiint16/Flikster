@@ -42,7 +42,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:elevation="10dp"
-            android:src="@drawable/camera"
+            app:backgroundTint="@color/white"
+            android:src="@drawable/add_plus_icon"
             app:fabSize="normal" />
     </RelativeLayout>
 

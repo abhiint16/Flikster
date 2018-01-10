@@ -36,22 +36,22 @@ public class ProfileCollectionRecyclerItemAdapter extends RecyclerView.Adapter<P
     public void onBindViewHolder(ViewHolder holder, int position) {
         if(a==1)
         {
-            holder.imageView.setImageResource(R.drawable.pooja2);
+            holder.imageView.setImageResource(R.drawable.no_image);
         }
         else if(a==2)
         {
-            holder.imageView.setImageResource(R.drawable.ranveer2);
+            //holder.imageView.setImageResource(R.drawable.ranveer2);
         }
         else if(a==3)
         {
             if(b==true)
             {
-                holder.imageView.setImageResource(R.drawable.legging1);
+                //holder.imageView.setImageResource(R.drawable.legging1);
                 b=false;
             }
             else if(b==false)
             {
-                holder.imageView.setImageResource(R.drawable.legging2);
+                //holder.imageView.setImageResource(R.drawable.legging2);
                 b=true;
             }
         }

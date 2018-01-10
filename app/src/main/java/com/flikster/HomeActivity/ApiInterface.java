@@ -61,6 +61,8 @@ public interface ApiInterface {
                                      @Query("size") Integer i,
                                      @Query("from") Integer m,
                                      @Query("q") String c);
+    @GET
+    Call<FeedData> getTopRatedMovies(@Url String url);
 
     @GET
     Call<MovieData> getMovieData(@Url String url);

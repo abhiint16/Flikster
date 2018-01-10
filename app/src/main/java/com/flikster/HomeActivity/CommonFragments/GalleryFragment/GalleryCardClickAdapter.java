@@ -18,14 +18,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
-import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsBottomHorRecyclerAdapter;
-import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.Util.Common;
-import com.flikster.Util.GlobalData;
-import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
 import com.flikster.R;
 
 import java.util.List;
@@ -39,7 +35,6 @@ import retrofit2.Response;
  */
 
 public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    GlobalData globalData;
     Context context;
     FragmentManager fragmentManager;
     RecyclerView recyclerView;
@@ -56,7 +51,6 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
                                    GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick, String userId) {
         this.context = context;
         this.userId = userId;
-        globalData = new GlobalData();
         this.fragmentManager = fragmentManager;
         this.galleryImgLinks = galleryImgLinks;
         this.galleryRecommendationItemClick = galleryRecommendationItemClick;

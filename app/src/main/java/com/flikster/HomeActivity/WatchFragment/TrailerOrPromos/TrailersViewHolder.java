@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
@@ -26,29 +27,18 @@ import java.util.List;
  */
 
 public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> imag=new ArrayList<>();
     Context context;
-    List<String> trailerPromoImg=new ArrayList<>();
-    List<String> trailerPromoTitle=new ArrayList<>();
-    List<String> trailerPromoVideo=new ArrayList<>();
     FragmentManager fragmentManager;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-    public TrailersViewHolder(Context context, List<String> trailerPromoTitle, List<String> trailerPromoImg,List<String> trailerPromoVideo, FragmentManager fragmentManager,
+    FeedInnerData feedInnerData;
+    public TrailersViewHolder(Context context,
+                              FeedInnerData feedInnerData, FragmentManager fragmentManager,
                               WatchFragment.WatchFragCommInterface watchFragCommInterface) {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");
-        imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");
-        imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
         this.context=context;
-        this.trailerPromoImg=trailerPromoImg;
-        this.trailerPromoTitle=trailerPromoTitle;
-        this.trailerPromoVideo=trailerPromoVideo;
+        this.feedInnerData=feedInnerData;
         this.fragmentManager = fragmentManager;
         this.watchFragCommInterface=watchFragCommInterface;
     }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType==0)
@@ -71,25 +61,25 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
         else
         {
-            Glide.with(context).load(trailerPromoImg.get(position)).into(((ViewHolder2)holder).carousel_image);
-            ((ViewHolder2)holder).carousel_title.setText(trailerPromoTitle.get(position));
+            if (feedInnerData.getHits().get(position).get_source().getProfilePic()!=null)
+            Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder2)holder).carousel_image);
+            if (feedInnerData.getHits().get(position).get_source().getTitle()!=null)
+            ((ViewHolder2)holder).carousel_title.setText(feedInnerData.getHits().get(position).get_source().getTitle());
         }
     }
 
     @Override
     public int getItemCount() {
-        if(trailerPromoImg.size()==0)
-            return 1;
-        else
-            return trailerPromoImg.size();
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
+            return feedInnerData.getHits().size();
+        else return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(trailerPromoImg.size()==0)
-            return 0;
-        else
+        if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
             return 1;
+        else return  0;
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -104,10 +94,10 @@ public class TrailersViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         @Override
         public void onClick(View view) {
-            watchFragCommInterface.carouselItemClick(trailerPromoTitle.get(getAdapterPosition()),
-                    trailerPromoImg.get(getAdapterPosition()),
-                    trailerPromoTitle.get(getAdapterPosition()),
-                    trailerPromoVideo.get(getAdapterPosition()),"video",new MovieSongsListFragment());
+            watchFragCommInterface.carouselItemClick(feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),"video",new MovieSongsListFragment());
         }
     }
 
