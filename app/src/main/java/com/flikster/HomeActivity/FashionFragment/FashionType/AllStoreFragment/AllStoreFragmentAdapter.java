@@ -81,9 +81,9 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     public String formatRole(List<String> role) {
         String roleString = "";
         for (int i = 0; i < role.size(); i++) {
-            roleString = roleString + ", " + role.get(i);
+            roleString = roleString + ", #" + role.get(i);
         }
-        return roleString;
+        return roleString.substring(1);
     }
 
     @Override

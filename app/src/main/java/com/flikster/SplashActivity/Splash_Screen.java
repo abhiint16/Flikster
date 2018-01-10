@@ -11,7 +11,7 @@ import com.flikster.R;
 
 public class Splash_Screen extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT=2000;
+    private static int SPLASH_TIME_OUT=2500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

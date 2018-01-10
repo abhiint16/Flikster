@@ -502,9 +502,9 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
                 Log.e("inside hitRetrofit","hit retrofitforcar"+carouselImgWatch);
                 Log.e("inside hitRetrofit","iii"+i);
-                if (i<5)
+                if (carouselImgWatch.size()<5)
                     hitRetrofitForCarousel(allUrls.get(i),carouselView);
-                else if (i==5)
+                else if (carouselImgWatch.size()==5)
                     carouselView.setPageCount(carouselImgWatch.size());
                 carouselView.setImageListener(imageListeners);
             }

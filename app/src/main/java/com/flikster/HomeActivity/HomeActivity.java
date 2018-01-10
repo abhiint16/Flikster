@@ -147,6 +147,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
+    TextView footer_drawer_layout_aboutus,footer_drawer_layout_help,footer_drawer_layout_blog,footer_drawer_layout_privacy,
+    footer_drawer_layout_terms,footer_drawer_layout_business;
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
     Context mContext;
@@ -357,6 +359,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         rating.setOnClickListener(this);
         plus.setOnClickListener(this);
         camera_fab.setOnClickListener(this);
+        footer_drawer_layout_aboutus.setOnClickListener(this);
+        footer_drawer_layout_blog.setOnClickListener(this);
+        footer_drawer_layout_business.setOnClickListener(this);
+        footer_drawer_layout_help.setOnClickListener(this);
+        footer_drawer_layout_terms.setOnClickListener(this);
+        footer_drawer_layout_privacy.setOnClickListener(this);
         fragmentManager = getSupportFragmentManager();
         toolbar_main.setWillNotCacheDrawing(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -552,6 +560,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar_cart_btn = (LinearLayout) findViewById(R.id.toolbar_cart_btn);
         toolbar_main_title = (TextView) findViewById(R.id.toolbar_main_title);
+        footer_drawer_layout_aboutus=(TextView)findViewById(R.id.footer_drawer_layout_aboutus);
+        footer_drawer_layout_blog=(TextView)findViewById(R.id.footer_drawer_layout_blog);
+        footer_drawer_layout_business=(TextView)findViewById(R.id.footer_drawer_layout_business);
+        footer_drawer_layout_help=(TextView)findViewById(R.id.footer_drawer_layout_help);
+        footer_drawer_layout_terms=(TextView)findViewById(R.id.footer_drawer_layout_terms);
+        footer_drawer_layout_privacy=(TextView)findViewById(R.id.footer_drawer_layout_privacy);
         toolbar_search_btn = (SearchView) findViewById(R.id.toolbar_search_btn);
         toolbar_navigation_view_open_btn = (LinearLayout) findViewById(R.id.toolbar_navigation_view_open_btn);
         toolbar_pref_spinner = (Spinner) findViewById(R.id.toolbar_pref_spinner);
@@ -650,7 +664,20 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             navigationMenuitemsAction("Flikster", "Return Policy");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_terms) {
             navigationMenuitemsAction("Flikster", "Terms");
-        } else if (viewId == R.id.right_navigation_bar_non_loggedin_login_btn) {
+        }else if (viewId == R.id.footer_drawer_layout_aboutus) {
+            navigationMenuitemsAction("Flikster", "About Us");
+        }else if (viewId == R.id.footer_drawer_layout_blog) {
+            navigationMenuitemsAction("Flikster", "Blog");
+        }else if (viewId == R.id.footer_drawer_layout_business) {
+            navigationMenuitemsAction("Flikster", "Business");
+        }else if (viewId == R.id.footer_drawer_layout_help) {
+            navigationMenuitemsAction("Flikster", "Help");
+        }else if (viewId == R.id.footer_drawer_layout_privacy) {
+            navigationMenuitemsAction("Flikster", "Privacy");
+        }else if (viewId == R.id.footer_drawer_layout_terms) {
+            navigationMenuitemsAction("Flikster", "Terms");
+        }
+        else if (viewId == R.id.right_navigation_bar_non_loggedin_login_btn) {
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);

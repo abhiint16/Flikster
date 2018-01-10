@@ -168,6 +168,16 @@ public class FeedInnerData {
         private String slug;
         @SerializedName("name")
         private String name;
+        @SerializedName("tag")
+        private List<String> tag;
+
+        public List<String> getTag() {
+            return tag;
+        }
+
+        public void setTag(List<String> tag) {
+            this.tag = tag;
+        }
 
         public String getId() {
             return id;
@@ -222,6 +232,16 @@ public class FeedInnerData {
         private String slug;
         @SerializedName("name")
         private String name;
+        @SerializedName("tag")
+        private List<String> tag;
+
+        public List<String> getTag() {
+            return tag;
+        }
+
+        public void setTag(List<String> tag) {
+            this.tag = tag;
+        }
 
         public String getId() {
             return id;
