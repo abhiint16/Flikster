@@ -489,8 +489,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         pref.add("Kollywood");
         pref.add("Mollywood");
         pref.add("Sandalwood");
-        ArrayAdapter<String> prefArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, pref);
-        prefArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        ArrayAdapter<String> prefArrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_item,R.id.spinner_item_tv, pref);
+        prefArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
         toolbar_pref_spinner.setAdapter(prefArrayAdapter);
 
         try {
