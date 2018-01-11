@@ -18,6 +18,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -32,6 +34,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -117,6 +120,9 @@ import com.google.android.gms.vision.text.Line;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -182,7 +188,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     //Bottom Navigation
     private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
-    private AHBottomNavigation bottomNavigation;
+    AHBottomNavigation bottomNavigation;
 
     static int TAKE_PICTURE = 1;
     final int ACTIVITY_SELECT_IMAGE = 2;
@@ -201,6 +207,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_home);
+        bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
         initializeViews();
         setPrefIfNull();
         setNavigationBar();
@@ -246,21 +253,28 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     private void bottomnavigationBar() {
-        bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+
 // Create items
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed,
-                R.drawable.homeunselectedbottom, R.color.color_tab_1);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed, R.drawable.homeunselectedbottom, R.color.color_tab_1);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watchunselected, R.color.color_tab_1);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.addsquare, R.color.color_tab_1);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionunselectedbottom, R.color.color_tab_1);
         AHBottomNavigationItem item5 = new AHBottomNavigationItem("My Account", R.drawable.profileunactive, R.color.color_tab_1);
 
 // Add items
-        bottomNavigation.addItem(item1);
+        bottomNavigationItems.add(item1);
+        bottomNavigationItems.add(item2);
+        bottomNavigationItems.add(item3);
+        bottomNavigationItems.add(item4);
+        bottomNavigationItems.add(item5);
+
+        /*bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
         bottomNavigation.addItem(item3);
         bottomNavigation.addItem(item4);
-        bottomNavigation.addItem(item5);
+        bottomNavigation.addItem(item5);*/
+
+        bottomNavigation.addItems(bottomNavigationItems);
 
         bottomNavigation.setForceTint(true);
         bottomNavigation.setTranslucentNavigationEnabled(true);
@@ -273,56 +287,24 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         bottomNavigation.setAccentColor(Color.parseColor("#FF4081"));
         bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
         bottomNavigation.setForceTint(true);
-//        bottomNavigation.setColored(true);
 
-// Set listeners
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
-            public boolean onTabSelected(final int position, boolean wasSelected) {
-                Toast.makeText(getApplicationContext(), "Pos"+position, Toast.LENGTH_SHORT).show();
+            public boolean onTabSelected(int position, boolean wasSelected) {
                 if (position == 0) {
-                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
-                    settabChangeIconWithPostion(1);
                     beginTransact(new FeedFragment());
                 } else if (position == 1) {
-                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
-                    settabChangeIconWithPostion(2);
                     beginTransact(new WatchFragment());
                 } else if (position == 2) {
-                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
                 } else if (position == 3) {
-                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
-                    settabChangeIconWithPostion(4);
                     beginTransact(new FashionLandingFragment());
                 } else if (position == 4) {
-                    Toast.makeText(getApplicationContext(), "Click"+position, Toast.LENGTH_SHORT).show();
-                    settabChangeIconWithPostion(5);
                     beginTransact(new MyAccountFragment());
                 }
-
                 return true;
             }
         });
-
-       /* bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
-            @Override
-            public void onPositionChange(int y) {
-                // Manage the new y position
-            }
-        });*/
-
-
     }
-
-    private void settabChangeIconWithPostion(final int tabPos) {
-        bottomNavigation.setCurrentItem(tabPos);
-        bottomNavigation.setAccentColor(Color.parseColor("#FF4081"));
-        bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
-        bottomNavigation.setForceTint(true);
-    }
-
-
-
     private void checkForLaunch() {
         if ("MyBag".equals(getIntent().getStringExtra("MyBag"))) {
             fragmentManager.beginTransaction()
@@ -1241,6 +1223,5 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             }
         });
     }
-
 
 }
