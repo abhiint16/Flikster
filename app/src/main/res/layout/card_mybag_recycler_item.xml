@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:background="@color/white"
     android:orientation="vertical"
@@ -28,6 +28,7 @@
             android:layout_weight="1"
             android:background="@drawable/black_round_border"
             android:padding="5dp"
+            android:scaleType="fitXY"
             android:src="@drawable/no_image" />
 
         <LinearLayout
@@ -40,21 +41,21 @@
             <TextView
                 android:id="@+id/notification_item_title"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="product title "
+                android:text="product title"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/notification_item_desc"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="product desc"
-                android:textSize="12sp" />
+                android:textSize="12sp" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,12 +71,12 @@
                     android:text="Color: " />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:id="@+id/notification_item_color"
-                    android:text="null"
-                    android:gravity="center_vertical|start" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|start"
+                    android:text="null" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -85,22 +86,13 @@
                     android:text="Size: " />
 
                 <TextView
+                    android:id="@+id/notification_item_size"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|start"
-                    android:text="null"
-                    android:id="@+id/notification_item_size"/>
+                    android:text="null" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:gravity="end|center_vertical"
-                    android:text="null"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:id="@+id/notification_item_price"/>
             </LinearLayout>
 
             <LinearLayout
@@ -108,7 +100,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|start"
@@ -122,13 +114,13 @@
                     android:layout_weight="2"
                     android:gravity="center_vertical|start"
                     android:text="null"
-                    android:textSize="16sp" />
+                    android:textSize="16sp" />-->
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
-                    android:gravity="center_vertical|end"
+                    android:gravity="center_vertical|start"
                     android:text="Quantity :"
                     android:textColor="@color/black"
                     android:textSize="12sp"
@@ -139,12 +131,31 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:gravity="center_vertical|end"
-                    android:text="2"
+                    android:gravity="center_vertical|start"
+                    android:text="1"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center_vertical|end"
+                    android:text="Price :"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/notification_item_price"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:text="null"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
                 <!--<ImageButton
                     android:id="@+id/plus_btn"
                     android:layout_width="0dp"

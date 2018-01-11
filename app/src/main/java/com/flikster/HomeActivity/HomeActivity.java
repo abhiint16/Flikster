@@ -395,7 +395,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                     UserId = SharedPrefsUtil.getStringPreference(getApplicationContext(),
                             "USER_ID");
                     Log.e("LoginUserId", UserId);
-                    intent.putExtra("userId", "abhiint");
+                    intent.putExtra("userId", UserId);
                 } else {
                     intent.putExtra("userId", "abhiint");
                 }

@@ -21,19 +21,12 @@ import java.util.List;
 
 public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Integer> color=new ArrayList<>();
-    List<String> title=new ArrayList<>();
-    List<String> desc=new ArrayList<>();
-    List<Integer> img=new ArrayList<>();
-    MyBagData.MyBagInnerData myBagInnerData;
+    List<MyBagData.MyBagInnerData> myBagInnerData;
     Context context;
 
-    public MyBagAdapter(Context context, MyBagData.MyBagInnerData myBagInnerData) {
+    public MyBagAdapter(Context context, List<MyBagData.MyBagInnerData> myBagInnerData) {
         color.add(R.color.colorAccent);color.add(R.color.colorPrimary);color.add(R.color.colorCreateAccountSelected);
         color.add(R.color.colorAuthenticationHeader);
-        title.add("Men's Capri Athletic Shoes");title.add("Arjun Reddy Glasses");title.add("Men's Capri Athletic Shoes");
-        title.add("Arjun Reddy Glasses");
-        desc.add("Sperry Shoes");desc.add("Round Glasses");desc.add("Sperry Shoes");desc.add("Round Glasses");
-        img.add(R.drawable.shoes);img.add(R.drawable.shades);img.add(R.drawable.shoes);img.add(R.drawable.shades);
         this.myBagInnerData=myBagInnerData;
         this.context=context;
     }
@@ -56,18 +49,28 @@ public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         /*if (holder.getItemViewType()==0)
         {*/
-        Glide.with(context).load(myBagInnerData.getHits().get(position).get_source().getProductDetails().getProductPic()).into(((ViewHolder1)holder).notification_item_img);
-            ((ViewHolder1)holder).notification_item_title.setText(myBagInnerData.getHits().get(position).get_source().getProductDetails().getProductTitle());
-            ((ViewHolder1)holder).notification_item_color.setText(myBagInnerData.getHits().get(position).get_source().getColor());
-        ((ViewHolder1)holder).notification_item_size.setText(myBagInnerData.getHits().get(position).get_source().getProductDetails().getSize());
+        if (myBagInnerData.get(position).getProductDetails().getProductPic()!=null)
+            Glide.with(context).load(myBagInnerData.get(position).getProductDetails().getProductPic()).into(((ViewHolder1)holder).notification_item_img);
+        if (myBagInnerData.get(position).getProductDetails().getProductTitle()!=null)
+            ((ViewHolder1)holder).notification_item_title.setText(myBagInnerData.get(position).getProductDetails().getProductTitle());
+        else if (myBagInnerData.get(position).getProductDetails().getProductSlug()!=null)
+            ((ViewHolder1)holder).notification_item_title.setText(myBagInnerData.get(position).getProductDetails().getProductSlug());
+        if (myBagInnerData.get(position).getColor()!=null)
+        ((ViewHolder1)holder).notification_item_color.setText(myBagInnerData.get(position).getColor());
+        if (myBagInnerData.get(position).getSize()!=null)
+        ((ViewHolder1)holder).notification_item_size.setText(myBagInnerData.get(position).getSize());
+        if (myBagInnerData.get(position).getProductDetails().getQuantity()!=null)
+            ((ViewHolder1)holder).notification_item_quantity.setText(myBagInnerData.get(position).getProductDetails().getQuantity());
+        if (myBagInnerData.get(position).getProductDetails().getPrice()!=null)
+            ((ViewHolder1)holder).notification_item_price.setText(myBagInnerData.get(position).getProductDetails().getPrice()+" /-");
 //        ((ViewHolder1)holder).notification_item_quantity.setText(myBagInnerData.getHits().get(position).get_source().getProductDetails().getQuantity());
         //}
     }
 
     @Override
     public int getItemCount() {
-        if(myBagInnerData.getHits()!=null&&myBagInnerData.getHits().size()!=0)
-            return myBagInnerData.getHits().size();
+        if(myBagInnerData!=null&&myBagInnerData.size()!=0)
+            return myBagInnerData.size();
         else return 0;
     }
 
@@ -86,7 +89,6 @@ public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public ViewHolder1(View itemView) {
             super(itemView);
             notification_item_color=(TextView)itemView.findViewById(R.id.notification_item_color);
-            notification_item_desc=(TextView)itemView.findViewById(R.id.notification_item_desc);
             notification_item_title=(TextView)itemView.findViewById(R.id.notification_item_title);
             notification_item_img=(ImageView)itemView.findViewById(R.id.notification_item_img);
             notification_item_quantity=(TextView) itemView.findViewById(R.id.notification_item_quantity);

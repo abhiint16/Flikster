@@ -368,7 +368,8 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                         role.addAll(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getRole());
                 }
                 allStoreInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), "abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), SharedPrefsUtil.getStringPreference(context.getApplicationContext(),
+                                "USER_ID"),
                         hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
@@ -459,7 +460,8 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                         role.addAll(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getRole());
                 }
                 allStoreInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), "abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), SharedPrefsUtil.getStringPreference(context.getApplicationContext(),
+                                "USER_ID"),
                         hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
@@ -561,7 +563,8 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                         role.addAll(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getRole());
                 }
                 allStoreInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), "abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), SharedPrefsUtil.getStringPreference(context.getApplicationContext(),
+                                "USER_ID"),
                         hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
@@ -662,7 +665,8 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                         role.addAll(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getRole());
                 }
                 allStoreInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), "abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), SharedPrefsUtil.getStringPreference(context.getApplicationContext(),
+                                "USER_ID"),
                         hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
@@ -770,7 +774,8 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                         role.addAll(hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getRole());
                 }
                 allStoreInterafce.onGalleryContainerClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), "abhiint",
+                        hits.getHits().get(getAdapterPosition()).get_source().getSize(), SharedPrefsUtil.getStringPreference(context.getApplicationContext(),
+                                "USER_ID"),
                         hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
@@ -807,15 +812,15 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
         if (hits.getHits().get(pos).get_source().getSize() != null) {
             allStoreInterafce.onBuyClick(hits.getHits().get(pos).get_source().getId(),
-                    hits.getHits().get(pos).get_source().getSize(), "abhiint",
+                    hits.getHits().get(pos).get_source().getSize(), SharedPrefsUtil.getStringPreference(context.getApplicationContext(),
+                            "USER_ID"),
                     hits.getHits().get(pos).get_source().getPrice(),
                     hits.getHits().get(pos).get_source().getProfilePic(),
                     hits.getHits().get(pos).get_source().getProductInfo(),
                     hits.getHits().get(pos).get_source().getSlug(),
                     hits.getHits().get(pos).get_source().getImageGallery(), new ProductOnClick());
         }
+        else if(hits.getHits().get(pos).get_source().getSize() == null)
         Toast.makeText(context,"size is null for this item",Toast.LENGTH_SHORT).show();
-
     }
-
 }

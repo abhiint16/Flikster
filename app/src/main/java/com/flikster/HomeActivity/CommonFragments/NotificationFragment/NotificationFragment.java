@@ -65,6 +65,7 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
 
         nodatalayout = (LinearLayout) view.findViewById(R.id.nodatalayout);
+        //nodatalayout.setVisibility(View.VISIBLE);
         notifcationimg = (ImageView) view.findViewById(R.id.notifcationimg);
         nodataavailtxt = (TextView) view.findViewById(R.id.nodataavailtxt);
         backhomebtn = (Button) view.findViewById(R.id.backhomebtn);

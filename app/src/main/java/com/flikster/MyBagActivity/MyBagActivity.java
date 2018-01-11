@@ -21,6 +21,9 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.CheckoutActivity.MyBagContinueOnClickActivity;
 import com.flikster.R;
+import com.leo.simplearcloader.SimpleArcLoader;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,8 +45,9 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     TextView nodataavailtxt;
     TextView toolbar_frag_multiicons_title;
     ApiInterface apiInterface;
-    MyBagData.MyBagInnerData myBagInnerData;
+    List<MyBagData.MyBagInnerData> myBagInnerData;
     Context context;
+    SimpleArcLoader simpleArcLoader;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,17 +60,21 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void getCartData() {
-        apiInterface = ApiClient.getClient("http://apiservice-es.flikster.com/cart/_search/").create(ApiInterface.class);
+        /*apiInterface = ApiClient.getClient("http://apiservice-es.flikster.com/cart/_search/").create(ApiInterface.class);
         Call<MyBagData> call = apiInterface.getMyBagData("http://apiservice-es.flikster.com/cart/_search?pretty=true&sort=createdAt:desc&q=userId:" +
-                getIntent().getStringExtra("userId"));
+                getIntent().getStringExtra("userId"));*/
         //Implementation Pending for New Response
-//        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/").create(ApiInterface.class);
-//        Call<MyBagData> call = apiInterface.getMyBagData("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/Nagarani/");
+        simpleArcLoader.setVisibility(View.VISIBLE);
+        simpleArcLoader.start();
+        apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/").create(ApiInterface.class);
+        Call<MyBagData> call = apiInterface.getMyBagData("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/"+getIntent().getStringExtra("userId"));
         call.enqueue(new Callback<MyBagData>() {
             @Override
             public void onResponse(Call<MyBagData> call, Response<MyBagData> response) {
-                myBagInnerData = response.body().getHits();
+                myBagInnerData = response.body().getItems();
                 myBagAdapter = new MyBagAdapter(context, myBagInnerData);
+                simpleArcLoader.setVisibility(View.GONE);
+                simpleArcLoader.stop();
                 fragment_common_recyclerview_recycler.setAdapter(myBagAdapter);
             }
 
@@ -110,7 +118,7 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
         fragment_common_recyclerview_recycler = (RecyclerView) findViewById(R.id.fragment_common_recyclerview_recycler);
         activity_my_bag_bottom_continue_btn = (Button) findViewById(R.id.activity_my_bag_bottom_continue_btn);
         toolbar_frag_multiicons_back_navigation = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-
+        simpleArcLoader=(SimpleArcLoader)findViewById(R.id.arc_loader);
         nodatalayout = (LinearLayout) findViewById(R.id.nodatalayout);
         notifcationimg = (ImageView) findViewById(R.id.notifcationimg);
         nodataavailtxt = (TextView) findViewById(R.id.nodataavailtxt);

@@ -257,12 +257,10 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         call.enqueue(new Callback<ProductDetailsDataToSend>() {
             @Override
             public void onResponse(Call<ProductDetailsDataToSend> call, Response<ProductDetailsDataToSend> response) {
-                Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
-                Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
+                Toast.makeText(getActivity(), "Added to Cart.....fetching details", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), MyBagActivity.class);
                 intent.putExtra("userId", userId);
                 startActivity(intent);
-                //getCartData(userId);
             }
 
             @Override
@@ -287,12 +285,6 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         this.productTitle = productTitle;
         this.productSlug = productSlug;
         this.imageGallery = imageGallery;
-        Log.e("check userId", "" + this.userId);
-        Log.e("check userId", "" + this.price);
-        Log.e("check Size", "" + this.size);
-        Log.e("check userId", "" + this.productId);
-        Log.e("check userId", "" + this.productSlug);
-        Log.e("check userId", "" + this.imageGallery);
     }
 
     @Override
