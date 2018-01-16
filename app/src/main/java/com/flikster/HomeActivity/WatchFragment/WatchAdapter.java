@@ -505,8 +505,12 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 if (carouselImgWatch.size()<5)
                     hitRetrofitForCarousel(allUrls.get(i),carouselView);
                 else if (carouselImgWatch.size()==5)
+                {
+                    Log.e("print size",""+carouselImgWatch.size());
+                    carouselView.setImageListener(imageListeners);
                     carouselView.setPageCount(carouselImgWatch.size());
-                carouselView.setImageListener(imageListeners);
+
+                }
             }
 
             @Override

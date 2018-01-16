@@ -120,6 +120,10 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else if (viewType == 100) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_no_comments, parent, false);
             return new ViewHolder100(view);
+        }else if(viewType==200)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnull, parent, false);
+            return new ViewHolder200(view);
         }
         return null;
     }
@@ -419,6 +423,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                             return 4;
                     }
                 }
+                return 200;
 
             }
             return 100;
@@ -1304,6 +1309,13 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         public ViewHolder100(View itemView) {
             super(itemView);
             activity_no_comments_tv = (TextView) itemView.findViewById(R.id.activity_no_comments_tv);
+        }
+    }
+
+    public class ViewHolder200 extends RecyclerView.ViewHolder {
+
+        public ViewHolder200(View itemView) {
+            super(itemView);
         }
     }
 
