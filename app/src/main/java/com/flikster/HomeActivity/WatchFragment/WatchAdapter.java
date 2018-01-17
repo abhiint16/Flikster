@@ -46,7 +46,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     Context context;
     FragmentManager fragmentManager;
     List<Integer> type = new ArrayList<>();
-    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
     MusicAdapterViewHolder musicAdapterViewHolder;
     SocialBuzzOrInterViewsViewHolder msocialBuzzOrInterViewsViewHolder;
     TrailersViewHolder trailersViewHolder;
@@ -134,7 +134,6 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 1) {
             carouselImgWatch.clear();
-            Boolean audio = false, tv = false, social = false, movie = false, trailer = false, comedy = false;
             allUrls.clear();
             i=0;
             allUrls.add("http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=1&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22");
@@ -144,41 +143,6 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             allUrls.add("http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=1&from=0&pretty=true&q=contentType:%22comedy-clip%22");
             Log.e("check position 0",""+allUrls.size()+"and"+i);
             hitRetrofitForCarousel(allUrls.get(0),((ViewHolder1) holder).carouselView);
-            /*for (int i=0;i<outerHits.getHits().size();i++)
-            {
-                if ("audio-song".equals(outerHits.getHits().get(i).get_source().getContentType())&&audio==false)
-                {
-                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    audio=true;
-                }
-                if ("gallery".equals(outerHits.getHits().get(i).get_source().getContentType())&&tv==false)
-                {
-                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getMedia().getGallery().get(0));
-                    tv=true;
-                }
-                if (("social-buzz".equals(outerHits.getHits().get(i).get_source().getContentType())||
-                        "interview".equals(outerHits.getHits().get(i).get_source().getContentType()))&&social==false)
-                {
-                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    social=true;
-                }
-                if ("movies".equals(outerHits.getHits().get(i).get_source().getContentType())&&movie==false)
-                {
-                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    movie=true;
-                }
-                if (("trailer".equals(outerHits.getHits().get(i).get_source().getContentType())||
-                        "prome".equals(outerHits.getHits().get(i).get_source().getContentType()))&&trailer==false)
-                {
-                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    trailer=true;
-                }
-                if ("comedy-clip".equals(outerHits.getHits().get(i).get_source().getContentType())&&comedy==false)
-                {
-                    carouselImgWatch.add(outerHits.getHits().get(i).get_source().getProfilePic());
-                    comedy=true;
-                }
-            }*/
         } else if (holder.getItemViewType() == 2) {
             fetchRetrofitForMusic(((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22");
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Music");
@@ -390,7 +354,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 outerHitsMusic = response.body().getHits();
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(layoutManager);
-                musicAdapterViewHolder = new MusicAdapterViewHolder(context, response.body().getHits(), fragmentManager, watchFragCommInterface);
+                musicAdapterViewHolder = new MusicAdapterViewHolder(context, response.body().getHits(), fragmentManager, layoutManager,watchFragCommInterface);
                 recyclerView.setAdapter(musicAdapterViewHolder);
             }
 
@@ -410,7 +374,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 outerHitsGallery = response.body().getHits();
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(layoutManager);
-                tvShowsViewHolder = new TvShowsViewHolder(context, fragmentManager, response.body().getHits(), watchFragCommInterface);
+                tvShowsViewHolder = new TvShowsViewHolder(context, fragmentManager, response.body().getHits(), layoutManager,watchFragCommInterface);
                 recyclerView.setAdapter(tvShowsViewHolder);
             }
 
@@ -430,7 +394,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 outerHitsSocialBuzz = response.body().getHits();
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(layoutManager);
-                msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, response.body().getHits(), fragmentManager, watchFragCommInterface);
+                msocialBuzzOrInterViewsViewHolder = new SocialBuzzOrInterViewsViewHolder(context, response.body().getHits(), fragmentManager,layoutManager, watchFragCommInterface);
                 recyclerView.setAdapter(msocialBuzzOrInterViewsViewHolder);
             }
 
@@ -450,7 +414,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 outerHitsTrailer = response.body().getHits();
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(layoutManager);
-                trailersViewHolder = new TrailersViewHolder(context, response.body().getHits(), fragmentManager, watchFragCommInterface);
+                trailersViewHolder = new TrailersViewHolder(context, response.body().getHits(), fragmentManager,layoutManager, watchFragCommInterface);
                 recyclerView.setAdapter(trailersViewHolder);
             }
 
@@ -470,7 +434,7 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 outerHitsComedy = response.body().getHits();
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(layoutManager);
-                comedyViewHolder = new ComedyViewHolder(context, response.body().getHits(), fragmentManager, watchFragCommInterface);
+                comedyViewHolder = new ComedyViewHolder(context, response.body().getHits(), fragmentManager,layoutManager, watchFragCommInterface);
                 recyclerView.setAdapter(comedyViewHolder);
             }
 

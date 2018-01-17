@@ -123,19 +123,14 @@ public class FeedFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 int visibleItemCount = feedLayoutManager.getChildCount();
                 int totalItemCount = feedLayoutManager.getItemCount();
-                Log.e("check c before",""+c);
                 int firstVisibleItemPosition = feedLayoutManager.findFirstVisibleItemPosition();
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    Log.e("check c",""+c+"and"+visibleItemCount+"and"+totalItemCount+"and"+firstVisibleItemPosition);
-                    Log.e("check c after",""+c);
                     apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
                     Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 30,c, industryCompletedata);
-                    Log.e("check url","http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=30&from="+c+"&q="+industryCompletedata);
                     call.enqueue(new Callback<FeedData>() {
                         @Override
                         public void onResponse(Call<FeedData> call, Response<FeedData> response) {
-                            Log.e("indie onres",""+response.body().getHits().getHits());
                             c=c+30;
                             feedAdapter.updateDataPagination(response.body().getHits().getHits());
                             //feedAdapter.outerHits.getHits().addAll(response.body().getHits().getHits());
