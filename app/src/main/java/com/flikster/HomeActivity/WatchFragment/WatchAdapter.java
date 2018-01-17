@@ -169,17 +169,12 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private void initMovieRetrofit(final RecyclerView recyclerView) {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/movies/").create(ApiInterface.class);
-        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?size=4&sort=createdAt:desc");
+        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?size=5&from=0&sort=createdAt:desc");
         call.enqueue(new Callback<MovieData>() {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
                 moviehits = response.body().getHits();
-                for (int i = 0; i < moviehits.getHits().size(); i++) {
-                    moviesImg.add(moviehits.getHits().get(i).get_source().getCoverPic());
-                    moviesTitle.add(moviehits.getHits().get(i).get_source().getTitle());
-                    moviesSlug.add(moviehits.getHits().get(i).get_source().getSlug());
-                }
-                moviesViewHolder = new MoviesViewHolder(context, fragmentManager, moviesImg, moviesTitle, moviesSlug, watchFragCommInterface);
+                moviesViewHolder = new MoviesViewHolder(context, fragmentManager,moviehits, watchFragCommInterface);
                 recyclerView.setAdapter(moviesViewHolder);
             }
 

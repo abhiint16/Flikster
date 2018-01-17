@@ -74,9 +74,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     String userName = "null";
     ApiInterface apiInterface;
     int listSize;
+    String industryCompletedata;
+    int count=30;
 
 
-    public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count, FeedFragment.Testing testing) {
+    public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count,
+                               String industryCompletedata, FeedFragment.Testing testing) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.outerHits = outerHits;
@@ -84,6 +87,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.testing = testing;
         audio.add("http://content.flikster.com/audio/legendd1.mp3");
         listSize = outerHits.getHits().size();
+        this.industryCompletedata=industryCompletedata;
         //setHasStableIds(true);
     }
 
@@ -93,6 +97,24 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
+    public void loadMore()
+    {
+        Log.e("print dataaaaaaa",""+industryCompletedata+"and"+count);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 30,count, industryCompletedata);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                count=count+30;
+                updateDataPagination(response.body().getHits().getHits());
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -139,6 +161,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (viewType == 100) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnocard, parent, false);
             return new ViewHolder9(view);
+        }else if (viewType==200)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
+            return new ViewHolder200(view);
         }
 
         return null;
@@ -622,17 +648,26 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder14) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
             ((ViewHolder14) holder).card_gallary5_text.setText("+" + ((outerHits.getHits().get(position).get_source().getMedia().getGallery().size()) - 4));
         }
+        else if (holder.getItemViewType()==200)
+        {
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.fifty));
+            ((ViewHolder200)holder).hor_last_item_load_more_container.setLayoutParams(params);
+            loadMore();
+        }
     }
 
     @Override
     public int getItemCount() {
         Log.e("size", "size" + outerHits.getHits().size());
-        return outerHits.getHits().size();
+        return outerHits.getHits().size()+1;
     }
 
 
     @Override
     public int getItemViewType(int position) {
+        if (position==outerHits.getHits().size())
+            return 200;
         if (outerHits.getHits().get(position).get_source().getContentType() != null) {
             Log.e("check duplicacy",""+position+"and"+outerHits.getHits().get(position).get_source().getContentType());
             switch (outerHits.getHits().get(position).get_source().getContentType().toLowerCase()) {
@@ -2163,6 +2198,20 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
             }
+        }
+    }
+
+    public class ViewHolder200 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout hor_last_item_load_more_container;
+        public ViewHolder200(View itemView) {
+            super(itemView);
+            hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 

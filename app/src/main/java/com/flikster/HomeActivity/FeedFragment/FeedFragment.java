@@ -46,7 +46,7 @@ public class FeedFragment extends Fragment {
     SimpleArcLoader mDialog;
     String industryname = "";
     String industryCompletedata;
-    int c=30;
+   // int c=30;
 
     @Nullable
     @Override
@@ -87,7 +87,7 @@ public class FeedFragment extends Fragment {
                 try {
                     outerHits = response.body().getHits();
                     Count = outerHits.getTotal();
-                    feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
+                    feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, outerHits, Count,industryCompletedata, testing);
                     mDialog.setVisibility(View.GONE);
                     mDialog.stop();
                     fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
@@ -112,7 +112,7 @@ public class FeedFragment extends Fragment {
         //mDialog = new SimpleArcDialog(getActivity());
         //mDialog.setConfiguration(new ArcConfiguration(MainActivity.this));
         fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.colorImageBackgroundGrey));
-        fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -144,7 +144,7 @@ public class FeedFragment extends Fragment {
                     });
                 }
             }
-        });
+        });*/
     }
 
     private void initializeViews() {

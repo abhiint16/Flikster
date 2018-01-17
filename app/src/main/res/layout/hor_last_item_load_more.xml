@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
+    android:layout_width="50dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/last_hot_load_more_back"
-    android:elevation="5dp">
+    android:elevation="5dp"
+    android:id="@+id/hor_last_item_load_more_container">
 
     <android.support.v4.widget.ContentLoadingProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyle"/>
+        style="?android:attr/progressBarStyleSmall"/>
 </LinearLayout>
