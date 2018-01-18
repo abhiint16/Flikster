@@ -143,7 +143,8 @@ public class SendOtpWithMobileNoActivityOrEmail extends AppCompatActivity implem
                         Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, "Server Error please try again later", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(SendOtpWithMobileNoActivityOrEmail.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 

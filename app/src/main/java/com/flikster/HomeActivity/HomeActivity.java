@@ -139,22 +139,27 @@ import retrofit2.Response;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, FeedFragment.Testing, WatchFragment.WatchFragCommInterface
-        , MovieSongsListFragment.WatchPlayAudioOrVideoInterafce, MusicGridFragment.WatchAudioVideoSendFromGridFrag,
-        NewsOnClickFragment.NewsRecommendedClick, VideoGalleryFragment.VideoRecommendationClick, GalleryCardClick.GalleryRecommendationItemClick
-        , CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
+public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener,
+        NavigationView.OnNavigationItemSelectedListener,
+        FeedFragment.Testing, WatchFragment.WatchFragCommInterface
+        , MovieSongsListFragment.WatchPlayAudioOrVideoInterafce,
+        MusicGridFragment.WatchAudioVideoSendFromGridFrag,
+        NewsOnClickFragment.NewsRecommendedClick,
+        VideoGalleryFragment.VideoRecommendationClick,
+        GalleryCardClick.GalleryRecommendationItemClick,
+        CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
         CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag {
     LinearLayout feed, rating, plus, fashion, store, toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    LinearLayout toolbar_cart_btn,toolbar_main_notification,toolbar_navigation_view_open_btn;
+    LinearLayout toolbar_cart_btn, toolbar_main_notification, toolbar_navigation_view_open_btn;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
-    TextView footer_drawer_layout_aboutus,footer_drawer_layout_help,footer_drawer_layout_blog,footer_drawer_layout_privacy,
-    footer_drawer_layout_terms,footer_drawer_layout_business;
+    TextView footer_drawer_layout_aboutus, footer_drawer_layout_help, footer_drawer_layout_blog, footer_drawer_layout_privacy,
+            footer_drawer_layout_terms, footer_drawer_layout_business;
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
     Context mContext;
@@ -184,6 +189,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     private static int CAMERA_REQUES_CODE = 101;
     String captured_img_str;
     boolean cameracaptured = false;
+    public int firstItemCreate = 0;
 //    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
 
     //Bottom Navigation
@@ -305,6 +311,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             }
         });
     }
+
     private void checkForLaunch() {
         if ("MyBag".equals(getIntent().getStringExtra("MyBag"))) {
             fragmentManager.beginTransaction()
@@ -458,10 +465,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     private void industrySelectionrefreshActivity(String industrytype) {
-        SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", industrytype);
-        Intent i = new Intent(HomeActivity.this, HomeActivity.class);
-        startActivity(i);
-//        finish();
+        if (firstItemCreate != 0) {
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", industrytype);
+            Intent i = new Intent(HomeActivity.this, HomeActivity.class);
+            startActivity(i);
+        }
     }
 
     private void toolbarPrefSpinner() {
@@ -471,7 +479,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         pref.add("Kollywood");
         pref.add("Mollywood");
         pref.add("Sandalwood");
-        ArrayAdapter<String> prefArrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_item,R.id.spinner_item_tv, pref);
+        ArrayAdapter<String> prefArrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_item, R.id.spinner_item_tv, pref);
         prefArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
         toolbar_pref_spinner.setAdapter(prefArrayAdapter);
 
@@ -506,21 +514,31 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_pref_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) {
-                    if (industrySpinnerSelection) {
-//                    toolbar_pref_spinner.setVisibility(View.GONE);
-                        Toast.makeText(getApplicationContext(), pref.get(position), Toast.LENGTH_LONG).show();
-                        if (pref.get(position).equals("Bollywood")) {
-                            industrySelectionrefreshActivity("Bollywood");
-                        } else if (pref.get(position).equals("Tollywood")) {
-                            industrySelectionrefreshActivity("Tollywood");
-                        } else if (pref.get(position).equals("Kollywood")) {
-                            industrySelectionrefreshActivity("Kollywood");
-                        } else if (pref.get(position).equals("Mollywood")) {
-                            industrySelectionrefreshActivity("Mollywood");
-                        } else if (pref.get(position).equals("Sandalwood")) {
-                            industrySelectionrefreshActivity("Sandalwood");
-                        }
+                if (position == 0) {
+                    Toast.makeText(getApplicationContext(), "position" + position, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), pref.get(position), Toast.LENGTH_LONG).show();
+                    Log.e("Itemname", pref.get(position));
+                    if (firstItemCreate != 0) {
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", "Bollywood");
+                        Intent i = new Intent(HomeActivity.this, HomeActivity.class);
+                        startActivity(i);
+                    }
+                }
+                if (firstItemCreate == 0) {
+                    firstItemCreate = 1;//++;
+                    return;
+                } else {
+                    /*if (position == 0) {
+                        industrySelectionrefreshActivity("Bollywood");
+                    } else*/
+                    if (pref.get(position).equals("Tollywood")) {
+                        industrySelectionrefreshActivity("Tollywood");
+                    } else if (pref.get(position).equals("Kollywood")) {
+                        industrySelectionrefreshActivity("Kollywood");
+                    } else if (pref.get(position).equals("Mollywood")) {
+                        industrySelectionrefreshActivity("Mollywood");
+                    } else if (pref.get(position).equals("Sandalwood")) {
+                        industrySelectionrefreshActivity("Sandalwood");
                     }
                 }
             }
@@ -530,6 +548,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
             }
         });
+
+
+//        toolbar_pref_spinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
     }
 
     private void initializeViews() {
@@ -542,12 +563,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar_cart_btn = (LinearLayout) findViewById(R.id.toolbar_cart_btn);
         toolbar_main_title = (TextView) findViewById(R.id.toolbar_main_title);
-        footer_drawer_layout_aboutus=(TextView)findViewById(R.id.footer_drawer_layout_aboutus);
-        footer_drawer_layout_blog=(TextView)findViewById(R.id.footer_drawer_layout_blog);
-        footer_drawer_layout_business=(TextView)findViewById(R.id.footer_drawer_layout_business);
-        footer_drawer_layout_help=(TextView)findViewById(R.id.footer_drawer_layout_help);
-        footer_drawer_layout_terms=(TextView)findViewById(R.id.footer_drawer_layout_terms);
-        footer_drawer_layout_privacy=(TextView)findViewById(R.id.footer_drawer_layout_privacy);
+        footer_drawer_layout_aboutus = (TextView) findViewById(R.id.footer_drawer_layout_aboutus);
+        footer_drawer_layout_blog = (TextView) findViewById(R.id.footer_drawer_layout_blog);
+        footer_drawer_layout_business = (TextView) findViewById(R.id.footer_drawer_layout_business);
+        footer_drawer_layout_help = (TextView) findViewById(R.id.footer_drawer_layout_help);
+        footer_drawer_layout_terms = (TextView) findViewById(R.id.footer_drawer_layout_terms);
+        footer_drawer_layout_privacy = (TextView) findViewById(R.id.footer_drawer_layout_privacy);
         toolbar_search_btn = (SearchView) findViewById(R.id.toolbar_search_btn);
         toolbar_navigation_view_open_btn = (LinearLayout) findViewById(R.id.toolbar_navigation_view_open_btn);
         toolbar_pref_spinner = (Spinner) findViewById(R.id.toolbar_pref_spinner);
@@ -646,20 +667,19 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             navigationMenuitemsAction("Flikster", "Return Policy");
         } else if (viewId == R.id.right_navigation_bar_non_loggedin_terms) {
             navigationMenuitemsAction("Flikster", "Terms");
-        }else if (viewId == R.id.footer_drawer_layout_aboutus) {
+        } else if (viewId == R.id.footer_drawer_layout_aboutus) {
             navigationMenuitemsAction("Flikster", "About Us");
-        }else if (viewId == R.id.footer_drawer_layout_blog) {
+        } else if (viewId == R.id.footer_drawer_layout_blog) {
             navigationMenuitemsAction("Flikster", "Blog");
-        }else if (viewId == R.id.footer_drawer_layout_business) {
+        } else if (viewId == R.id.footer_drawer_layout_business) {
             navigationMenuitemsAction("Flikster", "Business");
-        }else if (viewId == R.id.footer_drawer_layout_help) {
+        } else if (viewId == R.id.footer_drawer_layout_help) {
             navigationMenuitemsAction("Flikster", "Help");
-        }else if (viewId == R.id.footer_drawer_layout_privacy) {
+        } else if (viewId == R.id.footer_drawer_layout_privacy) {
             navigationMenuitemsAction("Flikster", "Privacy");
-        }else if (viewId == R.id.footer_drawer_layout_terms) {
+        } else if (viewId == R.id.footer_drawer_layout_terms) {
             navigationMenuitemsAction("Flikster", "Terms");
-        }
-        else if (viewId == R.id.right_navigation_bar_non_loggedin_login_btn) {
+        } else if (viewId == R.id.right_navigation_bar_non_loggedin_login_btn) {
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
@@ -675,9 +695,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
         } else if (viewId == R.id.toolbar_main_title) {
-            Toast.makeText(getApplicationContext(), "Flikster", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "Flikster", Toast.LENGTH_SHORT).show();
             toolbar_pref_spinner.setVisibility(View.VISIBLE);
             toolbar_pref_spinner.setEnabled(false);
+//            toolbar_pref_spinner.isShown();
             toolbar_pref_spinner.performClick();
             industrySpinnerSelection = true;
 //            toolbar_pref_spinner.setSelection(0, false);
@@ -992,7 +1013,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void carouselContainerClick(String toolbarTitle,
                                        String url, Fragment fragment) {
         MusicGridFragment musicGridFragment = (MusicGridFragment) fragment;
-        musicGridFragment.getAllData(toolbarTitle,url);
+        musicGridFragment.getAllData(toolbarTitle, url);
         firstTimeLaunch(fragment);
     }
 
