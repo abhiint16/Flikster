@@ -93,7 +93,11 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public int getItemCount() {
         if (feedInnerData.getHits()!=null&&feedInnerData.getHits().size()!=0)
+        {
+            if (feedInnerData.getTotal()==feedInnerData.getHits().size())
+                return feedInnerData.getHits().size();
             return feedInnerData.getHits().size()+1;
+        }
         else return 1;
     }
 

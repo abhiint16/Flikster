@@ -656,7 +656,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        Log.e("size", "size" + outerHits.getHits().size());
+        if (outerHits.getTotal()==outerHits.getHits().size())
+            return outerHits.getHits().size();
         return outerHits.getHits().size()+1;
     }
 

@@ -88,8 +88,11 @@ public class MoviesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemCount() {
         if(movieInnerData.getHits().size()==0)
             return 1;
-        else
+        else{
+            if (movieInnerData.getTotal()==movieInnerData.getHits().size())
+                return movieInnerData.getHits().size();
             return movieInnerData.getHits().size()+1;
+        }
     }
 
     @Override

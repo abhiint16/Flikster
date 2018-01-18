@@ -306,6 +306,8 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
+        if (hits.getTotal()==hits.getHits().size())
+            return hits.getHits().size();
         return hits.getHits().size()+1;
     }
 

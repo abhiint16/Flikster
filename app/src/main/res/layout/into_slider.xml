@@ -32,13 +32,15 @@
         android:id="@+id/getStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:text="GETSTARTED"
+        android:background="@drawable/corner_rounded_pink"
+        android:text="GET STARTED"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        android:layout_marginBottom="70dp"
-        android:textColor="@color/colorAccent" />
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
 
 
 
@@ -47,11 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="skip"
-        android:background="@color/transparent"
-        android:textColor="@color/grey_txt_label"
+        android:background="@drawable/corner_rounded_pink_whiteback_greybor"
+        android:textColor="@color/colorAccent"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        />
+        android:layout_marginBottom="10dp"/>
     <Button
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"

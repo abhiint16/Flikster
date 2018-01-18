@@ -101,7 +101,11 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         if (outerHits.getHits()!=null&&outerHits.getHits().size()!=0)
+        {
+            if (outerHits.getTotal()==outerHits.getHits().size())
+                return outerHits.getHits().size();
             return outerHits.getHits().size()+1;
+        }
         else return 1;
     }
 
