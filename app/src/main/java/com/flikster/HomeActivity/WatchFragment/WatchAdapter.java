@@ -187,7 +187,6 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        Log.e("print hits", "" + outerHits.getHits().size());
         return 7;
     }
 

@@ -50,13 +50,15 @@ public class WatchFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
         initializeViews();
         initializeRest();
-        retrofitInit();
+        //retrofitInit();
         return view;
     }
 
     private void initializeRest() {
         movieFragmentInfoLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         movieFragmentInfoRecycler.setLayoutManager(movieFragmentInfoLayoutManager);
+        watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, watchFragCommInterface);
+        movieFragmentInfoRecycler.setAdapter(watchAdapter);
 //        watchAdapter = new WatchAdapter(getActivity(), fragmentManager);
 //        movieFragmentInfoRecycler.setAdapter(watchAdapter);
     }

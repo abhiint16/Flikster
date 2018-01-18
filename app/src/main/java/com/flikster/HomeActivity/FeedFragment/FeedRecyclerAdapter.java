@@ -99,7 +99,6 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void loadMore()
     {
-        Log.e("print dataaaaaaa",""+industryCompletedata+"and"+count);
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 30,count, industryCompletedata);
         call.enqueue(new Callback<FeedData>() {
