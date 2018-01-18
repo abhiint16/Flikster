@@ -41,8 +41,7 @@
                 android:layout_weight="1.2"
                 android:background="@color/white"
                 android:src="@drawable/no_image"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"/>
+                android:scaleType="centerCrop"/>
 
             <ImageView
                 android:id="@+id/card_gallary4_img2"
@@ -53,8 +52,7 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:src="@drawable/no_image"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"/>
+                android:scaleType="centerCrop"/>
         </LinearLayout>
 
         <LinearLayout
@@ -73,8 +71,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/no_image"
                 android:background="@color/white"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"/>
+                android:scaleType="centerCrop"/>
 
             <ImageView
                 android:id="@+id/card_gallary4_img4"
@@ -84,8 +81,7 @@
                 android:layout_marginBottom="1dp"
                 android:src="@drawable/no_image"
                 android:background="@color/white"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"/>
+                android:scaleType="centerCrop"/>
         </LinearLayout>
     </LinearLayout>
 

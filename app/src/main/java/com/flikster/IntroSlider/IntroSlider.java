@@ -25,7 +25,7 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
     private LinearLayout dotsLayout;
     private ImageView[] dots;
     private int[] layouts;
-    private Button btnSkip, btnNext;
+    private Button btnSkip, btnNext,getStart;
     private SharedPref sharedPref;
     IntroSliderPresenter introSliderPresenter;
 
@@ -65,7 +65,12 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
             public void onPageSelected(int state) {
 //                Toast.makeText(getApplicationContext(), "ScrollState" + state, Toast.LENGTH_SHORT).show();
                 if (state == 3) {
-                    launchHomeScreen();
+                    getStart.setVisibility(View.VISIBLE);
+                    btnSkip.setVisibility(View.GONE);
+//                    launchHomeScreen();
+                }else {
+                    btnSkip.setVisibility(View.VISIBLE);
+                    getStart.setVisibility(View.GONE);
                 }
             }
 
@@ -96,10 +101,17 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
     private void initializeButton() {
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
-        btnSkip.setVisibility(View.GONE);
-        btnNext.setVisibility(View.GONE);
+        getStart = (Button) findViewById(R.id.getStart);
+//        btnSkip.setVisibility(View.GONE);
+//        btnNext.setVisibility(View.GONE);
         btnNext.setOnClickListener(this);
         btnSkip.setOnClickListener(this);
+        getStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchHomeScreen();
+            }
+        });
     }
 
     private void checkForFirstTimeLaunch() {
@@ -135,9 +147,13 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
                 viewPager.setCurrentItem(current);
             } else {
                 launchHomeScreen();
+
             }
             if (current == 5) {
-                launchHomeScreen();
+//                getStart.setVisibility(View.VISIBLE);
+//                launchHomeScreen();
+            }else {
+//                getStart.setVisibility(View.GONE);
             }
         }
         if (view.getId() == R.id.btn_skip) {

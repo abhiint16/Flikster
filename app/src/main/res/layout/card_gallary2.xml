@@ -35,8 +35,7 @@
             android:layout_marginTop="1dp"
             android:background="@color/white"
             android:src="@drawable/no_image"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"/>
+            android:scaleType="centerCrop"/>
 
         <ImageView
             android:id="@+id/card_gallary2_img2"
@@ -48,8 +47,7 @@
             android:clickable="false"
             android:background="@color/white"
             android:src="@drawable/no_image"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"/>
+            android:scaleType="centerCrop"/>
     </LinearLayout>
 
     <include layout="@layout/card_footer"></include>
