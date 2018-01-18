@@ -6,6 +6,8 @@
 
     <color name="submitcolor">#FE5A69</color>
 
+    <color name="backprofilescreen">#FAFAFA</color>
+
 
     //Common colors
     <color name="white">#fff</color>
@@ -26,6 +28,10 @@
     <color name="color_tab_3">#8B6B62</color>
     <color name="color_tab_4">#6C4A42</color>
     <color name="color_tab_5">#F63D2B</color>
+
+    <color name="commontextcolor">#6A6A6A</color>
+    <color name="commontextgreycolor">#A6A6A6</color>
+
 
 
 
