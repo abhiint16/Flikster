@@ -46,7 +46,7 @@ public class FeedFragment extends Fragment {
     SimpleArcLoader mDialog;
     String industryname = "";
     String industryCompletedata;
-    int c=30;
+   // int c=30;
 
     @Nullable
     @Override
@@ -87,7 +87,7 @@ public class FeedFragment extends Fragment {
                 try {
                     outerHits = response.body().getHits();
                     Count = outerHits.getTotal();
-                    feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, outerHits, Count, testing);
+                    feedAdapter = new FeedRecyclerAdapter(getActivity(), fragmentManager, outerHits, Count,industryCompletedata, testing);
                     mDialog.setVisibility(View.GONE);
                     mDialog.stop();
                     fragment_common_recyclerview_recycler.setAdapter(feedAdapter);
@@ -112,7 +112,7 @@ public class FeedFragment extends Fragment {
         //mDialog = new SimpleArcDialog(getActivity());
         //mDialog.setConfiguration(new ArcConfiguration(MainActivity.this));
         fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.colorImageBackgroundGrey));
-        fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -123,19 +123,14 @@ public class FeedFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 int visibleItemCount = feedLayoutManager.getChildCount();
                 int totalItemCount = feedLayoutManager.getItemCount();
-                Log.e("check c before",""+c);
                 int firstVisibleItemPosition = feedLayoutManager.findFirstVisibleItemPosition();
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    Log.e("check c",""+c+"and"+visibleItemCount+"and"+totalItemCount+"and"+firstVisibleItemPosition);
-                    Log.e("check c after",""+c);
                     apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
                     Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 30,c, industryCompletedata);
-                    Log.e("check url","http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=30&from="+c+"&q="+industryCompletedata);
                     call.enqueue(new Callback<FeedData>() {
                         @Override
                         public void onResponse(Call<FeedData> call, Response<FeedData> response) {
-                            Log.e("indie onres",""+response.body().getHits().getHits());
                             c=c+30;
                             feedAdapter.updateDataPagination(response.body().getHits().getHits());
                             //feedAdapter.outerHits.getHits().addAll(response.body().getHits().getHits());
@@ -149,7 +144,7 @@ public class FeedFragment extends Fragment {
                     });
                 }
             }
-        });
+        });*/
     }
 
     private void initializeViews() {

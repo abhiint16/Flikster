@@ -27,6 +27,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.flikster.FullScreenYoutubeView.FullScreenYoutubeView;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
@@ -70,9 +74,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     String userName = "null";
     ApiInterface apiInterface;
     int listSize;
+    String industryCompletedata;
+    int count=30;
 
 
-    public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count, FeedFragment.Testing testing) {
+    public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count,
+                               String industryCompletedata, FeedFragment.Testing testing) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.outerHits = outerHits;
@@ -80,6 +87,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.testing = testing;
         audio.add("http://content.flikster.com/audio/legendd1.mp3");
         listSize = outerHits.getHits().size();
+        this.industryCompletedata=industryCompletedata;
         //setHasStableIds(true);
     }
 
@@ -88,6 +96,23 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
+    public void loadMore()
+    {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 30,count, industryCompletedata);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                count=count+30;
+                updateDataPagination(response.body().getHits().getHits());
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -134,13 +159,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (viewType == 100) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnocard, parent, false);
             return new ViewHolder9(view);
+        }else if (viewType==200)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
+            return new ViewHolder200(view);
         }
 
         return null;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 //        holder.itemView.setTag(outerHits.getClass().);
 
         if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
@@ -238,6 +267,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         (outerHits.getHits().get(position).get_source().getText())));
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            ((ViewHolder3) holder).card_gallary1_img1.setLayoutParams(params);
+                            ((ViewHolder3) holder).card_gallary1_img1.setScaleType(ImageView.ScaleType.FIT_XY);
+                            return false;
+                        }
+                    })
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .into(((ViewHolder3) holder).card_gallary1_img1);
             ((ViewHolder3) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
             ((ViewHolder3) holder).card_gallary1_img1.forceLayout();
@@ -269,6 +313,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder4) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            ((ViewHolder4) holder).news_img.setLayoutParams(params);
+                            ((ViewHolder4) holder).news_img.setScaleType(ImageView.ScaleType.FIT_XY);
+                            return false;
+                        }
+                    })
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .into(((ViewHolder4) holder).news_img);
             ((ViewHolder4) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
             ((ViewHolder4) holder).news_img.forceLayout();
@@ -299,6 +358,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((ViewHolder5) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            ((ViewHolder5) holder).card_gallary1_img1.setLayoutParams(params);
+                            ((ViewHolder5) holder).card_gallary1_img1.setScaleType(ImageView.ScaleType.FIT_XY);
+                            return false;
+                        }
+                    })
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .into(((ViewHolder5) holder).card_gallary1_img1);
             ((ViewHolder5) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
             ((ViewHolder5) holder).card_gallary1_img1.forceLayout();
@@ -335,6 +409,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(context)
                     .load(outerHits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            ((ViewHolder6) holder).card_gallary1_img1.setLayoutParams(params);
+                            ((ViewHolder6) holder).card_gallary1_img1.setScaleType(ImageView.ScaleType.FIT_XY);
+                            return false;
+                        }
+                    })
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .into(((ViewHolder6) holder).card_gallary1_img1);
             //((ViewHolder6) holder).card_gallary1_img1.setLayoutParams(params);
             ((ViewHolder6) holder).card_gallary1_img1.forceLayout();
@@ -367,6 +456,21 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getMedia().getGallery() != null && outerHits.getHits().get(position).get_source().getMedia().getGallery().size() != 0)
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                         .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                        .listener(new RequestListener<String, GlideDrawable>() {
+                            @Override
+                            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                ((ViewHolder7) holder).card_gallary1_img1.setLayoutParams(params);
+                                ((ViewHolder7) holder).card_gallary1_img1.setScaleType(ImageView.ScaleType.FIT_XY);
+                                return false;
+                            }
+                        })
+                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
                         .into(((ViewHolder7) holder).card_gallary1_img1);
             ((ViewHolder7) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 8) {
@@ -541,17 +645,26 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder14) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
             ((ViewHolder14) holder).card_gallary5_text.setText("+" + ((outerHits.getHits().get(position).get_source().getMedia().getGallery().size()) - 4));
         }
+        else if (holder.getItemViewType()==200)
+        {
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.fifty));
+            ((ViewHolder200)holder).hor_last_item_load_more_container.setLayoutParams(params);
+            loadMore();
+        }
     }
 
     @Override
     public int getItemCount() {
         Log.e("size", "size" + outerHits.getHits().size());
-        return outerHits.getHits().size();
+        return outerHits.getHits().size()+1;
     }
 
 
     @Override
     public int getItemViewType(int position) {
+        if (position==outerHits.getHits().size())
+            return 200;
         if (outerHits.getHits().get(position).get_source().getContentType() != null) {
             Log.e("check duplicacy", "" + position + "and" + outerHits.getHits().get(position).get_source().getContentType());
             switch (outerHits.getHits().get(position).get_source().getContentType().toLowerCase()) {
@@ -2087,6 +2200,20 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
             }
+        }
+    }
+
+    public class ViewHolder200 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout hor_last_item_load_more_container;
+        public ViewHolder200(View itemView) {
+            super(itemView);
+            hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 

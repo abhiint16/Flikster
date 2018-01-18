@@ -12,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
@@ -23,29 +26,25 @@ import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by abhishek on 13-10-2017.
  */
 
 public class MoviesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> imag=new ArrayList<>();
     Context context;
     FragmentManager fragmentManager;
-    List<String> movieImg;
-    List<String> movieTitle;
-    List<String> movieSlug;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
-    public MoviesViewHolder(Context context,FragmentManager fragmentManager,List<String> movieImg,List<String> movieTitle,
-                            List<String> movieSlug,WatchFragment.WatchFragCommInterface watchFragCommInterface) {
-        imag.add("http://img.youtube.com/vi/MeH346YHUIE/0.jpg");imag.add("http://img.youtube.com/vi/CUYcVfVt88I/0.jpg");
-        imag.add("http://img.youtube.com/vi/IkIqgTt8Xsk/0.jpg");
-        imag.add("http://img.youtube.com/vi/nwJ0tL8Fi-E/0.jpg");imag.add("http://img.youtube.com/vi/lhwfWm-m7tw/0.jpg");
-        imag.add("http://img.youtube.com/vi/-0XiiT5dR_Q/0.jpg");
+    MovieData.MovieInnerData movieInnerData;
+    ApiInterface apiInterface;
+    int count=5;
+    public MoviesViewHolder(Context context, FragmentManager fragmentManager, MovieData.MovieInnerData movieInnerData, WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         this.context=context;
         this.fragmentManager = fragmentManager;
-        this.movieImg=movieImg;
-        this.movieTitle=movieTitle;
-        this.movieSlug=movieSlug;
+        this.movieInnerData=movieInnerData;
         this.watchFragCommInterface=watchFragCommInterface;
     }
 
@@ -55,6 +54,11 @@ public class MoviesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
         {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_not_available_layout,parent,false);
             return new ViewHolder1(view);
+        }
+        else if (viewType==2)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
+            return new ViewHolder3(view);
         }
         else
         {
@@ -69,27 +73,34 @@ public class MoviesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
         {
 
         }
+        else if (holder.getItemViewType()==2)
+        {
+            loadMore();
+        }
         else
         {
-            Glide.with(context).load(movieImg.get(position)).into(((ViewHolder2)holder).carousel_image);
-            ((ViewHolder2)holder).carousel_title.setText(movieTitle.get(position));
+            Glide.with(context).load(movieInnerData.getHits().get(position).get_source().getCoverPic()).into(((ViewHolder2)holder).carousel_image);
+            ((ViewHolder2)holder).carousel_title.setText(movieInnerData.getHits().get(position).get_source().getTitle());
         }
     }
 
     @Override
     public int getItemCount() {
-        if(movieImg.size()==0)
+        if(movieInnerData.getHits().size()==0)
             return 1;
         else
-            return movieSlug.size();
+            return movieInnerData.getHits().size()+1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(movieImg.size()==0)
+        if(movieInnerData.getHits().size()==0)
             return 0;
-        else
+        else{
+            if (position!=movieInnerData.getHits().size())
             return 1;
+            else return 2;
+        }
     }
 
 
@@ -105,7 +116,21 @@ public class MoviesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-              watchFragCommInterface.carouselItemToMovie(movieSlug.get(getAdapterPosition()),new MovieFragment());
+              watchFragCommInterface.carouselItemToMovie(movieInnerData.getHits().get(getAdapterPosition()).get_source().getSlug(),new MovieFragment());
+        }
+    }
+
+    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView hor_last_item_load_more_txt;
+        public ViewHolder3(View itemView) {
+            super(itemView);
+            //hor_last_item_load_more_txt=(TextView)itemView.findViewById(R.id.hor_last_item_load_more_txt);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 
@@ -113,5 +138,24 @@ public class MoviesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
         public ViewHolder1(View itemView) {
             super(itemView);
         }
+    }
+
+    public void loadMore()
+    {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/movies/").create(ApiInterface.class);
+        Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?size=5&from="+count+"&sort=createdAt:desc");
+        call.enqueue(new Callback<MovieData>() {
+            @Override
+            public void onResponse(Call<MovieData> call, Response<MovieData> response) {
+                count=count+5;
+                movieInnerData.getHits().addAll(response.body().getHits().getHits());
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<MovieData> call, Throwable t) {
+                Log.e("xxx", "xxx" + call + t);
+            }
+        });
     }
 }

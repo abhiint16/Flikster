@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
@@ -25,6 +27,10 @@ import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 23-10-2017.
@@ -41,6 +47,8 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     String price = "";
     String userId = "PAWAN_KALYAN";
     String userName = "null";
+    ApiInterface  apiInterface;
+    int count=10;
 
     public AllStoreFragmentAdapter(Context context, AllStoreInnerData hits, AllStoreFragment.AllStoreInterafce allStoreInterafce) {
         this.context = context;
@@ -52,6 +60,24 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     {
         this.hits.getHits().addAll(a);
         notifyDataSetChanged();
+    }
+
+    public void loadMore()
+    {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/").create(ApiInterface.class);
+        Call<AllStoreData> call = apiInterface.getAllStore("http://apiservice-ec.flikster.com/products/_search?pretty=true&sort=createdAt:desc&size=10&from="+count+"&q=*");
+        call.enqueue(new Callback<AllStoreData>() {
+            @Override
+            public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
+                count=count+10;
+                updateDataPagination(response.body().getHits().getHits());
+            }
+
+            @Override
+            public void onFailure(Call<AllStoreData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
     @Override
@@ -74,6 +100,11 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         } else if (viewType == 6) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnull, parent, false);
             return new ViewHolder6(view);
+        }
+        else if (viewType==100)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
+            return new ViewHolder100(view);
         }
         return null;
     }
@@ -262,6 +293,12 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
             new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_like, context);
             new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getId(), ((ViewHolder5) holder).ib_bookmark, context);
+        }else if (holder.getItemViewType()==100)
+        {
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.fifty));
+            ((ViewHolder100)holder).hor_last_item_load_more_container.setLayoutParams(params);
+            loadMore();
         } else {
 
         }
@@ -269,11 +306,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        return hits.getHits().size();
+        return hits.getHits().size()+1;
     }
 
     @Override
     public int getItemViewType(int position) {
+        if(position==hits.getHits().size())
+            return 100;
         if (hits.getHits().get(position).get_source().getImageGallery() != null && hits.getHits().get(position).get_source().getImageGallery().size() != 0) {
             switch (hits.getHits().get(position).get_source().getImageGallery().size()) {
                 case 1:
@@ -802,6 +841,20 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
 
             }
+        }
+    }
+
+    public class ViewHolder100 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout hor_last_item_load_more_container;
+        public ViewHolder100(View itemView) {
+            super(itemView);
+            hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 

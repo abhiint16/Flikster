@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.WatchFragment.TvShows;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
+import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
@@ -24,6 +28,10 @@ import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by abhishek on 13-10-2017.
  */
@@ -33,13 +41,18 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
     Context context;
     WatchFragment.WatchFragCommInterface watchFragCommInterface;
     FeedInnerData outerHits;
+    LinearLayoutManager linearLayoutManager;
+    ApiInterface apiInterface;
+    int count=5;
 
     public TvShowsViewHolder(Context context, FragmentManager fragmentManager,
-            FeedInnerData feedInnerData, WatchFragment.WatchFragCommInterface watchFragCommInterface) {
+            FeedInnerData feedInnerData,LinearLayoutManager linearLayoutManager
+            ,WatchFragment.WatchFragCommInterface watchFragCommInterface) {
         this.fragmentManager = fragmentManager;
         this.context=context;
         this.watchFragCommInterface=watchFragCommInterface;
         this.outerHits=feedInnerData;
+        this.linearLayoutManager=linearLayoutManager;
     }
 
     @Override
@@ -48,6 +61,11 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
         {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_not_available_layout,parent,false);
             return new ViewHolder1(view);
+        }
+        else if (viewType==2)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
+            return new ViewHolder3(view);
         }
         else
         {
@@ -61,6 +79,9 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
         if(holder.getItemViewType()==0)
         {
 
+        }
+        else if (holder.getItemViewType()==2) {
+            loadMore();
         }
         else
         {
@@ -80,14 +101,18 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         if (outerHits.getHits()!=null&&outerHits.getHits().size()!=0)
-            return outerHits.getHits().size();
+            return outerHits.getHits().size()+1;
         else return 1;
     }
 
     @Override
     public int getItemViewType(int position) {
         if(outerHits.getHits()!=null&&outerHits.getHits().size()!=0)
+        {
+            if (position!=outerHits.getHits().size())
             return 1;
+            else return 2;
+        }
         else
             return 0;
     }
@@ -127,5 +152,39 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
         public ViewHolder1(View itemView) {
             super(itemView);
         }
+    }
+
+    public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView hor_last_item_load_more_txt;
+        public ViewHolder3(View itemView) {
+            super(itemView);
+            //hor_last_item_load_more_txt=(TextView)itemView.findViewById(R.id.hor_last_item_load_more_txt);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+    }
+
+    public void loadMore()
+    {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(
+                "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from="+count+"&pretty=true&q=contentType:%22gallery%22");
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                count=count+5;
+                outerHits.getHits().addAll(response.body().getHits().getHits());
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 }

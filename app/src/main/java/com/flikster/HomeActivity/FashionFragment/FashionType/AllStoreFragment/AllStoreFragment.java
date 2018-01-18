@@ -60,7 +60,6 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
                 allStoreFragmentAdapter = new AllStoreFragmentAdapter(getActivity(),hits,allStoreInterafce);
                 simpleArcLoader.setVisibility(View.GONE);
                 simpleArcLoader.stop();
-                Log.e("gggggg",""+layoutManagerFashionFragment.getChildCount()+"and"+layoutManagerFashionFragment.getItemCount()+"and"+layoutManagerFashionFragment.findFirstVisibleItemPosition());
                 fragment_common_recyclerview_recycler.setAdapter(allStoreFragmentAdapter);
             }
 
@@ -73,8 +72,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
     private void initializeRest() {
         layoutManagerFashionFragment = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerFashionFragment);
-        Log.e("gggggg",""+layoutManagerFashionFragment.getChildCount()+"and"+layoutManagerFashionFragment.getItemCount()+"and"+layoutManagerFashionFragment.findFirstVisibleItemPosition());
-        fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -107,7 +105,7 @@ public class AllStoreFragment extends Fragment implements View.OnClickListener {
                         });
                     }
             }
-        });
+        });*/
     }
 
     private void initializeViews() {
