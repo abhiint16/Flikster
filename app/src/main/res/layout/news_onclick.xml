@@ -37,7 +37,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical|center"
-                android:src="@drawable/no_image" />
+                android:src="@drawable/no_image"
+                android:adjustViewBounds="true"/>
 
             <include layout="@layout/card_footer"></include>
 

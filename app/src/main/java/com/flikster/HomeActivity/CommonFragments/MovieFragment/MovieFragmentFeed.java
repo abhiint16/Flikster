@@ -46,9 +46,8 @@ public class MovieFragmentFeed extends Fragment {
     }
 
     private void retrofitInit() {
-        Log.e("searching for slug", "" + getArguments().getString("slug"));
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getMovieFeedData(true, 100, "slug:\"" + getArguments().getString("slug") + "\"");
+        Call<FeedData> call = apiInterface.getMovieFeedData(true, 4,0, "slug:\"" + getArguments().getString("slug") + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {

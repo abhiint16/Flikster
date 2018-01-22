@@ -38,7 +38,6 @@ public class CelebrityFragmentStore extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_common_recyclerview, container, false);
-        Log.e("insdei createview", "" + getArguments().getString("slug"));
         initializeViews();
         initializeRest();
         retrofitInit();
@@ -46,14 +45,12 @@ public class CelebrityFragmentStore extends Fragment {
     }
 
     private void retrofitInit() {
-        Log.e("check slug store", "" + getArguments().getString("slug"));
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search/").create(ApiInterface.class);
-        Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true, 100, "tags:\"" + getArguments().getString("slug") + "\"");
+        Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true, 4,0, "tags:\"" + getArguments().getString("slug") + "\"");
         call.enqueue(new Callback<AllStoreData>() {
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
-                Log.e("check slug store", "" + getArguments().getString("slug") + hits.getHits().size());
                 celebrityStoreAdapter = new CelebrityStoreAdapter(getActivity(), fragmentManager, getArguments().getString("coverpic"),
                         getArguments().getString("biography"),
                         getArguments().getString("dateOfBirth"),
@@ -61,7 +58,8 @@ public class CelebrityFragmentStore extends Fragment {
                         getArguments().getString("placeOfBirth"),
                         getArguments().getString("name"), hits,
                         getArguments().getString("userId"),
-                        getArguments().getString("entityId"));
+                        getArguments().getString("entityId"),
+                        getArguments().getString("slug"));
                 celebrityFragmentStoreRecycler.setAdapter(celebrityStoreAdapter);
             }
 

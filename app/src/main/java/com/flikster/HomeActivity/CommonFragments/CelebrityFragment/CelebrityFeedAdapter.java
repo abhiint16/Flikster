@@ -20,9 +20,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.FullScreenYoutubeView.FullScreenYoutubeView;
 import com.flikster.GlobalDataStorage;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFeedAdapter;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
+import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
@@ -32,6 +35,10 @@ import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -51,13 +58,17 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     String userId;
     String entityId;
     CelebrityFragment.CelebItemClickInterface celebItemClickInterface;
+    ApiInterface apiInterface;
+    int count=4;
+    String slug;
 
     public CelebrityFeedAdapter(Context context, FragmentManager fragmentManager,
                                 String coverpic, String biography,
                                 String dateOfBirth, ArrayList<String> role,
                                 String placeOfBirth, String name, FeedInnerData hits,
-                                String userId, String entityId) {
+                                String userId, String entityId,String slug) {
         this.context = context;
+        this.slug=slug;
         this.fragmentManager = fragmentManager;
         this.userId = userId;
         this.entityId = entityId;
@@ -124,6 +135,11 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnull, parent, false);
             return new ViewHolder200(view);
+        }
+        else if(viewType==300)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
+            return new ViewHolder300(view);
         }
         return null;
     }
@@ -354,20 +370,51 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else if (holder.getItemViewType() == 100) {
             ((ViewHolder100) holder).activity_no_comments_tv.setText("No Contents Available!");
         }
+        else if (holder.getItemViewType()==300)
+        {
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.fifty));
+            ((ViewHolder300)holder).hor_last_item_load_more_container.setLayoutParams(params);
+            loadMore();
+        }
+    }
+
+    private void loadMore()
+    {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getMovieFeedData(true, 4,count, "slug:\"" + slug + "\"");
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                count=count+4;
+                hits.getHits().addAll(response.body().getHits().getHits());
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("xxx", "xxx" + call + t);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if (hits.getHits().size() != 0 && hits.getHits() != null) {
-            return hits.getHits().size() + 1;
-        } else
+        if (hits.getHits().size()==0||hits.getHits()==null)
             return 2;
+        if ((hits.getTotal()==hits.getHits().size()))
+            return hits.getHits().size()+1;
+        return hits.getHits().size()+2;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == 0)
             return 0;
+        else if (hits.getHits().size()!=0&&(position==hits.getHits().size()+1))
+        {
+            return 300;
+        }
         else {
             if (hits.getHits().size() != 0 && hits.getHits() != null) {
                 if (hits.getHits().get(position - 1).get_source().getContentType() != null) {
@@ -1318,6 +1365,21 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             super(itemView);
         }
     }
+
+    public class ViewHolder300 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout hor_last_item_load_more_container;
+        public ViewHolder300(View itemView) {
+            super(itemView);
+            hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+    }
+
 
     public void cardDescLinearClick(int pos) {
         if (hits.getHits().get(pos).get_source().getMovie() != null && hits.getHits().get(pos).get_source().getMovie().size() != 0) {

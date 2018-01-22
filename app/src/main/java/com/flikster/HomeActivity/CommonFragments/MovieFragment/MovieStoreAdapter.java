@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioShopByVideoViewHolder;
+import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
 import com.flikster.HomeActivity.PostRetrofit;
@@ -27,6 +30,10 @@ import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -59,6 +66,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     List<String> role = new ArrayList<>();
     String price = "";
     String userId;
+    int count=4;
 
     public MovieStoreAdapter(Context context, FragmentManager fragmentManager, String coverpic, String censor,
                              String dor, ArrayList<String> genre, String duration, String title, String storyline, String slug,
@@ -116,6 +124,10 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (viewType == 100) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_no_comments, parent, false);
             return new ViewHolder100(view);
+        }else if(viewType==300)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
+            return new ViewHolder300(view);
         } else
             return null;
     }
@@ -363,7 +375,32 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ((ViewHolder5) holder).card_fashion_details4_plus_text.setText("+ " + (hits.getHits().get(position - 1).get_source().getImageGallery().size() - 4));
         } else if (holder.getItemViewType() == 100) {
             ((ViewHolder100) holder).activity_no_comments_tv.setText("No Contents Available!");
+        }else if (holder.getItemViewType()==300)
+        {
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.fifty));
+            ((ViewHolder300)holder).hor_last_item_load_more_container.setLayoutParams(params);
+            loadMore();
         }
+    }
+
+    private void loadMore()
+    {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search/").create(ApiInterface.class);
+        Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true,4,count,"tags:\""+slug+"\"");
+        call.enqueue(new Callback<AllStoreData>() {
+            @Override
+            public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
+                count=count+4;
+                hits.getHits().addAll(response.body().getHits().getHits());
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<AllStoreData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
+            }
+        });
     }
 
    /* private void recommendedMoviesRetrofitInit(final RecyclerView.ViewHolder holder) {
@@ -390,16 +427,19 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        if (hits.getHits().size() != 0 && hits.getHits() != null) {
-            return hits.getHits().size() + 1;
-        } else
+        if (hits.getHits().size()==0||hits.getHits()==null)
             return 2;
+        if ((hits.getTotal()==hits.getHits().size()))
+            return hits.getHits().size()+1;
+        return hits.getHits().size()+2;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == 0)
             return 0;
+        else if (hits.getHits().size()!=0&&(position==hits.getHits().size()+1))
+            return 300;
         else {
             if (hits.getHits().size() != 0 && hits.getHits() != null) {
                 if (hits.getHits().get(position - 1).get_source().getImageGallery() != null && hits.getHits().get(position - 1).get_source().getImageGallery().size() != 0) {
@@ -670,6 +710,20 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public ViewHolder100(View itemView) {
             super(itemView);
             activity_no_comments_tv = (TextView) itemView.findViewById(R.id.activity_no_comments_tv);
+        }
+    }
+
+    public class ViewHolder300 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout hor_last_item_load_more_container;
+        public ViewHolder300(View itemView) {
+            super(itemView);
+            hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 

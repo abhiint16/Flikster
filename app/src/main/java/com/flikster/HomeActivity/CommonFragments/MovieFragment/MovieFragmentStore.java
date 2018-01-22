@@ -45,7 +45,7 @@ public class MovieFragmentStore extends Fragment{
 
     private void retrofitInit() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search/").create(ApiInterface.class);
-        Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true,100,"tags:\""+getArguments().getString("slug")+"\"");
+        Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true,4,0,"tags:\""+getArguments().getString("slug")+"\"");
         call.enqueue(new Callback<AllStoreData>() {
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
