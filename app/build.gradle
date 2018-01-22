@@ -9,24 +9,42 @@ repositories {
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
+    def keystorePropertiesFile = rootProject.file('keystore.properties')
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
     defaultConfig {
         applicationId "com.flikster"
         minSdkVersion 16
         targetSdkVersion 26
         multiDexEnabled true
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "2.0.0"
         //strip other than english resources
         resConfigs "en"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     dexOptions {
         javaMaxHeapSize "4g"
     }
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     dexOptions
