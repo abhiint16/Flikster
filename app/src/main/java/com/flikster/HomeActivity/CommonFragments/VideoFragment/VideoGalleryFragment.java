@@ -245,13 +245,13 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
     private void bottomHorRecyclerRetrofitInit() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + contentType + "\"");
+        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(), outerHits, Count, title, videoRecommendationClick);
+                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(), outerHits, Count, title, videoRecommendationClick,contentType);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(videoGalleryAdapter);
             }
 

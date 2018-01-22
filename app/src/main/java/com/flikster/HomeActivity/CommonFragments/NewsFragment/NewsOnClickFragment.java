@@ -17,10 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
@@ -58,8 +62,6 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     FeedInnerData outerHits;
     int Count;
     NewsRecommendedClick newsRecommendedClick;
-
-
     ImageButton card_footer_share, ib_like, ib_bookmark;
     Button followbtn;
     ImageButton card_comment_text_send_btn;
@@ -90,13 +92,13 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     private void bottomHorRecyclerRetrofitInit() {
         Log.e("check poster", "" + "http://apiservice-ec.flikster.com/contents/_search/");
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=100&q=contentType:" + "\"" + contentType + "\"");
+        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(), outerHits, Count, title, bannerImg, newsRecommendedClick);
+                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(), outerHits, Count, title, bannerImg, newsRecommendedClick,contentType);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(newsBottomHorRecyclerAdapter);
             }
 
@@ -199,7 +201,22 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
             Glide.with(getContext()).load(profilePic).asBitmap().into(profile_image);
         }
         if (bannerImg != null && !bannerImg.isEmpty()) {
-            Glide.with(getContext()).load(bannerImg).asBitmap().into(newsimg);
+            Glide.with(getContext()).load(bannerImg)
+            .thumbnail(Glide.with(getActivity()).load(R.drawable.loading_gif3))
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            newsimg.setLayoutParams(params);
+                            newsimg.setScaleType(ImageView.ScaleType.FIT_XY);
+                            return false;
+                        }
+                    }).into(newsimg);
         }
 
 
