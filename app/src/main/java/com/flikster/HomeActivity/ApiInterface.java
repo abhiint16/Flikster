@@ -91,6 +91,7 @@ public interface ApiInterface {
     @GET("http://apiservice-ec.flikster.com/contents/_search")
     Call<FeedData> getMovieFeedData(@Query("pretty") Boolean s,
                                     @Query("size") Integer d,
+                                    @Query("from") Integer from,
                                     @Query("q") String c);
 
     @GET

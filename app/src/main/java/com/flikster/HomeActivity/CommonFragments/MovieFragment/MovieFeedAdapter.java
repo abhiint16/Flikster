@@ -26,6 +26,7 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFeed
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClickAdapter;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
+import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
@@ -65,6 +66,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     ArrayList<String> genre = new ArrayList<>();
     String slug;
     FeedInnerData hits;
+    int count=4;
 
     public MovieFeedAdapter(Context context, FragmentManager fragmentManager, String coverpic, String censor,
                             String dor, ArrayList<String> genre, String duration,
@@ -150,6 +152,11 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnull, parent, false);
             return new ViewHolder200(view);
+        }
+        else if(viewType==300)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
+            return new ViewHolder300(view);
         }
         return null;
     }
@@ -392,8 +399,34 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (holder.getItemViewType() == 100) {
             ((ViewHolder100) holder).activity_no_comments_tv.setText("No Contents Available!");
         }
-
+        else if (holder.getItemViewType()==300)
+        {
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.fifty));
+            ((ViewHolder300)holder).hor_last_item_load_more_container.setLayoutParams(params);
+            loadMore();
+        }
     }
+
+    private void loadMore()
+    {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getMovieFeedData(true, 4,count, "slug:\"" + slug + "\"");
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                count=count+4;
+                hits.getHits().addAll(response.body().getHits().getHits());
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("xxx", "xxx" + call + t);
+            }
+        });
+    }
+
 
     private void recommendedMoviesRetrofitInit(final RecyclerView.ViewHolder holder) {
         apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/movie-ms/movies/").create(ApiInterface.class);
@@ -420,10 +453,16 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        if (hits.getHits().size() != 0 && hits.getHits() != null) {
+        if (hits.getHits().size()==0||hits.getHits()==null)
+            return 2;
+        if ((hits.getTotal()==hits.getHits().size()))
+            return hits.getHits().size()+1;
+        return hits.getHits().size()+2;
+
+        /*if (hits.getHits().size() != 0 && hits.getHits() != null) {
             return hits.getHits().size() + 1;
         } else
-            return 2;
+            return 2;*/
 
     }
 
@@ -431,6 +470,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemViewType(int position) {
         if (position == 0)
             return 0;
+        else if (hits.getHits().size()!=0&&(position==hits.getHits().size()+1))
+            return 300;
         else {
             if (hits.getHits().size() != 0 && hits.getHits() != null) {
                 if (hits.getHits().get(position - 1).get_source().getContentType() != null) {
@@ -1403,6 +1444,20 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public ViewHolder200(View itemView) {
             super(itemView);
+        }
+    }
+
+    public class ViewHolder300 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout hor_last_item_load_more_container;
+        public ViewHolder300(View itemView) {
+            super(itemView);
+            hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 

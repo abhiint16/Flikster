@@ -46,7 +46,7 @@ public class CelebrityFragmentFeed extends Fragment {
 
     private void retrofitInit() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getMovieFeedData(true, 100, "slug:\"" + getArguments().getString("slug") + "\"");
+        Call<FeedData> call = apiInterface.getMovieFeedData(true, 4,0, "slug:\"" + getArguments().getString("slug") + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
@@ -60,7 +60,8 @@ public class CelebrityFragmentFeed extends Fragment {
                         getArguments().getString("name"),
                         hits,
                         getArguments().getString("userId"),
-                        getArguments().getString("entityId"));
+                        getArguments().getString("entityId"),
+                        getArguments().getString("slug"));
                 celebrityFragmentFeedRecycler.setAdapter(celebrityFeedAdapter);
             }
 
