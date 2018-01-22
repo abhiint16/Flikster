@@ -22,7 +22,6 @@
         android:background="@color/white"
         android:src="@drawable/no_image"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
         />
 
     <include layout="@layout/card_footer"></include>

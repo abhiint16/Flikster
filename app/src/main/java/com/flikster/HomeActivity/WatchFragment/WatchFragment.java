@@ -80,7 +80,7 @@ public class WatchFragment extends Fragment {
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, watchFragCommInterface);
+                //watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, watchFragCommInterface);
                 simpleArcLoader.setVisibility(View.GONE);
                 simpleArcLoader.stop();
                 movieFragmentInfoRecycler.setAdapter(watchAdapter);

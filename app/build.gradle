@@ -16,6 +16,8 @@ android {
         multiDexEnabled true
         versionCode 1
         versionName "1.0"
+        //strip other than english resources
+        resConfigs "en"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dexOptions {
