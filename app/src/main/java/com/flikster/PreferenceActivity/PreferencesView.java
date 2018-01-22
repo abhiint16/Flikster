@@ -144,7 +144,7 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
                 "INDUSTRY_TYPE").isEmpty()) {
             lunchHomeScreen();
         } else {
-            SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", "Tollywood");
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", "Bollywood");
             lunchHomeScreen();
         }
 

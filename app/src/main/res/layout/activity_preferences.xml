@@ -59,14 +59,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/preference_industry_bollywood" />
+            android:text="@string/preference_industry_bollywood"
+            android:checked="true"/>
 
         <RadioButton
             android:id="@+id/ind_tollywood"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:checked="true"
             android:text="@string/preference_industry_tollywood" />
     </LinearLayout>
 
