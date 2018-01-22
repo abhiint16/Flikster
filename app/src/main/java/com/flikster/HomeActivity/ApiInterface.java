@@ -121,6 +121,7 @@ public interface ApiInterface {
     @GET("http://apiservice-ec.flikster.com/products/_search")
     Call<AllStoreData> getCelebMovieStoreData(@Query("pretty") Boolean s,
                                               @Query("size") Integer d,
+                                              @Query("from") Integer from,
                                               @Query("q") String c);
     //getIntent().getStringExtra("userId")
     ////////////////////////////////////////////////////////////
