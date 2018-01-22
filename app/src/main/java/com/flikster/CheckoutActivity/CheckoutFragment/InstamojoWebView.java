@@ -131,7 +131,7 @@ public class InstamojoWebView extends AppCompatActivity implements View.OnClickL
         String email = "rohan@flikster.com";
         String buyer = "Test";
         String buyer_name = "Test";//SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_NAME");
-        String amount ="4599.00"; SharedPrefsUtil.getStringPreference(getApplicationContext(), "PRODUCT_PRICE");
+        String amount = "1500"; //SharedPrefsUtil.getStringPreference(getApplicationContext(), "PRODUCT_PRICE");
         String purpose = "FLIKSTER";
         String status = "j";
         String send_sms = "false";
