@@ -12,37 +12,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/alldatalayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include
-                layout="@layout/fragment_common_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@+id/fragment_checkout_bottom_btn" />
-
-            <Button
-                android:id="@+id/fragment_checkout_bottom_btn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:background="@color/colorAccent"
-                android:text="Continue"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-        </RelativeLayout>
+        <include layout="@layout/toolbar_frag_multiicons" />
 
 
         <in.juspay.godel.ui.JuspayWebView
             android:id="@+id/juspay_browser_view"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
-            android:visibility="gone" />
-
-
+            android:scrollbars="none" />
     </LinearLayout>
 
     <com.leo.simplearcloader.SimpleArcLoader

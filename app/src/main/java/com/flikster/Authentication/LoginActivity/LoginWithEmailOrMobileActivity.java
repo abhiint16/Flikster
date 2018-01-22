@@ -158,6 +158,21 @@ public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements
                                         " " + response.body().getData().getLastname()
                         );
                     }
+
+                    if (response.body().getData().getEmail() != null
+                            && !response.body().getData().getEmail().isEmpty()) {
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "EMAIL_ID",
+                                response.body().getData().getEmail()
+                        );
+                    }
+
+                    if (response.body().getData().getMobile() != null
+                            && !response.body().getData().getMobile().isEmpty()) {
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "MOBILE_NO",
+                                response.body().getData().getMobile()
+                        );
+                    }
+
                     Log.e("FirstName", response.body().getData().getFirstname());
                     Toast.makeText(LoginWithEmailOrMobileActivity.this, "" +
                             response.body().getData().getFirstname(), Toast.LENGTH_LONG).show();

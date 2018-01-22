@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +25,9 @@ import com.flikster.CheckoutActivity.AddressFragment.AddressFragment;
 import com.flikster.CheckoutActivity.PaymentFragment.PaymentFragment;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionPlaceBidData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
+import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
@@ -42,9 +46,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.juspay.godel.ui.JuspayWebView;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -82,6 +88,12 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     ApiInterface apiInterface;
     private String accessToken = null;
     String instaMojoURL = "https://test.instamojo.com/";
+    PaymentRequest paymentRequestdata;
+    RelativeLayout alldatalayout;
+    JuspayWebView instamojoweb;
+    SimpleArcLoader mDialog;
+    PaymentRequest.PaymentRequestSuccesdata PaymentRequestsuccess;
+    CreateUserApiPostData createUserApiPostData;
 
     @Nullable
     @Override
@@ -89,10 +101,38 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_checkout, container, false);
         initializeViews();
         initializeRest();
-
-//        instamojoProductionUrlAccess();
-
+        dataAccess();
+//        placeOrderinServer();
         return view;
+    }
+
+    private void dataAccess() {
+        Log.e("inside onclick bototbtn", "inside hitcreateuserapi");
+        List<CreateUserApiPostData.ProductData> productDatas = new ArrayList<CreateUserApiPostData.ProductData>();
+        productDatas.add(new CreateUserApiPostData.ProductData(productId, productTitle, productSlug,
+                profilePic, color,
+                price, size, quantity));
+        SharedPrefsUtil.setStringPreference(getContext(), "ORDER_ID", productId);
+        SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_PRICE", price);
+        Gson gson = new Gson();
+        String orderJson = gson.toJson(productDatas);
+        Log.e("orderJson", orderJson.toString());
+        String productorderJson = gson.toJson(productDatas);
+        Log.e("Jsondata", productorderJson);
+        List<CreateUserApiPostData.ShippingAddress> shippingAddress = new ArrayList<CreateUserApiPostData.ShippingAddress>();
+        shippingAddress.add(new CreateUserApiPostData.ShippingAddress(name,
+                mobile, address, city, state, pin, landmark));
+
+        String postShippingAddrsdata = gson.toJson(productDatas);
+        Log.e("Jsondata", postShippingAddrsdata);
+
+        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
+                SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
+                productDatas,
+                new CreateUserApiPostData.ShippingAddress(name, mobile, address,
+                        city, state, pin, landmark));
+        apiInterface = ApiClient.getClient(ApiClient.BASE_URL)
+                .create(ApiInterface.class);
     }
 
     private void initializeRest() {
@@ -118,6 +158,9 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         addressTabText = (TextView) getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_address_linear_name);
         checkoutTabText = (TextView) getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_checkout_linear_name);
         //paymentTabText=(TextView)getActivity().findViewById(R.id.activity_mybag_continue_onclick_tabs_payment_linear_name);
+        alldatalayout = (RelativeLayout) view.findViewById(R.id.alldatalayout);
+        instamojoweb = (JuspayWebView) view.findViewById(R.id.juspay_browser_view);
+        mDialog = (SimpleArcLoader) view.findViewById(R.id.arc_loader);
     }
 
     @Override
@@ -136,9 +179,13 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             addressUserData.checkoutToAddress(name, mobile, address, city, pin, state, landmark, additionalMobile, new AddressFragment());
         } else if (view.getId() == R.id.fragment_checkout_bottom_btn) {
-            Log.e("inside onclick bototbtn", "inside bototn ctn clk");
-            //hitCreateUserApi();
-            instaMojoInit();
+            if (SharedPrefsUtil.getStringPreference(getContext(), "USER_ID")!=null && !SharedPrefsUtil.getStringPreference(getContext(), "USER_ID").isEmpty()){
+                hitCreateUserApi();
+            }else {
+                Toast.makeText(getContext(), "Please login", Toast.LENGTH_SHORT).show();
+            }
+
+//            instaMojoInit();
             /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_mybag_continue_onclick_container,new PaymentFragment())
@@ -148,60 +195,63 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void hitCreateUserApi() {
-        Log.e("inside onclick bototbtn", "inside hitcreateuserapi");
+        mDialog.setVisibility(View.VISIBLE);
+        mDialog.start();
+        /*Log.e("inside onclick bototbtn", "inside hitcreateuserapi");
         List<CreateUserApiPostData.ProductData> productDatas = new ArrayList<CreateUserApiPostData.ProductData>();
         productDatas.add(new CreateUserApiPostData.ProductData(productId, productTitle, productSlug,
                 profilePic, color,
                 price, size, quantity));
-
+        SharedPrefsUtil.setStringPreference(getContext(), "ORDER_ID", productId);
+        SharedPrefsUtil.setStringPreference(getContext(), "PRODUCT_PRICE", price);
         Gson gson = new Gson();
         String orderJson = gson.toJson(productDatas);
-
         Log.e("orderJson", orderJson.toString());
-
         String productorderJson = gson.toJson(productDatas);
         Log.e("Jsondata", productorderJson);
-
         List<CreateUserApiPostData.ShippingAddress> shippingAddress = new ArrayList<CreateUserApiPostData.ShippingAddress>();
-        shippingAddress.add(new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
+        shippingAddress.add(new CreateUserApiPostData.ShippingAddress(name,
+                mobile, address, city, state, pin, landmark));
 
         String postShippingAddrsdata = gson.toJson(productDatas);
         Log.e("Jsondata", postShippingAddrsdata);
 
-//        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
-//                SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
-        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
+        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
+                SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
                 productDatas,
-                new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
-//        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
-//                productDatas,
-//                new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
-        /*String o=gson.toJson(new CreateUserApiPostData.ShippingAddress(name, mobile, address, city, state, pin, landmark));
-        Log.e("o",o);*/
-
+                new CreateUserApiPostData.ShippingAddress(name, mobile, address,
+                        city, state, pin, landmark));
         apiInterface = ApiClient.getClient(ApiClient.BASE_URL)
-                .create(ApiInterface.class);
+                .create(ApiInterface.class);*/
         Call<CreateUserApiPostData> call = apiInterface.postSendToCraeteUser(createUserApiPostData);
         call.enqueue(new Callback<CreateUserApiPostData>() {
             @Override
             public void onResponse(Call<CreateUserApiPostData> call, Response<CreateUserApiPostData> response) {
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
                 if (response.body().getStatusCode() == 200) {
-                    Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getStatusCode());
-                    Log.e("success", "insied onrespnse" + call + "bcbbc" + response + "gggg" + response.body().getMessage());
                     Toast.makeText(getActivity(), "Order has been created", Toast.LENGTH_SHORT).show();
-                    instaMojoInit();
+                    instamojoPage();
                 } else {
                     Toast.makeText(getActivity(), "Error creating Order!", Toast.LENGTH_SHORT).show();
+                    instamojoPage();
                 }
 
             }
 
             @Override
             public void onFailure(Call<CreateUserApiPostData> call, Throwable t) {
+                mDialog.setVisibility(View.GONE);
+                mDialog.stop();
                 Toast.makeText(getActivity(), "Error creating Order!", Toast.LENGTH_SHORT).show();
-                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t.getCause() + "" + t.getMessage() + "" + t.getLocalizedMessage());
+                instamojoPage();
             }
         });
+    }
+
+    private void instamojoPage() {
+        Intent i = new Intent(getContext(), InstamojoWebView.class);
+        startActivity(i);
     }
 
     private void instaMojoInit() {
@@ -568,6 +618,61 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<InstamojoData> call, Throwable t) {
+                Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+            }
+        });
+    }
+
+
+    private void placeOrderinServer() {
+        String orderId = "61a404aa-5b8f-43c9-ba5e-43eb24de00fa";
+        String phone = "999999999";
+        String email = "rohan@flikster.com";
+        String buyer = "Test";
+        String buyer_name = "Test";
+        String amount = "4599.00";
+        String purpose = "FLIKSTER";
+        String status = "jj";
+        String send_sms = "false";
+        String send_email = "false";
+        String sms_status = "Pending";
+        String email_status = "Pending";
+        String shorturl = null;
+        String redirect_url = "http://flikster.com/checkout/61a404aa-5b8f-43c9-ba5e-43eb24de00fa";
+        String webhook = "http://www.example.com/webhook/";
+        String allow_repeated_payments = "false";
+
+
+        paymentRequestdata = new PaymentRequest(new
+                PaymentRequest.PaymentRequestInnerdata(orderId, phone, email, buyer, buyer_name, amount, purpose, status,
+                send_sms, send_email, sms_status, email_status, shorturl,
+                redirect_url, webhook, allow_repeated_payments));
+        apiInterface = ApiClient.getClient(ApiClient.PAYMENT_REQ)
+                .create(ApiInterface.class);
+        Call<PaymentRequest> call = apiInterface.paymentRequestinServer(paymentRequestdata);
+        call.enqueue(new Callback<PaymentRequest>() {
+            @Override
+            public void onResponse(Call<PaymentRequest> call,
+                                   Response<PaymentRequest> response) {
+                Log.e("ResponsePayment", response.body().isSuccess() + "");
+                if (response.body().isSuccess()) {
+                    PaymentRequestsuccess = response.body().getPayment_request();
+                    alldatalayout.setVisibility(View.GONE);
+                    instamojoweb.setVisibility(View.VISIBLE);
+                    Toast.makeText(getContext(), "Order Requested", Toast.LENGTH_LONG).show();
+                    instamojoweb.getSettings().setJavaScriptEnabled(true);
+                    instamojoweb.loadUrl(PaymentRequestsuccess.getLongurl() + "");
+
+                    //instamojoweb
+
+                } else {
+                    Toast.makeText(getContext(), "Order Requested failed", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PaymentRequest> call, Throwable t) {
+                Toast.makeText(getContext(), "Order Requested failed", Toast.LENGTH_LONG).show();
                 Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
             }
         });

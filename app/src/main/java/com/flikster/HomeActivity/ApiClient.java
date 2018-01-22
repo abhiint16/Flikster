@@ -74,6 +74,8 @@ public class ApiClient {
     //http://apiservice.flikster.com/v3/auctions-ms/postBidByAuction
 
     public static final String INSTAMOJO_URL = "http://api.instamojo.com/oauth2/token/";
+
+    public static final String PAYMENT_REQ = "http://apiservice.flikster.com/v3/checkout-ms/paymentRequest/";
     //
 
 //    likes-ms/postCardStatus

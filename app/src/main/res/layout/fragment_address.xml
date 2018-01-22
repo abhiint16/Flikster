@@ -31,6 +31,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:singleLine="true"
+                android:maxLines="1"
                 android:hint="name"
                 android:layout_margin="10dp"
                 android:id="@+id/address_fragment_name"/>
@@ -39,6 +41,8 @@
                 android:layout_height="60dp"
                 android:hint="Mobile No"
                 android:layout_margin="10dp"
+                android:singleLine="true"
+                android:maxLength="10"
                 android:id="@+id/address_fragment_mobileno"
                 android:inputType="phone"/>
             <EditText
@@ -51,6 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="City"
+                android:singleLine="true"
+                android:maxLines="1"
                 android:layout_margin="10dp"
                 android:id="@+id/address_fragment_city"/>
             <LinearLayout
@@ -64,7 +70,10 @@
                     android:layout_weight="1"
                     android:hint="Pin Code"
                     android:layout_margin="5dp"
+                    android:singleLine="true"
+                    android:maxLines="1"
                     android:inputType="number"
+                    android:maxLength="6"
                     android:id="@+id/address_fragment_pin"/>
                 <EditText
                     android:layout_width="0dp"
@@ -72,6 +81,8 @@
                     android:layout_height="match_parent"
                     android:hint="State"
                     android:layout_margin="5dp"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:id="@+id/address_fragment_state"/>
             </LinearLayout>
             <EditText
