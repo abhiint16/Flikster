@@ -77,22 +77,15 @@ public class AuctionRelatedProductsViewHolder extends RecyclerView.Adapter<Aucti
                         String minute = objtime.getString("minute");
                         String second = objtime.getString("second");
                         String completeTime = "Time Left: " + hours + "h " + minute + "m " + second + "s ";
-
                         ((ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");*/
-
 //                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
                             String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
                             SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                             Date enddate = simDf.parse(enddateTime);
                             long endTimeMillSec = enddate.getTime();
-
                             holder.timeLefttxt.setText("Time Left: " + Html.fromHtml(DateUtil.getTimeLeft(endTimeMillSec)) + "");
-
-
                         } catch (Exception e) {
-
                         }
-
                     }
 
 //                ((AuctionCurrentFragmentAdapter.ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");
