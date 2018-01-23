@@ -230,9 +230,9 @@ public class Common {
             ib_like.setImageResource(0);
             if (likeStr.equals("LIKED")) {
                 ib_like.setImageResource(R.drawable.like_icon);
-                Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "UnLiked", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Liked", Toast.LENGTH_SHORT).show();
                 ib_like.setImageResource(R.drawable.like_pink);
             }
             new PostRetrofit().postRetrofitMethod("like", userId,
@@ -266,9 +266,9 @@ public class Common {
         ib_like.setImageResource(0);
         if (!likeStr.equals("BOOKMARKED")) {
             ib_like.setImageResource(R.drawable.bookmark_icon);
-            Toast.makeText(context, userId + " Un Bookmarked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Un Bookmarked", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, userId + " Bookmarked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, " Bookmarked", Toast.LENGTH_SHORT).show();
             ib_like.setImageResource(R.drawable.bookmark_yellow);
         }
         new PostRetrofit().postRetrofitMethod("bookmark", userId,
@@ -305,9 +305,9 @@ public class Common {
             ib_like.setImageResource(0);
             if (likeStr.equals("LIKED")) {
                 ib_like.setImageResource(R.drawable.likesmallicon);
-                Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,   " UnLiked", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,  " Liked", Toast.LENGTH_SHORT).show();
                 ib_like.setImageResource(R.drawable.likegreensmall);
             }
             new PostRetrofit().postWatchOrUnWatchRetrofitMethod("1", userId,
@@ -346,9 +346,9 @@ public class Common {
             ib_like.setImageResource(0);
             if (likeStr.equals("LIKED")) {
                 ib_like.setImageResource(R.drawable.unlikesmallicon);
-                Toast.makeText(context, userId + " UnLiked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,  " UnLiked", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, userId + " Liked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,  " Liked", Toast.LENGTH_SHORT).show();
                 ib_like.setImageResource(R.drawable.unlikepinksmall);
             }
             new PostRetrofit().postWatchOrUnWatchRetrofitMethod("0", userId,
@@ -388,7 +388,7 @@ public class Common {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         //WebView commontxt = (WebView) dialog.findViewById(R.id.commontxt);
-        TextView commontxt=(TextView)dialog.findViewById(R.id.commontxt);
+        TextView commontxt = (TextView) dialog.findViewById(R.id.commontxt);
         ImageButton closebtn = (ImageButton) dialog.findViewById(R.id.closebtn);
         TextView headertxt = (TextView) dialog.findViewById(R.id.headertxt);
         if (headertxtStr != null && !headertxtStr.isEmpty()) {
@@ -421,7 +421,7 @@ public class Common {
         dialog.show();
     }
 
-    public static void popBackStack(FragmentManager manager){
+    public static void popBackStack(FragmentManager manager) {
         FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
         manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }

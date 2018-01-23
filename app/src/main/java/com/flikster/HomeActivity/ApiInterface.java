@@ -13,6 +13,7 @@ import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.RegisterPost
 import com.flikster.Authentication.SignUpActivity.SignupWithGmailOrFBData;
 import com.flikster.CheckoutActivity.CheckoutFragment.CreateUserApiPostData;
 import com.flikster.CheckoutActivity.CheckoutFragment.InstamojoData;
+import com.flikster.CheckoutActivity.CheckoutFragment.PaymentRequest;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionPlaceBidData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.AuctionCurrentOrUpcomingData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.OnGoingBidData;
@@ -55,12 +56,14 @@ public interface ApiInterface {
                                      @Query("sort") String d,
                                      @Query("size") Integer i,
                                      @Query("q") String c);
+
     @GET("http://apiservice-ec.flikster.com/contents/_search")
     Call<FeedData> getTopRatedMovies(@Query("pretty") Boolean s,
                                      @Query("sort") String d,
                                      @Query("size") Integer i,
                                      @Query("from") Integer m,
                                      @Query("q") String c);
+
     @GET
     Call<FeedData> getTopRatedMovies(@Url String url);
 
@@ -176,7 +179,6 @@ public interface ApiInterface {
     Call<RegisterPostStatus> emailOrPhoneRegisterUserData(@Body PhoneRegisterPostData emailRegisterPostData);
 
 
-
     @POST(ApiClient.SIGNIN_FBORGMAIL_URL)
     Call<SignupWithGmailOrFBData> signInWithFbOrGmail(@Body SignupWithGmailOrFBData emailRegisterPostData);
 
@@ -211,5 +213,8 @@ public interface ApiInterface {
 
     @POST("http://apiservice.flikster.com/v3/search-ms/globalSearch")
     Call<GlobalSearchGetData> getGlobalSearchData(@Body GlobalSearchPostData globalSearchPostData);
+
+    @POST(ApiClient.PAYMENT_REQ)
+    Call<PaymentRequest> paymentRequestinServer(@Body PaymentRequest paymentRequest);
 
 }

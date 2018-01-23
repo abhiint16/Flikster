@@ -55,54 +55,54 @@ public class AuctionRelatedProductsViewHolder extends RecyclerView.Adapter<Aucti
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (auctionCurrentOrUpcomingData.get(position).getEndTime()
-                != null && !auctionCurrentOrUpcomingData.get(position).getEndTime().isEmpty()) {
+        if (auctionCurrentOrUpcomingData.size() != 0) {
             try {
+                Glide.with(context).load(auctionCurrentOrUpcomingData.get(position).getProfilePic()).asBitmap().into(
+                        (holder.movieimg));
+                if (auctionCurrentOrUpcomingData.get(position).getEndTime()
+                        != null && !auctionCurrentOrUpcomingData.get(position).getEndTime().isEmpty()) {
+                }
+
                /* JSONObject objtime = new JSONObject(auctionCurrentOrUpcomingData.get(position).getEndTime());
                 String hours = objtime.getString("hour");
                 String minute = objtime.getString("minute");
                 String second = objtime.getString("second");
                 String completeTime = "Time Left: " + hours + "h " + minute + "m " + second + "s "*/
-                ;
-                if (auctionCurrentOrUpcomingData.get(0).getEndDate()
-                        != null && !auctionCurrentOrUpcomingData.get(0).getEndDate().isEmpty()) {
-                    try {
+
+                    if (auctionCurrentOrUpcomingData.get(0).getEndDate()
+                            != null && !auctionCurrentOrUpcomingData.get(0).getEndDate().isEmpty()) {
+                        try {
                        /* JSONObject objtime = new JSONObject(auctionCurrentOrUpcomingData.get(0).getEndTime());
                         String hours = objtime.getString("hour");
                         String minute = objtime.getString("minute");
                         String second = objtime.getString("second");
                         String completeTime = "Time Left: " + hours + "h " + minute + "m " + second + "s ";
-
                         ((ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");*/
-
 //                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
-                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
-                        SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-                        Date enddate = simDf.parse(enddateTime);
-                        long endTimeMillSec = enddate.getTime();
-
-                        holder.timeLefttxt.setText("Time Left: " + Html.fromHtml(DateUtil.getTimeLeft(endTimeMillSec)) + "");
-
-
-                    } catch (Exception e) {
-
+                            String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
+                            SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                            Date enddate = simDf.parse(enddateTime);
+                            long endTimeMillSec = enddate.getTime();
+                            holder.timeLefttxt.setText("Time Left: " + Html.fromHtml(DateUtil.getTimeLeft(endTimeMillSec)) + "");
+                        } catch (Exception e) {
+                        }
                     }
-
-                }
 
 //                ((AuctionCurrentFragmentAdapter.ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");
 //                holder.timeLefttxt.setText( Html.fromHtml(completeTime));
+
+
+
+
+                holder.card_video_item_desc.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(position).getInfo()));
+                holder.card_video_item_title.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(position).getName()));
+//        Glide.with(context).load(auctionCurrentOrUpcomingData.get(0).getProfilePic()).into(holder.movieimg);
+
 
             } catch (Exception e) {
             }
         }
 
-        holder.card_video_item_desc.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(position).getInfo()));
-        holder.card_video_item_title.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(position).getName()));
-//        Glide.with(context).load(auctionCurrentOrUpcomingData.get(0).getProfilePic()).into(holder.movieimg);
-
-        Glide.with(context).load(auctionCurrentOrUpcomingData.get(position).getProfilePic()).asBitmap().into(
-                (holder.movieimg));
     }
 
     @Override

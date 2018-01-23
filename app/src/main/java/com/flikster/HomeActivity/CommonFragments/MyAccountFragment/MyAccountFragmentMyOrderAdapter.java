@@ -26,7 +26,7 @@ public class MyAccountFragmentMyOrderAdapter extends RecyclerView.Adapter<MyAcco
     public void onBindViewHolder(MyAccountFragmentMyOrderAdapter.ViewHolder holder, int position) {
         Log.e("aaaaaaaa","aaaaaaaa");
         holder.fragment_my_account_container.setGravity(Gravity.CENTER_HORIZONTAL);
-        holder.activity_no_comments_tv.setText("No Order Placed");
+        holder.activity_no_comments_tv.setText("No Orders");
         /*holder.relativeLayout.setVisibility(View.GONE);
         holder.tv_description.setVisibility(View.GONE);
         holder.tv_name.setText("my latest pics");
