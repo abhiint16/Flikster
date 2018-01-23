@@ -126,7 +126,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
         String postShippingAddrsdata = gson.toJson(productDatas);
         Log.e("Jsondata", postShippingAddrsdata);
 
-        CreateUserApiPostData createUserApiPostData = new CreateUserApiPostData(
+         createUserApiPostData = new CreateUserApiPostData(
                 SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"),
                 productDatas,
                 new CreateUserApiPostData.ShippingAddress(name, mobile, address,
@@ -321,7 +321,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-
     }
 
 

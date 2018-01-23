@@ -125,13 +125,39 @@ public class InstamojoWebView extends AppCompatActivity implements View.OnClickL
         String webhook = "http://www.example.com/webhook/";
         String allow_repeated_payments = "false";*/
 
+        Log.e("priceAmt", SharedPrefsUtil.getStringPreference(getApplicationContext(), "PRODUCT_PRICE") + "Rs");
+        Log.e("orderidd", SharedPrefsUtil.getStringPreference(getApplicationContext(), "ORDER_ID") + "ID");
+        Log.e("USERNAME", SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_NAME").trim() + "name");
+        String orderIdtemp = SharedPrefsUtil.getStringPreference(getApplicationContext(), "ORDER_ID");
 
-        String orderId = "61a404aa-5b8f-43c9-ba5e-43eb24de00fa";// SharedPrefsUtil.getStringPreference(getApplicationContext(), "ORDER_ID");
-        String phone =  "9948737414";
-        String email = "rohan@flikster.com";
+
+        String orderId = orderIdtemp;//"61a404aa-5b8f-43c9-ba5e-43eb24de00fa";// SharedPrefsUtil.getStringPreference(getApplicationContext(), "ORDER_ID");
+        String phone = "";
+        if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "MOBILE_NO") != null && !SharedPrefsUtil.getStringPreference(getApplicationContext(), "MOBILE_NO").isEmpty()) {
+            phone = SharedPrefsUtil.getStringPreference(getApplicationContext(), "MOBILE_NO");
+            Log.e("phoneNo", phone);
+        } else {
+            phone = "";
+            Log.e("phoneNo", phone);
+        }
+
+        String email = "";
+        if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "EMAIL_ID") != null && !SharedPrefsUtil.getStringPreference(getApplicationContext(), "EMAIL_ID").isEmpty()) {
+            if (!SharedPrefsUtil.getStringPreference(getApplicationContext(), "EMAIL_ID").equals("undefined")){
+                email = SharedPrefsUtil.getStringPreference(getApplicationContext(), "EMAIL_ID");
+            }else {
+                email = "";
+            }
+
+            Log.e("emailId", email);
+        } else {
+            email = "";
+            Log.e("emailId", email);
+        }
+
         String buyer = "Test";
-        String buyer_name = "Test";//SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_NAME");
-        String amount = "1500"; //SharedPrefsUtil.getStringPreference(getApplicationContext(), "PRODUCT_PRICE");
+        String buyer_name = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_NAME").trim();
+        String amount = SharedPrefsUtil.getStringPreference(getApplicationContext(), "PRODUCT_PRICE"); //SharedPrefsUtil.getStringPreference(getApplicationContext(), "PRODUCT_PRICE");
         String purpose = "FLIKSTER";
         String status = "j";
         String send_sms = "false";
@@ -139,7 +165,7 @@ public class InstamojoWebView extends AppCompatActivity implements View.OnClickL
         String sms_status = "Pending";
         String email_status = "Pending";
         String shorturl = null;
-        String redirect_url = "http://flikster.com/checkout/61a404aa-5b8f-43c9-ba5e-43eb24de00fa";
+        String redirect_url = "http://flikster.com/checkout/" + orderIdtemp;
 //                + SharedPrefsUtil.getStringPreference(getApplicationContext(), "ORDER_ID");
         String webhook = "http://www.example.com/webhook/";
         String allow_repeated_payments = "false";
