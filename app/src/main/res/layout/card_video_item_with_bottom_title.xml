@@ -13,7 +13,6 @@
         android:layout_marginLeft="@dimen/ten"
         android:visibility="gone"
         android:layout_marginTop="@dimen/ten"
-        android:text="Date 11 Dec 2017"
         android:textColor="@color/black" />
 
     <ImageView
