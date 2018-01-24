@@ -45,12 +45,13 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     String title = "";
     List<String> role = new ArrayList<>();
     String price = "";
-    String userId = "PAWAN_KALYAN";
+    String userId = "";
     String userName = "null";
     ApiInterface  apiInterface;
     int count=10;
 
-    public AllStoreFragmentAdapter(Context context, AllStoreInnerData hits, AllStoreFragment.AllStoreInterafce allStoreInterafce) {
+    public AllStoreFragmentAdapter(Context context, AllStoreInnerData hits,
+                                   AllStoreFragment.AllStoreInterafce allStoreInterafce) {
         this.context = context;
         this.hits = hits;
         this.allStoreInterafce = allStoreInterafce;
@@ -123,8 +124,11 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
             userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
             Log.e("LoginUserId", userId);
+        }else {
+            userId = null;
         }
-        if (SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null && SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null) {
+        if (SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null
+                && SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null) {
             userName = SharedPrefsUtil.getStringPreference(context, "USER_NAME");
             Log.e("LoginUserName", userName);
         }
@@ -556,7 +560,6 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     if (hits.getHits().get(getAdapterPosition()).get_source()
                             .getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source()
                             .getCeleb().size() != 0) {

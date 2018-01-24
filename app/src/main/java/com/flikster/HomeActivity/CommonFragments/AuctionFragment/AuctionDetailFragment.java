@@ -273,7 +273,6 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
 
        /* if (auctionDetails.get(positionvalue).getEndTime() != null && !auctionDetails.get(positionvalue).getEndTime().isEmpty()) {
 //            timelefttxt.setText("Rs " + Html.fromHtml(auctionDetails.get(positionvalue).getStartingPrice() + "/"));
-
             try {
                 JSONObject objtime = new JSONObject(auctionDetails.get(positionvalue).getEndTime());
                 String hours = objtime.getString("hour");
@@ -293,10 +292,9 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
                         String minute = objtime.getString("minute");
                         String second = objtime.getString("second");
                         String completeTime = "Time Left: " + hours + "h " + minute + "m " + second + "s ";
-
                         ((ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");*/
-
 //                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
+
                 String enddateTime = DateUtil.serverSentTimeChange(auctionDetails.get(0).getEndDate());
                 SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                 Date enddate = simDf.parse(enddateTime);
