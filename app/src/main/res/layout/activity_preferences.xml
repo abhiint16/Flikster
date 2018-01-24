@@ -129,6 +129,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/preference_men_fashion"
+            android:textSize="12sp"
             android:drawableLeft="@drawable/dress_male"/>
 
         <TextView
@@ -141,6 +142,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/preference_female_fashion"
+            android:textSize="12sp"
             android:drawableLeft="@drawable/dress_female"/>
 
     </LinearLayout>
