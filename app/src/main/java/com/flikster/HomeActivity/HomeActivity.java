@@ -419,6 +419,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_search_btn.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if (query.length() >= 3) {
+                    getSearchedQueryData(query);
+                }
+                else
+                    Toast.makeText(HomeActivity.this,"Type atleast 3 character to get Result",Toast.LENGTH_SHORT).show();
                 return false;
             }
 
