@@ -112,6 +112,7 @@ import com.flikster.MenuFragments.WishListFragment;
 import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.Common;
 import com.flikster.Util.DateUtil;
+import com.flikster.Util.MySpinner;
 import com.flikster.Util.SharedPrefsUtil;
 import com.flikster.permission.DangerousPermResponseCallBack;
 import com.flikster.permission.DangerousPermissionResponse;
@@ -166,7 +167,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     FloatingActionButton camera_fab;
     SharedPref sharedPref;
     GlobalSearchGetData globalSearchGetData;
-    Spinner toolbar_pref_spinner;
+    MySpinner toolbar_pref_spinner;
     Button right_navigation_bar_non_loggedin_login_btn, right_navigation_bar_non_loggedin_create_account_btn;
     ScrollView right_navigation_bar_logged_in_container, right_navigation_bar_non_logged_in_container;
     TextView right_navigation_bar_my_account, right_navigation_bar_orders, right_navigation_bar_wishlist,
@@ -207,6 +208,21 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     String UserId = "";
     String Username = "";
+
+    String[] number = new String[]{
+            "Bollywood",
+            "Tollywood",
+            "Kollywood",
+            "Mollywood",
+            "Sandalwood"
+    };
+
+    /*pref.add("Bollywood");
+        pref.add("Tollywood");
+        pref.add("Kollywood");
+        pref.add("Mollywood");
+        pref.add("Sandalwood");*/
+    int Hold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -465,20 +481,70 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     private void industrySelectionrefreshActivity(String industrytype) {
-        if (firstItemCreate != 0) {
+        if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE") != null &&
+                !SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE").isEmpty()) {
+            String selectedIndustry = SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE");
+            if (!selectedIndustry.equals(industrytype)){
+                Toast.makeText(getApplicationContext(), industrytype, Toast.LENGTH_LONG).show();
+                SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", industrytype);
+                Intent i = new Intent(HomeActivity.this, HomeActivity.class);
+                startActivity(i);
+            }else {
+                Toast.makeText(getApplicationContext(), industrytype, Toast.LENGTH_LONG).show();
+            }
+        }else {
+            Toast.makeText(getApplicationContext(), industrytype, Toast.LENGTH_LONG).show();
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", industrytype);
             Intent i = new Intent(HomeActivity.this, HomeActivity.class);
             startActivity(i);
         }
+
     }
 
     private void toolbarPrefSpinner() {
-        pref = new ArrayList<>();
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_item, R.id.spinner_item_tv, number);
+
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
+
+        toolbar_pref_spinner.setAdapter(spinnerArrayAdapter);
+
+        toolbar_pref_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                Hold = toolbar_pref_spinner.getSelectedItemPosition() + 1;
+                if (Hold == 1) {
+                    industrySelectionrefreshActivity("Bollywood");
+                } else if (Hold == 2) {
+                    industrySelectionrefreshActivity("Tollywood");
+                } else if (Hold == 3) {
+                    industrySelectionrefreshActivity("Kollywood");
+                } else if (Hold == 4) {
+                    industrySelectionrefreshActivity("Mollywood");
+                } else if (Hold == 5) {
+                    industrySelectionrefreshActivity("Sandalwood");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        /*pref = new ArrayList<>();
         pref.add("Bollywood");
         pref.add("Tollywood");
         pref.add("Kollywood");
         pref.add("Mollywood");
         pref.add("Sandalwood");
+
+
+
         ArrayAdapter<String> prefArrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_item, R.id.spinner_item_tv, pref);
         prefArrayAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
         toolbar_pref_spinner.setAdapter(prefArrayAdapter);
@@ -514,23 +580,67 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_pref_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
+
+               *//* if (position == 0) {
                     Toast.makeText(getApplicationContext(), "position" + position, Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(), pref.get(position), Toast.LENGTH_LONG).show();
-                    Log.e("Itemname", pref.get(position));
                     if (firstItemCreate != 0) {
-                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", "Bollywood");
-                        Intent i = new Intent(HomeActivity.this, HomeActivity.class);
-                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), pref.get(position), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), pref.get(position), Toast.LENGTH_LONG).show();
+//                        Log.e("Itemname", pref.get(position));
+//                        SharedPrefsUtil.setStringPreference(getApplicationContext(),
+//                                "INDUSTRY_TYPE", "Bollywood");
+//                        Intent i = new Intent(HomeActivity.this, HomeActivity.class);
+//                        startActivity(i);
+
+                    }
+                }*//*
+
+                if (firstItemCreate == 0) {
+                    firstItemCreate = 1;
+                    Toast.makeText(getApplicationContext(), "AppCreated", Toast.LENGTH_LONG).show();
+                    return;
+                }else {
+                    Toast.makeText(getApplicationContext(), "Position" + position, Toast.LENGTH_LONG).show();
+                }
+                switch (position) {
+                    case 0:
+                        Toast.makeText(getApplicationContext(), "Position" + position, Toast.LENGTH_LONG).show();
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(),
+                                "INDUSTRY_TYPE", "Bollywood");
+                        industrySelectionrefreshActivity("Bollywood");
+                        break;
+                    case 1:
+                        industrySelectionrefreshActivity("Tollywood");
+                        break;
+                    case 2:
+                        industrySelectionrefreshActivity("Kollywood");
+                        break;
+                    case 3:
+                        industrySelectionrefreshActivity("Mollywood");
+                        break;
+                    case 4:
+                        industrySelectionrefreshActivity("Sandalwood");
+                        break;
+                }
+                *//*if (position == 0) {
+                    if (firstItemCreate != 0) {
+                        Toast.makeText(getApplicationContext(), "position" + position, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), pref.get(position), Toast.LENGTH_LONG).show();
+//                        Log.e("Itemname", pref.get(position));
+//                        SharedPrefsUtil.setStringPreference(getApplicationContext(),
+//                                "INDUSTRY_TYPE", "Bollywood");
+//                        Intent i = new Intent(HomeActivity.this, HomeActivity.class);
+//                        startActivity(i);
+
                     }
                 }
                 if (firstItemCreate == 0) {
                     firstItemCreate = 1;//++;
                     return;
                 } else {
-                    /*if (position == 0) {
+                    *//**//*if (position == 0) {
                         industrySelectionrefreshActivity("Bollywood");
-                    } else*/
+                    } else*//**//*
                     if (pref.get(position).equals("Tollywood")) {
                         industrySelectionrefreshActivity("Tollywood");
                     } else if (pref.get(position).equals("Kollywood")) {
@@ -540,14 +650,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                     } else if (pref.get(position).equals("Sandalwood")) {
                         industrySelectionrefreshActivity("Sandalwood");
                     }
-                }
+                }*//*
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
 //        toolbar_pref_spinner.setOnItemSelectedListener(new MyOnItemSelectedListener());
@@ -571,7 +681,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         footer_drawer_layout_privacy = (TextView) findViewById(R.id.footer_drawer_layout_privacy);
         toolbar_search_btn = (SearchView) findViewById(R.id.toolbar_search_btn);
         toolbar_navigation_view_open_btn = (LinearLayout) findViewById(R.id.toolbar_navigation_view_open_btn);
-        toolbar_pref_spinner = (Spinner) findViewById(R.id.toolbar_pref_spinner);
+        toolbar_pref_spinner = (MySpinner) findViewById(R.id.toolbar_pref_spinner);
         camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
         header_drawer_layout_username = (TextView) findViewById(R.id.header_drawer_layout_username);
         right_navigation_bar_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_logged_in_container);
@@ -1244,5 +1354,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             }
         });
     }
+
 
 }

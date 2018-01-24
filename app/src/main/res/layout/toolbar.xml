@@ -80,6 +80,16 @@
                 android:gravity="center" />
 
             <Spinner
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="@dimen/five"
+                android:background="@color/transparent"
+                android:spinnerMode="dropdown"
+                android:visibility="gone" />
+
+            <com.flikster.Util.MySpinner
                 android:id="@+id/toolbar_pref_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +97,7 @@
                 android:layout_marginTop="@dimen/five"
                 android:background="@color/transparent"
                 android:spinnerMode="dropdown"
-                android:visibility="visible" />
+                android:visibility="visible"/>
 
             <TextView
                 android:layout_width="match_parent"
