@@ -2,18 +2,27 @@ package com.flikster.MyBagActivity;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.ModelForPostRequest;
 import com.flikster.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 24-10-2017.
@@ -24,6 +33,7 @@ public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     List<MyBagData.MyBagInnerData> myBagInnerData;
     Context context;
     int price;
+    ApiInterface apiInterface;
 
     public MyBagAdapter(Context context, List<MyBagData.MyBagInnerData> myBagInnerData) {
         color.add(R.color.colorAccent);color.add(R.color.colorPrimary);color.add(R.color.colorCreateAccountSelected);
@@ -94,6 +104,7 @@ public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 notification_item_price,notification_item_size,buy_click_product_quantity_minus_btn,
                 buy_click_product_quantity_plus_btn;
         ImageView notification_item_img;
+        ImageButton notification_item_cancel_btn;
         public ViewHolder1(View itemView) {
             super(itemView);
             notification_item_color=(TextView)itemView.findViewById(R.id.notification_item_color);
@@ -102,10 +113,12 @@ public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             notification_item_quantity=(TextView) itemView.findViewById(R.id.notification_item_quantity);
             notification_item_price=(TextView) itemView.findViewById(R.id.notification_item_price);
             notification_item_size=(TextView) itemView.findViewById(R.id.notification_item_size);
+            notification_item_cancel_btn=(ImageButton)itemView.findViewById(R.id.notification_item_cancel_btn);
             buy_click_product_quantity_plus_btn=(TextView)itemView.findViewById(R.id.buy_click_product_quantity_plus_btn);
             buy_click_product_quantity_minus_btn=(TextView)itemView.findViewById(R.id.buy_click_product_quantity_minus_btn);
             buy_click_product_quantity_plus_btn.setOnClickListener(this);
             buy_click_product_quantity_minus_btn.setOnClickListener(this);
+            notification_item_cancel_btn.setOnClickListener(this);
         }
 
         @Override
@@ -127,6 +140,23 @@ public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         (Integer.parseInt((String)notification_item_quantity.getText()))+" /-");
                 price=price+Integer.parseInt(myBagInnerData.get(getAdapterPosition()).getProductDetails().getPrice());
                 notifyItemChanged(myBagInnerData.size());
+            }
+            else if (view.getId()==R.id.notification_item_cancel_btn)
+            {
+                apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/cart-ms/removeItemFromCart/").create(ApiInterface.class);
+                Call<ModelForPostRequest> call = apiInterface.removeItemFromBag("http://apiservice.flikster.com/v3/cart-ms/removeItemFromCart/"+myBagInnerData.get(getAdapterPosition()).getId());
+                call.enqueue(new Callback<ModelForPostRequest>() {
+                    @Override
+                    public void onResponse(Call<ModelForPostRequest> call, Response<ModelForPostRequest> response) {
+                     myBagInnerData.remove(getAdapterPosition());
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelForPostRequest> call, Throwable t) {
+                        Log.e("insied onfailure", "insied onfailre" + call + "bcbbc" + t);
+                    }
+                });
             }
         }
     }

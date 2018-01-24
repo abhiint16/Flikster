@@ -126,6 +126,8 @@ public interface ApiInterface {
                                               @Query("size") Integer d,
                                               @Query("from") Integer from,
                                               @Query("q") String c);
+    @GET
+    Call<ModelForPostRequest> removeItemFromBag(@Url String url);
     //getIntent().getStringExtra("userId")
     ////////////////////////////////////////////////////////////
     //POST Request
