@@ -21,6 +21,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
 import com.flikster.CheckoutActivity.MyBagContinueOnClickActivity;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 import com.leo.simplearcloader.SimpleArcLoader;
 
 import java.util.List;
@@ -67,7 +68,7 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
         simpleArcLoader.setVisibility(View.VISIBLE);
         simpleArcLoader.start();
         apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/").create(ApiInterface.class);
-        Call<MyBagData> call = apiInterface.getMyBagData("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/"+getIntent().getStringExtra("userId"));
+        Call<MyBagData> call = apiInterface.getMyBagData("http://apiservice.flikster.com/v3/cart-ms/getCartByUser/"+ SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID"));
         call.enqueue(new Callback<MyBagData>() {
             @Override
             public void onResponse(Call<MyBagData> call, Response<MyBagData> response) {
