@@ -18,7 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@color/white"
+        android:background="@color/colorImageBackgroundGrey"
         android:orientation="horizontal"
         android:id="@+id/card_fashion_details2_img_container">
 

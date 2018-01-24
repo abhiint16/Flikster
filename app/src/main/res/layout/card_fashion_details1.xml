@@ -30,7 +30,7 @@
         android:layout_marginBottom="1dp"
         android:layout_marginTop="1dp"
         android:src="@drawable/no_image"
-        android:scaleType="fitXY"/>
+        android:adjustViewBounds="true"/>
     </LinearLayout>
     <include layout="@layout/card_footer"/>
 
