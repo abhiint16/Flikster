@@ -67,7 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_frag_multiicons_toolbar"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/nodatalayout">
 
         <include layout="@layout/card_no_data_available" />
     </LinearLayout>

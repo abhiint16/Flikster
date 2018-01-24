@@ -102,7 +102,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
         else if (holder.getItemViewType()==1)
         {
-            Log.e("check checkout dat",""+profilePic+productTitle+color+size);
             Glide.with(context).load(profilePic).into(((ViewHolder1)holder).notification_item_img);
             ((ViewHolder1)holder).notification_item_title.setText(productTitle);
             ((ViewHolder1)holder).notification_item_color.setText(color);

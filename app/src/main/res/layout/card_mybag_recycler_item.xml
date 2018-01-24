@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <!--<ImageButton
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:background="@color/black"
         android:src="@drawable/cancel_white"
-        android:id="@+id/notification_item_cancel_btn"/>-->
+        android:id="@+id/notification_item_cancel_btn"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                     android:id="@+id/notification_item_size"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:gravity="center_vertical|start"
                     android:text="null" />
 
@@ -117,9 +117,8 @@
                     android:textSize="16sp" />-->
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
                     android:gravity="center_vertical|start"
                     android:text="Quantity :"
                     android:textColor="@color/black"
@@ -127,15 +126,39 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/notification_item_quantity"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:text="-"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="5dp"
+                    android:layout_weight="1"
+                    android:id="@+id/buy_click_product_quantity_minus_btn"/>
+
+                <TextView
+                    android:id="@+id/notification_item_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:gravity="center_vertical|start"
+                    android:gravity="center"
                     android:text="1"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="+"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical|start"
+                    android:id="@+id/buy_click_product_quantity_plus_btn"
+                    android:paddingLeft="5dp"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -149,12 +172,13 @@
 
                 <TextView
                     android:id="@+id/notification_item_price"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:gravity="start|center_vertical"
                     android:text="null"
                     android:textColor="@color/black"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
                 <!--<ImageButton
                     android:id="@+id/plus_btn"
