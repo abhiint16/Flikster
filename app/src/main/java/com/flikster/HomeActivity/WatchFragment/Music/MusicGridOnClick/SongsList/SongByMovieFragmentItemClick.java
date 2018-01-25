@@ -76,9 +76,9 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         hideAudioOrVideo();
         initializeRest();
         //musicplay = MediaPlayer.create(getContext(), R.raw.ringtone);
-        seekBar.setMax(musicplay.getDuration());
+        /*seekBar.setMax(musicplay.getDuration());
         SeekUpdation();
-        seekBar.setOnSeekBarChangeListener(this);
+        seekBar.setOnSeekBarChangeListener(this);*/
         return view;
     }
 

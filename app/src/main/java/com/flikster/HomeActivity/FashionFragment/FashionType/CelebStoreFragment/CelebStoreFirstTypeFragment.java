@@ -98,7 +98,7 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
             @Override
             public void onResponse(Call<AllStoreData> call, Response<AllStoreData> response) {
                 hits = response.body().getHits();
-                celebStoreFragmentAdapter = new CelebStoreFragmentAdapter(getContext(), fragmentManager,hits,shopByVideoInterafce);
+                celebStoreFragmentAdapter = new CelebStoreFragmentAdapter(getContext(), fragmentManager,hits,shopByVideoInterafce,URL);
                 simpleArcLoader.setVisibility(View.GONE);
                 simpleArcLoader.stop();
                 fragment_common_recyclerview_recycler.setAdapter(celebStoreFragmentAdapter);

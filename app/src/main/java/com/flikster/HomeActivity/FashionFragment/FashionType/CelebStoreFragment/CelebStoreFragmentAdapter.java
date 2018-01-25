@@ -72,9 +72,11 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     List<String> role = new ArrayList<>();
     String price = "";
     String userId = "";
+    String URL;
 
     public CelebStoreFragmentAdapter(Context context, FragmentManager fragmentManager, AllStoreInnerData hits,
-                                     CelebStoreFirstTypeFragment.ShopByVideoInterafce shopByVideoInterafce) {
+                                     CelebStoreFirstTypeFragment.ShopByVideoInterafce shopByVideoInterafce,
+                                     String URL) {
         type.add(1);
         type.add(2);
         type.add(3);
@@ -83,6 +85,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         type.add(6);
         type.add(7);
         this.context = context;
+        this.URL=URL;
         this.fragmentManager = fragmentManager;
         this.hits = hits;
         this.shopByVideoInterafce = shopByVideoInterafce;
@@ -159,7 +162,14 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
 
         } else if (holder.getItemViewType() == 2) {
             int j = 0;
-            for (int i = 0; i < hits.getHits().size(); i++) {
+            int k;
+            if (hits.getHits().size()>10)
+            {
+                k=10;
+            }
+            else
+            k=hits.getHits().size();
+            for (int i = 0; i < k; i++) {
                 if (hits.getHits().get(i).get_source().getImageGallery() != null && hits.getHits().get(i).get_source().getImageGallery().size() != 0) {
                     carouselImg.add(hits.getHits().get(i).get_source().getImageGallery().get(0));
                     j = ++j;
@@ -175,11 +185,13 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             initRetrofitProfileCollection(((ViewHolder3) holder).fragment_common_recyclerview_recycler,
                     "http://apiservice-es.flikster.com/widgets/_search?pretty=true&size=100&q=*");
         } else if (holder.getItemViewType() == 4) {
-            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Trending Celebrity Fashions");
-            layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+
+            ((ViewHolder4)holder).fragment_common_recyclerview_with_tv_layout.setVisibility(View.GONE);
+            //((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Trending Celebrity Fashions");
+            /*layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             celeStoreTredingCelebFashionRecyclerItemAdapter = new CeleStoreTredingCelebFashionRecyclerItemAdapter(context, 3, fragmentManager);
-            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celeStoreTredingCelebFashionRecyclerItemAdapter);
+            ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(celeStoreTredingCelebFashionRecyclerItemAdapter);*/
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Shop By Videos");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -571,11 +583,13 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
+        LinearLayout fragment_common_recyclerview_with_tv_layout;
 
         public ViewHolder4(View itemView) {
             super(itemView);
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_layout=(LinearLayout)itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_layout);
         }
 
         @Override

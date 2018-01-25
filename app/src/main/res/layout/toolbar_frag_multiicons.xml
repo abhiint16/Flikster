@@ -68,6 +68,6 @@
         android:layout_height="wrap_content"
         android:text="Fashion"
         android:textColor="@color/white"
-        android:textSize="18sp"/>
+        android:textSize="14sp"/>
 
 </android.support.v7.widget.Toolbar>
