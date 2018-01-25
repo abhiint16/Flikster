@@ -21,6 +21,7 @@ import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
 import com.flikster.Util.Common;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
 
@@ -61,9 +62,11 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
     public void onDestroyView() {
         super.onDestroyView();
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        GlideFaceDetector.releaseDetector();
     }
 
     private void initializeRest() {
+        GlideFaceDetector.initialize(getActivity());
         Glide.with(getActivity()).load(profilepic).asBitmap().into(profile_image);
         fragment_common_recyclerview_with_tv_title.setText(title);
         fragment_common_recyclerview_with_tv_title.setBackgroundColor(getActivity().getResources().getColor(R.color.white));

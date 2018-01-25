@@ -28,6 +28,7 @@ import com.flikster.HomeActivity.WatchFragment.SocialBuzzOrInterview.SocialBuzzO
 import com.flikster.HomeActivity.WatchFragment.TrailerOrPromos.TrailersViewHolder;
 import com.flikster.HomeActivity.WatchFragment.TvShows.TvShowsViewHolder;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -126,7 +127,9 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     ImageListener imageListeners = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-            Glide.with(context).load(carouselImgWatch.get(position).trim()).into(imageView);
+            Glide.with(context).load(carouselImgWatch.get(position).trim())
+                    .transform(new FaceCenterCrop())
+                    .into(imageView);
         }
     };
 

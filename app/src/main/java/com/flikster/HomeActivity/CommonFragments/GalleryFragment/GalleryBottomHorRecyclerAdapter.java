@@ -18,6 +18,7 @@ import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.List;
 
@@ -70,11 +71,15 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
         else if (holder.getItemViewType()==1)
         {
             if (hits.getHits().get(position).get_source().getProfilePic() != null)
-                Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1)holder).carousel_image);
+                Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic())
+                        .transform(new FaceCenterCrop())
+                        .into(((ViewHolder1)holder).carousel_image);
             else if (hits.getHits().get(position).get_source().getProfilePic() == null) {
                 if (hits.getHits().get(position).get_source().getMedia() != null) {
                     if (hits.getHits().get(position).get_source().getMedia().getGallery() != null && hits.getHits().get(position).get_source().getMedia().getGallery().size() != 0)
-                        Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder1)holder).carousel_image);
+                        Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0))
+                                .transform(new FaceCenterCrop())
+                                .into(((ViewHolder1)holder).carousel_image);
                 }
             }
             if (hits.getHits().get(position).get_source().getTitle() != null)

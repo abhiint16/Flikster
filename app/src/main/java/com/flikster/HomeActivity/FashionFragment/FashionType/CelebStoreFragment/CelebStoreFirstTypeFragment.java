@@ -24,6 +24,7 @@ import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
 import com.leo.simplearcloader.SimpleArcLoader;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
 
@@ -90,6 +91,7 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     }*/
 
     private void retrofitInit() {
+        GlideFaceDetector.initialize(getActivity());
         simpleArcLoader.setVisibility(View.VISIBLE);
         simpleArcLoader.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search/").create(ApiInterface.class);
@@ -206,5 +208,11 @@ public class CelebStoreFirstTypeFragment extends Fragment implements View.OnClic
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         shopByVideoInterafce = (ShopByVideoInterafce) activity;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GlideFaceDetector.releaseDetector();
     }
 }

@@ -36,6 +36,7 @@ import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.ExpandedGridView;
 import com.flikster.Util.SharedPrefsUtil;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -1142,7 +1143,9 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-            Glide.with(context).load(carouselImg.get(position).trim()).into(imageView);
+            Glide.with(context).load(carouselImg.get(position).trim())
+                    .transform(new FaceCenterCrop())
+                    .into(imageView);
             //imageView.setImageURI(Uri.parse(carouselImg.get(position)));
         }
     };

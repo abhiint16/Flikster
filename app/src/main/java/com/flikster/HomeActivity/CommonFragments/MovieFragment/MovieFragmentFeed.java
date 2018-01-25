@@ -16,6 +16,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +47,7 @@ public class MovieFragmentFeed extends Fragment {
     }
 
     private void retrofitInit() {
+        GlideFaceDetector.initialize(getActivity());
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getMovieFeedData(true, 4,0, "slug:\"" + getArguments().getString("slug") + "\"");
         call.enqueue(new Callback<FeedData>() {
@@ -80,5 +82,11 @@ public class MovieFragmentFeed extends Fragment {
     private void initializeViews() {
         movieFragmentFeedRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager = getActivity().getSupportFragmentManager();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GlideFaceDetector.releaseDetector();
     }
 }

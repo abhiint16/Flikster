@@ -33,6 +33,7 @@ import com.flikster.R;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -324,9 +325,11 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder11) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder11) holder).card_gallary2_img1);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder11) holder).card_gallary2_img2);
             ((ViewHolder11) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder11) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
@@ -340,12 +343,15 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder12) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder12) holder).card_gallary3_img1);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder12) holder).card_gallary3_img2);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder12) holder).card_gallary3_img3);
             ((ViewHolder12) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder12) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
@@ -359,15 +365,19 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder13) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder13) holder).card_gallary4_img1);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder13) holder).card_gallary4_img2);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder13) holder).card_gallary4_img3);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(3))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder13) holder).card_gallary4_img4);
             ((ViewHolder13) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder13) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
@@ -381,15 +391,19 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((ViewHolder14) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder14) holder).card_gallary5_img1);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder14) holder).card_gallary5_img2);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder14) holder).card_gallary5_img3);
             Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(3))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder14) holder).card_gallary5_img4);
             ((ViewHolder14) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
             ((ViewHolder14) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
