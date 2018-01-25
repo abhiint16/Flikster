@@ -73,7 +73,7 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<MyBagData> call, Response<MyBagData> response) {
                 myBagInnerData = response.body().getItems();
-                myBagAdapter = new MyBagAdapter(context, myBagInnerData);
+                myBagAdapter = new MyBagAdapter(context, myBagInnerData,activity_my_bag_bottom_continue_btn);
                 simpleArcLoader.setVisibility(View.GONE);
                 simpleArcLoader.stop();
                 fragment_common_recyclerview_recycler.setAdapter(myBagAdapter);
