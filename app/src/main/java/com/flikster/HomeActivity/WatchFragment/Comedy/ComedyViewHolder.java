@@ -23,6 +23,7 @@ import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,9 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
             loadMore();
         } else {
             if (feedInnerData.getHits().get(position).get_source().getProfilePic() != null)
-                Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder2) holder).carousel_image);
+                Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic())
+                        .transform(new FaceCenterCrop())
+                        .into(((ViewHolder2) holder).carousel_image);
             if (feedInnerData.getHits().get(position).get_source().getTitle() != null)
                 ((ViewHolder2) holder).carousel_title.setText(feedInnerData.getHits().get(position).get_source().getTitle());
         }

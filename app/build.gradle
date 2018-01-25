@@ -81,6 +81,7 @@ dependencies {
     compile 'com.instamojo:android-sdk:1.2.6'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
+    compile 'com.github.aryarohit07:glide-facedetection-transformation:0.3.0'
     //compile 'com.google.android.gms:play-services-auth:11.8.0'
     testCompile 'junit:junit:4.12'
 }

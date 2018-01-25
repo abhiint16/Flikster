@@ -24,6 +24,7 @@ import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
 import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +91,9 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if (outerHits.getHits().get(position).get_source().getMedia().getGallery()!=null&&
                         outerHits.getHits().get(position).get_source().getMedia().getGallery().size()!=0)
                 {
-                    Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0)).into(((ViewHolder2)holder).carousel_image);
+                    Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
+                            .transform(new FaceCenterCrop())
+                            .into(((ViewHolder2)holder).carousel_image);
                 }
             }
             if (outerHits.getHits().get(position).get_source().getTitle()!=null)

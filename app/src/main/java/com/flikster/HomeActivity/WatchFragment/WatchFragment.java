@@ -21,6 +21,7 @@ import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
 import com.leo.simplearcloader.SimpleArcLoader;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class WatchFragment extends Fragment {
     }
 
     private void initializeRest() {
+        GlideFaceDetector.initialize(getActivity());
         movieFragmentInfoLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         movieFragmentInfoRecycler.setLayoutManager(movieFragmentInfoLayoutManager);
         watchAdapter = new WatchAdapter(getActivity(), fragmentManager, outerHits, Count, watchFragCommInterface);
@@ -107,5 +109,11 @@ public class WatchFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         watchFragCommInterface = (WatchFragCommInterface) activity;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GlideFaceDetector.releaseDetector();
     }
 }

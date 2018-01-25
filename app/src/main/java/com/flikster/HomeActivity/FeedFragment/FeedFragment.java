@@ -22,6 +22,7 @@ import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
 import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
 
@@ -72,6 +73,7 @@ public class FeedFragment extends Fragment {
     }
 
     private void retrofitInit() {
+        GlideFaceDetector.initialize(getActivity());
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/")
@@ -174,4 +176,9 @@ public class FeedFragment extends Fragment {
         testing = (Testing) activity;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GlideFaceDetector.releaseDetector();
+    }
 }
