@@ -26,7 +26,7 @@
 
             <include layout="@layout/card_product_price_size_descr" />
 
-            <include layout="@layout/fragment_common_recyclerview_with_tv" />
+            <!--<include layout="@layout/fragment_common_recyclerview_with_tv" />-->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

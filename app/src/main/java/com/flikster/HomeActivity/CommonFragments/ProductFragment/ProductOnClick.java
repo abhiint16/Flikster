@@ -75,7 +75,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
 
     private void initializeRest() {
         toolbar_frag_title.setText("Product");
-        fragment_common_recyclerview_with_tv_title.setText("Recommended Product");
+        //fragment_common_recyclerview_with_tv_title.setText("Recommended Product");
         toolbar_more_icon.setVisibility(View.VISIBLE);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         fragment_product_details_recyclerview.setLayoutManager(layoutManager);
@@ -147,7 +147,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     private void initializeViews() {
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
-        fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+        //fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         fragment_product_details_recyclerview = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         product_price = (TextView) view.findViewById(R.id.buy_click_product_price);
         product_title = (TextView) view.findViewById(R.id.buy_click_product_title);

@@ -46,7 +46,9 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(context).load(imageGallery.get(position)).into(holder.card_image_item_img);
+        Glide.with(context).load(imageGallery.get(position))
+                .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
+                .into(holder.card_image_item_img);
     }
 
     @Override
