@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.flikster.R;
 
+import java.util.Calendar;
+
 /**
  * Created by abhishek on 21-10-2017.
  */
@@ -24,9 +26,10 @@ public class MyAccountFragmentMyOrderAdapter extends RecyclerView.Adapter<MyAcco
 
     @Override
     public void onBindViewHolder(MyAccountFragmentMyOrderAdapter.ViewHolder holder, int position) {
-        Log.e("aaaaaaaa","aaaaaaaa");
         holder.fragment_my_account_container.setGravity(Gravity.CENTER_HORIZONTAL);
-        holder.activity_no_comments_tv.setText("No Orders");
+        //holder.activity_no_comments_tv.setText("No Orders");
+        holder.activity_no_comments_tv.setText(""+Calendar.getInstance().getTime());
+
         /*holder.relativeLayout.setVisibility(View.GONE);
         holder.tv_description.setVisibility(View.GONE);
         holder.tv_name.setText("my latest pics");

@@ -67,12 +67,22 @@ public class FeedInnerData {
         private String profilePic;
         @SerializedName("rating")
         private  String rating;
+        @SerializedName("createdAt")
+        private  String createdAt;
         @SerializedName("movie")
         private List<FeedMovieData> movie;
         @SerializedName("celeb")
         private List<FeedCelebData> celeb;
         @SerializedName("media")
         public FeedMediaData media;
+
+        public String getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
+        }
 
         public String getId() {
             return id;
