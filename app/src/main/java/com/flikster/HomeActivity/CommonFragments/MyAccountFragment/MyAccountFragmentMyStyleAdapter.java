@@ -27,9 +27,9 @@ public class MyAccountFragmentMyStyleAdapter extends RecyclerView.Adapter<MyAcco
     @Override
     public void onBindViewHolder(MyAccountFragmentMyStyleAdapter.ViewHolder holder, int position) {
         holder.fragment_my_account_container.setGravity(Gravity.CENTER_HORIZONTAL);
-        //holder.activity_no_comments_tv.setText("No Styles");
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        holder.activity_no_comments_tv.setText(""+df.format(Calendar.getInstance().getTime()));
+        holder.activity_no_comments_tv.setText("No Styles");
+        /*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        holder.activity_no_comments_tv.setText(""+df.format(Calendar.getInstance().getTime()));*/
 
         /*holder.relativeLayout.setVisibility(View.GONE);
         holder.tv_description.setVisibility(View.GONE);

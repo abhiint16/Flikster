@@ -27,8 +27,8 @@ public class MyAccountFragmentMyOrderAdapter extends RecyclerView.Adapter<MyAcco
     @Override
     public void onBindViewHolder(MyAccountFragmentMyOrderAdapter.ViewHolder holder, int position) {
         holder.fragment_my_account_container.setGravity(Gravity.CENTER_HORIZONTAL);
-        //holder.activity_no_comments_tv.setText("No Orders");
-        holder.activity_no_comments_tv.setText(""+Calendar.getInstance().getTime());
+        holder.activity_no_comments_tv.setText("No Orders");
+        //holder.activity_no_comments_tv.setText(""+Calendar.getInstance().getTime());
 
         /*holder.relativeLayout.setVisibility(View.GONE);
         holder.tv_description.setVisibility(View.GONE);

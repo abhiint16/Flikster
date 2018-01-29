@@ -31,8 +31,8 @@ public class MyAccountFragmentMyFeedsAdapter extends RecyclerView.Adapter<MyAcco
     public void onBindViewHolder(MyAccountFragmentMyFeedsAdapter.ViewHolder holder, int position) {
         holder.fragment_my_account_container.setGravity(Gravity.CENTER_HORIZONTAL );
         holder.activity_no_comments_tv.setGravity(Gravity.CENTER_VERTICAL);
-        //holder.activity_no_comments_tv.setText("No Feeds");
-        holder.activity_no_comments_tv.setText(DateFormat.getDateTimeInstance().format(new Date()));
+        holder.activity_no_comments_tv.setText("No Feeds");
+        //holder.activity_no_comments_tv.setText(DateFormat.getDateTimeInstance().format(new Date()));
 
         /*holder.relativeLayout.setVisibility(View.GONE);
         holder.tv_description.setVisibility(View.GONE);
