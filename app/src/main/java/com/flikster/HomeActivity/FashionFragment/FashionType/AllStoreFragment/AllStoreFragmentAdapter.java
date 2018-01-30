@@ -390,7 +390,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getImageGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -484,7 +484,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getImageGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -577,7 +577,7 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (hits.getHits().get(getAdapterPosition()).get_source()
+                    /*if (hits.getHits().get(getAdapterPosition()).get_source()
                             .getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source()
                             .getCeleb().size() != 0) {
                         Common.shareClick(hits.getHits().get(getAdapterPosition())
@@ -585,8 +585,8 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                     } else {
                         Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                     }
-
-                    //Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+*/
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getImageGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -681,13 +681,14 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (hits.getHits().get(getAdapterPosition()).get_source()
+                    /*if (hits.getHits().get(getAdapterPosition()).get_source()
                             .getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source()
                             .getCeleb().size() != 0) {
                         Common.shareClick(hits.getHits().get(getAdapterPosition())
                                 .get_source().getCeleb().get(0).getProfilePic(), context);
                     } else {
-                    }
+                    }*/
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getImageGallery().get(0), context);
 
                 }
             });
@@ -784,13 +785,14 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (hits.getHits().get(getAdapterPosition()).get_source()
+                    /*if (hits.getHits().get(getAdapterPosition()).get_source()
                             .getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source()
                             .getCeleb().size() != 0) {
                         Common.shareClick(hits.getHits().get(getAdapterPosition())
                                 .get_source().getCeleb().get(0).getProfilePic(), context);
                     } else {
-                    }
+                    }*/
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getImageGallery().get(0), context);
 
 
                 }

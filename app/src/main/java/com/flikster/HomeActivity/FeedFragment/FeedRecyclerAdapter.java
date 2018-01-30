@@ -4,9 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,6 +55,10 @@ import com.flikster.VideoFullScreenActivity.VideoPlayerActivity;
 import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,6 +89,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     int count=30;
     String descritionString="";
 
+
+    public FeedRecyclerAdapter(Context context) {
+        this.context=context;
+    }
 
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count,
                                String industryCompletedata, FeedFragment.Testing testing) {
@@ -893,9 +904,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic()
-                        + "https://play.google.com/store/apps/details?id=com.flikster&hl=en" + "\n\n\n"
-                        + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
             }
         }
     }
@@ -986,8 +995,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 testing.seeMoreComments(userName, userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
             }
         }
     }
@@ -1128,8 +1136,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
             }
         }
 
@@ -1284,8 +1291,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 testing.seeMoreComments(userName,
                         userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
             }
 
         }
@@ -1420,8 +1426,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
             }
         }
     }
@@ -1553,8 +1558,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
             }
         }
     }
@@ -1682,8 +1686,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 testing.seeMoreComments(userName,
                         userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0));
             }
         }
     }
@@ -1772,8 +1775,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                        .getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
             }
             /*else if (view.getId() == R.id.card_description_linear) {
                 fragmentManager.beginTransaction()
@@ -1917,7 +1919,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0) + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0));
             }
         }
     }
@@ -2044,8 +2046,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
                 shareClick(
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0)
-                                + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0));
             }
         }
     }
@@ -2169,7 +2170,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_comment_text_see_more_comments) {
                 testing.seeMoreComments(userName, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
-                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0) + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
+                shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0));
             }
         }
     }
@@ -2296,19 +2297,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else if (view.getId() == R.id.card_footer_share) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null &&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
-                    shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
-                            "Stay connected to the world of Illusion.\n");
+                    shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic());
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
-                    shareClick(outerHits.getHits().get(getAdapterPosition())
-                            .get_source().getCeleb().get(0).getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
-                            "Stay connected to the world of Illusion.\n");
+                    shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic());
                 } else {
-                    shareClick(outerHits.getHits().get(getAdapterPosition()).get_source()
-                            .getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
-                            "Stay connected to the world of Illusion.\n");
+                    shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
 
 
@@ -2448,12 +2441,37 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void shareClick(String shareableLink) {
+        /*Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("image*//*");
+        i.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap));
+        startActivity(Intent.createChooser(i, "Share Image"));*/
+        BitmapLoadingInBack bitmapLoadingInBack=new BitmapLoadingInBack(shareableLink,context);
+        bitmapLoadingInBack.execute();
+    }
+
+    /*public void getBitmapForShare(Bitmap bitmap)
+    {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink);
+        //shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap));
         shareIntent.setType("text/plain");
         context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));
-    }
+    }*/
+
+    /*public Uri getLocalBitmapUri(Bitmap bmp) {
+        Uri bmpUri = null;
+        try {
+            File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.close();
+            bmpUri = Uri.fromFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bmpUri;
+    }*/
 
     private void checkForLoggedIn() {
         if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {

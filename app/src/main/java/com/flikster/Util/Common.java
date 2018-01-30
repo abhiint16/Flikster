@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity;
+import com.flikster.HomeActivity.FeedFragment.BitmapLoadingInBack;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
@@ -48,6 +50,9 @@ import com.flikster.permission.DangerousPermissionResponse;
 import com.flikster.permission.DangerousPermissionUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -359,14 +364,39 @@ public class Common {
 
 
     public static void shareClick(String shareableLink, Context context) {
-
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        BitmapLoadingInBack bitmapLoadingInBack=new BitmapLoadingInBack(shareableLink,context);
+        bitmapLoadingInBack.execute();
+        /*Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink + "\n\n\n" + "Download **Flikster**"
                 + "https://play.google.com/store/apps/details?id=com.flikster&hl=en" +
                 " and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
         shareIntent.setType("text/plain");
+        context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));*/
+    }
+
+    public static void getBitmapForShare(Bitmap bitmap,Context context)
+    {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
+        //shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap,context));
+        shareIntent.setType("text/plain");
         context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));
+    }
+
+    public static Uri getLocalBitmapUri(Bitmap bmp,Context context) {
+        Uri bmpUri = null;
+        try {
+            File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.close();
+            bmpUri = Uri.fromFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bmpUri;
     }
 
 
