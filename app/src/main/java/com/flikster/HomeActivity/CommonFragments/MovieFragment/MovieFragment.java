@@ -52,7 +52,6 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_celebrity, container, false);
         initializeViews();
-        Log.e("slug0101001", "" + slug);
         tempMethod();
         initializeRest();
         return view;

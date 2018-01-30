@@ -38,7 +38,6 @@ public class MovieAdapter extends FragmentStatePagerAdapter {
         else if(position==1)
         {
             MovieFragmentInfo movieFragmentInfo=new MovieFragmentInfo();
-            Log.e("DataMovie", data +"");
             movieFragmentInfo.setArguments(data);
             return movieFragmentInfo;
         }

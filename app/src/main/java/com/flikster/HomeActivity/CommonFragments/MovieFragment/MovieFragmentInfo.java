@@ -48,8 +48,6 @@ public class MovieFragmentInfo extends Fragment {
         initializeViews();
         bundle = getArguments();
         this.slug = bundle.getString("slug");
-        Log.e("slugMovieInfo1", "SSS");
-        Log.e("slugMovieInfo1", slug + "Shiva");
         initializeRest();
         retrofitInit();
         return view;
