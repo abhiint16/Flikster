@@ -80,6 +80,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     int listSize;
     String industryCompletedata;
     int count=30;
+    String descritionString="";
 
 
     public FeedRecyclerAdapter(Context context, FragmentManager fragmentManager, FeedInnerData outerHits, Integer Count,
@@ -1078,13 +1079,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_description_linear) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
+                    descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
+                    descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getTitle();
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
                     testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
+                            descritionString, new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId()
@@ -1095,7 +1100,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            descritionString,
                             new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
@@ -1107,7 +1112,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "",
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            descritionString,
                             new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
@@ -1222,13 +1227,17 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_description_linear) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
+                    descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
+                    descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getTitle();
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
                     testing.videoCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            descritionString,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
                             new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
@@ -1242,7 +1251,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            descritionString,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
                             new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
@@ -1255,7 +1264,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "",
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
+                            descritionString,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
                             new VideoGalleryFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
@@ -1362,6 +1371,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_description_linear) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
+                    descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
+                    descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getTitle();
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size()!=0) {
                     testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
@@ -1369,7 +1382,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            " ",
+                            descritionString,
                             new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId()
@@ -1381,7 +1394,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            " ", new NewsOnClickFragment(),
+                            descritionString, new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId()
@@ -1392,7 +1405,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "",
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            " ", new NewsOnClickFragment(),
+                            descritionString, new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());
@@ -1491,6 +1504,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
             } else if (view.getId() == R.id.card_description_linear) {
+                if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
+                    descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
+                else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
+                    descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getTitle();
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size()!=0) {
                     testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
@@ -1498,7 +1515,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            " ", new NewsOnClickFragment(),
+                            descritionString, new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId()
@@ -1510,7 +1527,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            " ", new NewsOnClickFragment(),
+                            descritionString, new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId()
@@ -1521,7 +1538,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             "",
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                            " ", new NewsOnClickFragment(),
+                            descritionString, new NewsOnClickFragment(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId());

@@ -85,12 +85,10 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         }
         if (description.trim().length() == 0)
             tv_description.setVisibility(View.GONE);
-        Log.e("Picimag2", profilePic + "");
         return view;
     }
 
     private void bottomHorRecyclerRetrofitInit() {
-        Log.e("check poster", "" + "http://apiservice-ec.flikster.com/contents/_search/");
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\"");
         call.enqueue(new Callback<FeedData>() {
