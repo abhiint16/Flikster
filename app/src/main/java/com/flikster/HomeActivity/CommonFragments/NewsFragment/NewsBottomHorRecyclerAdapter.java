@@ -19,6 +19,7 @@ import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.List;
 
@@ -77,7 +78,9 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                 ((ViewHolder1)holder).carousel_title.setText(outerHits.getHits().get(position).get_source().getTitle());
             }
             if (outerHits.getHits().get(position).get_source().getProfilePic() != null) {
-                Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1)holder).carousel_image);
+                Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic())
+                        .transform(new FaceCenterCrop())
+                        .into(((ViewHolder1)holder).carousel_image);
             }
         }
     }
