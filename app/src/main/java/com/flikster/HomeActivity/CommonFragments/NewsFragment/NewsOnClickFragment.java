@@ -36,6 +36,7 @@ import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.RoundedImageView;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.List;
 
@@ -90,7 +91,8 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
 
     private void bottomHorRecyclerRetrofitInit() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\"");
+        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\""
+                +"%20AND%20industry:\""+ SharedPrefsUtil.getStringPreference(getContext(), "INDUSTRY_TYPE")+"\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {

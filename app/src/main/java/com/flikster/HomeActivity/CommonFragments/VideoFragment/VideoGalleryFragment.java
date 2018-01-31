@@ -34,6 +34,7 @@ import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
 import com.flikster.Util.Common;
+import com.flikster.Util.SharedPrefsUtil;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
@@ -245,7 +246,8 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
     private void bottomHorRecyclerRetrofitInit() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\"");
+        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\""
+                +"%20AND%20industry:\""+ SharedPrefsUtil.getStringPreference(getContext(), "INDUSTRY_TYPE")+"\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {

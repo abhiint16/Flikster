@@ -20,6 +20,7 @@ import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.List;
 
@@ -80,7 +81,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void loadMore() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from="+count+"&q=contentType:" + "\"" + contentType + "\"");
+        Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from="+count+"&q=contentType:" + "\"" + contentType + "\""
+                +"%20AND%20industry:\""+ SharedPrefsUtil.getStringPreference(context, "INDUSTRY_TYPE")+"\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {

@@ -23,6 +23,7 @@ import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.Util.Common;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 
 import java.util.List;
 
@@ -82,7 +83,8 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private void galleryBottomHorRecyclerRetrofitInit(final RecyclerView.ViewHolder viewholder) {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getGalleryData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + "gallery" + "\"");
+        Call<FeedData> call = apiInterface.getGalleryData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + "gallery" + "\""
+                +"%20AND%20industry:\""+ SharedPrefsUtil.getStringPreference(context, "INDUSTRY_TYPE")+"\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
