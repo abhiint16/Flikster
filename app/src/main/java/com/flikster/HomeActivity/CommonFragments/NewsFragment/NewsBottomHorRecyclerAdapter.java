@@ -41,6 +41,7 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     int count=10;
     String contentType;
     String cardId;
+    String descritionString;
 
     public NewsBottomHorRecyclerAdapter(Context context, FeedInnerData outerHits, int Count, String title, String bannerImg,
                                         NewsOnClickFragment.NewsRecommendedClick newsRecommendedClick,
@@ -168,13 +169,17 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
 
         @Override
         public void onClick(View view) {
+            if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
+                descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
+            else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
+                descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getTitle();
             if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
                 newsRecommendedClick.newsRecommendedClickMethod(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
+                        descritionString, new NewsOnClickFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         "PAWANKALYAN",
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
@@ -186,7 +191,7 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
+                        descritionString, new NewsOnClickFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         "PAWANKALYAN",
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
@@ -198,7 +203,7 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                         "",
                         outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
+                        descritionString, new NewsOnClickFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         "PAWANKALYAN",
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
