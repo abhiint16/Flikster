@@ -38,15 +38,17 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
     GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick;
     ApiInterface apiInterface;
     int count=10;
+    String cardId;
 
     public GalleryBottomHorRecyclerAdapter(Context context,
                                            FeedInnerData hits,
                                            GalleryCardClick.GalleryRecommendationItemClick
-                                                   galleryRecommendationItemClick, String userId) {
+                                                   galleryRecommendationItemClick, String userId,String cardId) {
         this.context = context;
         this.hits = hits;
         this.galleryRecommendationItemClick = galleryRecommendationItemClick;
         this.userId = userId;
+        this.cardId=cardId;
     }
 
     @Override
@@ -55,6 +57,11 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
             return new ViewHolder0(view);
+        }
+        else if (viewType==2)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blank_card, parent, false);
+            return new ViewHolder2(view);
         }
         else
         {
@@ -118,6 +125,10 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
     public int getItemViewType(int position) {
         if (position==hits.getHits().size())
             return 0;
+        else if (cardId.equals(hits.getHits().get(position).get_id()))
+        {
+            return 2;
+        }
         else return 1;
     }
 
@@ -135,6 +146,17 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
         }
     }
 
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public ViewHolder2(View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+    }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView carousel_image;
@@ -154,18 +176,21 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
                         hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                         hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                         hits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId());
+                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()).get_id());
             } else if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
                 galleryRecommendationItemClick.galleryRecommendationItemClickMethod(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                         hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
                         hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                         hits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId());
+                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()).get_id());
             } else {
                 galleryRecommendationItemClick.galleryRecommendationItemClickMethod(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                         "",
                         "", "", hits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId());
+                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()).get_id());
 
             }
         }

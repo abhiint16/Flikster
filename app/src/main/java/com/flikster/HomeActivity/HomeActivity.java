@@ -1051,18 +1051,18 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type,
-                                   String title, Fragment fragment, String userId, String entityId) {
+                                   String title, Fragment fragment, String userId, String entityId,String cardId) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId);
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId,cardId);
         firstTimeLaunch(fragment);
     }
 
     @Override
     public void newsCardOnClick(String profilePic, String title, String type, String bannerImg,
                                 String headertitle, String description, Fragment fragment,
-                                String contentType, String userId, String entityId) {
+                                String contentType, String userId, String entityId,String cardId) {
         NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
-        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId);
+        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId,cardId);
         firstTimeLaunch(fragment);
     }
 
@@ -1071,9 +1071,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void videoCardOnClick(String profilePic, String title, String type, String bannerImg,
                                  String headertitle,
                                  String description, String videolink, Fragment fragment,
-                                 String contentType, String userId, String entityId) {
+                                 String contentType, String userId, String entityId,String cardId) {
         VideoGalleryFragment videoGalleryFragment = (VideoGalleryFragment) fragment;
-        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId);
+        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId,cardId);
         firstTimeLaunch(fragment);
     }
 
@@ -1156,9 +1156,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void carouselItemToGallery(List<String> galleryImgLinks, String name,
-                                      String profilePic, String type, String title, Fragment fragment) {
+                                      String profilePic, String type, String title, Fragment fragment,String cardId) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, "", "");
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, "", "",cardId);
         firstTimeLaunch(fragment);
     }
 
@@ -1173,18 +1173,18 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void videoRecommendationClickMethod(String profilePic, String title, String type, String bannerImg, String headertitle, String description, String videolink,
-                                               Fragment fragment, String contentType, String userId, String entityId) {
+                                               Fragment fragment, String contentType, String userId, String entityId,String cardId) {
         VideoGalleryFragment videoGalleryFragment = (VideoGalleryFragment) fragment;
-        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId);
+        videoGalleryFragment.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId,cardId);
         firstTimeLaunch(fragment);
     }
 
     @Override
     public void galleryRecommendationItemClickMethod(List<String> galleryImgLinks,
                                                      String name, String profilePic, String type,
-                                                     String title, Fragment fragment, String userId, String entityId) {
+                                                     String title, Fragment fragment, String userId, String entityId,String cardId) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId);
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId,cardId);
         firstTimeLaunch(fragment);
     }
 
@@ -1242,10 +1242,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void newsRecommendedClickMethod(String profilePic, String title,
                                            String type, String bannerImg, String headertitle,
                                            String description, Fragment fragment, String contentType,
-                                           String useriId, String entityId) {
+                                           String useriId, String entityId,String cardId) {
         NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
         gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle,
-                description, contentType, useriId, entityId);
+                description, contentType, useriId, entityId,cardId);
         firstTimeLaunch(fragment);
     }
 

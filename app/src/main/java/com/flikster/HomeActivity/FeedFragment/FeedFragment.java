@@ -158,14 +158,14 @@ public class FeedFragment extends Fragment {
         void test(String name, Fragment fragment, int getClass, String userId, String entityId);
 
         void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
-                                Fragment fragment, String userId, String entityId);
+                                Fragment fragment, String userId, String entityId,String cardId);
 
         void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
-                             String description, Fragment fragment, String contentType, String userId, String entityId);
+                             String description, Fragment fragment, String contentType, String userId, String entityId,String cardId);
 
         void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                               String description, String videolink, Fragment fragment, String contentType,
-                              String userId, String entityId);
+                              String userId, String entityId,String cardId);
 
         void seeMoreComments(String userName, String userId, String entityId);
     }

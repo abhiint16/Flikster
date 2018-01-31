@@ -42,6 +42,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
     GalleryRecommendationItemClick galleryRecommendationItemClick;
     ImageButton toolbar_back_navigation_btn;
     Button followbtn;
+    String cardId;
 
     @Nullable
     @Override
@@ -75,7 +76,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
         gallaryLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(gallaryLayoutManager);
         galleryCardClickAdapter = new GalleryCardClickAdapter(getActivity(), fragmentManager,
-                galleryImgLinks, galleryRecommendationItemClick, userId);
+                galleryImgLinks, galleryRecommendationItemClick, userId,cardId);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryCardClickAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
         new PostRetrofit().checkForFollow("follow", userId, entityId, followbtn, getContext());
@@ -100,7 +101,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
     }
 
     public void updateImage(List<String> galleryImgLinks, String name,
-                            String profilePic, String type, String title, String userId, String entityId) {
+                            String profilePic, String type, String title, String userId, String entityId,String cardId) {
         this.galleryImgLinks = galleryImgLinks;
         this.name = name;
         this.profilepic = profilePic;
@@ -108,6 +109,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
         this.title = title;
         this.userId = userId;
         this.entityId = entityId;
+        this.cardId=cardId;
     }
 
     @Override
@@ -122,7 +124,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
     public interface GalleryRecommendationItemClick {
         void galleryRecommendationItemClickMethod(List<String> galleryImgLinks,
                                                   String name, String profilePic, String type,
-                                                  String title, Fragment fragment, String userId, String entityId);
+                                                  String title, Fragment fragment, String userId, String entityId,String cardId);
     }
 
     @Override

@@ -170,14 +170,14 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
 
     public interface CelebItemClickInterface {
         void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
-                                Fragment fragment,String userId,String entityId);
+                                Fragment fragment,String userId,String entityId,String cardId);
 
         void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
-                             String description, Fragment fragment, String contentType,String userId, String entityId);
+                             String description, Fragment fragment, String contentType,String userId, String entityId,String cardId);
 
         void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                               String description, String videolink, Fragment fragment, String contentType,
-                              String userId, String entityId);
+                              String userId, String entityId,String cardId);
         void onGalleryContainerClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
                                      String productSlug, List<String> imageGallery,
                                      String profilepic,List<String> role,String name,String title,

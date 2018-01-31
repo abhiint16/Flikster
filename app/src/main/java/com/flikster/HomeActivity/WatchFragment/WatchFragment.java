@@ -102,7 +102,7 @@ public class WatchFragment extends Fragment {
         void carouselContainerClick(String toolbarTitle,String url,Fragment fragment);
         void carouselItemClick(String toolbarTitle,String img,String title,String audio,String type,Fragment fragment);
         void carouselItemToMovie(String slug,Fragment fragment);
-        void carouselItemToGallery(List<String> galleryImgLinks,String name,String profilePic,String type,String title,Fragment fragment);
+        void carouselItemToGallery(List<String> galleryImgLinks,String name,String profilePic,String type,String title,Fragment fragment,String cardId);
     }
 
     @Override

@@ -1405,7 +1405,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     hits.getHits().get(pos).get_source().getTitle(), new NewsOnClickFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId()
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id()
             );
         } else if (hits.getHits().get(pos).get_source().getCeleb() != null && hits.getHits().get(pos).get_source().getCeleb().size() != 0) {
             celebItemClickInterface.newsCardOnClick(hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic(),
@@ -1417,7 +1418,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     new NewsOnClickFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId()
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id()
             );
         } else {
             celebItemClickInterface.newsCardOnClick("",
@@ -1429,7 +1431,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     new NewsOnClickFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId());
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id());
         }
     }
 
@@ -1441,7 +1444,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     hits.getHits().get(pos).get_source().getMovie().get(0).getType(),
                     hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
-                    hits.getHits().get(pos).get_source().getId());
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id());
         } else if (hits.getHits().get(pos).get_source().getCeleb() != null) {
             celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
                     hits.getHits().get(pos).get_source().getCeleb().get(0).getName(),
@@ -1449,13 +1453,15 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     hits.getHits().get(pos).get_source().getCeleb().get(0).getType(),
                     hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
-                    hits.getHits().get(pos).get_source().getId());
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id());
         } else {
             celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
                     "",
                     "", "", hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
-                    hits.getHits().get(pos).get_source().getId());
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id());
 
         }
     }
@@ -1484,8 +1490,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     new VideoGalleryFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId()
-
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id()
             );
         } else if (hits.getHits().get(pos).get_source().getCeleb() != null && hits.getHits().get(pos).get_source().getCeleb().size() != 0) {
             celebItemClickInterface.videoCardOnClick(hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic(),
@@ -1498,7 +1504,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     new VideoGalleryFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId()
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id()
             );
         } else {
             celebItemClickInterface.videoCardOnClick("",
@@ -1511,7 +1518,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     new VideoGalleryFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId());
+                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_id());
         }
     }
 

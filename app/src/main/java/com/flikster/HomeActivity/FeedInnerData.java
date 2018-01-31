@@ -39,8 +39,18 @@ public class FeedInnerData {
 
     public class FeedInnerMoreData
     {
+        @SerializedName("_id")
+        private String _id;
         @SerializedName("_source")
         private FeedInnerMostData _source;
+
+        public String get_id() {
+            return _id;
+        }
+
+        public void set_id(String _id) {
+            this._id = _id;
+        }
 
         public FeedInnerMostData get_source() {
             return _source;

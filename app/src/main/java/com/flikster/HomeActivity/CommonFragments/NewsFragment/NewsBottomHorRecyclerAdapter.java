@@ -40,16 +40,18 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     ApiInterface apiInterface;
     int count=10;
     String contentType;
+    String cardId;
 
     public NewsBottomHorRecyclerAdapter(Context context, FeedInnerData outerHits, int Count, String title, String bannerImg,
                                         NewsOnClickFragment.NewsRecommendedClick newsRecommendedClick,
-                                        String contentType) {
+                                        String contentType,String cardId) {
         this.context = context;
         this.outerHits = outerHits;
         this.title = title;
         this.bannerImg = bannerImg;
         this.newsRecommendedClick = newsRecommendedClick;
         this.contentType=contentType;
+        this.cardId=cardId;
     }
 
     @Override
@@ -58,6 +60,11 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
             return new ViewHolder0(view);
+        }
+        else if (viewType==2)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blank_card, parent, false);
+            return new ViewHolder2(view);
         }
         else
         {
@@ -115,6 +122,10 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     public int getItemViewType(int position) {
         if (position==outerHits.getHits().size())
             return 0;
+        else if (cardId.equals(outerHits.getHits().get(position).get_id()))
+        {
+            return 2;
+        }
         else return 1;
     }
 
@@ -123,6 +134,18 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         public ViewHolder0(View itemView) {
             super(itemView);
             hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+    }
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public ViewHolder2(View itemView) {
+            super(itemView);
             itemView.setOnClickListener(this);
         }
 
@@ -154,7 +177,8 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         "PAWANKALYAN",
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getId()
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        outerHits.getHits().get(getAdapterPosition()).get_id()
                 );
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                 newsRecommendedClick.newsRecommendedClickMethod(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
@@ -165,7 +189,8 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         "PAWANKALYAN",
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getId()
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        outerHits.getHits().get(getAdapterPosition()).get_id()
                 );
             } else {
                 newsRecommendedClick.newsRecommendedClickMethod("",
@@ -176,7 +201,8 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new NewsOnClickFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         "PAWANKALYAN",
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        outerHits.getHits().get(getAdapterPosition()).get_id());
             }
         }
     }

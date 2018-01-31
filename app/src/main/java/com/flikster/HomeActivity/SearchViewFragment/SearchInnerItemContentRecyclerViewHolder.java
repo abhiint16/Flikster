@@ -108,12 +108,14 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                                 response.body().getCeleb().get(0).getType(),
                                 response.body().getTitle(),
                                 new GalleryCardClick(), userId,
+                                response.body().getId(),
                                 response.body().getId());
                     } else {
                         searchViewToFrag.galleryCardOnClick(response.body().getMedia().getGallery(),
                                 "",
                                 "", "", response.body().getTitle(),
                                 new GalleryCardClick(), userId,
+                                response.body().getId(),
                                 response.body().getId());
 
                     }
@@ -141,6 +143,7 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                                 new NewsOnClickFragment(),
                                 response.body().getContentType(),
                                 userId,
+                                response.body().getId(),
                                 response.body().getId()
                         );
                     } else {
@@ -153,6 +156,7 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                                 new NewsOnClickFragment(),
                                 response.body().getContentType(),
                                 userId,
+                                response.body().getId(),
                                 response.body().getId());
                     }
                 }
@@ -180,6 +184,7 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                                 new VideoGalleryFragment(),
                                 response.body().getContentType(),
                                 userId,
+                                response.body().getId(),
                                 response.body().getId()
                         );
                     } else {
@@ -193,6 +198,7 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                                 new VideoGalleryFragment(),
                                 response.body().getContentType(),
                                 userId,
+                                response.body().getId(),
                                 response.body().getId());
                     }
                 }

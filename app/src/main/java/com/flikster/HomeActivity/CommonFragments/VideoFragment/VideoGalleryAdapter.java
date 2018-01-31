@@ -42,15 +42,17 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     String contentType;
     ApiInterface apiInterface;
     int count=10;
+    String cardId;
 
     public VideoGalleryAdapter(Context context, FeedInnerData outerHits, Integer Count, String title,
                                VideoGalleryFragment.VideoRecommendationClick videoRecommendationClick,
-                               String contentType) {
+                               String contentType,String cardId) {
         this.context = context;
         this.title = title;
         this.outerHits = outerHits;
         this.contentType=contentType;
         this.videoRecommendationClick = videoRecommendationClick;
+        this.cardId=cardId;
     }
 
     @Override
@@ -59,6 +61,11 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
             return new ViewHolder0(view);
+        }
+        else if (viewType==2)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blank_card, parent, false);
+            return new ViewHolder2(view);
         }
         else
         {
@@ -111,6 +118,10 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public int getItemViewType(int position) {
         if (position==outerHits.getHits().size())
             return 0;
+        else if (cardId.equals(outerHits.getHits().get(position).get_id()))
+        {
+            return 2;
+        }
         else return 1;
     }
 
@@ -119,6 +130,18 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public ViewHolder0(View itemView) {
             super(itemView);
             hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+    }
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public ViewHolder2(View itemView) {
+            super(itemView);
             itemView.setOnClickListener(this);
         }
 
@@ -151,7 +174,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
                         new VideoGalleryFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
-                        userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId()
+                        userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        outerHits.getHits().get(getAdapterPosition()).get_id()
                 );
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                 videoRecommendationClick.videoRecommendationClickMethod(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
@@ -164,7 +188,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         new VideoGalleryFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId,
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getId()
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        outerHits.getHits().get(getAdapterPosition()).get_id()
                 );
             } else {
                 videoRecommendationClick.videoRecommendationClickMethod("",
@@ -177,7 +202,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         new VideoGalleryFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId,
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getId());
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        outerHits.getHits().get(getAdapterPosition()).get_id());
             }
         }
     }

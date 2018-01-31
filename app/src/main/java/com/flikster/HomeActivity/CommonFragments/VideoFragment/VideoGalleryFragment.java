@@ -57,7 +57,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     TextView toolbar_frag_title, titlehedertxt, fragment_common_recyclerview_with_tv_title, tv_name, tv_description;
     Context mContext;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
-    String profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId;
+    String profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId,cardId;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
     ApiInterface apiInterface;
     FeedInnerData outerHits;
@@ -255,7 +255,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(), outerHits, Count, title, videoRecommendationClick,contentType);
+                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(), outerHits, Count, title, videoRecommendationClick,contentType,cardId);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(videoGalleryAdapter);
             }
 
@@ -268,7 +268,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
     public void updateImage(String profilePic, String title, String type, String bannerImg,
                             String headertitle, String description, String contentType,
-                            String videolink, String userId, String entityId) {
+                            String videolink, String userId, String entityId,String cardId) {
         this.profilePic = profilePic;
         this.title = title;
         this.type = type;
@@ -280,13 +280,14 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         this.userId = userId;
         this.entityId = entityId;
         this.entityId = entityId;
+        this.cardId=cardId;
     }
 
     public interface VideoRecommendationClick {
         void videoRecommendationClickMethod(String profilePic,
                                             String title, String type, String bannerImg,
                                             String headertitle, String description, String videolink,
-                                            Fragment fragment, String contentType, String userId, String entityId);
+                                            Fragment fragment, String contentType, String userId, String entityId,String cardId);
     }
 
     @Override

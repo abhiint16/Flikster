@@ -47,14 +47,16 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
     Integer Count;
     String userId;
     GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick;
+    String cardId;
 
     public GalleryCardClickAdapter(Context context, FragmentManager fragmentManager, List<String> galleryImgLinks,
-                                   GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick, String userId) {
+                                   GalleryCardClick.GalleryRecommendationItemClick galleryRecommendationItemClick, String userId,String cardId) {
         this.context = context;
         this.userId = userId;
         this.fragmentManager = fragmentManager;
         this.galleryImgLinks = galleryImgLinks;
         this.galleryRecommendationItemClick = galleryRecommendationItemClick;
+        this.cardId=cardId;
     }
 
     @Override
@@ -92,7 +94,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
                 ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-                galleryBottomHorRecyclerAdapter = new GalleryBottomHorRecyclerAdapter(context, hits, galleryRecommendationItemClick, userId);
+                galleryBottomHorRecyclerAdapter = new GalleryBottomHorRecyclerAdapter(context, hits, galleryRecommendationItemClick, userId,cardId);
                 ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryBottomHorRecyclerAdapter);
             }
 

@@ -58,7 +58,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     TextView tv_tag_name, tv_tag_desc;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
     NewsBottomHorRecyclerAdapter newsBottomHorRecyclerAdapter;
-    String profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId;
+    String profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId,cardId;
     RoundedImageView profile_image;
     ApiInterface apiInterface;
     FeedInnerData outerHits;
@@ -100,7 +100,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(), outerHits, Count, title, bannerImg, newsRecommendedClick,contentType);
+                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(), outerHits, Count, title, bannerImg, newsRecommendedClick,contentType,cardId);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(newsBottomHorRecyclerAdapter);
             }
 
@@ -245,7 +245,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     public void updateImage(String profilePic, String title, String type,
                             String bannerImg, String headertitle,
                             String description, String contentType,
-                            String userId, String entityId
+                            String userId, String entityId,String cardId
     ) {
 
         this.profilePic = profilePic;
@@ -257,12 +257,13 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         this.contentType = contentType;
         this.userId = userId;
         this.entityId = entityId;
+        this.cardId=cardId;
     }
 
     public interface NewsRecommendedClick {
         void newsRecommendedClickMethod(String profilePic, String title, String type,
                                         String bannerImg, String headertitle, String description,
-                                        Fragment fragment, String contentType,String userId,String entityId);
+                                        Fragment fragment, String contentType,String userId,String entityId,String cardId);
     }
 
     @Override
