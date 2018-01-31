@@ -39,6 +39,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
 
@@ -227,8 +228,8 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     public void onDestroyView() {
         super.onDestroyView();
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        GlideFaceDetector.releaseDetector();
     }
-
     /*private void playLocalVideo() {
         //Creating MediaController
         MediaController mediaController = new MediaController(getContext());
@@ -245,6 +246,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
 
     private void bottomHorRecyclerRetrofitInit() {
+        GlideFaceDetector.initialize(getActivity());
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\""
                 +"%20AND%20industry:\""+ SharedPrefsUtil.getStringPreference(getContext(), "INDUSTRY_TYPE")+"\"");

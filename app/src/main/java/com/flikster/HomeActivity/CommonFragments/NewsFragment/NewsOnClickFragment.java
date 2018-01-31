@@ -37,6 +37,7 @@ import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.RoundedImageView;
 import com.flikster.Util.SharedPrefsUtil;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
 
@@ -90,6 +91,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     }
 
     private void bottomHorRecyclerRetrofitInit() {
+        GlideFaceDetector.initialize(getActivity());
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getNewsData("http://apiservice-ec.flikster.com/contents/_search?pretty=true&sort=createdAt:desc&size=10&from=0&q=contentType:" + "\"" + contentType + "\""
                 +"%20AND%20industry:\""+ SharedPrefsUtil.getStringPreference(getContext(), "INDUSTRY_TYPE")+"\"");
@@ -237,6 +239,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     public void onDestroyView() {
         super.onDestroyView();
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        GlideFaceDetector.releaseDetector();
     }
 
     public void updateImage(String profilePic, String title, String type,
