@@ -67,7 +67,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     ArrayList<String> genre = new ArrayList<>();
     String slug;
     FeedInnerData hits;
-    int count=4;
+    int count = 4;
 
     public MovieFeedAdapter(Context context, FragmentManager fragmentManager, String coverpic, String censor,
                             String dor, ArrayList<String> genre, String duration,
@@ -148,14 +148,10 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (viewType == 100) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_no_comments, parent, false);
             return new ViewHolder100(view);
-        }
-        else if(viewType==200)
-        {
+        } else if (viewType == 200) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.testingnull, parent, false);
             return new ViewHolder200(view);
-        }
-        else if(viewType==300)
-        {
+        } else if (viewType == 300) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
             return new ViewHolder300(view);
         }
@@ -412,24 +408,21 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder14) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 100) {
             ((ViewHolder100) holder).activity_no_comments_tv.setText("No Contents Available!");
-        }
-        else if (holder.getItemViewType()==300)
-        {
-            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        } else if (holder.getItemViewType() == 300) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     (int) context.getResources().getDimension(R.dimen.fifty));
-            ((ViewHolder300)holder).hor_last_item_load_more_container.setLayoutParams(params);
+            ((ViewHolder300) holder).hor_last_item_load_more_container.setLayoutParams(params);
             loadMore();
         }
     }
 
-    private void loadMore()
-    {
+    private void loadMore() {
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/_search/").create(ApiInterface.class);
-        Call<FeedData> call = apiInterface.getMovieFeedData(true, 4,count, "slug:\"" + slug + "\"");
+        Call<FeedData> call = apiInterface.getMovieFeedData(true, 4, count, "slug:\"" + slug + "\"");
         call.enqueue(new Callback<FeedData>() {
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
-                count=count+4;
+                count = count + 4;
                 hits.getHits().addAll(response.body().getHits().getHits());
                 notifyDataSetChanged();
             }
@@ -467,11 +460,11 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        if (hits.getHits().size()==0||hits.getHits()==null)
+        if (hits.getHits().size() == 0 || hits.getHits() == null)
             return 2;
-        if ((hits.getTotal()==hits.getHits().size()))
-            return hits.getHits().size()+1;
-        return hits.getHits().size()+2;
+        if ((hits.getTotal() == hits.getHits().size()))
+            return hits.getHits().size() + 1;
+        return hits.getHits().size() + 2;
 
         /*if (hits.getHits().size() != 0 && hits.getHits() != null) {
             return hits.getHits().size() + 1;
@@ -484,7 +477,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemViewType(int position) {
         if (position == 0)
             return 0;
-        else if (hits.getHits().size()!=0&&(position==hits.getHits().size()+1))
+        else if (hits.getHits().size() != 0 && (position == hits.getHits().size() + 1))
             return 300;
         else {
             if (hits.getHits().size() != 0 && hits.getHits() != null) {
@@ -591,7 +584,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     Common.wantWatchHit(context, unlike, userId, entityId);
                     ib_like.setImageResource(R.drawable.likesmallicon);
                     unlikeCounttxt.setText(String.valueOf(unlikeCounttxt.getText().toString()) + 1);
-                    int countdec = Integer.valueOf(unlikeCounttxt.getText().toString())- 1;
+                    int countdec = Integer.valueOf(unlikeCounttxt.getText().toString()) - 1;
                     likeCounttxt.setText(countdec);
                 }
             });
@@ -641,7 +634,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -702,7 +695,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -771,7 +764,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -839,7 +832,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -910,7 +903,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -978,7 +971,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1049,7 +1042,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1118,7 +1111,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1189,7 +1182,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1262,7 +1255,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1336,7 +1329,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1409,7 +1402,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    //hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0)
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1463,9 +1457,10 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class ViewHolder300 extends RecyclerView.ViewHolder implements View.OnClickListener {
         LinearLayout hor_last_item_load_more_container;
+
         public ViewHolder300(View itemView) {
             super(itemView);
-            hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            hor_last_item_load_more_container = (LinearLayout) itemView.findViewById(R.id.hor_last_item_load_more_container);
             itemView.setOnClickListener(this);
         }
 

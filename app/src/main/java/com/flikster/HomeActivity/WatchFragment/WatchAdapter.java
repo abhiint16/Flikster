@@ -127,9 +127,14 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     ImageListener imageListeners = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-            Glide.with(context).load(carouselImgWatch.get(position).trim())
-                    .transform(new FaceCenterCrop())
-                    .into(imageView);
+            try {
+                Glide.with(context).load(carouselImgWatch.get(position).trim())
+                        .transform(new FaceCenterCrop())
+                        .into(imageView);
+            }catch (Exception e){
+
+            }
+
         }
     };
 
@@ -147,7 +152,8 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             Log.e("check position 0",""+allUrls.size()+"and"+i);
             hitRetrofitForCarousel(allUrls.get(0),((ViewHolder1) holder).carouselView);
         } else if (holder.getItemViewType() == 2) {
-            fetchRetrofitForMusic(((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22");
+            fetchRetrofitForMusic(((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler,
+                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22");
             ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Music");
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Gallery");

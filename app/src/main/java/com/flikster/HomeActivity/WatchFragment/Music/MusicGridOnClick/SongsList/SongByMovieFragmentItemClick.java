@@ -184,6 +184,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         card_footer_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("audioLink", audioLink);
                 Common.shareClick(audioLink, getContext());
             }
         });
@@ -203,7 +204,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
             }
         } else if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container,new WatchFragment())
+                    .replace(R.id.main_container, new WatchFragment())
                     .commit();
         }
     }

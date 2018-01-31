@@ -180,15 +180,20 @@ public class Common {
     //Follow or UnFollow action
     public static void followOrUnFollow(Context context, final Button followbtn,
                                         final String userId, String entityId) {
-        Log.e("TextData", followbtn.getText().toString() + "");
-        if (followbtn.getText().toString().equals("follow")) {
-            followcolorChange(followbtn, context);
-            new PostRetrofit().postRetrofitFollowMethod("follow", userId, entityId, followbtn, context);
+        if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
+            Log.e("TextData", followbtn.getText().toString() + "");
+            if (followbtn.getText().toString().equals("follow")) {
+                followcolorChange(followbtn, context);
+                new PostRetrofit().postRetrofitFollowMethod("follow", userId, entityId, followbtn, context);
+            } else {
+                Toast.makeText(context, "You Unfollowing", Toast.LENGTH_LONG).show();
+                unfollowcolorChange(followbtn, context);
+                new PostRetrofit().postRetrofitFollowMethod("follow", userId, entityId, followbtn, context);
+            }
         } else {
-            Toast.makeText(context, "You Unfollowing", Toast.LENGTH_LONG).show();
-            unfollowcolorChange(followbtn, context);
-            new PostRetrofit().postRetrofitFollowMethod("follow", userId, entityId, followbtn, context);
+            Toast.makeText(context, "You need to first Login.", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 
@@ -310,9 +315,9 @@ public class Common {
             ib_like.setImageResource(0);
             if (likeStr.equals("LIKED")) {
                 ib_like.setImageResource(R.drawable.likesmallicon);
-                Toast.makeText(context,   " UnLiked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, " UnLiked", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context,  " Liked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, " Liked", Toast.LENGTH_SHORT).show();
                 ib_like.setImageResource(R.drawable.likegreensmall);
             }
             new PostRetrofit().postWatchOrUnWatchRetrofitMethod("1", userId,
@@ -351,9 +356,9 @@ public class Common {
             ib_like.setImageResource(0);
             if (likeStr.equals("LIKED")) {
                 ib_like.setImageResource(R.drawable.unlikesmallicon);
-                Toast.makeText(context,  " UnLiked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, " UnLiked", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context,  " Liked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, " Liked", Toast.LENGTH_SHORT).show();
                 ib_like.setImageResource(R.drawable.unlikepinksmall);
             }
             new PostRetrofit().postWatchOrUnWatchRetrofitMethod("0", userId,
@@ -364,8 +369,20 @@ public class Common {
 
 
     public static void shareClick(String shareableLink, Context context) {
-        BitmapLoadingInBack bitmapLoadingInBack=new BitmapLoadingInBack(shareableLink,context);
-        bitmapLoadingInBack.execute();
+
+        if (shareableLink != null && !shareableLink.isEmpty()) {
+            Log.e("shareLink", shareableLink);
+            if (shareableLink.contains("https://www.youtube.com/embed/")) {
+                shareAudioOrVideoLink(shareableLink, context);
+            } else {
+                BitmapLoadingInBack bitmapLoadingInBack = new BitmapLoadingInBack(shareableLink, context);
+                bitmapLoadingInBack.execute();
+            }
+        } else {
+            Log.e("shareLink", shareableLink);
+            Toast.makeText(context, "Image Link not available", Toast.LENGTH_SHORT).show();
+        }
+
         /*Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink + "\n\n\n" + "Download **Flikster**"
@@ -375,20 +392,29 @@ public class Common {
         context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));*/
     }
 
-    public static void getBitmapForShare(Bitmap bitmap,Context context)
-    {
+    private static void shareAudioOrVideoLink(String shareableLink, Context context) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
-        //shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap,context));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink + "\n\n\n" + "Download **Flikster**" + "\n" +
+                "https://play.google.com/store/apps/details?id=com.flikster&hl=en" +
+                " and don't miss anything from movie industry. Stay connected to the world of Illusion.\n");
         shareIntent.setType("text/plain");
         context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));
     }
 
-    public static Uri getLocalBitmapUri(Bitmap bmp,Context context) {
+    public static void getBitmapForShare(Bitmap bitmap, Context context) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Flikster");
+        //shareIntent.putExtra(Intent.EXTRA_TEXT, shareableLink);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap, context));
+        shareIntent.setType("text/plain");
+        context.startActivity(Intent.createChooser(shareIntent, "Complete action using ...."));
+    }
+
+    public static Uri getLocalBitmapUri(Bitmap bmp, Context context) {
         Uri bmpUri = null;
         try {
-            File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
             FileOutputStream out = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.close();
