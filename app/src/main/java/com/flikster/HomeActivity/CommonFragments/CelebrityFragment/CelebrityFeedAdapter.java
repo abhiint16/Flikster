@@ -554,8 +554,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -616,7 +615,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -686,7 +685,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -755,7 +754,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -828,7 +827,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -896,7 +895,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -971,7 +970,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1040,7 +1039,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1110,7 +1109,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1182,7 +1181,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1255,7 +1254,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1329,7 +1328,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic() + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {

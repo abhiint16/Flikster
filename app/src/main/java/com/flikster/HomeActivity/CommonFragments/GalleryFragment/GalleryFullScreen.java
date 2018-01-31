@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -79,9 +80,7 @@ public class GalleryFullScreen extends AppCompatActivity implements View.OnClick
         card_footer_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Common.shareClick(getIntent().getStringExtra("galleryimglink")
-                        + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. " +
-                        "Stay connected to the world of Illusion.\n", getApplicationContext());
+                Common.shareClick(getIntent().getStringExtra("galleryimglink"),GalleryFullScreen.this);
             }
         });
 

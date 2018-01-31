@@ -1297,6 +1297,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 testing.seeMoreComments(userName,
                         userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
             } else if (view.getId() == R.id.card_footer_share) {
+
                 shareClick(outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
             }
 

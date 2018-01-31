@@ -42,7 +42,8 @@ public class BitmapLoadingInBack extends AsyncTask<Integer,Void,Bitmap> {
             BitmapFactory.Options options=new BitmapFactory.Options();
             //options.inJustDecodeBounds=true;
             options.inSampleSize=4;
-            Bitmap bitmap=BitmapFactory.decodeStream(url.openConnection().getInputStream(),null,options);
+            Bitmap bitmap=BitmapFactory.decodeStream(url.openConnection().getInputStream(),
+                    null,options);
             //Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             return bitmap;
         } catch (MalformedURLException e) {

@@ -58,7 +58,8 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initRetrofit() {
-        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/")
+                .create(ApiInterface.class);
         Call<FeedData> call = apiInterface.getTopRatedMovies(url);
         call.enqueue(new Callback<FeedData>() {
             @Override

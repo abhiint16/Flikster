@@ -143,7 +143,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(galleryImgLinks.get(getAdapterPosition()) + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(galleryImgLinks.get(getAdapterPosition()), context);
                 }
             });
 

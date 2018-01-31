@@ -53,8 +53,7 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType==0)
-        {
+        if (viewType == 0) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
             return new ViewHolder0(view);
         }
@@ -63,8 +62,7 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blank_card, parent, false);
             return new ViewHolder2(view);
         }
-        else
-        {
+         else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item, parent, false);
             return new ViewHolder1(view);
         }
@@ -72,26 +70,23 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType()==0)
-        {
+        if (holder.getItemViewType() == 0) {
             loadMore();
-        }
-        else if (holder.getItemViewType()==1)
-        {
+        } else if (holder.getItemViewType() == 1) {
             if (hits.getHits().get(position).get_source().getProfilePic() != null)
                 Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic())
                         .transform(new FaceCenterCrop())
-                        .into(((ViewHolder1)holder).carousel_image);
+                        .into(((ViewHolder1) holder).carousel_image);
             else if (hits.getHits().get(position).get_source().getProfilePic() == null) {
                 if (hits.getHits().get(position).get_source().getMedia() != null) {
                     if (hits.getHits().get(position).get_source().getMedia().getGallery() != null && hits.getHits().get(position).get_source().getMedia().getGallery().size() != 0)
                         Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                                 .transform(new FaceCenterCrop())
-                                .into(((ViewHolder1)holder).carousel_image);
+                                .into(((ViewHolder1) holder).carousel_image);
                 }
             }
             if (hits.getHits().get(position).get_source().getTitle() != null)
-                ((ViewHolder1)holder).carousel_title.setText(hits.getHits().get(position).get_source().getTitle());
+                ((ViewHolder1) holder).carousel_title.setText(hits.getHits().get(position).get_source().getTitle());
 
         }
     }
@@ -116,14 +111,14 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
 
     @Override
     public int getItemCount() {
-        if (hits.getTotal()==hits.getHits().size())
+        if (hits.getTotal() == hits.getHits().size())
             return hits.getHits().size();
-        return hits.getHits().size()+1;
+        return hits.getHits().size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position==hits.getHits().size())
+        if (position == hits.getHits().size())
             return 0;
         else if (cardId.equals(hits.getHits().get(position).get_id()))
         {
@@ -134,9 +129,10 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
 
     public class ViewHolder0 extends RecyclerView.ViewHolder implements View.OnClickListener {
         LinearLayout hor_last_item_load_more_container;
+
         public ViewHolder0(View itemView) {
             super(itemView);
-            hor_last_item_load_more_container=(LinearLayout)itemView.findViewById(R.id.hor_last_item_load_more_container);
+            hor_last_item_load_more_container = (LinearLayout) itemView.findViewById(R.id.hor_last_item_load_more_container);
             itemView.setOnClickListener(this);
         }
 
@@ -171,14 +167,15 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
 
         @Override
         public void onClick(View view) {
-            if (hits.getHits().get(getAdapterPosition()).get_source().getMovie() != null) {
+            if (hits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && hits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
                 galleryRecommendationItemClick.galleryRecommendationItemClickMethod(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                         hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                         hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                         hits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                         new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId(),
                         hits.getHits().get(getAdapterPosition()).get_id());
-            } else if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
+            }
+            else if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                 galleryRecommendationItemClick.galleryRecommendationItemClickMethod(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                         hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
                         hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),

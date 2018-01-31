@@ -675,8 +675,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 @Override
                 public void onClick(View v) {
                     Log.e("singleImgProint", hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic() + "SS");
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getImageGallery().get(0).trim(),context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -763,8 +762,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 @Override
                 public void onClick(View v) {
                     Log.e("singleImgProint", hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic() + "SS");
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getImageGallery().get(0).trim(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -850,8 +848,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 @Override
                 public void onClick(View v) {
                     Log.e("singleImgProint", hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic() + "SS");
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getImageGallery().get(0).trim(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -939,8 +936,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 @Override
                 public void onClick(View v) {
                     Log.e("singleImgProint", hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic() + "SS");
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getImageGallery().get(0).trim(),context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1031,8 +1027,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 @Override
                 public void onClick(View v) {
                     Log.e("singleImgProint", hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic() + "SS");
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getImageGallery().get(0).trim()
+                            , context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
@@ -1112,8 +1108,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 @Override
                 public void onClick(View v) {
                     Log.e("singleImgProint", hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic() + "SS");
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getProfilePic()
-                            + "\n\n\n" + "Download **Flikster** and don't miss anything from movie industry. Stay connected to the world of Illusion.\n", context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 4).get_source().getImageGallery().get(0).trim(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
