@@ -25,6 +25,7 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMovies
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.WatchOrUnWatchCheckData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.WatchStatusData;
+import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.MyOrderData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CreateShareYourStyleData;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.StyleSearchData;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductDetailsDataToSend;
@@ -66,6 +67,9 @@ public interface ApiInterface {
 
     @GET
     Call<FeedData> getTopRatedMovies(@Url String url);
+
+    @GET
+    Call<MyOrderData> getMyOrderInAccount(@Url String url);
 
     @GET
     Call<MovieData> getMovieData(@Url String url);
