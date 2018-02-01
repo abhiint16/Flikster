@@ -141,8 +141,9 @@ public class Common {
 
     public static String formatString(String name) {
         String s = name;
-        if (s.length() >= 120) {
-            s = s.substring(0, 115) + " ...";
+        Log.e("datalength", s.length() + "");
+        if (s.length() >= 220) {
+            s = s.substring(0, 215) + " ...";
         }
         return s;
     }

@@ -91,7 +91,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
             @Override
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 hits = response.body().getHits();
-                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallary");
+                ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_title.setText("Recommended Gallery");
                 layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                 ((ViewHolder2) viewholder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
                 galleryBottomHorRecyclerAdapter = new GalleryBottomHorRecyclerAdapter(context, hits, galleryRecommendationItemClick, userId,cardId);
