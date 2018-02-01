@@ -41,7 +41,7 @@ public class BitmapLoadingInBack extends AsyncTask<Integer,Void,Bitmap> {
             URL url = new URL(bitmapUrl);
             BitmapFactory.Options options=new BitmapFactory.Options();
             //options.inJustDecodeBounds=true;
-            options.inSampleSize=4;
+            options.inSampleSize=3;
             Bitmap bitmap=BitmapFactory.decodeStream(url.openConnection().getInputStream(),
                     null,options);
             //Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
