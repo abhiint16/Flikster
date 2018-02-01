@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.FullScreenYoutubeView.FullScreenYoutubeView;
-import com.flikster.GlobalDataStorage;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;

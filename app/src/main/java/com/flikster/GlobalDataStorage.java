@@ -1,7 +1,11 @@
 package com.flikster;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
+
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by abhishek on 11-11-2017.
@@ -9,43 +13,23 @@ import android.util.Log;
 
 public class GlobalDataStorage extends Application {
 
-    String celebrityProfilePic;
-    String celebrityCoverPic;
-    String celebrityName;
-    String celebrityRole;
+    RefWatcher refWatcher;
 
-    public String getCelebrityProfilePic() {
-        return celebrityProfilePic;
+    public static RefWatcher getRefWatcher(Context context)
+    {
+        GlobalDataStorage globalDataStorage=(GlobalDataStorage)context.getApplicationContext();
+        return globalDataStorage.refWatcher;
     }
 
-    public void setCelebrityProfilePic(String celebrityProfilePic) {
-        Log.e("inside global","GLOBALDAtastorage");
-        Log.e("checkpic"," "+getCelebrityProfilePic());
-        this.celebrityProfilePic = celebrityProfilePic;
-        Log.e("checkpic1"," "+getCelebrityProfilePic());
+    @Override public void onCreate() {
+        super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        refWatcher=LeakCanary.install(this);
+        // Normal app init code...
     }
 
-    public String getCelebrityCoverPic() {
-        return celebrityCoverPic;
-    }
-
-    public void setCelebrityCoverPic(String celebrityCoverPic) {
-        this.celebrityCoverPic = celebrityCoverPic;
-    }
-
-    public String getCelebrityName() {
-        return celebrityName;
-    }
-
-    public void setCelebrityName(String celebrityName) {
-        this.celebrityName = celebrityName;
-    }
-
-    public String getCelebrityRole() {
-        return celebrityRole;
-    }
-
-    public void setCelebrityRole(String celebrityRole) {
-        this.celebrityRole = celebrityRole;
-    }
 }
