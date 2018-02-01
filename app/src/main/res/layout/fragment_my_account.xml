@@ -39,8 +39,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="145dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="140dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="140dp"
                     android:background="@drawable/white_solid_round_border"></View>
 
                 <ImageView
@@ -57,19 +57,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/fragment_my_account_dp"
+                    android:layout_marginTop="@dimen/seven"
                     android:gravity="center"
                     android:text="username"
-                    android:layout_marginTop="@dimen/seven"
                     android:textColor="@color/commontextcolor"
                     android:textSize="25sp" />
 
                 <LinearLayout
+                    android:id="@+id/locationlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/fragment_my_account_name"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:id="@+id/locationlayout"
                     android:padding="1dp">
 
                     <TextView
@@ -86,8 +86,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:text="|"
-                        android:visibility="gone"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:visibility="gone" />
 
 
                     <!--<TextView
@@ -98,14 +98,15 @@
                         android:text="53 Followers"
                         android:textColor="@color/black" />-->
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/fifteen"
+                    android:layout_below="@+id/locationlayout"
                     android:layout_marginLeft="@dimen/twenty"
                     android:layout_marginRight="@dimen/twenty"
-                    android:layout_below="@+id/locationlayout"
-                    android:background="@color/grey_txt_label"/>
+                    android:layout_marginTop="@dimen/fifteen"
+                    android:background="@color/grey_txt_label" />
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
@@ -210,10 +211,46 @@
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/fragment_my_account_pager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    <!--<android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"></android.support.v4.view.ViewPager>
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:fitsSystemWindows="true">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/fragment_my_account_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"></android.support.v4.view.ViewPager>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>-->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fadeScrollbars="false"
+        android:scrollbarFadeDuration="0"
+        android:id="@+id/main_nested">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
+
+            <android.support.v4.view.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="665dp"
+                android:id="@+id/fragment_my_account_pager"
+                android:fitsSystemWindows="true">
+
+            </android.support.v4.view.ViewPager>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 </android.support.design.widget.CoordinatorLayout>
