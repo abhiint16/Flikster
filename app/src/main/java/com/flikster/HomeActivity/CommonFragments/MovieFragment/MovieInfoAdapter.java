@@ -364,63 +364,48 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onClick(View v) {
                     if (userId != null && !userId.isEmpty()) {
-                        Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
                         if (ib_like.getDrawable().getConstantState().equals
                                 (context.getResources().getDrawable(R.drawable.likegreensmall)
                                         .getConstantState())) {
-                            if(!((Activity) context ).isFinishing())
-                            {
-                                Toast.makeText(context, "Already Watch liked", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Common.willWatchOrNot(context, ib_like, userId, entityId);
-                            unlike.setImageResource(R.drawable.unlikesmallicon);
-                            int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
-                            int watchcount_added = watchcount + 1;
-                            likeCounttxt.setText(String.valueOf(watchcount_added));
-                            unlikeCounttxt.setText("0");
-                        }
-                    } else {
-                        Toast.makeText(context, "Please login", Toast.LENGTH_SHORT).show();
-                    }
-
-                   /* if (userId != null && !userId.isEmpty()) {
-                        Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
-                        if (ib_like.getDrawable().getConstantState().equals
-                                (context.getResources().getDrawable(R.drawable.likegreensmall)
-                                        .getConstantState())) {
-                            if(!((Activity) context ).isFinishing())
-                            {
-                                Toast.makeText(context, "Already Watch liked", Toast.LENGTH_SHORT).show();
-                            }else{
-//                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_LONG).show();
+                            if (!((Activity) context).isFinishing()) {
+                                Toast.makeText(context, "You Already Watched", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_LONG).show();
                             }
                         } else {
                             if (unlike.getDrawable().getConstantState().equals
                                     (context.getResources().getDrawable(R.drawable.unlikepinksmall).getConstantState())) {
-                                int watchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
-                                int watchcount_added = watchcount - 1;
+                                int unwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int unwatchcount_added;
+                                if (unwatchcount != 0) {
+                                    unwatchcount_added = unwatchcount - 1;
+                                } else {
+                                    unwatchcount_added = 0;
+                                }
+                                unlikeCounttxt.setText(String.valueOf(unwatchcount_added));
+                                int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
+                                int watchcount_added = watchcount + 1;
                                 likeCounttxt.setText(String.valueOf(watchcount_added));
-                                int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
-                                int wontwatchcount_added = wontwatchcount + 1;
-                                unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
-                                ib_like.setImageResource(R.drawable.likesmallicon);
-                                Common.wantWatchHit(context, unlike, userId, entityId);
+                                unlike.setImageResource(R.drawable.unlikesmallicon);
+                                Common.willWatchOrNot(context, ib_like, userId, entityId);
                             } else {
-                                Common.wantWatchHit(context, unlike, userId, entityId);
-                                ib_like.setImageResource(R.drawable.likesmallicon);
-                                int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
-                                int wontwatchcount_added = wontwatchcount + 1;
-                                unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
-                                ib_like.setImageResource(R.drawable.likesmallicon);
+                                Common.willWatchOrNot(context, ib_like, userId, entityId);
+                                unlike.setImageResource(R.drawable.unlikesmallicon);
+                                int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
+                                int watchcount_added = 0;
+                                if (watchcount != 0) {
+                                    watchcount_added = watchcount + 1;
+                                } else {
+                                    watchcount_added = 0;
+                                }
+                                likeCounttxt.setText(String.valueOf(watchcount_added));
+                                unlike.setImageResource(R.drawable.unlikesmallicon);
                             }
                         }
                     } else {
                         Toast.makeText(context, "Please login", Toast.LENGTH_SHORT).show();
-                    }*/
-
+                    }
 
                 }
             });
@@ -428,21 +413,24 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onClick(View v) {
                     if (userId != null && !userId.isEmpty()) {
-                        Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
                         if (unlike.getDrawable().getConstantState().equals
                                 (context.getResources().getDrawable(R.drawable.unlikepinksmall).getConstantState())) {
-                            if(!((Activity) context ).isFinishing())
-                            {
-                                Toast.makeText(context, "Already Un Watch liked", Toast.LENGTH_SHORT).show();
-                            }else{
-//                                Toast.makeText(getApplicationContext(),"Successful", Toast.LENGTH_LONG).show();
+                            if (!((Activity) context).isFinishing()) {
+                                Toast.makeText(context, "You Already UnWatched", Toast.LENGTH_SHORT).show();
+                            } else {
                             }
                         } else {
                             if (ib_like.getDrawable().getConstantState().equals
                                     (context.getResources().getDrawable(R.drawable.likegreensmall)
                                             .getConstantState())) {
                                 int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
-                                int watchcount_added = watchcount - 1;
+                                int watchcount_added = 0;
+                                if (watchcount != 0) {
+                                    watchcount_added = watchcount - 1;
+                                } else {
+                                    watchcount_added = 0;
+                                }
                                 likeCounttxt.setText(String.valueOf(watchcount_added));
                                 int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
                                 int wontwatchcount_added = wontwatchcount + 1;
@@ -453,7 +441,12 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                 Common.wantWatchHit(context, unlike, userId, entityId);
                                 ib_like.setImageResource(R.drawable.likesmallicon);
                                 int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
-                                int wontwatchcount_added = wontwatchcount + 1;
+                                int wontwatchcount_added;
+                                if (wontwatchcount != 0) {
+                                    wontwatchcount_added = wontwatchcount + 1;
+                                } else {
+                                    wontwatchcount_added = 0;
+                                }
                                 unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
                                 ib_like.setImageResource(R.drawable.likesmallicon);
                             }

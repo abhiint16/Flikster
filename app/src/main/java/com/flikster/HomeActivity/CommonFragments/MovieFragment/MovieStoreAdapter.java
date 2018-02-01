@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +35,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by abhishek on 12-10-2017.
@@ -492,21 +495,96 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
-                    Common.willWatchOrNot(context, ib_like, userId, entityId);
-                    likeCounttxt.setText("1");
-                    unlike.setImageResource(R.drawable.unlikesmallicon);
-                    unlikeCounttxt.setText("0");
+                    if (userId != null && !userId.isEmpty()) {
+//                        Toast.makeText(context, "Will Watch", Toast.LENGTH_SHORT).show();
+                        if (ib_like.getDrawable().getConstantState().equals
+                                (context.getResources().getDrawable(R.drawable.likegreensmall)
+                                        .getConstantState())) {
+                            if (!((Activity) context).isFinishing()) {
+                                Toast.makeText(context, "You Already Watched", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            if (unlike.getDrawable().getConstantState().equals
+                                    (context.getResources().getDrawable(R.drawable.unlikepinksmall).getConstantState())) {
+                                int unwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int unwatchcount_added;
+                                if (unwatchcount != 0) {
+                                    unwatchcount_added = unwatchcount - 1;
+                                } else {
+                                    unwatchcount_added = 0;
+                                }
+                                unlikeCounttxt.setText(String.valueOf(unwatchcount_added));
+                                int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
+                                int watchcount_added = watchcount + 1;
+                                likeCounttxt.setText(String.valueOf(watchcount_added));
+                                unlike.setImageResource(R.drawable.unlikesmallicon);
+                                Common.willWatchOrNot(context, ib_like, userId, entityId);
+                            } else {
+                                Common.willWatchOrNot(context, ib_like, userId, entityId);
+                                unlike.setImageResource(R.drawable.unlikesmallicon);
+                                int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
+                                int watchcount_added = 0;
+                                if (watchcount != 0) {
+                                    watchcount_added = watchcount + 1;
+                                } else {
+                                    watchcount_added = 0;
+                                }
+                                likeCounttxt.setText(String.valueOf(watchcount_added));
+                                unlike.setImageResource(R.drawable.unlikesmallicon);
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "Please login", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             unlike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
-                    Common.wantWatchHit(context, unlike, userId, entityId);
-                    likeCounttxt.setText("0");
-                    ib_like.setImageResource(R.drawable.likesmallicon);
-                    unlikeCounttxt.setText("1");
+                    if (userId != null && !userId.isEmpty()) {
+//                        Toast.makeText(context, "Wont Watch", Toast.LENGTH_SHORT).show();
+                        if (unlike.getDrawable().getConstantState().equals
+                                (context.getResources().getDrawable(R.drawable.unlikepinksmall).getConstantState())) {
+                            if (!((Activity) context).isFinishing()) {
+                                Toast.makeText(context, "You Already UnWatched", Toast.LENGTH_SHORT).show();
+                            } else {
+                            }
+                        } else {
+                            if (ib_like.getDrawable().getConstantState().equals
+                                    (context.getResources().getDrawable(R.drawable.likegreensmall)
+                                            .getConstantState())) {
+                                int watchcount = Integer.parseInt(likeCounttxt.getText().toString());
+                                int watchcount_added = 0;
+                                if (watchcount != 0) {
+                                    watchcount_added = watchcount - 1;
+                                } else {
+                                    watchcount_added = 0;
+                                }
+                                likeCounttxt.setText(String.valueOf(watchcount_added));
+                                int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int wontwatchcount_added = wontwatchcount + 1;
+                                unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                                Common.wantWatchHit(context, unlike, userId, entityId);
+                            } else {
+                                Common.wantWatchHit(context, unlike, userId, entityId);
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                                int wontwatchcount = Integer.parseInt(unlikeCounttxt.getText().toString());
+                                int wontwatchcount_added;
+                                if (wontwatchcount != 0) {
+                                    wontwatchcount_added = wontwatchcount + 1;
+                                } else {
+                                    wontwatchcount_added = 0;
+                                }
+                                unlikeCounttxt.setText(String.valueOf(wontwatchcount_added));
+                                ib_like.setImageResource(R.drawable.likesmallicon);
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "Please login", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
