@@ -210,7 +210,8 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder11) holder).followbtn.setText("BUY");
             ((ViewHolder11) holder).card_fashion_details1_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position - 4).get_source().getPrice() != null) {
-                ((ViewHolder11) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
+                ((ViewHolder11) holder).card_description_with_price_price.setText("\u20B9 "
+                        + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
             }
             if (hits.getHits().get(position - 4).get_source().getName() != null) {
                 ((ViewHolder11) holder).card_description_with_price_title.setText(hits.getHits().get(position - 4).get_source().getName());
@@ -247,7 +248,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder12) holder).followbtn.setText("BUY");
             ((ViewHolder12) holder).card_fashion_details2_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position - 4).get_source().getPrice() != null) {
-                ((ViewHolder12) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
+                ((ViewHolder12) holder).card_description_with_price_price.setText("\u20B9 " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
             }
             if (hits.getHits().get(position - 4).get_source().getName() != null) {
                 ((ViewHolder12) holder).card_description_with_price_title.setText(hits.getHits().get(position - 4).get_source().getName());
@@ -283,7 +284,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder13) holder).followbtn.setText("BUY");
             ((ViewHolder13) holder).card_fashion_details3_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position - 4).get_source().getPrice() != null) {
-                ((ViewHolder13) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
+                ((ViewHolder13) holder).card_description_with_price_price.setText("\u20B9 " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
             }
             if (hits.getHits().get(position - 4).get_source().getName() != null) {
                 ((ViewHolder13) holder).card_description_with_price_title.setText(hits.getHits().get(position - 4).get_source().getName());
@@ -323,7 +324,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder14) holder).followbtn.setText("BUY");
             ((ViewHolder14) holder).card_fashion_details4_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position - 4).get_source().getPrice() != null) {
-                ((ViewHolder14) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
+                ((ViewHolder14) holder).card_description_with_price_price.setText("\u20B9 " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
             }
             if (hits.getHits().get(position - 4).get_source().getName() != null) {
                 ((ViewHolder14) holder).card_description_with_price_title.setText(hits.getHits().get(position - 4).get_source().getName());
@@ -365,7 +366,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder15) holder).followbtn.setText("BUY");
             ((ViewHolder15) holder).card_fashion_details4_plus_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position - 4).get_source().getPrice() != null) {
-                ((ViewHolder15) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
+                ((ViewHolder15) holder).card_description_with_price_price.setText("\u20B9 " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
             }
             if (hits.getHits().get(position - 4).get_source().getName() != null) {
                 ((ViewHolder15) holder).card_description_with_price_title.setText(hits.getHits().get(position - 4).get_source().getName());
@@ -408,7 +409,7 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (holder.getItemViewType() == 20) {
             ((ViewHolder20) holder).followbtn.setText("BUY");
             if (hits.getHits().get(position - 4).get_source().getPrice() != null) {
-                ((ViewHolder20) holder).card_description_with_price_price.setText("Rs. " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
+                ((ViewHolder20) holder).card_description_with_price_price.setText("\u20B9 " + hits.getHits().get(position - 4).get_source().getPrice() + " /-");
             }
             ((ViewHolder20) holder).card_fashion_details1_txt.setVisibility(View.GONE);
             if (hits.getHits().get(position - 4).get_source().getName() != null) {

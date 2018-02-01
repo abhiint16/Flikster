@@ -55,8 +55,6 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
         type.add(3);
         type.add(4);
         type.add(5);
-        type.add(6);
-        type.add(7);
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.hits=hits;
@@ -82,8 +80,9 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_fashion_product_singleimg, parent, false);
             return new ViewHolder5(view);
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_feed_profile, parent, false);
-            return new ViewHolder1(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.empty_layout, parent, false);
+            return new ViewHolder5(view);
+//            7102432274
         }
     }
 
@@ -209,9 +208,6 @@ public class MenFashionFragmentAdapter extends RecyclerView.Adapter<RecyclerView
             card_celebrity_feed_profile_layout = (LinearLayout) itemView.findViewById(R.id.card_celebrity_feed_profile_layout);
             fashionname = (TextView) itemView.findViewById(R.id.fashionname);
             card_celebrity_feed_profile_coverpic = (ImageView) itemView.findViewById(R.id.card_celebrity_feed_profile_coverpic);
-//            card_celebrity_feed_profile_role  = (TextView) itemView.findViewById(R.id.card_celebrity_feed_profile_role);
-//            card_celebrity_feed_profile_name.setVisibility(View.GONE);
-//            card_celebrity_feed_profile_role.setVisibility(View.GONE);
         }
 
         @Override
