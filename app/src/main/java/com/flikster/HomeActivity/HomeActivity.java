@@ -43,6 +43,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -155,7 +156,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     LinearLayout feed, rating, plus, fashion, store, toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    LinearLayout toolbar_cart_btn, toolbar_main_notification, toolbar_navigation_view_open_btn;
+    LinearLayout toolbar_main_notification, toolbar_navigation_view_open_btn;
+    TextView toolbar_cart_btn;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
@@ -203,7 +205,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     Bundle bundle = new Bundle();
     List<String> pref = new ArrayList<>();
     boolean industrySpinnerSelection = false;
-    TextView toolbar_main_title;
+    //ImageButton toolbar_main_title;
     TextView header_drawer_layout_username;
 
     String UserId = "";
@@ -306,7 +308,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         bottomNavigation.setItemDisableColor(Color.parseColor("#949494"));
 
         bottomNavigation.setCurrentItem(0);
-        bottomNavigation.setAccentColor(Color.parseColor("#FF4081"));
+        bottomNavigation.setAccentColor(Color.parseColor("#fe5b69"));
         bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
         bottomNavigation.setForceTint(true);
 
@@ -392,6 +394,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_terms.setOnClickListener(this);
         right_navigation_bar_non_loggedin_login_btn.setOnClickListener(this);
         right_navigation_bar_non_loggedin_auction.setOnClickListener(this);
+        toolbar_flikter_text_container.setOnClickListener(this);
         toolbar_cart_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -447,7 +450,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_navigation_view_open_btn.setOnClickListener(this);
         toolbarPrefSpinner();
 
-        toolbar_main_title.setOnClickListener(this);
+        //toolbar_main_title.setOnClickListener(this);
         toolbar_pref_spinner.setVisibility(View.GONE);
 
         try {
@@ -676,8 +679,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar_cart_btn = (LinearLayout) findViewById(R.id.toolbar_cart_btn);
-        toolbar_main_title = (TextView) findViewById(R.id.toolbar_main_title);
+        toolbar_cart_btn = (TextView) findViewById(R.id.toolbar_cart_btn);
+       // toolbar_main_title = (ImageButton) findViewById(R.id.toolbar_main_title);
         footer_drawer_layout_aboutus = (TextView) findViewById(R.id.footer_drawer_layout_aboutus);
         footer_drawer_layout_blog = (TextView) findViewById(R.id.footer_drawer_layout_blog);
         footer_drawer_layout_business = (TextView) findViewById(R.id.footer_drawer_layout_business);
@@ -809,7 +812,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "SIGNUP");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
-        } else if (viewId == R.id.toolbar_main_title) {
+        } else if (viewId == R.id.toolbar_flikter_text_container) {
 //            Toast.makeText(getApplicationContext(), "Flikster", Toast.LENGTH_SHORT).show();
             toolbar_pref_spinner.setVisibility(View.VISIBLE);
             toolbar_pref_spinner.setEnabled(false);

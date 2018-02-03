@@ -53,6 +53,6 @@
         android:background="@drawable/corner_rounded"
         android:gravity="center"
         android:text="follow"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 
 </RelativeLayout>

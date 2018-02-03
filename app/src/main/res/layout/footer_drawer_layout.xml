@@ -25,9 +25,8 @@
                 android:layout_marginRight="5dp"
                 android:gravity="center"
                 android:text="About Us"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
-                android:background="@color/colorAccent"
                 android:id="@+id/footer_drawer_layout_aboutus"/>
 
             <!--<TextView
@@ -47,9 +46,8 @@
                 android:layout_marginRight="5dp"
                 android:gravity="center"
                 android:text="Business"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
-                android:background="@color/colorAccent"
                 android:id="@+id/footer_drawer_layout_business"/>
 
             <!--<TextView
@@ -69,9 +67,8 @@
                 android:layout_marginRight="5dp"
                 android:gravity="center"
                 android:text="Blog"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
-                android:background="@color/colorAccent"
                 android:id="@+id/footer_drawer_layout_blog"/>
         </LinearLayout>
 
@@ -87,9 +84,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Help"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
-                android:background="@color/colorAccent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:id="@+id/footer_drawer_layout_help"/>
@@ -109,9 +105,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Privacy"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
-                android:background="@color/colorAccent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:id="@+id/footer_drawer_layout_privacy"/>
@@ -131,9 +126,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Terms"
-                android:textColor="@color/white"
+                android:textColor="@color/colorAccent"
                 android:textSize="14sp"
-                android:background="@color/colorAccent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:id="@+id/footer_drawer_layout_terms"/>

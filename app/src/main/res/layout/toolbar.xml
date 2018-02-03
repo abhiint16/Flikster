@@ -45,15 +45,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:src="@drawable/toolbar_notify_svg"
+            android:src="@drawable/notification_try"
             android:clickable="false"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/toolbar_flikter_text_container"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/flikster_toolbar_txt">
 
         <ImageButton
             android:layout_width="40dp"
@@ -64,20 +69,23 @@
             android:src="@drawable/flikster_icon"
             android:visibility="gone" />
 
-        <LinearLayout
-            android:id="@+id/toolbar_flikter_text_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <!--<LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <TextView
+            android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/flikster_toolbar_txt">
+-->
+            <!--<ImageButton
                 android:id="@+id/toolbar_main_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@drawable/logotext"
-                android:gravity="center" />
+                android:clickable="true"
+                android:background="@drawable/flikster_toolbar_txt"
+                android:gravity="center"
+                android:orientation="horizontal"/>-->
 
             <Spinner
 
@@ -107,7 +115,6 @@
                 android:background="@color/black"
                 android:visibility="gone" />
         </LinearLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="40dp"
@@ -122,11 +129,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:src="@drawable/toolbar_hamburger_svg"
+            android:src="@drawable/hamburger_try"
             android:clickable="false"/>
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
@@ -141,12 +148,12 @@
             android:clickable="false"
             android:background="@color/transparent"
             android:src="@drawable/toolbar_cart_svg" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <android.support.v7.widget.SearchView
         android:id="@+id/toolbar_search_btn"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:searchIcon="@drawable/toolbar_search_svg"></android.support.v7.widget.SearchView>
+        app:searchIcon="@drawable/search_try"></android.support.v7.widget.SearchView>
 </android.support.v7.widget.Toolbar>
