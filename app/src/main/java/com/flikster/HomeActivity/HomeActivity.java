@@ -283,7 +283,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watchunselected, R.color.color_tab_1);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.addsquare, R.color.color_tab_1);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionunselectedbottom, R.color.color_tab_1);
-        AHBottomNavigationItem item5 = new AHBottomNavigationItem("My Account", R.drawable.profileunactive, R.color.color_tab_1);
+        AHBottomNavigationItem item5 = new AHBottomNavigationItem("My Profile", R.drawable.profileunactive, R.color.color_tab_1);
 
 // Add items
         bottomNavigationItems.add(item1);
@@ -308,8 +308,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         bottomNavigation.setItemDisableColor(Color.parseColor("#949494"));
 
         bottomNavigation.setCurrentItem(0);
-        bottomNavigation.setAccentColor(Color.parseColor("#fe5b69"));
-        bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
+        bottomNavigation.setAccentColor(Color.parseColor("#000000"));
+        bottomNavigation.setInactiveColor(Color.parseColor("#949494"));
         bottomNavigation.setForceTint(true);
 
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
