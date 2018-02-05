@@ -13,6 +13,16 @@
 
         <include layout="@layout/toolbar"/>
 
+        <com.flikster.Util.MySpinner
+            android:id="@+id/toolbar_pref_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:spinnerMode="dropdown"
+            android:visibility="visible"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="?attr/actionBarSize"/>
 
         <include
             android:id="@+id/bottom_navigation_bar"
