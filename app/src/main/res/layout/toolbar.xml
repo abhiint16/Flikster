@@ -14,7 +14,8 @@
     app:contentInsetRight="0dp"
     app:contentInsetStart="0dp"
     app:layout_collapseMode="parallax"
-    app:layout_scrollFlags="scroll|enterAlways">
+    app:layout_scrollFlags="scroll|enterAlways"
+    android:layout_marginBottom="2dp">
 
     <LinearLayout
         android:layout_width="27dp"
