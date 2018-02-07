@@ -15,6 +15,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -269,7 +270,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder1) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder1) holder).tv_description.setText(Html.fromHtml(Common.formatString(outerHits.getHits().get(position).get_source().getText())));
+                ((ViewHolder1) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             ((ViewHolder1) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 2) {
             new PostRetrofit().checkForLike("like", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_like, context);
@@ -297,7 +301,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder2) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder2) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             ((ViewHolder2) holder).tv_name.setText(outerHits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 3) {
             Log.e("check dupliaccay inbind", "" + position + "and" + outerHits.getHits().get(position).get_source().getContentType());
@@ -327,8 +334,11 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder3) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder3) holder).tv_description.setText(Html.fromHtml(Common.formatString
                         (outerHits.getHits().get(position).get_source().getText())));
+                ((ViewHolder3) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif_try))
                     .listener(new RequestListener<String, GlideDrawable>() {
@@ -376,7 +386,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder4) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder4) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder4) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif_try))
                     .listener(new RequestListener<String, GlideDrawable>() {
@@ -423,7 +436,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder5) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder5) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder5) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif_try))
                     .listener(new RequestListener<String, GlideDrawable>() {
@@ -474,7 +490,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder6) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder6) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder6) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             //LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             Glide.with(context)
                     .load(outerHits.getHits().get(position).get_source().getProfilePic())
@@ -524,7 +543,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder7) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             if (outerHits.getHits().get(position).get_source().getMedia().getGallery() != null && outerHits.getHits().get(position).get_source().getMedia().getGallery().size() != 0)
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                         .thumbnail(Glide.with(context).load(R.drawable.loading_gif_try))
@@ -600,7 +622,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder11) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder11) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder11) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif_try))
                     .transform(new FaceCenterCrop())
@@ -636,7 +661,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder12) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder12) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder12) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif_try))
                     .transform(new FaceCenterCrop())
@@ -676,7 +704,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder13) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder13) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder13) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif_try))
                     .transform(new FaceCenterCrop())
@@ -720,7 +751,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (outerHits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder14) holder).tv_description.setVisibility(View.GONE);
             else if (outerHits.getHits().get(position).get_source().getText() != null)
+            {
                 ((ViewHolder14) holder).tv_description.setText(Html.fromHtml(outerHits.getHits().get(position).get_source().getText()));
+                ((ViewHolder14) holder).tv_description.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             Glide.with(context).load(outerHits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif_try))
                     .transform(new FaceCenterCrop())
