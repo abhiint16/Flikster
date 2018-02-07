@@ -18,7 +18,7 @@
     android:contentInsetEnd="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetEnd="0dp">
-
+<!--
     <ImageButton
         android:id="@+id/toolbar_frag_multiicons_overflow"
         android:layout_width="40dp"
@@ -53,7 +53,7 @@
         android:layout_gravity="end|center_vertical"
         android:layout_marginRight="5dp"
         android:background="@color/transparent"
-        android:src="@android:drawable/ic_menu_search" />
+        android:src="@android:drawable/ic_menu_search" />-->
 
     <ImageButton
         android:id="@+id/toolbar_frag_multiicons_back_navigation"

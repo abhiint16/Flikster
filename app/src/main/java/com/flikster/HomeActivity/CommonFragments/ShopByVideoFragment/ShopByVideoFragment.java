@@ -25,7 +25,6 @@ public class ShopByVideoFragment extends Fragment implements View.OnClickListene
     RecyclerView.LayoutManager layoutManagerShopByVideoFragment;
     ShopByVideoFragmentAdapter shopByVideoFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
-    ImageButton toolbar_frag_multiicons_back_navigation,toolbar_frag_multiicons_notification,toolbar_frag_multiicons_cart;
     FragmentManager fragmentManager;
     @Nullable
     @Override
@@ -54,24 +53,24 @@ public class ShopByVideoFragment extends Fragment implements View.OnClickListene
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerShopByVideoFragment);
         shopByVideoFragmentAdapter = new ShopByVideoFragmentAdapter(getActivity(),fragmentManager);
         fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentAdapter);
-        toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setVisibility(View.GONE);
-        toolbar_frag_multiicons_cart.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
+        //toolbar_frag_multiicons_notification.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_cart.setVisibility(View.GONE);
     }
 
     private void initializeViews() {
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
-        toolbar_frag_multiicons_back_navigation=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_notification=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_back_navigation=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
+        //toolbar_frag_multiicons_notification=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_cart);
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.toolbar_frag_multiicons_notification)
+        /*if(view.getId()==R.id.toolbar_frag_multiicons_notification)
         {
             fragmentManager.popBackStackImmediate();
-        }
+        }*/
     }
 }

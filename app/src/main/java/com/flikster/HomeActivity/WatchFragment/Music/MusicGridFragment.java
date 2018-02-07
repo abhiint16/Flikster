@@ -40,7 +40,7 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
     MusicGridAdapter musicGridAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
     TextView toolbar_frag_multiicons_title;
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart, toolbar_frag_multiicons_overflow;
+    ImageButton toolbar_frag_multiicons_back_navigation;
     FragmentManager fragmentManager;
     String tootbarTitle;
     WatchAudioVideoSendFromGridFrag watchAudioVideoSendFromGridFrag;
@@ -92,9 +92,9 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
         toolbar_frag_multiicons_title.setText(tootbarTitle);
         fragmentManager = getActivity().getSupportFragmentManager();
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setVisibility(View.GONE);
-        toolbar_frag_multiicons_cart.setVisibility(View.GONE);
-        toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_notification.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_cart.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
     }
 
     private void initializeViews() {
@@ -102,9 +102,9 @@ public class MusicGridFragment extends Fragment implements View.OnClickListener 
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
-        toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
+        //toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        ///toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
     }
 
     @Override

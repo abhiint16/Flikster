@@ -41,7 +41,7 @@ public class BuyFashionTypeSingleProductCarouselViewFragment extends Fragment im
     Toolbar toolbar_frag_multiicons_toolbar;
     FragmentManager fragmentManager;
     TextView toolbar_frag_multiicons_title;
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
+    ImageButton toolbar_frag_multiicons_back_navigation;
 
     ImageView buyimg;
     int[] sampleImages = {R.drawable.shirtblue, R.drawable.shirtblue, R.drawable.shirtblue, R.drawable.shirtblue, R.drawable.shirtblue};
@@ -62,8 +62,8 @@ public class BuyFashionTypeSingleProductCarouselViewFragment extends Fragment im
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setOnClickListener(this);
-        toolbar_frag_multiicons_cart.setOnClickListener(this);
+        //toolbar_frag_multiicons_notification.setOnClickListener(this);
+        //toolbar_frag_multiicons_cart.setOnClickListener(this);
         buybtn.setOnClickListener(this);
     }
 
@@ -77,8 +77,8 @@ public class BuyFashionTypeSingleProductCarouselViewFragment extends Fragment im
 
     private void initializeViews() {
         toolbar_frag_multiicons_title = (TextView)view.findViewById(R.id.toolbar_frag_multiicons_title);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         carouselView = (CarouselView) view.findViewById(R.id.carouselView);
         buybtn = (Button) view.findViewById(R.id.buybtn);
@@ -98,12 +98,12 @@ public class BuyFashionTypeSingleProductCarouselViewFragment extends Fragment im
         } else if (view.getId() == R.id.buybtn) {
             Intent intent = new Intent(getActivity(), MyBagActivity.class);
             startActivity(intent);
-        } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
+        } /*else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new NotificationFragment())
                     .addToBackStack("")
                     .commit();
-        }
+        }*/
     }
 }

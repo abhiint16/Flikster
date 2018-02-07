@@ -62,7 +62,7 @@ import retrofit2.Response;
 public class AuctionDetailFragment extends Fragment implements View.OnClickListener {
     View view;
     Button placebidbtn, add, buy;
-    ImageButton toolbar_back_navigation_btn, toolbar_more_icon;
+    ImageButton toolbar_back_navigation_btn;
     FragmentManager fragmentManager;
     TextView fragment_common_recyclerview_with_tv_title, infotxt, descrtxt;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
@@ -239,7 +239,7 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
     private void initializeRest() {
         toolbar_frag_title.setText("Auction");
         fragment_common_recyclerview_with_tv_title.setText("Recommended Product");
-        toolbar_more_icon.setVisibility(View.VISIBLE);
+        //toolbar_more_icon.setVisibility(View.VISIBLE);
         cartlayout.setVisibility(View.GONE);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -345,7 +345,7 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
 //        fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragment_common_recyclerview_with_tv_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         placebidbtn = (Button) view.findViewById(R.id.placebidbtn);
-        toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
+        //toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
         cartlayout = (LinearLayout) view.findViewById(R.id.cartlayout);
         fragmentManager = getActivity().getSupportFragmentManager();
 

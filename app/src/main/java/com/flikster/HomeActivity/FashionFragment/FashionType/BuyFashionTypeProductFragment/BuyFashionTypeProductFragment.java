@@ -31,7 +31,7 @@ public class BuyFashionTypeProductFragment extends Fragment implements View.OnCl
     BuyFashionTypeProductFragmentAdapter celebStoreFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
     FragmentManager fragmentManager;
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
+    ImageButton toolbar_frag_multiicons_back_navigation;
     TextView toolbar_frag_multiicons_title;
     FashionLandingFragment fashionLandingFragment;
 
@@ -53,14 +53,14 @@ public class BuyFashionTypeProductFragment extends Fragment implements View.OnCl
         fragment_common_recyclerview_recycler.setAdapter(celebStoreFragmentAdapter);
         toolbar_frag_multiicons_title.setText("BUY");
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setOnClickListener(this);
-        toolbar_frag_multiicons_cart.setOnClickListener(this);
+        //toolbar_frag_multiicons_notification.setOnClickListener(this);
+        //toolbar_frag_multiicons_cart.setOnClickListener(this);
     }
 
     private void initializeViews() {
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager = getActivity().getSupportFragmentManager();
@@ -83,12 +83,12 @@ public class BuyFashionTypeProductFragment extends Fragment implements View.OnCl
                     .replace(R.id.main_container, fashionLandingFragment)
                     .addToBackStack("")
                     .commit();
-        } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
+        } /*else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new NotificationFragment())
                     .addToBackStack("")
                     .commit();
-        }
+        }*/
     }
 }

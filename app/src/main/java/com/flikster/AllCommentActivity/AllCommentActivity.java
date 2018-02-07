@@ -36,7 +36,7 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
     ApiInterface apiInterface;
     CommentsData.CommentsInnerData hits;
     TextView textView, toolbar_frag_title;
-    ImageButton toolbar_more_icon, card_comment_text_send_btn, toolbar_back_navigation_btn;
+    ImageButton card_comment_text_send_btn, toolbar_back_navigation_btn;
     EditText editText;
     Context context;
 
@@ -79,7 +79,7 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
         textView.setVisibility(View.GONE);
         card_comment_text_send_btn.setOnClickListener(this);
         toolbar_frag_title.setText("All Comments");
-        toolbar_more_icon.setVisibility(View.GONE);
+        //toolbar_more_icon.setVisibility(View.GONE);
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
@@ -89,7 +89,7 @@ public class AllCommentActivity extends AppCompatActivity implements View.OnClic
         card_comment_text_send_btn = (ImageButton) findViewById(R.id.card_comment_text_send_btn);
         editText = (EditText) findViewById(R.id.card_comment_text_edittxt);
         toolbar_frag_title = (TextView) findViewById(R.id.toolbar_frag_title);
-        toolbar_more_icon = (ImageButton) findViewById(R.id.toolbar_more_icon);
+        //toolbar_more_icon = (ImageButton) findViewById(R.id.toolbar_more_icon);
         toolbar_back_navigation_btn = (ImageButton) findViewById(R.id.toolbar_back_navigation_btn);
     }
 

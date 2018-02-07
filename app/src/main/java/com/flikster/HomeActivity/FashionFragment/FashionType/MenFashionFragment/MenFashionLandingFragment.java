@@ -33,7 +33,7 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     FashionFragmentAdapter fashionFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
+    ImageButton toolbar_frag_multiicons_back_navigation;
     TabLayout tabLayout;
     TextView toolbar_frag_multiicons_title;
     String storeTypeMenWomen;
@@ -78,8 +78,8 @@ public class MenFashionLandingFragment extends Fragment implements View.OnClickL
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_toolbar);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setSelectedTabIndicatorColor(getContext().getResources().getColor(R.color.yellowthink));
     }

@@ -28,7 +28,7 @@ import java.io.IOException;
 public class SongByMovieProductFragmentItemClick extends Fragment implements View.OnClickListener {
     View view;
     FragmentManager fragmentManager;
-    ImageButton ib_bookmark, toolbar_back_navigation_btn, toolbar_frag_multiicons_search, toolbar_frag_multiicons_overflow, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
+    ImageButton ib_bookmark, toolbar_back_navigation_btn;
     TextView toolbar_frag_multiicons_title;
     MediaPlayer musicplay;
     SeekBar seekBar;
@@ -47,10 +47,10 @@ public class SongByMovieProductFragmentItemClick extends Fragment implements Vie
     private void initializeRest() {
         toolbar_frag_multiicons_title.setText("Audio");
         toolbar_back_navigation_btn.setOnClickListener(this);
-        toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
-        toolbar_frag_multiicons_search.setVisibility(View.GONE);
-        toolbar_frag_multiicons_notification.setVisibility(View.GONE);
-        toolbar_frag_multiicons_cart.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_search.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_notification.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_cart.setVisibility(View.GONE);
         playibtn.setOnClickListener(this);
         pauseibtn.setOnClickListener(this);
         closeimgv.setOnClickListener(this);
@@ -59,10 +59,10 @@ public class SongByMovieProductFragmentItemClick extends Fragment implements Vie
     private void initializeViews() {
         fragmentManager = getActivity().getSupportFragmentManager();
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_search = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_search);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
-        toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
+        //toolbar_frag_multiicons_search = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_search);
+        //toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
         playibtn = (ImageButton) view.findViewById(R.id.playibtn);
         pauseibtn = (ImageButton) view.findViewById(R.id.pauseibtn);

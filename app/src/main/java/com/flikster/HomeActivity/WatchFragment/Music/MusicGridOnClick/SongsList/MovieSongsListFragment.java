@@ -31,7 +31,7 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
     RecyclerView.LayoutManager layoutManagerShopByVideoFragment;
     MovieSongsListAdapter shopByVideoFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart, toolbar_frag_multiicons_search, toolbar_frag_multiicons_overflow;
+    ImageButton toolbar_frag_multiicons_back_navigation;
     FragmentManager fragmentManager;
     TextView toolbar_frag_multiicons_title;
     String toolbarTitle;
@@ -69,10 +69,10 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
         shopByVideoFragmentAdapter = new MovieSongsListAdapter(getActivity(), fragmentManager,img,title,audio,type,watchPlayAudioOrVideoInterafce);
         fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setVisibility(View.GONE);
-        toolbar_frag_multiicons_cart.setVisibility(View.GONE);
-        toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
-        toolbar_frag_multiicons_search.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_notification.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_cart.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_search.setVisibility(View.GONE);
     }
 
     private void initializeViews() {
@@ -80,10 +80,10 @@ public class MovieSongsListFragment extends Fragment implements View.OnClickList
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
         toolbar_frag_multiicons_back_navigation = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
-        toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
-        toolbar_frag_multiicons_search = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_search);
+        //toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
+        //toolbar_frag_multiicons_search = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_search);
     }
 
     @Override

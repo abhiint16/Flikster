@@ -45,8 +45,7 @@ public class InstamojoWebView extends AppCompatActivity implements View.OnClickL
     AuctionCurrentFragmentAdapter auctionCurrentFragmentAdapter;
     FragmentManager fragmentManager;
     TextView toolbar_frag_title;
-    ImageButton toolbar_back_navigation_btn, toolbar_frag_multiicons_search, toolbar_frag_multiicons_notification,
-            toolbar_frag_multiicons_cart, toolbar_frag_multiicons_overflow;
+    ImageButton toolbar_back_navigation_btn;
 
     int Count;
     TextView nodataavailtxt;
@@ -71,10 +70,10 @@ public class InstamojoWebView extends AppCompatActivity implements View.OnClickL
     private void initializeRes() {
         toolbar_frag_title.setText("Payment Mode");
         toolbar_back_navigation_btn.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setVisibility(View.GONE);
-        toolbar_frag_multiicons_cart.setVisibility(View.GONE);
-        toolbar_frag_multiicons_search.setVisibility(View.GONE);
-        toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_notification.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_cart.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_search.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
     }
 
 
@@ -84,10 +83,10 @@ public class InstamojoWebView extends AppCompatActivity implements View.OnClickL
         instamojoweb = (JuspayWebView) findViewById(R.id.juspay_browser_view);
 
         toolbar_back_navigation_btn = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_search = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_search);
-        toolbar_frag_multiicons_notification = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_cart);
-        toolbar_frag_multiicons_overflow = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_overflow);
+        //toolbar_frag_multiicons_search = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_search);
+        //toolbar_frag_multiicons_notification = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_overflow = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_overflow);
     }
 
 

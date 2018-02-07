@@ -161,6 +161,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
+    ImageButton facebook_icon_footer,twitter_icon_footer,instagram_icon_footer,linkedin_icon_footer;
     TextView footer_drawer_layout_aboutus, footer_drawer_layout_help, footer_drawer_layout_blog, footer_drawer_layout_privacy,
             footer_drawer_layout_terms, footer_drawer_layout_business;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -385,6 +386,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_refer.setOnClickListener(this);
         right_navigation_bar_rewards.setOnClickListener(this);
         right_navigation_bar_logout.setOnClickListener(this);
+        twitter_icon_footer.setOnClickListener(this);
+        instagram_icon_footer.setOnClickListener(this);
+        facebook_icon_footer.setOnClickListener(this);
+        linkedin_icon_footer.setOnClickListener(this);
         right_navigation_bar_non_loggedin_aboutflikster.setOnClickListener(this);
         right_navigation_bar_non_loggedin_careers.setOnClickListener(this);
         right_navigation_bar_non_loggedin_contact.setOnClickListener(this);
@@ -680,6 +685,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         plus = (LinearLayout) findViewById(R.id.plus_button);
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar_cart_btn = (TextView) findViewById(R.id.toolbar_cart_btn);
+        facebook_icon_footer=(ImageButton)findViewById(R.id.facebook_icon_footer);
+        instagram_icon_footer=(ImageButton)findViewById(R.id.insta_icon_footer);
+        twitter_icon_footer=(ImageButton)findViewById(R.id.twitter_icon_footer);
+        linkedin_icon_footer=(ImageButton)findViewById(R.id.facebook_icon_footer);
        // toolbar_main_title = (ImageButton) findViewById(R.id.toolbar_main_title);
         footer_drawer_layout_aboutus = (TextView) findViewById(R.id.footer_drawer_layout_aboutus);
         footer_drawer_layout_blog = (TextView) findViewById(R.id.footer_drawer_layout_blog);
@@ -826,6 +835,30 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             } else if (!drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
                 drawerLayout.openDrawer(Gravity.RIGHT);
             }
+        }
+        else if (viewId==R.id.twitter_icon_footer)
+        {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("https://twitter.com/"));
+            startActivity(i);
+        }
+        else if (viewId==R.id.insta_icon_footer)
+        {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("https://www.instagram.com/?hl=en"));
+            startActivity(i);
+        }
+        else if (viewId==R.id.linkedin_icon_footer)
+        {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("https://www.linkedin.com/in/"));
+            startActivity(i);
+        }
+        else if (viewId==R.id.facebook_icon_footer)
+        {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("https://facebook.com/"));
+            startActivity(i);
         }
     }
 

@@ -1,12 +1,14 @@
 package com.flikster.HomeActivity.FeedFragment;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -47,6 +49,7 @@ public class FeedFragment extends Fragment {
     SimpleArcLoader mDialog;
     String industryname = "";
     String industryCompletedata;
+    Toolbar toolbar;
    // int c=30;
 
     @Nullable
@@ -122,28 +125,13 @@ public class FeedFragment extends Fragment {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int visibleItemCount = feedLayoutManager.getChildCount();
-                int totalItemCount = feedLayoutManager.getItemCount();
-                int firstVisibleItemPosition = feedLayoutManager.findFirstVisibleItemPosition();
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0) {
-                    apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
-                    Call<FeedData> call = apiInterface.getTopRatedMovies(true, "createdAt:desc", 30,c, industryCompletedata);
-                    call.enqueue(new Callback<FeedData>() {
-                        @Override
-                        public void onResponse(Call<FeedData> call, Response<FeedData> response) {
-                            c=c+30;
-                            feedAdapter.updateDataPagination(response.body().getHits().getHits());
-                            //feedAdapter.outerHits.getHits().addAll(response.body().getHits().getHits());
-                            //allStoreFragmentAdapter.updateDataPagination(response.body().getHits().getHits());
-                        }
-
-                        @Override
-                        public void onFailure(Call<FeedData> call, Throwable t) {
-                            Log.e("vvvvvvvvvv", "vv" + call + t);
-                        }
-                    });
+                if (dy > 0 && toolbar.isShown()) {
+                    toolbar.scrollTo(0,toolbar.getHeight());
+                    toolbar.setBackgroundColor(Color.TRANSPARENT);
+                    //toolbar.scrollBy(0,toolbar.getHeight());
+                    //toolbar.setVisibility(View.GONE);
+                } else if (dy < 0 ) {
+                    toolbar.setVisibility(View.VISIBLE);
                 }
             }
         });*/
@@ -152,6 +140,7 @@ public class FeedFragment extends Fragment {
     private void initializeViews() {
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager = getActivity().getSupportFragmentManager();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_main);
     }
 
     public interface Testing {

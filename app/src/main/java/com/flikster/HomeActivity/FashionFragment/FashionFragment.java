@@ -28,7 +28,7 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
     RecyclerView.LayoutManager layoutManagerFashionFragment;
     FashionFragmentAdapter fashionFragmentAdapter;
     Toolbar toolbar_frag_multiicons_toolbar;
-    ImageButton toolbar_frag_multiicons_back_navigation,toolbar_frag_multiicons_notification,toolbar_frag_multiicons_cart;
+    ImageButton toolbar_frag_multiicons_back_navigation;
 
     @Nullable
     @Override
@@ -46,16 +46,16 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
         fashionFragmentAdapter = new FashionFragmentAdapter(getActivity());
         fragment_common_recyclerview_recycler.setAdapter(fashionFragmentAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_notification.setOnClickListener(this);
-        toolbar_frag_multiicons_cart.setOnClickListener(this);
+        //toolbar_frag_multiicons_notification.setOnClickListener(this);
+        //toolbar_frag_multiicons_cart.setOnClickListener(this);
     }
 
     private void initializeViews() {
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_back_navigation=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_notification=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_notification=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart=(ImageButton)view.findViewById(R.id.toolbar_frag_multiicons_cart);
     }
 
     @Override
@@ -74,18 +74,18 @@ public class FashionFragment extends Fragment implements View.OnClickListener {
                     .addToBackStack("")
                     .commit();
         }
-        else if(view.getId()==R.id.toolbar_frag_multiicons_notification)
+        /*else if(view.getId()==R.id.toolbar_frag_multiicons_notification)
         {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container,new NotificationFragment())
                     .addToBackStack("")
                     .commit();
-        }
-        else if(view.getId()==R.id.toolbar_frag_multiicons_cart)
+        }*/
+        /*else if(view.getId()==R.id.toolbar_frag_multiicons_cart)
         {
             Intent intent=new Intent(getActivity(),MyBagActivity.class);
             startActivity(intent);
-        }
+        }*/
     }
 }

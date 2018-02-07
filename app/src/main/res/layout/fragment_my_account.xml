@@ -128,7 +128,7 @@
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <ImageButton
+                <!--<ImageButton
                     android:id="@+id/myprofile_toolbar_overflow_icon"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
@@ -158,7 +158,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="end|center_vertical"
                     android:background="@color/transparent"
-                    android:src="@android:drawable/ic_menu_search" />
+                    android:src="@android:drawable/ic_menu_search" />-->
 
                 <ImageButton
                     android:id="@+id/myprofile_toolbar_navigation_icon"

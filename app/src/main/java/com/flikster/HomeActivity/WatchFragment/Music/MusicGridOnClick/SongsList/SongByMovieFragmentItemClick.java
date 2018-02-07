@@ -52,7 +52,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     RecyclerView.LayoutManager layoutManager;
     SongByMovieFragmentItemPlayClickAdapter shopByVideoFragmentItemClickAdapter;
     FragmentManager fragmentManager;
-    ImageButton ib_bookmark, card_footer_share, ib_like, toolbar_back_navigation_btn, toolbar_frag_multiicons_search, toolbar_frag_multiicons_overflow, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
+    ImageButton ib_bookmark, card_footer_share, ib_like, toolbar_back_navigation_btn;
     TextView fragment_common_recyclerview_with_tv_title, toolbar_frag_multiicons_title;
     MediaPlayer musicplay;
     SeekBar seekBar;
@@ -105,10 +105,10 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         shopByVideoFragmentItemClickAdapter = new SongByMovieFragmentItemPlayClickAdapter(getActivity(), fragmentManager, listOfProducts);
         fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentItemClickAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
-        toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
-        toolbar_frag_multiicons_search.setVisibility(View.GONE);
-        toolbar_frag_multiicons_notification.setVisibility(View.GONE);
-        toolbar_frag_multiicons_cart.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_search.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_notification.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_cart.setVisibility(View.GONE);
 //        ib_bookmark.setBackgroundDrawable(null);
 //        ib_bookmark.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.playlist));
         Glide.with(getActivity()).load(audioImg).into(audio_frame_image);
@@ -139,9 +139,9 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         fragment_common_recyclerview_recycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_search = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_search);
-        toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_search = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_search);
+        //toolbar_frag_multiicons_notification = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_cart);
         audio_frame_image = (ImageView) view.findViewById(R.id.audio_frame_image);
         youtube_container = (FrameLayout) view.findViewById(R.id.youtube_fragment);
 
@@ -152,7 +152,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         audio_frame = (LinearLayout) view.findViewById(R.id.audio_frame);
          /*youTubePlayerFragment= (YouTubePlayerSupportFragment) getActivity().getSupportFragmentManager()
                 .findFragmentById(R.id.youtube_fragment);*/
-        toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
+        // toolbar_frag_multiicons_overflow = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_overflow);
         toolbar_frag_multiicons_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
 
         ib_like = (ImageButton) view.findViewById(R.id.ib_like);

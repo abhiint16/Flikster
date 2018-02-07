@@ -46,7 +46,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     FragmentManager fragmentManager;
     GridView gridView;
 
-    ImageButton toolbar_frag_multiicons_back_navigation, toolbar_frag_multiicons_overflow, toolbar_frag_multiicons_search, toolbar_frag_multiicons_notification, toolbar_frag_multiicons_cart;
+    ImageButton toolbar_frag_multiicons_back_navigation;
     TabLayout tabLayout;
     Toolbar toolbar_frag_multiicons_toolbar;
     TextView toolbar_frag_multiicons_title;
@@ -131,20 +131,20 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         toolbar_frag_multiicons_title = (TextView) findViewById(R.id.toolbar_frag_multiicons_title);
         toolbar_frag_multiicons_toolbar = (Toolbar) findViewById(R.id.toolbar_frag_multiicons_toolbar);
         toolbar_frag_multiicons_back_navigation = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_back_navigation);
-        toolbar_frag_multiicons_notification = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_notification);
-        toolbar_frag_multiicons_cart = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_cart);
-        toolbar_frag_multiicons_search = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_search);
-        toolbar_frag_multiicons_overflow = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_overflow);
+        //toolbar_frag_multiicons_notification = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_notification);
+        //toolbar_frag_multiicons_cart = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_cart);
+        //toolbar_frag_multiicons_search = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_search);
+        //toolbar_frag_multiicons_overflow = (ImageButton) findViewById(R.id.toolbar_frag_multiicons_overflow);
         gridView = (GridView) findViewById(R.id.gridview);
         retrofitInit(getIntent().getStringExtra("CATEGORY_NO").toString());
     }
 
     private void initializeRest() {
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
-        toolbar_frag_multiicons_cart.setVisibility(View.GONE);
-        toolbar_frag_multiicons_notification.setVisibility(View.GONE);
-        toolbar_frag_multiicons_search.setVisibility(View.GONE);
-        toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_cart.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_notification.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_search.setVisibility(View.GONE);
+        //toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
     }
 
     private void retrofitInit(String categoryno) {

@@ -41,7 +41,7 @@ import retrofit2.Response;
 public class ProductOnClick extends Fragment implements View.OnClickListener {
     View view;
     Button buy, add;
-    ImageButton toolbar_more_icon, toolbar_back_navigation_btn;
+    ImageButton  toolbar_back_navigation_btn;
     TextView toolbar_frag_title, product_price, product_size_small, product_size_med, product_size_large, product_size_extra, product_size_extra_extra;
     TextView product_title, product_quantity_minus_btn, product_quanitity_plus_btn, product_quantity_txt;
     FragmentManager fragmentManager;
@@ -76,7 +76,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
     private void initializeRest() {
         toolbar_frag_title.setText("Product");
         //fragment_common_recyclerview_with_tv_title.setText("Recommended Product");
-        toolbar_more_icon.setVisibility(View.VISIBLE);
+       // toolbar_more_icon.setVisibility(View.VISIBLE);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         fragment_product_details_recyclerview.setLayoutManager(layoutManager);
         productImagesAdapter = new ProductImagesAdapter(getActivity(), fragmentManager, imageGallery);
@@ -161,7 +161,7 @@ public class ProductOnClick extends Fragment implements View.OnClickListener {
         product_quantity_txt = (TextView) view.findViewById(R.id.buy_click_product_quantity_no);
         add = (Button) view.findViewById(R.id.add_to_cart_btn);
         buy = (Button) view.findViewById(R.id.buy_now_btn);
-        toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
+        //toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
         fragmentManager = getActivity().getSupportFragmentManager();
     }
 

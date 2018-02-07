@@ -50,7 +50,7 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
         nodatalayout.setVisibility(View.GONE);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
-        notificationAdapter = new NotificationAdapter();
+        notificationAdapter = new NotificationAdapter(getActivity());
         fragment_common_recyclerview_recycler.setAdapter(notificationAdapter);
         toolbar_frag_multiicons_back_navigation.setOnClickListener(this);
         backhomebtn.setOnClickListener(this);

@@ -31,7 +31,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     TabLayout tabLayout;
     MyAccountAdapter myAccountAdapter;
     TextView fragment_my_account_name, fragment_my_account_location, fragment_my_account_no_followers;
-    ImageButton myprofile_toolbar_navigation_icon, myprofile_toolbar_notification_icon;
+    ImageButton myprofile_toolbar_navigation_icon;
 
     @Nullable
     @Override
@@ -49,7 +49,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         tabLayout.setupWithViewPager(viewPager);
         myprofile_toolbar_title.setText("Profile");
         myprofile_toolbar_navigation_icon.setOnClickListener(this);
-        myprofile_toolbar_notification_icon.setOnClickListener(this);
+        //myprofile_toolbar_notification_icon.setOnClickListener(this);
 
         if (SharedPrefsUtil.getStringPreference(getContext(), "USER_NAME") != null
                 && !SharedPrefsUtil.getStringPreference(getContext(), "USER_NAME").isEmpty()) {
@@ -65,7 +65,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         tabLayout = (TabLayout) view.findViewById(R.id.fragment_my_account_tablayout);
         myprofile_toolbar = (Toolbar) view.findViewById(R.id.myprofile_toolbar);
         myprofile_toolbar_navigation_icon = (ImageButton) view.findViewById(R.id.myprofile_toolbar_navigation_icon);
-        myprofile_toolbar_notification_icon = (ImageButton) view.findViewById(R.id.myprofile_toolbar_notification_icon);
+        //myprofile_toolbar_notification_icon = (ImageButton) view.findViewById(R.id.myprofile_toolbar_notification_icon);
         myprofile_toolbar_title = (TextView) view.findViewById(R.id.myprofile_toolbar_title);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.colorAccent));
@@ -92,13 +92,13 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             getFragmentManager().popBackStackImmediate();
-        } else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
+        } /*else if (view.getId() == R.id.toolbar_frag_multiicons_notification) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new NotificationFragment())
                     .addToBackStack("")
                     .commit();
-        }else if (view.getId() ==R.id.myprofile_toolbar_navigation_icon)
+        }*/else if (view.getId() ==R.id.myprofile_toolbar_navigation_icon)
         {
             getFragmentManager().beginTransaction()
                     .replace(R.id.main_container,new FeedFragment())

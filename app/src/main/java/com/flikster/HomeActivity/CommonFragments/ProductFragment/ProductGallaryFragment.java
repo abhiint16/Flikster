@@ -28,7 +28,7 @@ public class ProductGallaryFragment extends Fragment implements View.OnClickList
     Button buynowbtn, closebtn;
     TextView toolbar_frag_title;
     FragmentManager fragmentManager;
-    ImageButton toolbar_back_navigation_btn,toolbar_more_icon;
+    ImageButton toolbar_back_navigation_btn;
     TextView txt;
 
     @Nullable
@@ -47,12 +47,12 @@ public class ProductGallaryFragment extends Fragment implements View.OnClickList
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         buynowbtn = (Button) view.findViewById(R.id.buynowbtn);
         closebtn = (Button) view.findViewById(R.id.closebtn);
-        toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
+        //toolbar_more_icon = (ImageButton) view.findViewById(R.id.toolbar_more_icon);
     }
 
     private void initializeRest() {
         toolbar_frag_title.setText("Product");
-        toolbar_more_icon.setVisibility(View.GONE);
+        //toolbar_more_icon.setVisibility(View.GONE);
         toolbar_back_navigation_btn.setOnClickListener(this);
         buynowbtn.setOnClickListener(this);
         closebtn.setOnClickListener(this);
