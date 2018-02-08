@@ -40,6 +40,7 @@ import com.flikster.Authentication.SignUpActivity.SignupWithGmailOrFBData;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.HomeActivity;
+import com.flikster.PreferenceActivity.PreferencesView;
 import com.flikster.R;
 import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.Common;
@@ -69,7 +70,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
     private Button btnLoginPhone, btnLoginEmail;
     private Button keycloak, without_keycloak;
-    private TextView tvLoginTermsCond, headertxt;
+    private TextView tvLoginTermsCond, headertxt,skip_preference_txt;
     SharedPref sharedPref;
     private ImageButton back_btn;
     Button btnLoginGoogle;
@@ -125,7 +126,12 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         }
 
         initializeView();
+        initializeRest();
         gmailView();
+    }
+
+    private void initializeRest() {
+        skip_preference_txt.setOnClickListener(this);
     }
 
     private void gmailView() {
@@ -157,6 +163,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         btnLoginFacebook = (LoginButton) findViewById(R.id.btn_login_facebook);
         tvLoginTermsCond = (TextView) findViewById(R.id.tv_login_terms);
         keycloak = (Button) findViewById(R.id.keycloak);
+        skip_preference_txt = (TextView) findViewById(R.id.skip_preference_txt);
         headertxt = (TextView) findViewById(R.id.headertxt);
         back_btn = (ImageButton) findViewById(R.id.back_btn);
         without_keycloak = (Button) findViewById(R.id.without_keycloak);
@@ -237,6 +244,9 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                 }
             }
 
+        } else if (view.getId() == R.id.skip_preference_txt)
+        {
+            nextButtonClick();
         } else if (view.getId() == R.id.without_keycloak) {
             SharedPrefsUtil.setStringPreference(AuthenticationActivity.this, "IS_LOGGED_IN", "NOT_LOGGED_IN");
             Intent intent = new Intent(this, HomeActivity.class);
@@ -535,5 +545,24 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         parameters.putString("fields", "id,first_name,last_name,email,gender,birthday"); // id,first_name,last_name,email,gender,birthday,cover,picture.type(large)
         request.setParameters(parameters);
         request.executeAsync();
+    }
+
+    private void nextButtonClick() {
+        if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE") != null
+                && !SharedPrefsUtil.getStringPreference(getApplicationContext(),
+                "INDUSTRY_TYPE").isEmpty()) {
+            lunchHomeScreen();
+        } else {
+            SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", "Bollywood");
+            lunchHomeScreen();
+        }
+
+    }
+
+    private void lunchHomeScreen() {
+        sharedPref.setFirstTimeLaunch2(false);
+        SharedPrefsUtil.setStringPreference(AuthenticationActivity.this, "IS_LOGGED_IN", "NOT_LOGGED_IN");
+        startActivity(new Intent(AuthenticationActivity.this, HomeActivity.class));
+        finish();
     }
 }
