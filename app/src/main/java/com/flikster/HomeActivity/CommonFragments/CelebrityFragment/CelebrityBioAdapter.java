@@ -22,6 +22,7 @@ import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -204,7 +205,9 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (dateOfBirth != null)
                 ((ViewHolder1) holder).card_celebrity_bio_profile_dob.setText(dateOfBirth);
             ((ViewHolder1) holder).card_celebrity_bio_profile_role.setText(formatRole());
-            Glide.with(context).load(coverpic).into(((ViewHolder1) holder).card_celebrity_bio_profile_coverpic);
+            Glide.with(context).load(coverpic)
+                    .transform(new FaceCenterCrop())
+                    .into(((ViewHolder1) holder).card_celebrity_bio_profile_coverpic);
 
 
             if (userId != null && !userId.isEmpty()) {

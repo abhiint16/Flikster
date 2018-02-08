@@ -203,6 +203,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
+                        .transform(new FaceCenterCrop())
                         .into(((ViewHolder0) holder).card_movie_feed_profile_image);
             }
             if (censor != null && !censor.isEmpty()) {

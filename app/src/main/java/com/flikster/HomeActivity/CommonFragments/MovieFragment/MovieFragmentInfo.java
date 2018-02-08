@@ -18,6 +18,7 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieInfoAdapter;
 import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class MovieFragmentInfo extends Fragment {
     }
 
     private void retrofitInit() {
+        GlideFaceDetector.initialize(getActivity());
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/movies/_search/").create(ApiInterface.class);
         Call<MovieData> call = apiInterface.getMovieData("http://apiservice-ec.flikster.com/movies/_search?pretty=true&q=slug:\"" + slug + "\"");
         call.enqueue(new Callback<MovieData>() {
@@ -101,5 +103,11 @@ public class MovieFragmentInfo extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         movieToShopByVideoInterface = (MovieToShopByVideoInterface) activity;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GlideFaceDetector.releaseDetector();
     }
 }

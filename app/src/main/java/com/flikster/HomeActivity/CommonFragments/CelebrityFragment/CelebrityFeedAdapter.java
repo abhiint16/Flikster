@@ -183,7 +183,9 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             ((ViewHolder0) holder).card_celebrity_feed_profile_role.setText(formatRole());
             if (coverpic != null && !coverpic.isEmpty()) {
-                Glide.with(context).load(coverpic).asBitmap().into(((ViewHolder0) holder).card_celebrity_feed_profile_coverpic);
+                Glide.with(context).load(coverpic).asBitmap()
+                        .transform(new FaceCenterCrop())
+                        .into(((ViewHolder0) holder).card_celebrity_feed_profile_coverpic);
             }
         } else if (holder.getItemViewType() == 1) {
             ((ViewHolder1) holder).card_header_container.setVisibility(View.GONE);

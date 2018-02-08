@@ -28,6 +28,7 @@ import com.flikster.HomeActivity.StealStyleViewHolder;
 import com.flikster.SharedPref.SharedPref;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -185,7 +186,9 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             ((ViewHolder0) holder).card_celebrity_feed_profile_role.setText(formatRole());
             if (coverpic != null && !coverpic.isEmpty()) {
-                Glide.with(context).load(coverpic).asBitmap().into(((ViewHolder0) holder).card_celebrity_feed_profile_coverpic);
+                Glide.with(context).load(coverpic).asBitmap()
+                        .transform(new FaceCenterCrop())
+                        .into(((ViewHolder0) holder).card_celebrity_feed_profile_coverpic);
             }
         } else if (holder.getItemViewType() == 1) {
             ((ViewHolder1) holder).followbtn.setText("BUY");

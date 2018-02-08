@@ -9,8 +9,7 @@
         android:id="@+id/card_movie_feed_profile_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@color/black"
-        android:scaleType="fitXY"/>
+        android:background="@color/black"/>
 
     <LinearLayout
         android:id="@+id/card_movie_feed_profile_texts_container"

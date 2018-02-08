@@ -30,6 +30,7 @@ import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -228,6 +229,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
+                        .transform(new FaceCenterCrop())
                         .into(((ViewHolder1) holder).card_movie_feed_profile_image);
             }
             if (censor != null && !censor.isEmpty()) {

@@ -16,6 +16,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +45,7 @@ public class MovieFragmentStore extends Fragment{
     }
 
     private void retrofitInit() {
+        GlideFaceDetector.initialize(getActivity());
         apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/products/_search/").create(ApiInterface.class);
         Call<AllStoreData> call = apiInterface.getCelebMovieStoreData(true,4,0,"tags:\""+getArguments().getString("slug")+"\"");
         call.enqueue(new Callback<AllStoreData>() {
@@ -73,5 +75,11 @@ public class MovieFragmentStore extends Fragment{
     private void initializeViews() {
         celebrityFragmentStoreRecycler=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager=getActivity().getSupportFragmentManager();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GlideFaceDetector.releaseDetector();
     }
 }

@@ -28,6 +28,7 @@ import com.flikster.HomeActivity.ProfileCollectionRecyclerItemAdapter;
 import com.flikster.R;
 import com.flikster.Util.Common;
 import com.flikster.Util.SharedPrefsUtil;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -182,6 +183,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
             if (coverpic != null && !coverpic.isEmpty()) {
                 Glide.with(context).load(coverpic).asBitmap()
+                        .transform(new FaceCenterCrop())
                         .into(((ViewHolder0) holder).card_movie_feed_profile_image);
             }
             if (censor != null && !censor.isEmpty()) {

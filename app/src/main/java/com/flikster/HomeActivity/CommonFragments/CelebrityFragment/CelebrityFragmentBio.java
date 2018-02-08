@@ -17,6 +17,7 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieInfoAdapter;
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
 
@@ -71,6 +72,7 @@ public class CelebrityFragmentBio extends Fragment {
     }*/
 
     private void initializeRest() {
+        GlideFaceDetector.initialize(getActivity());
         celebrityFragmentBioLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentBioRecycler.setLayoutManager(celebrityFragmentBioLayoutManager);
         celebrityBioAdapter = new CelebrityBioAdapter(getActivity(),
@@ -99,5 +101,11 @@ public class CelebrityFragmentBio extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         celebToShopByVideoInterface = (CelebToShopByVideoInterface) activity;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GlideFaceDetector.releaseDetector();
     }
 }

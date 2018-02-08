@@ -688,7 +688,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         facebook_icon_footer=(ImageButton)findViewById(R.id.facebook_icon_footer);
         instagram_icon_footer=(ImageButton)findViewById(R.id.insta_icon_footer);
         twitter_icon_footer=(ImageButton)findViewById(R.id.twitter_icon_footer);
-        linkedin_icon_footer=(ImageButton)findViewById(R.id.facebook_icon_footer);
+        linkedin_icon_footer=(ImageButton)findViewById(R.id.linkedin_icon_footer);
        // toolbar_main_title = (ImageButton) findViewById(R.id.toolbar_main_title);
         footer_drawer_layout_aboutus = (TextView) findViewById(R.id.footer_drawer_layout_aboutus);
         footer_drawer_layout_blog = (TextView) findViewById(R.id.footer_drawer_layout_blog);
@@ -839,25 +839,25 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         else if (viewId==R.id.twitter_icon_footer)
         {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("https://twitter.com/"));
+            i.setData(Uri.parse("https://twitter.com/Flikstercom/"));
             startActivity(i);
         }
         else if (viewId==R.id.insta_icon_footer)
         {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("https://www.instagram.com/?hl=en"));
+            i.setData(Uri.parse("https://www.instagram.com/fliksterfashion/"));
             startActivity(i);
         }
         else if (viewId==R.id.linkedin_icon_footer)
         {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("https://www.linkedin.com/in/"));
+            i.setData(Uri.parse("https://www.linkedin.com/company/flikster/?originalSubdomain=in"));
             startActivity(i);
         }
         else if (viewId==R.id.facebook_icon_footer)
         {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("https://facebook.com/"));
+            i.setData(Uri.parse("https://www.facebook.com/Flikster/"));
             startActivity(i);
         }
     }
