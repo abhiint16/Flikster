@@ -492,6 +492,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                     Toast.makeText(AuthenticationActivity.this, firstName, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(AuthenticationActivity.this, "Failed " + response.body().getStatusCode(), Toast.LENGTH_LONG).show();
                 }
