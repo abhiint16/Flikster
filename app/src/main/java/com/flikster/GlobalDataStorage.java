@@ -2,6 +2,7 @@ package com.flikster;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.squareup.leakcanary.LeakCanary;
@@ -23,6 +24,8 @@ public class GlobalDataStorage extends Application {
 
     @Override public void onCreate() {
         super.onCreate();
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
