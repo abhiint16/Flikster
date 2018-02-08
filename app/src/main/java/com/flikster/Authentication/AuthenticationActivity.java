@@ -420,6 +420,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             startActivity(i);
 //            homeacess.setVisibility(View.VISIBLE);
         } else {
+            Toast.makeText(this,"Something went wrong, Please retry",Toast.LENGTH_SHORT).show();
 //            btnSignIn.setVisibility(View.VISIBLE);
 //            btnSignOut.setVisibility(View.GONE);
 //            btnRevokeAccess.setVisibility(View.GONE);
