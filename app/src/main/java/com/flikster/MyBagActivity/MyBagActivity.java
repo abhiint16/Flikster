@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -145,4 +146,9 @@ public class MyBagActivity extends AppCompatActivity implements View.OnClickList
         intent.putExtra("MyBag", "MyBag");
         startActivity(intent);
     }
+
+    /*public interface AllStoreInterafce {
+        void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
+                        String productSlug, List<String> imageGallery, Fragment fragment);
+    }*/
 }

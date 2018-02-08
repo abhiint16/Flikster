@@ -147,6 +147,11 @@ public class MyBagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             buy_click_product_quantity_plus_btn.setOnClickListener(this);
             buy_click_product_quantity_minus_btn.setOnClickListener(this);
             notification_item_cancel_btn.setOnClickListener(this);
+            /*itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                }
+            });*/
         }
 
         @Override

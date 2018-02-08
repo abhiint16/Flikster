@@ -198,6 +198,12 @@
             android:src="@drawable/linkedin_pink_icon"
             android:background="@color/transparent"
             android:id="@+id/linkedin_icon_footer"/>
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/pintrest_pink_icon"
+            android:background="@color/transparent"
+            android:id="@+id/pintrest_icon_footer"/>
     </LinearLayout>
 
     <TextView
