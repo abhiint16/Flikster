@@ -20,7 +20,7 @@ import com.flikster.Util.SharedPrefsUtil;
 public class PreferencesView extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnPreferencesNext, btnSignup;
-    private TextView tvMenFashon, tvWomenFashon, skip_preference_txt;
+    private TextView tvMenFashon, tvWomenFashon;/*skip_preference_txt*/;
     RadioButton radioTollywood, radioBollywood, radioTamil, radioKannada, radioMalayalam;
     private SharedPref sharedPref;
 
@@ -50,7 +50,7 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
         btnPreferencesNext.setOnClickListener(this);
         tvMenFashon.setOnClickListener(this);
         tvWomenFashon.setOnClickListener(this);
-        skip_preference_txt.setOnClickListener(this);
+        //skip_preference_txt.setOnClickListener(this);
     }
 
     private void initializeView() {
@@ -63,7 +63,7 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
         radioTamil = (RadioButton) findViewById(R.id.ind_tamil);
         tvMenFashon = (TextView) findViewById(R.id.tv_menFashion);
         tvWomenFashon = (TextView) findViewById(R.id.tv_womenFashion);
-        skip_preference_txt = (TextView) findViewById(R.id.skip_preference_txt);
+        //skip_preference_txt = (TextView) findViewById(R.id.skip_preference_txt);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
         if (view.getId() == R.id.preference_next_btn) {
             nextButtonClick();
         } else if (view.getId() == R.id.goto_signup) {
-            goToSignUp();
+            nextButtonClick();
         } else if (view.getId() == R.id.ind_bollywood) {
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "INDUSTRY_TYPE", "Bollywood");
             radioTollywood.setChecked(false);
@@ -119,9 +119,9 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
             tvMenFashon.setBackgroundColor(getResources().getColor(R.color.transparent));
             tvMenFashon.setBackgroundDrawable(getResources().getDrawable(R.drawable.gray_rectange_border));
             tvMenFashon.setTextColor(getResources().getColor(R.color.grey_txt_label));
-        } else if (view.getId() == R.id.skip_preference_txt) {
-            nextButtonClick();
-        }
+        } /*else if (view.getId() == R.id.skip_preference_txt) {
+
+        }*/
 
     }
 

@@ -50,6 +50,7 @@ public class FeedFragment extends Fragment {
     String industryname = "";
     String industryCompletedata;
     Toolbar toolbar;
+    int positionOfLayoutManager;
    // int c=30;
 
     @Nullable
@@ -170,4 +171,31 @@ public class FeedFragment extends Fragment {
         super.onDestroyView();
         GlideFaceDetector.releaseDetector();
     }
+
+
+    /*@Override
+    public void onPause() {
+        super.onPause();
+        positionOfLayoutManager = ((LinearLayoutManager)fragment_common_recyclerview_recycler.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((LinearLayoutManager)fragment_common_recyclerview_recycler.getLayoutManager()).scrollToPosition(positionOfLayoutManager);
+    }
+*/
+    /*@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (positionOfLayoutManager!=0)
+        {
+
+        }
+    }*/
 }

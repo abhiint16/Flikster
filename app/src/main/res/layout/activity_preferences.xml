@@ -6,40 +6,42 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/activity_authentication_login_margin"
-    android:layout_marginRight="@dimen/activity_authentication_login_margin"
-    android:layout_marginTop="@dimen/activity_authentication_login_margin"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
     android:orientation="vertical"
-    android:layout_above="@+id/skip_preference_txt">
+    android:gravity="center">
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:background="@drawable/logotext"
         android:gravity="center_horizontal" />
-
+-->
     <TextView
         style="@style/preferences_header_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/ten"
-        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.5"
         android:text="@string/preference_header" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:gravity="center"
         android:text="@string/preference_subheader" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorAccent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <TextView
         style="@style/preferences_header_style"
@@ -52,7 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="10dp">
 
         <RadioButton
             android:id="@+id/ind_bollywood"
@@ -60,64 +63,115 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/preference_industry_bollywood"
-            android:checked="true"/>
+            android:checked="true"
+            android:buttonTint="#6ea8e4"/>
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"/>
         <RadioButton
             android:id="@+id/ind_tollywood"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/preference_industry_tollywood" />
+            android:text="@string/preference_industry_tollywood"
+            android:buttonTint="#6ea8e4"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="10dp">
 
         <RadioButton
             android:id="@+id/ind_tamil"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/preference_industry_tamil" />
+            android:text="@string/preference_industry_tamil"
+            android:buttonTint="#6ea8e4"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"/>
 
         <RadioButton
             android:id="@+id/ind_kannada"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/preference_industry_kannada" />
+            android:text="@string/preference_industry_kannada"
+            android:buttonTint="#6ea8e4"/>
     </LinearLayout>
 
     <RadioButton
         android:id="@+id/ind_malayalam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/preference_industry_malayalam" />
+        android:text="@string/preference_industry_malayalam"
+        android:layout_marginLeft="10dp"
+        android:buttonTint="#6ea8e4"/>
 
-    <View
+    <!--<View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/five"
         android:background="@color/colorAccent">
 
-    </View>
+    </View>-->
 
-    <TextView
-        style="@style/preferences_header_style"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0.1dp"
+            android:layout_weight="1"
+            android:background="#7d7c7b"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="60dp"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/transparent"
+            android:src="@drawable/pref_box"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0.1dp"
+            android:layout_weight="1"
+            android:background="#7d7c7b"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="60dp"/>
+    </LinearLayout>
+
+
+    <TextView
+        style="@style/preferences_header_style2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
         android:text="@string/preference_fashion_selection" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <TextView
             android:id="@+id/tv_menFashion"
@@ -129,8 +183,8 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/preference_men_fashion"
-            android:textSize="12sp"
-            android:drawableLeft="@drawable/dress_male"/>
+            android:textSize="12sp"/>
+            <!--android:drawableLeft="@drawable/dress_male"/>-->
 
         <TextView
             android:id="@+id/tv_womenFashion"
@@ -142,16 +196,16 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/preference_female_fashion"
-            android:textSize="12sp"
-            android:drawableLeft="@drawable/dress_female"/>
+            android:textSize="12sp"/>
+            <!--android:drawableLeft="@drawable/dress_female"/>-->
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.6"
         android:orientation="horizontal">
 
@@ -170,14 +224,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:text="Sign Up" />
+            android:text=">>  Next  >>"
+            android:background="@drawable/corner_rounded_pink"
+            android:textColor="#ededed"/>
     </LinearLayout>
 
 
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"/>
 </LinearLayout>
-    <TextView
+    <!--<TextView
         android:id="@+id/skip_preference_txt"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -187,5 +247,5 @@
         android:text="Skip and proceed"
         android:textSize="13sp"
         android:gravity="center"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"/>-->
 </RelativeLayout>

@@ -49,11 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="skip"
-        android:background="@drawable/corner_rounded_pink_whiteback_greybor"
-        android:textColor="@color/colorAccent"
+        android:textColor="#898989"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:background="@color/transparent"/>
     <Button
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"

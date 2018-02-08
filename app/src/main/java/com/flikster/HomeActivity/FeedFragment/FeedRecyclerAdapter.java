@@ -1073,7 +1073,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             card_comment_text_see_more_comments.setOnClickListener(this);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
-
+            card_gallary1_img1.setOnClickListener(this);
             likescounttxt = (TextView) itemView.findViewById(R.id.likescounttxt);
 
             header_linear.setOnClickListener(this);
@@ -1120,7 +1120,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(),
                             new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            }
+            else if (view.getId() == R.id.card_description_linear || view.getId()==R.id.card_gallary1_img1) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
                     descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
@@ -1417,7 +1418,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             new CelebrityFragment(), 2,
                             userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            } else if (view.getId() == R.id.card_description_linear || view.getId()==R.id.card_gallary1_img1) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
                     descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
@@ -1552,7 +1553,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug(), new MovieFragment(), 1,
                             userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            } else if (view.getId() == R.id.card_description_linear || view.getId()==R.id.card_gallary1_img1) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
                     descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
@@ -1688,12 +1689,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2,
                             userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            } /*else if () {
 //                fragmentManager.beginTransaction()
 //                        .replace(R.id.main_container, new AuctionDetailFragment())
 //                        .addToBackStack("")
 //                        .commit();
-            } else if (view.getId() == R.id.card_gallary1_img1) {
+            } */else if (view.getId() == R.id.card_gallary1_img1 ||view.getId() == R.id.card_description_linear) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size()!=0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -1929,12 +1930,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(),
                             new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            }/* else if (view.getId() == R.id.card_description_linear) {
 //                fragmentManager.beginTransaction()
 //                        .replace(R.id.main_container, new AuctionDetailFragment())
 //                        .addToBackStack("")
 //                        .commit();
-            } else if (view.getId() == R.id.card_gallery2_img_container) {
+            }*/ else if (view.getId() == R.id.card_gallery2_img_container||view.getId() == R.id.card_description_linear) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size()!=0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -2057,12 +2058,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            }/* else if (view.getId() == R.id.card_description_linear) {
 //                fragmentManager.beginTransaction()
 //                        .replace(R.id.main_container, new AuctionDetailFragment())
 //                        .addToBackStack("")
 //                        .commit();
-            } else if (view.getId() == R.id.card_gallery3_1_img_container) {
+            }*/ else if (view.getId() == R.id.card_gallery3_1_img_container||view.getId() == R.id.card_description_linear) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size()!=0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -2186,12 +2187,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            }/* else if (view.getId() == R.id.card_description_linear) {
 //                fragmentManager.beginTransaction()
 //                        .replace(R.id.main_container, new AuctionDetailFragment())
 //                        .addToBackStack("")
 //                        .commit();
-            } else if (view.getId() == R.id.card_gallery4_img_container) {
+            }*/ else if (view.getId() == R.id.card_gallery4_img_container||view.getId() == R.id.card_description_linear) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size()!=0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -2317,12 +2318,12 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(),
                             new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            }/* else if (view.getId() == R.id.card_description_linear) {
 //                fragmentManager.beginTransaction()
 //                        .replace(R.id.main_container, new AuctionDetailFragment())
 //                        .addToBackStack("")
 //                        .commit();
-            } else if (view.getId() == R.id.card_gallery5_img_container) {
+            }*/ else if (view.getId() == R.id.card_gallery5_img_container||view.getId() == R.id.card_description_linear) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getMovie() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().size() != 0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
