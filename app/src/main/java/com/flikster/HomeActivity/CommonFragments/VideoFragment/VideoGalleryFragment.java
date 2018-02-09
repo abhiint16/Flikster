@@ -198,6 +198,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
                 else if (videolink.contains("https://www.youtube.com/"))
                     yPlayer.loadVideo(videolink.substring(24));
                 yPlayer.play();
+                yPlayer.setShowFullscreenButton(false);
             }
 
             @Override

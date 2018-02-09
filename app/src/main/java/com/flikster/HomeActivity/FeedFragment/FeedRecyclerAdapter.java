@@ -1220,6 +1220,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             profile_image.setOnClickListener(this);
             header_linear.setOnClickListener(this);
             video_btn.setOnClickListener(this);
+            news_img.setOnClickListener(this);
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1271,7 +1272,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null) {
                     testing.test(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug(), new CelebrityFragment(), 2, userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId());
                 }
-            } else if (view.getId() == R.id.card_description_linear) {
+            } else if (view.getId() == R.id.card_description_linear||view.getId()==R.id.news_img) {
                 if (outerHits.getHits().get(getAdapterPosition()).get_source().getText()!=null)
                     descritionString=outerHits.getHits().get(getAdapterPosition()).get_source().getText();
                 else if (outerHits.getHits().get(getAdapterPosition()).get_source().getTitle()!=null)
