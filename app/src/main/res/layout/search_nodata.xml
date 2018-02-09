@@ -10,5 +10,7 @@
         android:layout_height="wrap_content"
         android:text="No Data Available"
         android:textColor="@color/colorAccent"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:id="@+id/search_nodata_text"
+        android:gravity="center"/>
 </LinearLayout>

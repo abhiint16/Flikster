@@ -26,6 +26,7 @@ public class SearchViewFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     SearchViewRecyclerAdapter searchViewRecyclerAdapter;
     SearchViewToFrag searchViewToFrag;
+    String query;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class SearchViewFragment extends Fragment {
         recyclerView.setBackgroundColor(getActivity().getResources().getColor(R.color.white));
         layoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        searchViewRecyclerAdapter=new SearchViewRecyclerAdapter(globalSearchGetData,searchViewToFrag,getActivity());
+        searchViewRecyclerAdapter=new SearchViewRecyclerAdapter(globalSearchGetData,searchViewToFrag,getActivity(),query);
         recyclerView.setAdapter(searchViewRecyclerAdapter);
     }
 
@@ -47,9 +48,10 @@ public class SearchViewFragment extends Fragment {
         recyclerView=(RecyclerView)view.findViewById(R.id.fragment_common_recyclerview_recycler);
     }
 
-    public void getSearchQueryData(GlobalSearchGetData globalSearchGetData)
+    public void getSearchQueryData(GlobalSearchGetData globalSearchGetData,String query)
     {
         this.globalSearchGetData=globalSearchGetData;
+        this.query=query;
     }
 
     public interface SearchViewToFrag {

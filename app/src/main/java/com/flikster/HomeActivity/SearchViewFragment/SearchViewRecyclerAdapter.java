@@ -27,11 +27,13 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     List<String> type=new ArrayList<>();
     String userId="null";
     RecyclerView.LayoutManager layoutManager;
+    String query;
     public SearchViewRecyclerAdapter(GlobalSearchGetData globalSearchGetData, SearchViewFragment.SearchViewToFrag searchViewToFrag,
-                                     Context context) {
+                                     Context context,String query) {
         this.globalSearchGetData = globalSearchGetData;
         this.searchViewToFrag=searchViewToFrag;
         this.context=context;
+        this.query=query;
         if (this.globalSearchGetData!=null)
         {
             if (this.globalSearchGetData.getMovie()!=null&&this.globalSearchGetData.getMovie().size()!=0)
@@ -80,6 +82,10 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.searchview_recycler_item,parent,false);
             return new ViewHolder6(view);
+        }
+        else if (viewType==100){
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.search_nodata,parent,false);
+            return new ViewHolder100(view);
         }
         else {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.search_nodata,parent,false);
@@ -140,6 +146,11 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ((ViewHolder6)holder).recyclerView.setLayoutManager(layoutManager);
             SearchInnerItemBrandRecyclerViewHolder searchInnerItemBrandRecyclerViewHolder =new SearchInnerItemBrandRecyclerViewHolder(context,globalSearchGetData.getBrand(),searchViewToFrag);
             ((ViewHolder6)holder).recyclerView.setAdapter(searchInnerItemBrandRecyclerViewHolder);
+        }
+        else if(holder.getItemViewType()==100)
+        {
+            ((ViewHolder100)holder).search_nodata_text.setText("Search for Movies, Celebrities, Fashion, Brands etc ... ");
+            ((ViewHolder100)holder).search_nodata_text.setTextColor(context.getResources().getColor(R.color.dark_grey));
         }
         else if(holder.getItemViewType()==0)
         {
@@ -268,6 +279,8 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
                     return 6;
             }
         }
+        else if (query.isEmpty()||query.length()<3)
+            return 100;
         return 0;
         /*if (globalSearchGetData!=null)
         {
@@ -312,6 +325,15 @@ public class SearchViewRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     {
         public ViewHolder0(View itemView) {
             super(itemView);
+        }
+    }
+
+    public class ViewHolder100 extends RecyclerView.ViewHolder
+    {
+        TextView search_nodata_text;
+        public ViewHolder100(View itemView) {
+            super(itemView);
+            search_nodata_text=(TextView)itemView.findViewById(R.id.search_nodata_text);
         }
     }
 

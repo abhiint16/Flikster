@@ -422,7 +422,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             @Override
             public void onClick(View view) {
                 toolbar_flikter_text_container.setVisibility(View.GONE);
-                searchViewFragmentLaunch(new SearchViewFragment(), globalSearchGetData);
+                searchViewFragmentLaunch(new SearchViewFragment(), globalSearchGetData,"");
             }
         });
         toolbar_search_btn.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -476,7 +476,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     }
 
-    private void getSearchedQueryData(String newText) {
+    private void getSearchedQueryData(final String newText) {
         GlobalSearchPostData globalSearchPostData = new GlobalSearchPostData(newText);
         apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/search-ms/").create(ApiInterface.class);
         Call<GlobalSearchGetData> call = apiInterface.getGlobalSearchData(globalSearchPostData);
@@ -485,7 +485,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             public void onResponse(Call<GlobalSearchGetData> call, Response<GlobalSearchGetData> response) {
                 Log.e("inside onResopbke", "" + response.body().getCeleb().size());
                 globalSearchGetData = response.body();
-                searchViewFragmentLaunch(new SearchViewFragment(), globalSearchGetData);
+                searchViewFragmentLaunch(new SearchViewFragment(), globalSearchGetData,newText);
             }
 
             @Override
@@ -1268,9 +1268,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         firstTimeLaunch(fragment);
     }
 
-    public void searchViewFragmentLaunch(Fragment fragment, GlobalSearchGetData globalSearchGetData) {
+    public void searchViewFragmentLaunch(Fragment fragment, GlobalSearchGetData globalSearchGetData,String query) {
         SearchViewFragment searchViewFragment = (SearchViewFragment) fragment;
-        searchViewFragment.getSearchQueryData(globalSearchGetData);
+        searchViewFragment.getSearchQueryData(globalSearchGetData,query);
         firstTimeLaunch(fragment);
     }
 
