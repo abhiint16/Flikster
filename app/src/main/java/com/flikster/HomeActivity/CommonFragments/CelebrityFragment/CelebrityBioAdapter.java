@@ -48,7 +48,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     ApiInterface apiInterface;
     ShopByVideoData.ShopByVideoInnerData shopByVideoInnerData;
     MovieData.MovieInnerData movieInnerData;
-    List<String> celebAllImages = new ArrayList<>();
+    List<CelebBioImagesData.CelebBioImagesDataInner> celebAllImages = new ArrayList<>();
     Boolean biographyBoolean = true;
     String biography;
     String coverpic;

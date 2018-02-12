@@ -12,7 +12,7 @@ public class CelebBioImagesData {
     @SerializedName("celebSlug")
     private String celebSlug;
     @SerializedName("data")
-    private List<String> data;
+    private List<CelebBioImagesDataInner> data;
     @SerializedName("statusCode")
     private String statusCode;
 
@@ -20,11 +20,11 @@ public class CelebBioImagesData {
         this.celebSlug = celebSlug;
     }
 
-    public List<String> getData() {
+    public List<CelebBioImagesDataInner> getData() {
         return data;
     }
 
-    public void setData(List<String> data) {
+    public void setData(List<CelebBioImagesDataInner> data) {
         this.data = data;
     }
 
@@ -34,5 +34,39 @@ public class CelebBioImagesData {
 
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public  class CelebBioImagesDataInner
+    {
+        @SerializedName("gallery")
+        private String gallery;
+        @SerializedName("slug")
+        private String slug;
+        @SerializedName("id")
+        private String id;
+
+        public String getGallery() {
+            return gallery;
+        }
+
+        public void setGallery(String gallery) {
+            this.gallery = gallery;
+        }
+
+        public String getSlug() {
+            return slug;
+        }
+
+        public void setSlug(String slug) {
+            this.slug = slug;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
     }
 }

@@ -59,7 +59,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     ApiInterface apiInterface;
     ShopByVideoData.ShopByVideoInnerData shopByVideoInnerData;
     Boolean storyLineBoolean = true;
-    List<String> movieAllImages = new ArrayList<>();
+    List<CelebBioImagesData.CelebBioImagesDataInner> movieAllImages = new ArrayList<>();
     String censor;
     String coverpic;
     String dor;

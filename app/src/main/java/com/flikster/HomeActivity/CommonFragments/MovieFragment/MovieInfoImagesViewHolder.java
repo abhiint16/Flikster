@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
 
@@ -21,10 +22,10 @@ import java.util.List;
  */
 
 public class MovieInfoImagesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> movieAllImages=new ArrayList<>();
+    List<CelebBioImagesData.CelebBioImagesDataInner> movieAllImages=new ArrayList<>();
     Context context;
 
-    public MovieInfoImagesViewHolder(Context context,List<String> movieAllImages) {
+    public MovieInfoImagesViewHolder(Context context,List<CelebBioImagesData.CelebBioImagesDataInner> movieAllImages) {
         this.context=context;
         this.movieAllImages=movieAllImages;
     }

@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="Role"
+                    android:text=" "
                     android:textColor="@color/grey_txt_label"
                     android:textSize="13sp" />
 
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/five"
                     android:gravity="center_horizontal"
-                    android:text="0"
+                    android:text=" "
                     android:textColor="@color/grey_txt_label"
                     android:textSize="13sp" />
 
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:gravity="center_horizontal"
-                    android:text="Movies"
+                    android:text=" "
                     android:textColor="@color/grey_txt_label"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -88,14 +88,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="Dob"
+                    android:text=" "
                     android:textColor="@color/grey_txt_label"
                     android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=","
+                    android:text="  "
                     android:textColor="@color/grey_txt_label" />
 
                 <TextView
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:paddingLeft="2dp"
-                    android:text="Location"
+                    android:text=" "
                     android:textColor="@color/grey_txt_label"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -137,7 +137,8 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:clickable="true">
 
                         <TextView
                             android:id="@+id/card_celeb_bio_likes_txt"
@@ -145,7 +146,8 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textColor="@color/black"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:clickable="false"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -169,14 +171,15 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:clickable="true">
 
                         <TextView
                             android:id="@+id/card_celeb_bio_followers_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-
+                            android:clickable="false"
                             android:textColor="@color/black" />
 
                         <TextView

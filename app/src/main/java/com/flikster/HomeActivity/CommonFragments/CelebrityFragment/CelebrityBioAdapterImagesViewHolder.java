@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,9 @@ import java.util.List;
  */
 
 public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<String> celebALlImages=new ArrayList<>();
+    List<CelebBioImagesData.CelebBioImagesDataInner> celebALlImages=new ArrayList<>();
     Context context;
-    public CelebrityBioAdapterImagesViewHolder(Context context,List<String> celebALlImages) {
+    public CelebrityBioAdapterImagesViewHolder(Context context,List<CelebBioImagesData.CelebBioImagesDataInner> celebALlImages) {
         this.context=context;
         this.celebALlImages=celebALlImages;
     }
@@ -50,7 +51,8 @@ public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<Re
         }
         else if (holder.getItemViewType()==2)
         {
-                Glide.with(context).load(celebALlImages.get(position))
+            Log.e("check for link",""+celebALlImages.get(position).getGallery());
+                Glide.with(context).load(celebALlImages.get(position).getGallery())
                         .into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setVisibility(View.GONE);
         }
