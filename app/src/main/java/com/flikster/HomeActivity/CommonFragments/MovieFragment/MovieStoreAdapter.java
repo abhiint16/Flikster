@@ -152,7 +152,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public String formatGenre() {
         String genre = "";
         for (int i = 0; i < this.genre.size(); i++) {
-            if (i < genre.length() - 1)
+            if (i < this.genre.size()- 1)
                 genre = genre + this.genre.get(i) + " | ";
             else
                 genre = genre + this.genre.get(i);
