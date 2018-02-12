@@ -100,12 +100,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:clickable="true">
 
                 <ImageButton
                     android:id="@+id/ib_like"
-                    android:clickable="true"
-
+                    android:clickable="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
@@ -117,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
+                    android:clickable="false"
                     android:text="0"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -135,13 +136,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/unlike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:background="@color/transparent"
                     android:src="@drawable/unlikesmallicon" />
 
@@ -149,6 +151,7 @@
                     android:id="@+id/unlikeCounttxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:layout_marginLeft="5dp"
                     android:text="0"
                     android:textSize="15sp" />

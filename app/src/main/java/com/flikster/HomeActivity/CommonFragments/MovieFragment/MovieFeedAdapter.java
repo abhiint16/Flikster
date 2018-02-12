@@ -570,7 +570,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             likeCounttxt = (TextView) itemView.findViewById(R.id.likeCounttxt);
             unlikeCounttxt = (TextView) itemView.findViewById(R.id.unlikeCounttxt);
 
-            ib_like.setOnClickListener(new View.OnClickListener() {
+            willwatchLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (userId != null && !userId.isEmpty()) {
@@ -618,7 +618,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     }
                 }
             });
-            unlike.setOnClickListener(new View.OnClickListener() {
+            wontwatchLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (userId != null && !userId.isEmpty()) {

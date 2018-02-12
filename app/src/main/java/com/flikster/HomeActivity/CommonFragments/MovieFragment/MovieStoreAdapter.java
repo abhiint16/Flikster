@@ -494,7 +494,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             likeCounttxt = (TextView) itemView.findViewById(R.id.likeCounttxt);
             unlikeCounttxt = (TextView) itemView.findViewById(R.id.unlikeCounttxt);
 
-            ib_like.setOnClickListener(new View.OnClickListener() {
+            willwatchLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (userId != null && !userId.isEmpty()) {
@@ -542,7 +542,7 @@ public class MovieStoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 }
             });
-            unlike.setOnClickListener(new View.OnClickListener() {
+            wontwatchLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (userId != null && !userId.isEmpty()) {

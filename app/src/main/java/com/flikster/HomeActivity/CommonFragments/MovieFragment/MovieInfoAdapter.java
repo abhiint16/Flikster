@@ -354,7 +354,6 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_movie_feed_profile_genre = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_genre);
             card_movie_feed_profile_storyline = (TextView) itemView.findViewById(R.id.card_movie_feed_profile_storyline);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
-
             willwatchLayout = (LinearLayout) itemView.findViewById(R.id.willwatchLayout);
             wontwatchLayout = (LinearLayout) itemView.findViewById(R.id.wontwatchLayout);
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
@@ -362,7 +361,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             likeCounttxt = (TextView) itemView.findViewById(R.id.likeCounttxt);
             unlikeCounttxt = (TextView) itemView.findViewById(R.id.unlikeCounttxt);
 
-            ib_like.setOnClickListener(new View.OnClickListener() {
+            willwatchLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (userId != null && !userId.isEmpty()) {
@@ -411,7 +410,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                 }
             });
-            unlike.setOnClickListener(new View.OnClickListener() {
+            wontwatchLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (userId != null && !userId.isEmpty()) {
