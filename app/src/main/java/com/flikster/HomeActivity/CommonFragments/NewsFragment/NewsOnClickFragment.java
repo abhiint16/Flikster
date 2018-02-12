@@ -100,7 +100,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(), outerHits, Count, title, bannerImg, newsRecommendedClick,contentType,cardId);
+                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(), outerHits, Count, title, bannerImg, newsRecommendedClick,contentType,userId,cardId);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(newsBottomHorRecyclerAdapter);
             }
 

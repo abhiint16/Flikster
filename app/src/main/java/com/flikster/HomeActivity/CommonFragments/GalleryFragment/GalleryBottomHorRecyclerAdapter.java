@@ -172,7 +172,7 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
                         hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                         hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                         hits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
                         hits.getHits().get(getAdapterPosition()).get_id());
             }
             else if (hits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && hits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
@@ -180,7 +180,7 @@ public class GalleryBottomHorRecyclerAdapter extends RecyclerView.Adapter<Recycl
                         hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
                         hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                         hits.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        new GalleryCardClick(), userId, hits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
                         hits.getHits().get(getAdapterPosition()).get_id());
             } else {
                 galleryRecommendationItemClick.galleryRecommendationItemClickMethod(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),

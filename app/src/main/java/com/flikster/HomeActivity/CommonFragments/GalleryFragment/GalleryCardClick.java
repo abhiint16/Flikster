@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
                 galleryImgLinks, galleryRecommendationItemClick, userId,cardId);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryCardClickAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
+        //Log.e("cehc for followe",""+userId+"AND"+entityId);
         new PostRetrofit().checkForFollow("follow", userId, entityId, followbtn, getContext());
         followbtn.setOnClickListener(new View.OnClickListener() {
             @Override

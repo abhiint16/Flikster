@@ -174,7 +174,7 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),
                         new VideoGalleryFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
-                        userId, outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        userId, outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
                         outerHits.getHits().get(getAdapterPosition()).get_id()
                 );
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
@@ -188,7 +188,7 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         new VideoGalleryFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId,
-                        outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
                         outerHits.getHits().get(getAdapterPosition()).get_id()
                 );
             } else {
