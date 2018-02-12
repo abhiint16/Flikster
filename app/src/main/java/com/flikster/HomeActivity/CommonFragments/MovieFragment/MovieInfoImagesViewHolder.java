@@ -52,7 +52,7 @@ public class MovieInfoImagesViewHolder extends RecyclerView.Adapter<RecyclerView
         }
         else if (holder.getItemViewType()==2)
         {
-            Glide.with(context).load(movieAllImages.get(position))
+            Glide.with(context).load(movieAllImages.get(position).getGallery())
                     .into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setVisibility(View.GONE);
         }

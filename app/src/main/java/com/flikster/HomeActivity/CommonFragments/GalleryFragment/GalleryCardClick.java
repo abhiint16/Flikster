@@ -80,14 +80,14 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
                 galleryImgLinks, galleryRecommendationItemClick, userId,cardId);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryCardClickAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
-        //Log.e("cehc for followe",""+userId+"AND"+entityId);
+        Log.e("cehc for followe",""+userId+"AND"+entityId);
         new PostRetrofit().checkForFollow("follow", userId, entityId, followbtn, getContext());
         followbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Common.followOrUnFollow(getContext(), followbtn, userId, entityId);
             }
-        });
+        });//41015e26-d119-4110-9f27-6205d0561606AND78c2279e-57c1-4b3c-8d92-a643f91f1661
     }
 
     private void initializeViews() {

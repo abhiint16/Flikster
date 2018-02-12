@@ -51,7 +51,7 @@ public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<Re
         }
         else if (holder.getItemViewType()==2)
         {
-            Log.e("check for link",""+celebALlImages.get(position).getGallery());
+            //Log.e("check for link",""+celebALlImages.get(position).getGallery());
                 Glide.with(context).load(celebALlImages.get(position).getGallery())
                         .into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setVisibility(View.GONE);

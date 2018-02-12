@@ -161,11 +161,11 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (SharedPrefsUtil.getStringPreference(context, userId) != null && !SharedPrefsUtil.getStringPreference(context, userId).isEmpty()) {
+        /*if (SharedPrefsUtil.getStringPreference(context, userId) != null && !SharedPrefsUtil.getStringPreference(context, userId).isEmpty()) {
             userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
         } else {
             userId = "";
-        }
+        }*/
         if (holder.getItemViewType() == 0) {
             if (name != null && !name.isEmpty()) {
                 ((ViewHolder0) holder).card_celebrity_feed_profile_name.setText(name);
@@ -1405,7 +1405,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     hits.getHits().get(pos).get_source().getTitle(), new NewsOnClickFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getId(),
                     hits.getHits().get(pos).get_id()
             );
         } else if (hits.getHits().get(pos).get_source().getCeleb() != null && hits.getHits().get(pos).get_source().getCeleb().size() != 0) {
@@ -1418,7 +1418,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     new NewsOnClickFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getId(),
                     hits.getHits().get(pos).get_id()
             );
         } else {
@@ -1437,23 +1437,25 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public void cardGalleryContainerClick(int pos) {
-        if (hits.getHits().get(pos).get_source().getMovie() != null) {
+        if (hits.getHits().get(pos).get_source().getMovie() != null&&
+                hits.getHits().get(pos).get_source().getMovie().size()!=0) {
             celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
                     hits.getHits().get(pos).get_source().getMovie().get(0).getName(),
                     hits.getHits().get(pos).get_source().getMovie().get(0).getProfilePic(),
                     hits.getHits().get(pos).get_source().getMovie().get(0).getType(),
                     hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
-                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getId(),
                     hits.getHits().get(pos).get_id());
-        } else if (hits.getHits().get(pos).get_source().getCeleb() != null) {
+        } else if (hits.getHits().get(pos).get_source().getCeleb() != null&&
+                hits.getHits().get(pos).get_source().getCeleb().size()!=0) {
             celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
                     hits.getHits().get(pos).get_source().getCeleb().get(0).getName(),
                     hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic(),
                     hits.getHits().get(pos).get_source().getCeleb().get(0).getType(),
                     hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
-                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getId(),
                     hits.getHits().get(pos).get_id());
         } else {
             celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
@@ -1490,7 +1492,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     new VideoGalleryFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getId(),
                     hits.getHits().get(pos).get_id()
             );
         } else if (hits.getHits().get(pos).get_source().getCeleb() != null && hits.getHits().get(pos).get_source().getCeleb().size() != 0) {
@@ -1504,7 +1506,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     new VideoGalleryFragment(),
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
-                    hits.getHits().get(pos).get_source().getId(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getId(),
                     hits.getHits().get(pos).get_id()
             );
         } else {
