@@ -194,10 +194,10 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }*/
 
 
-            Log.e("CELEB_BIO_PAGE", "CELEB_BIO_PAGE");
+            /*Log.e("CELEB_BIO_PAGE", "CELEB_BIO_PAGE");
             Log.e("ENTITY_ID", entityId);
 
-            userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
+            userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");*/
 
             ((ViewHolder1) holder).card_celebrity_bio_profile_biography.setText(Html.fromHtml(biography));
             ((ViewHolder1) holder).card_celebrity_bio_profile_name.setText(name);

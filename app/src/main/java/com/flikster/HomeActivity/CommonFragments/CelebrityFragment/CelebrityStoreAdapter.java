@@ -163,11 +163,11 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (SharedPrefsUtil.getStringPreference(context, userId) != null && !SharedPrefsUtil.getStringPreference(context, userId).isEmpty()) {
+        /*if (SharedPrefsUtil.getStringPreference(context, userId) != null && !SharedPrefsUtil.getStringPreference(context, userId).isEmpty()) {
             userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
         } else {
             userId = "";
-        }
+        }*/
 
         if (holder.getItemViewType() == 0) {
             if (name != null && !name.isEmpty()) {
