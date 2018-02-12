@@ -8,7 +8,7 @@ repositories {
 }
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     def keystorePropertiesFile = rootProject.file('keystore.properties')
     def keystoreProperties = new Properties()
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))

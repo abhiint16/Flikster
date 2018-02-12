@@ -233,7 +233,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (SharedPrefsUtil.getStringPreference(context, "USER_ID") != null && !SharedPrefsUtil.getStringPreference(context, "USER_ID").isEmpty()) {
             userId = SharedPrefsUtil.getStringPreference(context, "USER_ID");
-            Log.e("LoginUserId", userId);
+                Log.e("LoginUserId", userId);
         }
         if (SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null && SharedPrefsUtil.getStringPreference(context, "USER_NAME") != null) {
             userName = SharedPrefsUtil.getStringPreference(context, "USER_NAME");

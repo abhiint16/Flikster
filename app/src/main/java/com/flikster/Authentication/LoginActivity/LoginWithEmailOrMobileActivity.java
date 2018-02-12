@@ -151,7 +151,7 @@ public class LoginWithEmailOrMobileActivity extends AppCompatActivity implements
                         SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME",
                                 response.body().getData().getFirstname());
                     }
-                    if (response.body().getData().getLastname().toString() != null
+                    if (response.body().getData().getLastname()!= null
                             && !response.body().getData().getLastname().toString().isEmpty()) {
                         SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME",
                                 response.body().getData().getFirstname() +

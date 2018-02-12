@@ -236,6 +236,7 @@ public class SignUpWithEmailActivity extends AppCompatActivity implements View.O
             @Override
             public void onResponse(Call<RegisterPostStatus> call,
                                    Response<RegisterPostStatus> response) {
+                Log.e("response code",""+response+"AND"+response.body()+"AND"+response.message());
                 Log.e("StatusCode", response.body().getStatusCode() + "");
                 Log.e("otpStatus", response.body().getOtpStatus() + "");
                 if (CLICK_EVENT.equals("email")) {
