@@ -838,6 +838,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_description_linear.setOnClickListener(this);
             card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_gallary1_img1.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -870,7 +871,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_description_linear) {
+            if (view.getId() == R.id.card_description_linear||view.getId()==R.id.card_gallary1_img1) {
                 cardDescLinearClick(getAdapterPosition() - 1);
             }
         }
@@ -904,6 +905,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ib_like = (ImageButton) itemView.findViewById(R.id.ib_like);
             ib_bookmark = (ImageButton) itemView.findViewById(R.id.ib_bookmark);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
+            news_img.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
             video_btn.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
@@ -939,7 +941,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_description_linear) {
+            if (view.getId() == R.id.card_description_linear||view.getId()==R.id.news_img) {
                 cardVideoCardDescClick(getAdapterPosition() - 1);
             } else if (view.getId() == R.id.video_btn) {
                 cardVideoButtonClick(getAdapterPosition() - 1);
@@ -976,6 +978,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_comment_text_edittxt = (EditText) itemView.findViewById(R.id.card_comment_text_edittxt);
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
+            card_gallary1_img1.setOnClickListener(this);
             card_description_linear.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1010,7 +1013,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_description_linear) {
+            if (view.getId() == R.id.card_description_linear||view.getId()==R.id.card_gallary1_img1) {
                 cardDescLinearClick(getAdapterPosition() - 1);
             }
         }
@@ -1045,6 +1048,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
             card_footer_share = (ImageButton) itemView.findViewById(R.id.card_footer_share);
             card_description_linear.setOnClickListener(this);
+            card_gallary1_img1.setOnClickListener(this);
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1078,7 +1082,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_description_linear) {
+            if (view.getId() == R.id.card_description_linear||view.getId()==R.id.card_gallary1_img1) {
                 cardDescLinearClick(getAdapterPosition() - 1);
             }
         }
@@ -1150,7 +1154,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_description_linear) {
-                //cardDescLinearClick(getAdapterPosition()-1);
+                cardDescLinearClick(getAdapterPosition()-1);
             } else if (view.getId() == R.id.card_gallary1_img1) {
                 cardGalleryContainerClick(getAdapterPosition() - 1);
             }
@@ -1289,7 +1293,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_gallery2_img_container) {
+            if (view.getId() == R.id.card_gallery2_img_container||view.getId()==R.id.card_description_linear) {
                 cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
@@ -1362,7 +1366,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_gallery3_1_img_container) {
+            if (view.getId() == R.id.card_gallery3_1_img_container||view.getId()==R.id.card_description_linear) {
                 cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
@@ -1436,7 +1440,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_gallery4_img_container) {
+            if (view.getId() == R.id.card_gallery4_img_container||view.getId()==R.id.card_description_linear) {
                 cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
@@ -1510,7 +1514,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.card_gallery5_img_container) {
+            if (view.getId() == R.id.card_gallery5_img_container||view.getId()==R.id.card_description_linear) {
                 cardGalleryContainerClick(getAdapterPosition() - 1);
             }
         }
