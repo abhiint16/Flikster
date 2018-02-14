@@ -20,6 +20,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieAdapter;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,9 +133,11 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     public void onDestroyView() {
         super.onDestroyView();
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+            GlideFaceDetector.releaseDetector();
     }
 
     private void initializeRest() {
+        GlideFaceDetector.initialize(getActivity());
         arguments.putString("slug", slug);
         tabLayout.setupWithViewPager(viewPager);
 //        toolbar_frag_title.setText("Celebrity");

@@ -292,8 +292,8 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         call.enqueue(new Callback<CelebBioImagesData>() {
             @Override
             public void onResponse(Call<CelebBioImagesData> call, Response<CelebBioImagesData> response) {
-                Log.e("check msg", "" + response.body().getStatusCode());
-                Log.e("check msg", "" + response.body().getData());
+                /*Log.e("check msg", "" + response.body().getStatusCode());
+                Log.e("check msg", "" + response.body().getData());*/
                 movieAllImages = response.body().getData();
                 movieInfoImagesViewHolder = new MovieInfoImagesViewHolder(context, movieAllImages);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoImagesViewHolder);

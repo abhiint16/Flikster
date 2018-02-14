@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<Re
         {
             //Log.e("check for link",""+celebALlImages.get(position).getGallery());
                 Glide.with(context).load(celebALlImages.get(position).getGallery())
+                        .transform(new FaceCenterCrop())
                         .into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setVisibility(View.GONE);
         }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,9 @@ public class CelebrityBioAdapterFilmographyViewHolder extends RecyclerView.Adapt
         else if (holder.getItemViewType()==2)
         {
             if (movieInnerData.getHits().get(position).get_source().getCoverPic()!=null)
-                Glide.with(context).load(movieInnerData.getHits().get(position).get_source().getCoverPic()).into(((ViewHolder2)holder).carousel_image);
+                Glide.with(context).load(movieInnerData.getHits().get(position).get_source().getCoverPic())
+                        .transform(new FaceCenterCrop())
+                        .into(((ViewHolder2)holder).carousel_image);
             if (movieInnerData.getHits().get(position).get_source().getTitle()!=null)
                 ((ViewHolder2)holder).carousel_title.setText(movieInnerData.getHits().get(position).get_source().getTitle());
         }

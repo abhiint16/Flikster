@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.List;
 
@@ -48,7 +49,9 @@ public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<Recycle
             if (hits.getHits().get(0).get_source().getCast().get(position).getName()!=null)
             ((ViewHolder2) holder).card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(0).get_source().getCast().get(position).getName());
             if (hits.getHits().get(0).get_source().getCast().get(position).getProfilePic()!=null)
-            Glide.with(context).load(hits.getHits().get(0).get_source().getCast().get(position).getProfilePic()).asBitmap().into(((ViewHolder2) holder).card_movie_info_cast_recycler_item_image);
+            Glide.with(context).load(hits.getHits().get(0).get_source().getCast().get(position).getProfilePic()).asBitmap()
+                    .transform(new FaceCenterCrop())
+                    .into(((ViewHolder2) holder).card_movie_info_cast_recycler_item_image);
         }
     }
 

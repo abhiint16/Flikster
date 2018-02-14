@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<Recycle
             try {
                 if (hits.getHits().get(position).get_source().getCoverPic() != null)
                     Glide.with(context).load(hits.getHits().get(position).get_source().getCoverPic())
+                            .transform(new FaceCenterCrop())
                             .into(((ViewHolder2) holder).card_movie_info_cast_recycler_item_image);
                 if (hits.getHits().get(position).get_source().getTitle() != null)
                     ((ViewHolder2) holder).card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(position).get_source().getTitle());

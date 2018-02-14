@@ -14,6 +14,7 @@ import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.R;
 import com.flikster.HomeActivity.CommonFragments.ShopByVideoFragment.ShopByVideoFragment;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,9 @@ public class CelebrityBioShopByVideoViewHolder extends RecyclerView.Adapter<Recy
         {
             if (shopByVideoInnerData.getHits().get(position).get_source().getThumbnail()!=null)
             {
-                Glide.with(context).load(shopByVideoInnerData.getHits().get(position).get_source().getThumbnail()).into(((ViewHolder2)holder).imageView);
+                Glide.with(context).load(shopByVideoInnerData.getHits().get(position).get_source().getThumbnail())
+                        .transform(new FaceCenterCrop())
+                        .into(((ViewHolder2)holder).imageView);
             }
         }
     }

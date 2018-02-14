@@ -13,6 +13,7 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFrag
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 /**
  * Created by abhishek on 13-10-2017.
@@ -56,7 +57,9 @@ public class MovieBioShopByVideoViewHolder extends RecyclerView.Adapter<Recycler
         {
             if (shopByVideoInnerData.getHits().get(position).get_source().getThumbnail()!=null)
             {
-                Glide.with(context).load(shopByVideoInnerData.getHits().get(position).get_source().getThumbnail()).into(((ViewHolder2)holder).imageView);
+                Glide.with(context).load(shopByVideoInnerData.getHits().get(position).get_source().getThumbnail())
+                        .transform(new FaceCenterCrop())
+                        .into(((ViewHolder2)holder).imageView);
             }
         }
     }

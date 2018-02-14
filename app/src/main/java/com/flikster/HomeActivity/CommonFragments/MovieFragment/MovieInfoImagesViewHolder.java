@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class MovieInfoImagesViewHolder extends RecyclerView.Adapter<RecyclerView
         else if (holder.getItemViewType()==2)
         {
             Glide.with(context).load(movieAllImages.get(position).getGallery())
+                    .transform(new FaceCenterCrop())
                     .into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setVisibility(View.GONE);
         }
