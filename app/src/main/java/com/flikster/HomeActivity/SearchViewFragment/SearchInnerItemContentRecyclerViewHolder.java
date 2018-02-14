@@ -144,7 +144,7 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                                 response.body().getContentType(),
                                 userId,
                                 response.body().getId(),
-                                response.body().getId()
+                                response.body().getId(),response.body().getCeleb().get(0).getSlug()
                         );
                     } else {
                         searchViewToFrag.newsCardOnClick("",
@@ -157,7 +157,7 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                                 response.body().getContentType(),
                                 userId,
                                 response.body().getId(),
-                                response.body().getId());
+                                response.body().getId(),"");
                     }
                 }
                 @Override

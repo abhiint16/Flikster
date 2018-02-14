@@ -28,6 +28,8 @@ import com.bumptech.glide.request.target.Target;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
@@ -58,7 +60,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     TextView tv_tag_name, tv_tag_desc;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
     NewsBottomHorRecyclerAdapter newsBottomHorRecyclerAdapter;
-    String profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId,cardId;
+    String profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId,cardId,slug;
     RoundedImageView profile_image;
     ApiInterface apiInterface;
     FeedInnerData outerHits;
@@ -69,6 +71,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     ImageButton card_comment_text_send_btn;
     EditText card_comment_text_edittxt;
     TextView card_comment_text_see_more_comments;
+    LinearLayout header_linear;
 
     @Nullable
     @Override
@@ -100,7 +103,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(), outerHits, Count, title, bannerImg, newsRecommendedClick,contentType,userId,cardId);
+                newsBottomHorRecyclerAdapter = new NewsBottomHorRecyclerAdapter(getActivity(), outerHits, Count, title, bannerImg, newsRecommendedClick,contentType,userId,cardId,slug);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(newsBottomHorRecyclerAdapter);
             }
 
@@ -130,7 +133,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         newsimg.setVisibility(View.VISIBLE);
         tv_name.setVisibility(View.GONE);
-
+        header_linear=(LinearLayout)view.findViewById(R.id.header_linear);
         followbtn = (Button) view.findViewById(R.id.followbtn);
         card_footer_share = (ImageButton) view.findViewById(R.id.card_footer_share);
         ib_like = (ImageButton) view.findViewById(R.id.ib_like);
@@ -186,6 +189,8 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
 
 
     private void initializeRest() {
+        header_linear.setOnClickListener(this);
+        profile_image.setOnClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
@@ -232,6 +237,15 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
                     .replace(R.id.main_container, new FeedFragment())
                     .addToBackStack("")
                     .commit();
+        }else if (view.getId()==R.id.header_linear||view.getId()==R.id.profile_image)
+        {
+            if ("movie".equals(type)) {
+                newsRecommendedClick.test(slug,
+                        new MovieFragment(), 1, userId, entityId);
+            } else if ("celeb".equals(type)) {
+                newsRecommendedClick.test(slug,
+                        new CelebrityFragment(), 2, userId, entityId);
+            }
         }
     }
 
@@ -245,12 +259,13 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     public void updateImage(String profilePic, String title, String type,
                             String bannerImg, String headertitle,
                             String description, String contentType,
-                            String userId, String entityId,String cardId
+                            String userId, String entityId,String cardId,String slug
     ) {
 
         this.profilePic = profilePic;
         this.title = title;
         this.type = type;
+        this.slug=slug;
         this.bannerImg = bannerImg;
         this.headertitle = headertitle;
         this.description = description;
@@ -263,7 +278,8 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     public interface NewsRecommendedClick {
         void newsRecommendedClickMethod(String profilePic, String title, String type,
                                         String bannerImg, String headertitle, String description,
-                                        Fragment fragment, String contentType,String userId,String entityId,String cardId);
+                                        Fragment fragment, String contentType,String userId,String entityId,String cardId,String slug);
+        void test(String name, Fragment fragment, int getClass, String userId, String entityId);
     }
 
     @Override

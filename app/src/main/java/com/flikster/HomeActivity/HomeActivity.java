@@ -1102,9 +1102,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     @Override
     public void newsCardOnClick(String profilePic, String title, String type, String bannerImg,
                                 String headertitle, String description, Fragment fragment,
-                                String contentType, String userId, String entityId,String cardId) {
+                                String contentType, String userId, String entityId,String cardId,String slug) {
         NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
-        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId,cardId);
+        gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle, description, contentType, userId, entityId,cardId,
+                slug);
         firstTimeLaunch(fragment);
     }
 
@@ -1284,10 +1285,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void newsRecommendedClickMethod(String profilePic, String title,
                                            String type, String bannerImg, String headertitle,
                                            String description, Fragment fragment, String contentType,
-                                           String useriId, String entityId,String cardId) {
+                                           String useriId, String entityId,String cardId,String slug) {
         NewsOnClickFragment gallaryCardClick = (NewsOnClickFragment) fragment;
         gallaryCardClick.updateImage(profilePic, title, type, bannerImg, headertitle,
-                description, contentType, useriId, entityId,cardId);
+                description, contentType, useriId, entityId,cardId,slug);
         firstTimeLaunch(fragment);
     }
 

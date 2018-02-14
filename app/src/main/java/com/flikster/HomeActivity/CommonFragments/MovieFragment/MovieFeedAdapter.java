@@ -1563,7 +1563,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
                     hits.getHits().get(pos).get_source().getId(),
-                    hits.getHits().get(pos).get_id()
+                    hits.getHits().get(pos).get_id(),
+                    hits.getHits().get(pos).get_source().getMovie().get(0).getSlug()
             );
         } else if (hits.getHits().get(pos).get_source().getCeleb() != null && hits.getHits().get(pos).get_source().getCeleb().size() != 0) {
             movieItemClickInterface.newsCardOnClick(hits.getHits().get(pos).get_source().getCeleb().get(0).getProfilePic(),
@@ -1576,7 +1577,8 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
                     hits.getHits().get(pos).get_source().getId(),
-                    hits.getHits().get(pos).get_id()
+                    hits.getHits().get(pos).get_id(),
+                    hits.getHits().get(pos).get_source().getCeleb().get(0).getSlug()
             );
         } else {
             movieItemClickInterface.newsCardOnClick("",
@@ -1589,7 +1591,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     hits.getHits().get(pos).get_source().getContentType(),
                     userId,
                     hits.getHits().get(pos).get_source().getId(),
-                    hits.getHits().get(pos).get_id());
+                    hits.getHits().get(pos).get_id(),"");
         }
     }
 

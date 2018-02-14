@@ -1136,7 +1136,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id()
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug()
                     );
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.newsCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
@@ -1149,7 +1150,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id()
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug()
                     );
                 } else {
                     testing.newsCardOnClick("",
@@ -1162,7 +1164,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),"");
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
                 if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
@@ -1439,7 +1441,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             new NewsOnClickFragment(), outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id()
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug()
                     );
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size()!=0) {
@@ -1452,7 +1455,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id()
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug()
                     );
                 } else {
                     testing.newsCardOnClick("",
@@ -1464,7 +1468,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),"");
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
                 if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {
@@ -1574,7 +1578,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id()
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug()
                     );
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size()!=0) {
@@ -1587,7 +1592,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id()
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug()
                     );
                 } else {
                     testing.newsCardOnClick("",
@@ -1599,7 +1605,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                             userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),"");
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
                 if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {

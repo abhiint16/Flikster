@@ -43,13 +43,15 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     String cardId;
     String descritionString;
     String userId;
+    String slug;
 
     public NewsBottomHorRecyclerAdapter(Context context, FeedInnerData outerHits, int Count, String title, String bannerImg,
                                         NewsOnClickFragment.NewsRecommendedClick newsRecommendedClick,
-                                        String contentType,String userId,String cardId) {
+                                        String contentType,String userId,String cardId,String slug) {
         this.context = context;
         this.outerHits = outerHits;
         this.title = title;
+        this.slug=slug;
         this.userId=userId;
         this.bannerImg = bannerImg;
         this.newsRecommendedClick = newsRecommendedClick;
@@ -185,7 +187,8 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id()
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug()
                 );
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                 newsRecommendedClick.newsRecommendedClickMethod(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
@@ -197,7 +200,8 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id()
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug()
                 );
             } else {
                 newsRecommendedClick.newsRecommendedClickMethod("",
@@ -209,7 +213,7 @@ public class NewsBottomHorRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id());
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),"");
             }
         }
     }

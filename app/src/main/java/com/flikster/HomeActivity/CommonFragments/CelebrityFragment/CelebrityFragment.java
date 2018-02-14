@@ -172,7 +172,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                                 Fragment fragment,String userId,String entityId,String cardId,String slug);
 
         void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
-                             String description, Fragment fragment, String contentType,String userId, String entityId,String cardId);
+                             String description, Fragment fragment, String contentType,String userId, String entityId,String cardId,String slug);
 
         void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                               String description, String videolink, Fragment fragment, String contentType,
