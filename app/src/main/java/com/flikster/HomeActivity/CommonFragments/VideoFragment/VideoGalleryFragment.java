@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -26,6 +27,8 @@ import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityBioAdapterImagesViewHolder;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsData;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
@@ -57,7 +60,8 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     TextView toolbar_frag_title, titlehedertxt, fragment_common_recyclerview_with_tv_title, tv_name, tv_description;
     Context mContext;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
-    String profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId,cardId;
+    String profilePic, title, type, bannerImg, headertitle, description, contentType, videolink, userId, entityId,cardId,
+    slug;
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
     ApiInterface apiInterface;
     FeedInnerData outerHits;
@@ -74,7 +78,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     ImageButton card_comment_text_send_btn;
     EditText card_comment_text_edittxt;
     TextView card_comment_text_see_more_comments;
-
+    LinearLayout header_linear;
 
     @Nullable
     @Override
@@ -102,6 +106,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         profile_image=(ImageView)view.findViewById(R.id.profile_image);
         fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
+        header_linear=(LinearLayout)view.findViewById(R.id.header_linear);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
         tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
@@ -183,6 +188,8 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
 
     private void initializeRest() {
+        profile_image.setOnClickListener(this);
+        header_linear.setOnClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
@@ -216,6 +223,15 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
                     .replace(R.id.main_container, new FeedFragment())
                     .addToBackStack("")
                     .commit();
+        }else if (view.getId()==R.id.header_linear||view.getId()==R.id.profile_image)
+        {
+            if ("movie".equals(type)) {
+                videoRecommendationClick.test(slug,
+                        new MovieFragment(), 1, userId, entityId);
+            } else if ("celeb".equals(type)) {
+                videoRecommendationClick.test(slug,
+                        new CelebrityFragment(), 2, userId, entityId);
+            }
         }
     }
 
@@ -256,7 +272,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
             public void onResponse(Call<FeedData> call, Response<FeedData> response) {
                 outerHits = response.body().getHits();
                 Count = outerHits.getTotal();
-                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(), outerHits, Count, title, videoRecommendationClick,contentType,cardId);
+                videoGalleryAdapter = new VideoGalleryAdapter(getActivity(), outerHits, Count, title, videoRecommendationClick,contentType,cardId,slug);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(videoGalleryAdapter);
             }
 
@@ -269,7 +285,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
 
     public void updateImage(String profilePic, String title, String type, String bannerImg,
                             String headertitle, String description, String contentType,
-                            String videolink, String userId, String entityId,String cardId) {
+                            String videolink, String userId, String entityId,String cardId,String slug) {
         this.profilePic = profilePic;
         this.title = title;
         this.type = type;
@@ -282,13 +298,15 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
         this.entityId = entityId;
         this.entityId = entityId;
         this.cardId=cardId;
+        this.slug=slug;
     }
 
     public interface VideoRecommendationClick {
         void videoRecommendationClickMethod(String profilePic,
                                             String title, String type, String bannerImg,
                                             String headertitle, String description, String videolink,
-                                            Fragment fragment, String contentType, String userId, String entityId,String cardId);
+                                            Fragment fragment, String contentType, String userId, String entityId,String cardId,String slug);
+        void test(String name, Fragment fragment, int getClass, String userId, String entityId);
     }
 
     @Override

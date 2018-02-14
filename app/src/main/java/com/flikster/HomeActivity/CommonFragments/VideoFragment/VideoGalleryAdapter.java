@@ -43,10 +43,12 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     ApiInterface apiInterface;
     int count=10;
     String cardId;
+    String slug;
 
     public VideoGalleryAdapter(Context context, FeedInnerData outerHits, Integer Count, String title,
                                VideoGalleryFragment.VideoRecommendationClick videoRecommendationClick,
-                               String contentType,String cardId) {
+                               String contentType,String cardId,String slug) {
+        this.slug=slug;
         this.context = context;
         this.title = title;
         this.outerHits = outerHits;
@@ -175,7 +177,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         new VideoGalleryFragment(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId, outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id()
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug()
                 );
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                 videoRecommendationClick.videoRecommendationClickMethod(outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(),
@@ -189,7 +192,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id()
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug()
                 );
             } else {
                 videoRecommendationClick.videoRecommendationClickMethod("",
@@ -203,7 +207,7 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         outerHits.getHits().get(getAdapterPosition()).get_source().getContentType(),
                         userId,
                         outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id());
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),"");
             }
         }
     }

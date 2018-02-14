@@ -63,7 +63,7 @@ public class SearchViewFragment extends Fragment {
                                 Fragment fragment, String userId, String entityId,String cardId,String slug);
         void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                               String description, String videolink, Fragment fragment, String contentType,
-                              String userId, String entityId,String cardId);
+                              String userId, String entityId,String cardId,String slug);
         void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
                         String productSlug, List<String> imageGallery, Fragment fragment);
     }

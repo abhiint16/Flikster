@@ -156,7 +156,7 @@ public class FeedFragment extends Fragment {
 
         void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                               String description, String videolink, Fragment fragment, String contentType,
-                              String userId, String entityId,String cardId);
+                              String userId, String entityId,String cardId,String slug);
 
         void seeMoreComments(String userName, String userId, String entityId);
     }
