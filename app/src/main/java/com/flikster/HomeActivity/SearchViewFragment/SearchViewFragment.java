@@ -60,7 +60,7 @@ public class SearchViewFragment extends Fragment {
                              String description, Fragment fragment, String contentType, String userId, String entityId,
                              String cardId);
         void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
-                                Fragment fragment, String userId, String entityId,String cardId);
+                                Fragment fragment, String userId, String entityId,String cardId,String slug);
         void videoCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                               String description, String videolink, Fragment fragment, String contentType,
                               String userId, String entityId,String cardId);

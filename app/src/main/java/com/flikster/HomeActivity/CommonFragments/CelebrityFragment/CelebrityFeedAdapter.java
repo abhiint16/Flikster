@@ -1453,7 +1453,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
                     hits.getHits().get(pos).get_source().getMovie().get(0).getId(),
-                    hits.getHits().get(pos).get_id());
+                    hits.getHits().get(pos).get_id(),slug);
         } else if (hits.getHits().get(pos).get_source().getCeleb() != null&&
                 hits.getHits().get(pos).get_source().getCeleb().size()!=0) {
             celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
@@ -1463,14 +1463,14 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                     hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
                     hits.getHits().get(pos).get_source().getCeleb().get(0).getId(),
-                    hits.getHits().get(pos).get_id());
+                    hits.getHits().get(pos).get_id(),slug);
         } else {
             celebItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
                     "",
                     "", "", hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
                     hits.getHits().get(pos).get_source().getId(),
-                    hits.getHits().get(pos).get_id());
+                    hits.getHits().get(pos).get_id(),"");
 
         }
     }

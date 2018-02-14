@@ -149,6 +149,16 @@ public class SearchGalleryData {
         private String type;
         @SerializedName("profilePic")
         private String profilePic;
+        @SerializedName("slug")
+        private String slug;
+
+        public String getSlug() {
+            return slug;
+        }
+
+        public void setSlug(String slug) {
+            this.slug = slug;
+        }
 
         public String getName() {
             return name;

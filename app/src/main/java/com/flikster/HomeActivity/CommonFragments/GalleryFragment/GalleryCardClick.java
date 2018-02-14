@@ -15,9 +15,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.R;
@@ -43,7 +46,8 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
     GalleryRecommendationItemClick galleryRecommendationItemClick;
     ImageButton toolbar_back_navigation_btn;
     Button followbtn;
-    String cardId;
+    String cardId,slug;
+    LinearLayout header_linear;
 
     @Nullable
     @Override
@@ -80,6 +84,8 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
                 galleryImgLinks, galleryRecommendationItemClick, userId,cardId);
         fragment_common_recyclerview_with_tv_recycler.setAdapter(galleryCardClickAdapter);
         toolbar_back_navigation_btn.setOnClickListener(this);
+        profile_image.setOnClickListener(this);
+        header_linear.setOnClickListener(this);
         //Log.e("cehc for followe",""+userId+"AND"+entityId);
         new PostRetrofit().checkForFollow("follow", userId, entityId, followbtn, getContext());
         followbtn.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +102,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
         profile_image = (ImageView) view.findViewById(R.id.profile_image);
         tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
+        header_linear=(LinearLayout)view.findViewById(R.id.header_linear);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         fragmentManager = getActivity().getSupportFragmentManager();
         followbtn = (Button) view.findViewById(R.id.followbtn);
@@ -103,7 +110,8 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
     }
 
     public void updateImage(List<String> galleryImgLinks, String name,
-                            String profilePic, String type, String title, String userId, String entityId,String cardId) {
+                            String profilePic, String type, String title, String userId, String entityId,String cardId,
+                            String slug) {
         this.galleryImgLinks = galleryImgLinks;
         this.name = name;
         this.profilepic = profilePic;
@@ -112,6 +120,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
         this.userId = userId;
         this.entityId = entityId;
         this.cardId=cardId;
+        this.slug=slug;
     }
 
     @Override
@@ -121,12 +130,23 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
                     .replace(R.id.main_container, new FeedFragment())
                     .commit();
         }
+        else if (view.getId()==R.id.header_linear||view.getId()==R.id.profile_image)
+        {
+            if ("movie".equals(type)) {
+                galleryRecommendationItemClick.test(slug,
+                        new MovieFragment(), 1, userId, entityId);
+            } else if ("celeb".equals(type)) {
+                galleryRecommendationItemClick.test(slug,
+                        new CelebrityFragment(), 2, userId, entityId);
+            }
+        }
     }
 
     public interface GalleryRecommendationItemClick {
         void galleryRecommendationItemClickMethod(List<String> galleryImgLinks,
                                                   String name, String profilePic, String type,
-                                                  String title, Fragment fragment, String userId, String entityId,String cardId);
+                                                  String title, Fragment fragment, String userId, String entityId,String cardId,String slug);
+        void test(String name, Fragment fragment, int getClass, String userId, String entityId);
     }
 
     @Override

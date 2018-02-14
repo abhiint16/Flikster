@@ -1709,7 +1709,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug());
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size()!=0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -1719,14 +1720,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug());
                 } else {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             "",
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),"");
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
@@ -1951,7 +1953,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug());
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size()!=0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -1960,14 +1963,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug());
                 } else {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             "",
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),"");
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
@@ -2079,7 +2083,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug());
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size()!=0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -2088,7 +2093,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug());
                 } else {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             "",
@@ -2096,7 +2102,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),"");
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
@@ -2208,7 +2214,8 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug());
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null&&
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size()!=0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
@@ -2217,14 +2224,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug());
                 } else {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             "",
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),"");
 
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
@@ -2338,7 +2346,7 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug());
                 } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null && outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size() != 0) {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
@@ -2346,14 +2354,15 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),
+                            outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug());
                 } else {
                     testing.galleryCardOnClick(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                             "",
                             "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(),
                             new GalleryCardClick(), userId,
                             outerHits.getHits().get(getAdapterPosition()).get_source().getId(),
-                            outerHits.getHits().get(getAdapterPosition()).get_id());
+                            outerHits.getHits().get(getAdapterPosition()).get_id(),"");
                 }
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
                 if (SharedPrefsUtil.getStringPreference(context, "IS_LOGGED_IN").equals("NOT_LOGGED_IN")) {

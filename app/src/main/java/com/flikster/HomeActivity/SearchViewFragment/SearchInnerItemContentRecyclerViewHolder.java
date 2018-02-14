@@ -109,14 +109,14 @@ public class SearchInnerItemContentRecyclerViewHolder extends RecyclerView.Adapt
                                 response.body().getTitle(),
                                 new GalleryCardClick(), userId,
                                 response.body().getId(),
-                                response.body().getId());
+                                response.body().getId(),response.body().getCeleb().get(0).getSlug());
                     } else {
                         searchViewToFrag.galleryCardOnClick(response.body().getMedia().getGallery(),
                                 "",
                                 "", "", response.body().getTitle(),
                                 new GalleryCardClick(), userId,
                                 response.body().getId(),
-                                response.body().getId());
+                                response.body().getId(),"");
 
                     }
                     }

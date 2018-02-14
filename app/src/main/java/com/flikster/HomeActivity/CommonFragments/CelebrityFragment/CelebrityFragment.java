@@ -169,7 +169,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
 
     public interface CelebItemClickInterface {
         void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
-                                Fragment fragment,String userId,String entityId,String cardId);
+                                Fragment fragment,String userId,String entityId,String cardId,String slug);
 
         void newsCardOnClick(String profilePic, String title, String type, String bannerImg, String headertitle,
                              String description, Fragment fragment, String contentType,String userId, String entityId,String cardId);

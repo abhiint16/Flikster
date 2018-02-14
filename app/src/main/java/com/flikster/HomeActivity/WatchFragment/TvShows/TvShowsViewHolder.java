@@ -142,18 +142,20 @@ public class TvShowsViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHol
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getName(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getType(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id());
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getMovie().get(0).getSlug());
             } else if (outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb() != null&&outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().size()!=0) {
                 watchFragCommInterface.carouselItemToGallery(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getName(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getProfilePic(), outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getType(),
                         outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id());
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),
+                        outerHits.getHits().get(getAdapterPosition()).get_source().getCeleb().get(0).getSlug());
             } else {
                 watchFragCommInterface.carouselItemToGallery(outerHits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery(),
                         "",
                         "", "", outerHits.getHits().get(getAdapterPosition()).get_source().getTitle(), new GalleryCardClick(),
-                        outerHits.getHits().get(getAdapterPosition()).get_id());
+                        outerHits.getHits().get(getAdapterPosition()).get_id(),"");
             }
         }
     }

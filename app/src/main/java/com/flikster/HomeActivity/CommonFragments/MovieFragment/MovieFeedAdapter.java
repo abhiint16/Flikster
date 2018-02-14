@@ -1602,7 +1602,7 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
                     hits.getHits().get(pos).get_source().getId(),
-                    hits.getHits().get(pos).get_id());
+                    hits.getHits().get(pos).get_id(),slug);
         } else if (hits.getHits().get(pos).get_source().getCeleb() != null) {
             movieItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
                     hits.getHits().get(pos).get_source().getCeleb().get(0).getName(),
@@ -1611,14 +1611,14 @@ public class MovieFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
                     hits.getHits().get(pos).get_source().getId(),
-                    hits.getHits().get(pos).get_id());
+                    hits.getHits().get(pos).get_id(),slug);
         } else {
             movieItemClickInterface.galleryCardOnClick(hits.getHits().get(pos).get_source().getMedia().getGallery(),
                     "",
                     "", "", hits.getHits().get(pos).get_source().getTitle(),
                     new GalleryCardClick(), userId,
                     hits.getHits().get(pos).get_source().getId(),
-                    hits.getHits().get(pos).get_id());
+                    hits.getHits().get(pos).get_id(),"");
 
         }
     }

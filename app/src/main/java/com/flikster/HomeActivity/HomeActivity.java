@@ -1083,21 +1083,19 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         if (getClass == 1) {
             MovieFragment movieFragment = (MovieFragment) fragment;
             movieFragment.updateInfo(name, userId, entityId);
-            Log.e("inside home movie", "indies home movie" + name);
             firstTimeLaunch(fragment);
         } else if (getClass == 2) {
             CelebrityFragment celebrityFragment = (CelebrityFragment) fragment;
             celebrityFragment.updateInfo(name, userId, entityId);
-            Log.e("inside home celeb", "indie home celbe");
             firstTimeLaunch(fragment);
         }
     }
 
     @Override
     public void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type,
-                                   String title, Fragment fragment, String userId, String entityId,String cardId) {
+                                   String title, Fragment fragment, String userId, String entityId,String cardId,String slug) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId,cardId);
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId,cardId,slug);
         firstTimeLaunch(fragment);
     }
 
@@ -1200,9 +1198,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void carouselItemToGallery(List<String> galleryImgLinks, String name,
-                                      String profilePic, String type, String title, Fragment fragment,String cardId) {
+                                      String profilePic, String type, String title, Fragment fragment,String cardId,String slug) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, "", "",cardId);
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, "", "",cardId,slug);
         firstTimeLaunch(fragment);
     }
 
@@ -1226,9 +1224,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     @Override
     public void galleryRecommendationItemClickMethod(List<String> galleryImgLinks,
                                                      String name, String profilePic, String type,
-                                                     String title, Fragment fragment, String userId, String entityId,String cardId) {
+                                                     String title, Fragment fragment, String userId, String entityId,String cardId,String slug) {
         GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
-        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId,cardId);
+        galleryCardClick.updateImage(galleryImgLinks, name, profilePic, type, title, userId, entityId,cardId,slug);
         firstTimeLaunch(fragment);
     }
 
