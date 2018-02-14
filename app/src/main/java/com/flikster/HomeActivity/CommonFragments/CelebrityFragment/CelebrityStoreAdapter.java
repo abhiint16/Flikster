@@ -203,7 +203,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 ((ViewHolder1) holder).card_description_with_price_price.setText(hits.getHits().get(position - 1).get_source().getPrice() + " /-");
             }
             if (hits.getHits().get(position - 1).get_source().getProductDescription() != null) {
-                ((ViewHolder1) holder).card_description_with_price_title.setText(hits.getHits().get(position - 1).get_source().getProductDescription());
+                ((ViewHolder1) holder).card_description_with_price_title.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getProductDescription()));
             }
             if (hits.getHits().get(position - 1).get_source().getCeleb() != null && hits.getHits().get(position - 1).get_source().getCeleb().size() != 0) {
                 if (hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName() != null)
@@ -470,7 +470,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details1_txt;
         RelativeLayout card_header_container;
-        LinearLayout card_fashion_details1_img_container;
+        LinearLayout card_fashion_details1_img_container,card_description_with_price_container;
 
         public ViewHolder1(View itemView) {
             super(itemView);
@@ -479,6 +479,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             card_fashion_details1_txt = (TextView) itemView.findViewById(R.id.card_fashion_details1_txt);
             card_fashion_details1_img = (ImageView) itemView.findViewById(R.id.card_fashion_details1_img);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_container=(LinearLayout)itemView.findViewById(R.id.card_description_with_price_container);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
@@ -486,6 +487,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             card_fashion_details1_img_container = (LinearLayout) itemView.findViewById(R.id.card_fashion_details1_img_container);
             card_fashion_details1_img_container.setOnClickListener(this);
+            card_description_with_price_container.setOnClickListener(this);
             followbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -496,7 +498,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.card_fashion_details1_img_container) {
+            if (v.getId() == R.id.card_fashion_details1_img_container||v.getId()==R.id.card_description_with_price_container) {
                 cardContainerClick(getAdapterPosition() - 1);
             }
         }
@@ -508,7 +510,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details2_txt;
         RelativeLayout card_header_container;
-        LinearLayout card_fashion_details2_img_container;
+        LinearLayout card_fashion_details2_img_container,card_description_with_price_container;
 
         public ViewHolder2(View itemView) {
             super(itemView);
@@ -518,6 +520,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             card_fashion_details2_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img1);
             card_fashion_details2_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details2_img2);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_container=(LinearLayout)itemView.findViewById(R.id.card_description_with_price_container);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
@@ -526,6 +529,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             card_fashion_details2_img_container = (LinearLayout) itemView.findViewById(R.id.card_fashion_details2_img_container);
             card_fashion_details2_img_container.setOnClickListener(this);
             followbtn.setOnClickListener(this);
+            card_description_with_price_container.setOnClickListener(this);
         }
 
         @Override
@@ -533,7 +537,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (v.getId() == R.id.followbtn) {
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
 
-            } else if (v.getId() == R.id.card_fashion_details2_img_container) {
+            } else if (v.getId() == R.id.card_fashion_details2_img_container||v.getId()==R.id.card_description_with_price_container) {
                 cardContainerClick(getAdapterPosition() - 1);
             }
 
@@ -546,7 +550,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details3_txt;
         RelativeLayout card_header_container;
-        LinearLayout card_my_style_one_big_img_container;
+        LinearLayout card_my_style_one_big_img_container,card_description_with_price_container;
 
         public ViewHolder3(View itemView) {
             super(itemView);
@@ -556,6 +560,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             card_fashion_details3_img1 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img1);
             card_fashion_details3_img2 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img2);
             card_fashion_details3_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details3_img3);
+            card_description_with_price_container=(LinearLayout)itemView.findViewById(R.id.card_description_with_price_container);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             //card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
@@ -564,6 +569,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             card_my_style_one_big_img_container = (LinearLayout) itemView.findViewById(R.id.card_my_style_one_big_img_container);
             card_my_style_one_big_img_container.setOnClickListener(this);
+            card_description_with_price_container.setOnClickListener(this);
         }
 
         @Override
@@ -571,7 +577,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (v.getId() == R.id.followbtn) {
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
 
-            } else if (v.getId() == R.id.card_my_style_one_big_img_container) {
+            } else if (v.getId() == R.id.card_my_style_one_big_img_container||v.getId()==R.id.card_description_with_price_container) {
                 cardContainerClick(getAdapterPosition() - 1);
             }
         }
@@ -584,7 +590,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name,
                 card_fashion_details4_txt;
         RelativeLayout card_header_container;
-        LinearLayout card_fashion_deatails4_img_container;
+        LinearLayout card_fashion_deatails4_img_container,card_description_with_price_container;
 
         public ViewHolder4(View itemView) {
             super(itemView);
@@ -596,6 +602,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             card_fashion_details4_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img3);
             card_fashion_details4_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_img4);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_container=(LinearLayout)itemView.findViewById(R.id.card_description_with_price_container);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             // card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
             card_description_with_price_price = (TextView) itemView.findViewById(R.id.card_description_with_price_price);
@@ -603,13 +610,14 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             card_fashion_deatails4_img_container = (LinearLayout) itemView.findViewById(R.id.card_fashion_deatails4_img_container);
             card_fashion_deatails4_img_container.setOnClickListener(this);
+            card_description_with_price_container.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-            } else if (v.getId() == R.id.card_fashion_deatails4_img_container) {
+            } else if (v.getId() == R.id.card_fashion_deatails4_img_container||v.getId()==R.id.card_description_with_price_container) {
                 cardContainerClick(getAdapterPosition() - 1);
             }
         }
@@ -622,6 +630,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         TextView card_description_with_price_title, card_description_with_price_desc, card_description_with_price_price, tv_tag_desc, tv_tag_name, card_fashion_details4_plus_text,
                 card_fashion_details4_plus_txt;
         RelativeLayout card_header_container, card_fashion_details4_plus_img_container;
+        LinearLayout card_description_with_price_container;
 
         public ViewHolder5(View itemView) {
             super(itemView);
@@ -633,6 +642,7 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             card_fashion_details4_plus_img3 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img3);
             card_fashion_details4_plus_img4 = (ImageView) itemView.findViewById(R.id.card_fashion_details4_plus_img4);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
+            card_description_with_price_container=(LinearLayout)itemView.findViewById(R.id.card_description_with_price_container);
             card_fashion_details4_plus_text = (TextView) itemView.findViewById(R.id.card_fashion_details4_plus_text);
             card_description_with_price_title = (TextView) itemView.findViewById(R.id.card_description_with_price_title);
             // card_description_with_price_desc = (TextView) itemView.findViewById(R.id.card_description_with_price_desc);
@@ -641,13 +651,14 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             tv_tag_name = (TextView) itemView.findViewById(R.id.tv_tag_name);
             card_fashion_details4_plus_img_container = (RelativeLayout) itemView.findViewById(R.id.card_fashion_details4_plus_img_container);
             card_fashion_details4_plus_img_container.setOnClickListener(this);
+            card_description_with_price_container.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.followbtn) {
                 Toast.makeText(context, "Buy Success", Toast.LENGTH_LONG).show();
-            } else if (v.getId() == R.id.card_fashion_details4_plus_img_container) {
+            } else if (v.getId() == R.id.card_fashion_details4_plus_img_container||v.getId()==R.id.card_description_with_price_container) {
                 cardContainerClick(getAdapterPosition() - 1);
             }
         }
