@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.R;
 import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
@@ -23,11 +24,16 @@ public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<Recycle
     Context context;
     int size;
     MovieData.MovieInnerData hits;
+    MovieFragmentInfo.MovieToShopByVideoInterface movieToShopByVideoInterface;
+    String userId;
 
-    public MovieInfoAdapterCrewViewHolder(Context context, MovieData.MovieInnerData hits) {
+    public MovieInfoAdapterCrewViewHolder(Context context, MovieData.MovieInnerData hits,MovieFragmentInfo.MovieToShopByVideoInterface movieToShopByVideoInterface,
+                                          String userId) {
         this.context = context;
         this.size = size;
         this.hits = hits;
+        this.movieToShopByVideoInterface=movieToShopByVideoInterface;
+        this.userId=userId;
     }
 
     @Override
@@ -47,12 +53,13 @@ public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<Recycle
 
         } else if (holder.getItemViewType() == 2) {
             try {
-                if (hits.getHits().get(position).get_source().getCoverPic() != null)
-                    Glide.with(context).load(hits.getHits().get(position).get_source().getCoverPic())
+                if (hits.getHits().get(0).get_source().getCrew() != null&&hits.getHits().get(0).get_source().getCrew().size()!=0)
+                {
+                    Glide.with(context).load(hits.getHits().get(0).get_source().getCrew().get(position).getProfilePic())
                             .transform(new FaceCenterCrop())
                             .into(((ViewHolder2) holder).card_movie_info_cast_recycler_item_image);
-                if (hits.getHits().get(position).get_source().getTitle() != null)
-                    ((ViewHolder2) holder).card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(position).get_source().getTitle());
+                        ((ViewHolder2) holder).card_movie_info_cast_recycler_item_name.setText(hits.getHits().get(0).get_source().getCrew().get(position).getName());
+                }
             } catch (Exception e) {
 
             }
@@ -90,6 +97,12 @@ public class MovieInfoAdapterCrewViewHolder extends RecyclerView.Adapter<Recycle
             super(itemView);
             card_movie_info_cast_recycler_item_image = (ImageView) itemView.findViewById(R.id.card_movie_info_cast_recycler_item_image);
             card_movie_info_cast_recycler_item_name = (TextView) itemView.findViewById(R.id.card_movie_info_cast_recycler_item_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    movieToShopByVideoInterface.test(hits.getHits().get(0).get_source().getCrew().get(getAdapterPosition()).getSlug(),new CelebrityFragment(),2,userId,hits.getHits().get(0).get_source().getCrew().get(getAdapterPosition()).getId());
+                }
+            });
         }
     }
 }

@@ -263,13 +263,13 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Cast");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context, hits);
+            movieInfoAdapterCastViewHolder = new MovieInfoAdapterCastViewHolder(context, hits,movieToShopByVideoInterface,userId);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCastViewHolder);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Crew");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
-            movieInfoAdapterCrewViewHolder = new MovieInfoAdapterCrewViewHolder(context, hits);
+            movieInfoAdapterCrewViewHolder = new MovieInfoAdapterCrewViewHolder(context, hits,movieToShopByVideoInterface,userId);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler.setAdapter(movieInfoAdapterCrewViewHolder);
         } else if (holder.getItemViewType() == 6) {
             //((ViewHolder6)holder).textView.setText("videos");

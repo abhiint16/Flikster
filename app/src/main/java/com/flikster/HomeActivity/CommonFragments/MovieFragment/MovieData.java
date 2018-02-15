@@ -182,6 +182,16 @@ public class MovieData {
                      private String name;
                      @SerializedName("slug")
                      private String slug;
+                     @SerializedName("id")
+                     private String id;
+
+                     public String getId() {
+                         return id;
+                     }
+
+                     public void setId(String id) {
+                         this.id = id;
+                     }
 
                      public String getProfilePic() {
                          return profilePic;
@@ -216,6 +226,16 @@ public class MovieData {
                      private String name;
                      @SerializedName("slug")
                      private String slug;
+                     @SerializedName("id")
+                     private String id;
+
+                     public String getId() {
+                         return id;
+                     }
+
+                     public void setId(String id) {
+                         this.id = id;
+                     }
 
                      public String getProfilePic() {
                          return profilePic;

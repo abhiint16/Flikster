@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
 import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
@@ -24,10 +25,15 @@ public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<Recycle
     Context context;
     int size;
     MovieData.MovieInnerData hits;
+    MovieFragmentInfo.MovieToShopByVideoInterface movieToShopByVideoInterface;
+    String userId;
 
-    public MovieInfoAdapterCastViewHolder(Context context, MovieData.MovieInnerData hits) {
+    public MovieInfoAdapterCastViewHolder(Context context, MovieData.MovieInnerData hits,MovieFragmentInfo.MovieToShopByVideoInterface movieToShopByVideoInterface,
+                                          String userId) {
         this.context = context;
         this.hits = hits;
+        this.userId=userId;
+        this.movieToShopByVideoInterface=movieToShopByVideoInterface;
     }
 
     @Override
@@ -94,8 +100,7 @@ public class MovieInfoAdapterCastViewHolder extends RecyclerView.Adapter<Recycle
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, GalleryFullScreen.class);
-            context.startActivity(intent);
+            movieToShopByVideoInterface.test(hits.getHits().get(0).get_source().getCast().get(getAdapterPosition()).getSlug(), new CelebrityFragment(), 2, userId, hits.getHits().get(0).get_source().getCast().get(getAdapterPosition()).getId());
         }
     }
 }
