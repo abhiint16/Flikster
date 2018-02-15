@@ -20,6 +20,7 @@ import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Cur
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebBioImagesData;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryData;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryDataFromImage;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedMoviesData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.RecommendedProductData;
@@ -76,6 +77,9 @@ public interface ApiInterface {
 
     @GET
     Call<CelebrityData> getCelebrityData(@Url String url);
+
+    @GET
+    Call<GalleryDataFromImage> getGalleryDataFromImage(@Url String url);
 
     @GET
     Call<SearchGalleryData> getSearchGalleryData(@Url String url);

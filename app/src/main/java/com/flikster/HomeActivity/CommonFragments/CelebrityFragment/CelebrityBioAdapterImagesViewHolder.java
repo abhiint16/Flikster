@@ -11,12 +11,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
+import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryDataFromImage;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryFullScreen;
 import com.flikster.R;
 import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 13-10-2017.
@@ -25,9 +33,16 @@ import java.util.List;
 public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<CelebBioImagesData.CelebBioImagesDataInner> celebALlImages=new ArrayList<>();
     Context context;
-    public CelebrityBioAdapterImagesViewHolder(Context context,List<CelebBioImagesData.CelebBioImagesDataInner> celebALlImages) {
+    CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface;
+    String userId;
+    ApiInterface apiInterface;
+    public CelebrityBioAdapterImagesViewHolder(Context context, List<CelebBioImagesData.CelebBioImagesDataInner> celebALlImages,
+                                               CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface,
+                                               String userId) {
         this.context=context;
         this.celebALlImages=celebALlImages;
+        this.celebToShopByVideoInterface=celebToShopByVideoInterface;
+        this.userId=userId;
     }
 
     @Override
@@ -90,6 +105,55 @@ public class CelebrityBioAdapterImagesViewHolder extends RecyclerView.Adapter<Re
             super(itemView);
             carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
             carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    retrofitForImageGallery();
+                }
+            });
+        }
+        private void retrofitForImageGallery() {
+            apiInterface = ApiClient.getClient("http://apiservice.flikster.com/v3/content-ms/getContentById/").create(ApiInterface.class);
+            Call<GalleryDataFromImage> call = apiInterface.getGalleryDataFromImage("http://apiservice.flikster.com/v3/content-ms/getContentById/"+celebALlImages.get(getAdapterPosition()).getId());
+            call.enqueue(new Callback<GalleryDataFromImage>() {
+                @Override
+                public void onResponse(Call<GalleryDataFromImage> call, Response<GalleryDataFromImage> response) {
+                    if (response.body().getMovie() != null&&
+                            response.body().getMovie().size()!=0) {
+                        celebToShopByVideoInterface.galleryCardOnClick(response.body().getMedia().getGallery(),
+                                response.body().getMovie().get(0).getName(),
+                                response.body().getMovie().get(0).getProfilePic(),
+                                response.body().getMovie().get(0).getType(),
+                                response.body().getTitle(),
+                                new GalleryCardClick(), userId,
+                                response.body().getMovie().get(0).getId(),
+                                response.body().getMovie().get(0).getId(),response.body().getMovie().get(0).getSlug());
+                    } else if (response.body().getCeleb() != null&&
+                            response.body().getCeleb().size()!=0) {
+                        celebToShopByVideoInterface.galleryCardOnClick(response.body().getMedia().getGallery(),
+                                response.body().getCeleb().get(0).getName(),
+                                response.body().getCeleb().get(0).getProfilePic(),
+                                response.body().getCeleb().get(0).getType(),
+                                response.body().getTitle(),
+                                new GalleryCardClick(), userId,
+                                response.body().getCeleb().get(0).getId(),
+                                response.body().getCeleb().get(0).getId(),response.body().getCeleb().get(0).getSlug());
+                    } else {
+                        celebToShopByVideoInterface.galleryCardOnClick(response.body().getMedia().getGallery(),
+                                "",
+                                "", "", response.body().getTitle(),
+                                new GalleryCardClick(), userId,
+                                response.body().getCeleb().get(0).getId(),
+                                response.body().getCeleb().get(0).getId(),"");
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GalleryDataFromImage> call, Throwable t) {
+                    Log.e("vvvvvvvvvv","vv"+call+t);
+                }
+            });
         }
     }
 }

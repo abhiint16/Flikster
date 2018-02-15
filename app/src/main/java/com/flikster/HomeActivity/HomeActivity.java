@@ -1091,6 +1091,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         }
     }
 
+    /*@Override
+    public void imageClickToGallery(String userId, String id, String slug,Fragment fragment,String staticString) {
+        GalleryCardClick galleryCardClick = (GalleryCardClick) fragment;
+        galleryCardClick.updateDataFromImage(userId, id, slug, staticString);
+        firstTimeLaunch(fragment);
+    }*/
+
     @Override
     public void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type,
                                    String title, Fragment fragment, String userId, String entityId,String cardId,String slug) {

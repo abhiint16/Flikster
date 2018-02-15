@@ -94,8 +94,11 @@ public class CelebrityFragmentBio extends Fragment {
     }
 
     public interface CelebToShopByVideoInterface {
+        void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
+                                Fragment fragment,String userId,String entityId,String cardId,String slug);
         void playShopByVideoMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
         void test(String name, Fragment fragment, int getClass, String userId, String entityId);
+        //void imageClickToGallery(String userId,String id,String slug,Fragment fragment,String staticString);
     }
 
     @Override

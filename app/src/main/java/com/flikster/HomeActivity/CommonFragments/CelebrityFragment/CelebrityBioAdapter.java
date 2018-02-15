@@ -259,7 +259,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 /*Log.e("check msg", "" + response.body().getStatusCode());
                 Log.e("check msg", "" + response.body().getData());*/
                 celebAllImages = response.body().getData();
-                celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context, celebAllImages);
+                celebrityBioAdapterImagesViewHolder = new CelebrityBioAdapterImagesViewHolder(context, celebAllImages,celebToShopByVideoInterface,userId);
                 fragment_common_recyclerview_with_tv_recycler.setAdapter(celebrityBioAdapterImagesViewHolder);
             }
 

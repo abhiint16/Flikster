@@ -96,6 +96,8 @@ public class MovieFragmentInfo extends Fragment {
     }
 
     public interface MovieToShopByVideoInterface {
+        void galleryCardOnClick(List<String> galleryImgLinks, String name, String profilePic, String type, String title,
+                                Fragment fragment,String userId,String entityId,String cardId,String slug);
         void test(String name, Fragment fragment, int getClass, String userId, String entityId);
         void playShopByVideoMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
     }
