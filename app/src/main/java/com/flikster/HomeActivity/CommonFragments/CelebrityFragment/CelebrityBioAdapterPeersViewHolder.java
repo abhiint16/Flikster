@@ -25,11 +25,13 @@ public class CelebrityBioAdapterPeersViewHolder extends RecyclerView.Adapter<Rec
     Context context;
     MovieData.MovieInnerData movieInnerData;
     String entityId;
+    String userId;
 
     public CelebrityBioAdapterPeersViewHolder(Context context, MovieData.MovieInnerData movieInnerData, CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface,
-                                              String entityId) {
+                                              String entityId,String userId) {
         this.celebToShopByVideoInterface=celebToShopByVideoInterface;
         this.context=context;
+        this.userId=userId;
         this.movieInnerData=movieInnerData;
         this.entityId=entityId;
     }
@@ -99,6 +101,12 @@ public class CelebrityBioAdapterPeersViewHolder extends RecyclerView.Adapter<Rec
             super(itemView);
             carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
             carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    celebToShopByVideoInterface.test(movieInnerData.getHits().get(0).get_source().getCast().get(getAdapterPosition()).getSlug(), new CelebrityFragment(), 2, userId, movieInnerData.getHits().get(0).get_source().getCast().get(getAdapterPosition()).getId());
+                }
+            });
         }
     }
 }
