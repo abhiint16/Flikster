@@ -287,7 +287,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }*/
 
                 } else if ("filmography".equals(type)) {
-                    celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder(context, movieInnerData, celebToShopByVideoInterface);
+                    celebrityBioAdapterFilmographyViewHolder = new CelebrityBioAdapterFilmographyViewHolder(context, movieInnerData, celebToShopByVideoInterface,userId);
                     recyclerView.setAdapter(celebrityBioAdapterFilmographyViewHolder);
                 }
                 /*else {

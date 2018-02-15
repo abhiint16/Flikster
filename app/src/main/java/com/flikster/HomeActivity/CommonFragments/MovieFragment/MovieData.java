@@ -82,6 +82,16 @@ public class MovieData {
                  private  String storyLine;
                  @SerializedName("slug")
                  private  String slug;
+                 @SerializedName("id")
+                 private  String id;
+
+                 public String getId() {
+                     return id;
+                 }
+
+                 public void setId(String id) {
+                     this.id = id;
+                 }
 
                  public String getSlug() {
                      return slug;

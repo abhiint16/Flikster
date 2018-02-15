@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
+import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.R;
 import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
@@ -24,12 +25,15 @@ public class CelebrityBioAdapterFilmographyViewHolder extends RecyclerView.Adapt
     CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface;
     Context context;
     MovieData.MovieInnerData movieInnerData;
+    String userId;
 
 
-    public CelebrityBioAdapterFilmographyViewHolder(Context context, MovieData.MovieInnerData movieInnerData, CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface) {
+    public CelebrityBioAdapterFilmographyViewHolder(Context context, MovieData.MovieInnerData movieInnerData, CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface,
+                                                    String userId) {
         this.celebToShopByVideoInterface=celebToShopByVideoInterface;
         this.context=context;
         this.movieInnerData=movieInnerData;
+        this.userId=userId;
     }
 
     @Override
@@ -92,6 +96,12 @@ public class CelebrityBioAdapterFilmographyViewHolder extends RecyclerView.Adapt
             super(itemView);
             carousel_image=(ImageView)itemView.findViewById(R.id.carousel_image);
             carousel_title=(TextView)itemView.findViewById(R.id.carousel_title);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    celebToShopByVideoInterface.test(movieInnerData.getHits().get(getAdapterPosition()).get_source().getSlug(), new MovieFragment(), 1, userId, movieInnerData.getHits().get(getAdapterPosition()).get_source().getId());
+                }
+            });
         }
     }
 }
