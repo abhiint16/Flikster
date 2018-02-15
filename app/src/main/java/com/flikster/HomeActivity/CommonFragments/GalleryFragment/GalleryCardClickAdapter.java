@@ -162,7 +162,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
 
-            gallary_recycler_item_img.setOnClickListener(this);
+            //gallary_recycler_item_img.setOnClickListener(this);
         }
 
         @Override
