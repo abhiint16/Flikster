@@ -24,11 +24,14 @@ public class CelebrityBioAdapterPeersViewHolder extends RecyclerView.Adapter<Rec
     CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface;
     Context context;
     MovieData.MovieInnerData movieInnerData;
+    String entityId;
 
-    public CelebrityBioAdapterPeersViewHolder(Context context, MovieData.MovieInnerData movieInnerData, CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface) {
+    public CelebrityBioAdapterPeersViewHolder(Context context, MovieData.MovieInnerData movieInnerData, CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface,
+                                              String entityId) {
         this.celebToShopByVideoInterface=celebToShopByVideoInterface;
         this.context=context;
         this.movieInnerData=movieInnerData;
+        this.entityId=entityId;
     }
 
     @Override

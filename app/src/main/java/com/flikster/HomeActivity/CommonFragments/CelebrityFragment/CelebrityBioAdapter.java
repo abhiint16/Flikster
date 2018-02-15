@@ -279,7 +279,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 movieInnerData = response.body().getHits();
                 if ("peers".equals(type)) {
 //                    if (movieInnerData.getHits().size() != 0) {
-                        celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder(context, movieInnerData, celebToShopByVideoInterface);
+                        celebrityBioAdapterPeersViewHolder = new CelebrityBioAdapterPeersViewHolder(context, movieInnerData, celebToShopByVideoInterface,entityId);
                         recyclerView.setAdapter(celebrityBioAdapterPeersViewHolder);
                     /*} else {
                         recyclerView.setVisibility(View.GONE);
