@@ -188,8 +188,8 @@ public class PostRetrofit {
         call.enqueue(new Callback<ModelForPostRequest>() {
             @Override
             public void onResponse(Call<ModelForPostRequest> call, Response<ModelForPostRequest> response) {
-                bookmarkBtn.setImageResource(0);
-                bookmarkBtn.setImageResource(R.drawable.bookmark_yellow);
+                //bookmarkBtn.setImageResource(0);
+               // bookmarkBtn.setImageResource(R.drawable.bookmark_yellow);
             }
 
             @Override
