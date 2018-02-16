@@ -157,7 +157,9 @@ public class IntroSlider extends AppCompatActivity implements SharedPrefMethods,
             }
         }
         if (view.getId() == R.id.btn_skip) {
-            launchHomeScreen();
+            //launchHomeScreen();
+            //Log.e("check current ite,",""+viewPager.getCurrentItem());
+            viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
         }
 
     }

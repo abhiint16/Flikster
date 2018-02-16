@@ -75,6 +75,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private ImageButton back_btn;
     Button btnLoginGoogle;
     String comingPage = "";
+    TextView login_signup_text,login_signup_btn;
 //    Button btnLoginFacebook;
 
     //Facebook Login
@@ -167,7 +168,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         headertxt = (TextView) findViewById(R.id.headertxt);
         back_btn = (ImageButton) findViewById(R.id.back_btn);
         without_keycloak = (Button) findViewById(R.id.without_keycloak);
-
+        login_signup_btn=(TextView)findViewById(R.id.login_signup_btn);
+        login_signup_text=(TextView)findViewById(R.id.login_signup_text);
         custom_facebook = (Button) findViewById(R.id.custom_facebook);
         custom_gmail = (Button) findViewById(R.id.custom_gmail);
 
@@ -181,13 +183,18 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         back_btn.setOnClickListener(this);
         custom_facebook.setOnClickListener(this);
         custom_gmail.setOnClickListener(this);
-
+        login_signup_btn.setOnClickListener(this);
+        login_signup_text.setOnClickListener(this);
         comingPage = SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE");
         if (comingPage != null && !comingPage.isEmpty()) {
             if (comingPage.equals("SIGNUP")) {
                 headertxt.setText("REGISTER");
+                login_signup_text.setText("Already have an account?");
+                login_signup_btn.setText(" SignIn");
             } else {
                 headertxt.setText("LOGIN");
+                login_signup_text.setText("Don't have an account?");
+                login_signup_btn.setText(" SignUp");
             }
         }
 
@@ -258,6 +265,23 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                 } else {
                     gotoEmailLogin("email");
                 }
+            }
+        }
+        else if (view.getId()==R.id.login_signup_btn||view.getId()==R.id.login_signup_text)
+        {
+            if ("SIGNUP".equals(SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE")))
+            {
+                headertxt.setText("LOGIN");
+                login_signup_text.setText("Don't have an account?");
+                login_signup_btn.setText(" SignUp");
+                SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
+            }
+            else
+            {
+                headertxt.setText("REGISTER");
+                login_signup_text.setText("Already have an account?");
+                login_signup_btn.setText(" SignIn");
+                SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "SIGNUP");
             }
         }
         /* else if (view.getId() == R.id.btn_login_facebook) {

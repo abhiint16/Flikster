@@ -152,8 +152,9 @@ public class PreferencesView extends AppCompatActivity implements View.OnClickLi
 
     private void lunchHomeScreen() {
         sharedPref.setFirstTimeLaunch2(false);
+        SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "SIGNUP");
         SharedPrefsUtil.setStringPreference(PreferencesView.this, "IS_LOGGED_IN", "NOT_LOGGED_IN");
-        startActivity(new Intent(PreferencesView.this, HomeActivity.class));
+        startActivity(new Intent(PreferencesView.this, AuthenticationActivity.class));
         finish();
     }
 
