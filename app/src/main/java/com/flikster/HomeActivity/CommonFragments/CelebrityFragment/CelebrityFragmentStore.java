@@ -16,6 +16,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import retrofit2.Call;
@@ -77,6 +78,17 @@ public class CelebrityFragmentStore extends Fragment {
         celebrityFragmentStoreRecycler.setLayoutManager(celebrityFragmentStoreLayoutManager);
     }
 
+    public void updateFollowForFirstItem(Boolean followBoolean)
+    {
+        /*SharedPrefsUtil.setBooleanPreference(getActivity(),
+                "FOLLOW_BOOL", followBoolean);
+        SharedPrefsUtil.setStringPreference(getActivity(),
+                "FOLLOW_STRING", "follow");*/
+        /*celebrityStoreAdapter.followBoolean=followBoolean;
+        celebrityStoreAdapter.updateFollow();
+        celebrityStoreAdapter.followString="follow";*/
+    }
+
     private void initializeViews() {
         celebrityFragmentStoreRecycler = (RecyclerView) view.findViewById(R.id.fragment_common_recyclerview_recycler);
         fragmentManager = getActivity().getSupportFragmentManager();
@@ -86,5 +98,9 @@ public class CelebrityFragmentStore extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         GlideFaceDetector.releaseDetector();
+        /*SharedPrefsUtil.setBooleanPreference(getActivity(),
+                "FOLLOW_BOOL", false);
+        SharedPrefsUtil.setStringPreference(getActivity(),
+                "FOLLOW_STRING", "");*/
     }
 }

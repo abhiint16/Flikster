@@ -66,6 +66,8 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     ApiInterface apiInterface;
     int count=4;
     CelebrityFragment.CelebItemClickInterface celebItemClickInterface;
+    Boolean followBoolean;
+    String followString="";
 
     public CelebrityStoreAdapter(Context context, FragmentManager fragmentManager, String coverpic, String biography,
                                  String dateOfBirth, ArrayList<String> role, String placeOfBirth, String name,
@@ -98,6 +100,11 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.biography = biography;
         this.dateOfBirth = dateOfBirth;
         this.hits = hits;
+    }
+
+    public void updateFollow()
+    {
+        notifyItemChanged(0);
     }
 
     @Override
@@ -178,7 +185,27 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (userId != null && !userId.isEmpty()) {
                 new PostRetrofit().checkForLikesCount("like", userId, entityId, ((ViewHolder0) holder).card_celeb_feed_profile_likes_txt, context);
                 new PostRetrofit().checkForFollowersCount("follow", userId, entityId, ((ViewHolder0) holder).card_celeb_feed_profile_followers_txt, context);
-                new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder0) holder).followbtn, context);
+                /*if ("follow".equals(followString))
+                {
+                    if (followBoolean==true)
+                    {
+                        ((ViewHolder0) holder).followbtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+                        ((ViewHolder0) holder).followbtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
+                        ((ViewHolder0) holder).followbtn.setText("Following");
+                        ((ViewHolder0) holder).followbtn.setTextColor(context.getResources().getColor(R.color.white));
+                    }
+                    else if (followBoolean==false)
+                    {
+                        ((ViewHolder0) holder).followbtn.setBackgroundColor(context.getResources().getColor(R.color.black));
+                        ((ViewHolder0) holder).followbtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded));
+                        ((ViewHolder0) holder).followbtn.setText("follow");
+                        ((ViewHolder0) holder).followbtn.setTextColor(context.getResources().getColor(R.color.black));
+                    }
+                }
+                else
+                {*/
+                    new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder0) holder).followbtn, context);
+                /*}*/
             } else {
                 new PostRetrofit().checkForLikesCount("like", "null", entityId, ((ViewHolder0) holder).card_celeb_feed_profile_likes_txt, context);
                 new PostRetrofit().checkForFollowersCount("follow", "null", entityId, ((ViewHolder0) holder).card_celeb_feed_profile_followers_txt, context);
@@ -459,6 +486,14 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 @Override
                 public void onClick(View v) {
                     Common.followOrUnFollow(context, followbtn, userId, entityId);
+                    if (followbtn.getText().toString().equals("follow"))
+                    {
+                        celebItemClickInterface.followBtnChange(true,3);
+                    }
+                    else
+                    {
+                        celebItemClickInterface.followBtnChange(false,3);
+                    }
                 }
             });
         }

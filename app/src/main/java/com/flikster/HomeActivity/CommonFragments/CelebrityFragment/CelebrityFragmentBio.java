@@ -17,6 +17,7 @@ import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieData;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieInfoAdapter;
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.List;
@@ -98,7 +99,19 @@ public class CelebrityFragmentBio extends Fragment {
                                 Fragment fragment,String userId,String entityId,String cardId,String slug);
         void playShopByVideoMethod(String audioLink, Fragment fragment, String audioImg, String type, List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts);
         void test(String name, Fragment fragment, int getClass, String userId, String entityId);
+        void followBtnChange(Boolean followBoolean,int type);
         //void imageClickToGallery(String userId,String id,String slug,Fragment fragment,String staticString);
+    }
+
+    public void updateFollowForFirstItem(Boolean followBoolean)
+    {
+        /*SharedPrefsUtil.setBooleanPreference(getActivity(),
+                "FOLLOW_BOOL", followBoolean);
+        SharedPrefsUtil.setStringPreference(getActivity(),
+                "FOLLOW_STRING", "follow");*/
+        /*celebrityBioAdapter.followBoolean=followBoolean;
+        celebrityBioAdapter.updateFollow();
+        celebrityBioAdapter.followString="follow";*/
     }
 
     @Override
@@ -111,5 +124,9 @@ public class CelebrityFragmentBio extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         GlideFaceDetector.releaseDetector();
+        /*SharedPrefsUtil.setBooleanPreference(getActivity(),
+                "FOLLOW_BOOL", false);
+        SharedPrefsUtil.setStringPreference(getActivity(),
+                "FOLLOW_STRING", "");*/
     }
 }

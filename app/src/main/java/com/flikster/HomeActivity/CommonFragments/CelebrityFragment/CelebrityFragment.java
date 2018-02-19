@@ -184,6 +184,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                                      String productSlug, List<String> imageGallery,
                                      String profilepic,List<String> role,String name,String title,
                                      Fragment fragment);
+        void followBtnChange(Boolean followBoolean,int type);
         void seeMoreComments(String userName, String userId, String entityId);
     }
 

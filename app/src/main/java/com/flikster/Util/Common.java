@@ -41,6 +41,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentBio;
 import com.flikster.HomeActivity.FeedFragment.BitmapLoadingInBack;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
@@ -187,7 +189,7 @@ public class Common {
                 followcolorChange(followbtn, context);
                 new PostRetrofit().postRetrofitFollowMethod("follow", userId, entityId, followbtn, context);
             } else {
-                Toast.makeText(context, "You Unfollowing", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "You Unfollowing", Toast.LENGTH_LONG).show();
                 unfollowcolorChange(followbtn, context);
                 new PostRetrofit().postRetrofitFollowMethod("follow", userId, entityId, followbtn, context);
             }

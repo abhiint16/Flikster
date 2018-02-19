@@ -60,6 +60,8 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     String entityId;
     String slug;
     CelebrityFragmentBio.CelebToShopByVideoInterface celebToShopByVideoInterface;
+    Boolean followBoolean;
+    String followString="";
 
 
     public CelebrityBioAdapter(Context context, FragmentManager fragmentManager, String coverpic, String biography,
@@ -84,6 +86,11 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.dateOfBirth = dateOfBirth;
         this.slug = slug;
         this.celebToShopByVideoInterface = celebToShopByVideoInterface;
+    }
+
+    public void updateFollow()
+    {
+        notifyItemChanged(0);
     }
 
     @Override
@@ -213,7 +220,27 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (userId != null && !userId.isEmpty()) {
                 new PostRetrofit().checkForLikesCount("like", userId, entityId, ((ViewHolder1) holder).card_celeb_bio_likes_txt, context);
                 new PostRetrofit().checkForFollowersCount("follow", userId, entityId, ((ViewHolder1) holder).card_celeb_bio_followers_txt, context);
-                new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder1) holder).followbtn, context);
+                /*if ("follow".equals(followString))
+                {
+                    if (followBoolean==true)
+                    {
+                        ((ViewHolder1) holder).followbtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+                        ((ViewHolder1) holder).followbtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
+                        ((ViewHolder1) holder).followbtn.setText("Following");
+                        ((ViewHolder1) holder).followbtn.setTextColor(context.getResources().getColor(R.color.white));
+                    }
+                    else if (followBoolean==false)
+                    {
+                        ((ViewHolder1) holder).followbtn.setBackgroundColor(context.getResources().getColor(R.color.black));
+                        ((ViewHolder1) holder).followbtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded));
+                        ((ViewHolder1) holder).followbtn.setText("follow");
+                        ((ViewHolder1) holder).followbtn.setTextColor(context.getResources().getColor(R.color.black));
+                    }
+                }
+                else
+                {*/
+                    new PostRetrofit().checkForFollow("follow", userId, entityId, ((ViewHolder1) holder).followbtn, context);
+                /*}*/
             } else {
                 new PostRetrofit().checkForLikesCount("like", "null", entityId, ((ViewHolder1) holder).card_celeb_bio_likes_txt, context);
                 new PostRetrofit().checkForFollowersCount("follow", "null", entityId, ((ViewHolder1) holder).card_celeb_bio_followers_txt, context);
@@ -364,6 +391,15 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onClick(View v) {
                     Common.followOrUnFollow(context, followbtn, userId, entityId);
+                    if (followbtn.getText().toString().equals("follow"))
+                    {
+                        celebToShopByVideoInterface.followBtnChange(true,2);
+                    }
+                    else
+                    {
+                        celebToShopByVideoInterface.followBtnChange(false,2);
+                    }
+                    //celebToShopByVideoInterface.followBtnChange(true);
                 }
             });
         }

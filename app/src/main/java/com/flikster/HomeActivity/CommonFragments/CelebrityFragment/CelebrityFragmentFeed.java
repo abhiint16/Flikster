@@ -16,6 +16,7 @@ import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.R;
+import com.flikster.Util.SharedPrefsUtil;
 import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import retrofit2.Call;
@@ -74,6 +75,17 @@ public class CelebrityFragmentFeed extends Fragment {
         });
     }
 
+    public void updateFollowForFirstItem(Boolean followBoolean)
+    {
+        /*SharedPrefsUtil.setBooleanPreference(getActivity(),
+                "FOLLOW_BOOL", followBoolean);
+        SharedPrefsUtil.setStringPreference(getActivity(),
+                "FOLLOW_STRING", "follow");*/
+        /*celebrityFeedAdapter.followBoolean=followBoolean;
+        celebrityFeedAdapter.updateFollow();*/
+        //celebrityFeedAdapter.followString="follow";
+    }
+
     private void initializeRest() {
         celebrityFragmentFeedLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         celebrityFragmentFeedRecycler.setLayoutManager(celebrityFragmentFeedLayoutManager);
@@ -88,5 +100,9 @@ public class CelebrityFragmentFeed extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         GlideFaceDetector.releaseDetector();
+        /*SharedPrefsUtil.setBooleanPreference(getActivity(),
+                "FOLLOW_BOOL", false);
+        SharedPrefsUtil.setStringPreference(getActivity(),
+                "FOLLOW_STRING", "");*/
     }
 }

@@ -74,6 +74,8 @@ import com.flikster.CheckoutActivity.CheckoutFragment.InstamojoData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentBio;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentFeed;
+import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentStore;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragmentInfo;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
@@ -1088,6 +1090,31 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             CelebrityFragment celebrityFragment = (CelebrityFragment) fragment;
             celebrityFragment.updateInfo(name, userId, entityId);
             firstTimeLaunch(fragment);
+        }
+    }
+
+    @Override
+    public void followBtnChange(Boolean followBoolean,int type) {
+        if (type==1)
+        {
+            CelebrityFragmentBio celebrityFragmentBio=new CelebrityFragmentBio();
+            CelebrityFragmentStore celebrityFragmentStore=new CelebrityFragmentStore();
+            celebrityFragmentBio.updateFollowForFirstItem(followBoolean);
+            celebrityFragmentStore.updateFollowForFirstItem(followBoolean);
+        }
+        else if (type==2)
+        {
+            CelebrityFragmentFeed celebrityFragmentFeed=new CelebrityFragmentFeed();
+            CelebrityFragmentStore celebrityFragmentStore=new CelebrityFragmentStore();
+            celebrityFragmentFeed.updateFollowForFirstItem(followBoolean);
+            celebrityFragmentStore.updateFollowForFirstItem(followBoolean);
+        }
+        else if (type==3)
+        {
+            CelebrityFragmentFeed celebrityFragmentFeed=new CelebrityFragmentFeed();
+            CelebrityFragmentBio celebrityFragmentBio=new CelebrityFragmentBio();
+            celebrityFragmentFeed.updateFollowForFirstItem(followBoolean);
+            celebrityFragmentBio.updateFollowForFirstItem(followBoolean);
         }
     }
 
