@@ -201,10 +201,10 @@ public class Common {
 
 
     public static void followcolorChange(Button followbtn, Context context) {
-        followbtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-        followbtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
+        followbtn.setBackgroundColor(context.getResources().getColor(R.color.transparent));
+        followbtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounder_pink_follow));
         followbtn.setText("Following");
-        followbtn.setTextColor(context.getResources().getColor(R.color.white));
+        followbtn.setTextColor(context.getResources().getColor(R.color.colorAccent));
     }
 
     public static void unfollowcolorChange(Button followbtn, Context context) {

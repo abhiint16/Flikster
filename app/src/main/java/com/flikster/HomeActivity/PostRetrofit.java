@@ -151,10 +151,10 @@ public class PostRetrofit {
 //                Log.e("Follow SUCCESS", response.body().getData().getCount() + "SUCCESS");
                 try {
                     if (response.body().getData().getCount().equals("1")) {
-                        followBtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-                        followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
+                        followBtn.setBackgroundColor(context.getResources().getColor(R.color.transparent));
+                        followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounder_pink_follow));
                         followBtn.setText("Following");
-                        followBtn.setTextColor(context.getResources().getColor(R.color.white));
+                        followBtn.setTextColor(context.getResources().getColor(R.color.colorAccent));
                     } else {
                         followBtn.setBackgroundColor(context.getResources().getColor(R.color.black));
                         followBtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded));

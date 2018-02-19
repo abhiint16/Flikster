@@ -2481,10 +2481,10 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void followcolorChange(Button followbtn) {
-        followbtn.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
-        followbtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounded_pink));
+        followbtn.setBackgroundColor(context.getResources().getColor(R.color.transparent));
+        followbtn.setBackground(context.getResources().getDrawable(R.drawable.corner_rounder_pink_follow));
         followbtn.setText("Following");
-        followbtn.setTextColor(context.getResources().getColor(R.color.white));
+        followbtn.setTextColor(context.getResources().getColor(R.color.colorAccent));
     }
 
     private void unfollowcolorChange(Button followbtn) {
