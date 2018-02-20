@@ -189,11 +189,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         if (comingPage != null && !comingPage.isEmpty()) {
             if (comingPage.equals("SIGNUP")) {
                 headertxt.setText("REGISTER");
-                login_signup_text.setText("Already have an account?");
-                login_signup_btn.setText(" SignIn");
+                login_signup_text.setText("If you already have an account, please");
+                login_signup_btn.setText(" Login");
             } else {
                 headertxt.setText("LOGIN");
-                login_signup_text.setText("Don't have an account?");
+                login_signup_text.setText("Id you don't have an account, please");
                 login_signup_btn.setText(" SignUp");
             }
         }
