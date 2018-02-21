@@ -48,7 +48,7 @@
     <string name="login_screen_mail">EMAIL</string>
     <string name="login_screen_facebook">FACEBOOK</string>
     <string name="login_screen_google">GOOGLE</string>
-    <string name="login_screen_condition">By creating an account, you are agree to our </string>
+    <string name="login_screen_condition">By creating an account, you agree to our </string>
     <string name="login_screen_terms">Terms &amp; Conditions</string>
 
     <!-- preferences -->

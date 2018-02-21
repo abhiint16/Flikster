@@ -9,6 +9,7 @@ import android.content.pm.Signature;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.flikster.Authentication.LoginActivity.LoginWithEmailOrMobileActivity;
+import com.flikster.Authentication.NewDesignRegister.RegisterPhoneEmail;
 import com.flikster.Authentication.OtpAndResendOtpActivity.OtpActivity;
 import com.flikster.Authentication.SignUpActivity.SignUpWithEmail.SignUpWithEmailActivity;
 //import com.flikster.Authentication.SignUpActivity.SignUpWithPhoneNo.SignUpWithPhoneActivity;
@@ -75,7 +77,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private ImageButton back_btn;
     Button btnLoginGoogle;
     String comingPage = "";
-    TextView login_signup_text,login_signup_btn;
+    TextView login_signup_text,login_signup_btn,quote_text;
 //    Button btnLoginFacebook;
 
     //Facebook Login
@@ -162,7 +164,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         btnLoginEmail = (Button) findViewById(R.id.btn_login_mail);
         btnLoginGoogle = (Button) findViewById(R.id.btnLoginGoogle);
         btnLoginFacebook = (LoginButton) findViewById(R.id.btn_login_facebook);
-        tvLoginTermsCond = (TextView) findViewById(R.id.tv_login_terms);
+        //tvLoginTermsCond = (TextView) findViewById(R.id.tv_login_terms);
         keycloak = (Button) findViewById(R.id.keycloak);
         skip_preference_txt = (TextView) findViewById(R.id.skip_preference_txt);
         headertxt = (TextView) findViewById(R.id.headertxt);
@@ -172,14 +174,14 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         login_signup_text=(TextView)findViewById(R.id.login_signup_text);
         custom_facebook = (Button) findViewById(R.id.custom_facebook);
         custom_gmail = (Button) findViewById(R.id.custom_gmail);
-
+        quote_text=(TextView)findViewById(R.id.quote_text);
         without_keycloak.setOnClickListener(this);
         keycloak.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
         btnLoginEmail.setOnClickListener(this);
         btnLoginGoogle.setOnClickListener(this);
         btnLoginFacebook.setOnClickListener(this);
-        tvLoginTermsCond.setOnClickListener(this);
+        //tvLoginTermsCond.setOnClickListener(this);
         back_btn.setOnClickListener(this);
         custom_facebook.setOnClickListener(this);
         custom_gmail.setOnClickListener(this);
@@ -188,13 +190,15 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         comingPage = SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE");
         if (comingPage != null && !comingPage.isEmpty()) {
             if (comingPage.equals("SIGNUP")) {
-                headertxt.setText("REGISTER");
-                login_signup_text.setText("If you already have an account, please");
-                login_signup_btn.setText(" Login");
+                quote_text.setText("\"Join our exclusive community of movie, celebrity & fashion enthusiasts.\"");
+                headertxt.setText("Register");
+                login_signup_text.setText("If you already have an account, please ");
+                login_signup_btn.setText(Html.fromHtml(" <u>Login</u>"));
             } else {
-                headertxt.setText("LOGIN");
-                login_signup_text.setText("Id you don't have an account, please");
-                login_signup_btn.setText(" SignUp");
+                quote_text.setText("\"Welcome to the one stop for all your Movie and Fashion needs.\"");
+                headertxt.setText("Login");
+                login_signup_text.setText("If you don't have an account, please ");
+                login_signup_btn.setText(Html.fromHtml(" <u>SignUp</u>"));
             }
         }
 
@@ -271,25 +275,31 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         {
             if ("SIGNUP".equals(SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE")))
             {
-                headertxt.setText("LOGIN");
-                login_signup_text.setText("Don't have an account?");
-                login_signup_btn.setText(" SignUp");
+                Log.e("check for sign1",""+SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE"));
+                headertxt.setText("Login");
+                login_signup_text.setText("If you don't have an account, please ");
+                login_signup_btn.setText(Html.fromHtml(" <u>SignUp</u>"));
+                quote_text.setText("\"Welcome to the one stop for all your Movie and Fashion needs.\"");
                 SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
+                comingPage=SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE");
             }
             else
             {
-                headertxt.setText("REGISTER");
-                login_signup_text.setText("Already have an account?");
-                login_signup_btn.setText(" SignIn");
+                Log.e("check for sign2",""+SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE"));
+                headertxt.setText("Register");
+                login_signup_text.setText("If you already have an account, please ");
+                quote_text.setText("\"Join our exclusive community of movie, celebrity & fashion enthusiasts.\"");
+                login_signup_btn.setText(Html.fromHtml(" <u>Login</u>"));
                 SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "SIGNUP");
+                comingPage=SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE");
             }
         }
         /* else if (view.getId() == R.id.btn_login_facebook) {
             gotoFacebookLogin();
         }*/
-        else if (view.getId() == R.id.tv_login_terms) {
+        /*else if (view.getId() == R.id.tv_login_terms) {
             showTermsConditions();
-        } else if (view.getId() == R.id.keycloak) {
+        } */else if (view.getId() == R.id.keycloak) {
             SharedPrefsUtil.setStringPreference(AuthenticationActivity.this, "IS_LOGGED_IN", "LOGGED_IN");
             Toast.makeText(getApplicationContext(), "You're now LoggedIn.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
@@ -354,7 +364,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
     private void gotoEmailSignUp(String type) {
         Toast.makeText(getApplicationContext(), "Siging With " + type, Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(AuthenticationActivity.this, SignUpWithEmailActivity.class);
+        Intent i = new Intent(AuthenticationActivity.this, RegisterPhoneEmail.class);
         i.putExtra("TYPE", type);
         startActivity(i);
     }

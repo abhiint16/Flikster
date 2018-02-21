@@ -22,24 +22,36 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:background="@color/transparent"
                 android:clickable="true"
                 android:src="@drawable/leftarrow" />
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@drawable/logotext"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal" />-->
         </RelativeLayout>
         <TextView
             style="@style/headers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/twenty"
-            android:layout_marginBottom="@dimen/ten"
             android:text="Forgot Password" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="50dp">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/simple_line"/>
+        </LinearLayout>
 
 
         <LinearLayout
@@ -57,14 +69,14 @@
                 android:orientation="horizontal"
                 android:visibility="gone">
 
-                <Spinner
+                <!--<Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/login_country_codes"
                     android:paddingBottom="16dp"
                     android:paddingLeft="20dp"
                     android:paddingTop="16dp"
-                    android:spinnerMode="dropdown"></Spinner>
+                    android:spinnerMode="dropdown"></Spinner>-->
 
                 <TextView
                     style="@style/login_vertical_line"
@@ -108,7 +120,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -128,14 +140,14 @@
                 android:paddingBottom="20dp"
                 android:paddingTop="15dp"
                 android:text="@string/login_mobile_terms" />
-        </LinearLayout>
+        </LinearLayout>-->
 
         <Button
             android:id="@+id/btn_mobile_otp_send"
             style="@style/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:text="@string/login_email_send" />
 
 

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_common_recycler_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SKIP &amp; PROCEED"
+        android:layout_alignParentBottom="true"
+        android:padding="30dp"
+        android:id="@+id/register_create_profile_skip"
+        android:background="@color/white"
+        android:gravity="center"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_above="@+id/register_create_profile_skip">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/five">
+
+                    <ImageButton
+                        android:id="@+id/back_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentLeft="true"
+                        android:background="@color/transparent"
+                        android:clickable="true"
+                        android:src="@drawable/leftarrow" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/register_main_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/create_account"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/twenty"
+                    android:textStyle="bold"
+                    android:layout_marginTop="40dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="30dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/simple_line"/>
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_user_pic"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/gray_rectange_border"
+                    android:src="@drawable/user" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_authentication_margin"
+                    android:layout_marginRight="@dimen/activity_authentication_margin"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <EditText
+                                android:id="@+id/register_first_name"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/ten"
+                                android:layout_weight="2"
+                                android:background="@drawable/gray_rectange_border"
+                                android:hint="@string/login_createaccount_fullname"
+                                android:imeOptions="actionNext"
+                                android:cursorVisible="true"
+                                android:maxLines="1"
+                                android:fontFamily="sans-serif-thin"
+                                android:textCursorDrawable="@drawable/cursor_color"
+                                android:textColor="@color/black"
+                                android:padding="15dp"
+                                android:singleLine="true" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/ten"
+                            android:text="Select Gender" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/ten"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/btn_account_male"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="0.4"
+                                android:paddingLeft="@dimen/twenty"
+                                android:fontFamily="sans-serif-thin"
+                                android:gravity="center"
+                                android:background="@color/gender_active_color"
+                                android:drawablePadding="-60dp"
+                                android:drawableLeft="@drawable/maleactivesmall"
+                                android:text="@string/login_createaccount_male"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white" />
+
+                            <Button
+                                android:id="@+id/btn_account_female"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.4"
+                                android:background="@drawable/gray_rectange_border"
+                                android:drawableLeft="@drawable/femaleunactivesmall"
+                                android:drawablePadding="-60dp"
+                                android:paddingLeft="@dimen/twenty"
+                                android:fontFamily="sans-serif-thin"
+                                android:text="@string/login_createaccount_female"
+                                android:textAllCaps="false" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/register_btn"
+                            style="@style/sign_up"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="SUBMIT" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <com.leo.simplearcloader.SimpleArcLoader
+        android:id="@+id/arc_loader"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        custom:arc_colors="@color/colorAccent"
+        custom:arc_margin="3dp"
+        custom:arc_speed="medium"
+        custom:arc_style="simple_arc"
+        custom:arc_thickness="3dp"></com.leo.simplearcloader.SimpleArcLoader>
+</RelativeLayout>

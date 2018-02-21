@@ -3,8 +3,7 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_common_recycler_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
- >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,12 +14,40 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp">
+            <TextView
+                style="@style/headers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/twenty"
+                android:text="Forgot Password"
+                android:id="@+id/activity_login_verify_mobile_otp_header"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/simple_line"
+                    android:id="@+id/activity_login_verify_mobile_otp_underline"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/activity_authentication_margin"
+            android:layout_marginLeft="@dimen/activity_authentication_margin"
+            android:layout_marginRight="@dimen/activity_authentication_margin"
+            android:layout_marginBottom="@dimen/activity_authentication_margin"
             android:background="@color/white"
-            android:gravity="center_vertical"
+            android:paddingTop="100dp"
             android:orientation="vertical">
 
             <TextView
@@ -46,12 +73,12 @@
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:padding="10dp"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <Button
                     android:id="@+id/btn_verify_mobileno_edit"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_weight="0.3"
                     android:background="@drawable/gray_rectange_border"
                     android:text="@string/login_verify_mobileno_edit"
@@ -190,7 +217,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="@string/login_verify_mobile_verify" />
+                android:text="SUBMIT" />
         </LinearLayout>
 
     </LinearLayout>

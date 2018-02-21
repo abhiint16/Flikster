@@ -34,6 +34,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/twenty"
         android:text="@string/login_mobile_title" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/simple_line"/>
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -41,7 +53,8 @@
         android:layout_marginBottom="@dimen/activity_authentication_login_margin"
         android:layout_marginTop="@dimen/activity_authentication_login_margin"
         android:gravity="center"
-        android:text="@string/login_screen_description"
+        android:text=""
+        android:id="@+id/quote_text"
         android:textSize="14sp" />
 
     <LinearLayout
@@ -144,10 +157,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/login_signup_btn"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/checkboxblue"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" here"/>
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -167,9 +184,9 @@
             android:text="@string/login_terms"
             android:textColor="@color/colorCreateAccountSelected"
             android:textSize="11sp" />
-    </LinearLayout>
+    </LinearLayout>-->
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -183,11 +200,11 @@
             android:layout_gravity="center"
             android:paddingTop="@dimen/seven"
             android:clickable="true"
-            android:text="Skip and proceed"
+            android:text="SKIP \&amp; PROCEED"
             android:textSize="13sp"
             android:gravity="center"
             android:layout_alignParentBottom="true"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
