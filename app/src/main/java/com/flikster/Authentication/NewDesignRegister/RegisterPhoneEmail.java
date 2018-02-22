@@ -9,8 +9,10 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.Authentication.AuthenticationActivity;
 import com.flikster.R;
 
 /**
@@ -23,6 +25,7 @@ public class RegisterPhoneEmail extends AppCompatActivity implements View.OnClic
     EditText register_phone_email;
     TextView register_terms_condition;
     String type;
+    ImageButton back_btn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class RegisterPhoneEmail extends AppCompatActivity implements View.OnClic
         register_terms_condition.setOnClickListener(this);
         register_send_otp_phone.setOnClickListener(this);
         register_phone_email.setOnClickListener(this);
+        back_btn.setOnClickListener(this);
         if ("phone".equals(type))
         {
             register_phone_email.setHint("Enter Phone Number");
@@ -51,6 +55,7 @@ public class RegisterPhoneEmail extends AppCompatActivity implements View.OnClic
         register_send_otp_phone=(Button)findViewById(R.id.register_send_otp_phone);
         register_phone_email=(EditText)findViewById(R.id.register_phone_email);
         register_terms_condition=(TextView)findViewById(R.id.register_terms_condition);
+        back_btn=(ImageButton)findViewById(R.id.back_btn);
         register_terms_condition.setText(Html.fromHtml(" <u>Terms & Condition</u>"));
     }
 
@@ -70,6 +75,11 @@ public class RegisterPhoneEmail extends AppCompatActivity implements View.OnClic
         }else if (view.getId()==R.id.register_terms_condition)
         {
 
+        }
+        else if (view.getId()==R.id.back_btn)
+        {
+            Intent intent=new Intent(RegisterPhoneEmail.this, AuthenticationActivity.class);
+            startActivity(intent);
         }
     }
 }

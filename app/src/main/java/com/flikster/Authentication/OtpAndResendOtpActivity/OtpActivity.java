@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     String typeStr, OtpId;
     String PEFORM_FORGET = "";
     String emailOrMobilestr;
+    ImageButton back_btn;
 
     SimpleArcLoader mDialog;
 
@@ -48,6 +50,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void initializeRest() {
+        back_btn.setOnClickListener(this);
         try {
             Log.e("TYPE_DATA", getIntent().getStringExtra("TYPE_DATA"));
             if (getIntent().getStringExtra("TYPE_DATA") != null && !getIntent().getStringExtra("TYPE_DATA").isEmpty()) {
@@ -75,6 +78,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void initializeView() {
+        back_btn=(ImageButton)findViewById(R.id.back_btn);
         etMobileNo = (EditText) findViewById(R.id.tv_verify_mobile);
         btnMobileNoEdit = (Button) findViewById(R.id.btn_verify_mobileno_edit);
         mDialog = (SimpleArcLoader) findViewById(R.id.arc_loader);
@@ -269,6 +273,11 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
             btnMobileNoEdit.setVisibility(View.VISIBLE);
             modifyMobileDisable();
             sendOtpAgain();
+        }
+        else if (view.getId()==R.id.back_btn)
+        {
+            Intent intent=new Intent(OtpActivity.this,SendOtpWithMobileNoActivityOrEmail.class);
+            startActivity(intent);
         }
     }
 

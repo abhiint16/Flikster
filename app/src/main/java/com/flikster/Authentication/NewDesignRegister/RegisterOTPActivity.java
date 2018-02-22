@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class RegisterOTPActivity extends AppCompatActivity implements View.OnCli
     ImageView activity_login_verify_mobile_otp_underline;
     EditText tv_verify_mobile;
     Button btn_verify_mobileno_edit,btn_mob_verify;
+    ImageButton back_btn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +45,12 @@ public class RegisterOTPActivity extends AppCompatActivity implements View.OnCli
             btn_verify_mobileno_edit.setOnClickListener(this);
         }
         btn_mob_verify.setOnClickListener(this);
+        back_btn.setOnClickListener(this);
     }
 
     private void initializeView() {
         btn_verify_mobileno_edit=(Button)findViewById(R.id.btn_verify_mobileno_edit);
+        back_btn=(ImageButton)findViewById(R.id.back_btn);
         activity_login_verify_mobile_otp_header=(TextView)findViewById(R.id.activity_login_verify_mobile_otp_header);
         activity_login_verify_mobile_otp_underline=(ImageView)findViewById(R.id.activity_login_verify_mobile_otp_underline);
         tv_verify_mobile=(EditText)findViewById(R.id.tv_verify_mobile);
@@ -63,6 +67,13 @@ public class RegisterOTPActivity extends AppCompatActivity implements View.OnCli
         }else if (view.getId()==R.id.btn_mob_verify)
         {
             Intent intent=new Intent(RegisterOTPActivity.this,RegisterSetPasswordActivity.class);
+            intent.putExtra("TYPE",getIntent().getStringExtra("TYPE"));
+            intent.putExtra("PhoneEmail",getIntent().getStringExtra("PhoneEmail"));
+            startActivity(intent);
+        }
+        else if (view.getId()==R.id.back_btn)
+        {
+            Intent intent=new Intent(RegisterOTPActivity.this,RegisterPhoneEmail.class);
             intent.putExtra("TYPE",getIntent().getStringExtra("TYPE"));
             startActivity(intent);
         }
