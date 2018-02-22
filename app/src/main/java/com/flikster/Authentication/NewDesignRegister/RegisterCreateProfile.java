@@ -18,7 +18,7 @@ import com.flikster.R;
 
 public class RegisterCreateProfile extends AppCompatActivity implements View.OnClickListener {
 
-    Button register_btn;
+    Button register_btn,btn_account_male,btn_account_female;
     TextView register_create_profile_skip;
     ImageButton back_btn;
     @Override
@@ -33,11 +33,15 @@ public class RegisterCreateProfile extends AppCompatActivity implements View.OnC
         register_btn.setOnClickListener(this);
         register_create_profile_skip.setOnClickListener(this);
         back_btn.setOnClickListener(this);
+        btn_account_male.setOnClickListener(this);
+        btn_account_female.setOnClickListener(this);
     }
 
     private void initializeView() {
         register_btn=(Button)findViewById(R.id.register_btn);
         back_btn=(ImageButton)findViewById(R.id.back_btn);
+        btn_account_female=(Button)findViewById(R.id.btn_account_female);
+        btn_account_male=(Button)findViewById(R.id.btn_account_male);
         register_create_profile_skip=(TextView)findViewById(R.id.register_create_profile_skip);
     }
 
@@ -58,6 +62,24 @@ public class RegisterCreateProfile extends AppCompatActivity implements View.OnC
             intent.putExtra("TYPE",getIntent().getStringExtra("TYPE"));
             intent.putExtra("PhoneEmail",getIntent().getStringExtra("PhoneEmail"));
             startActivity(intent);
+        }
+        else if (view.getId()==R.id.btn_account_female)
+        {
+            btn_account_female.setCompoundDrawablesWithIntrinsicBounds( R.drawable.register_create_account_female_white, 0, 0, 0);
+            btn_account_male.setCompoundDrawablesWithIntrinsicBounds( R.drawable.register_create_account_male_grey, 0, 0, 0);
+            btn_account_female.setTextColor(getResources().getColor(R.color.white));
+            btn_account_male.setTextColor(getResources().getColor(R.color.grey_mid));
+            btn_account_female.setBackgroundColor(getResources().getColor(R.color.gender_active_color));
+            btn_account_male.setBackground(getResources().getDrawable(R.drawable.gray_rectange_border));
+        }
+        else if (view.getId()==R.id.btn_account_male)
+        {
+            btn_account_female.setCompoundDrawablesWithIntrinsicBounds( R.drawable.register_create_account_female_grey, 0, 0, 0);
+            btn_account_male.setCompoundDrawablesWithIntrinsicBounds( R.drawable.register_create_account_male_white, 0, 0, 0);
+            btn_account_female.setTextColor(getResources().getColor(R.color.grey_mid));
+            btn_account_male.setTextColor(getResources().getColor(R.color.white));
+            btn_account_female.setBackground(getResources().getDrawable(R.drawable.gray_rectange_border));
+            btn_account_male.setBackgroundColor(getResources().getColor(R.color.gender_active_color));
         }
     }
 }
