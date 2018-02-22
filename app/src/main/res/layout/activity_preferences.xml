@@ -226,7 +226,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:text=">>  Next  >>"
+            android:text="Next"
             android:background="@drawable/corner_rounded_pink"
             android:textColor="#ededed"/>
     </LinearLayout>

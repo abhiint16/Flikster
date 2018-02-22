@@ -192,11 +192,14 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             if (comingPage.equals("SIGNUP")) {
                 quote_text.setText("\"Join our exclusive community of movie, celebrity & fashion enthusiasts.\"");
                 headertxt.setText("Register");
+                back_btn.setActivated(false);
+                back_btn.setVisibility(View.INVISIBLE);
                 login_signup_text.setText("If you already have an account, please ");
                 login_signup_btn.setText(Html.fromHtml(" <u>Login</u>"));
             } else {
                 quote_text.setText("\"Welcome to the one stop for all your Movie and Fashion needs.\"");
                 headertxt.setText("Login");
+                back_btn.setVisibility(View.VISIBLE);
                 login_signup_text.setText("If you don't have an account, please ");
                 login_signup_btn.setText(Html.fromHtml(" <u>SignUp</u>"));
             }
@@ -278,6 +281,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                 Log.e("check for sign1",""+SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE"));
                 headertxt.setText("Login");
                 login_signup_text.setText("If you don't have an account, please ");
+                back_btn.setVisibility(View.VISIBLE);
                 login_signup_btn.setText(Html.fromHtml(" <u>SignUp</u>"));
                 quote_text.setText("\"Welcome to the one stop for all your Movie and Fashion needs.\"");
                 SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
@@ -287,6 +291,8 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             {
                 Log.e("check for sign2",""+SharedPrefsUtil.getStringPreference(getApplicationContext(), "COMING_PAGE"));
                 headertxt.setText("Register");
+                back_btn.setActivated(false);
+                back_btn.setVisibility(View.INVISIBLE);
                 login_signup_text.setText("If you already have an account, please ");
                 quote_text.setText("\"Join our exclusive community of movie, celebrity & fashion enthusiasts.\"");
                 login_signup_btn.setText(Html.fromHtml(" <u>Login</u>"));
