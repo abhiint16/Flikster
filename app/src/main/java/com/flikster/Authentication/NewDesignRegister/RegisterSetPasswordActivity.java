@@ -53,11 +53,13 @@ public class RegisterSetPasswordActivity extends AppCompatActivity implements Vi
                                 if (passwordEt.getInputType()==(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT))
                                 {
                                     passwordEt.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_NORMAL);
+                                    passwordEt.setSelection(passwordEt.getText().length());//for cursor to be at the end point when inputtype chnages
                                     passwordEt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye, 0);
                                 }
                                 else if (passwordEt.getInputType()==(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_NORMAL))
                                 {
                                     passwordEt.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+                                    passwordEt.setSelection(passwordEt.getText().length());//for cursor to be at the end point when inputtype chnages
                                     passwordEt.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.eye_not, 0);
                                 }
                             }
@@ -80,11 +82,13 @@ public class RegisterSetPasswordActivity extends AppCompatActivity implements Vi
                             if (confirm_password.getInputType()==(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT))
                             {
                                 confirm_password.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_NORMAL);
+                                confirm_password.setSelection(confirm_password.getText().length());//for cursor to be at the end point when inputtype chnages
                                 confirm_password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye, 0);
                             }
                             else if (confirm_password.getInputType()==(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_NORMAL))
                             {
                                 confirm_password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+                                confirm_password.setSelection(confirm_password.getText().length());//for cursor to be at the end point when inputtype chnages
                                 confirm_password.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.eye_not, 0);
                             }
                         }
