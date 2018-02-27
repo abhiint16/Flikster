@@ -218,11 +218,12 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_back_navigation_btn) {
-            getFragmentManager()
+            videoRecommendationClick.voidMethod(new FeedFragment());
+            /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new FeedFragment())
                     .addToBackStack("")
-                    .commit();
+                    .commit();*/
         }else if (view.getId()==R.id.header_linear||view.getId()==R.id.profile_image)
         {
             if ("movie".equals(type)) {
@@ -307,6 +308,7 @@ public class VideoGalleryFragment extends Fragment implements View.OnClickListen
                                             String headertitle, String description, String videolink,
                                             Fragment fragment, String contentType, String userId, String entityId,String cardId,String slug);
         void test(String name, Fragment fragment, int getClass, String userId, String entityId);
+        void voidMethod(Fragment fragment);
     }
 
     @Override

@@ -11,18 +11,111 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar"/>
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/include_bottom_navigation_bar"
+            tools:context="com.sixteenmb.abhishekint.humor.MainActivity">
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true">
+
+                <!--<android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/main_collapsing"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:collapsedTitleGravity="left"
+                    app:collapsedTitleTextAppearance="@color/colorAccent"
+                    app:contentScrim="@color/red"
+                    app:expandedTitleGravity="bottom"
+                    app:expandedTitleMarginBottom="3200dp"
+                    app:expandedTitleMarginEnd="20dp"
+                    app:expandedTitleMarginStart="40dp"
+                    app:expandedTitleTextAppearance="@color/black"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/toolbar" />
+
+                        <!--<View
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"></View>-->
+
+                       <!-- <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <Button
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>-->
+                    </LinearLayout>
+                <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+            </android.support.design.widget.AppBarLayout>
+
+            <!--<android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:id="@+id/main_nested">-->
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <FrameLayout
+                android:id="@+id/main_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar_main"
+                ></FrameLayout>
+            </android.support.v4.widget.NestedScrollView>
+            <!--</android.support.v4.widget.NestedScrollView>-->
+        </android.support.design.widget.CoordinatorLayout>
+
+        <include
+            android:id="@+id/include_bottom_navigation_bar"
+            layout="@layout/bottom_navigation_customized_bar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true" />
 
         <com.flikster.Util.MySpinner
             android:id="@+id/toolbar_pref_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:spinnerMode="dropdown"
-            android:visibility="visible"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="?attr/actionBarSize"/>
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@color/transparent"
+            android:spinnerMode="dropdown"
+            android:visibility="visible" />
+        <!--<com.flikster.Util.MySpinner
+            android:id="@+id/toolbar_pref_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@color/transparent"
+            android:spinnerMode="dropdown"
+            android:visibility="visible" />
 
         <include
             android:id="@+id/bottom_navigation_bar"
@@ -44,7 +137,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/include_bottom_navigation_bar"
             android:layout_below="@+id/toolbar_main"></FrameLayout>
-
+-->
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/camera_fab"
             android:layout_width="60dp"
@@ -53,8 +146,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
             android:elevation="10dp"
-            app:backgroundTint="@color/white"
             android:src="@drawable/add_plus_icon"
+            app:backgroundTint="@color/white"
             app:fabSize="normal" />
     </RelativeLayout>
 
@@ -63,18 +156,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:background="@drawable/solid_round_border_with_semitrans_back"
         android:divider="#fff"
-        android:dividerHeight="5dp"
-        android:background="@drawable/solid_round_border_with_semitrans_back">
+        android:dividerHeight="5dp">
 
-        <include layout="@layout/right_navigation_bar_logged_in"
+        <include
+            layout="@layout/right_navigation_bar_logged_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"></include>
-        <include layout="@layout/right_navigation_bar_non_logged_in"
-            android:visibility="gone"
+
+        <include
+            layout="@layout/right_navigation_bar_non_logged_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"></include>
+            android:layout_gravity="bottom"
+            android:visibility="gone"></include>
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

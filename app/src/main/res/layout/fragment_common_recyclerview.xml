@@ -2,17 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_common_recycler_container">
 
 
     <android.support.v7.widget.RecyclerView
-        android:nestedScrollingEnabled="false"
-        android:focusableInTouchMode="true"
         android:id="@+id/fragment_common_recyclerview_recycler"
         android:layout_width="match_parent"
-
+        android:focusableInTouchMode="false"
+        android:focusable="false"
         android:layout_height="match_parent"
         android:background="@color/recycle_color" />
     <TextView

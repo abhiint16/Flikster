@@ -117,7 +117,7 @@ public class FeedFragment extends Fragment {
         mDialog = (SimpleArcLoader) view.findViewById(R.id.arc_loader);
         //mDialog = new SimpleArcDialog(getActivity());
         //mDialog.setConfiguration(new ArcConfiguration(MainActivity.this));
-        fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.colorImageBackgroundGrey));
+        fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.recycle_color));
         /*fragment_common_recyclerview_recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

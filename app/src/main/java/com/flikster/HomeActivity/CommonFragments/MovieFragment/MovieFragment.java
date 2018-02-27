@@ -133,9 +133,10 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_back_navigation_btn) {
-            fragmentManager.beginTransaction()
+            movieItemClickInterface.voidMethod(new FeedFragment());
+            /*fragmentManager.beginTransaction()
                     .replace(R.id.main_container, new FeedFragment())
-                    .commit();
+                    .commit();*/
         }
     }
 
@@ -154,6 +155,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                                      String productSlug, List<String> imageGallery,
                                      String profilepic,List<String> role,String name,String title,
                                      Fragment fragment);
+        void voidMethod(Fragment fragment);
         void seeMoreComments(String userName, String userId, String entityId);
     }
 

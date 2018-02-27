@@ -232,11 +232,12 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_back_navigation_btn) {
-            getFragmentManager()
+            newsRecommendedClick.voidMethod(new FeedFragment());
+            /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new FeedFragment())
                     .addToBackStack("")
-                    .commit();
+                    .commit();*/
         }else if (view.getId()==R.id.header_linear||view.getId()==R.id.profile_image)
         {
             if ("movie".equals(type)) {
@@ -280,6 +281,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
                                         String bannerImg, String headertitle, String description,
                                         Fragment fragment, String contentType,String userId,String entityId,String cardId,String slug);
         void test(String name, Fragment fragment, int getClass, String userId, String entityId);
+        void voidMethod(Fragment fragment);
     }
 
     @Override

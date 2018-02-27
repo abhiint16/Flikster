@@ -155,10 +155,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
         CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag {
-    LinearLayout feed, rating, plus, fashion, store, toolbar_flikter_text_container;
+    LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    LinearLayout toolbar_main_notification, toolbar_navigation_view_open_btn;
+    LinearLayout toolbar_main_notification, toolbar_navigation_view_open_btn,feed_tab_layout;
     TextView toolbar_cart_btn;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
@@ -233,7 +233,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home2);
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
         initializeViews();
         setPrefIfNull();
@@ -356,18 +356,29 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     private void firstTimeLaunch(Fragment fragment) {
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_container, fragment)
-                .commit();
+        if (!fragment.getClass().equals(FeedFragment.class))
+        {Log.e("cehck for frag","chec for frag not");
+            feed_tab_layout.setVisibility(View.GONE);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, fragment)
+                    .commit();
+        }
+        else if (fragment.getClass().equals(FeedFragment.class))
+        {Log.e("cehck for frag","chec for frag");
+            feed_tab_layout.setVisibility(View.VISIBLE);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, fragment)
+                    .commit();
+        }
     }
 
     private void initializeRest() {
         mContext = HomeActivity.this;
-        feed.setOnClickListener(this);
+        /*feed.setOnClickListener(this);
         fashion.setOnClickListener(this);
         store.setOnClickListener(this);
         rating.setOnClickListener(this);
-        plus.setOnClickListener(this);
+        plus.setOnClickListener(this);*/
         camera_fab.setOnClickListener(this);
         footer_drawer_layout_aboutus.setOnClickListener(this);
         footer_drawer_layout_blog.setOnClickListener(this);
@@ -681,11 +692,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void initializeViews() {
         sharedPref = new SharedPref(getApplicationContext());
+        feed_tab_layout=(LinearLayout)findViewById(R.id.feed_tab_layout); /*;
         feed = (LinearLayout) findViewById(R.id.feed_button);
         fashion = (LinearLayout) findViewById(R.id.fashion_button);
         rating = (LinearLayout) findViewById(R.id.rating_button);
         store = (LinearLayout) findViewById(R.id.store_button);
-        plus = (LinearLayout) findViewById(R.id.plus_button);
+        plus = (LinearLayout) findViewById(R.id.plus_button);*/
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar_cart_btn = (TextView) findViewById(R.id.toolbar_cart_btn);
         facebook_icon_footer=(ImageButton)findViewById(R.id.facebook_icon_footer);
@@ -733,10 +745,24 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void beginTransact(Fragment fragment) {
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_container, fragment)
-                .addToBackStack("")
-                .commit();
+        if (!fragment.getClass().equals(FeedFragment.class))
+        {
+            Log.e("cehck for frag","chec for frag not");
+            feed_tab_layout.setVisibility(View.GONE);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, fragment)
+                    .addToBackStack("")
+                    .commit();
+        }
+        else if (fragment.getClass().equals(FeedFragment.class))
+        {
+            Log.e("cehck for frag","chec for frag");
+            feed_tab_layout.setVisibility(View.VISIBLE);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, fragment)
+                    .addToBackStack("")
+                    .commit();
+        }
     }
 
     @Override
@@ -1091,6 +1117,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             celebrityFragment.updateInfo(name, userId, entityId);
             firstTimeLaunch(fragment);
         }
+    }
+
+    @Override
+    public void voidMethod(Fragment fragment) {
+        FeedFragment feedFragment=(FeedFragment)fragment;
+        firstTimeLaunch(fragment);
     }
 
     @Override
