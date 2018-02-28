@@ -44,20 +44,25 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/filter_industry_layout"
+                        android:clickable="true">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tollywood"
                             android:textColor="@color/grey_mid"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:clickable="false"
+                            android:id="@+id/filter_industry_layout_text"/>
                         <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/downarrow_tab_feed"
                             android:background="@color/transparent"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:clickable="false"/>
                     </LinearLayout>
 
                     <View
@@ -72,20 +77,24 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/filter_contenttype_layout"
+                        android:clickable="true">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Filters"
                             android:textColor="@color/grey_mid"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:clickable="false"/>
                         <ImageButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/filter_feed_tab"
                             android:background="@color/transparent"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:clickable="false"/>
                     </LinearLayout>
                 </LinearLayout>
 

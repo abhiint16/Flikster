@@ -32,6 +32,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -158,8 +160,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
-    LinearLayout toolbar_main_notification, toolbar_navigation_view_open_btn,feed_tab_layout;
-    TextView toolbar_cart_btn;
+    LinearLayout toolbar_main_notification, toolbar_navigation_view_open_btn,feed_tab_layout,filter_contenttype_layout,
+            filter_industry_layout;
+    TextView toolbar_cart_btn,filter_industry_layout_text;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     DrawerLayout drawerLayout;
@@ -374,12 +377,15 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void initializeRest() {
         mContext = HomeActivity.this;
+        filter_contenttype_layout.setOnClickListener(this);
+        filter_industry_layout.setOnClickListener(this);
         /*feed.setOnClickListener(this);
         fashion.setOnClickListener(this);
         store.setOnClickListener(this);
         rating.setOnClickListener(this);
         plus.setOnClickListener(this);*/
         camera_fab.setOnClickListener(this);
+        filter_industry_layout_text.setText(SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE"));
         footer_drawer_layout_aboutus.setOnClickListener(this);
         footer_drawer_layout_blog.setOnClickListener(this);
         footer_drawer_layout_business.setOnClickListener(this);
@@ -692,7 +698,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void initializeViews() {
         sharedPref = new SharedPref(getApplicationContext());
-        feed_tab_layout=(LinearLayout)findViewById(R.id.feed_tab_layout); /*;
+        feed_tab_layout=(LinearLayout)findViewById(R.id.feed_tab_layout);
+        filter_industry_layout=(LinearLayout)findViewById(R.id.filter_industry_layout);
+        filter_contenttype_layout=(LinearLayout)findViewById(R.id.filter_contenttype_layout);/*;
         feed = (LinearLayout) findViewById(R.id.feed_button);
         fashion = (LinearLayout) findViewById(R.id.fashion_button);
         rating = (LinearLayout) findViewById(R.id.rating_button);
@@ -700,6 +708,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         plus = (LinearLayout) findViewById(R.id.plus_button);*/
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar_cart_btn = (TextView) findViewById(R.id.toolbar_cart_btn);
+        filter_industry_layout_text=(TextView)findViewById(R.id.filter_industry_layout_text);
         facebook_icon_footer=(ImageButton)findViewById(R.id.facebook_icon_footer);
         instagram_icon_footer=(ImageButton)findViewById(R.id.insta_icon_footer);
         pintrest_icon_footer=(ImageButton)findViewById(R.id.pintrest_icon_footer);
@@ -765,6 +774,36 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         }
     }
 
+    public void openDialog(String title)
+    {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_filter_industry_contentype);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        TextView dialog_filter_industry_contenttype_title = (TextView) dialog.findViewById(R.id.dialog_filter_industry_contenttype_title);
+        ImageButton dialog_filter_industry_contenttype_cancel_btn = (ImageButton) dialog.findViewById(R.id.dialog_filter_industry_contenttype_cancel_btn);
+        Button dialog_filter_industry_contenttype_reset_btn = (Button) dialog.findViewById(R.id.dialog_filter_industry_contenttype_reset_btn);
+        Button apply_btn_dialog=(Button)dialog.findViewById(R.id.apply_btn_dialog);
+        apply_btn_dialog.setVisibility(View.GONE);
+        dialog_filter_industry_contenttype_reset_btn.setEnabled(false);
+        RecyclerView dialog_filter_industry_contenttype_recyclerview=(RecyclerView)dialog.findViewById(R.id.dialog_filter_industry_contenttype_recyclerview);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
+        dialog_filter_industry_contenttype_recyclerview.setLayoutManager(layoutManager);
+        DialogFilterIndustryAdapter dialogFilterIndustryAdapter=new DialogFilterIndustryAdapter(title,dialog_filter_industry_contenttype_reset_btn,this,apply_btn_dialog);
+        dialog_filter_industry_contenttype_recyclerview.setAdapter(dialogFilterIndustryAdapter);
+        dialog_filter_industry_contenttype_title.setText(title);
+        dialog_filter_industry_contenttype_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.recycle_color)));
+        dialog.show();
+    }
+
     @Override
     public void onClick(View view) {
         callBeginTrasact(view.getId());
@@ -775,7 +814,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             beginTransact(new FeedFragment());
         } else if (viewId == R.id.fashion_button) {
             beginTransact(new FashionLandingFragment());
-        } else if (viewId == R.id.toolbar_main_notification) {
+        }
+        else if (viewId == R.id.filter_contenttype_layout) {
+            openDialog("Filter");
+        }
+        else if (viewId == R.id.filter_industry_layout) {
+            openDialog("Select Industry");
+        }else if (viewId == R.id.toolbar_main_notification) {
             beginTransact(new NotificationFragment());
         } else if (viewId == R.id.menu_search) {
             beginTransact(new SearchFragment());

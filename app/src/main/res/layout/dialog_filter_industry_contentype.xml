@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="5dp"
+        android:contentInsetEnd="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        android:background="@color/white"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/toolbar_dialog_filter_industry">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@color/transparent"
+                android:src="@drawable/cancel_black"
+                android:id="@+id/dialog_filter_industry_contenttype_cancel_btn"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:id="@+id/dialog_filter_industry_contenttype_title"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@color/transparent"
+                android:text="Reset"
+                android:id="@+id/dialog_filter_industry_contenttype_reset_btn"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/dialog_filter_industry_contenttype_recyclerview"
+        android:background="@color/transparent"
+        android:layout_below="@+id/toolbar_dialog_filter_industry"
+        android:layout_above="@+id/apply_btn_dialog">
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="APPLY"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:background="@color/colorAccent"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/apply_btn_dialog"/>
+
+</RelativeLayout>
