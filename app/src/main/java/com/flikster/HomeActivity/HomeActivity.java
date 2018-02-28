@@ -791,7 +791,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         RecyclerView dialog_filter_industry_contenttype_recyclerview=(RecyclerView)dialog.findViewById(R.id.dialog_filter_industry_contenttype_recyclerview);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         dialog_filter_industry_contenttype_recyclerview.setLayoutManager(layoutManager);
-        DialogFilterIndustryAdapter dialogFilterIndustryAdapter=new DialogFilterIndustryAdapter(title,dialog_filter_industry_contenttype_reset_btn,this,apply_btn_dialog);
+        DialogFilterIndustryAdapter dialogFilterIndustryAdapter=new DialogFilterIndustryAdapter(title,dialog_filter_industry_contenttype_reset_btn,this,apply_btn_dialog,dialog);
         dialog_filter_industry_contenttype_recyclerview.setAdapter(dialogFilterIndustryAdapter);
         dialog_filter_industry_contenttype_title.setText(title);
         dialog_filter_industry_contenttype_cancel_btn.setOnClickListener(new View.OnClickListener() {
@@ -802,6 +802,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         });
         window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.recycle_color)));
         dialog.show();
+        //industrySelectionrefreshActivity((String) filter_industry_layout_text.getText());
     }
 
     @Override

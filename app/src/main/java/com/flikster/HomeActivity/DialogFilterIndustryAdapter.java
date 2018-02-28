@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by abhishek on 27-02-2018.
  */
 
-public class DialogFilterIndustryAdapter extends RecyclerView.Adapter<DialogFilterIndustryAdapter.ViewHolder> {
+public class DialogFilterIndustryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     String title;
     List<String> industry = new ArrayList<>();
@@ -30,20 +31,24 @@ public class DialogFilterIndustryAdapter extends RecyclerView.Adapter<DialogFilt
     Button dialog_filter_industry_contenttype_reset_btn;
     Context context;
     List<String> contentTypeSelected = new ArrayList<>();
+    String industry_type;
     Button apply_btn_dialog;
+    int m=0;
+    Dialog dialog;
 
     public DialogFilterIndustryAdapter(String title, Button dialog_filter_industry_contenttype_reset_btn, Context context,
-                                       Button apply_btn_dialog) {
+                                       Button apply_btn_dialog,Dialog  dialog) {
         this.title = title;
+        this.dialog=dialog;
         this.apply_btn_dialog = apply_btn_dialog;
         this.context = context;
         setHasStableIds(true);
         this.dialog_filter_industry_contenttype_reset_btn = dialog_filter_industry_contenttype_reset_btn;
         industry.add("Bollywood");
         industry.add("Tollywood");
-        industry.add("Tamil");
-        industry.add("Kannada");
-        industry.add("Malayalam");
+        industry.add("Kollywood");
+        industry.add("Mollywood");
+        industry.add("Sandalwood");
         contentType.add("News");
         contentType.add("First Look");
         contentType.add("Gallery");
@@ -62,37 +67,57 @@ public class DialogFilterIndustryAdapter extends RecyclerView.Adapter<DialogFilt
     }
 
     @Override
-    public DialogFilterIndustryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dialog_filter_industry_contenttype_recycler_item,
-                parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType==100)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dialog_industry_item,
+                    parent, false);
+            return new ViewHolder1(view);
+        }
+        else
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dialog_filter_industry_contenttype_recycler_item,
+                    parent, false);
+            return new ViewHolder2(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(DialogFilterIndustryAdapter.ViewHolder holder, int position) {
-        if ("Filter".equals(title)) {
-            if (contentTypeSelected.size() == 0) {
-                dialog_filter_industry_contenttype_reset_btn.setEnabled(false);
-                holder.checkBox.setChecked(false);
-            }
-            holder.textView.setText(contentType.get(position));
-            holder.radioButton.setVisibility(View.GONE);
-        } else {
-            holder.textView.setText(industry.get(position));
-            holder.checkBox.setVisibility(View.GONE);
-            Log.e("check industrtype", "" + SharedPrefsUtil.getStringPreference(context.getApplicationContext(), "INDUSTRY_TYPE"));
-            if (industry.get(position).equals(SharedPrefsUtil.getStringPreference(context.getApplicationContext(), "INDUSTRY_TYPE")))
-                ;
-            {
-                Log.e("check inside if" + industry.get(position), "chck inside dif" + SharedPrefsUtil.getStringPreference(context.getApplicationContext(), "INDUSTRY_TYPE"));
-                holder.radioButton.setChecked(true);
-            }
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder.getItemViewType()==100)
+        {
+            ((ViewHolder1)holder).dialog_bollywood_text.setText(industry.get(0));
+            ((ViewHolder1)holder).dialog_tollywood_text.setText(industry.get(1));
+            ((ViewHolder1)holder).dialog_tamil_text.setText(industry.get(2));
+            ((ViewHolder1)holder).dialog_kannada_text.setText(industry.get(3));
+            ((ViewHolder1)holder).dialog_malayalam_text.setText(industry.get(4));
+        }
+        else
+        {
+            if ("Filter".equals(title)) {
+                if (contentTypeSelected.size() == 0) {
+                    dialog_filter_industry_contenttype_reset_btn.setEnabled(false);
+                    ((ViewHolder2)holder).checkBox.setChecked(false);
+                }
+                ((ViewHolder2)holder).textView.setText(contentType.get(position));
+                ((ViewHolder2)holder).radioButton.setVisibility(View.GONE);
+            } else {
+                ((ViewHolder2)holder).textView.setText(industry.get(position));
+                ((ViewHolder2)holder).checkBox.setVisibility(View.GONE);
+                if (industry.get(position).equals(industry_type));
+                {
+                    ((ViewHolder2)holder).radioButton.setChecked(true);
+                }
+                ((ViewHolder2)holder).radioButton.setChecked(false);
+        }
         }
     }
 
     // for removing item duplication, adding this things. getItemViewType(), getItemId(), and one line in constructor (setHasStableIds(true))
     @Override
     public int getItemViewType(int position) {
+        if (!"Filter".equals(title))
+            return 100;
         return position;
     }
 
@@ -100,15 +125,126 @@ public class DialogFilterIndustryAdapter extends RecyclerView.Adapter<DialogFilt
     public int getItemCount() {
         if ("Filter".equals(title))
             return contentType.size();
-        else return industry.size();
+        else return 1;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView dialog_bollywood_text,dialog_tollywood_text,dialog_tamil_text,dialog_kannada_text,dialog_malayalam_text;
+        RadioButton dialog_malayalam_btn,dialog_kannada_btn,dialog_tamil_btn,dialog_tollywood_btn,dialog_bollywood_btn;
+        public ViewHolder1(View itemView)
+        {
+            super(itemView);
+            dialog_bollywood_text=(TextView)itemView.findViewById(R.id.dialog_bollywood_text);
+            dialog_tollywood_text=(TextView)itemView.findViewById(R.id.dialog_tollywood_text);
+            dialog_tamil_text=(TextView)itemView.findViewById(R.id.dialog_tamil_text);
+            dialog_kannada_text=(TextView)itemView.findViewById(R.id.dialog_kannada_text);
+            dialog_malayalam_text=(TextView)itemView.findViewById(R.id.dialog_malayalam_text);
+
+            dialog_malayalam_btn=(RadioButton) itemView.findViewById(R.id.dialog_malayalam_btn);
+            dialog_kannada_btn=(RadioButton)itemView.findViewById(R.id.dialog_kannada_btn);
+            dialog_tamil_btn=(RadioButton)itemView.findViewById(R.id.dialog_tamil_btn);
+            dialog_tollywood_btn=(RadioButton)itemView.findViewById(R.id.dialog_tollywood_btn);
+            dialog_bollywood_btn=(RadioButton)itemView.findViewById(R.id.dialog_bollywood_btn);
+
+            dialog_bollywood_btn.setOnClickListener(this);
+            dialog_tollywood_btn.setOnClickListener(this);
+            dialog_tamil_btn.setOnClickListener(this);
+            dialog_kannada_btn.setOnClickListener(this);
+            dialog_malayalam_btn.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId()==R.id.dialog_bollywood_btn)
+            {
+                dialog_bollywood_btn.setChecked(true);
+                dialog_tollywood_btn.setChecked(false);
+                dialog_tamil_btn.setChecked(false);
+                dialog_kannada_btn.setChecked(false);
+                dialog_malayalam_btn.setChecked(false);
+                industry_type= (String) dialog_bollywood_text.getText();
+                dialog_filter_industry_contenttype_reset_btn.setEnabled(true);
+                dialog_filter_industry_contenttype_reset_btn.setOnClickListener(this);
+                apply_btn_dialog.setVisibility(View.VISIBLE);
+                apply_btn_dialog.setOnClickListener(this);
+            }
+            else if (view.getId()==R.id.dialog_tollywood_btn)
+            {
+                dialog_bollywood_btn.setChecked(false);
+                dialog_tollywood_btn.setChecked(true);
+                dialog_tamil_btn.setChecked(false);
+                dialog_kannada_btn.setChecked(false);
+                dialog_malayalam_btn.setChecked(false);
+                industry_type= (String) dialog_tollywood_text.getText();
+                dialog_filter_industry_contenttype_reset_btn.setEnabled(true);
+                dialog_filter_industry_contenttype_reset_btn.setOnClickListener(this);
+                apply_btn_dialog.setVisibility(View.VISIBLE);
+                apply_btn_dialog.setOnClickListener(this);
+            }
+            else if (view.getId()==R.id.dialog_tamil_btn)
+            {
+                dialog_bollywood_btn.setChecked(false);
+                dialog_tollywood_btn.setChecked(false);
+                dialog_tamil_btn.setChecked(true);
+                dialog_kannada_btn.setChecked(false);
+                dialog_malayalam_btn.setChecked(false);
+                industry_type= (String) dialog_tamil_text.getText();
+                dialog_filter_industry_contenttype_reset_btn.setEnabled(true);
+                dialog_filter_industry_contenttype_reset_btn.setOnClickListener(this);
+                apply_btn_dialog.setVisibility(View.VISIBLE);
+                apply_btn_dialog.setOnClickListener(this);
+            }
+            else if (view.getId()==R.id.dialog_kannada_btn)
+            {
+                dialog_bollywood_btn.setChecked(false);
+                dialog_tollywood_btn.setChecked(false);
+                dialog_tamil_btn.setChecked(false);
+                dialog_kannada_btn.setChecked(true);
+                dialog_malayalam_btn.setChecked(false);
+                industry_type= (String) dialog_kannada_text.getText();
+                dialog_filter_industry_contenttype_reset_btn.setEnabled(true);
+                dialog_filter_industry_contenttype_reset_btn.setOnClickListener(this);
+                apply_btn_dialog.setVisibility(View.VISIBLE);
+                apply_btn_dialog.setOnClickListener(this);
+            }
+            else if (view.getId()==R.id.dialog_malayalam_btn)
+            {
+                dialog_bollywood_btn.setChecked(false);
+                dialog_tollywood_btn.setChecked(false);
+                dialog_tamil_btn.setChecked(false);
+                dialog_kannada_btn.setChecked(false);
+                dialog_malayalam_btn.setChecked(true);
+                industry_type= (String) dialog_malayalam_text.getText();
+                dialog_filter_industry_contenttype_reset_btn.setEnabled(true);
+                dialog_filter_industry_contenttype_reset_btn.setOnClickListener(this);
+                apply_btn_dialog.setVisibility(View.VISIBLE);
+                apply_btn_dialog.setOnClickListener(this);
+            }
+            else if (view.getId()==R.id.dialog_filter_industry_contenttype_reset_btn)
+            {
+                industry_type="";
+                apply_btn_dialog.setVisibility(View.GONE);
+                dialog_filter_industry_contenttype_reset_btn.setEnabled(false);
+                dialog_bollywood_btn.setChecked(false);
+                dialog_tollywood_btn.setChecked(false);
+                dialog_tamil_btn.setChecked(false);
+                dialog_kannada_btn.setChecked(false);
+                dialog_malayalam_btn.setChecked(false);
+            }
+            else if (view.getId()==R.id.apply_btn_dialog)
+            {
+                SharedPrefsUtil.setStringPreference(context.getApplicationContext(), "INDUSTRY_TYPE", industry_type);
+                dialog.dismiss();
+            }
+        }
+    }
+
+    public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
         TextView textView;
         CheckBox checkBox;
         RadioButton radioButton;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder2(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.dialog_text);
             checkBox = (CheckBox) itemView.findViewById(R.id.dialog_check_box);
@@ -136,9 +272,7 @@ public class DialogFilterIndustryAdapter extends RecyclerView.Adapter<DialogFilt
 
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if (compoundButton.getId() == R.id.dialog_radio_btn) {
-
-            } else if (compoundButton.getId() == R.id.dialog_check_box) {
+            if (compoundButton.getId() == R.id.dialog_check_box) {
                 Log.e("chekc forf cehclbox", "cehcke fof cbox" + b);
                 if (b) {
                     dialog_filter_industry_contenttype_reset_btn.setEnabled(true);
