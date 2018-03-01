@@ -156,7 +156,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
-        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag {
+        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag,DialogCommunication {
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
@@ -165,6 +165,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     TextView toolbar_cart_btn,filter_industry_layout_text;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
+    String industry_type_from_dialog;
+    String industryOrFilter;
     DrawerLayout drawerLayout;
     ImageButton facebook_icon_footer,twitter_icon_footer,instagram_icon_footer,linkedin_icon_footer,pintrest_icon_footer;
     TextView footer_drawer_layout_aboutus, footer_drawer_layout_help, footer_drawer_layout_blog, footer_drawer_layout_privacy,
@@ -791,7 +793,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         RecyclerView dialog_filter_industry_contenttype_recyclerview=(RecyclerView)dialog.findViewById(R.id.dialog_filter_industry_contenttype_recyclerview);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         dialog_filter_industry_contenttype_recyclerview.setLayoutManager(layoutManager);
-        DialogFilterIndustryAdapter dialogFilterIndustryAdapter=new DialogFilterIndustryAdapter(title,dialog_filter_industry_contenttype_reset_btn,this,apply_btn_dialog,dialog);
+        DialogFilterIndustryAdapter dialogFilterIndustryAdapter=new DialogFilterIndustryAdapter(title,dialog_filter_industry_contenttype_reset_btn,this,apply_btn_dialog,dialog,this);
         dialog_filter_industry_contenttype_recyclerview.setAdapter(dialogFilterIndustryAdapter);
         dialog_filter_industry_contenttype_title.setText(title);
         dialog_filter_industry_contenttype_cancel_btn.setOnClickListener(new View.OnClickListener() {
@@ -802,7 +804,19 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         });
         window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.recycle_color)));
         dialog.show();
-        //industrySelectionrefreshActivity((String) filter_industry_layout_text.getText());
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                if ("Industry".equals(industryOrFilter))
+                industrySelectionrefreshActivity(industry_type_from_dialog);
+            }
+        });
+    }
+
+    @Override
+    public void getDialogValue(String industryType,String industryOrFilter) {
+        this.industry_type_from_dialog=industryType;
+        this.industryOrFilter=industryOrFilter;
     }
 
     @Override

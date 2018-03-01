@@ -35,10 +35,12 @@ public class DialogFilterIndustryAdapter extends RecyclerView.Adapter<RecyclerVi
     Button apply_btn_dialog;
     int m=0;
     Dialog dialog;
+    DialogCommunication dialogCommunication;
 
     public DialogFilterIndustryAdapter(String title, Button dialog_filter_industry_contenttype_reset_btn, Context context,
-                                       Button apply_btn_dialog,Dialog  dialog) {
+                                       Button apply_btn_dialog,Dialog  dialog,DialogCommunication dialogCommunication) {
         this.title = title;
+        this.dialogCommunication=dialogCommunication;
         this.dialog=dialog;
         this.apply_btn_dialog = apply_btn_dialog;
         this.context = context;
@@ -233,7 +235,8 @@ public class DialogFilterIndustryAdapter extends RecyclerView.Adapter<RecyclerVi
             }
             else if (view.getId()==R.id.apply_btn_dialog)
             {
-                SharedPrefsUtil.setStringPreference(context.getApplicationContext(), "INDUSTRY_TYPE", industry_type);
+                //SharedPrefsUtil.setStringPreference(context.getApplicationContext(), "INDUSTRY_TYPE", industry_type);
+                dialogCommunication.getDialogValue(industry_type,"Industry");
                 dialog.dismiss();
             }
         }
