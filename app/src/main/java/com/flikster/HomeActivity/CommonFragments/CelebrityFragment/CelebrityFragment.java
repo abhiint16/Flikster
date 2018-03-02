@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
             card_celeb_common_profile_followers_txt;
     LinearLayout card_celeb_common_profile_likes_layout,card_celeb_common_profile_followers_layout,card_celeb_common_profile_follow_layout;
     Button followbtn;
+    NestedScrollView nestedScrollView;
 
 
     @Nullable
@@ -195,6 +197,8 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeViews() {
+        nestedScrollView = (NestedScrollView)view. findViewById (R.id.main_nested);
+        nestedScrollView.setFillViewport (true);
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
         //toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
