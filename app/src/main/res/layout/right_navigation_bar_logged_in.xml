@@ -14,7 +14,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -40,7 +39,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="My Account"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -76,7 +75,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="Orders"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -118,7 +117,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="Wish List"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -154,7 +153,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="Saved Posts"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -190,7 +189,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="Refer a Friend"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -226,7 +225,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="Flikster Credits"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -262,7 +261,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="About Us"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -297,7 +296,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="Settings"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -332,7 +331,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="18dp"
                     android:text="Logout"
                     android:textColor="@color/grey_mid"
                     android:textSize="16sp" />
@@ -345,9 +344,15 @@
                 android:layout_marginRight="30dp"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5px"
+            android:gravity="center_horizontal|bottom"
+            android:paddingTop="2px" >
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="end|bottom"
             android:gravity="end|bottom"
             android:padding="5dp"
@@ -355,7 +360,7 @@
             android:textColor="#898989"
             android:textSize="12sp"
             android:layout_marginTop="30dp"/>
-
+        </LinearLayout>
         <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
