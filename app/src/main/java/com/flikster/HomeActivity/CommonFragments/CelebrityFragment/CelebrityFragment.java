@@ -12,15 +12,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieAdapter;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,12 +53,18 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     CelebrityData.CelebrityInnerData hits;
     Bundle arguments = new Bundle();
     CelebItemClickInterface celebItemClickInterface;
+    ImageView card_celeb_common_profile_coverpic;
+    TextView card_celeb_common_profile_name,card_celeb_common_profile_role,card_celeb_common_profile_likes_txt,
+            card_celeb_common_profile_followers_txt;
+    LinearLayout card_celeb_common_profile_likes_layout,card_celeb_common_profile_followers_layout,card_celeb_common_profile_follow_layout;
+    Button followbtn;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_celebrity, container, false);
+        //view = inflater.inflate(R.layout.fragment_celebrity, container, false);
+        view = inflater.inflate(R.layout.celebrity_feed_container, container, false);
         initializeViews();
         tempMethod();
         initializeRest();
@@ -65,6 +78,28 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onResponse(Call<CelebrityData> call, Response<CelebrityData> response) {
                 hits = response.body().getHits();
+                if (hits.getHits().get(0).get_source().getCoverPic()!=null)
+                {
+                    Glide.with(getActivity()).load(hits.getHits().get(0).get_source().getCoverPic()).asBitmap()
+                            .transform(new FaceCenterCrop())
+                            .into(card_celeb_common_profile_coverpic);
+                }
+                if (hits.getHits().get(0).get_source().getDateOfBirth()!=null)
+                {
+
+                }
+                if (hits.getHits().get(0).get_source().getRole()!=null&&hits.getHits().get(0).get_source().getRole().size()!=0)
+                {
+                    card_celeb_common_profile_role.setText(formatRole());
+                }
+                if (hits.getHits().get(0).get_source().getPlaceOfBirth()!=null)
+                {
+
+                }
+                if (hits.getHits().get(0).get_source().getName()!=null)
+                {
+                    card_celeb_common_profile_name.setText(hits.getHits().get(0).get_source().getName());
+                }
                 if (hits.getHits().size() != 0) {
                     if (hits.getHits().get(0).get_source().getCoverPic()!=null)
                     arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
@@ -144,11 +179,35 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
         toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
+    public String formatRole() {
+        String genre = "";
+        try {
+            for (int i = 0; i < this.hits.getHits().get(0).get_source().getRole().size(); i++) {
+                if (i < genre.length() - 1)
+                    genre = genre + this.hits.getHits().get(0).get_source().getRole().get(i) + " | ";
+                else
+                    genre = genre + this.hits.getHits().get(0).get_source().getRole().get(i);
+            }
+        } catch (Exception e) {
+            Log.e("Error", "role size null");
+        }
+        return genre;
+    }
+
     private void initializeViews() {
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
-        toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
+        //toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
+        card_celeb_common_profile_coverpic=(ImageView)view.findViewById(R.id.card_celeb_common_profile_coverpic);
+        card_celeb_common_profile_name=(TextView)view.findViewById(R.id.card_celeb_common_profile_name);
+        card_celeb_common_profile_role=(TextView)view.findViewById(R.id.card_celeb_common_profile_role);
+        card_celeb_common_profile_likes_txt=(TextView)view.findViewById(R.id.card_celeb_common_profile_likes_txt);
+        card_celeb_common_profile_followers_txt=(TextView)view.findViewById(R.id.card_celeb_common_profile_followers_txt);
+        card_celeb_common_profile_follow_layout=(LinearLayout)view.findViewById(R.id.card_celeb_common_profile_follow_layout);
+        card_celeb_common_profile_likes_layout=(LinearLayout)view.findViewById(R.id.card_celeb_common_profile_likes_layout);
+        card_celeb_common_profile_followers_layout=(LinearLayout)view.findViewById(R.id.card_celeb_common_profile_followers_layout);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
+        followbtn=(Button)view.findViewById(R.id.followbtn);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.black));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));

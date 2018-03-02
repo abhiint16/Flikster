@@ -71,7 +71,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.entityId = entityId;
         this.context = context;
         this.fragmentManager = fragmentManager;
-        type.add(1);
+        //type.add(1);
         type.add(2);
         type.add(3);
         type.add(5);
@@ -357,7 +357,7 @@ public class CelebrityBioAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return 7;
+        return 6;
     }
 
     @Override

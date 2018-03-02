@@ -431,17 +431,17 @@ public class CelebrityStoreAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public int getItemCount() {
         if (hits.getHits().size()==0||hits.getHits()==null)
-            return 2;
+            return 1;
         if ((hits.getTotal()==hits.getHits().size()))
-            return hits.getHits().size()+1;
-        return hits.getHits().size()+2;
+            return hits.getHits().size();
+        return hits.getHits().size()+1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0)
+        /*if (position == 0)
             return 0;
-        else if (hits.getHits().size()!=0&&(position==hits.getHits().size()+1))
+        else */if (hits.getHits().size()!=0&&(position==hits.getHits().size()+1))
             return 300;
         else {
             if (hits.getHits().size() != 0 && hits.getHits() != null) {
