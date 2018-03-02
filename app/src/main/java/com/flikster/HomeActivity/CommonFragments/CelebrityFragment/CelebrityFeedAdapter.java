@@ -216,199 +216,199 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
         } else if (holder.getItemViewType() == 1) {
             ((ViewHolder1) holder).card_header_container.setVisibility(View.GONE);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic()).into(((ViewHolder1) holder).card_critic_review_main_image);
-            if (hits.getHits().get(position - 1).get_source().getMovie() != null) {
-                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
-                ((ViewHolder1) holder).tv_tag_desc.setText(hits.getHits().get(position - 1).get_source().getMovie().get(0).getType());
-                ((ViewHolder1) holder).tv_tag_name.setText(hits.getHits().get(position - 1).get_source().getMovie().get(0).getName());
-                ((ViewHolder1) holder).card_critic_review_moviename.setText(hits.getHits().get(position - 1).get_source().getMovie().get(0).getName());
-            } else if (hits.getHits().get(position - 1).get_source().getCeleb() != null) {
-                Glide.with(context).load(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
-                ((ViewHolder1) holder).tv_tag_desc.setText(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getType());
-                ((ViewHolder1) holder).tv_tag_name.setText(hits.getHits().get(position - 1).get_source().getCeleb().get(0).getName());
+            Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder1) holder).card_critic_review_main_image);
+            if (hits.getHits().get(position).get_source().getMovie() != null) {
+                Glide.with(context).load(hits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
+                ((ViewHolder1) holder).tv_tag_desc.setText(hits.getHits().get(position).get_source().getMovie().get(0).getType());
+                ((ViewHolder1) holder).tv_tag_name.setText(hits.getHits().get(position).get_source().getMovie().get(0).getName());
+                ((ViewHolder1) holder).card_critic_review_moviename.setText(hits.getHits().get(position).get_source().getMovie().get(0).getName());
+            } else if (hits.getHits().get(position).get_source().getCeleb() != null) {
+                Glide.with(context).load(hits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder1) holder).profile_image));
+                ((ViewHolder1) holder).tv_tag_desc.setText(hits.getHits().get(position).get_source().getCeleb().get(0).getType());
+                ((ViewHolder1) holder).tv_tag_name.setText(hits.getHits().get(position).get_source().getCeleb().get(0).getName());
             }
-            ((ViewHolder1) holder).card_movie_review_bottom_header_criticrating.setText(hits.getHits().get(position - 1).get_source().getRating());
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            ((ViewHolder1) holder).card_movie_review_bottom_header_criticrating.setText(hits.getHits().get(position).get_source().getRating());
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder1) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder1) holder).tv_description.setText(Html.fromHtml(Common.formatString(hits.getHits().get(position - 1).get_source().getText())));
-            ((ViewHolder1) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder1) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder1) holder).tv_description.setText(Html.fromHtml(Common.formatString(hits.getHits().get(position).get_source().getText())));
+            ((ViewHolder1) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder1) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
         } else if (holder.getItemViewType() == 2) {
             ((ViewHolder2) holder).card_header_container.setVisibility(View.GONE);
             Log.e("inside bindview", "" + position);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder2) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            ((ViewHolder2) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder2) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder2) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder2) holder).ib_bookmark, context);
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder2) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            ((ViewHolder2) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder2) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder2) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder2) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 3) {
             ((ViewHolder3) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder3) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder3) holder).tv_description.setText(Html.fromHtml(Common.formatString(hits.getHits().get(position - 1).get_source().getText())));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic())
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder3) holder).tv_description.setText(Html.fromHtml(Common.formatString(hits.getHits().get(position).get_source().getText())));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder3) holder).card_gallary1_img1);
-            ((ViewHolder3) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder3) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder3) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder3) holder).ib_bookmark, context);
+            ((ViewHolder3) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder3) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder3) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder3) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 4) {
             ((ViewHolder4) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder4) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder4) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic())
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder4) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder4) holder).news_img);
-            ((ViewHolder4) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder4) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder4) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder4) holder).ib_bookmark, context);
+            ((ViewHolder4) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder4) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder4) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder4) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 5) {
             ((ViewHolder5) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder5) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder5) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic())
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder5) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder5) holder).card_gallary1_img1);
-            ((ViewHolder5) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder5) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder5) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder5) holder).ib_bookmark, context);
+            ((ViewHolder5) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder5) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder5) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder5) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 6) {
             ((ViewHolder6) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder6) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder6) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic())
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder6) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic())
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder6) holder).card_gallary1_img1);
-            ((ViewHolder6) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder6) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder6) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder6) holder).ib_bookmark, context);
+            ((ViewHolder6) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder6) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder6) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder6) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 10) {
             ((ViewHolder7) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder7) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder7) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .into(((ViewHolder7) holder).card_gallary1_img1);
-            ((ViewHolder7) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder7) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder7) holder).ib_bookmark, context);
+            ((ViewHolder7) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder7) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder7) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder7) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 8) {
             ((ViewHolder8) holder).card_header_container.setVisibility(View.GONE);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getProfilePic()).into(((ViewHolder8) holder).card_audio_jukebox_imageview);
+            Glide.with(context).load(hits.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder8) holder).card_audio_jukebox_imageview);
             ((ViewHolder8) holder).card_footer_container.setVisibility(View.GONE);
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder8) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder8) holder).ib_bookmark, context);
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder8) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder8) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 11) {
             ((ViewHolder11) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder11) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder11) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder11) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder11) holder).card_gallary2_img1);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder11) holder).card_gallary2_img2);
-            ((ViewHolder11) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder11) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder11) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder11) holder).ib_bookmark, context);
+            ((ViewHolder11) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder11) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder11) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder11) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 12) {
             ((ViewHolder12) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder12) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder12) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder12) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder12) holder).card_gallary3_img1);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder12) holder).card_gallary3_img2);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(2))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder12) holder).card_gallary3_img3);
-            ((ViewHolder12) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder12) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder12) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder12) holder).ib_bookmark, context);
+            ((ViewHolder12) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder12) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder12) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder12) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 13) {
             ((ViewHolder13) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder13) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder13) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder13) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder13) holder).card_gallary4_img1);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder13) holder).card_gallary4_img2);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(2))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder13) holder).card_gallary4_img3);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(3))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(3))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder13) holder).card_gallary4_img4);
-            ((ViewHolder13) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder13) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder13) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder13) holder).ib_bookmark, context);
+            ((ViewHolder13) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder13) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder13) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder13) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 14) {
             ((ViewHolder14) holder).card_header_container.setVisibility(View.GONE);
-            if (hits.getHits().get(position - 1).get_source().getText() == null)
+            if (hits.getHits().get(position).get_source().getText() == null)
                 ((ViewHolder14) holder).tv_description.setVisibility(View.GONE);
-            else if (hits.getHits().get(position - 1).get_source().getText() != null)
-                ((ViewHolder14) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position - 1).get_source().getText()));
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(0))
+            else if (hits.getHits().get(position).get_source().getText() != null)
+                ((ViewHolder14) holder).tv_description.setText(Html.fromHtml(hits.getHits().get(position).get_source().getText()));
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(0))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder14) holder).card_gallary5_img1);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(1))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(1))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder14) holder).card_gallary5_img2);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(2))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(2))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder14) holder).card_gallary5_img3);
-            Glide.with(context).load(hits.getHits().get(position - 1).get_source().getMedia().getGallery().get(3))
+            Glide.with(context).load(hits.getHits().get(position).get_source().getMedia().getGallery().get(3))
                     .thumbnail(Glide.with(context).load(R.drawable.loading_gif3))
                     .transform(new FaceCenterCrop())
                     .into(((ViewHolder14) holder).card_gallary5_img4);
-            ((ViewHolder14) holder).tv_name.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder14) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position - 1).get_source().getTitle());
-            ((ViewHolder14) holder).card_gallary5_text.setText("+" + ((hits.getHits().get(position - 1).get_source().getMedia().getGallery().size()) - 4));
-            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder14) holder).ib_like, context);
-            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position - 1).get_source().getProfilePic(), ((ViewHolder14) holder).ib_bookmark, context);
+            ((ViewHolder14) holder).tv_name.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder14) holder).card_celebrity_feed_gallery1_title.setText(hits.getHits().get(position).get_source().getTitle());
+            ((ViewHolder14) holder).card_gallary5_text.setText("+" + ((hits.getHits().get(position).get_source().getMedia().getGallery().size()) - 4));
+            new PostRetrofit().checkForLike("like", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder14) holder).ib_like, context);
+            new PostRetrofit().checkForBookmark("bookmark", userId, hits.getHits().get(position).get_source().getProfilePic(), ((ViewHolder14) holder).ib_bookmark, context);
         } else if (holder.getItemViewType() == 100) {
             ((ViewHolder100) holder).activity_no_comments_tv.setText("No Contents Available!");
         }
@@ -459,8 +459,8 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
         else {
             if (hits.getHits().size() != 0 && hits.getHits() != null) {
-                if (hits.getHits().get(position - 1).get_source().getContentType() != null) {
-                    switch (hits.getHits().get(position - 1).get_source().getContentType().toLowerCase()) {
+                if (hits.getHits().get(position).get_source().getContentType() != null) {
+                    switch (hits.getHits().get(position).get_source().getContentType().toLowerCase()) {
                         case "comedy-clip":
                             return 4;
                         case "quote":
@@ -478,20 +478,20 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                         case "tweet":
                             return 6;
                         case "gallery": {
-                            if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() == 1)
+                            if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() == 1)
                                 return 10;
-                            else if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() == 2)
+                            else if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() == 2)
                                 return 11;
-                            else if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() == 3)
+                            else if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() == 3)
                                 return 12;
-                            else if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() == 4)
+                            else if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() == 4)
                                 return 13;
-                            else if (hits.getHits().get(position - 1).get_source().getMedia().getGallery() != null
-                                    && hits.getHits().get(position - 1).get_source().getMedia().getGallery().size() > 4)
+                            else if (hits.getHits().get(position).get_source().getMedia().getGallery() != null
+                                    && hits.getHits().get(position).get_source().getMedia().getGallery().size() > 4)
                                 return 14;
                         }
                         case "movie-making":
@@ -590,19 +590,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -610,7 +610,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -651,19 +651,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -671,7 +671,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -681,7 +681,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_description_linear) {
-                cardDescLinearClick(getAdapterPosition() - 1);
+                cardDescLinearClick(getAdapterPosition());
             }
         }
     }
@@ -722,19 +722,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -742,7 +742,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -752,7 +752,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_description_linear||view.getId()==R.id.card_gallary1_img1) {
-                cardDescLinearClick(getAdapterPosition() - 1);
+                cardDescLinearClick(getAdapterPosition());
             }
         }
     }
@@ -792,19 +792,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
 
@@ -813,7 +813,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -823,9 +823,9 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_description_linear||view.getId()==R.id.news_img) {
-                cardVideoCardDescClick(getAdapterPosition() - 1);
+                cardVideoCardDescClick(getAdapterPosition());
             } else if (view.getId() == R.id.video_btn) {
-                cardVideoButtonClick(getAdapterPosition() - 1);
+                cardVideoButtonClick(getAdapterPosition());
             }
         }
     }
@@ -866,19 +866,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
 
@@ -887,7 +887,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -897,7 +897,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_description_linear||view.getId()==R.id.card_gallary1_img1) {
-                cardDescLinearClick(getAdapterPosition() - 1);
+                cardDescLinearClick(getAdapterPosition());
             }
         }
     }
@@ -935,19 +935,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -955,7 +955,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -965,7 +965,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_description_linear||view.getId()==R.id.card_gallary1_img1) {
-                cardDescLinearClick(getAdapterPosition() - 1);
+                cardDescLinearClick(getAdapterPosition());
             }
         }
     }
@@ -1010,19 +1010,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
 
@@ -1031,7 +1031,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -1043,7 +1043,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             if (view.getId() == R.id.card_description_linear) {
                 cardDescLinearClick(getAdapterPosition()-1);
             } else if (view.getId() == R.id.card_gallary1_img1) {
-                cardGalleryContainerClick(getAdapterPosition() - 1);
+                cardGalleryContainerClick(getAdapterPosition());
             }
         }
     }
@@ -1079,19 +1079,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -1099,7 +1099,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -1150,19 +1150,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -1170,7 +1170,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -1180,7 +1180,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_gallery2_img_container||view.getId()==R.id.card_description_linear) {
-                cardGalleryContainerClick(getAdapterPosition() - 1);
+                cardGalleryContainerClick(getAdapterPosition());
             }
         }
     }
@@ -1223,19 +1223,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -1243,7 +1243,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -1253,7 +1253,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_gallery3_1_img_container||view.getId()==R.id.card_description_linear) {
-                cardGalleryContainerClick(getAdapterPosition() - 1);
+                cardGalleryContainerClick(getAdapterPosition());
             }
         }
     }
@@ -1297,19 +1297,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -1317,7 +1317,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -1327,7 +1327,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_gallery4_img_container||view.getId()==R.id.card_description_linear) {
-                cardGalleryContainerClick(getAdapterPosition() - 1);
+                cardGalleryContainerClick(getAdapterPosition());
             }
         }
     }
@@ -1371,19 +1371,19 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
             card_footer_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.shareClick(hits.getHits().get(getAdapterPosition() - 1).get_source().getMedia().getGallery().get(0), context);
+                    Common.shareClick(hits.getHits().get(getAdapterPosition()).get_source().getMedia().getGallery().get(0), context);
                 }
             });
             ib_like.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.likeAndUnLikeEvent(context, ib_like, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             ib_bookmark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic());
+                    Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, hits.getHits().get(getAdapterPosition()).get_source().getProfilePic());
                 }
             });
             card_comment_text_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -1391,7 +1391,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                             userId,
-                            hits.getHits().get(getAdapterPosition() - 1).get_source().getProfilePic(),
+                            hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                             card_comment_text_edittxt.getText().toString(),
                             card_comment_text_edittxt, context);
                 }
@@ -1401,7 +1401,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.card_gallery5_img_container||view.getId()==R.id.card_description_linear) {
-                cardGalleryContainerClick(getAdapterPosition() - 1);
+                cardGalleryContainerClick(getAdapterPosition());
             }
         }
     }
