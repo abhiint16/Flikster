@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -52,6 +53,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -162,6 +164,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         MyAccountFragment.MyAccountItemClick {
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
+    FrameLayout main_container;
     ApiInterface apiInterface;
     AppBarLayout appbar_container;
     LinearLayout toolbar_main_notification, toolbar_navigation_view_open_btn,feed_tab_layout,filter_contenttype_layout,
@@ -171,6 +174,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     Toolbar toolbar_main;
     String industry_type_from_dialog;
     String industryOrFilter;
+    CoordinatorLayout.LayoutParams params;
     DrawerLayout drawerLayout;
     View profile_pink_line,order_pink_line,wishlist_pink_line,saved_post_pink_line,refer_pink_line,flikster_credit_pink_line,
             aboutus_pink_line,settings_pink_line,logout_pink_line;
@@ -378,6 +382,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         {Log.e("cehck for frag","chec for frag not");
             appbar_container.setVisibility(View.GONE);
             feed_tab_layout.setVisibility(View.GONE);
+            params.setBehavior(null);
+            main_container.requestLayout();
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
                     .commit();
@@ -386,6 +392,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         {Log.e("cehck for frag","chec for frag");
             appbar_container.setVisibility(View.VISIBLE);
             feed_tab_layout.setVisibility(View.VISIBLE);
+            params.setBehavior(new AppBarLayout.ScrollingViewBehavior());
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
                     .commit();
@@ -730,8 +737,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         feed_tab_layout=(LinearLayout)findViewById(R.id.feed_tab_layout);
         login_btn_navigation=(TextView)findViewById(R.id.login_btn_navigation);
         navigation_username_loc_container=(LinearLayout)findViewById(R.id.navigation_username_loc_container);
+        main_container=(FrameLayout)findViewById(R.id.main_container);
         filter_industry_layout=(LinearLayout)findViewById(R.id.filter_industry_layout);
         filter_contenttype_layout=(LinearLayout)findViewById(R.id.filter_contenttype_layout);
+        params = (CoordinatorLayout.LayoutParams) main_container.getLayoutParams();
         logout_pink_line=(View)findViewById(R.id.logout_pink_line);
         aboutus_pink_line=(View)findViewById(R.id.aboutus_pink_line);
         flikster_credit_pink_line=(View)findViewById(R.id.flikster_credit_pink_line);
@@ -804,6 +813,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             Log.e("cehck for frag","chec for frag not");
             appbar_container.setVisibility(View.GONE);
             feed_tab_layout.setVisibility(View.GONE);
+            params.setBehavior(null);
+            main_container.requestLayout();
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
                     .addToBackStack("")
@@ -814,6 +825,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             Log.e("cehck for frag","chec for frag");
             appbar_container.setVisibility(View.VISIBLE);
             feed_tab_layout.setVisibility(View.VISIBLE);
+            params.setBehavior(new AppBarLayout.ScrollingViewBehavior());
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
                     .addToBackStack("")
