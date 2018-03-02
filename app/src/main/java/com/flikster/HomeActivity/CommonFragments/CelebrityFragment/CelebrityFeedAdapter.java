@@ -453,7 +453,7 @@ public class CelebrityFeedAdapter extends RecyclerView.Adapter<RecyclerView.View
     public int getItemViewType(int position) {
         /*if (position == 0)
             return 0;
-        else */if (hits.getHits().size()!=0&&(position==hits.getHits().size()+1))
+        else */if (hits.getHits().size()!=0&&(position==hits.getHits().size()))
         {
             return 300;
         }
