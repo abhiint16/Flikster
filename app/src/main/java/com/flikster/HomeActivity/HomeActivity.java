@@ -52,6 +52,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import android.app.Activity;
@@ -156,20 +157,24 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
-        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag,DialogCommunication {
+        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener {
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
     LinearLayout toolbar_main_notification, toolbar_navigation_view_open_btn,feed_tab_layout,filter_contenttype_layout,
-            filter_industry_layout;
+            filter_industry_layout,navigation_username_loc_container;
     TextView toolbar_cart_btn,filter_industry_layout_text;
     SearchView toolbar_search_btn;
     Toolbar toolbar_main;
     String industry_type_from_dialog;
     String industryOrFilter;
     DrawerLayout drawerLayout;
-    ImageButton facebook_icon_footer,twitter_icon_footer,instagram_icon_footer,linkedin_icon_footer,pintrest_icon_footer;
-    TextView footer_drawer_layout_aboutus, footer_drawer_layout_help, footer_drawer_layout_blog, footer_drawer_layout_privacy,
+    View profile_pink_line,order_pink_line,wishlist_pink_line,saved_post_pink_line,refer_pink_line,flikster_credit_pink_line,
+            aboutus_pink_line,settings_pink_line,logout_pink_line;
+    /*ImageButton facebook_icon_footer,twitter_icon_footer,instagram_icon_footer,linkedin_icon_footer,pintrest_icon_footer;*/
+    LinearLayout footer_drawer_layout_aboutus,right_navigation_bar_my_account, right_navigation_bar_orders, right_navigation_bar_wishlist,
+            right_navigation_bar_liked_posts, right_navigation_bar_refer, right_navigation_bar_rewards,
+            right_navigation_bar_logout,right_navigation_bar_setting,right_navigation_bar_about_us, footer_drawer_layout_help, footer_drawer_layout_blog, footer_drawer_layout_privacy,
             footer_drawer_layout_terms, footer_drawer_layout_business;
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
@@ -178,14 +183,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     SharedPref sharedPref;
     GlobalSearchGetData globalSearchGetData;
     MySpinner toolbar_pref_spinner;
-    Button right_navigation_bar_non_loggedin_login_btn, right_navigation_bar_non_loggedin_create_account_btn;
+    ImageView header_drawer_layout_profile_pic;
+    /*Button  right_navigation_bar_non_loggedin_create_account_btn*//*,right_navigation_bar_non_loggedin_login_btn*//*;*/
     ScrollView right_navigation_bar_logged_in_container, right_navigation_bar_non_logged_in_container;
-    TextView right_navigation_bar_my_account, right_navigation_bar_orders, right_navigation_bar_wishlist,
-            right_navigation_bar_liked_posts, right_navigation_bar_refer, right_navigation_bar_rewards,
-            right_navigation_bar_logout, right_navigation_bar_non_loggedin_aboutflikster,
+    TextView login_btn_navigation /*right_navigation_bar_non_loggedin_aboutflikster,
             right_navigation_bar_non_loggedin_careers, right_navigation_bar_non_loggedin_contact,
-            right_navigation_bar_non_loggedin_help, right_navigation_bar_non_loggedin_privacy,
-            right_navigation_bar_non_loggedin_return_policy, right_navigation_bar_non_loggedin_terms, right_navigation_bar_non_loggedin_auction;
+            right_navigation_bar_non_loggedin_help, right_navigation_bar_non_loggedin_privacy,login_btn_navigation,
+            right_navigation_bar_non_loggedin_return_policy, right_navigation_bar_non_loggedin_terms, right_navigation_bar_non_loggedin_auction*/;
 
     ///Image Capture
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -270,17 +274,23 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         UserId = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID");
         Username = SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_NAME");
         if (UserId != null && !UserId.isEmpty()) {
-            right_navigation_bar_logged_in_container.setVisibility(View.VISIBLE);
-            right_navigation_bar_non_logged_in_container.setVisibility(View.GONE);
+            navigation_username_loc_container.setVisibility(View.VISIBLE);
+            right_navigation_bar_logout.setVisibility(View.VISIBLE);
+            login_btn_navigation.setVisibility(View.GONE);
+            /*right_navigation_bar_logged_in_container.setVisibility(View.VISIBLE);*/
+            //right_navigation_bar_non_logged_in_container.setVisibility(View.GONE);
             if (Username != null && !Username.isEmpty()) {
                 header_drawer_layout_username.setText(Username + "");
             } else {
-
+                right_navigation_bar_logout.setVisibility(View.GONE);
             }
 
         } else {
-            right_navigation_bar_logged_in_container.setVisibility(View.GONE);
-            right_navigation_bar_non_logged_in_container.setVisibility(View.VISIBLE);
+            navigation_username_loc_container.setVisibility(View.GONE);
+            right_navigation_bar_logout.setVisibility(View.GONE);
+            login_btn_navigation.setVisibility(View.VISIBLE);
+            /*right_navigation_bar_logged_in_container.setVisibility(View.GONE);
+            right_navigation_bar_non_logged_in_container.setVisibility(View.VISIBLE);*/
         }
     }
 
@@ -379,8 +389,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void initializeRest() {
         mContext = HomeActivity.this;
+
         filter_contenttype_layout.setOnClickListener(this);
         filter_industry_layout.setOnClickListener(this);
+        login_btn_navigation.setOnClickListener(this);
+
         /*feed.setOnClickListener(this);
         fashion.setOnClickListener(this);
         store.setOnClickListener(this);
@@ -389,11 +402,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         camera_fab.setOnClickListener(this);
         filter_industry_layout_text.setText(SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE"));
         footer_drawer_layout_aboutus.setOnClickListener(this);
-        footer_drawer_layout_blog.setOnClickListener(this);
+        /*footer_drawer_layout_blog.setOnClickListener(this);
         footer_drawer_layout_business.setOnClickListener(this);
         footer_drawer_layout_help.setOnClickListener(this);
         footer_drawer_layout_terms.setOnClickListener(this);
-        footer_drawer_layout_privacy.setOnClickListener(this);
+        footer_drawer_layout_privacy.setOnClickListener(this);*/
         fragmentManager = getSupportFragmentManager();
         toolbar_main.setWillNotCacheDrawing(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -407,12 +420,21 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_refer.setOnClickListener(this);
         right_navigation_bar_rewards.setOnClickListener(this);
         right_navigation_bar_logout.setOnClickListener(this);
-        twitter_icon_footer.setOnClickListener(this);
+        right_navigation_bar_my_account.setOnTouchListener(this);
+        right_navigation_bar_orders.setOnTouchListener(this);
+        right_navigation_bar_wishlist.setOnTouchListener(this);
+        right_navigation_bar_liked_posts.setOnTouchListener(this);
+        right_navigation_bar_refer.setOnTouchListener(this);
+        right_navigation_bar_rewards.setOnTouchListener(this);
+        right_navigation_bar_logout.setOnTouchListener(this);
+        right_navigation_bar_about_us.setOnTouchListener(this);
+        right_navigation_bar_setting.setOnTouchListener(this);
+        /*twitter_icon_footer.setOnClickListener(this);
         instagram_icon_footer.setOnClickListener(this);
         pintrest_icon_footer.setOnClickListener(this);
         facebook_icon_footer.setOnClickListener(this);
-        linkedin_icon_footer.setOnClickListener(this);
-        right_navigation_bar_non_loggedin_aboutflikster.setOnClickListener(this);
+        linkedin_icon_footer.setOnClickListener(this);*/
+        /*right_navigation_bar_non_loggedin_aboutflikster.setOnClickListener(this);
         right_navigation_bar_non_loggedin_careers.setOnClickListener(this);
         right_navigation_bar_non_loggedin_contact.setOnClickListener(this);
         right_navigation_bar_non_loggedin_help.setOnClickListener(this);
@@ -420,9 +442,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_return_policy.setOnClickListener(this);
         right_navigation_bar_non_loggedin_terms.setOnClickListener(this);
         right_navigation_bar_non_loggedin_login_btn.setOnClickListener(this);
-        right_navigation_bar_non_loggedin_auction.setOnClickListener(this);
+        right_navigation_bar_non_loggedin_auction.setOnClickListener(this);*/
         toolbar_flikter_text_container.setOnClickListener(this);
-        toolbar_cart_btn.setOnClickListener(new View.OnClickListener() {
+        /*toolbar_cart_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, MyBagActivity.class);
@@ -436,8 +458,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 }
                 startActivity(intent);
             }
-        });
-        right_navigation_bar_non_loggedin_create_account_btn.setOnClickListener(this);
+        });*/
+        /*right_navigation_bar_non_loggedin_create_account_btn.setOnClickListener(this);*/
         toolbar_search_btn.setQueryHint("type min 3 characters...");
         toolbar_search_btn.setOnSearchClickListener(new View.OnClickListener() {
             @Override
@@ -701,28 +723,41 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     private void initializeViews() {
         sharedPref = new SharedPref(getApplicationContext());
         feed_tab_layout=(LinearLayout)findViewById(R.id.feed_tab_layout);
+        login_btn_navigation=(TextView)findViewById(R.id.login_btn_navigation);
+        navigation_username_loc_container=(LinearLayout)findViewById(R.id.navigation_username_loc_container);
         filter_industry_layout=(LinearLayout)findViewById(R.id.filter_industry_layout);
-        filter_contenttype_layout=(LinearLayout)findViewById(R.id.filter_contenttype_layout);/*;
+        filter_contenttype_layout=(LinearLayout)findViewById(R.id.filter_contenttype_layout);
+        logout_pink_line=(View)findViewById(R.id.logout_pink_line);
+        aboutus_pink_line=(View)findViewById(R.id.aboutus_pink_line);
+        flikster_credit_pink_line=(View)findViewById(R.id.flikster_credit_pink_line);
+        order_pink_line=(View)findViewById(R.id.order_pink_line);
+        profile_pink_line=(View)findViewById(R.id.profile_pink_line);
+        refer_pink_line=(View)findViewById(R.id.refer_pink_line);
+        wishlist_pink_line=(View)findViewById(R.id.wishlist_pink_line);
+        settings_pink_line=(View)findViewById(R.id.settings_pink_line);
+        saved_post_pink_line=(View)findViewById(R.id.saved_post_pink_line);
+        /*;
         feed = (LinearLayout) findViewById(R.id.feed_button);
         fashion = (LinearLayout) findViewById(R.id.fashion_button);
         rating = (LinearLayout) findViewById(R.id.rating_button);
         store = (LinearLayout) findViewById(R.id.store_button);
         plus = (LinearLayout) findViewById(R.id.plus_button);*/
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar_cart_btn = (TextView) findViewById(R.id.toolbar_cart_btn);
+       // toolbar_cart_btn = (TextView) findViewById(R.id.toolbar_cart_btn);
         filter_industry_layout_text=(TextView)findViewById(R.id.filter_industry_layout_text);
-        facebook_icon_footer=(ImageButton)findViewById(R.id.facebook_icon_footer);
+        /*facebook_icon_footer=(ImageButton)findViewById(R.id.facebook_icon_footer);
         instagram_icon_footer=(ImageButton)findViewById(R.id.insta_icon_footer);
         pintrest_icon_footer=(ImageButton)findViewById(R.id.pintrest_icon_footer);
         twitter_icon_footer=(ImageButton)findViewById(R.id.twitter_icon_footer);
-        linkedin_icon_footer=(ImageButton)findViewById(R.id.linkedin_icon_footer);
+        linkedin_icon_footer=(ImageButton)findViewById(R.id.linkedin_icon_footer);*/
        // toolbar_main_title = (ImageButton) findViewById(R.id.toolbar_main_title);
-        footer_drawer_layout_aboutus = (TextView) findViewById(R.id.footer_drawer_layout_aboutus);
-        footer_drawer_layout_blog = (TextView) findViewById(R.id.footer_drawer_layout_blog);
+        footer_drawer_layout_aboutus = (LinearLayout) findViewById(R.id.right_navigation_bar_about_us);
+        header_drawer_layout_profile_pic=(ImageView)findViewById(R.id.header_drawer_layout_profile_pic);
+        /*footer_drawer_layout_blog = (TextView) findViewById(R.id.footer_drawer_layout_blog);
         footer_drawer_layout_business = (TextView) findViewById(R.id.footer_drawer_layout_business);
         footer_drawer_layout_help = (TextView) findViewById(R.id.footer_drawer_layout_help);
         footer_drawer_layout_terms = (TextView) findViewById(R.id.footer_drawer_layout_terms);
-        footer_drawer_layout_privacy = (TextView) findViewById(R.id.footer_drawer_layout_privacy);
+        footer_drawer_layout_privacy = (TextView) findViewById(R.id.footer_drawer_layout_privacy);*/
         toolbar_search_btn = (SearchView) findViewById(R.id.toolbar_search_btn);
         toolbar_navigation_view_open_btn = (LinearLayout) findViewById(R.id.toolbar_navigation_view_open_btn);
         toolbar_pref_spinner = (MySpinner) findViewById(R.id.toolbar_pref_spinner);
@@ -730,15 +765,17 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         header_drawer_layout_username = (TextView) findViewById(R.id.header_drawer_layout_username);
         right_navigation_bar_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_logged_in_container);
         right_navigation_bar_non_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_non_logged_in_container);
-        right_navigation_bar_my_account = (TextView) findViewById(R.id.right_navigation_bar_my_account);
-        right_navigation_bar_orders = (TextView) findViewById(R.id.right_navigation_bar_orders);
-        right_navigation_bar_wishlist = (TextView) findViewById(R.id.right_navigation_bar_wish_list);
-        right_navigation_bar_liked_posts = (TextView) findViewById(R.id.right_navigation_bar_liked_posts);
-        right_navigation_bar_refer = (TextView) findViewById(R.id.right_navigation_bar_refer);
-        right_navigation_bar_rewards = (TextView) findViewById(R.id.right_navigation_bar_rewards);
-        right_navigation_bar_logout = (TextView) findViewById(R.id.right_navigation_bar_logout);
+        right_navigation_bar_my_account = (LinearLayout) findViewById(R.id.right_navigation_bar_my_account);
+        right_navigation_bar_orders = (LinearLayout) findViewById(R.id.right_navigation_bar_orders);
+        right_navigation_bar_setting=(LinearLayout)findViewById(R.id.right_navigation_bar_setting);
+        right_navigation_bar_about_us=(LinearLayout)findViewById(R.id.right_navigation_bar_about_us);
+        right_navigation_bar_wishlist = (LinearLayout) findViewById(R.id.right_navigation_bar_wish_list);
+        right_navigation_bar_liked_posts = (LinearLayout) findViewById(R.id.right_navigation_bar_liked_posts);
+        right_navigation_bar_refer = (LinearLayout) findViewById(R.id.right_navigation_bar_refer);
+        right_navigation_bar_rewards = (LinearLayout) findViewById(R.id.right_navigation_bar_rewards);
+        right_navigation_bar_logout = (LinearLayout) findViewById(R.id.right_navigation_bar_logout);
         toolbar_flikter_text_container = (LinearLayout) findViewById(R.id.toolbar_flikter_text_container);
-        right_navigation_bar_non_loggedin_aboutflikster = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_aboutflikster);
+        /*right_navigation_bar_non_loggedin_aboutflikster = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_aboutflikster);
         right_navigation_bar_non_loggedin_careers = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_careers);
         right_navigation_bar_non_loggedin_contact = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_contact);
         right_navigation_bar_non_loggedin_help = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_help);
@@ -747,7 +784,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_terms = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_terms);
         right_navigation_bar_non_loggedin_login_btn = (Button) findViewById(R.id.right_navigation_bar_non_loggedin_login_btn);
         right_navigation_bar_non_loggedin_auction = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_auction);
-        right_navigation_bar_non_loggedin_create_account_btn = (Button) findViewById(R.id.right_navigation_bar_non_loggedin_create_account_btn);
+        right_navigation_bar_non_loggedin_create_account_btn = (Button) findViewById(R.id.right_navigation_bar_non_loggedin_create_account_btn);*/
         setSupportActionBar(toolbar_main);
         toolbar_main_notification = (LinearLayout) toolbar_main.findViewById(R.id.toolbar_main_notification);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -824,6 +861,103 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         callBeginTrasact(view.getId());
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+         if (view.getId()== R.id.right_navigation_bar_my_account) {
+            profile_pink_line.setVisibility(View.VISIBLE);
+            order_pink_line.setVisibility(View.GONE);
+            wishlist_pink_line.setVisibility(View.GONE);
+            saved_post_pink_line.setVisibility(View.GONE);
+            refer_pink_line.setVisibility(View.GONE);
+            flikster_credit_pink_line.setVisibility(View.GONE);
+            aboutus_pink_line.setVisibility(View.GONE);
+            settings_pink_line.setVisibility(View.GONE);
+            logout_pink_line.setVisibility(View.GONE);
+        } else if (view.getId() == R.id.right_navigation_bar_orders) {
+             profile_pink_line.setVisibility(View.GONE);
+             order_pink_line.setVisibility(View.VISIBLE);
+             wishlist_pink_line.setVisibility(View.GONE);
+             saved_post_pink_line.setVisibility(View.GONE);
+             refer_pink_line.setVisibility(View.GONE);
+             flikster_credit_pink_line.setVisibility(View.GONE);
+             aboutus_pink_line.setVisibility(View.GONE);
+             settings_pink_line.setVisibility(View.GONE);
+             logout_pink_line.setVisibility(View.GONE);
+        } else if (view.getId() == R.id.right_navigation_bar_wish_list) {
+             profile_pink_line.setVisibility(View.GONE);
+             order_pink_line.setVisibility(View.GONE);
+             wishlist_pink_line.setVisibility(View.VISIBLE);
+             saved_post_pink_line.setVisibility(View.GONE);
+             refer_pink_line.setVisibility(View.GONE);
+             flikster_credit_pink_line.setVisibility(View.GONE);
+             aboutus_pink_line.setVisibility(View.GONE);
+             settings_pink_line.setVisibility(View.GONE);
+             logout_pink_line.setVisibility(View.GONE);
+        } else if (view.getId() == R.id.right_navigation_bar_liked_posts) {
+             profile_pink_line.setVisibility(View.GONE);
+             order_pink_line.setVisibility(View.GONE);
+             wishlist_pink_line.setVisibility(View.GONE);
+             saved_post_pink_line.setVisibility(View.VISIBLE);
+             refer_pink_line.setVisibility(View.GONE);
+             flikster_credit_pink_line.setVisibility(View.GONE);
+             aboutus_pink_line.setVisibility(View.GONE);
+             settings_pink_line.setVisibility(View.GONE);
+             logout_pink_line.setVisibility(View.GONE);
+        } else if (view.getId() == R.id.right_navigation_bar_refer) {
+             profile_pink_line.setVisibility(View.GONE);
+             order_pink_line.setVisibility(View.GONE);
+             wishlist_pink_line.setVisibility(View.GONE);
+             saved_post_pink_line.setVisibility(View.GONE);
+             refer_pink_line.setVisibility(View.VISIBLE);
+             flikster_credit_pink_line.setVisibility(View.GONE);
+             aboutus_pink_line.setVisibility(View.GONE);
+             settings_pink_line.setVisibility(View.GONE);
+             logout_pink_line.setVisibility(View.GONE);
+        } else if (view.getId()== R.id.right_navigation_bar_rewards) {
+             profile_pink_line.setVisibility(View.GONE);
+             order_pink_line.setVisibility(View.GONE);
+             wishlist_pink_line.setVisibility(View.GONE);
+             saved_post_pink_line.setVisibility(View.GONE);
+             refer_pink_line.setVisibility(View.GONE);
+             flikster_credit_pink_line.setVisibility(View.VISIBLE);
+             aboutus_pink_line.setVisibility(View.GONE);
+             settings_pink_line.setVisibility(View.GONE);
+             logout_pink_line.setVisibility(View.GONE);
+        }
+         else if (view.getId()== R.id.right_navigation_bar_about_us) {
+             profile_pink_line.setVisibility(View.GONE);
+             order_pink_line.setVisibility(View.GONE);
+             wishlist_pink_line.setVisibility(View.GONE);
+             saved_post_pink_line.setVisibility(View.GONE);
+             refer_pink_line.setVisibility(View.GONE);
+             flikster_credit_pink_line.setVisibility(View.GONE);
+             aboutus_pink_line.setVisibility(View.VISIBLE);
+             settings_pink_line.setVisibility(View.GONE);
+             logout_pink_line.setVisibility(View.GONE);
+         }
+         else if (view.getId()== R.id.right_navigation_bar_setting) {
+             profile_pink_line.setVisibility(View.GONE);
+             order_pink_line.setVisibility(View.GONE);
+             wishlist_pink_line.setVisibility(View.GONE);
+             saved_post_pink_line.setVisibility(View.GONE);
+             refer_pink_line.setVisibility(View.GONE);
+             flikster_credit_pink_line.setVisibility(View.GONE);
+             aboutus_pink_line.setVisibility(View.GONE);
+             settings_pink_line.setVisibility(View.VISIBLE);
+             logout_pink_line.setVisibility(View.GONE);
+         }
+         else if (view.getId()== R.id.right_navigation_bar_logout) {
+             profile_pink_line.setVisibility(View.GONE);
+             order_pink_line.setVisibility(View.GONE);
+             wishlist_pink_line.setVisibility(View.GONE);
+             saved_post_pink_line.setVisibility(View.GONE);
+             refer_pink_line.setVisibility(View.GONE);
+             flikster_credit_pink_line.setVisibility(View.GONE);
+             aboutus_pink_line.setVisibility(View.GONE);
+             settings_pink_line.setVisibility(View.GONE);
+             logout_pink_line.setVisibility(View.VISIBLE);
+         }return false;
+    }
     private void callBeginTrasact(int viewId) {
         if (viewId == R.id.feed_button) {
             beginTransact(new FeedFragment());
@@ -886,7 +1020,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             navigationMenuitemsAction("Flikster", "Terms");
         } else if (viewId == R.id.footer_drawer_layout_aboutus) {
             navigationMenuitemsAction("Flikster", "About Us");
-        } else if (viewId == R.id.footer_drawer_layout_blog) {
+        } /*else if (viewId == R.id.footer_drawer_layout_blog) {
             navigationMenuitemsAction("Flikster", "Blog");
         } else if (viewId == R.id.footer_drawer_layout_business) {
             navigationMenuitemsAction("Flikster", "Business");
@@ -896,7 +1030,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             navigationMenuitemsAction("Flikster", "Privacy");
         } else if (viewId == R.id.footer_drawer_layout_terms) {
             navigationMenuitemsAction("Flikster", "Terms");
-        } else if (viewId == R.id.right_navigation_bar_non_loggedin_login_btn) {
+        } */else if (viewId == R.id.login_btn_navigation) {
             SharedPrefsUtil.setStringPreference(getApplicationContext(), "COMING_PAGE", "LOGIN");
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
@@ -926,7 +1060,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 drawerLayout.openDrawer(Gravity.RIGHT);
             }
         }
-        else if (viewId==R.id.twitter_icon_footer)
+        /*else if (viewId==R.id.twitter_icon_footer)
         {
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse("https://twitter.com/Flikstercom/"));
@@ -955,7 +1089,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse("https://www.facebook.com/Flikster/"));
             startActivity(i);
-        }
+        }*/
     }
 
     private void navigationMenuitemsAction(String contentddata, String headerStr) {

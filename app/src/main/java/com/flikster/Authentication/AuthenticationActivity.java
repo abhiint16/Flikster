@@ -528,7 +528,7 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
                         SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME", firstName);
                     }
                     if (lastName != null && !lastName.isEmpty()) {
-                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME", firstName + lastName);
+                        SharedPrefsUtil.setStringPreference(getApplicationContext(), "USER_NAME", firstName + " "+lastName);
                     }
                     Toast.makeText(AuthenticationActivity.this, firstName, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
