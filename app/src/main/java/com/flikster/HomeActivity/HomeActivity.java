@@ -19,6 +19,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -157,10 +158,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
-        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener {
+        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener,
+        MyAccountFragment.MyAccountItemClick {
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
+    AppBarLayout appbar_container;
     LinearLayout toolbar_main_notification, toolbar_navigation_view_open_btn,feed_tab_layout,filter_contenttype_layout,
             filter_industry_layout,navigation_username_loc_container;
     TextView toolbar_cart_btn,filter_industry_layout_text;
@@ -373,6 +376,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     private void firstTimeLaunch(Fragment fragment) {
         if (!fragment.getClass().equals(FeedFragment.class))
         {Log.e("cehck for frag","chec for frag not");
+            appbar_container.setVisibility(View.GONE);
             feed_tab_layout.setVisibility(View.GONE);
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
@@ -380,6 +384,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         }
         else if (fragment.getClass().equals(FeedFragment.class))
         {Log.e("cehck for frag","chec for frag");
+            appbar_container.setVisibility(View.VISIBLE);
             feed_tab_layout.setVisibility(View.VISIBLE);
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
@@ -786,6 +791,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_non_loggedin_auction = (TextView) findViewById(R.id.right_navigation_bar_non_loggedin_auction);
         right_navigation_bar_non_loggedin_create_account_btn = (Button) findViewById(R.id.right_navigation_bar_non_loggedin_create_account_btn);*/
         setSupportActionBar(toolbar_main);
+        appbar_container=(AppBarLayout)findViewById(R.id.appbar_container);
         toolbar_main_notification = (LinearLayout) toolbar_main.findViewById(R.id.toolbar_main_notification);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         navigationView = (NavigationView) findViewById(R.id.drawer_navview);
@@ -796,6 +802,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         if (!fragment.getClass().equals(FeedFragment.class))
         {
             Log.e("cehck for frag","chec for frag not");
+            appbar_container.setVisibility(View.GONE);
             feed_tab_layout.setVisibility(View.GONE);
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
@@ -805,6 +812,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         else if (fragment.getClass().equals(FeedFragment.class))
         {
             Log.e("cehck for frag","chec for frag");
+            appbar_container.setVisibility(View.VISIBLE);
             feed_tab_layout.setVisibility(View.VISIBLE);
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)

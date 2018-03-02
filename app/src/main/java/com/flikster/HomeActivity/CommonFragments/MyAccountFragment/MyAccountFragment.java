@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.MyAccountFragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -19,6 +20,8 @@ import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
 
+import java.util.List;
+
 /**
  * Created by abhishek on 17-10-2017.
  */
@@ -32,6 +35,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     MyAccountAdapter myAccountAdapter;
     TextView fragment_my_account_name, fragment_my_account_location, fragment_my_account_no_followers;
     ImageButton myprofile_toolbar_navigation_icon;
+    MyAccountItemClick myAccountItemClick;
 
     @Nullable
     @Override
@@ -98,11 +102,21 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
                     .replace(R.id.main_container, new NotificationFragment())
                     .addToBackStack("")
                     .commit();
-        }*/else if (view.getId() ==R.id.myprofile_toolbar_navigation_icon)
-        {
-            getFragmentManager().beginTransaction()
+        }*/ else if (view.getId() == R.id.myprofile_toolbar_navigation_icon) {
+            /*getFragmentManager().beginTransaction()
                     .replace(R.id.main_container,new FeedFragment())
-                    .commit();
+                    .commit();*/
+            myAccountItemClick.voidMethod(new FeedFragment());
         }
+    }
+
+    public interface MyAccountItemClick {
+        void voidMethod(Fragment fragment);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        myAccountItemClick = (MyAccountItemClick) activity;
     }
 }

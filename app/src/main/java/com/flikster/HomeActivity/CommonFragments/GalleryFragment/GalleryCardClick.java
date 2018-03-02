@@ -126,9 +126,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbar_back_navigation_btn) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new FeedFragment())
-                    .commit();
+            galleryRecommendationItemClick.voidMethod(new FeedFragment());
         }
         else if (view.getId()==R.id.header_linear||view.getId()==R.id.profile_image)
         {
@@ -147,6 +145,7 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
                                                   String name, String profilePic, String type,
                                                   String title, Fragment fragment, String userId, String entityId,String cardId,String slug);
         void test(String name, Fragment fragment, int getClass, String userId, String entityId);
+        void voidMethod(Fragment fragment);
     }
 
     @Override
@@ -154,7 +153,4 @@ public class GalleryCardClick extends Fragment implements View.OnClickListener {
         super.onAttach(activity);
         galleryRecommendationItemClick = (GalleryRecommendationItemClick) activity;
     }
-
-
-
 }
