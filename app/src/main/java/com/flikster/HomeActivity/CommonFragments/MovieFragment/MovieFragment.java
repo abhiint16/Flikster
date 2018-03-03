@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,14 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.ApiClient;
 import com.flikster.HomeActivity.ApiInterface;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityAdapter;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityData;
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 import com.rohitarya.glide.facedetection.transformation.core.GlideFaceDetector;
 
 import java.util.ArrayList;
@@ -40,18 +44,21 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     TabLayout tabLayout;
     MovieAdapter movieAdapter;
     FragmentManager fragmentManager;
-    TextView toolbar_frag_title;
+    TextView toolbar_frag_title,card_movie_feed_profile_moviename,card_movie_feed_profile_censor,card_movie_feed_profile_dor,
+            card_movie_feed_profile_genre,card_movie_feed_profile_dur;
     ApiInterface apiInterface;
     ImageButton toolbar_back_navigation_btn;
     Bundle arguments = new Bundle();
     MovieData.MovieInnerData hits;
     String slug, userId, entityId;
     MovieItemClickInterface movieItemClickInterface;
+    ImageView card_movie_common_profile_coverpic;
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_celebrity, container, false);
+        view = inflater.inflate(R.layout.movie_feed_container, container, false);
         initializeViews();
         tempMethod();
         initializeRest();
@@ -66,6 +73,19 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
                 hits = response.body().getHits();
+                Glide.with(getActivity()).load(hits.getHits().get(0).get_source().getCoverPic()).asBitmap()
+                        .transform(new FaceCenterCrop())
+                        .into(card_movie_common_profile_coverpic);
+                //card_movie_feed_profile_moviename.setText(hits.getHits().get(0).get_source().getTitle());
+                card_movie_feed_profile_censor.setText(hits.getHits().get(0).get_source().getCensorCertificate());
+                card_movie_feed_profile_dor.setText(hits.getHits().get(0).get_source().getDateOfRelease());
+                card_movie_feed_profile_genre.setText(formatGenre((ArrayList<String>) hits.getHits().get(0).get_source().getGenre()));
+                card_movie_feed_profile_dur.setText(hits.getHits().get(0).get_source().getDuration());
+                collapsingToolbarLayout.setTitleEnabled(true);
+                collapsingToolbarLayout.setTitle(hits.getHits().get(0).get_source().getTitle());
+                collapsingToolbarLayout.setExpandedTitleColor(getActivity().getResources().getColor(R.color.black));
+                collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));
+
                 arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
                 arguments.putString("censor", hits.getHits().get(0).get_source().getCensorCertificate());
                 arguments.putString("dor", hits.getHits().get(0).get_source().getDateOfRelease());
@@ -90,6 +110,17 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+    public String formatGenre(ArrayList<String> genre1) {
+        String genre = "";
+        for (int i = 0; i < genre1.size(); i++) {
+            if (i < genre1.size()- 1)
+                genre = genre + genre1.get(i) + " | ";
+            else
+                genre = genre + genre1.get(i);
+        }
+        return genre;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -106,12 +137,19 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     private void initializeViews() {
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
+        collapsingToolbarLayout=(CollapsingToolbarLayout)view.findViewById(R.id.main_collapsing);
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.black));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
         fragmentManager = getActivity().getSupportFragmentManager();
+        card_movie_feed_profile_moviename=(TextView)view.findViewById(R.id.card_movie_feed_profile_moviename);
+        card_movie_feed_profile_censor=(TextView)view.findViewById(R.id.card_movie_feed_profile_censor);
+        card_movie_feed_profile_dor=(TextView)view.findViewById(R.id.card_movie_feed_profile_dor);
+        card_movie_feed_profile_genre=(TextView)view.findViewById(R.id.card_movie_feed_profile_genre);
+        card_movie_feed_profile_dur=(TextView)view.findViewById(R.id.card_movie_feed_profile_dur);
+        card_movie_common_profile_coverpic=(ImageView)view.findViewById(R.id.card_movie_common_profile_coverpic);
     }
 
     private void initializeRest() {

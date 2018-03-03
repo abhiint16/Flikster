@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -54,6 +55,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     CelebrityData.CelebrityInnerData hits;
     Bundle arguments = new Bundle();
     CelebItemClickInterface celebItemClickInterface;
+    CollapsingToolbarLayout collapsingToolbarLayout;
     ImageView card_celeb_common_profile_coverpic;
     TextView card_celeb_common_profile_name,card_celeb_common_profile_role,card_celeb_common_profile_likes_txt,
             card_celeb_common_profile_followers_txt;
@@ -98,10 +100,14 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                 {
 
                 }
-                if (hits.getHits().get(0).get_source().getName()!=null)
+                /*if (hits.getHits().get(0).get_source().getName()!=null)
                 {
                     card_celeb_common_profile_name.setText(hits.getHits().get(0).get_source().getName());
-                }
+                }*/
+                collapsingToolbarLayout.setTitleEnabled(true);
+                collapsingToolbarLayout.setTitle(hits.getHits().get(0).get_source().getName());
+                collapsingToolbarLayout.setExpandedTitleColor(getActivity().getResources().getColor(R.color.black));
+                collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));
                 if (hits.getHits().size() != 0) {
                     if (hits.getHits().get(0).get_source().getCoverPic()!=null)
                     arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
@@ -185,7 +191,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
         String genre = "";
         try {
             for (int i = 0; i < this.hits.getHits().get(0).get_source().getRole().size(); i++) {
-                if (i < genre.length() - 1)
+                if (i < hits.getHits().get(0).get_source().getRole().size() - 1)
                     genre = genre + this.hits.getHits().get(0).get_source().getRole().get(i) + " | ";
                 else
                     genre = genre + this.hits.getHits().get(0).get_source().getRole().get(i);
@@ -197,10 +203,11 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initializeViews() {
-        nestedScrollView = (NestedScrollView)view. findViewById (R.id.main_nested);
-        nestedScrollView.setFillViewport (true);
+        /*nestedScrollView = (NestedScrollView)view. findViewById (R.id.main_nested);
+        nestedScrollView.setFillViewport (true);*/
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
+        collapsingToolbarLayout= (CollapsingToolbarLayout)view.findViewById(R.id.main_collapsing);
         //toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         card_celeb_common_profile_coverpic=(ImageView)view.findViewById(R.id.card_celeb_common_profile_coverpic);
         card_celeb_common_profile_name=(TextView)view.findViewById(R.id.card_celeb_common_profile_name);

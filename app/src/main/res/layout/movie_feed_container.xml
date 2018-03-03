@@ -27,7 +27,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/card_celeb_common_profile_coverpic"
+                android:id="@+id/card_movie_common_profile_coverpic"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:alpha="0.9"
@@ -43,12 +43,77 @@
                 android:background="@drawable/white_grey_radius_border"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/card_movie_feed_profile_moviename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <!--<TextView
+                        android:id="@+id/card_movie_feed_profile_censor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text=" "
+                        android:textSize="14sp" />-->
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/card_movie_feed_profile_dor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=" " />
+
+                    <TextView
+                        android:id="@+id/card_movie_feed_profile_genre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text=" "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/card_movie_feed_profile_dur"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text=" "
+                        android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/card_movie_feed_profile_censor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text=" "
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <!--<TextView
                     android:id="@+id/card_celeb_common_profile_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/five"
                     android:gravity="center"
+                    android:text="Name"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -61,7 +126,7 @@
                     android:gravity="center"
                     android:text="Role"
                     android:textColor="@color/grey_txt_label"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />-->
 
                 <View
                     android:layout_width="match_parent"
@@ -265,8 +330,8 @@
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
         android:scrollbarFadeDuration="0"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
--->
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
         <android.support.v4.view.ViewPager
             android:id="@+id/celebrity_pager"
             android:layout_width="match_parent"
