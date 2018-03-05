@@ -23,6 +23,9 @@
     <color name="colorAuthenticationHeader">#0C4483</color>
     <color name="transparent">#00000000</color>
     <color name="translucent">#94000000</color>
+    <color name="translucent1">#3c000000</color>
+    <color name="translucent2">#1e000000</color>
+    <color name="translucent3">#00000000</color>
 
     <color name="color_tab_1">#455C65</color>
     <color name="color_tab_2">#00886A</color>

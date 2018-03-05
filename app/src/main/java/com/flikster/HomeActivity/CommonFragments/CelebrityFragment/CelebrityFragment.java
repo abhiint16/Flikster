@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
             card_celeb_common_profile_followers_txt;
     LinearLayout card_celeb_common_profile_likes_layout,card_celeb_common_profile_followers_layout,card_celeb_common_profile_follow_layout;
     Button followbtn;
+    Toolbar toolbar_main;
     NestedScrollView nestedScrollView;
 
 
@@ -202,8 +204,10 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                 if (scrollRange + verticalOffset < 40) {
                     collapsingToolbarLayout.setTitle(hits.getHits().get(0).get_source().getName());
                     collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));
+                    toolbar_main.setBackground(getActivity().getResources().getDrawable(R.color.transparent));
                     isShow = true;
                 } else if(isShow) {
+                    toolbar_main.setBackground(getActivity().getResources().getDrawable(R.drawable.testing));
                     collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
                     isShow = false;
                 }
@@ -231,6 +235,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
         nestedScrollView.setFillViewport (true);*/
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
+        toolbar_main=(Toolbar)view.findViewById(R.id.toolbar_main);
         collapsingToolbarLayout= (CollapsingToolbarLayout)view.findViewById(R.id.main_collapsing);
         main_appbar=(AppBarLayout)view.findViewById(R.id.main_appbar);
         //toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);

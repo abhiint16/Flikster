@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     ImageView card_movie_common_profile_coverpic;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
+    Toolbar toolbar_main;
 
     @Nullable
     @Override
@@ -137,6 +139,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initializeViews() {
+        toolbar_main=(Toolbar)view.findViewById(R.id.toolbar_main);
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
         collapsingToolbarLayout=(CollapsingToolbarLayout)view.findViewById(R.id.main_collapsing);
@@ -172,8 +175,10 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                 if (scrollRange + verticalOffset < 40) {
                     collapsingToolbarLayout.setTitle(hits.getHits().get(0).get_source().getTitle());
                     collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));
+                    toolbar_main.setBackgroundColor(getActivity().getResources().getColor(R.color.transparent));
                     isShow = true;
                 } else if(isShow) {
+                    toolbar_main.setBackground(getActivity().getResources().getDrawable(R.drawable.testing));
                     collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
                     isShow = false;
                 }

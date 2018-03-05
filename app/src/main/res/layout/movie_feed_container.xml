@@ -31,7 +31,7 @@
                 android:id="@+id/card_movie_common_profile_coverpic"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:alpha="0.9"
+                android:alpha="1"
                 android:background="@color/black" />
 
             <LinearLayout
@@ -245,7 +245,7 @@
                 android:id="@+id/toolbar_main"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/transparent"
+                android:background="@drawable/testing"
                 android:contentInsetEnd="0dp"
                 android:contentInsetLeft="0dp"
                 android:contentInsetRight="0dp"
@@ -264,7 +264,7 @@
                     android:background="@color/transparent"
                     android:src="@drawable/arrow_white" />
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:id="@+id/toolbar_main_notification"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
@@ -279,7 +279,7 @@
                         android:background="@color/transparent"
                         android:clickable="false"
                         android:src="@drawable/notification_try_white" />
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:id="@+id/toolbar_navigation_view_open_btn"
@@ -298,12 +298,12 @@
                         android:src="@drawable/hamburger_try_white" />
                 </LinearLayout>
 
-                <android.support.v7.widget.SearchView
+                <!--<android.support.v7.widget.SearchView
                     android:id="@+id/toolbar_search_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
-                    app:searchIcon="@drawable/search_try_white"></android.support.v7.widget.SearchView>
+                    app:searchIcon="@drawable/search_try_white"></android.support.v7.widget.SearchView>-->
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 
