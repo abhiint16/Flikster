@@ -82,7 +82,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.entityId = entityId;
         this.context = context;
         this.fragmentManager = fragmentManager;
-        type.add(1);
+        //type.add(1);
         type.add(2);
         type.add(3);
         type.add(4);
@@ -326,7 +326,7 @@ public class MovieInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return 7;
+        return 6;
     }
 
     @Override
