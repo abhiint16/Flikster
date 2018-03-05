@@ -1,8 +1,11 @@
 package com.flikster.HomeActivity.CommonFragments.CelebrityFragment;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -56,6 +59,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
     Bundle arguments = new Bundle();
     CelebItemClickInterface celebItemClickInterface;
     CollapsingToolbarLayout collapsingToolbarLayout;
+    AppBarLayout main_appbar;
     ImageView card_celeb_common_profile_coverpic;
     TextView card_celeb_common_profile_name,card_celeb_common_profile_role,card_celeb_common_profile_likes_txt,
             card_celeb_common_profile_followers_txt;
@@ -100,14 +104,14 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                 {
 
                 }
-                /*if (hits.getHits().get(0).get_source().getName()!=null)
+                if (hits.getHits().get(0).get_source().getName()!=null)
                 {
                     card_celeb_common_profile_name.setText(hits.getHits().get(0).get_source().getName());
-                }*/
-                collapsingToolbarLayout.setTitleEnabled(true);
+                }
+                /*collapsingToolbarLayout.setTitleEnabled(true);
                 collapsingToolbarLayout.setTitle(hits.getHits().get(0).get_source().getName());
                 collapsingToolbarLayout.setExpandedTitleColor(getActivity().getResources().getColor(R.color.black));
-                collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));
+                collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));*/
                 if (hits.getHits().size() != 0) {
                     if (hits.getHits().get(0).get_source().getCoverPic()!=null)
                     arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
@@ -183,8 +187,28 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
         GlideFaceDetector.initialize(getActivity());
         arguments.putString("slug", slug);
         tabLayout.setupWithViewPager(viewPager);
-//        toolbar_frag_title.setText("Celebrity");
         toolbar_back_navigation_btn.setOnClickListener(this);
+        main_appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                /*Log.e("appbarscrolling" ,""+verticalOffset+"AND"+appBarLayout.getTotalScrollRange()+"AND"+appBarLayout.getTransitionName()+
+                "AND"+(scrollRange+verticalOffset));*/
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset < 40) {
+                    collapsingToolbarLayout.setTitle(hits.getHits().get(0).get_source().getName());
+                    collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));
+                    isShow = true;
+                } else if(isShow) {
+                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                    isShow = false;
+                }
+            }
+        });
     }
 
     public String formatRole() {
@@ -208,6 +232,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
         collapsingToolbarLayout= (CollapsingToolbarLayout)view.findViewById(R.id.main_collapsing);
+        main_appbar=(AppBarLayout)view.findViewById(R.id.main_appbar);
         //toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         card_celeb_common_profile_coverpic=(ImageView)view.findViewById(R.id.card_celeb_common_profile_coverpic);
         card_celeb_common_profile_name=(TextView)view.findViewById(R.id.card_celeb_common_profile_name);

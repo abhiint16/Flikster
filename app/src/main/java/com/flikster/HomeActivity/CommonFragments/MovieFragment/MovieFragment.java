@@ -3,6 +3,7 @@ package com.flikster.HomeActivity.CommonFragments.MovieFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -54,6 +55,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     MovieItemClickInterface movieItemClickInterface;
     ImageView card_movie_common_profile_coverpic;
     CollapsingToolbarLayout collapsingToolbarLayout;
+    AppBarLayout appBarLayout;
 
     @Nullable
     @Override
@@ -76,15 +78,15 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                 Glide.with(getActivity()).load(hits.getHits().get(0).get_source().getCoverPic()).asBitmap()
                         .transform(new FaceCenterCrop())
                         .into(card_movie_common_profile_coverpic);
-                //card_movie_feed_profile_moviename.setText(hits.getHits().get(0).get_source().getTitle());
+                card_movie_feed_profile_moviename.setText(hits.getHits().get(0).get_source().getTitle());
                 card_movie_feed_profile_censor.setText(hits.getHits().get(0).get_source().getCensorCertificate());
                 card_movie_feed_profile_dor.setText(hits.getHits().get(0).get_source().getDateOfRelease());
                 card_movie_feed_profile_genre.setText(formatGenre((ArrayList<String>) hits.getHits().get(0).get_source().getGenre()));
                 card_movie_feed_profile_dur.setText(hits.getHits().get(0).get_source().getDuration());
-                collapsingToolbarLayout.setTitleEnabled(true);
+                /*collapsingToolbarLayout.setTitleEnabled(true);
                 collapsingToolbarLayout.setTitle(hits.getHits().get(0).get_source().getTitle());
                 collapsingToolbarLayout.setExpandedTitleColor(getActivity().getResources().getColor(R.color.black));
-                collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));
+                collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));*/
 
                 arguments.putString("coverpic", hits.getHits().get(0).get_source().getCoverPic());
                 arguments.putString("censor", hits.getHits().get(0).get_source().getCensorCertificate());
@@ -138,6 +140,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
         collapsingToolbarLayout=(CollapsingToolbarLayout)view.findViewById(R.id.main_collapsing);
+        appBarLayout=(AppBarLayout)view.findViewById(R.id.main_appbar);
         toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_title);
         toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_back_navigation_btn);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
@@ -155,10 +158,27 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     private void initializeRest() {
         GlideFaceDetector.initialize(getActivity());
         arguments.putString("slug", slug);
-        Log.e("slugjsjjsjsj", "ajja" + slug + " " + arguments);
         tabLayout.setupWithViewPager(viewPager);
 //        toolbar_frag_title.setText("Movies");
         toolbar_back_navigation_btn.setOnClickListener(this);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset < 40) {
+                    collapsingToolbarLayout.setTitle(hits.getHits().get(0).get_source().getTitle());
+                    collapsingToolbarLayout.setCollapsedTitleTextColor(getActivity().getResources().getColor(R.color.white));
+                    isShow = true;
+                } else if(isShow) {
+                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                    isShow = false;
+                }
+            }
+        });
     }
 
     public void updateInfo(String slug, String userId, String entityId) {
