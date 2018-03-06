@@ -138,7 +138,7 @@
             android:spinnerMode="dropdown"
             android:visibility="visible" />
 
-        <android.support.design.widget.FloatingActionButton
+        <!--<android.support.design.widget.FloatingActionButton
             android:id="@+id/camera_fab"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -148,7 +148,7 @@
             android:elevation="10dp"
             android:src="@drawable/add_plus_icon"
             app:backgroundTint="@color/white"
-            app:fabSize="normal" />
+            app:fabSize="normal" />-->
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

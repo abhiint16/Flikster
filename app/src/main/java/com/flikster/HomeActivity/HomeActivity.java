@@ -186,7 +186,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
     Context mContext;
-    FloatingActionButton camera_fab;
+   // FloatingActionButton camera_fab;
     SharedPref sharedPref;
     GlobalSearchGetData globalSearchGetData;
     MySpinner toolbar_pref_spinner;
@@ -306,8 +306,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed, R.drawable.homeunselectedbottom, R.color.color_tab_1);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watchunselected, R.color.color_tab_1);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.addsquare, R.color.color_tab_1);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionunselectedbottom, R.color.color_tab_1);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionunselectedbottom, R.color.color_tab_1);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.Auction, R.drawable.share, R.color.color_tab_1);
         AHBottomNavigationItem item5 = new AHBottomNavigationItem("My Profile", R.drawable.profileunactive, R.color.color_tab_1);
 
 // Add items
@@ -345,8 +345,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 } else if (position == 1) {
                     beginTransact(new WatchFragment());
                 } else if (position == 2) {
-                } else if (position == 3) {
                     beginTransact(new FashionLandingFragment());
+                } else if (position == 3) {
+                    beginTransact(new AuctionFeedFragment());
                 } else if (position == 4) {
                     beginTransact(new MyAccountFragment());
                 }
@@ -411,7 +412,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         store.setOnClickListener(this);
         rating.setOnClickListener(this);
         plus.setOnClickListener(this);*/
-        camera_fab.setOnClickListener(this);
+        //camera_fab.setOnClickListener(this);
         filter_industry_layout_text.setText(SharedPrefsUtil.getStringPreference(getApplicationContext(), "INDUSTRY_TYPE"));
         footer_drawer_layout_aboutus.setOnClickListener(this);
         /*footer_drawer_layout_blog.setOnClickListener(this);
@@ -775,7 +776,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         toolbar_search_btn = (SearchView) findViewById(R.id.toolbar_search_btn);
         toolbar_navigation_view_open_btn = (LinearLayout) findViewById(R.id.toolbar_navigation_view_open_btn);
         toolbar_pref_spinner = (MySpinner) findViewById(R.id.toolbar_pref_spinner);
-        camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
+       // camera_fab = (FloatingActionButton) findViewById(R.id.camera_fab);
         header_drawer_layout_username = (TextView) findViewById(R.id.header_drawer_layout_username);
         right_navigation_bar_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_logged_in_container);
         right_navigation_bar_non_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_non_logged_in_container);
@@ -999,10 +1000,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             beginTransact(new RatingFragment());
         } else if (viewId == R.id.plus_button) {
 //            cameraAccessPermission();
-        } else if (viewId == R.id.camera_fab) {
+        } /*else if (viewId == R.id.camera_fab) {
             // openCameraClickDialog();
             beginTransact(new MyStyleFragment());
-        } else if (viewId == R.id.right_navigation_bar_my_account) {
+        }*/ else if (viewId == R.id.right_navigation_bar_my_account) {
             beginTransact(new MyAccountFragment());
         } else if (viewId == R.id.right_navigation_bar_orders) {
             navigationMenuitemsAction("Flikster", "Orders");

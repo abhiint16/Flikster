@@ -90,6 +90,7 @@ public class CelebrityFragment extends Fragment implements View.OnClickListener 
                 hits = response.body().getHits();
                 if (hits.getHits().get(0).get_source().getCoverPic()!=null)
                 {
+                    Log.e("cehck for coverpic","cehkc for cover pic"+hits.getHits().get(0).get_source().getCoverPic()+"AND"+slug);
                     Glide.with(getActivity()).load(hits.getHits().get(0).get_source().getCoverPic()).asBitmap()
                             .transform(new FaceCenterCrop())
                             .into(card_celeb_common_profile_coverpic);

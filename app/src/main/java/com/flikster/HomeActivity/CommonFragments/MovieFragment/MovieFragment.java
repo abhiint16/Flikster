@@ -77,6 +77,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<MovieData> call, Response<MovieData> response) {
                 hits = response.body().getHits();
+                Log.e("cehck for coverpic","cehkc for cover pic"+hits.getHits().get(0).get_source().getCoverPic()+"AND"+slug);
                 Glide.with(getActivity()).load(hits.getHits().get(0).get_source().getCoverPic()).asBitmap()
                         .transform(new FaceCenterCrop())
                         .into(card_movie_common_profile_coverpic);
