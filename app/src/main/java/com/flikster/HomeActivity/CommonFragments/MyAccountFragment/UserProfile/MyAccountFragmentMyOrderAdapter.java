@@ -1,8 +1,7 @@
-package com.flikster.HomeActivity.CommonFragments.MyAccountFragment;
+package com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +13,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flikster.R;
-
-import java.util.Calendar;
 
 import retrofit2.Response;
 

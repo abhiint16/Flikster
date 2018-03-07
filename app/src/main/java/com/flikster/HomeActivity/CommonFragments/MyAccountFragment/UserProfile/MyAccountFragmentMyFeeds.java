@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.CommonFragments.MyAccountFragment;
+package com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,11 +17,11 @@ import com.leo.simplearcloader.SimpleArcLoader;
  * Created by abhishek on 21-10-2017.
  */
 
-public class MyAccountFragmentMyStyle extends Fragment {
+public class MyAccountFragmentMyFeeds extends Fragment {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
     RecyclerView.LayoutManager layoutManagerMyPost;
-    MyAccountFragmentMyStyleAdapter myAccountFragmentMyStyleAdapter;
+    MyAccountFragmentMyFeedsAdapter myAccountFragmentMyFeedsAdapter;
     TextView nodataavailtxt;
     SimpleArcLoader mDialog;
 
@@ -37,8 +37,8 @@ public class MyAccountFragmentMyStyle extends Fragment {
     private void initializeRest() {
         layoutManagerMyPost = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManagerMyPost);
-        myAccountFragmentMyStyleAdapter = new MyAccountFragmentMyStyleAdapter();
-        fragment_common_recyclerview_recycler.setAdapter(myAccountFragmentMyStyleAdapter);
+        myAccountFragmentMyFeedsAdapter = new MyAccountFragmentMyFeedsAdapter();
+        fragment_common_recyclerview_recycler.setAdapter(myAccountFragmentMyFeedsAdapter);
         fragment_common_recyclerview_recycler.setBackgroundColor(getActivity().getResources().getColor(R.color.backprofilescreen));
     }
 

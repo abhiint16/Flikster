@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.CommonFragments.MyAccountFragment;
+package com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile;
 
 import com.google.gson.annotations.SerializedName;
 

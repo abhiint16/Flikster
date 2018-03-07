@@ -1,8 +1,12 @@
-package com.flikster.HomeActivity.CommonFragments.MyAccountFragment;
+package com.flikster.HomeActivity.CommonFragments.MyAccountFragment.CelebProfile;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile.MyAccountFragmentMyFeeds;
+import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile.MyAccountFragmentMyOrder;
+import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile.MyAccountFragmentMyStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +15,13 @@ import java.util.List;
  * Created by abhishek on 20-09-2017.
  */
 
-public class MyAccountAdapter extends FragmentStatePagerAdapter {
+public class CelebProfileAdapter extends FragmentStatePagerAdapter {
     List<String> list=new ArrayList<>();
-    public MyAccountAdapter(FragmentManager fm) {
+    public CelebProfileAdapter(FragmentManager fm) {
         super(fm);
-        list.add("My Feeds");
-        list.add("My Orders");
-        list.add("My Styles");
+        list.add("Feed");
+        list.add("Biography");
+        list.add("Collections");
     }
 
     @Override

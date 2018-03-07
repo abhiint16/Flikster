@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.CommonFragments.MyAccountFragment;
+package com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -6,15 +6,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.flikster.R;
-
-import java.text.DateFormat;
-import java.util.Date;
 
 /**
  * Created by abhishek on 21-10-2017.

@@ -5,31 +5,18 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,16 +25,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -63,9 +46,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,7 +56,6 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.flikster.AllCommentActivity.AllCommentActivity;
 import com.flikster.Authentication.AuthenticationActivity;
-import com.flikster.BuildConfig;
 import com.flikster.CheckoutActivity.CheckoutFragment.InstamojoData;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionFeedFragment;
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragment;
@@ -84,11 +64,10 @@ import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFrag
 import com.flikster.HomeActivity.CommonFragments.CelebrityFragment.CelebrityFragmentStore;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragment;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFragmentInfo;
-import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
+import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.CelebProfile.CelebProfileFragment;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment;
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
-import com.flikster.HomeActivity.FashionFragment.FashionFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreFirstTypeFragment;
@@ -100,21 +79,17 @@ import com.flikster.HomeActivity.WatchFragment.Music.MusicGridFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.SongByMovieFragmentItemClick;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
-import com.flikster.MenuFragments.FliksterCreditFragment;
 import com.flikster.HomeActivity.CommonFragments.GalleryFragment.GalleryCardClick;
 import com.flikster.MenuFragments.LogoutFragment;
-import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.MyAccountFragment;
+import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile.MyAccountFragment;
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
 import com.flikster.MenuFragments.OrdersFragment;
-import com.flikster.MyBagActivity.MyBagActivity;
-import com.flikster.PreferenceActivity.PreferencesView;
 import com.flikster.R;
 import com.flikster.HomeActivity.RatingFragment.RatingFragment;
 import com.flikster.MenuFragments.ReferFragment;
 import com.flikster.MenuFragments.RewardsFragment;
 import com.flikster.MenuFragments.SavedPostsFragment;
 import com.flikster.MenuFragments.SearchFragment;
-import com.flikster.MenuFragments.SettingsFragment;
 import com.flikster.HomeActivity.StoreFragment.StoreFragment;
 import com.flikster.HomeActivity.CommonFragments.VideoFragment.VideoGalleryFragment;
 import com.flikster.MenuFragments.WishListFragment;
@@ -126,13 +101,8 @@ import com.flikster.Util.SharedPrefsUtil;
 import com.flikster.permission.DangerousPermResponseCallBack;
 import com.flikster.permission.DangerousPermissionResponse;
 import com.flikster.permission.DangerousPermissionUtils;
-import com.google.android.gms.vision.text.Line;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -140,14 +110,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class HomeActivity extends AppCompatActivity implements FragmentChangeInterface, View.OnClickListener,
         NavigationView.OnNavigationItemSelectedListener,
@@ -307,7 +273,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.feed, R.drawable.homeunselectedbottom, R.color.color_tab_1);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.watch, R.drawable.watchunselected, R.color.color_tab_1);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.fashion, R.drawable.fashionunselectedbottom, R.color.color_tab_1);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.Auction, R.drawable.share, R.color.color_tab_1);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.Auction, R.drawable.auction_bottom, R.color.color_tab_1);
         AHBottomNavigationItem item5 = new AHBottomNavigationItem("My Profile", R.drawable.profileunactive, R.color.color_tab_1);
 
 // Add items
@@ -1004,7 +970,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             // openCameraClickDialog();
             beginTransact(new MyStyleFragment());
         }*/ else if (viewId == R.id.right_navigation_bar_my_account) {
-            beginTransact(new MyAccountFragment());
+            beginTransact(new CelebProfileFragment());
+            if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
         } else if (viewId == R.id.right_navigation_bar_orders) {
             navigationMenuitemsAction("Flikster", "Orders");
         } else if (viewId == R.id.right_navigation_bar_wish_list) {
@@ -1336,7 +1305,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void voidMethod(Fragment fragment) {
-        FeedFragment feedFragment=(FeedFragment)fragment;
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void toMyStyle(Fragment fragment) {
         firstTimeLaunch(fragment);
     }
 

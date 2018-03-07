@@ -1,4 +1,4 @@
-package com.flikster.HomeActivity.CommonFragments.MyAccountFragment;
+package com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
