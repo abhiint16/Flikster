@@ -69,6 +69,8 @@ import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
+import com.flikster.HomeActivity.FashionFragment.FashionNewDesign.FashionFragContainerClick.FashionContainerClickFrag;
+import com.flikster.HomeActivity.FashionFragment.FashionNewDesign.FashionFragmentNew;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CelebStoreFragment.CelebStoreFirstTypeFragment;
 import com.flikster.HomeActivity.FashionFragment.FashionType.CommonAllProductPage.CommonAllProductPage;
@@ -127,7 +129,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
         CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener,
-        MyAccountFragment.MyAccountItemClick {
+        MyAccountFragment.MyAccountItemClick,FashionFragmentNew.FashionOnClick,FashionContainerClickFrag.FashionOnClickToProduct {
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
     FrameLayout main_container;
@@ -311,7 +313,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                 } else if (position == 1) {
                     beginTransact(new WatchFragment());
                 } else if (position == 2) {
-                    beginTransact(new FashionLandingFragment());
+                    //beginTransact(new FashionLandingFragment());
+                    beginTransact(new FashionFragmentNew());
                 } else if (position == 3) {
                     beginTransact(new AuctionFeedFragment());
                 } else if (position == 4) {
@@ -346,20 +349,22 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void firstTimeLaunch(Fragment fragment) {
         if (!fragment.getClass().equals(FeedFragment.class))
-        {Log.e("cehck for frag","chec for frag not");
+        {Log.e("cehck for frag","chec for frag notfirsttme"+appbar_container.getVisibility()+"AND"+feed_tab_layout.getVisibility());
             appbar_container.setVisibility(View.GONE);
             feed_tab_layout.setVisibility(View.GONE);
             params.setBehavior(null);
             main_container.requestLayout();
+            //feed_tab_layout.setVisibility(View.GONE);
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
                     .commit();
         }
         else if (fragment.getClass().equals(FeedFragment.class))
-        {Log.e("cehck for frag","chec for frag");
+        {Log.e("cehck for frag","chec for fragfirsttme"+appbar_container.getVisibility()+"AND"+feed_tab_layout.getVisibility());
             appbar_container.setVisibility(View.VISIBLE);
             feed_tab_layout.setVisibility(View.VISIBLE);
             params.setBehavior(new AppBarLayout.ScrollingViewBehavior());
+            //feed_tab_layout.setVisibility(View.GONE);
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
                     .commit();
@@ -777,11 +782,25 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void beginTransact(Fragment fragment) {
         if (!fragment.getClass().equals(FeedFragment.class))
         {
-            Log.e("cehck for frag","chec for frag not");
-            appbar_container.setVisibility(View.GONE);
+            Log.e("cehck for frag type","cehck for fragtype"+appbar_container.getVisibility()+"AND"+feed_tab_layout.getVisibility());
+            if (!(feed_tab_layout.getVisibility()==View.GONE))
+            {
+                Log.e("cehck for fragNO","chec for frag notNObegin");
+                //appbar_container.setVisibility(View.GONE);
+                feed_tab_layout.setVisibility(View.GONE);
+                /*params.setBehavior(null);
+                main_container.requestLayout();*/
+            }
+            if (appbar_container.getVisibility()==View.GONE)
+            {
+                appbar_container.setVisibility(View.VISIBLE);
+                params.setBehavior(new AppBarLayout.ScrollingViewBehavior());
+            }
+            /*appbar_container.setVisibility(View.GONE);
             feed_tab_layout.setVisibility(View.GONE);
             params.setBehavior(null);
-            main_container.requestLayout();
+            main_container.requestLayout();*/
+            //feed_tab_layout.setVisibility(View.GONE);
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
                     .addToBackStack("")
@@ -789,10 +808,22 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         }
         else if (fragment.getClass().equals(FeedFragment.class))
         {
-            Log.e("cehck for frag","chec for frag");
-            appbar_container.setVisibility(View.VISIBLE);
+            Log.e("cehck for frag type","cehck for fragtype"+appbar_container.getVisibility()+"AND"+feed_tab_layout.getVisibility());
+            if (appbar_container.getVisibility()==View.GONE)
+            {
+                appbar_container.setVisibility(View.VISIBLE);
+                params.setBehavior(new AppBarLayout.ScrollingViewBehavior());
+            }
+            if (!(feed_tab_layout.getVisibility()==View.VISIBLE))
+            {Log.e("cehck for fragYES","chec for fragYESbegin");
+                /*appbar_container.setVisibility(View.VISIBLE);*/
+                feed_tab_layout.setVisibility(View.VISIBLE);
+                /*params.setBehavior(new AppBarLayout.ScrollingViewBehavior());*/
+            }
+            //feed_tab_layout.setVisibility(View.VISIBLE);
+            /*appbar_container.setVisibility(View.VISIBLE);
             feed_tab_layout.setVisibility(View.VISIBLE);
-            params.setBehavior(new AppBarLayout.ScrollingViewBehavior());
+            params.setBehavior(new AppBarLayout.ScrollingViewBehavior());*/
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, fragment)
                     .addToBackStack("")
@@ -1532,6 +1563,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void toCelebPage(String name, Fragment fragment, String userId, String entityId) {
         CelebrityFragment celebrityFragment = (CelebrityFragment) fragment;
         celebrityFragment.updateInfo(name, userId, entityId);
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void fashionContainerClick(Fragment fragment) {
         firstTimeLaunch(fragment);
     }
 

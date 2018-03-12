@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/fragment_fashion_new_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@drawable/fashion_new_round_border_white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="13dp"
+                android:background="@color/colorAccent"></View>
+
+            <TextView
+                android:id="@+id/fragment_fashion_new_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="top"/>
+        </LinearLayout>
+    </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_fashion_new_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"></android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
