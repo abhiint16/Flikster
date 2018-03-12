@@ -38,13 +38,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="UserName"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:fontFamily="@font/Mark Simonson - Proxima Nova Alt Condensed Semibold-webfont"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/activity_all_comment_main_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/Mark Simonson - Proxima Nova Alt Regular-webfont"
                 android:text="comment"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -62,7 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
-            android:text="1 hour ago" />
+            android:text="1 hour ago"
+            android:fontFamily="@font/Mark Simonson - Proxima Nova Alt Regular-webfont"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -70,7 +72,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="|"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:fontFamily="@font/Mark Simonson - Proxima Nova Alt Regular-webfont"/>
 
         <TextView
             android:id="@+id/activity_all_comment_Like_comment"
@@ -78,6 +81,7 @@
             android:layout_height="match_parent"
             android:text="Like"
             android:textColor="@color/colorAccent"
+            android:fontFamily="@font/Mark Simonson - Proxima Nova Alt Regular-webfont"
             android:visibility="gone" />
 
         <TextView
@@ -85,6 +89,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:fontFamily="@font/Mark Simonson - Proxima Nova Alt Regular-webfont"
             android:text="|"
             android:visibility="gone" />
 
@@ -93,6 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Reply"
+            android:fontFamily="@font/Mark Simonson - Proxima Nova Alt Regular-webfont"
             android:textColor="@color/colorAccent"
             android:visibility="gone" />
     </LinearLayout>

@@ -24,5 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
+        android:fontFamily="@font/Mark Simonson - Proxima Nova Alt Condensed Semibold-webfont"
         android:layout_below="@+id/toolbar_frag_toolbar"/>
 </RelativeLayout>

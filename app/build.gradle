@@ -3,7 +3,7 @@ repositories {
     mavenCentral()
     maven {
         url 'https://maven.google.com'
-        }
+    }
     maven { url "https://s3-ap-southeast-1.amazonaws.com/godel-release/godel/" }
 }
 android {
@@ -53,6 +53,7 @@ android {
                 javaMaxHeapSize "2048M"
                 preDexLibraries = false
             }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
 dependencies {
