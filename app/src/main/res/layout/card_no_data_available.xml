@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/dots_margin_bottom"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="No Notifications here !!"
         android:textStyle="bold"
         android:textColor="@color/colorAccent"
@@ -34,6 +35,7 @@
         android:background="@drawable/solid_border"
         android:backgroundTint="@color/colorAccent"
         android:text="Back to Home"
+        android:fontFamily="@font/alt_regular_webfont"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp" />

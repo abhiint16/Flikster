@@ -26,6 +26,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:layout_weight="0.5"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="@string/preference_header" />
 
     <TextView
@@ -34,6 +35,7 @@
         android:layout_gravity="center"
         android:layout_weight="0.5"
         android:gravity="center"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="@string/preference_subheader" />
 
     <View
@@ -48,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="@string/preference_industry_type" />
 
     <LinearLayout
@@ -69,6 +72,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_weight="0.3"/>
         <RadioButton
             android:id="@+id/ind_tollywood"
@@ -96,6 +100,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_weight="0.3"/>
 
         <RadioButton
@@ -138,6 +143,7 @@
             android:layout_weight="1"
             android:background="#7d7c7b"
             android:layout_marginRight="5dp"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_marginLeft="60dp"/>
 
         <ImageButton
@@ -161,6 +167,7 @@
         style="@style/preferences_header_style2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:layout_weight="0.5"
         android:text="@string/preference_fashion_selection" />
 
@@ -179,6 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="0.4"
+            android:fontFamily="@font/alt_regular_webfont"
             android:background="@drawable/gray_rectange_border"
             android:gravity="center"
             android:padding="10dp"
@@ -194,6 +202,7 @@
             android:layout_weight="0.4"
             android:background="@drawable/gray_rectange_border"
             android:gravity="center"
+            android:fontFamily="@font/alt_regular_webfont"
             android:padding="10dp"
             android:text="@string/preference_female_fashion"
             android:textSize="12sp"/>
@@ -235,6 +244,7 @@
 <TextView
     android:layout_width="match_parent"
     android:layout_height="0dp"
+    android:fontFamily="@font/alt_regular_webfont"
     android:layout_weight="1"/>
 </LinearLayout>
     <!--<TextView

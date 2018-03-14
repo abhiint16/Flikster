@@ -12,5 +12,6 @@
         android:text="Be the first to comment on this item."
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/activity_no_comments_tv"/>
 </LinearLayout>

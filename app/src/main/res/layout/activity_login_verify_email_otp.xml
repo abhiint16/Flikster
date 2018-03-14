@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="@string/login_verify_mobile_info"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:fontFamily="@font/alt_regular_webfont"/>
     <TextView
         android:id="@+id/tv_verify_email"
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
         android:textSize="16sp"
         android:inputType="none"
         android:layout_marginTop="10dp"
-        />
+        android:fontFamily="@font/alt_regular_webfont"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:text="00:45"
+            android:fontFamily="@font/alt_regular_webfont"
             android:gravity="right"/>
     </LinearLayout>
     <LinearLayout
@@ -86,12 +88,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alt_regular_webfont"
             android:text="@string/login_verify_mobile_code_receive"/>
         <TextView
             android:id="@+id/tv_send_new_otp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_verify_mobile_resend_code"
+            android:fontFamily="@font/alt_regular_webfont"
             android:textColor="@color/colorCreateAccountSelected"/>
     </LinearLayout>
 

@@ -69,6 +69,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:clickable="false"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:gravity="center"
                 android:text="Address" />
         </LinearLayout>
@@ -97,6 +98,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:clickable="false"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:gravity="center"
                 android:text="Payment" />
         </LinearLayout>

@@ -32,6 +32,7 @@
                 android:paddingBottom="@dimen/five"
                 android:paddingLeft="@dimen/ten"
                 android:paddingTop="@dimen/five"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:text="Time Left"
                 android:textColor="@color/translucent"
                 android:textSize="15sp"

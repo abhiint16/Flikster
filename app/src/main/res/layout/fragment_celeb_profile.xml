@@ -56,6 +56,7 @@
                         android:layout_marginTop="@dimen/seven"
                         android:gravity="center"
                         android:text="username"
+                        android:fontFamily="@font/alt_regular_webfont"
                         android:textColor="@color/commontextcolor"
                         android:textSize="25sp" />
 
@@ -72,6 +73,7 @@
                             android:id="@+id/fragment_my_account_location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/alt_regular_webfont"
                             android:layout_marginRight="5dp"
                             android:text="Hyderabad"
                             android:textColor="@color/commontextgreycolor" />

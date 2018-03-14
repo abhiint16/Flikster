@@ -45,6 +45,7 @@
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
                         android:text="@string/create_account"
+                        android:fontFamily="@font/alt_regular_webfont"
                         android:textColor="@color/black"
                         android:textSize="@dimen/twenty"
                         android:textStyle="bold" />
@@ -66,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:visibility="gone"
+                    android:fontFamily="@font/alt_regular_webfont"
                     android:layout_marginBottom="10dp" />
 
                 <LinearLayout
@@ -197,7 +199,8 @@
                             <TextView
                                 style="@style/login_vertical_line"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/alt_regular_webfont"/>
 
                             <EditText
                                 android:id="@+id/et_mobile_no"

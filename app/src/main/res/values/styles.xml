@@ -14,6 +14,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:padding">10dp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/alt_regular_webfont</item>
     </style>
 
     <style name="login_btn">

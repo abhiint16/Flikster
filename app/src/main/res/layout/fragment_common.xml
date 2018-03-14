@@ -9,5 +9,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvf"
         android:padding="10dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="Fashion page is working"/>
 </LinearLayout>

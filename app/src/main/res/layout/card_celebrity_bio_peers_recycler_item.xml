@@ -15,5 +15,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:textSize="10sp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/peers_text"/>
 </LinearLayout>

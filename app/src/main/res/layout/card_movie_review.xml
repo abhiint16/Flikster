@@ -11,12 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="Crictic Reviews"
         android:textColor="@color/black"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="No data Available"
+        android:fontFamily="@font/alt_regular_webfont"
         android:gravity="center"/>
     <!--<TextView
         android:layout_width="match_parent"

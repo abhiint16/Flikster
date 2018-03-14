@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:textColor="@color/black"
         android:textSize="14sp" />
     <RelativeLayout
@@ -100,6 +101,7 @@
             android:id="@+id/card_fashion_details4_plus_text"
             android:textColor="@color/white"
             android:layout_margin="5dp"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_alignParentRight="true"
             android:gravity="center"/>
     </RelativeLayout>

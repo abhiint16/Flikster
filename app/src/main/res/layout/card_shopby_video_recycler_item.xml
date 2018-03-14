@@ -30,11 +30,13 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="Video Title"
+        android:fontFamily="@font/alt_regular_webfont"
         android:textColor="@color/black"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="20 Products"
         android:textColor="@color/black"/>
 </LinearLayout>

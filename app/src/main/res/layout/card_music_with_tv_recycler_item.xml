@@ -18,6 +18,7 @@
         android:layout_alignBottom="@+id/movieimg"
         android:layout_marginBottom="10dp"
         android:textSize="15sp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:layout_marginLeft="@dimen/ten"
         android:text="@string/song_title"
         android:textColor="@color/colorAccent"

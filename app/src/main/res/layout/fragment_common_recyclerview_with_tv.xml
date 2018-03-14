@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="Loading  ..."
         android:textColor="@color/translucent"
         android:textStyle="bold" />

@@ -45,6 +45,7 @@
                 android:layout_gravity="left|center_vertical"
                 android:layout_weight="1"
                 android:gravity="left"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:text="Rs 7,500/-"
                 android:textColor="@color/black"
                 android:textSize="18sp" />

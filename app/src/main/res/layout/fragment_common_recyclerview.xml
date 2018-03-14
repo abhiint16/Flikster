@@ -20,6 +20,7 @@
         android:paddingBottom="@dimen/five"
         android:paddingLeft="@dimen/ten"
         android:paddingTop="@dimen/five"
+        android:fontFamily="@font/alt_regular_webfont"
         android:layout_centerInParent="true"
         android:id="@+id/nodataavailtxt"
         android:visibility="gone"

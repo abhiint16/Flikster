@@ -21,6 +21,7 @@
         android:layout_weight="1"
         android:padding="10dp"
         android:text="Brand Name"
+        android:fontFamily="@font/alt_regular_webfont"
         android:gravity="center_vertical"
         android:textColor="@color/black"/>
     <TextView
@@ -29,5 +30,6 @@
         android:layout_weight="1"
         android:padding="10dp"
         android:text="designer"
+        android:fontFamily="@font/alt_regular_webfont"
         android:gravity="center_vertical"/>
 </LinearLayout>

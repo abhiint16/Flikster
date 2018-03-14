@@ -23,6 +23,7 @@
             android:id="@+id/fashion_grid_item_title1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_weight="1" />
 
         <TextView
@@ -30,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:fontFamily="@font/alt_regular_webfont"
             android:textColor="@color/black" />
     </LinearLayout>
     <LinearLayout
@@ -51,6 +53,7 @@
             android:id="@+id/fashion_grid_item_title2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_weight="1" />
 
         <TextView
@@ -58,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:fontFamily="@font/alt_regular_webfont"
             android:textColor="@color/black" />
     </LinearLayout>
 </LinearLayout>

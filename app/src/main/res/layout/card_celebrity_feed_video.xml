@@ -10,6 +10,7 @@
         android:id="@+id/card_celebrity_feed_video_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/alt_regular_webfont"
         android:padding="10dp" />
 
     <RelativeLayout

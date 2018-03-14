@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
+            android:fontFamily="@font/alt_regular_webfont"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:textSize="14sp" />
@@ -37,6 +38,7 @@
             android:id="@+id/tv_tag_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alt_regular_webfont"
             android:text="#Type"
             android:textSize="10sp" />
 
@@ -48,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
+        android:fontFamily="@font/alt_regular_webfont"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@drawable/corner_rounded"

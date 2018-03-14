@@ -55,6 +55,7 @@
         android:layout_below="@+id/comment_container"
         android:padding="5dp"
         android:text="See All Comments"
+        android:fontFamily="@font/alt_regular_webfont"
         android:textColor="@color/colorAccent"
         android:visibility="gone"/>
 </RelativeLayout>

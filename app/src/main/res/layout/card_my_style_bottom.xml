@@ -46,6 +46,7 @@
                 android:layout_gravity="center_vertical"
                 android:padding="10dp"
                 android:text="Share On :"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:textColor="#AAAAAA"
                 android:textSize="@dimen/fifteen"
                 android:visibility="gone" />
@@ -99,6 +100,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="@dimen/ten"
                     android:layout_weight="1"
+                    android:fontFamily="@font/alt_regular_webfont"
                     android:background="@drawable/corner_rounded"
                     android:backgroundTint="@color/red"
                     android:text="Share"

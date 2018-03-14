@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="Upcoming Movies"
+        android:fontFamily="@font/alt_regular_webfont"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -22,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No Data Available"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="14sp"/>

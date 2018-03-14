@@ -11,6 +11,7 @@
         android:id="@+id/card_dialogue_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/alt_regular_webfont"
         android:padding="10dp"
         android:text="aaaaaaaaaaaa" />
 

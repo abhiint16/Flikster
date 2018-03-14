@@ -16,5 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
+        android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/card_movie_info_cast_recycler_item_name"/>
 </LinearLayout>

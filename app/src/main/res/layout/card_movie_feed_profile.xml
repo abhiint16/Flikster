@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Movie Name(No Data)"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -43,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:text=" "
                 android:textSize="14sp" />
         </LinearLayout>
@@ -58,6 +60,7 @@
             android:id="@+id/card_movie_feed_profile_dor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_gravity="center"
             android:text=" " />
 
@@ -65,6 +68,7 @@
             android:id="@+id/card_movie_feed_profile_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:text=" "
@@ -74,6 +78,7 @@
             android:id="@+id/card_movie_feed_profile_dur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:text=" "
@@ -85,6 +90,7 @@
             android:layout_height="0.5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_marginTop="10dp"
             android:background="@color/dark_grey" />
 
@@ -117,6 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/alt_regular_webfont"
                     android:clickable="false"
                     android:text="0"
                     android:textSize="13sp" />
@@ -127,6 +134,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:background="@color/dark_grey"
                 tools:ignore="Suspicious0dp" />
 
@@ -154,6 +162,7 @@
                     android:clickable="false"
                     android:layout_marginLeft="5dp"
                     android:text="0"
+                    android:fontFamily="@font/alt_regular_webfont"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -162,6 +171,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:background="@color/dark_grey"
                 tools:ignore="Suspicious0dp" />
 
@@ -176,6 +186,7 @@
                 android:background="@drawable/corner_rounded"
                 android:gravity="center"
                 android:text="FOLLOW"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:textColor="@color/dark_grey"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -188,6 +199,7 @@
         android:layout_below="@+id/card_movie_feed_profile_texts_container"
         android:layout_margin="10dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:background="@color/white"
         android:padding="10dp"
         android:text="No Data" />

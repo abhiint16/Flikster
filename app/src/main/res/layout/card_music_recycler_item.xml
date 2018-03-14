@@ -20,6 +20,7 @@
         android:layout_weight="1"
         android:text="title"
         android:padding="5dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:textSize="10sp"
         android:gravity="center"
         android:id="@+id/card_music_recycler_item_title"

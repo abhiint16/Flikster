@@ -10,14 +10,16 @@
         style="@style/headers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_mobile_title" />
+        android:text="@string/login_mobile_title"
+        android:fontFamily="@font/alt_regular_webfont"/>
 
     <TextView
         style="@style/login_horizontal_line"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/alt_regular_webfont"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +47,8 @@
             <TextView
                 style="@style/login_vertical_line"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:fontFamily="@font/alt_regular_webfont"/>
 
             <EditText
                 android:id="@+id/et_mobile_no"
@@ -100,7 +103,8 @@
             android:gravity="center_vertical"
             android:paddingBottom="20dp"
             android:paddingTop="15dp"
-            android:text="@string/login_mobile_terms" />
+            android:text="@string/login_mobile_terms"
+            android:fontFamily="@font/alt_regular_webfont"/>
     </LinearLayout>
 
     <Button
@@ -127,7 +131,8 @@
             android:layout_gravity="center"
             android:drawableBottom="@drawable/gray_rectange_border"
             android:gravity="center_horizontal"
-            android:text="@string/forgot_password" />
+            android:text="@string/forgot_password"
+            android:fontFamily="@font/alt_regular_webfont"/>
 
 
     </LinearLayout>

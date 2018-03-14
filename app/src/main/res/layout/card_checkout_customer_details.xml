@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Name"
         android:padding="5dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:id="@+id/card_checkout_customer_details_name"/>
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="Address"
         android:id="@+id/card_checkout_customer_details_address"/>
     <TextView
@@ -26,24 +28,28 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="city"
+        android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/card_checkout_customer_details_city"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="state"
+        android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/card_checkout_customer_details_state"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="Pin Code"
+        android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/card_checkout_customer_details_pin"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="Mobile No"
+        android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/card_checkout_customer_details_mobile"/>
     <Button
         android:layout_width="200dp"
@@ -52,5 +58,6 @@
         android:text="Change/Edit"
         android:textColor="@color/white"
         android:layout_gravity="end"
+        android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/card_checkout_customer_details_button"/>
 </LinearLayout>

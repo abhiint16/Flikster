@@ -19,6 +19,7 @@
             android:layout_margin="5dp"
             android:background="@color/white"
             android:padding="@dimen/five"
+            android:fontFamily="@font/alt_regular_webfont"
             android:text="@string/shirt_name"
             android:textColor="@color/black" />
 

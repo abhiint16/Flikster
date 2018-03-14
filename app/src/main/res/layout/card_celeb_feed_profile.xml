@@ -27,6 +27,7 @@
             android:id="@+id/card_celeb_feed_profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alt_regular_webfont"
             android:layout_marginTop="@dimen/five"
             android:gravity="center"
             android:text="Name"
@@ -39,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/five"
+            android:fontFamily="@font/alt_regular_webfont"
             android:gravity="center"
             android:text="Role"
             android:textColor="@color/grey_txt_label"
@@ -79,6 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:fontFamily="@font/alt_regular_webfont"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -86,6 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Likes"
+                        android:fontFamily="@font/alt_regular_webfont"
                         android:textColor="@color/grey_txt_label" />
                 </LinearLayout>
 
@@ -94,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="|"
+                    android:fontFamily="@font/alt_regular_webfont"
                     android:textColor="@color/grey_txt_label"
                     android:textSize="@dimen/twenty" />
 
@@ -111,6 +116,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:fontFamily="@font/alt_regular_webfont"
 
                         android:textColor="@color/black" />
 
@@ -118,6 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Followers"
+                        android:fontFamily="@font/alt_regular_webfont"
                         android:textColor="@color/grey_txt_label" />
                 </LinearLayout>
 
@@ -125,6 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/alt_regular_webfont"
                     android:text="|"
                     android:textColor="@color/grey_txt_label"
                     android:textSize="@dimen/twenty" />
@@ -145,6 +153,7 @@
                         android:layout_height="30dp"
                         android:background="@drawable/corner_rounded"
                         android:gravity="center_vertical|center_horizontal"
+                        android:fontFamily="@font/alt_regular_webfont"
                         android:paddingBottom="@dimen/five"
                         android:paddingLeft="@dimen/fifteen"
                         android:paddingRight="@dimen/fifteen"

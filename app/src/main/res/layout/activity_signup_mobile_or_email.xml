@@ -21,6 +21,7 @@
                 style="@style/headers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:text="@string/login_email_title" />
 
             <ImageView
@@ -37,6 +38,7 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/alt_regular_webfont"
                 android:layout_marginBottom="10dp" />
 
             <LinearLayout

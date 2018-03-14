@@ -44,6 +44,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="11dp"
         android:layout_marginStart="11dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:text="258 Followers"
         android:textColor="@color/white"
         android:textSize="12sp" />
@@ -58,6 +59,7 @@
         android:paddingBottom="5dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:fontFamily="@font/alt_regular_webfont"
         android:paddingTop="5dp"
         android:text="FOLLOW"
         android:textColor="@color/white"
@@ -69,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/card_celebrity_feed_profile_image"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/alt_regular_webfont"
         android:layout_marginTop="10dp"
         android:text="Pooja Hegde"
         android:textColor="@color/black" />
@@ -79,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/card_celebrity_feed_profile_name"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/alt_regular_webfont"
         android:layout_marginTop="5dp"
         android:text="Actress"
         android:textColor="@color/black" />
