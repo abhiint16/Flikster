@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/alt_regular_webfont"
             android:text="#Type"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
 
     </LinearLayout>
