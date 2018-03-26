@@ -104,7 +104,7 @@ public class FashionContainerClickFragAdapter extends RecyclerView.Adapter<Recyc
             ((ViewHolder0) holder).carouselView.setPageCount(j);
             ((ViewHolder0) holder).carouselView.setImageListener(imageListener);
         } else if (holder.getItemViewType() == 2) {
-            if (hits.getHits().get(position - 1).get_source().getImageGallery().get(0) != null)
+            if (hits.getHits().get(position - 1).get_source().getImageGallery() != null&&hits.getHits().get(position - 1).get_source().getImageGallery().size()!=0)
                 Glide.with(context).load(hits.getHits().get(position - 1).get_source().getImageGallery().get(0))
                         .into(((ViewHolder1) holder).fashion_containerclick_recycler_item_image);
             if (hits.getHits().get(position - 1).get_source().getName() != null)
@@ -212,13 +212,13 @@ public class FashionContainerClickFragAdapter extends RecyclerView.Adapter<Recyc
 
         @Override
         public void onClick(View view) {
-            fashionOnClick.onBuyClick(hits.getHits().get(getAdapterPosition()).get_source().getId(),
-                    hits.getHits().get(getAdapterPosition()).get_source().getSize(), "abhiint",
-                    hits.getHits().get(getAdapterPosition()).get_source().getPrice(),
-                    hits.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
-                    hits.getHits().get(getAdapterPosition()).get_source().getProductInfo(),
-                    hits.getHits().get(getAdapterPosition()).get_source().getSlug(),
-                    hits.getHits().get(getAdapterPosition()).get_source().getImageGallery(), new ProductOnClick());
+            fashionOnClick.onBuyClick(hits.getHits().get(getAdapterPosition()-1).get_source().getId(),
+                    hits.getHits().get(getAdapterPosition()-1).get_source().getSize(), "abhiint",
+                    hits.getHits().get(getAdapterPosition()-1).get_source().getPrice(),
+                    hits.getHits().get(getAdapterPosition()-1).get_source().getProfilePic(),
+                    hits.getHits().get(getAdapterPosition()-1).get_source().getProductInfo(),
+                    hits.getHits().get(getAdapterPosition()-1).get_source().getSlug(),
+                    hits.getHits().get(getAdapterPosition()-1).get_source().getImageGallery(), new ProductOnClick());
         }
     }
 

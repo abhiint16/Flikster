@@ -283,14 +283,14 @@ public class FeedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             else if (outerHits.getHits().get(position).get_source().getCeleb() != null && outerHits.getHits().get(position).get_source().getCeleb().size() != 0)
                 new PostRetrofit().checkForFollow("follow", userId, outerHits.getHits().get(position).get_source().getCeleb().get(0).getId(), ((ViewHolder2) holder).followbtn, context);
             new PostRetrofit().checkForBookmark("bookmark", userId, outerHits.getHits().get(position).get_source().getId(), ((ViewHolder2) holder).ib_bookmark, context);
-            if (outerHits.getHits().get(position).get_source().getMovie() != null) {
+            if (outerHits.getHits().get(position).get_source().getMovie() != null&&outerHits.getHits().get(position).get_source().getMovie().size()!=0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getMovie().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
                 if (outerHits.getHits().get(position).get_source().getMovie().get(0).getTag() != null &&
                         outerHits.getHits().get(position).get_source().getMovie().get(0).getTag().size() != 0)
                     ((ViewHolder2) holder).tv_tag_desc.setText("#" + outerHits.getHits().get(position).get_source().getMovie().get(0).getTag().get(0)+"  "
                             +formateItemDate(outerHits.getHits().get(position).get_source().getCreatedAt()));
                 ((ViewHolder2) holder).tv_tag_name.setText(outerHits.getHits().get(position).get_source().getMovie().get(0).getName());
-            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null) {
+            } else if (outerHits.getHits().get(position).get_source().getCeleb() != null&&outerHits.getHits().get(position).get_source().getCeleb().size()!=0) {
                 Glide.with(context).load(outerHits.getHits().get(position).get_source().getCeleb().get(0).getProfilePic()).asBitmap().into((((ViewHolder2) holder).profile_image));
                 if (outerHits.getHits().get(position).get_source().getCeleb().get(0).getTag() != null &&
                         outerHits.getHits().get(position).get_source().getCeleb().get(0).getTag().size() != 0)
