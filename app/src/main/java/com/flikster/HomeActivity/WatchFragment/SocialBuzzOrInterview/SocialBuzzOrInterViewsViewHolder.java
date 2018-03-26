@@ -69,7 +69,7 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
         }
         else
         {
-            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item,parent,false);
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_watch_video,parent,false);
             return new ViewHolder2(view);
         }
     }
@@ -132,7 +132,7 @@ public class SocialBuzzOrInterViewsViewHolder extends RecyclerView.Adapter<Recyc
             watchFragCommInterface.carouselItemClick(feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
                     feedInnerData.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                     feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),"video",new MovieSongsListFragment());
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0),"video",new MovieSongsListFragment(),"social");
         }
     }
 

@@ -79,6 +79,11 @@ public class MoviesViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         else
         {
+            if (movieInnerData.getHits().get(position).get_source().getCoverPic()==null||
+                    movieInnerData.getHits().get(position).get_source().getCoverPic().isEmpty())
+            {
+                Glide.with(context).load(movieInnerData.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder2)holder).carousel_image);
+            }
             Glide.with(context).load(movieInnerData.getHits().get(position).get_source().getCoverPic()).into(((ViewHolder2)holder).carousel_image);
             ((ViewHolder2)holder).carousel_title.setText(movieInnerData.getHits().get(position).get_source().getTitle());
         }

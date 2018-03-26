@@ -65,7 +65,7 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hor_last_item_load_more, parent, false);
             return new ViewHolder3(view);
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_celebrity_bio_images_recycler_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_watch_video, parent, false);
             return new ViewHolder2(view);
         }
     }
@@ -122,7 +122,7 @@ public class ComedyViewHolder extends RecyclerView.Adapter<RecyclerView.ViewHold
             watchFragCommInterface.carouselItemClick(feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
                     feedInnerData.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                     feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0), "video", new MovieSongsListFragment());
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getVideo().get(0), "video", new MovieSongsListFragment(),"comedy");
         }
     }
 

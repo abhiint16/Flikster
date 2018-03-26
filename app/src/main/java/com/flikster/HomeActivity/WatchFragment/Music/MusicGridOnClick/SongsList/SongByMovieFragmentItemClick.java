@@ -57,7 +57,7 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     MediaPlayer musicplay;
     SeekBar seekBar;
     ImageButton playibtn;
-    String audioLink, audioImg, type;
+    String audioLink, audioImg, type,itemType;
     Handler han = new Handler();
     Boolean playClick = false;
     ImageView audio_frame_image;
@@ -262,10 +262,11 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     };
 
 
-    public void getAudioLink(String audioLink, String audioImg, String type) {
+    public void getAudioLink(String audioLink, String audioImg, String type,String itemType) {
         this.audioLink = audioLink;
         this.audioImg = audioImg;
         this.type = type;
+        this.itemType=itemType;
     }
 
     public void getShopByVideo(String audioLink, String audioImg, String type,

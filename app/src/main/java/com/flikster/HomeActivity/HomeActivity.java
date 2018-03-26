@@ -1491,24 +1491,24 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void carouselContainerClick(String toolbarTitle,
-                                       String url, Fragment fragment) {
+                                       String url, Fragment fragment,String itemType) {
         MusicGridFragment musicGridFragment = (MusicGridFragment) fragment;
-        musicGridFragment.getAllData(toolbarTitle, url);
+        musicGridFragment.getAllData(toolbarTitle, url,itemType);
         firstTimeLaunch(fragment);
     }
 
     @Override
-    public void playAudioOrVideoPage(String audioLink, Fragment fragment, String audioImg, String type) {
+    public void playAudioOrVideoPage(String audioLink, Fragment fragment, String audioImg, String type,String itemType) {
         SongByMovieFragmentItemClick songByMovieFragmentItemClick = (SongByMovieFragmentItemClick) fragment;
-        songByMovieFragmentItemClick.getAudioLink(audioLink, audioImg, type);
+        songByMovieFragmentItemClick.getAudioLink(audioLink, audioImg, type,itemType);
         firstTimeLaunch(fragment);
     }
 
     @Override
     public void carouselItemClick(String toolbarTitle, String img, String title,
-                                  String audio, String type, Fragment fragment) {
+                                  String audio, String type, Fragment fragment,String itemType) {
         MovieSongsListFragment movieSongsListFragment = (MovieSongsListFragment) fragment;
-        movieSongsListFragment.getAllData(toolbarTitle, img, title, audio, type);
+        movieSongsListFragment.getAllData(toolbarTitle, img, title, audio, type,itemType);
         firstTimeLaunch(fragment);
     }
 
@@ -1529,9 +1529,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
 
     @Override
-    public void sendAudioVideoLink(String toolbarTitle, String img, String title, String audioVideoLink, Fragment fragment) {
+    public void sendAudioVideoLink(String toolbarTitle, String img, String title, String audioVideoLink, Fragment fragment,String itemType) {
         SongByMovieFragmentItemClick songByMovieFragmentItemClick = (SongByMovieFragmentItemClick) fragment;
-        songByMovieFragmentItemClick.getAudioLink(audioVideoLink, img, "video");
+        songByMovieFragmentItemClick.getAudioLink(audioVideoLink, img, "video",itemType);
         firstTimeLaunch(fragment);
     }
 

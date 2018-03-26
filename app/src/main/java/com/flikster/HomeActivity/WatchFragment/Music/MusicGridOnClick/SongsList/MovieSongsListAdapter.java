@@ -29,11 +29,13 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
     String videoLink;
     String audio;
     String type;
+    String itemType;
     MovieSongsListFragment.WatchPlayAudioOrVideoInterafce watchPlayAudioOrVideoInterafce;
 
     public MovieSongsListAdapter(Context context, FragmentManager fragmentManager, String img, String title, String audio,String type,
-                                 MovieSongsListFragment.WatchPlayAudioOrVideoInterafce watchPlayAudioOrVideoInterafce) {
+                                 MovieSongsListFragment.WatchPlayAudioOrVideoInterafce watchPlayAudioOrVideoInterafce,String itemType) {
         this.context = context;
+        this.itemType=itemType;
         this.fragmentManager = fragmentManager;
         this.img=img;
         this.title=title;
@@ -73,7 +75,7 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
 
         @Override
         public void onClick(View view) {
-            watchPlayAudioOrVideoInterafce.playAudioOrVideoPage(audio,new SongByMovieFragmentItemClick(), img,type);
+            watchPlayAudioOrVideoInterafce.playAudioOrVideoPage(audio,new SongByMovieFragmentItemClick(), img,type,itemType);
         }
     }
 }

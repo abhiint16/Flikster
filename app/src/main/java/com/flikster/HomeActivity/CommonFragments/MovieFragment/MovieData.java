@@ -70,6 +70,8 @@ public class MovieData {
                  private String censorCertificate;
                  @SerializedName("coverPic")
                  private String coverPic;
+                 @SerializedName("profilePic")
+                 private String profilePic;
                  @SerializedName("genre")
                  private List<String> genre;
                  @SerializedName("duration")
@@ -84,6 +86,14 @@ public class MovieData {
                  private  String slug;
                  @SerializedName("id")
                  private  String id;
+
+                 public String getProfilePic() {
+                     return profilePic;
+                 }
+
+                 public void setProfilePic(String profilePic) {
+                     this.profilePic = profilePic;
+                 }
 
                  public String getId() {
                      return id;

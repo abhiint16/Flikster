@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,25 +102,25 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.carouselview, parent, false);
             return new WatchAdapter.ViewHolder1(view);
         } else if (viewType == 2) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fashion_new, parent, false);
             return new WatchAdapter.ViewHolder2(view);
         } else if (viewType == 3) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fashion_new, parent, false);
             return new WatchAdapter.ViewHolder3(view);
         } else if (viewType == 4) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fashion_new, parent, false);
             return new WatchAdapter.ViewHolder4(view);
         } else if (viewType == 5) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fashion_new, parent, false);
             return new WatchAdapter.ViewHolder5(view);
         } else if (viewType == 6) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fashion_new, parent, false);
             return new WatchAdapter.ViewHolder6(view);
         } else if (viewType == 7) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fashion_new, parent, false);
             return new WatchAdapter.ViewHolder7(view);
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_common_recyclerview_with_tv, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fashion_new, parent, false);
             return new WatchAdapter.ViewHolder5(view);
         }
     }
@@ -152,24 +153,42 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             Log.e("check position 0",""+allUrls.size()+"and"+i);
             hitRetrofitForCarousel(allUrls.get(0),((ViewHolder1) holder).carouselView);
         } else if (holder.getItemViewType() == 2) {
+            RelativeLayout.LayoutParams layoutParam=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.twohundred));
+            ((ViewHolder2) holder).fragment_fashion_new_top_container.setLayoutParams(layoutParam);
             fetchRetrofitForMusic(((ViewHolder2) holder).fragment_common_recyclerview_with_tv_recycler,
                     "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22");
-            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Music");
+            ((ViewHolder2) holder).fragment_common_recyclerview_with_tv_title.setText("Juke Box");
         } else if (holder.getItemViewType() == 3) {
+            RelativeLayout.LayoutParams layoutParam=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.twohundred));
+            ((ViewHolder3) holder).fragment_fashion_new_top_container.setLayoutParams(layoutParam);
             ((ViewHolder3) holder).fragment_common_recyclerview_with_tv_title.setText("Gallery");
             fetchRetrofitForGallery(((ViewHolder3) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22gallery%22");
         } else if (holder.getItemViewType() == 4) {
+            RelativeLayout.LayoutParams layoutParam=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.twohundred));
+            ((ViewHolder4) holder).fragment_fashion_new_top_container.setLayoutParams(layoutParam);
             ((ViewHolder4) holder).fragment_common_recyclerview_with_tv_title.setText("Social Buzz/Interviews");
             fetchRetrofitForSocialBuzzAndInterview(((ViewHolder4) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22social-buzz%22%20OR%20contentType:%22interview%22");
         } else if (holder.getItemViewType() == 5) {
+            RelativeLayout.LayoutParams layoutParam=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.twohundred));
+            ((ViewHolder5) holder).fragment_fashion_new_top_container.setLayoutParams(layoutParam);
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_title.setText("Movies");
             layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             ((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler.setLayoutManager(layoutManager);
             initMovieRetrofit(((ViewHolder5) holder).fragment_common_recyclerview_with_tv_recycler);
         } else if (holder.getItemViewType() == 6) {
+            RelativeLayout.LayoutParams layoutParam=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.twohundred));
+            ((ViewHolder6) holder).fragment_fashion_new_top_container.setLayoutParams(layoutParam);
             ((ViewHolder6) holder).fragment_common_recyclerview_with_tv_title.setText("Trailers & Promos");
             fetchRetrofitForTrailerAndPromo(((ViewHolder6) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22trailer%22%20OR%20contentType:%22promo%22");
         } else if (holder.getItemViewType() == 7) {
+            RelativeLayout.LayoutParams layoutParam=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) context.getResources().getDimension(R.dimen.twohundred));
+            ((ViewHolder7) holder).fragment_fashion_new_top_container.setLayoutParams(layoutParam);
             ((ViewHolder7) holder).fragment_common_recyclerview_with_tv_title.setText("Comedy");
             fetchRetrofitForComedy(((ViewHolder7) holder).fragment_common_recyclerview_with_tv_recycler, "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22comedy-clip%22");
         } else {
@@ -232,19 +251,20 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public class ViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView fragment_common_recyclerview_with_tv_title;
         public RecyclerView fragment_common_recyclerview_with_tv_recycler;
-
+        RelativeLayout fragment_fashion_new_top_container;
         public ViewHolder2(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_fashion_new_title);
+            fragment_fashion_new_top_container=(RelativeLayout)itemView.findViewById(R.id.fragment_fashion_new_top_container);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_fashion_new_recycler);
             fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             innerTitleClick(v, "Music",
-                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22",
-                    new MusicGridFragment());
+                    "&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22",
+                    new MusicGridFragment(),"music");
         }
         //508001
     }
@@ -252,11 +272,12 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
-
+        RelativeLayout fragment_fashion_new_top_container;
         public ViewHolder3(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_fashion_new_title);
+            fragment_fashion_new_top_container=(RelativeLayout)itemView.findViewById(R.id.fragment_fashion_new_top_container);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_fashion_new_recycler);
             fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
 
         }
@@ -271,30 +292,32 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public class ViewHolder4 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
-
+        RelativeLayout fragment_fashion_new_top_container;
         public ViewHolder4(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_fashion_new_title);
+            fragment_fashion_new_top_container=(RelativeLayout)itemView.findViewById(R.id.fragment_fashion_new_top_container);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_fashion_new_recycler);
             fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             innerTitleClick(v, "Social Buzz/Interviews",
-                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22social-buzz%22%20OR%20contentType:%22interview%22",
-                    new MusicGridFragment());
+                    "&pretty=true&q=contentType:%22social-buzz%22%20OR%20contentType:%22interview%22",
+                    new MusicGridFragment(),"social");
         }
     }
 
     public class ViewHolder5 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
-
+        RelativeLayout fragment_fashion_new_top_container;
         public ViewHolder5(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_fashion_new_title);
+            fragment_fashion_new_top_container=(RelativeLayout)itemView.findViewById(R.id.fragment_fashion_new_top_container);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_fashion_new_recycler);
             fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
         }
 
@@ -308,30 +331,34 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public class ViewHolder6 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
+        RelativeLayout fragment_fashion_new_top_container;
 
         public ViewHolder6(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_fashion_new_title);
+            fragment_fashion_new_top_container=(RelativeLayout)itemView.findViewById(R.id.fragment_fashion_new_top_container);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_fashion_new_recycler);
             fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             innerTitleClick(v, "Trailer & Promos",
-                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22trailer%22%20OR%20contentType:%22promo%22",
-                    new MusicGridFragment());
+                    "&pretty=true&q=contentType:%22trailer%22%20OR%20contentType:%22promo%22",
+                    new MusicGridFragment(),"trailer");
         }
     }
 
     public class ViewHolder7 extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView fragment_common_recyclerview_with_tv_title;
         RecyclerView fragment_common_recyclerview_with_tv_recycler;
+        RelativeLayout fragment_fashion_new_top_container;
 
         public ViewHolder7(View itemView) {
             super(itemView);
-            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
-            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
+            fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_fashion_new_title);
+            fragment_fashion_new_top_container=(RelativeLayout)itemView.findViewById(R.id.fragment_fashion_new_top_container);
+            fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_fashion_new_recycler);
             fragment_common_recyclerview_with_tv_title.setOnClickListener(this);
         }
 
@@ -339,13 +366,13 @@ public class WatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @Override
         public void onClick(View v) {
             innerTitleClick(v, "Comedy",
-                    "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=5&from=0&pretty=true&q=contentType:%22comedy-clip%22",
-                    new MusicGridFragment());
+                    "&pretty=true&q=contentType:%22comedy-clip%22",
+                    new MusicGridFragment(),"comedy");
         }
     }
 
-    private void innerTitleClick(View view, String toolbarTitle, String url, Fragment fragment) {
-        watchFragCommInterface.carouselContainerClick(toolbarTitle, url, fragment);
+    private void innerTitleClick(View view, String toolbarTitle, String url, Fragment fragment,String itemType) {
+        watchFragCommInterface.carouselContainerClick(toolbarTitle, url, fragment,itemType);
     }
 
     public void fetchRetrofitForMusic(final RecyclerView recyclerView, String url) {

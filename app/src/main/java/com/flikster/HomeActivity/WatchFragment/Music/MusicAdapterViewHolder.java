@@ -19,6 +19,7 @@ import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList.MovieSongsListFragment;
 import com.flikster.HomeActivity.WatchFragment.WatchFragment;
 import com.flikster.R;
+import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +84,9 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
             if (feedInnerData.getHits().get(position).get_source()!=null)
             {
                 if (feedInnerData.getHits().get(position).get_source().getProfilePic()!=null)
-                    Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic()).into(((ViewHolder2)holder).carousel_image);
+                    Glide.with(context).load(feedInnerData.getHits().get(position).get_source().getProfilePic())
+                            .transform(new FaceCenterCrop())
+                            .into(((ViewHolder2)holder).carousel_image);
                 if (feedInnerData.getHits().get(position).get_source().getTitle()!=null)
                     ((ViewHolder2)holder).carousel_title.setText(feedInnerData.getHits().get(position).get_source().getTitle());
             }
@@ -134,7 +137,7 @@ public class MusicAdapterViewHolder extends RecyclerView.Adapter<RecyclerView.Vi
             watchFragCommInterface.carouselItemClick(feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
                     feedInnerData.getHits().get(getAdapterPosition()).get_source().getProfilePic(),
                     feedInnerData.getHits().get(getAdapterPosition()).get_source().getTitle(),
-                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getAudio().get(0),"audio",new MovieSongsListFragment());
+                    feedInnerData.getHits().get(getAdapterPosition()).get_source().getMedia().getAudio().get(0),"audio",new MovieSongsListFragment(),"music");
         }
     }
 

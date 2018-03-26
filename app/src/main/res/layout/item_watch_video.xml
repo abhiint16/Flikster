@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <ImageView
+            android:id="@+id/carousel_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorImageBackgroundGrey"
+            android:scaleType="fitXY" />
+        <ImageButton
+            android:id="@+id/item_watch_item_play_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/playbtn" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/carousel_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:fontFamily="@font/alt_regular_webfont"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:text="item title"
+        android:textSize="10sp" />
+</LinearLayout>

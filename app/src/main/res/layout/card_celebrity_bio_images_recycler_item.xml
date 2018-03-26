@@ -20,5 +20,6 @@
         android:textSize="10sp"
         android:fontFamily="@font/alt_regular_webfont"
         android:id="@+id/carousel_title"
-        android:gravity="center"/>
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"/>
 </LinearLayout>
