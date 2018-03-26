@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
-        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener,
+        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, NotificationFragment.NotificationInterface,SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener,
         MyAccountFragment.MyAccountItemClick,FashionFragmentNew.FashionOnClick,FashionContainerClickFrag.FashionOnClickToProduct {
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
@@ -1568,6 +1568,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void fashionContainerClick(Fragment fragment) {
+        firstTimeLaunch(fragment);
+    }
+
+    @Override
+    public void notificationBackButtonClick(Fragment fragment) {
         firstTimeLaunch(fragment);
     }
 
