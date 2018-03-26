@@ -19,5 +19,6 @@
         android:text="item title"
         android:textSize="10sp"
         android:fontFamily="@font/alt_regular_webfont"
-        android:id="@+id/carousel_title"/>
+        android:id="@+id/carousel_title"
+        android:gravity="center"/>
 </LinearLayout>

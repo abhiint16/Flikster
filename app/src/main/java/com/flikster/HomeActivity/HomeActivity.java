@@ -86,6 +86,7 @@ import com.flikster.MenuFragments.LogoutFragment;
 import com.flikster.HomeActivity.CommonFragments.MyAccountFragment.UserProfile.MyAccountFragment;
 import com.flikster.HomeActivity.CommonFragments.NotificationFragment.NotificationFragment;
 import com.flikster.MenuFragments.OrdersFragment;
+import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.R;
 import com.flikster.HomeActivity.RatingFragment.RatingFragment;
 import com.flikster.MenuFragments.ReferFragment;
@@ -144,10 +145,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     String industryOrFilter;
     CoordinatorLayout.LayoutParams params;
     DrawerLayout drawerLayout;
-    View profile_pink_line,order_pink_line,wishlist_pink_line,saved_post_pink_line,refer_pink_line,flikster_credit_pink_line,
+    View profile_pink_line,my_cart_pink_line,order_pink_line,wishlist_pink_line,saved_post_pink_line,refer_pink_line,flikster_credit_pink_line,
             aboutus_pink_line,settings_pink_line,logout_pink_line;
     /*ImageButton facebook_icon_footer,twitter_icon_footer,instagram_icon_footer,linkedin_icon_footer,pintrest_icon_footer;*/
-    LinearLayout footer_drawer_layout_aboutus,right_navigation_bar_my_account, right_navigation_bar_orders, right_navigation_bar_wishlist,
+    LinearLayout footer_drawer_layout_aboutus,right_navigation_bar_my_account,right_navigation_bar_my_cart ,right_navigation_bar_orders, right_navigation_bar_wishlist,
             right_navigation_bar_liked_posts, right_navigation_bar_refer, right_navigation_bar_rewards,
             right_navigation_bar_logout,right_navigation_bar_setting,right_navigation_bar_about_us, footer_drawer_layout_help, footer_drawer_layout_blog, footer_drawer_layout_privacy,
             footer_drawer_layout_terms, footer_drawer_layout_business;
@@ -328,7 +329,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     private void checkForLaunch() {
         if ("MyBag".equals(getIntent().getStringExtra("MyBag"))) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_container, new FashionLandingFragment())
+                    .replace(R.id.main_container, new FashionFragmentNew())
                     .commit();
         } else if ("VideoPlayer".equals(getIntent().getStringExtra("VideoPlayer"))) {
             fragmentManager.beginTransaction()
@@ -344,7 +345,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
                     .commit();
         } else
             firstTimeLaunch(new FeedFragment());
-
     }
 
     private void firstTimeLaunch(Fragment fragment) {
@@ -398,6 +398,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
         right_navigation_bar_my_account.setOnClickListener(this);
+        right_navigation_bar_my_cart.setOnClickListener(this);
         right_navigation_bar_orders.setOnClickListener(this);
         right_navigation_bar_wishlist.setOnClickListener(this);
         right_navigation_bar_liked_posts.setOnClickListener(this);
@@ -405,6 +406,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_rewards.setOnClickListener(this);
         right_navigation_bar_logout.setOnClickListener(this);
         right_navigation_bar_my_account.setOnTouchListener(this);
+        right_navigation_bar_my_cart.setOnTouchListener(this);
         right_navigation_bar_orders.setOnTouchListener(this);
         right_navigation_bar_wishlist.setOnTouchListener(this);
         right_navigation_bar_liked_posts.setOnTouchListener(this);
@@ -719,6 +721,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         order_pink_line=(View)findViewById(R.id.order_pink_line);
         profile_pink_line=(View)findViewById(R.id.profile_pink_line);
         refer_pink_line=(View)findViewById(R.id.refer_pink_line);
+        my_cart_pink_line=(View)findViewById(R.id.my_cart_pink_line);
         wishlist_pink_line=(View)findViewById(R.id.wishlist_pink_line);
         settings_pink_line=(View)findViewById(R.id.settings_pink_line);
         saved_post_pink_line=(View)findViewById(R.id.saved_post_pink_line);
@@ -752,6 +755,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         right_navigation_bar_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_logged_in_container);
         right_navigation_bar_non_logged_in_container = (ScrollView) findViewById(R.id.right_navigation_bar_non_logged_in_container);
         right_navigation_bar_my_account = (LinearLayout) findViewById(R.id.right_navigation_bar_my_account);
+        right_navigation_bar_my_cart=(LinearLayout)findViewById(R.id.right_navigation_bar_my_cart);
         right_navigation_bar_orders = (LinearLayout) findViewById(R.id.right_navigation_bar_orders);
         right_navigation_bar_setting=(LinearLayout)findViewById(R.id.right_navigation_bar_setting);
         right_navigation_bar_about_us=(LinearLayout)findViewById(R.id.right_navigation_bar_about_us);
@@ -883,6 +887,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public boolean onTouch(View view, MotionEvent motionEvent) {
          if (view.getId()== R.id.right_navigation_bar_my_account) {
             profile_pink_line.setVisibility(View.VISIBLE);
+             my_cart_pink_line.setVisibility(View.GONE);
             order_pink_line.setVisibility(View.GONE);
             wishlist_pink_line.setVisibility(View.GONE);
             saved_post_pink_line.setVisibility(View.GONE);
@@ -891,8 +896,22 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             aboutus_pink_line.setVisibility(View.GONE);
             settings_pink_line.setVisibility(View.GONE);
             logout_pink_line.setVisibility(View.GONE);
-        } else if (view.getId() == R.id.right_navigation_bar_orders) {
+        }
+         else if (view.getId() == R.id.right_navigation_bar_my_cart) {
              profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.VISIBLE);
+             order_pink_line.setVisibility(View.GONE);
+             wishlist_pink_line.setVisibility(View.GONE);
+             saved_post_pink_line.setVisibility(View.GONE);
+             refer_pink_line.setVisibility(View.GONE);
+             flikster_credit_pink_line.setVisibility(View.GONE);
+             aboutus_pink_line.setVisibility(View.GONE);
+             settings_pink_line.setVisibility(View.GONE);
+             logout_pink_line.setVisibility(View.GONE);
+         }
+        else if (view.getId() == R.id.right_navigation_bar_orders) {
+             profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.GONE);
              order_pink_line.setVisibility(View.VISIBLE);
              wishlist_pink_line.setVisibility(View.GONE);
              saved_post_pink_line.setVisibility(View.GONE);
@@ -903,6 +922,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
              logout_pink_line.setVisibility(View.GONE);
         } else if (view.getId() == R.id.right_navigation_bar_wish_list) {
              profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.GONE);
              order_pink_line.setVisibility(View.GONE);
              wishlist_pink_line.setVisibility(View.VISIBLE);
              saved_post_pink_line.setVisibility(View.GONE);
@@ -913,6 +933,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
              logout_pink_line.setVisibility(View.GONE);
         } else if (view.getId() == R.id.right_navigation_bar_liked_posts) {
              profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.GONE);
              order_pink_line.setVisibility(View.GONE);
              wishlist_pink_line.setVisibility(View.GONE);
              saved_post_pink_line.setVisibility(View.VISIBLE);
@@ -923,6 +944,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
              logout_pink_line.setVisibility(View.GONE);
         } else if (view.getId() == R.id.right_navigation_bar_refer) {
              profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.GONE);
              order_pink_line.setVisibility(View.GONE);
              wishlist_pink_line.setVisibility(View.GONE);
              saved_post_pink_line.setVisibility(View.GONE);
@@ -933,6 +955,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
              logout_pink_line.setVisibility(View.GONE);
         } else if (view.getId()== R.id.right_navigation_bar_rewards) {
              profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.GONE);
              order_pink_line.setVisibility(View.GONE);
              wishlist_pink_line.setVisibility(View.GONE);
              saved_post_pink_line.setVisibility(View.GONE);
@@ -944,6 +967,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         }
          else if (view.getId()== R.id.right_navigation_bar_about_us) {
              profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.GONE);
              order_pink_line.setVisibility(View.GONE);
              wishlist_pink_line.setVisibility(View.GONE);
              saved_post_pink_line.setVisibility(View.GONE);
@@ -955,6 +979,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
          }
          else if (view.getId()== R.id.right_navigation_bar_setting) {
              profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.GONE);
              order_pink_line.setVisibility(View.GONE);
              wishlist_pink_line.setVisibility(View.GONE);
              saved_post_pink_line.setVisibility(View.GONE);
@@ -966,6 +991,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
          }
          else if (view.getId()== R.id.right_navigation_bar_logout) {
              profile_pink_line.setVisibility(View.GONE);
+             my_cart_pink_line.setVisibility(View.GONE);
              order_pink_line.setVisibility(View.GONE);
              wishlist_pink_line.setVisibility(View.GONE);
              saved_post_pink_line.setVisibility(View.GONE);
@@ -1005,6 +1031,17 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
+        }else if (viewId == R.id.right_navigation_bar_my_cart) {
+            Intent intent = new Intent(HomeActivity.this, MyBagActivity.class);
+            if (SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID") != null && !SharedPrefsUtil.getStringPreference(getApplicationContext(), "USER_ID").isEmpty()) {
+                UserId = SharedPrefsUtil.getStringPreference(getApplicationContext(),
+                        "USER_ID");
+                Log.e("LoginUserId", UserId);
+                intent.putExtra("userId", UserId);
+            } else {
+                intent.putExtra("userId", "abhiint");
+            }
+            startActivity(intent);
         } else if (viewId == R.id.right_navigation_bar_orders) {
             navigationMenuitemsAction("Flikster", "Orders");
         } else if (viewId == R.id.right_navigation_bar_wish_list) {
