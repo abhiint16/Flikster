@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongsList;
 
+import android.app.Activity;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -25,7 +26,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.flikster.HomeActivity.ApiClient;
+import com.flikster.HomeActivity.ApiInterface;
+import com.flikster.HomeActivity.FeedData;
 import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
+import com.flikster.HomeActivity.FeedInnerData;
 import com.flikster.HomeActivity.PostRetrofit;
 import com.flikster.HomeActivity.ShopByVideoData;
 import com.flikster.HomeActivity.WatchFragment.Music.MusicGridOnClick.SongListItemWithProduct.SongByMovieFragmentItemPlayClickAdapter;
@@ -41,6 +46,9 @@ import java.io.IOException;
 import java.util.List;
 
 import okhttp3.internal.Util;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by abhishek on 01-11-2017.
@@ -49,7 +57,7 @@ import okhttp3.internal.Util;
 public class SongByMovieFragmentItemClick extends Fragment implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     View view;
     RecyclerView fragment_common_recyclerview_recycler;
-    RecyclerView.LayoutManager layoutManager;
+    GridLayoutManager layoutManager;
     SongByMovieFragmentItemPlayClickAdapter shopByVideoFragmentItemClickAdapter;
     FragmentManager fragmentManager;
     ImageButton ib_bookmark, card_footer_share, ib_like, toolbar_back_navigation_btn;
@@ -57,11 +65,15 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     MediaPlayer musicplay;
     SeekBar seekBar;
     ImageButton playibtn;
-    String audioLink, audioImg, type,itemType;
+    String audioLink, audioImg, type, itemType;
     Handler han = new Handler();
     Boolean playClick = false;
+    FeedInnerData feedInnerData;
     ImageView audio_frame_image;
     LinearLayout audio_frame;
+    String url;
+    SongByMovieFragClick songByMovieFragClick;
+    ApiInterface apiInterface;
     YouTubePlayerSupportFragment youTubePlayerFragment;
     List<ShopByVideoData.ShopByVideoInnerData.ShopByVideoInnerInnerData.ShopByVideoInnerMostData.ShopByVideoAllProduct> listOfProducts;
     YouTubePlayer yPlayer;
@@ -97,13 +109,25 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         } else if (type.equals("audio")) {
             toolbar_frag_multiicons_title.setText("Audio");
         }
-        if (listOfProducts != null && listOfProducts.size() != 0)
-            fragment_common_recyclerview_with_tv_title.setText(listOfProducts.size() + "Styles tagged");
         fragmentManager = getActivity().getSupportFragmentManager();
         layoutManager = new GridLayoutManager(getActivity(), 2);
         fragment_common_recyclerview_recycler.setLayoutManager(layoutManager);
-        shopByVideoFragmentItemClickAdapter = new SongByMovieFragmentItemPlayClickAdapter(getActivity(), fragmentManager, listOfProducts);
-        fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentItemClickAdapter);
+        if (listOfProducts == null || listOfProducts.size() == 0) {
+            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if ((position > feedInnerData.getHits().size() - 1))
+                        return 2;
+                    else return 1;
+                }
+            });
+            loadRelatedVideos();
+        } else if (listOfProducts != null || listOfProducts.size() != 0) {
+            if (listOfProducts != null && listOfProducts.size() != 0)
+                fragment_common_recyclerview_with_tv_title.setText(listOfProducts.size() + "Styles tagged");
+            shopByVideoFragmentItemClickAdapter = new SongByMovieFragmentItemPlayClickAdapter(getActivity(), fragmentManager, listOfProducts);
+            fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentItemClickAdapter);
+        }
         toolbar_back_navigation_btn.setOnClickListener(this);
         //toolbar_frag_multiicons_overflow.setVisibility(View.GONE);
         //toolbar_frag_multiicons_search.setVisibility(View.GONE);
@@ -131,6 +155,27 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
+            }
+        });
+    }
+
+    private void loadRelatedVideos() {
+        apiInterface = ApiClient.getClient("http://apiservice-ec.flikster.com/contents/").create(ApiInterface.class);
+        Call<FeedData> call = apiInterface.getTopRatedMovies(
+                "http://apiservice-ec.flikster.com/contents/_search?sort=createdAt:desc&size=10&from=0" + url);
+        call.enqueue(new Callback<FeedData>() {
+            @Override
+            public void onResponse(Call<FeedData> call, Response<FeedData> response) {
+                feedInnerData = response.body().getHits();
+                fragment_common_recyclerview_with_tv_title.setText(feedInnerData.getTotal() + " Related Videos");
+                shopByVideoFragmentItemClickAdapter = new SongByMovieFragmentItemPlayClickAdapter(getActivity(), fragmentManager, feedInnerData,url,songByMovieFragClick,itemType,
+                        audioLink);
+                fragment_common_recyclerview_recycler.setAdapter(shopByVideoFragmentItemClickAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<FeedData> call, Throwable t) {
+                Log.e("vvvvvvvvvv", "vv" + call + t);
             }
         });
     }
@@ -262,11 +307,20 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
     };
 
 
-    public void getAudioLink(String audioLink, String audioImg, String type,String itemType) {
+    public void getAudioLink(String audioLink, String audioImg, String type, String itemType) {
         this.audioLink = audioLink;
         this.audioImg = audioImg;
         this.type = type;
-        this.itemType=itemType;
+        this.itemType = itemType;
+        if ("comedy".equals(itemType)) {
+            url = "&pretty=true&q=contentType:%22comedy-clip%22";
+        } else if ("music".equals(itemType)) {
+            this.url = "&pretty=true&q=contentType:%22audio-song%22%20OR%20contentType:%22dialouge%22";
+        } else if ("trailer".equals(itemType)) {
+            this.url = "&pretty=true&q=contentType:%22trailer%22%20OR%20contentType:%22promo%22";
+        } else if ("social".equals(itemType)) {
+            this.url = "&pretty=true&q=contentType:%22social-buzz%22%20OR%20contentType:%22interview%22";
+        }
     }
 
     public void getShopByVideo(String audioLink, String audioImg, String type,
@@ -275,6 +329,16 @@ public class SongByMovieFragmentItemClick extends Fragment implements View.OnCli
         this.audioImg = audioImg;
         this.type = type;
         this.listOfProducts = listOfProducts;
+    }
+
+    public interface SongByMovieFragClick {
+        void playAudioOrVideoPage(String audioLink,Fragment fragment,String audioImg,String type,String itemType);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        songByMovieFragClick = (SongByMovieFragClick) activity;
     }
 
     @Override

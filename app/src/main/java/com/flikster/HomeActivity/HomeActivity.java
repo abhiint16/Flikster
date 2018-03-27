@@ -129,7 +129,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
-        CelebrityFragment.CelebItemClickInterface, MovieFragment.MovieItemClickInterface, NotificationFragment.NotificationInterface,SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener,
+        CelebrityFragment.CelebItemClickInterface, SongByMovieFragmentItemClick.SongByMovieFragClick,MovieFragment.MovieItemClickInterface, NotificationFragment.NotificationInterface,SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener,
         MyAccountFragment.MyAccountItemClick,FashionFragmentNew.FashionOnClick,FashionContainerClickFrag.FashionOnClickToProduct {
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
