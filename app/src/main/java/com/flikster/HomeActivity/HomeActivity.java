@@ -69,6 +69,7 @@ import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.MyStyleFragment
 import com.flikster.HomeActivity.CommonFragments.NewsFragment.NewsOnClickFragment;
 import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionLandingFragment.FashionLandingFragment;
+import com.flikster.HomeActivity.FashionFragment.FashionNewDesign.FashionFragContainerClick.FashionContainerClick;
 import com.flikster.HomeActivity.FashionFragment.FashionNewDesign.FashionFragContainerClick.FashionContainerClickFrag;
 import com.flikster.HomeActivity.FashionFragment.FashionNewDesign.FashionFragmentNew;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreFragment;
@@ -125,7 +126,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         MusicGridFragment.WatchAudioVideoSendFromGridFrag,
         NewsOnClickFragment.NewsRecommendedClick,
         VideoGalleryFragment.VideoRecommendationClick,
-        GalleryCardClick.GalleryRecommendationItemClick,
+        GalleryCardClick.GalleryRecommendationItemClick,FashionContainerClick.FashionContainerClickInterface,
         CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
@@ -1609,6 +1610,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
+    public void backButtonClick(Fragment fragment) {
+        beginTransact(fragment);
+    }
+
+    @Override
     public void notificationBackButtonClick(Fragment fragment) {
         firstTimeLaunch(fragment);
     }
@@ -1734,6 +1740,5 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
             }
         });
     }
-
 
 }

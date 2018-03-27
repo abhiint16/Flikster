@@ -48,6 +48,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
+                android:id="@+id/fashion_containerclick_recycler_item_wihlistbtn"
                 android:background="@color/transparent"
                 android:scaleType="fitXY"
                 android:src="@drawable/wishlist_semi_trans_back" />
@@ -58,6 +59,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="5dp"
+                android:id="@+id/fashion_containerclick_recycler_item_sharebtn"
                 android:layout_marginTop="5dp"
                 android:background="@color/transparent"
                 android:scaleType="fitXY"

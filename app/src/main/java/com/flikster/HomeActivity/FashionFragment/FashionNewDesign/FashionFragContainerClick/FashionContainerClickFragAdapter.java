@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.flikster.HomeActivity.CommonFragments.ProductFragment.ProductOnClick;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreData;
 import com.flikster.HomeActivity.FashionFragment.FashionType.AllStoreFragment.AllStoreInnerData;
 import com.flikster.R;
+import com.flikster.Util.Common;
 import com.rohitarya.glide.facedetection.transformation.FaceCenterCrop;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -200,6 +202,7 @@ public class FashionContainerClickFragAdapter extends RecyclerView.Adapter<Recyc
         ImageView fashion_containerclick_recycler_item_image;
         TextView fashion_containerclick_recycler_item_price, fashion_containerclick_recycler_item_title;
         CardView fashion_containerclick_recycler_item_card;
+        ImageButton fashion_containerclick_recycler_item_sharebtn;
 
         public ViewHolder1(View itemView) {
             super(itemView);
@@ -207,18 +210,27 @@ public class FashionContainerClickFragAdapter extends RecyclerView.Adapter<Recyc
             fashion_containerclick_recycler_item_image = (ImageView) itemView.findViewById(R.id.fashion_containerclick_recycler_item_image);
             fashion_containerclick_recycler_item_title = (TextView) itemView.findViewById(R.id.fashion_containerclick_recycler_item_title);
             fashion_containerclick_recycler_item_price = (TextView) itemView.findViewById(R.id.fashion_containerclick_recycler_item_price);
+            fashion_containerclick_recycler_item_sharebtn=(ImageButton)itemView.findViewById(R.id.fashion_containerclick_recycler_item_sharebtn);
             fashion_containerclick_recycler_item_card.setOnClickListener(this);
+            fashion_containerclick_recycler_item_sharebtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            fashionOnClick.onBuyClick(hits.getHits().get(getAdapterPosition()-1).get_source().getId(),
-                    hits.getHits().get(getAdapterPosition()-1).get_source().getSize(), "abhiint",
-                    hits.getHits().get(getAdapterPosition()-1).get_source().getPrice(),
-                    hits.getHits().get(getAdapterPosition()-1).get_source().getProfilePic(),
-                    hits.getHits().get(getAdapterPosition()-1).get_source().getProductInfo(),
-                    hits.getHits().get(getAdapterPosition()-1).get_source().getSlug(),
-                    hits.getHits().get(getAdapterPosition()-1).get_source().getImageGallery(), new ProductOnClick());
+            if (view.getId()==R.id.fashion_containerclick_recycler_item_card)
+            {
+                fashionOnClick.onBuyClick(hits.getHits().get(getAdapterPosition()-1).get_source().getId(),
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getSize(), "abhiint",
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getPrice(),
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getProfilePic(),
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getSlug(),
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getImageGallery(), new ProductOnClick());
+            }
+            else if (view.getId()==R.id.fashion_containerclick_recycler_item_sharebtn)
+            {
+                Common.shareClick(hits.getHits().get(getAdapterPosition()-1).get_source().getImageGallery().get(0),context);
+            }
         }
     }
 

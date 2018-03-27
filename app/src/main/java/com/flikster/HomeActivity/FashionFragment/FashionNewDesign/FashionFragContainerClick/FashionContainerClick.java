@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.FashionFragment.FashionNewDesign.FashionFragContainerClick;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -9,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.flikster.HomeActivity.FashionFragment.FashionNewDesign.FashionFragmentNew;
 import com.flikster.R;
 import com.flikster.Util.SharedPrefsUtil;
 
@@ -18,11 +21,13 @@ import com.flikster.Util.SharedPrefsUtil;
  * Created by abhishek on 07-03-2018.
  */
 
-public class FashionContainerClick extends Fragment implements TabLayout.OnTabSelectedListener {
+public class FashionContainerClick extends Fragment implements TabLayout.OnTabSelectedListener, View.OnClickListener {
     View view;
     TabLayout tabLayout;
     TextView toolbar_frag_multiicons_title;
     String storeType;
+    ImageButton toolbar_back_navigation_btn;
+    FashionContainerClickInterface fashionContainerClickInterface;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,11 +54,13 @@ public class FashionContainerClick extends Fragment implements TabLayout.OnTabSe
             toolbar_frag_multiicons_title.setText("Women Fashion");
         }
         createTabIcons();
+        toolbar_back_navigation_btn.setOnClickListener(this);
         tabLayout.addOnTabSelectedListener(this);
         firstTimeLaunchTab();
     }
 
     private void initializeViews() {
+        toolbar_back_navigation_btn=(ImageButton)view.findViewById(R.id.toolbar_back_navigation_btn);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         toolbar_frag_multiicons_title=(TextView)view.findViewById(R.id.toolbar_frag_title);
         tabLayout.setSelectedTabIndicatorColor(getContext().getResources().getColor(R.color.horizontal_line));
@@ -136,5 +143,24 @@ public class FashionContainerClick extends Fragment implements TabLayout.OnTabSe
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId()==R.id.toolbar_back_navigation_btn)
+        {
+            fashionContainerClickInterface.backButtonClick(new FashionFragmentNew());
+        }
+    }
+
+    public interface FashionContainerClickInterface
+    {
+        void backButtonClick(Fragment fragment);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        fashionContainerClickInterface=(FashionContainerClickInterface) context;
     }
 }
