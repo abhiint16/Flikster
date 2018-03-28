@@ -92,7 +92,7 @@
                 android:text="Select Size:"
                 android:textSize="14sp" />
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -100,7 +100,7 @@
                 android:padding="@dimen/five"
                 android:text="Size Chart"
                 android:textColor="#ff8080"
-                android:textSize="12sp" />
+                android:textSize="12sp" />-->
         </RelativeLayout>
 
         <LinearLayout
