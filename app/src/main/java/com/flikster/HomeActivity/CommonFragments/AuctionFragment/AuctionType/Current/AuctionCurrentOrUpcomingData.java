@@ -16,8 +16,6 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
     @SerializedName("currentAuctions")
     public List<AuctionInnerData> currentAuctions;
 
-
-
     @SerializedName("upcomingAuctions")
     public List<AuctionInnerData> upcomingAuctions;
 

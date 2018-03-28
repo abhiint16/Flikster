@@ -71,7 +71,7 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
     CelebrityBioAdapterImagesViewHolder myCeleAdapter;
     LinearLayout cartlayout;
     CarouselView carouselView;
-    List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionDetails;
+    AuctionCurrentOrUpcomingData auctionDetails;
     List<String> GalleryData = new ArrayList<>();
     LinearLayout productqtylayout;
 
@@ -104,10 +104,10 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
         view = inflater.inflate(R.layout.fragment_auction, container, false);
         Bundle bundle = getArguments();
         positionvalue = bundle.getInt("POSITION_VALUE");
-        auctionDetails = (List<AuctionCurrentOrUpcomingData.AuctionInnerData>) bundle.getSerializable("AUCTION_DETAILS");
-        Log.e("nameProfile", auctionDetails.get(positionvalue).getName());
+        auctionDetails = (AuctionCurrentOrUpcomingData) bundle.getSerializable("AUCTION_DETAILS");
+        Log.e("nameProfile", auctionDetails.getCurrentAuctions().get(positionvalue).getName());
 //        GalleryData.add(auctionDetails.get(positionvalue).getProfilePic());
-        GalleryData = auctionDetails.get(positionvalue).getGallery();
+        GalleryData = auctionDetails.getCurrentAuctions().get(positionvalue).getGallery();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         initializeViews();
         initializeRest();
@@ -122,12 +122,12 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
                 if (et_createac_fullname.getText().toString() != null && !et_createac_fullname.getText().toString().isEmpty()) {
                     String enterbid = et_createac_fullname.getText().toString();
                     Integer enterbidValue = Integer.valueOf(enterbid);
-                    Integer availbleBidvalue = Integer.valueOf(auctionDetails.get(positionvalue).getStartingPrice());
+                    Integer availbleBidvalue = Integer.valueOf(auctionDetails.getCurrentAuctions().get(positionvalue).getStartingPrice());
                     if (availbleBidvalue <= enterbidValue) {
                         if (enterbidValue >= ongoingbidAmountIncr) {
                             if (SharedPrefsUtil.getStringPreference(getContext(), "USER_ID") != null && !SharedPrefsUtil.getStringPreference(getContext(), "USER_ID").isEmpty()) {
                                 placeBidServerData(String.valueOf(enterbidValue),
-                                        auctionDetails.get(positionvalue).getId(),
+                                        auctionDetails.getCurrentAuctions().get(positionvalue).getId(),
                                         SharedPrefsUtil.getStringPreference(getContext(), "USER_ID"));
                                 Toast.makeText(getActivity(), "Your Bid Placed Successfully..", Toast.LENGTH_SHORT).show();
                             } else {
@@ -258,17 +258,17 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
 
         sizeOfSize = 0;// size.size();
 
-        if (auctionDetails.get(positionvalue).getName() != null && !auctionDetails.get(positionvalue).getName().isEmpty()) {
-            product_title.setText(Html.fromHtml(auctionDetails.get(positionvalue).getName()));
+        if (auctionDetails.getCurrentAuctions().get(positionvalue).getName() != null && !auctionDetails.getCurrentAuctions().get(positionvalue).getName().isEmpty()) {
+            product_title.setText(Html.fromHtml(auctionDetails.getCurrentAuctions().get(positionvalue).getName()));
         }
 
 
-        if (auctionDetails.get(positionvalue).getStartingPrice() != null && !auctionDetails.get(positionvalue).getStartingPrice().isEmpty()) {
-            product_price.setText("Rs " + Html.fromHtml(auctionDetails.get(positionvalue).getStartingPrice() + "/-"));
+        if (auctionDetails.getCurrentAuctions().get(positionvalue).getStartingPrice() != null && !auctionDetails.getCurrentAuctions().get(positionvalue).getStartingPrice().isEmpty()) {
+            product_price.setText("Rs " + Html.fromHtml(auctionDetails.getCurrentAuctions().get(positionvalue).getStartingPrice() + "/-"));
         }
 
-        if (auctionDetails.get(positionvalue).getStartingPrice() != null && !auctionDetails.get(positionvalue).getStartingPrice().isEmpty()) {
-            pricebidtxt.setText("Rs " + Html.fromHtml(auctionDetails.get(positionvalue).getStartingPrice() + "/-"));
+        if (auctionDetails.getCurrentAuctions().get(positionvalue).getStartingPrice() != null && !auctionDetails.getCurrentAuctions().get(positionvalue).getStartingPrice().isEmpty()) {
+            pricebidtxt.setText("Rs " + Html.fromHtml(auctionDetails.getCurrentAuctions().get(positionvalue).getStartingPrice() + "/-"));
         }
 
        /* if (auctionDetails.get(positionvalue).getEndTime() != null && !auctionDetails.get(positionvalue).getEndTime().isEmpty()) {
@@ -284,8 +284,8 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
             }
         }*/
 
-        if (auctionDetails.get(0).getEndDate()
-                != null && !auctionDetails.get(0).getEndDate().isEmpty()) {
+        if (auctionDetails.getCurrentAuctions().get(0).getEndDate()
+                != null && !auctionDetails.getCurrentAuctions().get(0).getEndDate().isEmpty()) {
             try {
                        /* JSONObject objtime = new JSONObject(auctionCurrentOrUpcomingData.get(0).getEndTime());
                         String hours = objtime.getString("hour");
@@ -295,7 +295,7 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
                         ((ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");*/
 //                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
 
-                String enddateTime = DateUtil.serverSentTimeChange(auctionDetails.get(0).getEndDate());
+                String enddateTime = DateUtil.serverSentTimeChange(auctionDetails.getCurrentAuctions().get(0).getEndDate());
                 SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                 Date enddate = simDf.parse(enddateTime);
                 long endTimeMillSec = enddate.getTime();
@@ -307,11 +307,11 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
             }
         }
 
-        if (auctionDetails.get(positionvalue).getInfo() != null && !auctionDetails.get(positionvalue).getInfo().isEmpty()) {
-            infotxt.setText("Information : " + Html.fromHtml(auctionDetails.get(positionvalue).getInfo()));
+        if (auctionDetails.getCurrentAuctions().get(positionvalue).getInfo() != null && !auctionDetails.getCurrentAuctions().get(positionvalue).getInfo().isEmpty()) {
+            infotxt.setText("Information : " + Html.fromHtml(auctionDetails.getCurrentAuctions().get(positionvalue).getInfo()));
         }
-        if (auctionDetails.get(positionvalue).getDescription() != null && !auctionDetails.get(positionvalue).getDescription().isEmpty()) {
-            descrtxt.setText("Description : " + Html.fromHtml(auctionDetails.get(positionvalue).getDescription()));
+        if (auctionDetails.getCurrentAuctions().get(positionvalue).getDescription() != null && !auctionDetails.getCurrentAuctions().get(positionvalue).getDescription().isEmpty()) {
+            descrtxt.setText("Description : " + Html.fromHtml(auctionDetails.getCurrentAuctions().get(positionvalue).getDescription()));
         }
         product_size_small.setOnClickListener(this);
         product_size_med.setOnClickListener(this);
@@ -466,9 +466,9 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
         mDialog.setVisibility(View.VISIBLE);
         mDialog.start();
         apiInterface = ApiClient.getClient(ApiClient.ON_GOING_BID_URL
-                + auctionDetails.get(positionvalue).getId() + "/").create(ApiInterface.class);
+                + auctionDetails.getCurrentAuctions().get(positionvalue).getId() + "/").create(ApiInterface.class);
         Call<OnGoingBidData> call = apiInterface.getOngoingBid(ApiClient.ON_GOING_BID_URL
-                + auctionDetails.get(positionvalue).getId() + "/");
+                + auctionDetails.getCurrentAuctions().get(positionvalue).getId() + "/");
         call.enqueue(new Callback<OnGoingBidData>() {
             @Override
             public void onResponse(Call<OnGoingBidData> call,
@@ -477,8 +477,8 @@ public class AuctionDetailFragment extends Fragment implements View.OnClickListe
                 mDialog.stop();
                 if (response.body().getStatusCode() == 200) {
                     ongoingbidAmount = response.body().getHighestBid();
-                    if (auctionDetails.get(positionvalue).getBidIncrement() !=null && !auctionDetails.get(positionvalue).getBidIncrement().isEmpty()){
-                        ongoingbidAmountIncr = ongoingbidAmount + Integer.valueOf(auctionDetails.get(positionvalue).getBidIncrement());
+                    if (auctionDetails.getCurrentAuctions().get(positionvalue).getBidIncrement() !=null && !auctionDetails.getCurrentAuctions().get(positionvalue).getBidIncrement().isEmpty()){
+                        ongoingbidAmountIncr = ongoingbidAmount + Integer.valueOf(auctionDetails.getCurrentAuctions().get(positionvalue).getBidIncrement());
                         enterbidtxt.setText("Enter Rs " + Html.fromHtml(ongoingbidAmountIncr+ " or more"));
                     }else {
                         enterbidtxt.setText("Enter Rs " + Html.fromHtml(response.body().getHighestBid()+ " or more"));

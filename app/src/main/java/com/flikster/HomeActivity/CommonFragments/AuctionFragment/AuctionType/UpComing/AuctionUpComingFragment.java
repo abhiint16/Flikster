@@ -38,7 +38,7 @@ public class AuctionUpComingFragment extends Fragment {
     FragmentManager fragmentManager;
     ApiInterface apiInterface;
     int Count;
-    List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionCurrentOrUpcomingData;
+    AuctionCurrentOrUpcomingData auctionCurrentOrUpcomingData;
     TextView nodataavailtxt;
     SimpleArcLoader mDialog;
 
@@ -53,7 +53,7 @@ public class AuctionUpComingFragment extends Fragment {
     }
 
 
-    private void initializeRest(List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionCurrentOrUpcomingData) {
+    private void initializeRest(AuctionCurrentOrUpcomingData auctionCurrentOrUpcomingData) {
         ratingNowShowingLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
         ratingNowShowingRecycler.setLayoutManager(ratingNowShowingLayoutManager);
@@ -79,8 +79,8 @@ public class AuctionUpComingFragment extends Fragment {
                                    Response<AuctionCurrentOrUpcomingData> response) {
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
-                auctionCurrentOrUpcomingData = response.body().getUpcomingAuctions();
-                if (auctionCurrentOrUpcomingData.size() != 0 && !auctionCurrentOrUpcomingData.isEmpty()) {
+                auctionCurrentOrUpcomingData = response.body();
+                if (auctionCurrentOrUpcomingData.getUpcomingAuctions().size() != 0 && !auctionCurrentOrUpcomingData.getUpcomingAuctions().isEmpty()) {
                     initializeRest(auctionCurrentOrUpcomingData);
                 } else {
                     nodataavailtxt.setVisibility(View.VISIBLE);
@@ -99,12 +99,12 @@ public class AuctionUpComingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        //((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 }

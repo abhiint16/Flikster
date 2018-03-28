@@ -38,9 +38,8 @@ public class AuctionCurrentFragment extends Fragment {
     RecyclerView.LayoutManager ratingNowShowingLayoutManager;
     AuctionCurrentFragmentAdapter auctionCurrentFragmentAdapter;
     FragmentManager fragmentManager;
-
     int Count;
-    List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionCurrentOrUpcomingData;
+    AuctionCurrentOrUpcomingData auctionCurrentOrUpcomingData;
     TextView nodataavailtxt;
     SimpleArcLoader mDialog;
     ApiInterface apiInterface;
@@ -55,7 +54,7 @@ public class AuctionCurrentFragment extends Fragment {
     }
 
 
-    private void initializeRest(List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionCurrentOrUpcomingData) {
+    private void initializeRest(AuctionCurrentOrUpcomingData auctionCurrentOrUpcomingData) {
         ratingNowShowingLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false);
         ratingNowShowingRecycler.setLayoutManager(ratingNowShowingLayoutManager);
@@ -81,8 +80,8 @@ public class AuctionCurrentFragment extends Fragment {
                                    Response<AuctionCurrentOrUpcomingData> response) {
                 mDialog.setVisibility(View.GONE);
                 mDialog.stop();
-                auctionCurrentOrUpcomingData = response.body().getCurrentAuctions();
-                if (auctionCurrentOrUpcomingData.size() != 0 && !auctionCurrentOrUpcomingData.isEmpty()) {
+                auctionCurrentOrUpcomingData = response.body();
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().size() != 0 && !auctionCurrentOrUpcomingData.getCurrentAuctions().isEmpty()) {
                     initializeRest(auctionCurrentOrUpcomingData);
                     Log.e("AuctionCount", Count + "");
                 } else {
@@ -101,7 +100,7 @@ public class AuctionCurrentFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     @Override

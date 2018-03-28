@@ -36,11 +36,11 @@ public class AuctionRelatedProductsViewHolder extends RecyclerView.Adapter<Aucti
     FragmentManager fragmentManager;
     int a;
     Context context;
-    List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionCurrentOrUpcomingData;
+    AuctionCurrentOrUpcomingData auctionCurrentOrUpcomingData;
     AuctionDetailFragment auctionDetailFragment;
     Bundle bundle;
 
-    public AuctionRelatedProductsViewHolder(Context context, FragmentManager fragmentManager, List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionCurrentOrUpcomingData) {
+    public AuctionRelatedProductsViewHolder(Context context, FragmentManager fragmentManager, AuctionCurrentOrUpcomingData auctionCurrentOrUpcomingData) {
         this.fragmentManager = fragmentManager;
         this.context = context;
         this.auctionCurrentOrUpcomingData = auctionCurrentOrUpcomingData;
@@ -55,12 +55,12 @@ public class AuctionRelatedProductsViewHolder extends RecyclerView.Adapter<Aucti
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (auctionCurrentOrUpcomingData.size() != 0) {
+        if (auctionCurrentOrUpcomingData.getCurrentAuctions().size() != 0) {
             try {
-                Glide.with(context).load(auctionCurrentOrUpcomingData.get(position).getProfilePic()).asBitmap().into(
+                Glide.with(context).load(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getProfilePic()).asBitmap().into(
                         (holder.movieimg));
-                if (auctionCurrentOrUpcomingData.get(position).getEndTime()
-                        != null && !auctionCurrentOrUpcomingData.get(position).getEndTime().isEmpty()) {
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getEndTime()
+                        != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getEndTime().isEmpty()) {
                 }
 
                /* JSONObject objtime = new JSONObject(auctionCurrentOrUpcomingData.get(position).getEndTime());
@@ -69,8 +69,8 @@ public class AuctionRelatedProductsViewHolder extends RecyclerView.Adapter<Aucti
                 String second = objtime.getString("second");
                 String completeTime = "Time Left: " + hours + "h " + minute + "m " + second + "s "*/
 
-                    if (auctionCurrentOrUpcomingData.get(0).getEndDate()
-                            != null && !auctionCurrentOrUpcomingData.get(0).getEndDate().isEmpty()) {
+                    if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate()
+                            != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate().isEmpty()) {
                         try {
                        /* JSONObject objtime = new JSONObject(auctionCurrentOrUpcomingData.get(0).getEndTime());
                         String hours = objtime.getString("hour");
@@ -79,7 +79,7 @@ public class AuctionRelatedProductsViewHolder extends RecyclerView.Adapter<Aucti
                         String completeTime = "Time Left: " + hours + "h " + minute + "m " + second + "s ";
                         ((ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");*/
 //                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
-                            String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
+                            String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate());
                             SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                             Date enddate = simDf.parse(enddateTime);
                             long endTimeMillSec = enddate.getTime();
@@ -94,8 +94,8 @@ public class AuctionRelatedProductsViewHolder extends RecyclerView.Adapter<Aucti
 
 
 
-                holder.card_video_item_desc.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(position).getInfo()));
-                holder.card_video_item_title.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(position).getName()));
+                holder.card_video_item_desc.setText(Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getInfo()));
+                holder.card_video_item_title.setText(Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getName()));
 //        Glide.with(context).load(auctionCurrentOrUpcomingData.get(0).getProfilePic()).into(holder.movieimg);
 
 
@@ -108,12 +108,12 @@ public class AuctionRelatedProductsViewHolder extends RecyclerView.Adapter<Aucti
     @Override
     public int getItemCount() {
         //return imag.size();
-        return auctionCurrentOrUpcomingData.size();
+        return auctionCurrentOrUpcomingData.getCurrentAuctions().size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return auctionCurrentOrUpcomingData.size();
+        return auctionCurrentOrUpcomingData.getCurrentAuctions().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

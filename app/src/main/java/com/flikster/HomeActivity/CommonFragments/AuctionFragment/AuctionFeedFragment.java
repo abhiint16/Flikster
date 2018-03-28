@@ -28,9 +28,9 @@ public class AuctionFeedFragment extends Fragment implements View.OnClickListene
     TabLayout tabLayout;
     AuctionFeedViewPagerAdapter auctionFeedViewPagerAdapter;
     FragmentManager fragmentManager;
-    TextView toolbar_frag_title;
-    ImageButton toolbar_back_navigation_btn;
-    Toolbar toolbar_frag_multiicons_toolbar;
+    //TextView toolbar_frag_title;
+    //ImageButton toolbar_back_navigation_btn;
+    //Toolbar toolbar_frag_multiicons_toolbar;
 
     @Nullable
     @Override
@@ -44,13 +44,13 @@ public class AuctionFeedFragment extends Fragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        //((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
     private void initializeRest() {
@@ -58,19 +58,19 @@ public class AuctionFeedFragment extends Fragment implements View.OnClickListene
         viewPager.setAdapter(auctionFeedViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        toolbar_frag_multiicons_toolbar.setBackgroundColor(getResources().getColor(R.color.ligth_blue_shades));
+        //toolbar_frag_multiicons_toolbar.setBackgroundColor(getResources().getColor(R.color.ligth_blue_shades));
 
-        toolbar_frag_title.setText("Auction");
-        toolbar_frag_title.setVisibility(View.GONE);
-        toolbar_back_navigation_btn.setOnClickListener(this);
+//        toolbar_frag_title.setText("Auction");
+       // toolbar_frag_title.setVisibility(View.GONE);
+//        toolbar_back_navigation_btn.setOnClickListener(this);
     }
 
     private void initializeViews() {
-        toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
+        //toolbar_frag_multiicons_toolbar = (Toolbar) view.findViewById(R.id.toolbar_frag_multiicons_toolbar);
         viewPager = (ViewPager) view.findViewById(R.id.celebrity_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.celebrity_tablayout);
-        toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
-        toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
+       // toolbar_frag_title = (TextView) view.findViewById(R.id.toolbar_frag_multiicons_title);
+        //toolbar_back_navigation_btn = (ImageButton) view.findViewById(R.id.toolbar_frag_multiicons_back_navigation);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.white));
         tabLayout.setTabTextColors(getResources().getColor(R.color.dark_grey), getResources().getColor(R.color.black));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
@@ -78,13 +78,13 @@ public class AuctionFeedFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
+        /*if (view.getId() == R.id.toolbar_frag_multiicons_back_navigation) {
             // getFragmentManager().popBackStackImmediate();
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, new FashionLandingFragment())
                     .addToBackStack("")
                     .commit();
-        }
+        }*/
     }
 }

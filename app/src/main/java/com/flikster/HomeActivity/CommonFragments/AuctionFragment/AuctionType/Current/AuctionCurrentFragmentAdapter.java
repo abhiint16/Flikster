@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,13 +44,13 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
     Context context;
     FragmentManager fragmentManager;
     AuctionRelatedProductsViewHolder auctionRelatedProductsViewHolder;
-    List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionCurrentOrUpcomingData;
+    AuctionCurrentOrUpcomingData auctionCurrentOrUpcomingData;
     AuctionDetailFragment auctionDetailFragment;
     Bundle bundle;
 
     public AuctionCurrentFragmentAdapter(Context context,
                                          FragmentManager fragmentManager,
-                                         List<AuctionCurrentOrUpcomingData.AuctionInnerData> auctionCurrentOrUpcomingData) {
+                                         AuctionCurrentOrUpcomingData auctionCurrentOrUpcomingData) {
         this.fragmentManager = fragmentManager;
         this.context = context;
         this.auctionCurrentOrUpcomingData = auctionCurrentOrUpcomingData;
@@ -72,45 +73,45 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 0) {
-            if (auctionCurrentOrUpcomingData.get(0).getProfilePic() != null && !auctionCurrentOrUpcomingData.get(0).getProfilePic().isEmpty()) {
-                Glide.with(context).load(auctionCurrentOrUpcomingData.get(0).getProfilePic()).asBitmap().into(
+            if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getProfilePic() != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getProfilePic().isEmpty()) {
+                Glide.with(context).load(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getProfilePic()).asBitmap().into(
                         (((ViewHolder1) holder).profile_image));
-                Glide.with(context).load(auctionCurrentOrUpcomingData.get(0).getProfilePic()).asBitmap().into(
+                Glide.with(context).load(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getProfilePic()).asBitmap().into(
                         (((ViewHolder1) holder).card_gallary3_img1));
 
-                if (auctionCurrentOrUpcomingData.get(0).getGallery().get(0) != null && !auctionCurrentOrUpcomingData.get(0).getGallery().get(0).isEmpty()) {
-                    Glide.with(context).load(auctionCurrentOrUpcomingData.get(0).getGallery().get(0)).asBitmap().into(
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getGallery().get(0) != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getGallery().get(0).isEmpty()) {
+                    Glide.with(context).load(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getGallery().get(0)).asBitmap().into(
                             (((ViewHolder1) holder).card_gallary3_img2));
                 }
                 try {
-                    if (auctionCurrentOrUpcomingData.get(0).getGallery().get(1) != null && !auctionCurrentOrUpcomingData.get(0).getGallery().get(1).isEmpty()) {
-                        Glide.with(context).load(auctionCurrentOrUpcomingData.get(0).getGallery().get(0)).asBitmap().into(
+                    if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getGallery().get(1) != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getGallery().get(1).isEmpty()) {
+                        Glide.with(context).load(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getGallery().get(0)).asBitmap().into(
                                 (((ViewHolder1) holder).card_gallary3_img3));
                     }
                 } catch (Exception e) {
                 }
 
-                if (auctionCurrentOrUpcomingData.get(0).getName() != null && !auctionCurrentOrUpcomingData.get(0).getName().isEmpty()) {
-                    ((ViewHolder1) holder).tv_tag_name.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(0).getName()) + "");
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getName() != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getName().isEmpty()) {
+                    ((ViewHolder1) holder).tv_tag_name.setText(Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getName()) + "");
                 }
-                if (auctionCurrentOrUpcomingData.get(0).getDescription() != null && !auctionCurrentOrUpcomingData.get(0).getDescription().isEmpty()) {
-                    ((ViewHolder1) holder).tv_name.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(0).getDescription()) + "");
-                }
-
-                if (auctionCurrentOrUpcomingData.get(0).getDescription() != null && !auctionCurrentOrUpcomingData.get(0).getDescription().isEmpty()) {
-                    ((ViewHolder1) holder).tv_name.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(0).getDescription()) + "");
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getDescription() != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getDescription().isEmpty()) {
+                    ((ViewHolder1) holder).tv_name.setText(Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getDescription()) + "");
                 }
 
-                if (auctionCurrentOrUpcomingData.get(0).getStartingPrice()
-                        != null && !auctionCurrentOrUpcomingData.get(0).getStartingPrice().isEmpty()) {
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getDescription() != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getDescription().isEmpty()) {
+                    ((ViewHolder1) holder).tv_name.setText(Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getDescription()) + "");
+                }
+
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getStartingPrice()
+                        != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getStartingPrice().isEmpty()) {
                     ((ViewHolder1) holder).bidprice.setText("Starting Bid Rs "
-                            + Html.fromHtml(auctionCurrentOrUpcomingData.get(0).getStartingPrice()) + " /-");
+                            + Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getStartingPrice()) + " /-");
                 }
 
-                if (auctionCurrentOrUpcomingData.get(0).getEndDate()
-                        != null && !auctionCurrentOrUpcomingData.get(0).getEndDate().isEmpty()) {
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate()
+                        != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate().isEmpty()) {
                     try {
-                       /* JSONObject objtime = new JSONObject(auctionCurrentOrUpcomingData.get(0).getEndTime());
+                       /* JSONObject objtime = new JSONObject(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndTime());
                         String hours = objtime.getString("hour");
                         String minute = objtime.getString("minute");
                         String second = objtime.getString("second");
@@ -118,8 +119,8 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
 
                         ((ViewHolder1) holder).timelefttxt.setText(Html.fromHtml(completeTime) + "");*/
 
-//                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
-                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.get(0).getEndDate());
+//                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate());
+                        String enddateTime = DateUtil.serverSentTimeChange(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate());
                         SimpleDateFormat simDf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                         Date enddate = simDf.parse(enddateTime);
                         long endTimeMillSec = enddate.getTime();
@@ -133,12 +134,9 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
                     }
                 }
 
-
-
-
-                if (auctionCurrentOrUpcomingData.get(0).getEndDate()
-                        != null && !auctionCurrentOrUpcomingData.get(0).getEndDate().isEmpty()) {
-                    ((ViewHolder1) holder).datetxt.setText(Html.fromHtml(auctionCurrentOrUpcomingData.get(0).getEndDate()) + "");
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate()
+                        != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate().isEmpty()) {
+                    ((ViewHolder1) holder).datetxt.setText(Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate()) + "");
                 }
             }
 
@@ -157,12 +155,22 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
 
     @Override
     public int getItemCount() {
-        return 2;
+        Log.e("check for size","chec for size"+auctionCurrentOrUpcomingData.getCurrentAuctions().size());
+        return auctionCurrentOrUpcomingData.getCurrentAuctions().size()+1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position;
+        Log.e("check for position","checl for pos"+position);
+       if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getGallery().size()==1)
+       {
+           return 2;
+       }
+       else if (position==auctionCurrentOrUpcomingData.getCurrentAuctions().size())
+       {
+           return 1;
+       }
+       return 0;
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener {
