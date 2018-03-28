@@ -138,7 +138,7 @@ public class FashionContainerClickFrag extends Fragment{
 
     public interface FashionOnClickToProduct {
         void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
-                        String productSlug, List<String> imageGallery, Fragment fragment);
+                        String productSlug, List<String> imageGallery, Activity fragment);
     }
 
     @Override

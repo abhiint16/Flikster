@@ -65,10 +65,10 @@ public class ProductGallaryFragment extends Fragment implements View.OnClickList
             startActivity(i);
         }
         if (view.getId() == R.id.closebtn) {
-            getFragmentManager().beginTransaction()
+            /*getFragmentManager().beginTransaction()
                     .replace(R.id.main_container, new ProductOnClick())
                     .addToBackStack("")
-                    .commit();
+                    .commit();*/
         } else if (view.getId() == R.id.toolbar_back_navigation_btn) {
             getFragmentManager()
                     .beginTransaction()

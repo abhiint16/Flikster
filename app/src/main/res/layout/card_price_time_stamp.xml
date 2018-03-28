@@ -6,38 +6,48 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/auction_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/auction_header_title_desc"
         android:fontFamily="@font/alt_regular_webfont"
         android:textColor="@android:color/black"
-        android:padding="@dimen/seven"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/ten"
-        android:layout_marginRight="@dimen/ten"
-        android:layout_marginTop="@dimen/seven"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="Starting Bid:  "
+            android:fontFamily="@font/alt_regular_webfont"
+            android:textColor="@color/grey_mid"
+            android:textSize="12sp"
+            android:textStyle="normal" />
+
+        <TextView
             android:id="@+id/bidprice"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/startbid"
             android:fontFamily="@font/alt_regular_webfont"
             android:textColor="@android:color/secondary_text_light"
             android:textSize="12sp"
             android:textStyle="normal" />
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -45,7 +55,7 @@
             android:layout_weight="1"
             android:gravity="right">
 
-            <TextView
+            &lt;!&ndash;<TextView
                 android:id="@+id/timelefttxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,21 +65,35 @@
                 android:fontFamily="@font/alt_regular_webfont"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="12sp"
-                android:textStyle="normal" />
-        </LinearLayout>
+                android:textStyle="normal" />&ndash;&gt;
+        </LinearLayout>-->
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/datetxt"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="@dimen/ten"
-        android:text="@string/datestr"
-        android:fontFamily="@font/alt_regular_webfont"
-        android:textColor="@android:color/secondary_text_light"
-        android:textSize="12sp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
-        android:layout_marginBottom="@dimen/ten"
-        android:textStyle="normal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Time Left:  "
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:id="@+id/auction_timer_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            android:id="@+id/auction_enddate"/>
+    </LinearLayout>
 </LinearLayout>

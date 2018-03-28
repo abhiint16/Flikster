@@ -148,6 +148,17 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
         @SerializedName("movie")
         public List<MovieTypeInnerData> movie;
 
+        @SerializedName("celeb")
+        public List<CelebTypeInnerData> celeb;
+
+        public List<CelebTypeInnerData> getCeleb() {
+            return celeb;
+        }
+
+        public void setCeleb(List<CelebTypeInnerData> celeb) {
+            this.celeb = celeb;
+        }
+
         public List<MovieTypeInnerData> getMovie() {
             return movie;
         }
@@ -218,12 +229,20 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
     public class MovieTypeInnerData implements  Serializable{
         @SerializedName("role")
         public List<String> role;
-
+        @SerializedName("genre")
+        public List<String> genre;
         @SerializedName("profilePic")
         public String profilePic;
-
         @SerializedName("name")
         public String name;
+
+        public List<String> getGenre() {
+            return genre;
+        }
+
+        public void setGenre(List<String> genre) {
+            this.genre = genre;
+        }
 
         public List<String> getRole() {
             return role;
@@ -249,4 +268,47 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
             this.name = name;
         }
     }
+    public class CelebTypeInnerData implements  Serializable{
+        @SerializedName("role")
+        public List<String> role;
+        @SerializedName("genre")
+        public List<String> genre;
+        @SerializedName("profilePic")
+        public String profilePic;
+        @SerializedName("name")
+        public String name;
+
+        public List<String> getGenre() {
+            return genre;
+        }
+
+        public void setGenre(List<String> genre) {
+            this.genre = genre;
+        }
+
+        public List<String> getRole() {
+            return role;
+        }
+
+        public void setRole(List<String> role) {
+            this.role = role;
+        }
+
+        public String getProfilePic() {
+            return profilePic;
+        }
+
+        public void setProfilePic(String profilePic) {
+            this.profilePic = profilePic;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
 }

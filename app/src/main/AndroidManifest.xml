@@ -54,6 +54,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HomeActivity.CommonFragments.ProductFragment.ProductOnClick"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" ></activity>
         <activity
             android:name=".MyBagActivity.MyBagActivity"
             android:screenOrientation="portrait"

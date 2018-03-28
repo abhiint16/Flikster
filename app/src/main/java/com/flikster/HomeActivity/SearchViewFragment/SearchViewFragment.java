@@ -65,7 +65,7 @@ public class SearchViewFragment extends Fragment {
                               String description, String videolink, Fragment fragment, String contentType,
                               String userId, String entityId,String cardId,String slug);
         void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
-                        String productSlug, List<String> imageGallery, Fragment fragment);
+                        String productSlug, List<String> imageGallery, Activity fragment);
     }
 
     @Override

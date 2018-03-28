@@ -9,7 +9,7 @@
     <include layout="@layout/card_header"></include>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -17,10 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="@color/colorImageBackgroundGrey"
-            android:scaleType="centerCrop"
-            android:src="@drawable/rakulpreetred" />
+            android:scaleType="centerCrop"/>
 
-        <EditText
+       <!-- <EditText
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,12 +33,12 @@
             android:paddingLeft="@dimen/fifteen"
             android:paddingRight="@dimen/fifteen"
             android:paddingTop="@dimen/ten"
-            android:textColorHint="@color/white" />
+            android:textColorHint="@color/white" />-->
     </FrameLayout>
 
     <include layout="@layout/card_footer"></include>
 
     <include layout="@layout/card_price_time_stamp"></include>
 
-    <include layout="@layout/card_comment_text"></include>
+    <!--<include layout="@layout/card_comment_text"></include>-->
 </LinearLayout>

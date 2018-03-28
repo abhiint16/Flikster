@@ -24,9 +24,11 @@ import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapterRecommene
 import com.flikster.HomeActivity.FeedFragment.FeedFragment;
 import com.flikster.HomeActivity.FeedFragment.FeedRecyclerAdapter;
 import com.flikster.R;
+import com.flikster.Util.Common;
 import com.flikster.Util.DateUtil;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -136,7 +138,7 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
 
                 if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate()
                         != null && !auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate().isEmpty()) {
-                    ((ViewHolder1) holder).datetxt.setText(Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate()) + "");
+                    //((ViewHolder1) holder).datetxt.setText(Html.fromHtml(auctionCurrentOrUpcomingData.getCurrentAuctions().get(0).getEndDate()) + "");
                 }
             }
 
@@ -149,14 +151,32 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
                     fragmentManager, auctionCurrentOrUpcomingData);
             ((ViewHolder2) holder).fragment_common_recyclerview_recycler.setAdapter(auctionRelatedProductsViewHolder);
         } else {
-
+            ((ViewHolder3)holder).auction_title.setText(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getName());
+            ((ViewHolder3)holder).bidprice.setText("Rs "+auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getStartingPrice()+"/-");
+            if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getMovie()!=null&&
+                    auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getMovie().size()!=0)
+            {
+                ((ViewHolder3)holder).tv_tag_name.setText(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getMovie().get(0).getName());
+                ((ViewHolder3)holder).tv_tag_desc.setText("#"+auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getMovie().get(0).getGenre().get(0));
+                Glide.with(context).load(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getMovie().get(0).getProfilePic()).asBitmap().into(((ViewHolder3)holder).profile_image);
+            }
+            else if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getCeleb()!=null&&
+                    auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getCeleb().size()!=0)
+            {
+                ((ViewHolder3)holder).tv_tag_name.setText(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getCeleb().get(0).getName());
+                ((ViewHolder3)holder).tv_tag_desc.setText("#"+auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getCeleb().get(0).getRole().get(0));
+                Glide.with(context).load(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getCeleb().get(0).getProfilePic()).asBitmap().into(((ViewHolder3)holder).profile_image);
+            }
+            ((ViewHolder3)holder).auction_enddate.setText("( "+ auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getEndDate().substring(0,10)+" )");
+            Log.e("check for img","chck for img"+auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getGallery().get(0));
+            Glide.with(context).load(auctionCurrentOrUpcomingData.getCurrentAuctions().get(position).getGallery().get(0)).into(((ViewHolder3)holder).card_auction_img);
         }
     }
 
     @Override
     public int getItemCount() {
         Log.e("check for size","chec for size"+auctionCurrentOrUpcomingData.getCurrentAuctions().size());
-        return auctionCurrentOrUpcomingData.getCurrentAuctions().size()+1;
+        return auctionCurrentOrUpcomingData.getCurrentAuctions().size();
     }
 
     @Override
@@ -199,7 +219,7 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             bidprice = (TextView) itemView.findViewById(R.id.bidprice);
             timelefttxt = (TextView) itemView.findViewById(R.id.timelefttxt);
-            datetxt = (TextView) itemView.findViewById(R.id.datetxt);
+            //datetxt = (TextView) itemView.findViewById(R.id.datetxt);
             profile_image = (ImageView) itemView.findViewById(R.id.profile_image);
 
 
@@ -243,13 +263,20 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
 
     public class ViewHolder3 extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button followbtn;
-//        TextView card_comment_text_see_more_comments;
+        ImageView card_auction_img,profile_image;
+        TextView tv_tag_name,tv_tag_desc,auction_title,bidprice,auction_timer_text,auction_enddate;
 
         public ViewHolder3(View itemView) {
             super(itemView);
             followbtn = (Button) itemView.findViewById(R.id.followbtn);
-//            card_comment_text_see_more_comments = (TextView) itemView.findViewById(R.id.card_comment_text_see_more_comments);
-//            card_comment_text_see_more_comments.setVisibility(View.GONE);
+            card_auction_img=(ImageView)itemView.findViewById(R.id.card_auction_img);
+            profile_image=(ImageView)itemView.findViewById(R.id.profile_image);
+            tv_tag_name=(TextView)itemView.findViewById(R.id.tv_tag_name);
+            tv_tag_desc=(TextView)itemView.findViewById(R.id.tv_tag_desc);
+            auction_enddate=(TextView)itemView.findViewById(R.id.auction_enddate);
+            auction_timer_text=(TextView)itemView.findViewById(R.id.auction_timer_text);
+            auction_title=(TextView)itemView.findViewById(R.id.auction_title);
+            bidprice=(TextView)itemView.findViewById(R.id.bidprice);
             followbtn.setText("BID");
             followbtn.setOnClickListener(this);
         }

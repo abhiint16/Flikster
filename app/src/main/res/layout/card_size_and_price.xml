@@ -181,35 +181,4 @@
                 android:id="@+id/buy_click_product_size_extra_extra_large"/>
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/cartlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <Button
-            android:id="@+id/add_to_cart_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#e0e0d2"
-            android:text="Add to Cart"
-            android:textAllCaps="false"
-            android:textColor="#8c8c8c"
-            android:textSize="17sp" />
-
-        <Button
-            android:id="@+id/buy_now_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ff6666"
-            android:text="Buy Now"
-            android:textAllCaps="false"
-            android:textColor="#FFF"
-            android:textSize="17sp" />
-    </LinearLayout>
 </LinearLayout>

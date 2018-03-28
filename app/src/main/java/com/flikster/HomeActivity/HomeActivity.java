@@ -130,7 +130,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         CelebStoreFirstTypeFragment.ShopByVideoInterafce, MenFashionFirstTypeFragment.ShopByVideoMenInterafce,
         AllStoreFragment.AllStoreInterafce, CommonAllProductPage.CommonAllProductPageBuyClick,
         CelebrityFragmentBio.CelebToShopByVideoInterface, MovieFragmentInfo.MovieToShopByVideoInterface,
-        CelebrityFragment.CelebItemClickInterface, SongByMovieFragmentItemClick.SongByMovieFragClick,MovieFragment.MovieItemClickInterface, NotificationFragment.NotificationInterface,SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener,
+        CelebrityFragment.CelebItemClickInterface, SongByMovieFragmentItemClick.SongByMovieFragClick,
+        MovieFragment.MovieItemClickInterface, NotificationFragment.NotificationInterface,SearchViewFragment.SearchViewToFrag,DialogCommunication, View.OnTouchListener,
         MyAccountFragment.MyAccountItemClick,FashionFragmentNew.FashionOnClick,FashionContainerClickFrag.FashionOnClickToProduct {
     LinearLayout /*feed, rating, plus, fashion, store,*/ toolbar_flikter_text_container;
     FragmentManager fragmentManager;
@@ -350,7 +351,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     private void firstTimeLaunch(Fragment fragment) {
         if (!fragment.getClass().equals(FeedFragment.class))
-        {Log.e("cehck for frag","chec for frag notfirsttme"+appbar_container.getVisibility()+"AND"+feed_tab_layout.getVisibility());
+        {
+            Log.e("cehck for frag","chec for frag notfirsttme"+appbar_container.getVisibility()+"AND"+feed_tab_layout.getVisibility());
             appbar_container.setVisibility(View.GONE);
             feed_tab_layout.setVisibility(View.GONE);
             params.setBehavior(null);
@@ -1569,10 +1571,22 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     }
 
     @Override
-    public void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle, String productSlug, List<String> imageGallery, Fragment fragment) {
-        ProductOnClick productOnClick = (ProductOnClick) fragment;
+    public void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
+                           String productSlug, List<String> imageGallery, Activity fragment) {
+        Intent intent=new Intent(HomeActivity.this,ProductOnClick.class);
+        intent.putExtra("productId",productId);
+        Log.e("homeact size","homeact size"+size);
+        intent.putStringArrayListExtra("size", (ArrayList<String>) size);
+        intent.putExtra("userId",userId);
+        intent.putExtra("price",price);
+        intent.putExtra("profilePic",profilePic);
+        intent.putExtra("productTitle",productTitle);
+        intent.putExtra("productSlug",productSlug);
+        intent.putStringArrayListExtra("imageGallery", (ArrayList<String>) imageGallery);
+        startActivity(intent);
+        /*ProductOnClick productOnClick = (ProductOnClick) fragment;
         productOnClick.getProductData(productId, size, userId, price, profilePic, productTitle, productSlug, imageGallery);
-        firstTimeLaunch(fragment);
+        firstTimeLaunch(fragment);*/
     }
 
     @Override

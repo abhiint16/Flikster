@@ -69,11 +69,11 @@ public class StealStyleViewHolder extends RecyclerView.Adapter<StealStyleViewHol
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
+           /* fragmentManager.beginTransaction()
                     .replace(R.id.main_container, new ProductOnClick())
 //                    .replace(R.id.main_container, new AuctionDetailFragment())
                     .addToBackStack("")
-                    .commit();
+                    .commit();*/
         }
     }
 }

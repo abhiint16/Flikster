@@ -84,10 +84,10 @@ public class CeleStoreRecyclerItemAdapter extends RecyclerView.Adapter<CeleStore
 
         @Override
         public void onClick(View view) {
-            fragmentManager.beginTransaction()
+           /* fragmentManager.beginTransaction()
                     .replace(R.id.main_container,new ProductOnClick())
                     .addToBackStack("")
-                    .commit();
+                    .commit();*/
         }
     }
 }
