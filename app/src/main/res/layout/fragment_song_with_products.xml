@@ -65,7 +65,6 @@
         layout="@layout/fragment_common_recyclerview_with_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/five"
         android:layout_gravity="center_horizontal"
         android:background="@color/white" />
 </LinearLayout>

@@ -126,6 +126,7 @@ public class NewsOnClickFragment extends Fragment implements View.OnClickListene
         fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_description = (TextView) view.findViewById(R.id.tv_description);
+        tv_description.setMaxLines(20);
         profile_image = (RoundedImageView) view.findViewById(R.id.profile_image);
         tv_tag_desc = (TextView) view.findViewById(R.id.tv_tag_desc);
         tv_tag_name = (TextView) view.findViewById(R.id.tv_tag_name);

@@ -32,6 +32,6 @@
         android:textStyle="normal"
         android:textColorLink="@android:color/darker_gray"
         android:textColor="@android:color/darker_gray"
-        android:textSize="12sp"/>
+        android:textSize="13sp"/>
 
 </LinearLayout>

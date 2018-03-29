@@ -16,62 +16,66 @@
             android:text="Product title"
             android:textSize="14sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:id="@+id/buy_click_product_title"/>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="8dp"
+            android:layout_alignParentLeft="true"
             android:text="price"
-            android:textSize="14sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:id="@+id/buy_click_product_price"/>
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
                 android:id="@+id/productqtylayout"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:text="-"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_grey"
                     android:background="@drawable/black_square_border"
                     android:textStyle="bold"
+                    android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:id="@+id/buy_click_product_quantity_minus_btn"/>
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
                     android:text="1"
                     android:layout_weight="1"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_grey"
                     android:background="@drawable/black_square_border"
                     android:textStyle="bold"
+                    android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:id="@+id/buy_click_product_quantity_no"/>
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
                     android:text="+"
                     android:layout_weight="1"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_grey"
                     android:background="@drawable/black_square_border"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:id="@+id/buy_click_product_quantity_plus_btn"/>
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="0.3dp"

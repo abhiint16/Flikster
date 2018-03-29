@@ -54,7 +54,7 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
     public void onBindViewHolder(MovieSongsListAdapter.ViewHolder holder, int position) {
         Log.e("chcek image",""+img);
         Glide.with(context).load(img).into(holder.movieimg);
-        holder.movietitle.setText("Item No. "+position);
+       // holder.movietitle.setText("Item No. "+position);
     }
 
     @Override
@@ -64,12 +64,12 @@ public class MovieSongsListAdapter extends RecyclerView.Adapter<MovieSongsListAd
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView movieimg;
-        TextView movietitle;
+        //TextView movietitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
             movieimg = (ImageView) itemView.findViewById(R.id.movieimg);
-            movietitle=(TextView)itemView.findViewById(R.id.movietitle);
+           // movietitle=(TextView)itemView.findViewById(R.id.movietitle);
             movieimg.setOnClickListener(this);
         }
 

@@ -1607,7 +1607,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
     public void searchViewFragmentLaunch(Fragment fragment, GlobalSearchGetData globalSearchGetData,String query) {
         SearchViewFragment searchViewFragment = (SearchViewFragment) fragment;
         searchViewFragment.getSearchQueryData(globalSearchGetData,query);
-        firstTimeLaunch(fragment);
+        beginTransact(fragment);
     }
 
 
