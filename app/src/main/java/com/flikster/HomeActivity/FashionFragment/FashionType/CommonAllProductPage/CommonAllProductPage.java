@@ -134,7 +134,7 @@ public class CommonAllProductPage extends Fragment implements View.OnClickListen
     public interface CommonAllProductPageBuyClick
     {
         void onBuyClick(String productId,List<String> size,String userId,String price,String profilePic,String productTitle,
-                        String productSlug,List<String> imageGallery,Activity fragment);
+                        String productSlug,List<String> imageGallery,String productDesc,String productInfo,Activity fragment);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class CommonAllProductPage extends Fragment implements View.OnClickListen
             Toast.makeText(getActivity(), "You need to first Login", Toast.LENGTH_SHORT).show();
             return;
         }
-        commonAllProductPageBuyClick.onBuyClick(productId,size,userId,price,profilePic,productTitle,productSlug,
-                imageGallery,new ProductOnClick());
+        /*commonAllProductPageBuyClick.onBuyClick(productId,size,userId,price,profilePic,productTitle,productSlug,
+                imageGallery,new ProductOnClick());*/
     }
 }

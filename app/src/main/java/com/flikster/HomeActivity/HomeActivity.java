@@ -1572,7 +1572,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
 
     @Override
     public void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
-                           String productSlug, List<String> imageGallery, Activity fragment) {
+                           String productSlug, List<String> imageGallery,String productDesc,String productInfo, Activity fragment) {
         Intent intent=new Intent(HomeActivity.this,ProductOnClick.class);
         intent.putExtra("productId",productId);
         Log.e("homeact size","homeact size"+size);
@@ -1582,6 +1582,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentChangeInt
         intent.putExtra("profilePic",profilePic);
         intent.putExtra("productTitle",productTitle);
         intent.putExtra("productSlug",productSlug);
+        intent.putExtra("productDesc",productDesc);
+        intent.putExtra("productInfo",productInfo);
         intent.putStringArrayListExtra("imageGallery", (ArrayList<String>) imageGallery);
         startActivity(intent);
         /*ProductOnClick productOnClick = (ProductOnClick) fragment;

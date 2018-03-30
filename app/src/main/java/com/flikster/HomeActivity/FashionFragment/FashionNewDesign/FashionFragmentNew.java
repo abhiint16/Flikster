@@ -50,7 +50,7 @@ public class FashionFragmentNew extends Fragment {
         void fashionContainerClick(Fragment fragment);
 
         void onBuyClick(String productId, List<String> size, String userId, String price, String profilePic, String productTitle,
-                        String productSlug, List<String> imageGallery, Activity fragment);
+                        String productSlug, List<String> imageGallery,String productDesc,String productInfo, Activity fragment);
     }
 
     @Override

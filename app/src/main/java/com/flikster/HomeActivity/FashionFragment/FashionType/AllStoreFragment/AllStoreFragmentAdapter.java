@@ -893,9 +893,11 @@ public class AllStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
                             "USER_ID"),
                     hits.getHits().get(pos).get_source().getPrice(),
                     hits.getHits().get(pos).get_source().getProfilePic(),
-                    hits.getHits().get(pos).get_source().getProductInfo(),
+                    hits.getHits().get(pos).get_source().getName(),
                     hits.getHits().get(pos).get_source().getSlug(),
-                    hits.getHits().get(pos).get_source().getImageGallery(), new ProductOnClick());
+                    hits.getHits().get(pos).get_source().getImageGallery(),
+                    hits.getHits().get(pos).get_source().getProductDescription(),
+                    hits.getHits().get(pos).get_source().getProductInfo(), new ProductOnClick());
         }
         else if(hits.getHits().get(pos).get_source().getSize() == null)
         Toast.makeText(context,"size is null for this item",Toast.LENGTH_SHORT).show();

@@ -223,9 +223,11 @@ public class FashionContainerClickFragAdapter extends RecyclerView.Adapter<Recyc
                         hits.getHits().get(getAdapterPosition()-1).get_source().getSize(), "abhiint",
                         hits.getHits().get(getAdapterPosition()-1).get_source().getPrice(),
                         hits.getHits().get(getAdapterPosition()-1).get_source().getProfilePic(),
-                        hits.getHits().get(getAdapterPosition()-1).get_source().getProductInfo(),
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getName(),
                         hits.getHits().get(getAdapterPosition()-1).get_source().getSlug(),
-                        hits.getHits().get(getAdapterPosition()-1).get_source().getImageGallery(), new ProductOnClick());
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getImageGallery(),
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getProductDescription(),
+                        hits.getHits().get(getAdapterPosition()-1).get_source().getProductInfo(), new ProductOnClick());
             }
             else if (view.getId()==R.id.fashion_containerclick_recycler_item_sharebtn)
             {

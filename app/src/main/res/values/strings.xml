@@ -14,6 +14,10 @@
     <string name="song_title">01 Song </string>
     <string name="shirt_name">Superdry Men Shirt</string>
 
+    //products page
+    <string name="dispatch">Tax: Applicable tax on the basis of exact location &amp; discount will be charged at the time of checkout. \n\nFree shipping across all products on a minimum purchase pf Rs:999 . \n\nCash on delivery might be available.</string>
+    <string name="policy">100% Original Products \n\nEasy 15 days returns &amp; 15 days exchanges</string>
+
     <string name="product_info">This model has a Height of 6 feet 0 inches, Chest 40 inches and is wearing a of Size</string>
 
     <string name="quote_str">"When dealing with people remember you are not dealing with creatures of logic, but creatures of emotion"</string>

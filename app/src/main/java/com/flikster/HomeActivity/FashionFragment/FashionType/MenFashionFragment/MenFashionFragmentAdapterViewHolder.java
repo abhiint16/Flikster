@@ -134,6 +134,7 @@ public class MenFashionFragmentAdapterViewHolder extends RecyclerView.Adapter<Me
             return;
         }
         shopByVideoMenInterafce.onBuyClick(_source.getId(),_source.getSize(),"abhiint",_source.getPrice(),
-                _source.getProfilePic(),_source.getProductInfo(),_source.getSlug(),_source.getImageGallery(),new ProductOnClick());
+                _source.getProfilePic(),_source.getName(),_source.getSlug(),_source.getImageGallery(),
+                _source.getProductDescription(),_source.getProductInfo(),new ProductOnClick());
     }
 }

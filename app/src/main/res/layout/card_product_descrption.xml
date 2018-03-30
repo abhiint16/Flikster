@@ -6,39 +6,80 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/infotxt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/five"
-        android:drawableLeft="@drawable/downsmal_arrow"
-        android:drawablePadding="@dimen/seven"
-        android:paddingBottom="@dimen/five"
-        android:paddingLeft="@dimen/ten"
-        android:layout_marginTop="@dimen/ten"
+        android:drawableLeft="@drawable/product_right_arrow"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
         android:fontFamily="@font/alt_regular_webfont"
-        android:paddingRight="@dimen/ten"
-        android:paddingTop="@dimen/five"
-        android:text="Dispatch with in 10days"
+        android:text="Information"
         android:textColor="#474747"
         android:textSize="13sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:visibility="gone"
+        android:id="@+id/product_expand_info"/>
+
+    <TextView
+        android:id="@+id/descrtxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/product_right_arrow"
+        android:fontFamily="@font/alt_regular_webfont"
+        android:text="Description"
         android:padding="10dp"
-        android:id="@+id/card_product_info_text"
+        android:textColor="#474747"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:visibility="gone"
+        android:id="@+id/product_expand_description"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/product_right_arrow"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/alt_regular_webfont"
+        android:id="@+id/dispatchtxt"
+        android:text="Dispatch with in 10 days"
+        android:padding="10dp"
+        android:textColor="#474747"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/dispatch"
+        android:paddingRight="10dp"
+        android:id="@+id/product_expand_dispatch"
         android:visibility="gone"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/five"
-        android:drawableLeft="@drawable/downsmal_arrow"
-        android:drawablePadding="@dimen/seven"
-        android:paddingBottom="@dimen/five"
+        android:drawableLeft="@drawable/product_right_arrow"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:id="@+id/policytxt"
         android:fontFamily="@font/alt_regular_webfont"
-        android:paddingLeft="@dimen/ten"
-        android:paddingRight="@dimen/ten"
-        android:paddingTop="@dimen/five"
         android:text="Policy and Authentication"
         android:textColor="#474747"
         android:textSize="13sp" />
@@ -46,34 +87,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/policy"
         android:visibility="gone"
-        android:id="@+id/card_product_description_text"/>
-    <TextView
-        android:id="@+id/infotxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/five"
-        android:paddingLeft="@dimen/ten"
-        android:fontFamily="@font/alt_regular_webfont"
-        android:paddingRight="@dimen/ten"
-        android:paddingTop="@dimen/five"
-        android:text="Information : Being Fab Men's Solid Formal Blue Shirt,Regular Fit, Full Sleeve"
-        android:textColor="#474747"
-        android:textSize="13sp" />
+        android:id="@+id/product_expand_policy"/>
 
-
-    <TextView
-        android:id="@+id/descrtxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/five"
-        android:paddingLeft="@dimen/ten"
-        android:paddingRight="@dimen/ten"
-        android:paddingTop="@dimen/five"
-        android:fontFamily="@font/alt_regular_webfont"
-        android:text="Description :
-If you are looking to be a trend setter when you go out to the fanciest of parties on a weekend, Being Fab has just the range of apparel that ensures you'd never miss that admirable glance or compliment. You can tuck the shirt inside for a formal look and also put it outside for casual look."
-        android:textColor="#474747"
-        android:textSize="13sp" />
 </LinearLayout>

@@ -52,7 +52,7 @@
                     android:layout_weight="1"
                     android:id="@+id/buy_click_product_quantity_minus_btn"/>
                 <TextView
-                    android:layout_width="40dp"
+                    android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="1"
                     android:layout_weight="1"
@@ -64,7 +64,7 @@
                     android:gravity="center"
                     android:id="@+id/buy_click_product_quantity_no"/>
                 <TextView
-                    android:layout_width="40dp"
+                    android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:text="+"
                     android:layout_weight="1"

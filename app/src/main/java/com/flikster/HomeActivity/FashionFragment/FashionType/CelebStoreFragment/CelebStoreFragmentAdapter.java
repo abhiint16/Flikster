@@ -1155,8 +1155,10 @@ public class CelebStoreFragmentAdapter extends RecyclerView.Adapter<RecyclerView
                 hits.getHits().get(pos - 4).get_source().getSize(), "abhiint",
                 hits.getHits().get(pos - 4).get_source().getPrice(),
                 hits.getHits().get(pos - 4).get_source().getProfilePic(),
-                hits.getHits().get(pos - 4).get_source().getProductInfo(),
+                hits.getHits().get(pos - 4).get_source().getName(),
                 hits.getHits().get(pos - 4).get_source().getSlug(),
-                hits.getHits().get(pos - 4).get_source().getImageGallery(), new ProductOnClick());
+                hits.getHits().get(pos - 4).get_source().getImageGallery(),
+                hits.getHits().get(pos - 4).get_source().getProductDescription(),
+                hits.getHits().get(pos - 4).get_source().getProductInfo(), new ProductOnClick());
     }
 }

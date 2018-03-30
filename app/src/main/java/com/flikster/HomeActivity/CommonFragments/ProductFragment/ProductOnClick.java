@@ -28,6 +28,8 @@ import com.flikster.MyBagActivity.MyBagActivity;
 import com.flikster.MyBagActivity.MyBagData;
 import com.flikster.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class ProductOnClick extends AppCompatActivity implements View.OnClickLis
     ImageButton  toolbar_back_navigation_btn;
     TextView toolbar_frag_title, product_price, product_size_small, product_size_med, product_size_large, product_size_extra, product_size_extra_extra;
     TextView product_title, product_quantity_minus_btn, product_quanitity_plus_btn, product_quantity_txt;
+    TextView infotxt,product_expand_info,descrtxt,product_expand_description,dispatchtxt,product_expand_dispatch,policytxt,product_expand_policy;
     FragmentManager fragmentManager;
     TextView fragment_common_recyclerview_with_tv_title;
     RecyclerView fragment_common_recyclerview_with_tv_recycler;
@@ -55,7 +58,7 @@ public class ProductOnClick extends AppCompatActivity implements View.OnClickLis
     String productId;
     List<String> size = new ArrayList<>();
     String userId;
-    String price;
+    String price,productDesc,productInfo;
     String profilePic;
     String productTitle;
     String productSlug;
@@ -63,6 +66,7 @@ public class ProductOnClick extends AppCompatActivity implements View.OnClickLis
     ApiInterface apiInterface;
     int sizeOfSize;
     String chosenSize = "";
+    Boolean desc=false,info=false,policy=false,dispatch=false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +89,8 @@ public class ProductOnClick extends AppCompatActivity implements View.OnClickLis
         }*/
 
         this.userId = getIntent().getStringExtra("userId");
+        this.productDesc = getIntent().getStringExtra("productDesc");
+        this.productInfo = getIntent().getStringExtra("productInfo");
         this.price = getIntent().getStringExtra("price");
         this.profilePic = getIntent().getStringExtra("profilePic");
         this.productTitle = getIntent().getStringExtra("productTitle");
@@ -94,17 +100,18 @@ public class ProductOnClick extends AppCompatActivity implements View.OnClickLis
 
     private void initializeRest() {
         toolbar_frag_title.setText("Product");
-        //fragment_common_recyclerview_with_tv_title.setText("Recommended Product");
-       // toolbar_more_icon.setVisibility(View.VISIBLE);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         fragment_product_details_recyclerview.setLayoutManager(layoutManager);
         productImagesAdapter = new ProductImagesAdapter(this, fragmentManager, imageGallery);
         fragment_product_details_recyclerview.setAdapter(productImagesAdapter);
         product_title.setText(productTitle);
         product_price.setText("Rs. " + price + " /-");
-//        size = new ArrayList<>();
         sizeOfSize = size.size();
         formatSize();
+        descrtxt.setOnClickListener(this);
+        infotxt.setOnClickListener(this);
+        policytxt.setOnClickListener(this);
+        dispatchtxt.setOnClickListener(this);
         toolbar_back_navigation_btn.setOnClickListener(this);
         add.setOnClickListener(this);
         buy.setOnClickListener(this);
@@ -166,7 +173,14 @@ public class ProductOnClick extends AppCompatActivity implements View.OnClickLis
     private void initializeViews() {
         toolbar_back_navigation_btn = (ImageButton) findViewById(R.id.toolbar_back_navigation_btn);
         toolbar_frag_title = (TextView) findViewById(R.id.toolbar_frag_title);
-        //fragment_common_recyclerview_with_tv_title = (TextView) view.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
+        product_expand_description=(TextView)findViewById(R.id.product_expand_description);
+        product_expand_dispatch=(TextView)findViewById(R.id.product_expand_dispatch);
+        product_expand_info=(TextView)findViewById(R.id.product_expand_info);
+        product_expand_policy=(TextView)findViewById(R.id.product_expand_policy);
+        dispatchtxt=(TextView)findViewById(R.id.dispatchtxt);
+        infotxt=(TextView)findViewById(R.id.infotxt);
+        policytxt=(TextView)findViewById(R.id.policytxt);
+        descrtxt=(TextView)findViewById(R.id.descrtxt);
         fragment_product_details_recyclerview = (RecyclerView) findViewById(R.id.fragment_common_recyclerview_recycler);
         product_price = (TextView) findViewById(R.id.buy_click_product_price);
         product_title = (TextView) findViewById(R.id.buy_click_product_title);
@@ -261,6 +275,68 @@ public class ProductOnClick extends AppCompatActivity implements View.OnClickLis
             product_size_extra.setBackgroundColor(getResources().getColor(R.color.white));
             product_size_extra_extra.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             chosenSize = size.get(4);
+        }
+        else if (view.getId()==R.id.descrtxt)
+        {
+            if (desc==false)
+            {
+                desc=true;
+                descrtxt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_down_arrow,0,0,0);
+                product_expand_description.setVisibility(View.VISIBLE);
+                product_expand_description.setText(productInfo);
+            }
+            else if (desc)
+            {
+                desc=false;
+                descrtxt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_right_arrow,0,0,0);
+                product_expand_description.setVisibility(View.GONE);
+            }
+        }
+        else if (view.getId()==R.id.infotxt)
+        {
+            if (info==false)
+            {
+                info=true;
+                infotxt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_down_arrow,0,0,0);
+                product_expand_info.setVisibility(View.VISIBLE);
+                product_expand_info.setText(productInfo);
+            }
+            else if (info)
+            {
+                info=false;
+                infotxt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_right_arrow,0,0,0);
+                product_expand_info.setVisibility(View.GONE);
+            }
+        }
+        else if (view.getId()==R.id.policytxt)
+        {
+            if (policy==false)
+            {
+                policy=true;
+                policytxt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_down_arrow,0,0,0);
+                product_expand_policy.setVisibility(View.VISIBLE);
+            }
+            else if (policy)
+            {
+                policy=false;
+                policytxt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_right_arrow,0,0,0);
+                product_expand_policy.setVisibility(View.GONE);
+            }
+        }
+        else if (view.getId()==R.id.dispatchtxt)
+        {
+            if (dispatch==false)
+            {
+                dispatch=true;
+                dispatchtxt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_down_arrow,0,0,0);
+                product_expand_dispatch.setVisibility(View.VISIBLE);
+            }
+            else if (dispatch)
+            {
+                dispatch=false;
+                dispatchtxt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_right_arrow,0,0,0);
+                product_expand_dispatch.setVisibility(View.GONE);
+            }
         }
     }
 

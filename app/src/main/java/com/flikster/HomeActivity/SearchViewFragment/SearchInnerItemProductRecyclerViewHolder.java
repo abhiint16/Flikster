@@ -76,9 +76,11 @@ public class SearchInnerItemProductRecyclerViewHolder extends RecyclerView.Adapt
                             response.body().getSize(), "abhiint",
                             response.body().getPrice(),
                             response.body().getProfilePic(),
-                            response.body().getProductInfo(),
+                            response.body().getName(),
                             response.body().getSlug(),
-                            response.body().getImageGallery(), new ProductOnClick());
+                            response.body().getImageGallery(),
+                            response.body().getProductDescription(),
+                            response.body().getProductInfo(), new ProductOnClick());
                 }
                 @Override
                 public void onFailure(Call<SearchProductOnClickData> call, Throwable t) {
