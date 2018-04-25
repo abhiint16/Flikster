@@ -124,6 +124,7 @@
 
         <activity android:name=".AllCommentActivity.AllCommentActivity"></activity>
         <activity android:name=".FullScreenYoutubeView.FullScreenYoutubeView"></activity>
+        <activity android:name=".HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.BidOnClick.BidOnClickActivity"></activity>
 
         <!--<service android:name="org.jboss.aerogear.android.authorization.oauth2.OAuth2AuthzService" />-->
 

@@ -31,7 +31,7 @@ public class GalleryFullScreen extends AppCompatActivity implements View.OnClick
     ImageView imageView;
     ScrollView scrollView;
     VideoView videoView;
-    Button closebtn;
+    ImageButton closebtn;
     ImageButton card_footer_share, ib_like, ib_bookmark;
     ImageButton card_comment_text_send_btn;
     EditText card_comment_text_edittxt;
@@ -65,7 +65,7 @@ public class GalleryFullScreen extends AppCompatActivity implements View.OnClick
         videoView = (VideoView) findViewById(R.id.playVideo);
         scrollView = (ScrollView) findViewById(R.id.gallary_fullscreen_scrollimg);
         imageView = (ImageView) findViewById(R.id.gallary_fullscreen_img);
-        closebtn = (Button) findViewById(R.id.closebtn);
+        closebtn = (ImageButton) findViewById(R.id.closebtn);
         card_footer_share = (ImageButton) findViewById(R.id.card_footer_share);
         ib_like = (ImageButton) findViewById(R.id.ib_like);
         ib_bookmark = (ImageButton) findViewById(R.id.ib_bookmark);

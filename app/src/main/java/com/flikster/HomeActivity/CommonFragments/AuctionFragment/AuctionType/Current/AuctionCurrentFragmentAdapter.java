@@ -1,7 +1,9 @@
 package com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionDetailFragment;
+import com.flikster.HomeActivity.CommonFragments.AuctionFragment.AuctionType.Current.BidOnClick.BidOnClickActivity;
 import com.flikster.HomeActivity.CommonFragments.MovieFragment.MovieFeedAdapter;
 import com.flikster.HomeActivity.CommonFragments.MyStyleFragment.CustomStyleTypes.MyStyleFragmentOne;
 import com.flikster.HomeActivity.FashionFragment.FashionFragmentAdapterJustArrivedViewHolder;
@@ -32,6 +35,7 @@ import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -279,12 +283,29 @@ public class AuctionCurrentFragmentAdapter extends RecyclerView.Adapter<Recycler
             bidprice=(TextView)itemView.findViewById(R.id.bidprice);
             followbtn.setText("BID");
             followbtn.setOnClickListener(this);
+            card_auction_img.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.followbtn) {
-                Toast.makeText(context, "Bid Success", Toast.LENGTH_LONG).show();
+            if (v.getId() == R.id.followbtn||v.getId()==R.id.card_auction_img) {
+                Intent intent=new Intent(context, BidOnClickActivity.class);
+                intent.putExtra("name",auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getName());
+                if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getMovie()!=null&&
+                        auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getMovie().size()!=0)
+                {
+                    intent.putExtra("celebname",auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getMovie().get(0).getName());
+                }
+                else if (auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getCeleb()!=null&&
+                        auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getCeleb().size()!=0)
+                {
+                    intent.putExtra("celebname",auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getCeleb().get(0).getName());
+                }
+                intent.putStringArrayListExtra("colorlist", (ArrayList<String>) auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getColor());
+                intent.putStringArrayListExtra("imagegallery", (ArrayList<String>) auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getGallery());
+                intent.putExtra("listOfBidObjects", (Serializable) auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getBids());
+                intent.putExtra("maxprice",auctionCurrentOrUpcomingData.getCurrentAuctions().get(getAdapterPosition()).getMaxPrice());
+                context.startActivity(intent);
             }
         }
     }

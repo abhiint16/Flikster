@@ -1,5 +1,6 @@
 package com.flikster.HomeActivity.CommonFragments.GalleryFragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -159,10 +162,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
                     Common.bookmarkAndUnBookmarkeEvent(context, ib_bookmark, userId, galleryImgLinks.get(getAdapterPosition()));
                 }
             });
-
-
-
-            //gallary_recycler_item_img.setOnClickListener(this);
+            gallary_recycler_item_img.setOnClickListener(this);
         }
 
         @Override
@@ -172,6 +172,7 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
                 intent.putExtra("galleryimglink", galleryImgLinks.get(getAdapterPosition()));
                 intent.putExtra("userId", userId);
                 context.startActivity(intent);
+                //openDialog(galleryImgLinks.get(getAdapterPosition()),userId);
             } else if (view.getId() == R.id.card_comment_text_send_btn) {
                 new PostRetrofit().postRetrofitCommentMethod("Abhishek Kumar",
                         userId,
@@ -192,5 +193,33 @@ public class GalleryCardClickAdapter extends RecyclerView.Adapter<RecyclerView.V
             fragment_common_recyclerview_with_tv_title = (TextView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_title);
             fragment_common_recyclerview_with_tv_recycler = (RecyclerView) itemView.findViewById(R.id.fragment_common_recyclerview_with_tv_recycler);
         }
+    }
+
+    public void openDialog(String imglink,String userid)
+    {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_gallery_fullscreen);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        ImageView dialog_gallery_fullscreen_img=(ImageView)dialog.findViewById(R.id.dialog_gallery_fullscreen_img);
+        Glide.with(context).load(imglink).into(dialog_gallery_fullscreen_img);
+        ImageButton dialog_gallery_fullscreen_cancel_btn=(ImageButton)dialog.findViewById(R.id.dialog_gallery_fullscreen_cancel_btn);
+        dialog_gallery_fullscreen_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        //window.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.recycle_color)));
+        dialog.show();
+        /*dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                if ("Industry".equals(industryOrFilter))
+                    industrySelectionrefreshActivity(industry_type_from_dialog);
+            }
+        });*/
     }
 }

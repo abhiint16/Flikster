@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
     android:orientation="vertical">
 
@@ -28,7 +28,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/closebtn"
+                android:id="@+id/dialog_gallery_fullscreen_cancel_btn"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
@@ -47,37 +47,15 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-
-    <FrameLayout
-        android:id="@+id/video_frame"
-        android:layout_width="fill_parent"
-        android:layout_height="280dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="#000">
-
-        <VideoView
-            android:id="@+id/playVideo"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center_vertical|center" />
-    </FrameLayout>
-
-    <ScrollView
-        android:id="@+id/gallary_fullscreen_scrollimg"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_layut"
-        android:layout_below="@+id/toolbar_dialog_gallery_full"
-        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/gallary_fullscreen_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/dialog_gallery_fullscreen_img"
+        android:layout_below="@+id/toolbar_dialog_gallery_full"
+        android:layout_above="@+id/bottom_layut"/>
 
     <LinearLayout
         android:layout_width="match_parent"

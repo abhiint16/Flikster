@@ -16,7 +16,7 @@
         android:id="@+id/fragment_fashion_hor_recycler_item_imageview"
         android:background="@drawable/fashion_new_round_border"
         android:padding="0.5dp"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:clickable="false"/>
 
     <TextView

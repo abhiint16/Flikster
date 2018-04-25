@@ -66,7 +66,10 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
         public String name;
         @SerializedName("brand")
         public String brand;
-
+        @SerializedName("maxPrice")
+        private String maxPrice;
+        @SerializedName("color")
+        private List<String> color;
         @SerializedName("startingPrice")
         public String startingPrice;
 
@@ -76,6 +79,8 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
         @SerializedName("startDate")
         public String startDate;
 
+        @SerializedName("bids")
+        private List<Bids> bids;
         @SerializedName("endDate")
         public String endDate;
 
@@ -94,6 +99,14 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
 
         public void setBidIncrement(String bidIncrement) {
             this.bidIncrement = bidIncrement;
+        }
+
+        public String getMaxPrice() {
+            return maxPrice;
+        }
+
+        public void setMaxPrice(String maxPrice) {
+            this.maxPrice = maxPrice;
         }
 
         public String getId() {
@@ -147,6 +160,22 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
         //movie
         @SerializedName("movie")
         public List<MovieTypeInnerData> movie;
+
+        public List<String> getColor() {
+            return color;
+        }
+
+        public void setColor(List<String> color) {
+            this.color = color;
+        }
+
+        public List<Bids> getBids() {
+            return bids;
+        }
+
+        public void setBids(List<Bids> bids) {
+            this.bids = bids;
+        }
 
         @SerializedName("celeb")
         public List<CelebTypeInnerData> celeb;
@@ -308,6 +337,40 @@ public class AuctionCurrentOrUpcomingData implements Serializable {
 
         public void setName(String name) {
             this.name = name;
+        }
+    }
+
+    public class Bids implements Serializable
+    {
+        @SerializedName("auctionId")
+        private String auctionId;
+        @SerializedName("userId")
+        private String userId;
+        @SerializedName("bidAmount")
+        private String bidAmount;
+
+        public String getAuctionId() {
+            return auctionId;
+        }
+
+        public void setAuctionId(String auctionId) {
+            this.auctionId = auctionId;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getBidAmount() {
+            return bidAmount;
+        }
+
+        public void setBidAmount(String bidAmount) {
+            this.bidAmount = bidAmount;
         }
     }
 
